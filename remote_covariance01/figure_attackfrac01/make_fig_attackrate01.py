@@ -51,27 +51,33 @@ with open(os.path.join(tpath,'data_brick.json')) as fid01:
 with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
-ntstp = int(param_dict['EXP_CONSTANT']['num_tsteps'])
-R0      = np.array(param_dict['EXP_VARIABLE']['R0'])
-ACQ_VAR = np.array(param_dict['EXP_VARIABLE']['ind_variance_risk'])
-COR_VAL = np.array(param_dict['EXP_VARIABLE']['corr_acq_trans'])
+ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
+R0       = np.array(param_dict['EXP_VARIABLE']['R0'])
+ACQ_VAR  = np.array(param_dict['EXP_VARIABLE']['ind_variance_risk'])
+COR_VAL  = np.array(param_dict['EXP_VARIABLE']['corr_acq_trans'])
 
 inf_mat = np.zeros(param_dict['num_sims'])
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   inf_mat[sim_idx] = np.array(data_brick[sim_idx_str])
 
-gidx = (ACQ_VAR == 0.0) & (COR_VAL == 0.0)
-axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.')
+gidx      = (ACQ_VAR == 0.0) & (COR_VAL == 0.0)
+label_str = 'Acq = 0.0; Corr = 0.0'
+axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str)
 
 gidx = (ACQ_VAR == 0.5) & (COR_VAL == 0.0)
-axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.')
+label_str = 'Acq = 0.5; Corr = 0.0'
+axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str)
 
 gidx = (ACQ_VAR == 0.5) & (COR_VAL == 0.5)
-axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.')
+label_str = 'Acq = 0.5; Corr = 0.5'
+axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str)
 
 gidx = (ACQ_VAR == 0.5) & (COR_VAL == 1.0)
-axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.')
+label_str = 'Acq = 0.5; Corr = 1.0'
+axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str)
+
+axs01.legend()
 
 # Generate figures
 plt.savefig(os.path.join('fig_attack01.png'))
