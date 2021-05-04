@@ -1,15 +1,3 @@
-Two Directories. Directory names should not change. Other client-side scripts
-will assume the existance of both Assets/dtk and Assets/python.
-
-
-
-dtk
-   Contains the executable, schema file, and reporters (if any). Including
-   these files here is not best practice (could auto-download from Bamboo)
-   but having a local copy eliminates some VPN issues.
-
-
-
 python
    Contains user-defined python files that are consumed by EMOD server-side.
    Some filenames must remain unchanged: EMOD looks for 'dtk_pre_process.py',
