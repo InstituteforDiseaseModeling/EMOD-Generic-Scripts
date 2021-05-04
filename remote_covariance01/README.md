@@ -11,7 +11,7 @@ Client Side: Uses 'idmtools' and 'emodpy' to communicate with COMPS
 2. Upload the parameter dictionary along with an ID and python files that use
    the parameter dictionary to create input files. Run the simulations.
 
-3  Collect results from the server.
+3. Collect results from the server.
 
 
 
