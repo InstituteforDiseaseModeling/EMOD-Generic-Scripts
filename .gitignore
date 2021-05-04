@@ -3,6 +3,7 @@
 COMPS_ID
 data_brick.json
 param_dict.json
+requirements_updated.txt
 StdOut.txt
 StdErr.txt
 
