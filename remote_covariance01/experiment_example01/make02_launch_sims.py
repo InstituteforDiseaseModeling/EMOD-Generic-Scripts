@@ -22,9 +22,9 @@ from emodpy.emod_task                 import EMODTask
 # Paths
 PATH_PARAM  = os.path.abspath('param_dict.json')
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
-PATH_BIN    = os.path.abspath(os.path.join('..', '..', 'dtk', 'Eradication'))
-PATH_DLLS   = os.path.abspath(os.path.join('..', '..', 'dtk', 'reporter_plugins'))
-PATH_SCHEMA = os.path.abspath(os.path.join('..', '..', 'dtk', 'schema.json'))
+PATH_BIN    = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'Eradication'))
+PATH_DLLS   = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'reporter_plugins'))
+PATH_SCHEMA = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'schema.json'))
 
 
 
