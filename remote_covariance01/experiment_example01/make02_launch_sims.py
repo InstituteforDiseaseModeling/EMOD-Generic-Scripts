@@ -29,11 +29,16 @@ PATH_SCHEMA = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'sc
 
 
 # Function for use in sweep builder
-def sweep_func(simulation, sim_idx_val):
-  sim_idx_str = '{:05d}'.format(sim_idx_val)
-  simulation.tags['sim_index'] = sim_idx_str
-  simulation.task.transient_assets.add_asset(Asset(filename = "idx_str_file.txt",
-                                                   content  = sim_idx_str))
+def sweep_func(simulation, arg_tuple):
+  sim_idx     = arg_tuple[0]
+  vars_dict   = arg_tuple[1]
+
+  simulation.tags['sim_index'] = sim_idx
+  for var_name in vars_dict:
+    simulation.tags[var_name] = vars_dict[var_name][sim_idx]
+
+  simulation.task.transient_assets.add_asset(Asset(filename = 'idx_str_file.txt',
+                                                   content  = '{:05d}'.format(sim_idx)))
   return None
 
 
@@ -87,8 +92,16 @@ def run_sims():
   task_obj.common_assets.add_directory(assets_directory=PATH_PYTHON,relative_path='python')
 
   # Create simulation sweep with builder
-  build_obj = SimulationBuilder()
-  build_obj.add_sweep_definition(sweep_func, list(range(num_sims)))
+  #   Odd syntax; sweep definition needs two args: sweep function and a list. The sweep function
+  #   is called once for each item in the list. Here, the list is of a 2-tuple created by the
+  #   zip function. Can't just be an interable, needs to be a list. First value for each tuple is
+  #   the integer index of the simulation, second value is the dict of variables. All of those
+  #   second-values are actually the SAME DICTIONARY (no deep copy) so don't make any changes
+  #   in the sweep function.
+  build_obj     = SimulationBuilder()
+  sim_id_list   = list(range(num_sims))
+  dict_list     = num_sims*[param_dict['EXP_VARIABLE']]
+  build_obj.add_sweep_definition(sweep_func, list(zip(sim_id_list,dict_list)))
 
   # Create an experiment from builder
   experiment = Experiment.from_builder(build_obj, task_obj, name=exp_name)
