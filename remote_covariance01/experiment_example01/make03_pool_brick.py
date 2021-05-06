@@ -34,7 +34,7 @@ def get_sim_files():
   # Creates a single docker work item to collect the specified files and download
   dwi_obj = DownloadWorkItem('RetreiveFiles01',
                              related_experiments          = [exp_id],
-                             file_patterns                = ['**/parsed_out.json'],
+                             file_patterns                = ['parsed_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',
                              output_path                  = PATH_TEMP)
 
