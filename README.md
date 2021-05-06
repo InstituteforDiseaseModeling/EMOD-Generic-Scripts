@@ -1,4 +1,4 @@
-# EMOD-Examples
+# EMOD-Generic
 
 Demonstration workflow and simulations using Generic-Ongoing branch of EMOD.
 
