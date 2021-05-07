@@ -23,12 +23,13 @@ Workflow notes:
   Client Side: Uses 'idmtools' and 'emodpy' to communicate with COMPS
 
   1. Create a parameter dictionary that specifies the variables for the
-     simulation.
+     simulation. OUTPUT = param_dict.json
 
   2. Upload the parameter dictionary along with an ID and python files that use
      the parameter dictionary to create input files. Run the simulations.
+     OUTPUT = COMPS_ID
 
-  3. Collect results from the server.
+  3. Collect results from the server. OUTPUT = data_brick.json (and others)
 
 
   Server Side: Uses 'emod_api' for file creation
