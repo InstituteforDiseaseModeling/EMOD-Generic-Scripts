@@ -25,7 +25,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['exp_name']     = 'example01'
+param_dict['exp_name']     = 'covariance01'
 param_dict['num_sims']     =  1000
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
@@ -40,16 +40,16 @@ NSIMS = param_dict['num_sims']
 
 # ***** Specify sim-variable parameters *****
 
-param_dict['EXP_VARIABLE']['run_number']           =     list(range(NSIMS))
+param_dict['EXP_VARIABLE']['run_number']             =     list(range(NSIMS))
 
 # R0 values for tranmssion
-param_dict['EXP_VARIABLE']['R0']                   =     np.random.uniform(low= 0.25,high= 1.75, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['R0']                     =     np.random.uniform(low= 0.25,high= 1.75, size=NSIMS).tolist()
 
 # Individual level acquisition variance; (mean = 1.0; log-normal distribution)
-param_dict['EXP_VARIABLE']['ind_variance_risk']    =     np.random.choice([0.0, 0.5, 1.0], p=[0.25, 0.75, 0.00], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['indiv_variance_acq']     =     np.random.choice([0.0, 0.5, 1.0], p=[0.25, 0.75, 0.00], size=NSIMS).tolist()
 
 # Acquision-transmission correlation;
-param_dict['EXP_VARIABLE']['corr_acq_trans']       =     np.random.choice([0.0, 0.5, 1.0], p=[0.50, 0.25, 0.25], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['correlation_acq_trans']  =     np.random.choice([0.0, 0.5, 1.0], p=[0.50, 0.25, 0.25], size=NSIMS).tolist()
 
 
 

@@ -27,7 +27,7 @@ def demographicsBuilder():
 
 
   # ***** Get variables for this simulation *****
-  IND_RISK_VAR   = gdata.var_params['ind_variance_risk']
+  IND_RISK_VAR   = gdata.var_params['indiv_variance_acq']
 
 
   # ***** Populate nodes in primary file *****

@@ -8,8 +8,7 @@ python
    Note that anything user-defined in this folder can be 'import' without any
    problems. Other server-side packages that don't come built-in (e.g., numpy
    or emod-api) need to ensure that the Assets/site_packages directory is on
-   the import path. Good practise is to just do that everywhere just-in-case.
-
+   the import path.
 
 
 Server-side, each simulation runs the EMOD executable. Almost the first thing

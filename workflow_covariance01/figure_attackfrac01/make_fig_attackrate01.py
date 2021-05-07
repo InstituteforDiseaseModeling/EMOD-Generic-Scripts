@@ -9,7 +9,7 @@ import matplotlib.pyplot  as plt
 #*******************************************************************************
 
 
-DIRNAME = 'experiment_example01'
+DIRNAME = 'experiment_covariance01'
 
 
 # Figure setup
@@ -53,8 +53,8 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 R0       = np.array(param_dict['EXP_VARIABLE']['R0'])
-ACQ_VAR  = np.array(param_dict['EXP_VARIABLE']['ind_variance_risk'])
-COR_VAL  = np.array(param_dict['EXP_VARIABLE']['corr_acq_trans'])
+ACQ_VAR  = np.array(param_dict['EXP_VARIABLE']['indiv_variance_acq'])
+COR_VAL  = np.array(param_dict['EXP_VARIABLE']['correlation_acq_trans'])
 
 inf_mat = np.zeros(param_dict['num_sims'])
 for sim_idx_str in data_brick:
