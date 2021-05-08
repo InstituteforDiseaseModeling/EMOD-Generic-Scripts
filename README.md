@@ -12,6 +12,9 @@ Contents:
 
   workflow_covariance01  - Demonstration of the covariance feature.
 
+  workflow_covid01       - Baseline simulations for SARS-CoV-2 in EMOD. Collab
+                           with MvG.
+
 
 
 Workflow notes:
@@ -63,5 +66,3 @@ Environment notes (client):
       + if k not in ['_task_log','common_assets']:
 
   ********************************
-
-    
