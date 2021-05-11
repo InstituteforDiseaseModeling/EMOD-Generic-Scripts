@@ -41,6 +41,13 @@ def application(config_filename_in):
   gdata.var_params = var_params
 
 
+  # Validation checks on param_dict.json
+  names_variable = set(param_dict['EXP_VARIABLE'].keys())
+  names_constant = set(param_dict['EXP_CONSTANT'].keys())
+  if(names_constant.intersection(names_variable)):
+    raise Exception('In param_dict.json: name in both EXP_CONSTANT and EXP_VARIABLE')
+
+
   # Seed random number generator
   np.random.seed(sim_index)
 
@@ -60,7 +67,7 @@ def application(config_filename_in):
   time.sleep(1)
 
 
-  # Make simulation configuration file
+  # Simulation configuration file
   config_filename = configBuilder()
   time.sleep(1)
 
