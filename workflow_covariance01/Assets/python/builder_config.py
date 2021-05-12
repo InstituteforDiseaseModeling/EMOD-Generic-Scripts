@@ -38,8 +38,8 @@ def configParamFunction(config):
   config.parameters.Start_Time                                     =    0.0
   config.parameters.Simulation_Duration                            = TIME_DELTA
 
-  config.parameters.Enable_Termination_On_Zero_Total_Infectivity   =    1
-  config.parameters.Minimum_End_Time                               =   50.0
+  #config.parameters.Enable_Termination_On_Zero_Total_Infectivity   =    1
+  #config.parameters.Minimum_End_Time                               =   50.0
 
 
   # ***** Intrahost *****
