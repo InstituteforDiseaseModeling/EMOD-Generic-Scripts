@@ -64,7 +64,7 @@ def run_sims():
                       exclusive       = 'False')
 
   # Request python packages on COMPS (may take a while if first time requesting package)
-  asset_builder = RequirementsToAssetCollection(plat_obj, pkg_list=['emod_api'])
+  asset_builder = RequirementsToAssetCollection(plat_obj, pkg_list=['emod-api'])
   asset_id01    = asset_builder.run()
   python_reqs   = AssetCollection.from_id(asset_id01, platform=plat_obj)
   exp_assets    = AssetCollection(python_reqs)
