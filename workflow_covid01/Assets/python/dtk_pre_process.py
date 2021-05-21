@@ -53,12 +53,12 @@ def application(config_filename_in):
 
 
   # Demographics file 
-  demographicsBuilder(var_params)
+  demographicsBuilder()
   time.sleep(1)
 
 
   # Campaign interventions file
-  campaignBuilder(var_params)
+  campaignBuilder()
   time.sleep(1)
 
 

@@ -118,32 +118,6 @@ param_dict['EXP_CONSTANT']['nudge_trans_mat11']            =          False
 param_dict['EXP_CONSTANT']['nudge_trans_mat12']            =          False
 param_dict['EXP_CONSTANT']['nudge_trans_mat13']            =          False
 
-param_dict['EXP_CONSTANT']['urb_targ02']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ03']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ04']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ05']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ06']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ07']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ08']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ09']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ10']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ11']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ12']                   =          False
-param_dict['EXP_CONSTANT']['urb_targ13']                   =          False
-
-param_dict['EXP_CONSTANT']['rur_targ02']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ03']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ04']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ05']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ06']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ07']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ08']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ09']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ10']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ11']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ12']                   =          False
-param_dict['EXP_CONSTANT']['rur_targ13']                   =          False
-
 param_dict['EXP_CONSTANT']['household_sia02']              =          False
 param_dict['EXP_CONSTANT']['household_sia03']              =          False
 param_dict['EXP_CONSTANT']['household_sia04']              =          False

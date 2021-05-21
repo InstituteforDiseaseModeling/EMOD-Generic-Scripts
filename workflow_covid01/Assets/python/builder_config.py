@@ -66,7 +66,7 @@ def configParamFunction(config):
 
   # ***** Interventions *****
   config.parameters.Enable_Interventions                           =    1
-  config.parameters.Campaign_Filename                              = 'campaign.json'
+  config.parameters.Campaign_Filename                              = gdata.camp_file
 
 
   # ***** Adapted sampling *****
@@ -83,7 +83,7 @@ def configParamFunction(config):
   config.parameters.Age_Initialization_Distribution_Type           = 'DISTRIBUTION_OFF'
   config.parameters.Enable_Vital_Dynamics                          =    0
   config.parameters.Enable_Infection_Rate_Overdispersion           =    1
-  config.parameters.Demographics_Filenames                         = ['demographics.json']
+  config.parameters.Demographics_Filenames                         = gdata.demog_files
 
   config.parameters.Enable_Heterogeneous_Intranode_Transmission    =    1
 

@@ -8,6 +8,8 @@
 
 import os, sys, json
 
+import global_data as gdata
+
 from aux_matrix_calc import mat_magic
 
 ext_py_path = os.path.join('Assets','site-packages')
@@ -16,451 +18,341 @@ if(ext_py_path not in sys.path):
 
 import numpy as np
 
+import emod_api.campaign     as     camp_module
+
+from emod_api                 import schema_to_class as s2c
+from emod_api.interventions   import utils
+
 #********************************************************************************
 
-def campaignBuilder(params=dict()):
+def campaignBuilder():
 
-  # Dictionary to be written
-  json_set = dict()
-
-  
-  # ***** Campaign file *****
-  json_set['Campaign_Name'] = 'COMMENT_FIELD'
-  json_set['Events']        = []
-  json_set['Use_Defaults']  = 1
+  # Note: campaign module itself is the file object; no Campaign class right now
+  CAMP_FILENAME =  'campaign.json'
 
 
-  # ***** Super hacky for backwards compatibility; bite me *****
-  if 'HCW_Frac' not in params:
-    params['HCW_Frac'] = 0.1
+  # ***** Get variables for this simulation *****
+  CTEXT_VAL    = gdata.var_params['ctext_val']
+  NUM_NODES    = gdata.var_params['num_nodes']
+
+  SIOS_FRAC    = gdata.var_params['self_isolate_on_symp_frac']
+  SIOS_EFFECT  = gdata.var_params['self_isolate_effectiveness']
+
+  HCW_PPE      = gdata.var_params['HCW_PPE']
+
+  IP_START     = gdata.var_params['importations_start_day']
+  IP_DURATION  = gdata.var_params['importations_duration']
+  IP_RATE      = gdata.var_params['importations_daily_rate']
+
+  HCW_WALK     = gdata.var_params['HCW_Walk']
+  HCW_FRAC     = 0.1
+  HCW_START    = gdata.var_params['HCW_Walk_Start']
+  HCW_END      = gdata.var_params['HCW_Walk_End']
+
+  BOB_WALK     = gdata.var_params['Bob_Walk']
+  BOB_FRAC     = gdata.var_params['Bob_Frac']
+  BOB_START    = gdata.var_params['Bob_Walk_Start']
+  BOB_END      = gdata.var_params['Bob_Walk_End']
+
+  AGE_ACQ      = gdata.var_params['age_effect_a']
+  AGE_TRN      = gdata.var_params['age_effect_t']
+
+  AF_START     = gdata.var_params['active_finding_start_day']
+  AF_COVER     = gdata.var_params['active_finding_coverage']
+  AF_QUAL      = gdata.var_params['active_finding_effectiveness']
+  AF_DELAY     = gdata.var_params['active_finding_delay']
+
+  TRANS_RANGE  = range(2,14)
+
+  DICT_TRANS   = {k1: gdata.var_params[          'trans_mat{:02d}'.format(k1)] for k1 in TRANS_RANGE}
+  DICT_SPIKE   = {k1: gdata.var_params[    'spike_trans_mat{:02d}'.format(k1)] for k1 in TRANS_RANGE}
+  DICT_NUDGE   = {k1: gdata.var_params[    'nudge_trans_mat{:02d}'.format(k1)] for k1 in TRANS_RANGE}
+  DICT_H2H     = {k1: gdata.var_params[      'household_sia{:02d}'.format(k1)] for k1 in TRANS_RANGE}
+  DICT_START   = {k1: gdata.var_params['start_day_trans_mat{:02d}'.format(k1)] for k1 in TRANS_RANGE}
+
+  NODES_ALL    = list(range(1,NUM_NODES+1))
 
 
   # ***** Events *****
 
   # Contact pattern revision
-  for k1 in range(2,999):
-    if('trans_mat{:02d}'.format(k1) not in params):
-      break
-    
-    pdict = {'arg_dist':         params['trans_mat{:02d}'.format(k1)] ,
-             'spike_mat':  params['spike_trans_mat{:02d}'.format(k1)] ,
-             'nudge_mat':  params['nudge_trans_mat{:02d}'.format(k1)] ,
-             'hcw_h2h':      params['household_sia{:02d}'.format(k1)] ,
-             'ctext_val':                         params['ctext_val'] }
+  for k1 in TRANS_RANGE:
+    pdict = {'arg_dist':               DICT_TRANS[k1] ,
+             'spike_mat':              DICT_SPIKE[k1] ,
+             'nudge_mat':              DICT_NUDGE[k1] ,
+             'hcw_h2h':                  DICT_H2H[k1] ,
+             'ctext_val':                   CTEXT_VAL }
     (_, _, matblock) = mat_magic(pdict)
-    pdict = {'startday':   params['start_day_trans_mat{:02d}'.format(k1)] ,
-             'only_urb':              params['urb_targ{:02d}'.format(k1)] ,
-             'only_rur':              params['rur_targ{:02d}'.format(k1)] ,
-             'num_nodes':                             params['num_nodes'] ,
-             'matblock':                                         matblock }
-    json_set['Events'].extend(IV_MatrixSwap(pdict))
-
-
-  # Infection importation
-  pdict = {'startday':       params['importations_start_day'] ,
-           'duration':        params['importations_duration'] ,
-           'amount':        params['importations_daily_rate'] }
-  json_set['Events'].extend(IV_ImportPressure(pdict))
-
-
-  # Self-quarantine
-  pdict = {'trigger':                      'NewlySymptomatic' ,
-           'startday':                                     15 ,
-           'coverage':    params['self_isolate_on_symp_frac'] ,
-           'quality':    params['self_isolate_effectiveness'] ,
-           'delay':                                      0.00 }
-  json_set['Events'].extend(IV_Quarantine(pdict))
-
-
-  # PPE for HCW
-  pdict = {'startday':                                     20 ,
-           'coverage':                                   1.00 ,
-           'qual_acq':                      params['HCW_PPE'] ,
-           'qual_trn':                      params['HCW_PPE'] ,
-           'group_names': [{'Restrictions':
-                                         ['Geographic:HCW']}] }
-  json_set['Events'].extend(IV_MultiEffect(pdict))
+    pdict = {'startday':               DICT_START[k1] ,
+             'nodes':                       NODES_ALL ,
+             'matblock':                     matblock }
+    camp_module.add(IV_MatrixSwap(pdict))
 
 
   # Tour for HCW
-  if('HCW_Walk' in params and params['HCW_Walk']):
-    for k1 in range(params['HCW_Walk_Start'],params['HCW_Walk_End']):
+  if(HCW_WALK):
+    for k1 in range(HCW_START,HCW_END):
       for k2 in range(5):
-        pdict = {'startday':                                         k1 ,
-                 'node_dest':  np.random.randint(2,params['num_nodes']) ,
-                 'duration':                                          2 ,
-                 'fraction':                         params['HCW_Frac'] ,
-                 'group_names':       [{'Restrictions':
-                                                   ['Geographic:HCW']}] }
-        json_set['Events'].extend(IV_TakeAWalk(pdict))
+        pdict = {'startday':                                                   k1 ,
+                 'node_dest':                      np.random.randint(2,NUM_NODES) ,
+                 'duration':                                                    2 ,
+                 'fraction':                                             HCW_FRAC ,
+                 'group_names':            [{'Restrictions': ['Geographic:HCW']}] }
+        camp_module.add(IV_TakeAWalk(pdict))
+
 
   # Tour for Bob
-  if('Bob_Walk' in params and params['Bob_Walk']):
-    for k1 in range(params['Bob_Walk_Start'],params['Bob_Walk_End']):
+  if(BOB_WALK):
+    for k1 in range(BOB_START,BOB_END):
       for k2 in range(5):
-        pdict = {'startday':                                         k1 ,
-                 'node_dest':  np.random.randint(2,params['num_nodes']) ,
-                 'duration':                                          1 ,
-                 'fraction':                         params['Bob_Frac'] ,
-                 'group_names':       [{'Restrictions':
-                                          ['Geographic:age25_riskMD']}] }
-        json_set['Events'].extend(IV_TakeAWalk(pdict))
+        pdict = {'startday':                                                   k1 ,
+                 'node_dest':                      np.random.randint(2,NUM_NODES) ,
+                 'duration':                                                    1 ,
+                 'fraction':                                             BOB_FRAC ,
+                 'group_names':  [{'Restrictions':  ['Geographic:age25_riskMD']}] }
+        camp_module.add(IV_TakeAWalk(pdict))
+
+
+  # Infection importation
+  pdict = {'startday':                                            IP_START ,
+           'duration':                                         IP_DURATION ,
+           'amount':                                               IP_RATE }
+  camp_module.add(IV_ImportPressure(pdict))
+
 
   # Age-dependent susceptibility
-  pdict = {'startday':                                     10 ,
-           'coverage':                                   1.00 ,
-           'qual_acq':            params['age_effect_a']*0.95 ,
-           'qual_trn':            params['age_effect_t']*0.95 ,
-           'group_names':     [{'Restrictions':
-                                ['Geographic:age00_riskLO']},
-                               {'Restrictions':
-                                ['Geographic:age00_riskMD']},
-                               {'Restrictions':
-                                ['Geographic:age00_riskHI']}] }
-  json_set['Events'].extend(IV_MultiEffect(pdict))
+  pdict = {'startday':                                                  10 ,
+           'coverage':                                                1.00 ,
+           'nodes':                                              NODES_ALL ,
+           'qual_acq':                                        AGE_ACQ*0.95 ,
+           'qual_trn':                                        AGE_TRN*0.95 ,
+           'group_names':  [{'Restrictions': ['Geographic:age00_riskLO']},
+                            {'Restrictions': ['Geographic:age00_riskMD']},
+                            {'Restrictions': ['Geographic:age00_riskHI']}] }
+  camp_module.add(IV_MultiEffect(pdict))
 
-  pdict = {'startday':                                     11 ,
-           'coverage':                                   1.00 ,
-           'qual_acq':            params['age_effect_a']*0.75 ,
-           'qual_trn':            params['age_effect_t']*0.75 ,
-           'group_names':     [{'Restrictions':
-                                ['Geographic:age05_riskLO']},
-                               {'Restrictions':
-                                ['Geographic:age05_riskMD']},
-                               {'Restrictions':
-                                ['Geographic:age05_riskHI']}] }
-  json_set['Events'].extend(IV_MultiEffect(pdict))
+  pdict = {'startday':                                                  11 ,
+           'coverage':                                                1.00 ,
+           'nodes':                                              NODES_ALL ,
+           'qual_acq':                                        AGE_ACQ*0.75 ,
+           'qual_trn':                                        AGE_TRN*0.75 ,
+           'group_names':  [{'Restrictions': ['Geographic:age05_riskLO']},
+                            {'Restrictions': ['Geographic:age05_riskMD']},
+                            {'Restrictions': ['Geographic:age05_riskHI']}] }
+  camp_module.add(IV_MultiEffect(pdict))
 
-  pdict = {'startday':                                     12 ,
-           'coverage':                                   1.00 ,
-           'qual_acq':            params['age_effect_a']*0.60 ,
-           'qual_trn':            params['age_effect_t']*0.60 ,
-           'group_names':     [{'Restrictions':
-                                ['Geographic:age10_riskLO']},
-                               {'Restrictions':
-                                ['Geographic:age10_riskMD']},
-                               {'Restrictions':
-                                ['Geographic:age10_riskHI']}] }
-  json_set['Events'].extend(IV_MultiEffect(pdict))
+  pdict = {'startday':                                                  12 ,
+           'coverage':                                                1.00 ,
+           'nodes':                                              NODES_ALL ,
+           'qual_acq':                                        AGE_ACQ*0.60 ,
+           'qual_trn':                                        AGE_TRN*0.60 ,
+           'group_names':  [{'Restrictions': ['Geographic:age10_riskLO']},
+                            {'Restrictions': ['Geographic:age10_riskMD']},
+                            {'Restrictions': ['Geographic:age10_riskHI']}] }
+  camp_module.add(IV_MultiEffect(pdict))
 
-  pdict = {'startday':                                     13 ,
-           'coverage':                                   1.00 ,
-           'qual_acq':            params['age_effect_a']*0.35 ,
-           'qual_trn':            params['age_effect_t']*0.35 ,
-           'group_names':     [{'Restrictions':
-                                ['Geographic:age15_riskLO']},
-                               {'Restrictions':
-                                ['Geographic:age15_riskMD']},
-                               {'Restrictions':
-                                ['Geographic:age15_riskHI']}] }
-  json_set['Events'].extend(IV_MultiEffect(pdict))
+  pdict = {'startday':                                                  13 ,
+           'coverage':                                                1.00 ,
+           'nodes':                                              NODES_ALL ,
+           'qual_acq':                                        AGE_ACQ*0.35 ,
+           'qual_trn':                                        AGE_TRN*0.35 ,
+           'group_names':  [{'Restrictions': ['Geographic:age15_riskLO']},
+                            {'Restrictions': ['Geographic:age15_riskMD']},
+                            {'Restrictions': ['Geographic:age15_riskHI']}] }
+  camp_module.add(IV_MultiEffect(pdict))
+
+
+  # Self-quarantine
+  pdict = {'trigger':                                   'NewlySymptomatic' ,
+           'startday':                                                  15 ,
+           'nodes':                                              NODES_ALL ,
+           'coverage':                                           SIOS_FRAC ,
+           'quality':                                          SIOS_EFFECT ,
+           'delay':                                                   0.00 }
+  camp_module.add(IV_Quarantine(pdict))
+
+
+  # PPE for HCW
+  pdict = {'startday':                                                  20 ,
+           'coverage':                                                1.00 ,
+           'nodes':                                              NODES_ALL ,
+           'qual_acq':                                             HCW_PPE ,
+           'qual_trn':                                             HCW_PPE ,
+           'group_names':  [{'Restrictions':          ['Geographic:HCW']}] }
+  camp_module.add(IV_MultiEffect(pdict))
 
 
   # Active case finding
-  pdict = {'trigger':                          'NewInfection' ,
-           'startday':     params['active_finding_start_day'] ,
-           'coverage':      params['active_finding_coverage'] ,
-           'quality':  params['active_finding_effectiveness'] ,
-           'delay':       2.00+params['active_finding_delay'] }
-  json_set['Events'].extend(IV_Quarantine(pdict))
+  pdict = {'trigger':                                       'NewInfection' ,
+           'startday':                                            AF_START ,
+           'nodes':                                              NODES_ALL ,
+           'coverage':                                            AF_COVER ,
+           'quality':                                              AF_QUAL ,
+           'delay':                                          2.00+AF_DELAY }
+  camp_module.add(IV_Quarantine(pdict))
 
 
   #  ***** End file construction *****
-  with open('campaign.json','w') as fid01:
-    json.dump(json_set,fid01,sort_keys=True)
+  camp_module.save(filename=CAMP_FILENAME)
+
+  # Save filename to global data for use in other functions
+  gdata.camp_file = CAMP_FILENAME
 
 
-# end-campaignBuilder
+  return None
 
 #********************************************************************************
 
-# Event observer
+# Event for quarantine
 def IV_Quarantine(params=dict()):
 
-  IVlist = list()
+  SCHEMA_PATH   =  gdata.schema_path
 
-  IVdic = { 'class':                              'CampaignEvent' ,
-             'Nodeset_Config':          { 'class': 'NodeSetAll' } ,
-             'Start_Day':              120*365+params['startday'] ,
-             'Event_Coordinator_Config':
-             { 'class':   'CommunityHealthWorkerEventCoordinator' ,
-               'Demographic_Coverage':                        1.0 ,
-               'Target_Residents_Only':                         0 ,
-               'Duration':                                   1000 ,
-               'Max_Distributed_Per_Day':                     1e9 ,
-               'Waiting_Period':                           1000.0 ,
-               'Days_Between_Shipments':                     1000 ,
-               'Amount_In_Shipment':                            0 ,
-               'Max_Stock':                                   1e9 ,
-               'Initial_Amount_Distribution':
-                                          'CONSTANT_DISTRIBUTION' ,
-               'Initial_Amount_Constant':                     1e9 ,
-               'Target_Demographic':                   'Everyone' ,
-               'Trigger_Condition_List':    [ params['trigger'] ] ,
-               'Intervention_Config':
-               { 'class':                               'Vaccine' ,
-                 'Event_Trigger_Distributed':         'NoTrigger' ,
-                 'Event_Trigger_Expired':             'NoTrigger' ,
-                 'Dont_Allow_Duplicates':                       0 ,
-                 'Cost_To_Consumer':                          0.0 ,
-                 'Take_Reduced_By_Acquire_Immunity':          0.0 ,
-                 'Intervention_Name':           'Self_Quarantine' ,
-                 'Efficacy_Is_Multiplicative':                  1 ,
-                 'Disqualifying_Properties':                   [] ,
-                 'New_Property_Value':                         '' ,
-                 'Vaccine_Take':               params['coverage'] ,
-                 'Take_By_Age_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Initial_Acquire_By_Current_Effect_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Initial_Mortality_By_Current_Effect_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Initial_Transmit_By_Current_Effect_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Acquire_Config':
-                 {
-                   'class':                    'WaningEffectNull'
-                 },
-                 'Mortality_Config':
-                 {
-                   'class':                    'WaningEffectNull'
-                 },
-                 'Transmit_Config':
-                 {
-                   'class':            'WaningEffectMapPiecewise' ,
-                   'Initial_Effect':                          1.0 ,
-                   'Reference_Timer':                         0.0 ,
-                   'Expire_At_Durability_Map_End':              0 ,
-                   'Durability_Map':
-                   {
-                     'Times':        [ 0.0, 1.0+params['delay'] ] ,
-                     'Values':       [ 0.0,     params['quality'] ]
-                   }
-                 }
-               }
-             }
-           }
+  camp_event    = s2c.get_class_with_defaults('CampaignEvent',                          SCHEMA_PATH)
+  camp_coord    = s2c.get_class_with_defaults('CommunityHealthWorkerEventCoordinator',  SCHEMA_PATH)
+  camp_iv       = s2c.get_class_with_defaults('Vaccine',                                SCHEMA_PATH)
+  camp_wane_trn = s2c.get_class_with_defaults('WaningEffectMapPiecewise',               SCHEMA_PATH)
 
-  IVlist.append(IVdic)
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
-  return IVlist
+  camp_event.Event_Coordinator_Config            = camp_coord
+  camp_event.Start_Day                           = 120*365+params['startday']
+  camp_event.Nodeset_Config                      = node_set
+
+  camp_coord.Intervention_Config                 = camp_iv
+  camp_coord.Duration                            = 1000
+  camp_coord.Waiting_Period                      = 1000
+  camp_coord.Max_Distributed_Per_Day             = 1e9
+  camp_coord.Days_Between_Shipments              = 1000
+  camp_coord.Initial_Amount_Distribution         = 'CONSTANT_DISTRIBUTION'
+  camp_coord.Initial_Amount_Constant             = 1e9
+
+  camp_iv.Vaccine_Take                           = params['coverage']
+  camp_iv.Transmit_Config                        = camp_wane_trn
+
+  camp_wane_trn.Initial_Effect                   = 1.0
+  camp_wane_trn.Reference_Timer                  = 0.0
+  camp_wane_trn.Durability_Map.Times             = [ 0.0, 1.0+params['delay']   ]
+  camp_wane_trn.Durability_Map.Values            = [ 0.0,     params['quality'] ]
+
+
+  return camp_event
+
 
 #********************************************************************************
 
-# Add protection
+# IPC measures
 def IV_MultiEffect(params=dict()):
 
-  IVlist = list()
+  SCHEMA_PATH   =  gdata.schema_path
 
-  IVdic = {
-             'class':                              'CampaignEvent' ,
-             'Nodeset_Config':          { 'class': 'NodeSetAll' } ,
-             'Start_Day':              120*365+params['startday'] ,
-             'Event_Coordinator_Config':
-             {
-               'class':
-               'StandardInterventionDistributionEventCoordinator' ,
-               'Demographic_Coverage':                        1.0 ,
-               'Property_Restrictions_Within_Node':
-                                            params['group_names'] ,
-               'Number_Repetitions':                            1 ,
-               'Timesteps_Between_Repetitions':                 0 ,
-               'Target_Demographic':                   'Everyone' ,
-               'Target_Residents_Only':                         0 ,
-               'Intervention_Config':
-               {
-                 'class':                               'Vaccine' ,
-                 'Event_Trigger_Distributed':         'NoTrigger' ,
-                 'Event_Trigger_Expired':             'NoTrigger' ,
-                 'Dont_Allow_Duplicates':                       0 ,
-                 'Cost_To_Consumer':                          0.0 ,
-                 'Take_Reduced_By_Acquire_Immunity':          0.0 ,
-                 'Intervention_Name':                       'IPC' ,
-                 'Efficacy_Is_Multiplicative':                  1 ,
-                 'Disqualifying_Properties':                   [] ,
-                 'New_Property_Value':                         '' ,
-                 'Vaccine_Take':               params['coverage'] ,
-                 'Take_By_Age_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Initial_Acquire_By_Current_Effect_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Initial_Mortality_By_Current_Effect_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Initial_Transmit_By_Current_Effect_Multiplier':
-                 {
-                   'Times':                               [ 0.0 ] ,
-                   'Values':                              [ 1.0 ]
-                 },
-                 'Acquire_Config':
-                 {
-                   'class':                'WaningEffectConstant' ,
-                   'Initial_Effect':           params['qual_acq'] 
-                 },
-                 'Mortality_Config':
-                 {
-                   'class':                'WaningEffectConstant' ,
-                   'Initial_Effect':                         1.00 
-                 },
-                 'Transmit_Config':
-                 {
-                   'class':                'WaningEffectConstant' ,
-                   'Initial_Effect':           params['qual_trn'] 
-                 }
-               }
-             }
-           }
+  camp_event    = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord    = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv       = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
+  camp_wane_acq = s2c.get_class_with_defaults('WaningEffectConstant',      SCHEMA_PATH)
+  camp_wane_trn = s2c.get_class_with_defaults('WaningEffectConstant',      SCHEMA_PATH)
 
-  IVlist.append(IVdic)
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
-  return IVlist
+  camp_event.Event_Coordinator_Config            = camp_coord
+  camp_event.Start_Day                           = 120*365+params['startday']
+  camp_event.Nodeset_Config                      = node_set
+
+  camp_coord.Intervention_Config                 = camp_iv
+  camp_coord.Property_Restrictions_Within_Node   = params['group_names']
+
+  camp_iv.Vaccine_Take                           = params['coverage']
+  camp_iv.Acquire_Config                         = camp_wane_acq
+  camp_iv.Transmit_Config                        = camp_wane_trn
+
+  camp_wane_acq.Initial_Effect                   = params['qual_acq']
+
+  camp_wane_trn.Initial_Effect                   = params['qual_trn']
+
+
+  return camp_event
+
 
 #********************************************************************************
 
 # Contagion import
 def IV_ImportPressure(params=dict()):
 
-  IVlist = list()
+  SCHEMA_PATH   =  gdata.schema_path
 
-  IVdic = {
-             'class':                             'CampaignEvent' ,
-             'Nodeset_Config':      { 'class': 'NodeSetNodeList',
-                                      'Node_List':          [1] } ,
-             'Start_Day':              120*365+params['startday'] ,
-             'Event_Coordinator_Config':
-             {
-               'class':
-               'StandardInterventionDistributionEventCoordinator' ,
-               'Demographic_Coverage':                        1.0 ,
-               'Number_Repetitions':                            1 ,
-               'Timesteps_Between_Repetitions':                 0 ,
-               'Target_Demographic':                   'Everyone' ,
-               'Target_Residents_Only':                         0 ,
-               'Intervention_Config':
-               {
-                 'class':                        'ImportPressure' ,
-                 'Clade':                                       0 ,
-                 'Genome':                                      0 ,
-                 'Number_Cases_Per_Node':                       0 ,
-                 'Durations':                [params['duration']] ,
-                 'Import_Age':                              12775 ,
-                 'Import_Agent_MC_Weight':                    1.0 ,
-                 'Import_Female_Prob':                        0.5 ,
-                 'Daily_Import_Pressures':     [params['amount']]
-               }
-             }
-           }
-    
-  IVlist.append(IVdic)
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv    = s2c.get_class_with_defaults('ImportPressure',            SCHEMA_PATH)
 
-  return IVlist
+  node_set   = utils.do_nodes(SCHEMA_PATH, [1])
+
+  camp_event.Event_Coordinator_Config       = camp_coord
+  camp_event.Start_Day                      = 120*365+params['startday']
+  camp_event.Nodeset_Config                 = node_set
+
+  camp_coord.Intervention_Config            = camp_iv
+
+  camp_iv.Daily_Import_Pressures            = [params['amount']]
+  camp_iv.Durations                         = [params['duration']]
+  camp_iv.Import_Age                        = 12775
+
+
+  return camp_event
+
 
 #********************************************************************************
 
 # HINT revision
 def IV_MatrixSwap(params=dict()):
+ 
+  SCHEMA_PATH   =  gdata.schema_path
 
-  IVlist = list()
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv    = s2c.get_class_with_defaults('ChangeIPMatrix',            SCHEMA_PATH)
 
-  if(params['only_urb']):
-    nodsetdic = { 'class': 'NodeSetNodeList',
-                  'Node_List': [1] }
-  elif(params['only_rur']):
-    nodsetdic = { 'class': 'NodeSetNodeList',
-                  'Node_List': list(range(2,params['num_nodes']+1)) }
-  else:
-    nodsetdic = { 'class': 'NodeSetAll' }
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
-  IVdic = {
-             'class':                             'CampaignEvent' ,
-             'Nodeset_Config':                          nodsetdic ,
-             'Start_Day':              120*365+params['startday'] ,
-             'Event_Coordinator_Config':
-             {
-               'class':
-               'StandardInterventionDistributionEventCoordinator' ,
-               'Demographic_Coverage':                        1.0 ,
-               'Number_Repetitions':                            1 ,
-               'Timesteps_Between_Repetitions':                 0 ,
-               'Target_Demographic':                   'Everyone' ,
-               'Target_Residents_Only':                         0 ,
-               'Intervention_Config':
-               {
-                 'class':                        'ChangeIPMatrix' ,
-                 'Property_Name':                    'Geographic' ,
-                 'New_Matrix':        params['matblock'].tolist()
-               }
-             }
-           }
-    
-  IVlist.append(IVdic)
+  camp_event.Event_Coordinator_Config       = camp_coord
+  camp_event.Start_Day                      = 120*365+params['startday']
+  camp_event.Nodeset_Config                 = node_set
 
-  return IVlist
+  camp_coord.Intervention_Config            = camp_iv
+
+  camp_iv.Property_Name                     = 'Geographic'
+  camp_iv.New_Matrix                        = params['matblock'].tolist()
+
+  return camp_event
+
 
 #********************************************************************************
 
-# HINT revision
+# Forced movement for HCW and others
 def IV_TakeAWalk(params=dict()):
 
-  IVlist = list()
+  SCHEMA_PATH   =  gdata.schema_path
 
-  IVdic = {
-             'class':                             'CampaignEvent' ,
-             'Nodeset_Config':      { 'class': 'NodeSetNodeList',
-                                      'Node_List':          [1] } ,
-             'Start_Day':              120*365+params['startday'] ,
-             'Event_Coordinator_Config':
-             {
-               'class':
-               'StandardInterventionDistributionEventCoordinator' ,
-               'Demographic_Coverage':         params['fraction'] ,
-               'Property_Restrictions_Within_Node':
-                                            params['group_names'] ,
-               'Number_Repetitions':                            1 ,
-               'Timesteps_Between_Repetitions':                 0 ,
-               'Target_Demographic':                   'Everyone' ,
-               'Target_Residents_Only':                         0 ,
-               'Intervention_Config':
-               {
-                 'class':                    'MigrateIndividuals' ,
-                 'Intervention_Name':             'COMMENT_FIELD' ,
-                 'Disqualifying_Properties':                   [] ,
-                 'New_Property_Value':                         '' ,
-                 'NodeID_To_Migrate_To':      params['node_dest'] ,
-                 'Dont_Allow_Duplicates':                       1 ,
-                 'Duration_Before_Leaving_Distribution':
-                                          'CONSTANT_DISTRIBUTION' ,
-                 'Duration_At_Node_Distribution':
-                                          'CONSTANT_DISTRIBUTION' ,
-                 'Is_Moving':                                   0 ,
-                 'Duration_Before_Leaving_Constant':            0 ,
-                 'Duration_At_Node_Constant':  params['duration']
-               }
-             }
-           }
-    
-  IVlist.append(IVdic)
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv    = s2c.get_class_with_defaults('MigrateIndividuals',        SCHEMA_PATH)
 
-  return IVlist
+  node_set   = utils.do_nodes(SCHEMA_PATH, [1])
+
+  camp_event.Event_Coordinator_Config            = camp_coord
+  camp_event.Start_Day                           = 120*365+params['startday']
+  camp_event.Nodeset_Config                      = node_set
+
+  camp_coord.Intervention_Config                 = camp_iv
+  camp_coord.Demographic_Coverage                = params['fraction']
+  camp_coord.Property_Restrictions_Within_Node   = params['group_names']
+
+  camp_iv.NodeID_To_Migrate_To                   = params['node_dest']
+  camp_iv.Duration_Before_Leaving_Distribution   = 'CONSTANT_DISTRIBUTION'
+  camp_iv.Duration_Before_Leaving_Constant       = 0
+  camp_iv.Duration_At_Node_Distribution          = 'CONSTANT_DISTRIBUTION'
+  camp_iv.Duration_At_Node_Constant              = params['duration']
+
+
+  return camp_event
 
 #********************************************************************************
