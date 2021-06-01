@@ -1,9 +1,9 @@
 {
     "Version": {
         "Creator": "dtk_post_process_schema.py",
-        "DTK_Branch": "Generic-Ongoing(565a809b1f)",
-        "DTK_Build_Date": "Apr 26 2021",
-        "DTK_Version": "2.21.5008.0"
+        "DTK_Branch": "Generic-Ongoing(5d2d3421fc)",
+        "DTK_Build_Date": "May 30 2021",
+        "DTK_Version": "2.21.5015.0"
     },
     "config": {
         "AgentConfig": {
@@ -290,16 +290,6 @@
                 "max": 1000,
                 "min": 0,
                 "type": "integer"
-            },
-            "Minimum_Adult_Age_Years": {
-                "default": 15,
-                "depends-on": {
-                    "Individual_Sampling_Type": "ADAPTED_SAMPLING_BY_AGE_GROUP"
-                },
-                "description": "The age, in years, after which an individual is considered an adult.",
-                "max": 3.402823466e+38,
-                "min": 0,
-                "type": "float"
             }
         },
         "Infection": {
@@ -1429,36 +1419,6 @@
                 ],
                 "type": "enum"
             },
-            "Birth_Rate_Boxcar_Forcing_Amplitude": {
-                "default": 0,
-                "depends-on": {
-                    "Birth_Rate_Time_Dependence": "ANNUAL_BOXCAR_FUNCTION"
-                },
-                "description": "Fractional increase in birth rate during high birth season.",
-                "max": 3.402823466e+38,
-                "min": 0,
-                "type": "float"
-            },
-            "Birth_Rate_Boxcar_Forcing_End_Time": {
-                "default": 0,
-                "depends-on": {
-                    "Birth_Rate_Time_Dependence": "ANNUAL_BOXCAR_FUNCTION"
-                },
-                "description": "Day of the year when the high birth rate season ends.",
-                "max": 365,
-                "min": 0,
-                "type": "float"
-            },
-            "Birth_Rate_Boxcar_Forcing_Start_Time": {
-                "default": 0,
-                "depends-on": {
-                    "Birth_Rate_Time_Dependence": "ANNUAL_BOXCAR_FUNCTION"
-                },
-                "description": "Day of the year when the high birth rate season begins",
-                "max": 365,
-                "min": 0,
-                "type": "float"
-            },
             "Birth_Rate_Dependence": {
                 "default": "FIXED_BIRTH_RATE",
                 "depends-on": {
@@ -1472,40 +1432,6 @@
                     "DEMOGRAPHIC_DEP_RATE",
                     "INDIVIDUAL_PREGNANCIES",
                     "INDIVIDUAL_PREGNANCIES_BY_AGE_AND_YEAR"
-                ],
-                "type": "enum"
-            },
-            "Birth_Rate_Sinusoidal_Forcing_Amplitude": {
-                "default": 0,
-                "depends-on": {
-                    "Birth_Rate_Time_Dependence": "SINUSOIDAL_FUNCTION_OF_TIME"
-                },
-                "description": "The amplitude of sinusoidal variations in birth rate.",
-                "max": 1,
-                "min": 0,
-                "type": "float"
-            },
-            "Birth_Rate_Sinusoidal_Forcing_Phase": {
-                "default": 0,
-                "depends-on": {
-                    "Birth_Rate_Time_Dependence": "SINUSOIDAL_FUNCTION_OF_TIME"
-                },
-                "description": "The phase of sinusoidal variations in birth rate.",
-                "max": 365,
-                "min": 0,
-                "type": "float"
-            },
-            "Birth_Rate_Time_Dependence": {
-                "default": "NONE",
-                "depends-on": {
-                    "Enable_Birth": 1,
-                    "Enable_Vital_Dynamics": 1
-                },
-                "description": "A scale factor for BirthRate that allows it to be altered by time or season.",
-                "enum": [
-                    "NONE",
-                    "SINUSOIDAL_FUNCTION_OF_TIME",
-                    "ANNUAL_BOXCAR_FUNCTION"
                 ],
                 "type": "enum"
             },
@@ -1525,23 +1451,6 @@
             "Enable_Infectivity_Reservoir": {
                 "default": 0,
                 "description": "Controls whether or not an exogeneous reservoir of infectivity will be included in the simulation and allows for the infectivity in a node to be increased additively.",
-                "type": "bool"
-            },
-            "Enable_Infectivity_Scaling": {
-                "default": 0,
-                "depends-on": {
-                    "Simulation_Type": "GENERIC_SIM,ENVIRONMENTAL_SIM"
-                },
-                "description": "Controls if total node infectivity should multiplied by a scaling factor.",
-                "type": "bool"
-            },
-            "Enable_Infectivity_Scaling_Climate": {
-                "default": 0,
-                "depends-on": {
-                    "Enable_Infectivity_Scaling": 1,
-                    "Simulation_Type": "GENERIC_SIM,ENVIRONMENTAL_SIM"
-                },
-                "description": "Controls if climate is used to alter total node infectivity.",
                 "type": "bool"
             },
             "Enable_Maternal_Infection_Transmission": {
@@ -1636,6 +1545,14 @@
                 "description": "Controls whether or not individuals experience heterogeneous disease transmission within a node.",
                 "type": "bool"
             },
+            "Enable_Infectivity_Scaling": {
+                "default": 0,
+                "depends-on": {
+                    "Simulation_Type": "GENERIC_SIM,ENVIRONMENTAL_SIM"
+                },
+                "description": "Controls if total node infectivity should multiplied by a scaling factor.",
+                "type": "bool"
+            },
             "Enable_Initial_Prevalence": {
                 "default": 0,
                 "depends-on": {
@@ -1661,6 +1578,15 @@
                     "Enable_Vital_Dynamics": 1
                 },
                 "description": "Controls whether or not individuals are removed from the simulation due to natural (non-disease) deaths.",
+                "type": "bool"
+            },
+            "Enable_Percentage_Children": {
+                "default": 0,
+                "depends-on": {
+                    "Enable_Demographics_Builtin": 0,
+                    "Simulation_Type": "VECTOR_SIM,MALARIA_SIM,DENGUE_SIM"
+                },
+                "description": "Indicates that the age initialization distribution is resampled to ensure a node populated with the exact fraction of children specified. Typically relevant only when nodes have small numbers of agents.",
                 "type": "bool"
             },
             "Enable_Susceptibility_Scaling": {
@@ -1760,6 +1686,16 @@
                 "description": "The maximum number of individuals to track in a node. When the population exceeds this number, the sampling rate will drop according to the value set in Individual_Sampling_Type.",
                 "max": 3.402823466e+38,
                 "min": 1,
+                "type": "float"
+            },
+            "Min_Node_Population_Samples": {
+                "default": 0,
+                "depends-on": {
+                    "Individual_Sampling_Type": "FIXED_SAMPLING,ADAPTED_SAMPLING_BY_IMMUNE_STATE"
+                },
+                "description": "Minimum number of agents to track in a node. The sampling rate will be modified to avoid down-sampling populations below this number.",
+                "max": 3.402823466e+38,
+                "min": 0,
                 "type": "float"
             },
             "Mosquito_Weight": {
@@ -13793,145 +13729,6 @@
                 }
             },
             "idmAbstractType:NodeIntervention": {
-                "BirthTriggeredIV": {
-                    "Actual_IndividualIntervention_Config": {
-                        "description": "The configuration of an actual individual intervention sought.",
-                        "type": "idmAbstractType:IndividualIntervention"
-                    },
-                    "Demographic_Coverage": {
-                        "default": 1,
-                        "description": "The fraction of individuals in the target demographic that will receive this intervention.",
-                        "max": 1,
-                        "min": 0,
-                        "type": "float"
-                    },
-                    "Disqualifying_Properties": {
-                        "default": [],
-                        "description": "A list of NodeProperty key:value pairs that cause an intervention to be aborted. Generally used to control the flow of health care access. For example, to prevent the same individual from accessing health care via two different routes at the same time.",
-                        "type": "Dynamic String Set",
-                        "value_source": ""
-                    },
-                    "Dont_Allow_Duplicates": {
-                        "default": 0,
-                        "description": "If an individual's container has an intervention, set to true (1) to prevent them from receiving another copy of the intervention. Supported by all intervention classes.",
-                        "type": "bool"
-                    },
-                    "Duration": {
-                        "default": -1,
-                        "description": "The number of days to continue this intervention.",
-                        "max": 3.402823466e+38,
-                        "min": -1,
-                        "type": "float"
-                    },
-                    "Enable_Intervention_Replacement": {
-                        "default": 0,
-                        "depends-on": {
-                            "Dont_Allow_Duplicates": 1
-                        },
-                        "description": "When enabled, distributing intervention will remove all other interventions of the same name on targeted individual.",
-                        "type": "bool"
-                    },
-                    "ID_List": {
-                        "ascending": 1,
-                        "default": [],
-                        "depends-on": {
-                            "Target_Demographic": "ExpliciteIDs"
-                        },
-                        "description": "List of individual IDs for intervention. Usually used in conjunction with event DB and embedded Python in-processing.",
-                        "max": 2147483647,
-                        "min": 0,
-                        "type": "Vector Int"
-                    },
-                    "Intervention_Name": {
-                        "default": "BirthTriggeredIV",
-                        "description": "The optional name used to refer to this intervention as a means to differentiate it from others that use the same class.",
-                        "type": "string"
-                    },
-                    "Max_Distributions_Per_Node": {
-                        "default": 2147483647,
-                        "description": "Maximum number of individuals in the target demographic that will receive this intervention.",
-                        "max": 2147483647,
-                        "min": 0,
-                        "type": "integer"
-                    },
-                    "New_Property_Value": {
-                        "default": "",
-                        "description": "An optional NodeProperty key:value pair that will be assigned when the intervention is distributed. Generally used to indicate the broad category of health care cascade to which an intervention belongs to prevent individuals from accessing care through multiple pathways.",
-                        "type": "Constrained String",
-                        "value_source": "'<demographics>::NodeProperties.*.Property':'<demographics>::NodeProperties.*.Values'"
-                    },
-                    "Property_Restrictions": {
-                        "default": [],
-                        "description": "A list of the IndividualProperty key:value pairs, as defined in the demographics file, that individuals must have to be targeted by this intervention.",
-                        "type": "Dynamic String Set",
-                        "value_source": "'<demographics>::*.Individual_Properties.*.Property':'<demographics>::*.Individual_Properties.*.Values'"
-                    },
-                    "Property_Restrictions_Within_Node": {
-                        "default": [],
-                        "description": "A list of the IndividualProperty key:value pairs, as defined in the demographics file, that individuals must have to be targeted by this intervention.",
-                        "type": "idmType:PropertyRestriction"
-                    },
-                    "Sim_Types": [
-                        "*"
-                    ],
-                    "Target_Age_Max": {
-                        "default": 9.322804028e+35,
-                        "depends-on": {
-                            "Target_Demographic": "ExplicitAgeRanges,ExplicitAgeRangesAndGender"
-                        },
-                        "description": "The upper end of ages targeted for an intervention, in years.",
-                        "max": 9.322804028e+35,
-                        "min": 0,
-                        "type": "float"
-                    },
-                    "Target_Age_Min": {
-                        "default": 0,
-                        "depends-on": {
-                            "Target_Demographic": "ExplicitAgeRanges,ExplicitAgeRangesAndGender"
-                        },
-                        "description": "The lower end of ages targeted for an intervention, in years.",
-                        "max": 3.402823466e+38,
-                        "min": 0,
-                        "type": "float"
-                    },
-                    "Target_Demographic": {
-                        "default": "Everyone",
-                        "description": "The target demographic group.",
-                        "enum": [
-                            "Everyone",
-                            "ExplicitAgeRanges",
-                            "ExplicitAgeRangesAndGender",
-                            "ExplicitGender",
-                            "PossibleMothers",
-                            "ArrivingAirTravellers",
-                            "DepartingAirTravellers",
-                            "ArrivingRoadTravellers",
-                            "DepartingRoadTravellers",
-                            "AllArrivingTravellers",
-                            "AllDepartingTravellers",
-                            "ExplicitDiseaseState",
-                            "ExplicitIDs"
-                        ],
-                        "type": "enum"
-                    },
-                    "Target_Gender": {
-                        "default": "All",
-                        "description": "Specifies the gender restriction for the intervention.",
-                        "enum": [
-                            "All",
-                            "Male",
-                            "Female"
-                        ],
-                        "type": "enum"
-                    },
-                    "Target_Residents_Only": {
-                        "default": 0,
-                        "description": "When set to true (1), the intervention is only distributed to individuals that began the simulation in the node (i.e. those that claim the node as their residence).",
-                        "type": "bool"
-                    },
-                    "class": "BirthTriggeredIV",
-                    "iv_type": "NodeTargeted"
-                },
                 "BroadcastNodeEvent": {
                     "Broadcast_Event": {
                         "default": "NoTrigger",
@@ -15231,6 +15028,47 @@
                     "class": "NLHTIVNode",
                     "iv_type": "NodeTargeted"
                 },
+                "NodeBirthRateMult": {
+                    "Disqualifying_Properties": {
+                        "default": [],
+                        "description": "A list of NodeProperty key:value pairs that cause an intervention to be aborted. Generally used to control the flow of health care access. For example, to prevent the same individual from accessing health care via two different routes at the same time.",
+                        "type": "Dynamic String Set",
+                        "value_source": ""
+                    },
+                    "Dont_Allow_Duplicates": {
+                        "default": 0,
+                        "description": "If an individual's container has an intervention, set to true (1) to prevent them from receiving another copy of the intervention. Supported by all intervention classes.",
+                        "type": "bool"
+                    },
+                    "Enable_Intervention_Replacement": {
+                        "default": 0,
+                        "depends-on": {
+                            "Dont_Allow_Duplicates": 1
+                        },
+                        "description": "When enabled, distributing intervention will remove all other interventions of the same name on targeted individual.",
+                        "type": "bool"
+                    },
+                    "Intervention_Name": {
+                        "default": "NodeBirthRateMult",
+                        "description": "The optional name used to refer to this intervention as a means to differentiate it from others that use the same class.",
+                        "type": "string"
+                    },
+                    "Multiplier_By_Duration": {
+                        "description": "Value of birth rate multiplier based on the duration of the intervention; uses interpolated value map.",
+                        "type": "idmType:InterpolatedValueMap"
+                    },
+                    "New_Property_Value": {
+                        "default": "",
+                        "description": "An optional NodeProperty key:value pair that will be assigned when the intervention is distributed. Generally used to indicate the broad category of health care cascade to which an intervention belongs to prevent individuals from accessing care through multiple pathways.",
+                        "type": "Constrained String",
+                        "value_source": "'<demographics>::NodeProperties.*.Property':'<demographics>::NodeProperties.*.Values'"
+                    },
+                    "Sim_Types": [
+                        "*"
+                    ],
+                    "class": "NodeBirthRateMult",
+                    "iv_type": "NodeTargeted"
+                },
                 "NodeInfectivityMult": {
                     "Disqualifying_Properties": {
                         "default": [],
@@ -15257,7 +15095,7 @@
                         "type": "string"
                     },
                     "Multiplier_By_Duration": {
-                        "description": "Value of infectivity multiplier based on the duration of the intervention; use interpolated value map.",
+                        "description": "Value of infectivity multiplier based on the duration of the intervention; uses interpolated value map.",
                         "type": "idmType:InterpolatedValueMap"
                     },
                     "New_Property_Value": {
