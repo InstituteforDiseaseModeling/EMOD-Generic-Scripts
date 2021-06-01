@@ -1,12 +1,12 @@
 # User-specific files
 
-COMPS_ID
-data_brick.json
-param_dict.json
 requirements_updated.txt
 StdOut.txt
 StdErr.txt
 
+*data_brick.json
+*param_dict.json
+*_ID
 *.log
 *.png
 *.svg
