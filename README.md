@@ -4,6 +4,11 @@
 
 Contents:
 
+  env_CentOS8            - Contains the script for building a singularity 
+                           image file (using COMPS) for running EMOD on COMPS.
+                           Produces an asset collection ID that is used in the
+                           various workflows.
+
   exe_GenericOngoing     - Contains the executable, schema file, and reporters
                            (if any). Including these files here is not best
                            practice (could auto-download) but having a local
@@ -52,6 +57,17 @@ Workflow notes:
 Environment notes (client):
 
   Requires idmtools[idm] and emodpy
+
+  ********************************
+  REQUIRED FOR SINGULARITY
+
+  DIRNAME\idmtools\Lib\site-packages\emodpy.py
+    (line 95)
+      + is_singularity: bool = False
+    (line 408)
+      + if(self.is_singularity):
+      +     self.command = CommandLine("singularity", "exec", "Assets/EMOD_env01.sif", f"Assets/{self.executable_name}", "--config", f"{self.config_file_name}", "--input-path", input_path, "--dll-path", "./Assets")
+      + else:
 
   ********************************
   Helpful speed-up (see InstituteforDiseaseModeling/idmtools/issues/1395)
