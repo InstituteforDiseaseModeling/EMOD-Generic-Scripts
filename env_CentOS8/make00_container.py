@@ -27,7 +27,8 @@ def make_work():
                       exclusive       = 'False')
 
   # Creates a single work item to create the image
-  sbwi_obj = SingularityBuildWorkItem(definition_file  = 'EMOD_env01.def')
+  sbwi_obj = SingularityBuildWorkItem(definition_file  = 'EMOD_env01.def',
+                                      force            = True)
 
   # Wait until the image is built
   ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
