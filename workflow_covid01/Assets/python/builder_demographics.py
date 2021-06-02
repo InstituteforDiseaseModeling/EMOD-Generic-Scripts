@@ -13,10 +13,6 @@ import global_data as gdata
 from aux_matrix_calc import mat_magic
 from aux_dist_calc   import pair_dist_mat
 
-ext_py_path = os.path.join('Assets','site-packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy                    as    np
 
 #********************************************************************************

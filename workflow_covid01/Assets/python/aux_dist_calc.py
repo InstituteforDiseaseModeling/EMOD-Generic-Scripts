@@ -8,10 +8,6 @@
 
 import os, sys
 
-ext_py_path = os.path.join('Assets','site-packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy as np
 
 #********************************************************************************

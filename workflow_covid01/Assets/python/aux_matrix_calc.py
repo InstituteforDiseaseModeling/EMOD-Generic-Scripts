@@ -12,10 +12,6 @@ from refdat_age_pyr       import age_pyr_fun
 from refdat_contact_mat   import contact_mat_fun
 from refdat_hcw_stats     import hcw_stats_fun
 
-ext_py_path = os.path.join('Assets','site-packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy as np
 
 #********************************************************************************

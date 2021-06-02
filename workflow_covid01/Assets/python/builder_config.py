@@ -10,10 +10,6 @@ import os, sys, json
 
 import global_data as gdata
 
-ext_py_path = os.path.join('Assets','site-packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy as np
 
 from emod_api.config import default_from_schema_no_validation as dfs
