@@ -40,13 +40,13 @@ Workflow notes:
   3. Collect results from the server. OUTPUT = data_brick.json (and others)
 
 
-  Server Side: Uses 'emod_api' for file creation
+  Server Side: Uses 'emod-api' for file creation
 
     Each EMOD simulation automatically runs 3 python functions: dtk_pre_process,
-    dtk_in_prcoess, and dtk_post_process. All file creation work is done within
-    the dtk_pre_prcoess function. That application will find the ID assigned to
+    dtk_in_process, and dtk_post_process. All file creation work is done within
+    the dtk_pre_process function. That application will find the ID assigned to
     the simulation, open the parameter dictionary and retrieve the correct
-    values for the simulation, then use 'emod_api' to create input files.
+    values for the simulation, then use 'emod-api' to create input files.
 
     The easiest way to trace the workflow is to start in an experiment directory
     and examine the 3 python scripts (corresponding to the 3 client-side steps
