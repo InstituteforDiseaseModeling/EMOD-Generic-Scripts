@@ -88,7 +88,7 @@ def run_sims():
   task_obj.common_assets.add_asset(param_asset)
 
   # Add everything in the dlls directory as assets
-  task_obj.common_assets.add_directory(assets_directory=PATH_DLLS,  relative_path='reporter_plugins')
+  task_obj.common_assets.add_directory(assets_directory=PATH_DLLS,relative_path='reporter_plugins')
 
   # Add everything in the python assets directory as assets
   task_obj.common_assets.add_directory(assets_directory=PATH_PYTHON,relative_path='python')
@@ -118,7 +118,6 @@ def run_sims():
   print(experiment.uid.hex)
 
   return None
-
 
 
 # ******************************************************************************
