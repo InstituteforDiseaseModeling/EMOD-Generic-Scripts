@@ -61,7 +61,7 @@ Environment notes (client):
   ********************************
   REQUIRED FOR SINGULARITY
 
-  DIRNAME\idmtools\Lib\site-packages\emodpy.py
+    DIRNAME\idmtools\Lib\site-packages\emodpy.py
     (line 95)
       + is_singularity: bool = False
     (line 408)
@@ -72,11 +72,11 @@ Environment notes (client):
   ********************************
   Helpful speed-up (see InstituteforDiseaseModeling/idmtools/issues/1395)
 
-  DIRNAME\idmtools\Lib\site-packages\idmtools\entities\templated_simulation.py
+    DIRNAME\idmtools\Lib\site-packages\idmtools\entities\templated_simulation.py
     (line 184)
       + sim.task.common_assets = self.base_simulation.task.common_assets
 
-  DIRNAME\idmtools\Lib\site-packages\idmtools\entities\itask.py
+    DIRNAME\idmtools\Lib\site-packages\idmtools\entities\itask.py
     (line 224)
       - if k not in ['_task_log']:
       + if k not in ['_task_log','common_assets']:
