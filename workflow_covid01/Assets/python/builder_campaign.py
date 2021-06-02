@@ -220,10 +220,12 @@ def IV_Quarantine(params=dict()):
   camp_event.Nodeset_Config                      = node_set
 
   camp_coord.Intervention_Config                 = camp_iv
+  camp_coord.Trigger_Condition_List              = [ params['trigger'] ]
   camp_coord.Duration                            = 1000
   camp_coord.Waiting_Period                      = 1000
   camp_coord.Max_Distributed_Per_Day             = 1e9
   camp_coord.Days_Between_Shipments              = 1000
+  camp_coord.Amount_In_Shipment                  = 0
   camp_coord.Initial_Amount_Distribution         = 'CONSTANT_DISTRIBUTION'
   camp_coord.Initial_Amount_Constant             = 1e9
 
