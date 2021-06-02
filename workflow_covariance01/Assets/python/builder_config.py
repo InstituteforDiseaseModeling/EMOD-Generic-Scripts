@@ -10,10 +10,6 @@ import os, sys, json
 
 import global_data as gdata
 
-ext_py_path = os.path.join('Assets','site_packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy as np
 
 from emod_api.config import default_from_schema_no_validation as dfs
@@ -38,8 +34,8 @@ def configParamFunction(config):
   config.parameters.Start_Time                                     =    0.0
   config.parameters.Simulation_Duration                            = TIME_DELTA
 
-  #config.parameters.Enable_Termination_On_Zero_Total_Infectivity   =    1
-  #config.parameters.Minimum_End_Time                               =   50.0
+  config.parameters.Enable_Termination_On_Zero_Total_Infectivity   =    1
+  config.parameters.Minimum_End_Time                               =   50.0
 
 
   # ***** Intrahost *****

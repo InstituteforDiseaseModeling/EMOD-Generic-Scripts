@@ -10,10 +10,6 @@ import os, sys, json
 
 import global_data as gdata
 
-ext_py_path = os.path.join('Assets','site_packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy as np
 
 import emod_api.campaign     as     camp_module
@@ -27,9 +23,7 @@ def campaignBuilder():
 
   # Note: campaign module itself is the file object; no Campaign class right now
   SCHEMA_PATH   =  gdata.schema_path
-  DEMOG_OBJ     =  gdata.demog_object
-  #ALL_NODES     =  DEMOG_OBJ.node_ids()    #Currently bugged
-  ALL_NODES     = [1]
+  ALL_NODES     =  gdata.demog_object.node_ids
   CAMP_FILENAME =  'campaign.json'
 
 

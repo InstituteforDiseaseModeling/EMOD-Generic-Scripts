@@ -22,6 +22,7 @@ from emodpy.emod_task                 import EMODTask
 # Paths
 PATH_PARAM  = os.path.abspath('param_dict.json')
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
+PATH_ENV    = os.path.abspath(os.path.join('..', '..', 'env_CentOS8', 'ASSETS_ID'))
 PATH_BIN    = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'Eradication'))
 PATH_DLLS   = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'reporter_plugins'))
 PATH_SCHEMA = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'schema.json'))
@@ -63,9 +64,9 @@ def run_sims():
                       num_retries     = '0',
                       exclusive       = 'False')
 
-  # Request python packages on COMPS (may take a while if first time requesting package)
-  asset_builder = RequirementsToAssetCollection(plat_obj, pkg_list=['emod-api']) # can specify version 'emod-api==1.0.0'
-  asset_id01    = asset_builder.run()
+  # Get asset id for singularity image file
+  with open(PATH_ENV) as fid01:
+    asset_id01 = fid01.readline().strip()
   python_reqs   = AssetCollection.from_id(asset_id01, platform=plat_obj)
   exp_assets    = AssetCollection(python_reqs)
 
@@ -76,6 +77,7 @@ def run_sims():
                                  ep4_path           = PATH_PYTHON)
   task_obj.campaign            = None
   task_obj.common_assets       = exp_assets
+  task_obj.is_singularity      = True
 
   # Add the parameters dictionary to assets
   param_asset = Asset(absolute_path=PATH_PARAM)

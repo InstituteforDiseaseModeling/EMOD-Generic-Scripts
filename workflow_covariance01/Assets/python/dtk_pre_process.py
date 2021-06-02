@@ -13,15 +13,17 @@ from builder_demographics   import demographicsBuilder
 from builder_campaign       import campaignBuilder
 from builder_dlls           import dllcBuilder
 
-ext_py_path = os.path.join('Assets','site-packages')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
-
 import numpy as np
+
+#import emod_api
 
 #*******************************************************************************
 
 def application(config_filename_in): 
+
+  # Declare current version of emod-api
+  #print('Using emod-api {:s}'.format(emod_api.__version__))
+
 
   # Read index of simulation parameter set
   with open('idx_str_file.txt') as fid01:

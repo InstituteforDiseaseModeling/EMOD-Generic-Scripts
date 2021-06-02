@@ -80,7 +80,7 @@ axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str)
 axs01.legend()
 
 # Generate figures
-plt.savefig(os.path.join('fig_attack01.png'))
+#plt.savefig(os.path.join('fig_attack01.png'))
 plt.savefig(os.path.join('fig_attack01.svg'))
 
 
