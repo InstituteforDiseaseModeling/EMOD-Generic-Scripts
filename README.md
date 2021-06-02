@@ -59,7 +59,7 @@ Environment notes (client):
   Requires idmtools[idm] and emodpy
 
   ********************************
-  REQUIRED FOR SINGULARITY
+  REQUIRED FOR SINGULARITY (see InstituteforDiseaseModeling/emodpy/issues/462)
 
     DIRNAME\idmtools\Lib\site-packages\emodpy.py
     (line 95)
