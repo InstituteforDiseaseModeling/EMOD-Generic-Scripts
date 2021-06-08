@@ -10,5 +10,6 @@ StdErr.txt
 *.log
 *.png
 *.svg
+*.id
 
 __pycache__/
