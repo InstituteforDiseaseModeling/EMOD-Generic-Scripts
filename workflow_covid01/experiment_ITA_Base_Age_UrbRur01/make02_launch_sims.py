@@ -22,7 +22,7 @@ from emodpy.emod_task                 import EMODTask
 # Paths
 PATH_PARAM  = os.path.abspath('param_dict.json')
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
-PATH_ENV    = os.path.abspath(os.path.join('..', '..', 'env_CentOS8', 'ASSETS_ID'))
+PATH_ENV    = os.path.abspath(os.path.join('..', '..', 'env_CentOS8', 'EMOD_SIF.id'))
 PATH_BIN    = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'Eradication'))
 PATH_DLLS   = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'reporter_plugins'))
 PATH_SCHEMA = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'schema.json'))
@@ -54,7 +54,7 @@ def run_sims():
   num_sims = param_dict['num_sims']
 
   # Prepare the platform
-  plat_obj = Platform('COMPS',
+  plat_obj = Platform(block           = 'COMPS',
                       endpoint        = 'https://comps.idmod.org',
                       environment     = 'Calculon',
                       priority        = 'Normal',
@@ -65,10 +65,8 @@ def run_sims():
                       exclusive       = 'False')
 
   # Get asset id for singularity image file
-  with open(PATH_ENV) as fid01:
-    asset_id01 = fid01.readline().strip()
-  python_reqs   = AssetCollection.from_id(asset_id01, platform=plat_obj)
-  exp_assets    = AssetCollection(python_reqs)
+  python_reqs   = AssetCollection.from_id_file(PATH_ENV)  # Read-only version
+  exp_assets    = AssetCollection(python_reqs)            # Editable version
 
   # Create EMODTask
   task_obj = EMODTask.from_files(config_path        = None,

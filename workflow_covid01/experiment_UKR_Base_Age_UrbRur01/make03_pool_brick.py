@@ -27,12 +27,12 @@ def get_sim_files():
     exp_id = fid01.readline().strip()
 
   # Connect to COMPS; needs to be the same environment used to run the sims
-  plat_obj = Platform('COMPS',
-                      endpoint        = 'https://comps.idmod.org',
-                      environment     = 'Calculon')
+  plat_obj = Platform(block        = 'COMPS',
+                      endpoint     = 'https://comps.idmod.org',
+                      environment  = 'Calculon')
 
   # Creates a single docker work item to collect the specified files and download
-  dwi_obj = DownloadWorkItem('RetreiveFiles01',
+  dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
                              related_experiments          = [exp_id],
                              file_patterns                = ['parsed_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',
