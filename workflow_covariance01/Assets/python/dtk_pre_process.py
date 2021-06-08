@@ -15,14 +15,14 @@ from builder_dlls           import dllcBuilder
 
 import numpy as np
 
-#import emod_api
+import emod_api
 
 #*******************************************************************************
 
 def application(config_filename_in): 
 
   # Declare current version of emod-api
-  #print('Using emod-api {:s}'.format(emod_api.__version__))
+  print('Using emod-api {:s}'.format(emod_api.__version__))
 
 
   # Read index of simulation parameter set
