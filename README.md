@@ -1,8 +1,6 @@
 # EMOD-Generic
 
-
-
-Contents:
+## Contents:
 
   env_CentOS8            - Contains the script for building a singularity 
                            image file (using COMPS) for running EMOD on COMPS.
@@ -20,9 +18,7 @@ Contents:
   workflow_covid01       - Baseline simulations for SARS-CoV-2 in EMOD. Collab
                            with MvG.
 
-
-
-Workflow notes:
+## Workflow notes:
 
   Separate defining and uploading (client side operations) from writing
   inputs and running sims (server side).
@@ -53,8 +49,31 @@ Workflow notes:
     above) that need to be run in order.
 
 
+## To run an example:
+1. Setup a virtual environment (e.g. conda)
+2. Install requirements via `pip` using IDM artifactory:
+    ```
+    >> pip install -r requirements.txt --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
+    ```
+3. Build singularity image file:
+    ```
+    >> cd EMOD-Generic/env_CentOS8
+    >> python make00_container.py
+    ```
+4. Run experiment:
+    ```
+    >> cd EMOD_Generic/workflow_covariance01/experiment_covariance01
+    >> python make01_param_dict.py
+    >> python make02_lauch_sims.py
+    >> python make03_pool_brick.py
+    ```
+5. Generate figures:
+    ```
+    >> cd EMOD_Generic/workflow_covariance01/figure_attackfrac01
+    >> make_fig_attackrate01.py
+    ```
 
-Environment notes (client):
+## Environment notes (client):
 
   Requires idmtools[idm] and emodpy
 

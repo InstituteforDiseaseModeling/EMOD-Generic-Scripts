@@ -106,7 +106,7 @@ def run_sims():
 
   # Save experiment id to file
   with open('COMPS_ID', 'w') as fid01:
-    fid01.write(experiment.uid.hex)
+    fid01.write('{}'.format(experiment.uid))
   print()
   print(experiment.uid.hex)
 
