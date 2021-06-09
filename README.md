@@ -59,17 +59,6 @@ Environment notes (client):
   Requires idmtools[idm] and emodpy
 
   ********************************
-  REQUIRED FOR SINGULARITY (see InstituteforDiseaseModeling/emodpy/issues/462)
-
-    DIRNAME\idmtools\Lib\site-packages\emodpy.py
-    (line 95)
-      + is_singularity: bool = False
-    (line 408)
-      + if(self.is_singularity):
-      +     self.command = CommandLine("singularity", "exec", "Assets/EMOD_env01.sif", f"Assets/{self.executable_name}", "--config", f"{self.config_file_name}", "--input-path", input_path, "--dll-path", "./Assets")
-      + else:
-
-  ********************************
   Helpful speed-up (see InstituteforDiseaseModeling/idmtools/issues/1395)
 
     DIRNAME\idmtools\Lib\site-packages\idmtools\entities\templated_simulation.py
