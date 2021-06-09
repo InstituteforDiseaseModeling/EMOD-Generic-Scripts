@@ -36,7 +36,7 @@ def demographicsBuilder():
 
   # ***** Create primary file *****
 
-  ref_name   = 'Apr2021_Measles_SIA_Timing'
+  ref_name   = 'Example_Covariance_Sims'
   demog_obj  = Demographics(nodes=node_list, idref=ref_name)
 
 
