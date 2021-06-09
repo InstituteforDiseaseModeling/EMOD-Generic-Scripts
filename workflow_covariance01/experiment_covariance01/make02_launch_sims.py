@@ -64,18 +64,10 @@ def run_sims():
                       num_retries     = '0',
                       exclusive       = 'False')
 
-  # Get asset id for singularity image file
-  python_reqs   = AssetCollection.from_id_file(PATH_ENV)  # Read-only version
-  exp_assets    = AssetCollection(python_reqs)            # Editable version
-
   # Create EMODTask
-  task_obj = EMODTask.from_files(config_path        = None,
-                                 demographics_paths = None,
-                                 eradication_path   = PATH_BIN,
+  task_obj = EMODTask.from_files(eradication_path   = PATH_BIN,
                                  ep4_path           = PATH_PYTHON)
-  task_obj.campaign            = None
-  task_obj.common_assets       = exp_assets
-  task_obj.is_singularity      = True
+  task_obj.set_sif(PATH_ENV)
 
   # Add the parameters dictionary to assets
   param_asset = Asset(absolute_path=PATH_PARAM)
@@ -88,8 +80,11 @@ def run_sims():
   # Add everything in the dlls directory as assets
   task_obj.common_assets.add_directory(assets_directory=PATH_DLLS,relative_path='reporter_plugins')
 
-  # Add everything in the python assets directory as assets
-  task_obj.common_assets.add_directory(assets_directory=PATH_PYTHON,relative_path='python')
+  # Add everything in the python assets directory as assets; dtk files already added
+  for filename in os.listdir(PATH_PYTHON):
+    if(not filename.startswith('dtk') and not filename.startswith('__')):
+      param_asset = Asset(absolute_path=os.path.join(PATH_PYTHON,filename),relative_path='python')
+      task_obj.common_assets.add_asset(param_asset)
 
   # Create simulation sweep with builder
   #   Odd syntax; sweep definition needs two args: sweep function and a list. The sweep function
