@@ -6,12 +6,10 @@
 
 import os, sys, json, time
 
-from idmtools.assets                  import Asset, AssetCollection
+from idmtools.assets                  import Asset
 from idmtools.builders                import SimulationBuilder
 from idmtools.core.platform_factory   import Platform
 from idmtools.entities.experiment     import Experiment
-from idmtools_platform_comps.utils.python_requirements_ac.requirements_to_asset_collection \
-                                      import RequirementsToAssetCollection
 
 from emodpy.emod_task                 import EMODTask
 
