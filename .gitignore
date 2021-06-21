@@ -4,6 +4,9 @@ requirements_updated.txt
 StdOut.txt
 StdErr.txt
 
+data_*.json
+_data_*.json
+
 *data_brick.json
 *param_dict.json
 *_ID
@@ -13,3 +16,4 @@ StdErr.txt
 *.id
 
 __pycache__/
+*output/
