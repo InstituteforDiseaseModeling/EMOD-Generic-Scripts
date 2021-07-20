@@ -18,6 +18,8 @@
   workflow_covid01       - Baseline simulations for SARS-CoV-2 in EMOD. Collab
                            with MvG.
 
+  workflow_demographics01- Example demographics for UK measles simulations.
+
 ## Workflow notes:
 
   Separate defining and uploading (client side operations) from writing
