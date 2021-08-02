@@ -2,9 +2,10 @@ Bootstrap: library
 From: centos:latest
 
 %post
-    yum install python3 -y
-    yum install snappy -y
-    yum install mpich -y
+    dnf install python3 -y
+    dnf install snappy -y
+    dnf install mpich -y
+    dnf clean all
 
     python3 -m pip install pip --upgrade
     python3 -m pip install emod-api --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
