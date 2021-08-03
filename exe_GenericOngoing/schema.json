@@ -1,9 +1,9 @@
 {
     "Version": {
         "Creator": "dtk_post_process_schema.py",
-        "DTK_Branch": "Generic-Ongoing(7b38d059b8)",
-        "DTK_Build_Date": "Jul  6 2021",
-        "DTK_Version": "2.21.5021.0"
+        "DTK_Branch": "Generic-Ongoing(a8fdc44efd)",
+        "DTK_Build_Date": "Aug  2 2021",
+        "DTK_Version": "2.21.5024.0"
     },
     "config": {
         "AgentConfig": {
