@@ -1,0 +1,31 @@
+Bootstrap: localimage
+From: Assets/EMOD_build01.sif
+
+%post
+    git --version
+    git clone https://github.com/InstituteforDiseaseModeling/EMOD.git
+
+    cd EMOD
+
+    git fetch
+    git checkout master
+
+    export USER=kfrey >> $SINGULARITY_ENVIRONMENT
+    scons --Release --jobs=4
+
+    build/x64/Release/Eradication/Eradication --help
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Test container for building EMOD.

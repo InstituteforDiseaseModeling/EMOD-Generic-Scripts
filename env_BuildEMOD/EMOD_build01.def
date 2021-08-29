@@ -1,0 +1,34 @@
+Bootstrap: library
+From: centos:latest
+
+%post
+    dnf install python3-devel -y
+    dnf install mpich-devel -y
+    dnf install sqlite-devel -y
+    dnf install boost-devel -y
+    dnf install git -y
+
+    dnf group install "Development Tools" -y
+
+    dnf clean all
+
+    python3 -m pip install pip --upgrade
+    python3 -m pip install scons
+
+    git --version
+
+%runscript
+
+
+%environment
+    export PATH=$PATH:/usr/lib64/mpich/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Test container for building EMOD.
