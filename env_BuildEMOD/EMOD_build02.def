@@ -3,17 +3,31 @@ From: Assets/EMOD_build01.sif
 
 %post
     git --version
-    git clone https://github.com/InstituteforDiseaseModeling/EMOD.git
+    git clone https://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@github.com/kfrey-idm/DtkTrunk.git
 
-    cd EMOD
+    cd DtkTrunk
 
     git fetch
-    git checkout master
+    git checkout Generic-Ongoing
 
-    export USER=kfrey >> $SINGULARITY_ENVIRONMENT
-    scons --Release --jobs=4
+    export USER=CalculonUser-EMOD >> $SINGULARITY_ENVIRONMENT
+    scons --Release --jobs=6 --Disease=Generic
 
-    build/x64/Release/Eradication/Eradication --help
+    cd ..
+
+    mkdir outputs
+    cp DtkTrunk/build/x64/Release/Eradication/Eradication outputs
+
+    mkdir outputs/reporter_plugins
+    cp DtkTrunk/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+
+    outputs/Eradication --get-schema --schema-path outputs/schema.json -P DtkTrunk/Scripts
+
+    ls -l outputs
+    ls outputs/reporter_plugins
+    outputs/Eradication --help
+
+    rm -r DtkTrunk
 
 %runscript
 
