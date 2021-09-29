@@ -8,6 +8,7 @@ import os, sys, shutil, json
 
 from idmtools.core.platform_factory                    import  Platform
 from idmtools_platform_comps.utils.download.download   import  DownloadWorkItem
+from idmtools.core.id_file                             import  read_id_file
 
 import numpy as np
 
@@ -23,8 +24,7 @@ PATH_TEMP  = os.path.abspath('temp_dir')
 def get_sim_files():
 
   # Get Experiment ID
-  with open('COMPS_ID') as fid01:
-    exp_id = fid01.readline().strip()
+  (exp_id,_,_,_) = read_id_file('COMPS_ID.id')
 
   # Connect to COMPS; needs to be the same environment used to run the sims
   plat_obj = Platform(block        = 'COMPS',
