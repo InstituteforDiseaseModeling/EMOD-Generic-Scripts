@@ -2,16 +2,15 @@
 
 ## Contents:
 
-  env_CentOS8            - Contains the script for building a singularity 
-                           image file (using COMPS) for running EMOD on COMPS.
+  env_CentOS8            - Contains the definition script for a singularity 
+                           image file that is used for for running EMOD on COMPS.
                            Produces an asset collection ID that is used in the
                            various workflows.
 
-  exe_GenericOngoing     - Contains the executable, schema file, and reporters
-                           (if any). Including these files here is not best
-                           practice (could auto-download) but having a local
-                           copy eliminates some VPN issues:
-                           InstituteforDiseaseModeling/DtkTrunk/Generic-Ongoing
+  env_BuildEMOD          - Contains the definition script for a singularity 
+                           image file that builds the EMOD executable.
+                           Produces an asset collection ID that is used in the
+                           various workflows.
 
   workflow_covariance01  - Demonstration of the covariance feature.
 
@@ -19,6 +18,7 @@
                            with MvG.
 
   workflow_demographics01- Example demographics for UK measles simulations.
+
 
 ## Workflow notes:
 
@@ -29,13 +29,15 @@
   Client Side: Uses 'idmtools' and 'emodpy' to communicate with COMPS
 
   1. Create a parameter dictionary that specifies the variables for the
-     simulation. OUTPUT = param_dict.json
+     simulation.
+     OUTPUT = param_dict.json
 
   2. Upload the parameter dictionary along with an ID and python files that use
      the parameter dictionary to create input files. Run the simulations.
-     OUTPUT = COMPS_ID
+     OUTPUT = COMPS_ID.id
 
-  3. Collect results from the server. OUTPUT = data_brick.json (and others)
+  3. Collect results from the server.
+     OUTPUT = data_brick.json (and others)
 
 
   Server Side: Uses 'emod-api' for file creation
@@ -52,15 +54,21 @@
 
 
 ## To run an example:
+
 1. Setup a virtual environment (e.g. conda)
 2. Install requirements via `pip` using IDM artifactory:
     ```
     >> pip install -r requirements.txt --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
     ```
-3. Build singularity image file:
+3. Build the environment:
     ```
     >> cd EMOD-Generic/env_CentOS8
     >> python make00_container.py
+    ```
+4. Build the executable:
+    ```
+    >> cd EMOD-Generic/env_BuildEMOD
+    >> python make00_executable.py
     ```
 4. Run experiment:
     ```
@@ -75,9 +83,8 @@
     >> make_fig_attackrate01.py
     ```
 
-## Environment notes (client):
 
-  Requires idmtools[idm] and emodpy
+## Environment notes (client):
 
   ********************************
   Helpful speed-up (see InstituteforDiseaseModeling/idmtools/issues/1395)
