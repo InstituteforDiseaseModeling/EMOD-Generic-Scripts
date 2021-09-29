@@ -65,7 +65,7 @@ for k0 in range(len(pname)):
 axs00.set_xlabel('Percentage',fontsize=26)
 axs00.set_ylabel('Age (years)',fontsize=26)
 
-plt.savefig('fig_poppyr01.png')
+#plt.savefig('fig_poppyr01.png')
 plt.savefig('fig_poppyr01.svg')
 
 plt.close()
