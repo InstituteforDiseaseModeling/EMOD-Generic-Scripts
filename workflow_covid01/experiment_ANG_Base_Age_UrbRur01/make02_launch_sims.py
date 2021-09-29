@@ -4,12 +4,13 @@
 #
 #*******************************************************************************
 
-import os, sys, json, time
+import os, sys, json
 
-from idmtools.assets                  import Asset
+from idmtools.assets                  import Asset, AssetCollection
 from idmtools.builders                import SimulationBuilder
 from idmtools.core.platform_factory   import Platform
 from idmtools.entities.experiment     import Experiment
+from idmtools.core.id_file            import write_id_file
 
 from emodpy.emod_task                 import EMODTask
 
@@ -97,8 +98,7 @@ def run_sims():
   plat_obj.run_items(experiment)
 
   # Save experiment id to file
-  with open('COMPS_ID', 'w') as fid01:
-    fid01.write('{}'.format(experiment.uid))
+  write_id_file('COMPS_ID.id', experiment)
   print()
   print(experiment.uid.hex)
 
