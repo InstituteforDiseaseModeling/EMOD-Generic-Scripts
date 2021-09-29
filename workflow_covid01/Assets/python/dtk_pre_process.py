@@ -11,7 +11,7 @@ import global_data as gdata
 from builder_config         import configBuilder
 from builder_demographics   import demographicsBuilder
 from builder_campaign       import campaignBuilder
-
+from builder_dlls           import dllcBuilder
 
 import numpy as np
 
@@ -64,12 +64,12 @@ def application(config_filename_in):
   time.sleep(1)
 
 
+  # Custom reporter file
+  dllcBuilder()
+  time.sleep(1)
 
 
-
-
-
-  # Make simulation configuration file
+  # Simulation configuration file
   config_filename = configBuilder()
   time.sleep(1)
 
