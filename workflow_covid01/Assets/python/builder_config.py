@@ -97,6 +97,8 @@ def configParamFunction(config):
   config.parameters.Enable_Default_Reporting                       =    1
   config.parameters.Enable_Property_Output                         =    1
 
+  config.parameters.Custom_Reports_Filename                        = gdata.reports_file
+
 
   return config
 

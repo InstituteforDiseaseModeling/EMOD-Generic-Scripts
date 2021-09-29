@@ -14,9 +14,9 @@ schema_path     = 'Assets/schema.json'
 # Filename params
 demog_files     = ['demographics.json']
 camp_file       = None
+reports_file    = None
 
 demog_dict      = dict()
-
 
 # Other stuff
 first_call_bool = True
