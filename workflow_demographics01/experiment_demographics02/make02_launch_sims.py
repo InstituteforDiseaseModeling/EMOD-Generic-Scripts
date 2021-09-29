@@ -6,7 +6,7 @@
 
 import os, sys, json, time
 
-from idmtools.assets                  import Asset
+from idmtools.assets                  import Asset, AssetCollection
 from idmtools.builders                import SimulationBuilder
 from idmtools.core.platform_factory   import Platform
 from idmtools.entities.experiment     import Experiment
@@ -20,10 +20,8 @@ from emodpy.emod_task                 import EMODTask
 # Paths
 PATH_PARAM  = os.path.abspath('param_dict.json')
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
-PATH_ENV    = os.path.abspath(os.path.join('..', '..', 'env_CentOS8', 'EMOD_SIF.id'))
-PATH_BIN    = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'Eradication'))
-PATH_DLLS   = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'reporter_plugins'))
-PATH_SCHEMA = os.path.abspath(os.path.join('..', '..', 'exe_GenericOngoing', 'schema.json'))
+PATH_ENV    = os.path.abspath(os.path.join('..', '..', 'env_CentOS8',   'EMOD_SIF.id'))
+PATH_EXE    = os.path.abspath(os.path.join('..', '..', 'env_BuildEMOD', 'EMOD_EXE.id'))
 
 
 
@@ -63,20 +61,16 @@ def run_sims():
                       exclusive       = 'False')
 
   # Create EMODTask
-  task_obj = EMODTask.from_files(eradication_path   = PATH_BIN,
-                                 ep4_path           = PATH_PYTHON)
+  task_obj = EMODTask.from_files(ep4_path = PATH_PYTHON)
   task_obj.set_sif(PATH_ENV)
 
   # Add the parameters dictionary to assets
   param_asset = Asset(absolute_path=PATH_PARAM)
   task_obj.common_assets.add_asset(param_asset)
 
-  # Add the schema to assets
-  param_asset = Asset(absolute_path=PATH_SCHEMA)
-  task_obj.common_assets.add_asset(param_asset)
-
-  # Add everything in the dlls directory as assets
-  task_obj.common_assets.add_directory(assets_directory=PATH_DLLS,relative_path='reporter_plugins')
+  # Add the executable and schema
+  exe_asset   = AssetCollection.from_id_file(PATH_EXE)
+  task_obj.common_assets.add_assets(exe_asset)
 
   # Add everything in the python assets directory as assets; dtk files already added
   for filename in os.listdir(PATH_PYTHON):
