@@ -19,6 +19,8 @@
 
   workflow_demographics01- Example demographics for UK measles simulations.
 
+  workflow_network01     - Demonstration of the network infectivity feature.
+
 
 ## Workflow notes:
 
