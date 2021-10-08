@@ -12,6 +12,7 @@
                            Produces an asset collection ID that is used in the
                            various workflows.
 
+
   workflow_covariance01  - Demonstration of the covariance feature.
 
   workflow_covid01       - Baseline simulations for SARS-CoV-2 in EMOD. Collab
@@ -20,6 +21,9 @@
   workflow_demographics01- Example demographics for UK measles simulations.
 
   workflow_network01     - Demonstration of the network infectivity feature.
+
+  workflow_polio01       - Example outbreak simulations for cVDPV2 in Nigeria.
+                           Collab with JG and HL.
 
 
 ## Workflow notes:
