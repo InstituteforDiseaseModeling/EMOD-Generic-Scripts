@@ -23,7 +23,7 @@ def dllcBuilder():
   SERO_TIME        = gdata.var_params['serosurvey_timestamps']
 
 
-  # Dictionary of parameters to be written
+  # Dictionary to be written
   json_set = {}
 
 

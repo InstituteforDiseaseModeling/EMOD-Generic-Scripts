@@ -53,7 +53,7 @@ param_dict['EXP_CONSTANT']['net_inf_ln_mult']      =  [-2.424]
 # Number of days to run simulation
 param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*2.0
 
-# Days after May 1, 2016 to start simulation
+# Days after May 1, 2016 (Sabin2 cessation) to start simulation
 param_dict['EXP_CONSTANT']['start_time']           =   365.0*0.0
 
 # Abort sim if running for more than specified time in minutes
@@ -98,6 +98,9 @@ param_dict['EXP_CONSTANT']['use_50pct_init']       =    True
 param_dict['EXP_CONSTANT']['sia_calendar']         =    False
 param_dict['EXP_CONSTANT']['sia_calendar_nopv']    =    False
 param_dict['EXP_CONSTANT']['sia_coverage']         =     0.5
+
+# Optional timestamp cutoff for SIA calendar; absolute time
+param_dict['EXP_CONSTANT']['sia_cutoff']           = 42825.0
 
 # Direct introduction of cVDPV2 (only uses genome val 7)
 # day_offset -> days after sim start, NOT ABSOLUTE TIME

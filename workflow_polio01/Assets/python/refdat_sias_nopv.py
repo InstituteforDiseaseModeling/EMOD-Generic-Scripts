@@ -9,7 +9,7 @@
 data_dict = \
 {
    "58018": {
-      "date": 1941,
+      "date": 44281,
       "nodes": [
          "AFRO:NIGERIA:NIGER:AGAIE",
          "AFRO:NIGERIA:NIGER:AGWARA",
@@ -109,7 +109,7 @@ data_dict = \
       ]
    },
    "58303": {
-      "date": 1928,
+      "date": 44268,
       "nodes": [
          "AFRO:NIGERIA:KEBBI:ALEIRO",
          "AFRO:NIGERIA:KEBBI:AREWA_DANDI",
@@ -135,7 +135,7 @@ data_dict = \
       ]
    },
    "58305": {
-      "date": 1970,
+      "date": 44310,
       "nodes": [
          "AFRO:NIGERIA:KEBBI:ALEIRO",
          "AFRO:NIGERIA:KEBBI:AREWA_DANDI",
@@ -166,7 +166,7 @@ data_dict = \
       ]
    },
    "58611": {
-      "date": 1899,
+      "date": 44239,
       "nodes": [
          "AFRO:NIGERIA:BAYELSA:BRASS",
          "AFRO:NIGERIA:BAYELSA:EKEREMOR",
@@ -261,7 +261,7 @@ data_dict = \
       ]
    },
    "58768": {
-      "date": 2005,
+      "date": 44345,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:ALKALERI",
          "AFRO:NIGERIA:BAUCHI:BAUCHI",
@@ -446,7 +446,7 @@ data_dict = \
       ]
    },
    "58769": {
-      "date": 2033,
+      "date": 44373,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:ALKALERI",
          "AFRO:NIGERIA:BAUCHI:BAUCHI",
@@ -631,7 +631,7 @@ data_dict = \
       ]
    },
    "58838": {
-      "date": 1998,
+      "date": 44338,
       "nodes": [
          "AFRO:NIGERIA:ABIA:ABA_NORTH",
          "AFRO:NIGERIA:ABIA:ABA_SOUTH",
@@ -734,7 +734,7 @@ data_dict = \
       ]
    },
    "58840": {
-      "date": 2026,
+      "date": 44366,
       "nodes": [
          "AFRO:NIGERIA:ABIA:ABA_NORTH",
          "AFRO:NIGERIA:ABIA:ABA_SOUTH",
@@ -837,7 +837,7 @@ data_dict = \
       ]
    },
    "58883": {
-      "date": 2047,
+      "date": 44387,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",
@@ -974,7 +974,7 @@ data_dict = \
       ]
    },
    "58885": {
-      "date": 2075,
+      "date": 44415,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",

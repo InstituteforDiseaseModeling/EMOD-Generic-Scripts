@@ -30,6 +30,9 @@ import numpy                    as    np
 
 def demographicsBuilder():
 
+  DEMOG_FILENAME = 'demographics.json'
+
+
   # ***** Get variables for this simulation *****
   SUB_LGA      = gdata.var_params['use_10k_res']
 
@@ -51,6 +54,9 @@ def demographicsBuilder():
     os.mkdir(PATH_OVERLAY)
 
   # ***** Prep dict for primary file *****
+
+  # Save filename to global data for use in other functions
+  gdata.demog_files.append(DEMOG_FILENAME)
 
   json_set = dict()
 
@@ -253,7 +259,7 @@ def demographicsBuilder():
       node_name  = node_dict['Name']
       node_id    = node_dict['NodeID']
       if(node_id in data_tup[2]):
-        start_year = 2016 + (gdata.start_off+TIME_START)/365.0
+        start_year = (gdata.start_off+TIME_START)/365.0 + 1900
         ref_year   = ipop_time[loc_name]
         mult_fac   = grow_rate**(start_year-ref_year)
         node_dict['NodeAttributes']['InitialPopulation'] =  \
@@ -279,7 +285,7 @@ def demographicsBuilder():
                 'ResultScaleFactor':                                       1 ,
                 'ResultValues':                                      [age_y] }
 
-    nfname = gdata.demog_files[0].rsplit('.',1)[0] + '_vd{:03}.json'.format(k1)
+    nfname = DEMOG_FILENAME.rsplit('.',1)[0] + '_vd{:03}.json'.format(k1)
     nfname = os.path.join(PATH_OVERLAY,nfname)
     gdata.demog_files.append(nfname)
     with open(nfname,'w')  as fid01:
@@ -358,7 +364,7 @@ def demographicsBuilder():
                 'ResultScaleFactor':                                       1 ,
                 'ResultValues':                                       isus_y }
 
-    nfname = gdata.demog_files[0].rsplit('.',1)[0] + '_is{:03}.json'.format(k1)
+    nfname = DEMOG_FILENAME.rsplit('.',1)[0] + '_is{:03}.json'.format(k1)
     nfname = os.path.join(PATH_OVERLAY,nfname)
     gdata.demog_files.append(nfname)
     with open(nfname,'w')  as fid01:
@@ -367,9 +373,10 @@ def demographicsBuilder():
 
   # ***** Write primary demographics file *****
 
-  with open(gdata.demog_files[0],'w')  as fid01:
+  with open(DEMOG_FILENAME,'w')  as fid01:
     json.dump(json_set,fid01,sort_keys=True)
 
+  # Save the demographics object for use in other functions
   gdata.demog_dict       = json_set
 
 

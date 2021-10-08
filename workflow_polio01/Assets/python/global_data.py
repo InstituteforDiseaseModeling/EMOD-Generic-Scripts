@@ -1,5 +1,7 @@
 #********************************************************************************
 #
+# Static data module for embedded python in the DTK.
+#
 # Python 3.6.0
 #
 #********************************************************************************
@@ -10,11 +12,11 @@ var_params      = dict()
 schema_path     = 'Assets/schema.json'
 
 # Filename params
-demog_files     = ['demographics.json']
+demog_files     = list()
 camp_file       = None
 reports_file    = None
 
-start_off       = 120.0
+start_off       = 365.0*(2016-1900)+120.0
 demog_dict      = dict()
 demog_node      = dict()
 demog_min_pop   = 0

@@ -9,7 +9,7 @@
 data_dict = \
 {
    "NGA-2016-018": {
-      "date": 132,
+      "date": 42472,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",
@@ -90,7 +90,7 @@ data_dict = \
       ]
    },
    "NGA-2016-019": {
-      "date": 165,
+      "date": 42505,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:MADAGALI",
          "AFRO:NIGERIA:ADAMAWA:MICHIKA",
@@ -124,7 +124,7 @@ data_dict = \
       ]
    },
    "NGA-2016-021": {
-      "date": 197,
+      "date": 42537,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:MADAGALI",
          "AFRO:NIGERIA:ADAMAWA:MICHIKA",
@@ -167,13 +167,13 @@ data_dict = \
       ]
    },
    "NGA-2016-023": {
-      "date": 170,
+      "date": 42510,
       "nodes": [
          "AFRO:NIGERIA:JIGAWA:KAUGAMA"
       ]
    },
    "NGA-2016-024": {
-      "date": 179,
+      "date": 42519,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:GIADE",
          "AFRO:NIGERIA:BAUCHI:ITAS_GADAU",
@@ -212,7 +212,7 @@ data_dict = \
       ]
    },
    "NGA-2016-025": {
-      "date": 207,
+      "date": 42547,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:GIADE",
          "AFRO:NIGERIA:BAUCHI:ITAS_GADAU",
@@ -251,14 +251,14 @@ data_dict = \
       ]
    },
    "NGA-2016-032": {
-      "date": 354,
+      "date": 42694,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:SHAGARI"
       ]
    },
    "NGA-2016-034": {
-      "date": 353,
+      "date": 42693,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",
@@ -398,7 +398,7 @@ data_dict = \
       ]
    },
    "NGA-2017-020": {
-      "date": 396,
+      "date": 42736,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",
@@ -785,7 +785,7 @@ data_dict = \
       ]
    },
    "NGA-2017-021": {
-      "date": 515,
+      "date": 42855,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BINJI",
          "AFRO:NIGERIA:SOKOTO:BODINGA",
@@ -813,7 +813,7 @@ data_dict = \
       ]
    },
    "NGA-2017-024": {
-      "date": 516,
+      "date": 42856,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:KWARE",
@@ -823,7 +823,7 @@ data_dict = \
       ]
    },
    "NGA-2018-012": {
-      "date": 863,
+      "date": 43203,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:DARAZO",
          "AFRO:NIGERIA:BAUCHI:GANJUWA",
@@ -877,7 +877,7 @@ data_dict = \
       ]
    },
    "NGA-2018-014": {
-      "date": 863,
+      "date": 43203,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:KWARE",
@@ -887,13 +887,13 @@ data_dict = \
       ]
    },
    "NGA-2018-016": {
-      "date": 942,
+      "date": 43282,
       "nodes": [
          "AFRO:NIGERIA:YOBE:GEIDAM"
       ]
    },
    "NGA-2018-017": {
-      "date": 977,
+      "date": 43317,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:DANGE_SHUNI",
@@ -906,7 +906,7 @@ data_dict = \
       ]
    },
    "NGA-2018-018": {
-      "date": 977,
+      "date": 43317,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:DAMBAN",
          "AFRO:NIGERIA:BAUCHI:GAMAWA",
@@ -996,7 +996,7 @@ data_dict = \
       ]
    },
    "NGA-2018-019": {
-      "date": 1012,
+      "date": 43352,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:DANGE_SHUNI",
@@ -1009,7 +1009,7 @@ data_dict = \
       ]
    },
    "NGA-2018-020": {
-      "date": 1012,
+      "date": 43352,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:DAMBAN",
          "AFRO:NIGERIA:BAUCHI:GAMAWA",
@@ -1107,7 +1107,7 @@ data_dict = \
       ]
    },
    "NGA-2018-022": {
-      "date": 879,
+      "date": 43219,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:DARAZO",
          "AFRO:NIGERIA:BAUCHI:GANJUWA",
@@ -1161,7 +1161,7 @@ data_dict = \
       ]
    },
    "NGA-2018-023": {
-      "date": 879,
+      "date": 43219,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:KWARE",
@@ -1171,7 +1171,7 @@ data_dict = \
       ]
    },
    "NGA-2018-025": {
-      "date": 1084,
+      "date": 43424,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:ALKALERI",
          "AFRO:NIGERIA:BAUCHI:BAUCHI",
@@ -1514,7 +1514,7 @@ data_dict = \
       ]
    },
    "NGA-2019-004": {
-      "date": 1201,
+      "date": 43541,
       "nodes": [
          "AFRO:NIGERIA:KADUNA:BIRNIN_GWARI",
          "AFRO:NIGERIA:KADUNA:CHIKUN",
@@ -1641,7 +1641,7 @@ data_dict = \
       ]
    },
    "NGA-2019-007": {
-      "date": 1124,
+      "date": 43464,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",
@@ -1995,7 +1995,7 @@ data_dict = \
       ]
    },
    "NGA-2019-010": {
-      "date": 1138,
+      "date": 43478,
       "nodes": [
          "AFRO:NIGERIA:KWARA:ASA",
          "AFRO:NIGERIA:KWARA:BARUTEN",
@@ -2010,7 +2010,7 @@ data_dict = \
       ]
    },
    "NGA-2019-012": {
-      "date": 1215,
+      "date": 43555,
       "nodes": [
          "AFRO:NIGERIA:BORNO:ABADAM",
          "AFRO:NIGERIA:BORNO:ASKIRA_UBA",
@@ -2133,7 +2133,7 @@ data_dict = \
       ]
    },
    "NGA-2019-013": {
-      "date": 1222,
+      "date": 43562,
       "nodes": [
          "AFRO:NIGERIA:ADAMAWA:DEMSA",
          "AFRO:NIGERIA:ADAMAWA:FUFORE",
@@ -2257,7 +2257,7 @@ data_dict = \
       ]
    },
    "NGA-2019-014": {
-      "date": 1222,
+      "date": 43562,
       "nodes": [
          "AFRO:NIGERIA:KWARA:EKITI",
          "AFRO:NIGERIA:KWARA:IFELODUN",
@@ -2273,7 +2273,7 @@ data_dict = \
       ]
    },
    "NGA-2019-016": {
-      "date": 1264,
+      "date": 43604,
       "nodes": [
          "AFRO:NIGERIA:EKITI:ADO_EKITI",
          "AFRO:NIGERIA:EKITI:EFON",
@@ -2415,7 +2415,7 @@ data_dict = \
       ]
    },
    "NGA-2019-018": {
-      "date": 1243,
+      "date": 43583,
       "nodes": [
          "AFRO:NIGERIA:BAUCHI:BAUCHI",
          "AFRO:NIGERIA:BORNO:KONDUGA",
@@ -2450,7 +2450,7 @@ data_dict = \
       ]
    },
    "NGA-2019-019": {
-      "date": 1306,
+      "date": 43646,
       "nodes": [
          "AFRO:NIGERIA:KWARA:ASA",
          "AFRO:NIGERIA:KWARA:IFELODUN",
@@ -2471,7 +2471,7 @@ data_dict = \
       ]
    },
    "NGA-2019-020": {
-      "date": 1341,
+      "date": 43681,
       "nodes": [
          "AFRO:NIGERIA:KOGI:ANKPA",
          "AFRO:NIGERIA:KOGI:DEKINA",
@@ -2479,7 +2479,7 @@ data_dict = \
       ]
    },
    "NGA-2019-021": {
-      "date": 1355,
+      "date": 43695,
       "nodes": [
          "AFRO:NIGERIA:ANAMBRA:ANAMBRA_WEST",
          "AFRO:NIGERIA:EDO:ESAN_CENTRAL",
@@ -2522,7 +2522,7 @@ data_dict = \
       ]
    },
    "NGA-2019-022": {
-      "date": 1388,
+      "date": 43728,
       "nodes": [
          "AFRO:NIGERIA:KOGI:ADAVI",
          "AFRO:NIGERIA:KOGI:AJAOKUTA",
@@ -2548,7 +2548,7 @@ data_dict = \
       ]
    },
    "NGA-2019-024": {
-      "date": 1324,
+      "date": 43664,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:SOKOTO_NORTH",
          "AFRO:NIGERIA:SOKOTO:SOKOTO_SOUTH",
@@ -2556,7 +2556,7 @@ data_dict = \
       ]
    },
    "NGA-2019-025": {
-      "date": 1418,
+      "date": 43758,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:DANGE_SHUNI",
          "AFRO:NIGERIA:SOKOTO:KWARE",
@@ -2567,7 +2567,7 @@ data_dict = \
       ]
    },
    "NGA-2019-026": {
-      "date": 1446,
+      "date": 43786,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:DANGE_SHUNI",
          "AFRO:NIGERIA:SOKOTO:KWARE",
@@ -2578,7 +2578,7 @@ data_dict = \
       ]
    },
    "NGA-2019-027": {
-      "date": 1426,
+      "date": 43766,
       "nodes": [
          "AFRO:NIGERIA:OYO:OGBOMOSHO_NORTH",
          "AFRO:NIGERIA:OYO:ORI_IRE",
@@ -2586,7 +2586,7 @@ data_dict = \
       ]
    },
    "NGA-2019-028": {
-      "date": 1439,
+      "date": 43779,
       "nodes": [
          "AFRO:NIGERIA:OYO:AFIJIO",
          "AFRO:NIGERIA:OYO:ATIBA",
@@ -2606,7 +2606,7 @@ data_dict = \
       ]
    },
    "NGA-2020-003": {
-      "date": 1529,
+      "date": 43869,
       "nodes": [
          "AFRO:NIGERIA:OYO:AFIJIO",
          "AFRO:NIGERIA:OYO:AKINYELE",
@@ -2631,14 +2631,14 @@ data_dict = \
       ]
    },
    "NGA-2020-004": {
-      "date": 1530,
+      "date": 43870,
       "nodes": [
          "AFRO:NIGERIA:ANAMBRA:ANAMBRA_EAST",
          "AFRO:NIGERIA:ANAMBRA:ONITSHA_SOUTH"
       ]
    },
    "NGA-2020-005": {
-      "date": 1515,
+      "date": 43855,
       "nodes": [
          "AFRO:NIGERIA:ANAMBRA:AGUATA",
          "AFRO:NIGERIA:ANAMBRA:ANAMBRA_EAST",
@@ -2667,7 +2667,7 @@ data_dict = \
       ]
    },
    "NGA-2020-008": {
-      "date": 1753,
+      "date": 44093,
       "nodes": [
          "AFRO:NIGERIA:OGUN:ABEOKUTA_NORTH",
          "AFRO:NIGERIA:OGUN:ABEOKUTA_SOUTH",
@@ -2692,7 +2692,7 @@ data_dict = \
       ]
    },
    "NGA-2020-009": {
-      "date": 1781,
+      "date": 44121,
       "nodes": [
          "AFRO:NIGERIA:OGUN:ABEOKUTA_NORTH",
          "AFRO:NIGERIA:OGUN:ABEOKUTA_SOUTH",
@@ -2717,7 +2717,7 @@ data_dict = \
       ]
    },
    "NGA-2020-011": {
-      "date": 1718,
+      "date": 44058,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:DANGE_SHUNI",
@@ -2729,7 +2729,7 @@ data_dict = \
       ]
    },
    "NGA-2020-012": {
-      "date": 1756,
+      "date": 44096,
       "nodes": [
          "AFRO:NIGERIA:SOKOTO:BODINGA",
          "AFRO:NIGERIA:SOKOTO:DANGE_SHUNI",
@@ -2741,7 +2741,7 @@ data_dict = \
       ]
    },
    "NGA-2020-013": {
-      "date": 1753,
+      "date": 44093,
       "nodes": [
          "AFRO:NIGERIA:LAGOS:APAPA",
          "AFRO:NIGERIA:LAGOS:MUSHIN",
@@ -2751,7 +2751,7 @@ data_dict = \
       ]
    },
    "NGA-2020-014": {
-      "date": 1781,
+      "date": 44121,
       "nodes": [
          "AFRO:NIGERIA:LAGOS:APAPA",
          "AFRO:NIGERIA:LAGOS:MUSHIN",
@@ -2761,7 +2761,7 @@ data_dict = \
       ]
    },
    "NGA-2020-015": {
-      "date": 1781,
+      "date": 44121,
       "nodes": [
          "AFRO:NIGERIA:DELTA:UDU",
          "AFRO:NIGERIA:DELTA:UGHELLI_SOUTH",
@@ -2771,7 +2771,7 @@ data_dict = \
       ]
    },
    "NGA-2020-016": {
-      "date": 1809,
+      "date": 44149,
       "nodes": [
          "AFRO:NIGERIA:DELTA:UDU",
          "AFRO:NIGERIA:DELTA:UGHELLI_SOUTH",

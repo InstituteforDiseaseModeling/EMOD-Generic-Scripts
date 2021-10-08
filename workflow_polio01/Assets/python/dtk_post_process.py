@@ -25,9 +25,14 @@ def application(output_path):
   TIME_START      = gdata.var_params['start_time']
   TIME_DELTA      = gdata.var_params['num_tsteps']
 
+  OPV_BOXES       = gdata.var_params['OPV_compartments']
+  NOPV_BOXES      = gdata.var_params['nOPV_compartments']
+
+  cVDPV_genome    = OPV_BOXES + NOPV_BOXES
+
 
   # Timesteps
-  time_init  = 365.0*(2016-1900)+ START_DAY + TIME_START
+  time_init  = START_DAY + TIME_START
   time_vec   = np.arange(time_init, time_init + 2*TIME_DELTA)
 
 
@@ -35,7 +40,7 @@ def application(output_path):
   strain_dat = np.loadtxt(os.path.join(output_path,'ReportStrainTracking01.csv'),delimiter=',',skiprows=1,ndmin=2)
 
 
-  # Construct csv file for cVDPV infections (Sabin descent)
+  # Construct csv file for cVDPV infections (Sabin descent: Clade = 0)
   node_reps     = list(REP_DEX_DICT.keys())
   dbrick0       = np.zeros((len(node_reps)+1,int(TIME_DELTA)))
   dbrick0[0,:]  = time_vec[:int(TIME_DELTA)]
@@ -43,7 +48,7 @@ def application(output_path):
   if(strain_dat.shape[0]>0):
     for rep_name in node_reps:
       brick_dex      = REP_DEX_DICT[rep_name]
-      rep_bool       = np.isin(strain_dat[:,1],REP_MAP_DICT[rep_name]) & (strain_dat[:,2]!=1) & (strain_dat[:,2]!=2) & (strain_dat[:,3]>6)
+      rep_bool       = np.isin(strain_dat[:,1],REP_MAP_DICT[rep_name]) & (strain_dat[:,2]==0) & (strain_dat[:,3]==cVDPV_genome)
       targ_dat       = strain_dat[rep_bool,:]
       for k1 in range(targ_dat.shape[0]):
         dbrick0[brick_dex,int(targ_dat[k1,0]-time_init)] += targ_dat[k1,7]
@@ -51,7 +56,7 @@ def application(output_path):
   np.savetxt(os.path.join(output_path,'lga_timeseries.csv'),dbrick0,fmt='%.0f',delimiter=',')
 
 
-  # Construct csv file for cVDPV infections (nOPV descent)
+  # Construct csv file for cVDPV infections (nOPV descent: Clade = 1)
   node_reps     = list(REP_DEX_DICT.keys())
   dbrick0       = np.zeros((len(node_reps)+1,int(TIME_DELTA)))
   dbrick0[0,:]  = time_vec[:int(TIME_DELTA)]
@@ -59,7 +64,7 @@ def application(output_path):
   if(strain_dat.shape[0]>0):
     for rep_name in node_reps:
       brick_dex      = REP_DEX_DICT[rep_name]
-      rep_bool       = np.isin(strain_dat[:,1],REP_MAP_DICT[rep_name]) & (strain_dat[:,2]==2) & (strain_dat[:,3]>6)
+      rep_bool       = np.isin(strain_dat[:,1],REP_MAP_DICT[rep_name]) & (strain_dat[:,2]==1) & (strain_dat[:,3]==cVDPV_genome)
       targ_dat       = strain_dat[rep_bool,:]
       for k1 in range(targ_dat.shape[0]):
         dbrick0[brick_dex,int(targ_dat[k1,0]-time_init)] += targ_dat[k1,7]

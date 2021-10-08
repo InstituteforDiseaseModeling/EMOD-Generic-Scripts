@@ -37,6 +37,9 @@ def maxCoeff(exp_vals):
 # Function for setting config parameters 
 def configParamFunction(config):
 
+  START_DAY       = gdata.start_off
+
+
   # ***** Get variables for this simulation *****
   R0              = gdata.var_params['R0']
   R0_OPV          = gdata.var_params['R0_OPV']
@@ -52,11 +55,10 @@ def configParamFunction(config):
   NI_MAXFRAC      = gdata.var_params['net_inf_maxfrac']
 
   OPV_REV         = gdata.var_params['OPV_rev_prob']
+  OPV_BOXES       = gdata.var_params['OPV_compartments']
 
   NOPV_REV        = gdata.var_params['nOPV_rev_prob']
   NOPV_BOXES      = gdata.var_params['nOPV_compartments']
-
-  CVDPV_TRAK      = gdata.var_params['Emergence_Tracking']
 
   RUN_NUM         = gdata.var_params['run_number']
 
@@ -69,16 +71,18 @@ def configParamFunction(config):
 
   MAX_CLOCK       = gdata.var_params['max_clock_minutes']
 
+
   # ***** Random number seed ****
   config.parameters.Run_Number                               = RUN_NUM
 
 
   # ***** Time *****
-  config.parameters.Start_Time                               = 365.0*(2016-1900)+gdata.start_off+TIME_START
+  config.parameters.Start_Time                               = START_DAY + TIME_START
   config.parameters.Simulation_Duration                      = TIME_DELTA
 
   config.parameters.Enable_Termination_On_Total_Wall_Time    =   1
   config.parameters.Wall_Time_Maximum_In_Minutes             = MAX_CLOCK
+
 
   # ***** Intrahost *****
   config.parameters.Base_Infectivity_Distribution            = 'GAMMA_DISTRIBUTION'
@@ -148,25 +152,33 @@ def configParamFunction(config):
 
 
   # ***** Multistrain *****
-  log2_num_strains = 3
-  num_strains      = 2**log2_num_strains
+
+  num_strains      = NOPV_BOXES + OPV_BOXES + 1
+  log2_num_strains = np.ceil(np.log2(num_strains))
 
   config.parameters.Enable_Strain_Tracking                 =  1
-  if(CVDPV_TRAK):
-    config.parameters.Enable_Emergence_Tracking            =  1
+  config.parameters.Enable_Genome_Dependent_Infectivity    =  1
+  config.parameters.Enable_Genome_Mutation                 =  1
+
   config.parameters.Number_of_Clades                       =  3
   config.parameters.Log2_Number_of_Genomes_per_Clade       =  log2_num_strains
-  config.parameters.Enable_Strain_Dependent_Transmission   =  1
-  config.parameters.Strain_Transmission_Multipliers        = (np.linspace(R0_OPV/R0, 1.0, num = num_strains)).tolist()
-  config.parameters.Clade_Multiplier                       =  NOPV_R0_MULT
-  config.parameters.Enable_Strain_Evolution                =  1
-  config.parameters.Strain_Evolution_Rate                  =  OPV_REV
-  config.parameters.nOPV_Evolution_Rate                    =  NOPV_REV
-  config.parameters.nOPV_Compartments                      =  NOPV_BOXES
+
+  list_multiply              = np.ones(num_strains)
+  list_multiply[:NOPV_BOXES] = NOPV_R0_MULT * R0_OPV / R0
+  list_multiply[NOPV_BOXES:] = np.linspace(R0_OPV/R0, 1.0, num = OPV_BOXES + 1)
+  
+  config.parameters.Genome_Infectivity_Multipliers         = list_multiply.tolist()
+
+  list_mutate   = np.zeros(num_strains)
+  list_mutate[:NOPV_BOXES]   = NOPV_REV
+  list_mutate[NOPV_BOXES:-1] =  OPV_REV
+
+  config.parameters.Genome_Mutation_Rates                  = list_mutate.tolist()
 
 
   # ***** Demographic parameters *****
   config.parameters.Enable_Demographics_Builtin           = 0
+
   config.parameters.Enable_Acquisition_Heterogeneity      = 1
   config.parameters.Demographics_Filenames                = gdata.demog_files
   config.parameters.Enable_Vital_Dynamics                 = 1
@@ -188,8 +200,7 @@ def configParamFunction(config):
   config.parameters.Enable_Event_DB                    = 0
   config.parameters.Enable_Property_Output             = 0
   config.parameters.Enable_Spatial_Output              = 0
-  config.parameters.Enable_Report_Event_Recorder       = 1
-  config.parameters.Report_Event_Recorder_Events       = ["NewSevereCase", "NewClinicalCase"]
+  config.parameters.Enable_Report_Event_Recorder       = 0
 
   config.parameters.Custom_Reports_Filename            = gdata.reports_file
 

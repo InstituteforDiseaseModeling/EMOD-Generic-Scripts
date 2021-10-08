@@ -4,7 +4,7 @@
 #
 #********************************************************************************
 
-import os, sys, time, json
+import os, sys, json, time
 
 import global_data as gdata
 
@@ -19,7 +19,7 @@ import emod_api
 
 #*******************************************************************************
 
-def application(config_filename_in): 
+def application(config_filename_in):
 
   # Declare current version of emod-api
   print('Using emod-api {:s}'.format(emod_api.__version__))
@@ -54,17 +54,17 @@ def application(config_filename_in):
   np.random.seed(sim_index)
 
 
-  # Make demographics file
+  # Demographics file
   demographicsBuilder()
   time.sleep(1)
 
 
-  # Make campaign file
+  # Campaign interventions file
   campaignBuilder()
   time.sleep(1)
 
 
-  # Make custom reporter file
+  # Custom reporter file
   dllcBuilder()
   time.sleep(1)
 

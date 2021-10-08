@@ -39,6 +39,12 @@ def campaignBuilder():
   SIAS_ETC     = gdata.var_params['sia_other']
   SIA_ADDLIST  = gdata.var_params['sia_sets']
 
+  OPV_BOXES    = gdata.var_params['OPV_compartments']
+  NOPV_BOXES   = gdata.var_params['nOPV_compartments']
+
+  SIA_STOP = 1.0e9
+  if('sia_cutoff' in gdata.var_params):
+    SIA_STOP     = gdata.var_params['sia_cutoff']
 
   # ***** Events *****
 
@@ -46,7 +52,7 @@ def campaignBuilder():
   node_opts = list(node_dict.keys())
 
 
-  # Use SIA calendar for sabin intervention schedule
+  # Use SIA calendar for Sabin intervention schedule
   if(SIAS_SABIN):
     for sia_name in dict_sia:
       sia_obj = dict_sia[sia_name]
@@ -58,20 +64,20 @@ def campaignBuilder():
             node_list.append(node_dict[node_name])
       start_val  = sia_obj['date']
 
-      if(start_val > 484.0):
+      if(start_val > SIA_STOP):
         continue
 
       pdict     = {'startday':                                start_val ,
                    'nodes':                                   node_list ,
                    'coverage':                                SIA_COVER ,
                    'vaccine_type':                                    0 ,
-                   'strain_type':                                     0 ,
+                   'strain_type':                            NOPV_BOXES ,
                    'immune_override':                                 0 }
 
       camp_module.add(IV_OPV2(pdict))
 
 
-  # Use SIA calendar for nopv intervention schedule
+  # Use SIA calendar for nOPV intervention schedule
   if(SIAS_NOPV):
     for sia_name in dict_sia_nopv:
       sia_obj = dict_sia_nopv[sia_name]
@@ -82,6 +88,9 @@ def campaignBuilder():
           if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
             node_list.append(node_dict[node_name])
       start_val  = sia_obj['date']
+
+      if(start_val > SIA_STOP):
+        continue
 
       pdict     = {'startday':                                start_val ,
                    'nodes':                                   node_list ,
@@ -102,16 +111,16 @@ def campaignBuilder():
         for node_name in node_opts:
           if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
             node_list.append(node_dict[node_name])
-      start_val = gdata.start_off + TIME_START + sia_obj['day_offset']
+      start_val  = gdata.start_off + TIME_START + sia_obj['day_offset']
       num_agents = sia_obj['num_cases']
       agent_wght = sia_obj['agent_wght']
-      node_list = [node_list[np.random.randint(low=0,high=len(node_list))]]
+      node_list  = [node_list[np.random.randint(low=0,high=len(node_list))]]
 
       pdict     = {'startday':                                start_val ,
                    'nodes':                                   node_list ,
                    'num_cases':                              num_agents ,
                    'ind_wght':                               agent_wght ,
-                   'strain_type':                                     7 }
+                   'strain_type':                  NOPV_BOXES+OPV_BOXES }
       camp_module.add(IV_cVDPV2(pdict))
 
 
@@ -126,7 +135,7 @@ def campaignBuilder():
 
 #********************************************************************************
 
-# Distribute vaccines using OutbreakIndividual
+# Distribute vaccines using OutbreakIndividual infections
 def IV_OPV2(params=dict()):
 
   SCHEMA_PATH   =  gdata.schema_path
@@ -138,7 +147,7 @@ def IV_OPV2(params=dict()):
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
   camp_event.Event_Coordinator_Config       = camp_coord
-  camp_event.Start_Day                      = 365.0*(2016-1900)+params['startday']
+  camp_event.Start_Day                      = params['startday']
   camp_event.Nodeset_Config                 = node_set
 
   camp_coord.Intervention_Config            = camp_iv
@@ -168,7 +177,7 @@ def IV_cVDPV2(params=dict()):
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
   camp_event.Event_Coordinator_Config       = camp_coord
-  camp_event.Start_Day                      = 365.0*(2016-1900)+params['startday']
+  camp_event.Start_Day                      = params['startday']
   camp_event.Nodeset_Config                 = node_set
 
   camp_coord.Intervention_Config            = camp_iv
