@@ -1,9 +1,12 @@
-python
-   Contains user-defined python files that are consumed by EMOD server-side.
-   Some filenames must remain unchanged: EMOD looks for 'dtk_pre_process.py',
-   'dtk_in_process.py', and 'dtk_post_process.py' by name and assumes those
-   files contain a function called 'application'. Everything else can be 
-   user-defined.
+#### python
+Contains user-defined python files that are consumed by EMOD server-side.
+Some filenames must remain unchanged: EMOD looks for 'dtk_pre_process.py',
+'dtk_in_process.py', and 'dtk_post_process.py' by name and assumes those
+files contain a function called 'application'. Everything else can be
+user-defined.
+
+#### data
+Contains csv files and json files for use by python while running EMOD.
 
 
 
