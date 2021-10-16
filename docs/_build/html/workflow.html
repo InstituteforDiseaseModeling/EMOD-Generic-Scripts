@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Client- and server-side workflow &mdash; EMOD-Generic  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copy_button.css" type="text/css" />
+  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/show_block_by_os.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within EMOD-Generic  documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Get started" href="get-started.html" />
+
+<link href="https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans" rel="stylesheet">
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EMOD-Generic
+          
+
+          
+            
+            <img src="_static/IDM_white.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Client- and server-side workflow</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EMOD-Generic</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+    <li><a href="https://idmod.org/documentation">IDM docs</a> &raquo;</li>
+    <li><a href="index.html">EMOD-Generic</a> &raquo;</li>
+    
+    <li>Client- and server-side workflow</li>
+
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="client-and-server-side-workflow">
+<h1>Client- and server-side workflow<a class="headerlink" href="#client-and-server-side-workflow" title="Permalink to this headline">¶</a></h1>
+<p>The workflow separates defining and uploading (client-side operations) from writing
+inputs and running sims (server-side).</p>
+<section id="client-side">
+<h2>Client-side<a class="headerlink" href="#client-side" title="Permalink to this headline">¶</a></h2>
+<p>The client-side workflow uses idmtools and emodpy to communicate with COMPS.</p>
+<ol class="arabic">
+<li><p>Create a parameter dictionary that specifies the variables for the
+simulation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUT</span> <span class="o">=</span> <span class="n">param_dict</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</li>
+<li><p>Upload the parameter dictionary along with an ID and Python files that use
+the parameter dictionary to create input files. Run the simulations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUT</span> <span class="o">=</span> <span class="n">COMPS_ID</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+</li>
+<li><p>Collect results from the server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OUTPUT</span> <span class="o">=</span> <span class="n">data_brick</span><span class="o">.</span><span class="n">json</span> <span class="p">(</span><span class="ow">and</span> <span class="n">others</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<section id="client-side-speed-up">
+<h3>Client-side speed-up<a class="headerlink" href="#client-side-speed-up" title="Permalink to this headline">¶</a></h3>
+<p>There is a known issue that causes the time to create simulations on COMPS
+to increase with the size of Python requirements
+(see <a class="reference external" href="https://github.com/InstituteforDiseaseModeling/idmtools/issues/1395">https://github.com/InstituteforDiseaseModeling/idmtools/issues/1395</a>). To
+work around this issue and reduce the time needed, modify the idmtools code as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DIRNAME</span>\<span class="n">idmtools</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">idmtools</span>\<span class="n">entities</span>\<span class="n">templated_simulation</span><span class="o">.</span><span class="n">py</span>
+<span class="p">(</span><span class="n">line</span> <span class="mi">184</span><span class="p">)</span>
+  <span class="o">+</span> <span class="n">sim</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">common_assets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_simulation</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">common_assets</span>
+
+<span class="n">DIRNAME</span>\<span class="n">idmtools</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">idmtools</span>\<span class="n">entities</span>\<span class="n">itask</span><span class="o">.</span><span class="n">py</span>
+<span class="p">(</span><span class="n">line</span> <span class="mi">224</span><span class="p">)</span>
+  <span class="o">-</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;_task_log&#39;</span><span class="p">]:</span>
+  <span class="o">+</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;_task_log&#39;</span><span class="p">,</span><span class="s1">&#39;common_assets&#39;</span><span class="p">]:</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="server-side">
+<h2>Server-side<a class="headerlink" href="#server-side" title="Permalink to this headline">¶</a></h2>
+<p>The server-side workflow uses emod-api for file creation.</p>
+<p>Each EMOD simulation automatically runs three Python functions: <code class="docutils literal notranslate"><span class="pre">dtk_pre_process</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dtk_in_process</span></code>, and <code class="docutils literal notranslate"><span class="pre">dtk_post_process</span></code>. All file creation work is done within
+the <code class="docutils literal notranslate"><span class="pre">dtk_pre_process</span></code> function. That application will find the ID assigned to
+the simulation, open the parameter dictionary and retrieve the correct
+values for the simulation, then use emod-api to create input files.</p>
+<p>The easiest way to trace the workflow is to start in an experiment directory
+and examine the three Python scripts (corresponding to the three client-side steps
+above) that need to be run in order.</p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="get-started.html" class="btn btn-neutral float-left" title="Get started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 1999 - 2021, Bill &amp; Melinda Gates Foundation. All rights reserved..
+
+    </p>
+  </div>
+<p>EMOD-Generic is licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons
+    Attribution-ShareAlike 4.0 International License</a>.</p>
+<p>Send documentation feedback to <a href="mailto:feedback@idmod.org" target="_top">feedback@idmod.org</a>. If you have
+    questions, email <a href="mailto:support@idmod.org" target="_top">support@idmod.org</a>.</p>
+<p><a href="https://www.gatesfoundation.org/Privacy-and-Cookies-Notice">Privacy and Cookies Notice</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="https://www.gatesfoundation.org/Terms-of-Use">Terms of Use</a></p>
+
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
