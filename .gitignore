@@ -17,3 +17,6 @@ _data_*.json
 
 __pycache__/
 *output/
+
+# Sphinx documentation
+docs/_build/
