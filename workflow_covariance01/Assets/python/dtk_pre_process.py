@@ -21,40 +21,61 @@ import emod_api
 
 def application(config_filename_in):
 
+  PFILE   = 'param_dict.json'
+  I_FILE  = 'idx_str_file.txt'
+  EXP_C   = 'EXP_CONSTANT'
+  EXP_V   = 'EXP_VARIABLE'
+  ASSETS  = 'Assets'
+
+
   # Declare current version of emod-api
   print('Using emod-api {:s}'.format(emod_api.__version__))
 
 
   # Read index of simulation parameter set
-  with open('idx_str_file.txt') as fid01:
+  with open(I_FILE) as fid01:
     sim_index = int(fid01.readline())
   gdata.sim_index = sim_index
 
 
-  # Read parameter dictionary, select appropriate index, save in globals
-  with open(os.path.join('Assets','param_dict.json')) as fid01:
-    param_dict = json.load(fid01)
+  # Read parameter dictionary file
+  param_dict  = dict()
+  param_paths = ['.',ASSETS]
 
-  var_params = dict()
-  var_params.update({keyval:param_dict['EXP_VARIABLE'][keyval][sim_index]
-                  for keyval in param_dict['EXP_VARIABLE']})
-  var_params.update({keyval:param_dict['EXP_CONSTANT'][keyval]
-                  for keyval in param_dict['EXP_CONSTANT']})
-  gdata.var_params = var_params
+  for ppath in param_paths:
+    pfileopt = os.path.join(ppath,PFILE)
+    if(os.path.exists(pfileopt)):
+      with open(pfileopt) as fid01:
+        param_dict = json.load(fid01)
+      break
 
 
-  # Validation checks on param_dict.json
-  names_variable = set(param_dict['EXP_VARIABLE'].keys())
-  names_constant = set(param_dict['EXP_CONSTANT'].keys())
+  # Validation checks on parameter dictionary file
+  if(not param_dict):
+    raise Exception('No {:s} found'.format(PFILE))
+
+  names_variable = set(param_dict[EXP_V].keys())
+  names_constant = set(param_dict[EXP_C].keys())
   if(names_constant.intersection(names_variable)):
-    raise Exception('In param_dict.json: name in both EXP_CONSTANT and EXP_VARIABLE')
+    raise Exception('Variable name in both {:s} and {:s}'.format(EXP_C,EXP_V))
+
+
+  # Select simulation parameters from parameters dictionary, save in globals
+  var_params  = dict()
+
+  var_params.update({keyval:param_dict[EXP_V][keyval][sim_index]
+                  for keyval in param_dict[EXP_V]})
+  var_params.update({keyval:param_dict[EXP_C][keyval]
+                  for keyval in param_dict[EXP_C]})
+
+  gdata.var_params = var_params
 
 
   # Seed random number generator
   np.random.seed(sim_index)
 
 
-  # Demographics file 
+  # Demographics file
   demographicsBuilder()
   time.sleep(1)
 
