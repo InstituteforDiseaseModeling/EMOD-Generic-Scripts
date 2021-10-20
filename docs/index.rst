@@ -13,14 +13,16 @@ the file creation is also done on |COMPS_s| (in contrast to |emodpy_generic|,
 which does file creation locally and then uploads everything to |COMPS_s|).
 This can be helpful if you have bandwidth issues.
 
-Additional information about how to use |IT_s| can be found in
-:doc:`idmtools:index`.  Additional information about |EMOD_s| generic
-parameters can be found in :doc:`emod-generic:parameter-overview`.
+Additional information about how to use |IT_s| can be found in the
+:doc:`documentation <idmtools:index>`.  Additional information about |EMOD_s| generic
+parameters can be found in the :doc:`parameter overview <emod-generic:parameter-overview>`.
 
-See :doc:`idmtools:index` for a diagram showing how |IT_s| and each of the
+:doc:`Click here <idmtools:index>` for a diagram showing how |IT_s| and each of the
 related packages are used in an end-to-end workflow using |EMOD_s| as the
 disease transmission model.
 
+Contents
+========
 
 .. toctree::
    :maxdepth: 3
@@ -28,4 +30,5 @@ disease transmission model.
 
    get-started
    workflow
+   examples
 
