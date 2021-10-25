@@ -71,6 +71,8 @@ def configParamFunction(config):
 
   MAX_CLOCK       = gdata.var_params['max_clock_minutes']
 
+  LABEL_MUTES     = gdata.var_params['label_by_mutator']
+
 
   # ***** Random number seed ****
   config.parameters.Run_Number                               = RUN_NUM
@@ -159,6 +161,7 @@ def configParamFunction(config):
   config.parameters.Enable_Strain_Tracking                 =  1
   config.parameters.Enable_Genome_Dependent_Infectivity    =  1
   config.parameters.Enable_Genome_Mutation                 =  1
+  config.parameters.Enable_Label_By_Mutator                =  LABEL_MUTES
 
   config.parameters.Number_of_Clades                       =  3
   config.parameters.Log2_Number_of_Genomes_per_Clade       =  log2_num_strains

@@ -129,6 +129,9 @@ param_dict['EXP_CONSTANT']['nOPV_compartments']    =     2
 param_dict['EXP_CONSTANT']['OPV_rev_prob']         =     0.0
 param_dict['EXP_CONSTANT']['OPV_compartments']     =     7
 
+# Uniquely labels infections (with the agent ID) on mutation; CAN SLOW DOWN SIMS
+param_dict['EXP_CONSTANT']['label_by_mutator']     =    False
+
 # Timestamps for conducting serosurveys; absolute time; survey <10yrs, 1yr age bins
 param_dict['EXP_CONSTANT']['serosurvey_timestamps']=     [ 42825.0 ]
 
