@@ -172,7 +172,7 @@ def configParamFunction(config):
   
   config.parameters.Genome_Infectivity_Multipliers         = list_multiply.tolist()
 
-  list_mutate   = np.zeros(num_strains)
+  list_mutate                = np.zeros(num_strains)
   list_mutate[:NOPV_BOXES]   = NOPV_REV
   list_mutate[NOPV_BOXES:-1] =  OPV_REV
 
