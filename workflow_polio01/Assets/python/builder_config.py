@@ -178,6 +178,11 @@ def configParamFunction(config):
 
   config.parameters.Genome_Mutation_Rates                  = list_mutate.tolist()
 
+  list_mlabel                = np.zeros(num_strains)
+  list_mlabel[-1]            = 1
+
+  config.parameters.Genome_Mutations_Labeled               = list_mlabel.tolist()
+
 
   # ***** Demographic parameters *****
   config.parameters.Enable_Demographics_Builtin           = 0
