@@ -25,7 +25,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['exp_name']     = 'covariance01'
+param_dict['exp_name']     = 'CovarainceDemo01'
 param_dict['num_sims']     =  1000
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
