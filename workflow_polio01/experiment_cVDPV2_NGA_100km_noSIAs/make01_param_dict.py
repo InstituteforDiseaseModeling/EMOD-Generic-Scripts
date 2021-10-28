@@ -71,14 +71,12 @@ param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 # Base agent weight; less than 10 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =    25.0
 
-# Individual level infetivity dispersion multiplier; 1.0 = Exponential distribution;
-param_dict['EXP_CONSTANT']['ind_stddev_mult']      =     1.0
-
 # Paramaters of beta distribution for HINT group fraction of infectable agents
 # Values less than 0.01 are re-drawn from the distribution (zero group muzt be <99%)
 param_dict['EXP_CONSTANT']['use_zero_group']                       = False
 param_dict['EXP_CONSTANT']['nonzero_group_beta_dist_param_alpha']  =  1.0
 param_dict['EXP_CONSTANT']['nonzero_group_beta_dist_param_beta']   =  1.0
+param_dict['EXP_CONSTANT']['nonzero_group_scale']                  =  1.0
 
 # R0 values for cVDPV and Sabin; linear interpolation; requires R0 > R0_OPV
 param_dict['EXP_CONSTANT']['R0']                   =    10.0
@@ -86,6 +84,13 @@ param_dict['EXP_CONSTANT']['R0_OPV']               =     2.5
 
 # Transmissibility of nOPV with respect to Sabin
 param_dict['EXP_CONSTANT']['R0_nOPV_mult']         =     0.5
+
+# Mean duration of infectious period
+param_dict['EXP_CONSTANT']['inf_duration_mean']    =    24.0
+
+# Dispersion for base infectivity and infectious duration (multiplier; 1.0 = exponential)
+param_dict['EXP_CONSTANT']['base_inf_stddev_mult'] =     1.0
+param_dict['EXP_CONSTANT']['inf_dur_stddev_mult']  =     0.4708333
 
 # Subdivide LGAs into 100km^2 regions
 param_dict['EXP_CONSTANT']['use_10k_res']          =    True
@@ -109,11 +114,6 @@ param_dict['EXP_CONSTANT']['sia_sets']             =  [ {"targ_list":   ["AFRO:N
                                                          "day_offset":                     1.0*365.0 +   5.0 ,
                                                          "num_cases":                                  100   ,
                                                          "agent_wght":                                   1.0 } ]
-
-# Mean and std dev of individual infectiousness duration; gamma distribution;
-# Valuse of mean = 32.0 and stddev = 11.3 used previously;
-param_dict['EXP_CONSTANT']['inf_duration_mean']    =    24.0
-param_dict['EXP_CONSTANT']['inf_duration_stddev']  =    11.3
 
 # Node level R0 variance (infectivity multiplier; mean = 1.0; log-normal distribution)
 param_dict['EXP_CONSTANT']['node_variance_R0']     =     0.0

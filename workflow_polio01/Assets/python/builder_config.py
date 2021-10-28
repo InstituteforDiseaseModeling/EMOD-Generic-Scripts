@@ -45,10 +45,10 @@ def configParamFunction(config):
   R0_OPV          = gdata.var_params['R0_OPV']
   NOPV_R0_MULT    = gdata.var_params['R0_nOPV_mult']
 
-  BI_STD          = gdata.var_params['ind_stddev_mult']
+  BI_STD          = gdata.var_params['base_inf_stddev_mult']
 
   ID_MEAN         = gdata.var_params['inf_duration_mean']
-  ID_STD          = gdata.var_params['inf_duration_stddev']
+  ID_STD          = gdata.var_params['inf_dur_stddev_mult']
 
   NI_LN_MULT      = gdata.var_params['net_inf_ln_mult']
   NI_POWER        = gdata.var_params['net_inf_power']
@@ -87,17 +87,25 @@ def configParamFunction(config):
 
 
   # ***** Intrahost *****
-  config.parameters.Base_Infectivity_Distribution            = 'GAMMA_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Scale                   =   R0/ID_MEAN*BI_STD*BI_STD
-  config.parameters.Base_Infectivity_Shape                   =          1.0/BI_STD/BI_STD
+  if(BI_STD > 0.01):
+    config.parameters.Base_Infectivity_Distribution          = 'GAMMA_DISTRIBUTION'
+    config.parameters.Base_Infectivity_Scale                 =   R0/ID_MEAN*BI_STD*BI_STD
+    config.parameters.Base_Infectivity_Shape                 =          1.0/BI_STD/BI_STD
+  else:
+    config.parameters.Base_Infectivity_Distribution          = 'CONSTANT_DISTRIBUTION'
+    config.parameters.Base_Infectivity_Constant              =   R0/ID_MEAN
 
   config.parameters.Incubation_Period_Distribution           = 'GAUSSIAN_DISTRIBUTION'
   config.parameters.Incubation_Period_Gaussian_Mean          =   3.0
   config.parameters.Incubation_Period_Gaussian_Std_Dev       =   1.0
 
-  config.parameters.Infectious_Period_Distribution           = 'GAMMA_DISTRIBUTION'
-  config.parameters.Infectious_Period_Scale                  =       1.0/ID_MEAN*ID_STD*ID_STD
-  config.parameters.Infectious_Period_Shape                  =   ID_MEAN*ID_MEAN/ID_STD/ID_STD
+  if(ID_STD > 0.01):
+    config.parameters.Infectious_Period_Distribution         = 'GAMMA_DISTRIBUTION'
+    config.parameters.Infectious_Period_Scale                =      ID_MEAN*ID_STD*ID_STD
+    config.parameters.Infectious_Period_Shape                =          1.0/ID_STD/ID_STD
+  else:
+    config.parameters.Infectious_Period_Distribution         = 'CONSTANT_DISTRIBUTION'
+    config.parameters.Infectious_Period_Constant             =      ID_MEAN
 
   config.parameters.Enable_Infection_Rate_Overdispersion     =   1
   config.parameters.Enable_Infectivity_Scaling               =   1

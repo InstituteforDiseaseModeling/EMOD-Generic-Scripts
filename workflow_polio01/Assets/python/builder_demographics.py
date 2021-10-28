@@ -47,6 +47,7 @@ def demographicsBuilder():
   USE_ZGRP     = gdata.var_params['use_zero_group']
   NZG_ALPHA    = gdata.var_params['nonzero_group_beta_dist_param_alpha']
   NZG_BETA     = gdata.var_params['nonzero_group_beta_dist_param_beta']
+  NGZ_SCALE    = gdata.var_params['nonzero_group_scale']
 
 
   PATH_OVERLAY = 'demog_overlay'
@@ -103,9 +104,9 @@ def demographicsBuilder():
 
       if(USE_ZGRP):
         node_dict['IndividualProperties'] = list()
-        nzg_frac = 0.0
-        while(nzg_frac < 0.01):
-          nzg_frac = np.random.beta(NZG_ALPHA,NZG_BETA)
+        nzg_frac = np.random.beta(NZG_ALPHA,NZG_BETA)*NGZ_SCALE
+        if(nzg_frac < 0.01):
+            nzg_frac = 0.01
         nzg_mval = np.power(nzg_frac,-1.0)
 
         pop_frac = [1.0-nzg_frac,nzg_frac]
