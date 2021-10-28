@@ -107,7 +107,7 @@ param_dict['EXP_CONSTANT']['sia_coverage']         =     0.5
 # Optional timestamp cutoff for SIA calendar; absolute time
 param_dict['EXP_CONSTANT']['sia_cutoff']           = 42825.0
 
-# Direct introduction of cVDPV2 (only uses genome val 7)
+# Direct introduction of cVDPV2
 # day_offset -> days after sim start, NOT ABSOLUTE TIME
 param_dict['EXP_CONSTANT']['sia_other']            =     True
 param_dict['EXP_CONSTANT']['sia_sets']             =  [ {"targ_list":   ["AFRO:NIGERIA:KANO:KANO_MUNICIPAL"] ,
