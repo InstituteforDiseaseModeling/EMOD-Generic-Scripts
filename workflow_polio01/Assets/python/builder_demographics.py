@@ -6,11 +6,11 @@
 #
 #********************************************************************************
 
-import os, sys, json, io
+import os, sys, json
 
 import global_data as gdata
 
-from aux_demo_calc           import demoCalc_AgeDist
+import numpy                    as    np
 
 from refdat_population_admin02     import data_dict   as dict_pop_admin02
 from refdat_area_admin02           import data_dict   as dict_area_admin02
@@ -24,13 +24,18 @@ from refdat_alias                  import data_dict   as dict_alias
 from refdat_birthrate              import data_dict   as dict_birth
 from refdat_deathrate              import data_dict   as dict_death
 
-import numpy                    as    np
+from aux_demo_calc                 import demoCalc_AgeDist
+
+from emod_api.demographics.Demographics  import Demographics, DemographicsOverlay
+from emod_api.demographics.Node          import Node
+from emod_api.demographics               import DemographicsTemplates as DT
 
 #********************************************************************************
 
 def demographicsBuilder():
 
   DEMOG_FILENAME = 'demographics.json'
+  GEOG_LIST      = ['AFRO:NIGERIA']
 
 
   # ***** Get variables for this simulation *****
@@ -54,23 +59,10 @@ def demographicsBuilder():
   if(not os.path.exists(PATH_OVERLAY)):
     os.mkdir(PATH_OVERLAY)
 
-  # ***** Prep dict for primary file *****
-
-  # Save filename to global data for use in other functions
-  gdata.demog_files.append(DEMOG_FILENAME)
-
-  json_set = dict()
-
-  json_set['Metadata'] = { 'IdReference':   'polio-custom' }
-  json_set['Defaults'] = { 'IndividualAttributes': dict()  ,
-                           'IndividualProperties': list()  ,
-                           'NodeAttributes':       dict()  }
-  json_set['Nodes']    = list()
-
 
   # ***** Populate nodes in primary file *****
 
-  geog_list     = ['AFRO:NIGERIA']
+  node_list = list()
 
   if(SUB_LGA):
     dict_pop     = dict_pop_100km
@@ -84,26 +76,26 @@ def demographicsBuilder():
   # Add nodes
   node_id   = 0
   ipop_time = dict()
-  
+
   for loc_name in dict_pop:
-    if(any([loc_name.startswith(val) for val in geog_list])):
+    if(any([loc_name.startswith(val) for val in GEOG_LIST])):
       ipop_time[loc_name] = dict_pop[loc_name][1] + 0.5
       node_id   = node_id + 1
+
+      node_obj = Node(lat              = dict_longlat[loc_name][1],
+                      lon              = dict_longlat[loc_name][0],
+                      pop              = dict_pop[loc_name][0],
+                      name             = loc_name,
+                      forced_id        = node_id,
+                      area             = dict_area[loc_name])
+
       ln_r0_sig = np.sqrt(np.log(NODE_R0_VAR+1.0))
       ln_r0_mu  = -0.5*ln_r0_sig*ln_r0_sig
       R0_mult   = np.random.lognormal(mean=ln_r0_mu,sigma=ln_r0_sig)
-      node_dict = dict()
-      node_dict['NodeID']         =   node_id
-      node_dict['Name']           =   loc_name
-      
-      node_dict['NodeAttributes'] = {'InitialPopulation':        dict_pop[loc_name][0],
-                                     'Longitude':                dict_longlat[loc_name][0],
-                                     'Latitude':                 dict_longlat[loc_name][1],
-                                     'Area':                     dict_area[loc_name],
-                                     'InfectivityMultiplier':    R0_mult}
+
+      node_obj.node_attributes.infectivity_multiplier = R0_mult
 
       if(USE_ZGRP):
-        node_dict['IndividualProperties'] = list()
         nzg_frac = np.random.beta(NZG_ALPHA,NZG_BETA)*NGZ_SCALE
         if(nzg_frac < 0.01):
             nzg_frac = 0.01
@@ -113,30 +105,27 @@ def demographicsBuilder():
         mult_mat = np.array([[0.0,      0.0],
                              [0.0, nzg_mval]])
 
-        ipdict = dict()
+        ip_obj = Node.IndividualProperty(initial_distribution = pop_frac,
+                                         property             = 'Geographic',
+                                         values               = ['L00','L01'],
+                                         transitions          = list(),
+                                         transmission_matrix  = {'Matrix':  mult_mat.tolist(),
+                                                                 'Route':           'Contact'} )
 
-        ipdict = {'Initial_Distribution':  pop_frac,
-                  'Property':              'Geographic',
-                  'Values':                ['L00','L01'],
-                  'Transitions':           list(),
-                  'TransmissionMatrix':   {'Matrix':  mult_mat.tolist() ,
-                                           'Route':           'Contact' } }
+        node_obj.individual_properties.add(ip_obj)
 
-        node_dict['IndividualProperties'].append(ipdict)
-
-      json_set['Nodes'].append(node_dict)
+      node_list.append(node_obj)
 
 
   # ***** Write node name bookkeeping *****
 
-  nname_dict     = {node_obj['Name']:node_obj['NodeID'] for node_obj in json_set['Nodes']}
+  nname_dict     = {node_obj.name: node_obj.forced_id for node_obj in node_list}
   node_rep_list  = sorted([nname for nname in dict_pop_admin02.keys() if
-                                             any([nname.startswith(val) for val in geog_list])])
+                                             any([nname.startswith(val) for val in GEOG_LIST])])
   rep_groups     = {nrep:[nname_dict[val] for val  in nname_dict.keys() if val.startswith(nrep+':') or val == nrep]
                                           for nrep in node_rep_list}
 
   gdata.demog_node_map = rep_groups
-
 
   node_rep_dict = {val[0]:val[1]+1 for val in zip(node_rep_list,range(len(node_rep_list)))}
   with open('node_names.json','w')  as fid01:
@@ -149,49 +138,47 @@ def demographicsBuilder():
 
   gdata.demog_min_pop = 50
 
-  rev_node_list = [node_obj for node_obj in json_set['Nodes'] 
-                         if node_obj['NodeAttributes']['InitialPopulation'] >= gdata.demog_min_pop]
-
-  json_set['Nodes'] = rev_node_list
-
-  node_name_dict = {node_obj['Name']:node_obj['NodeID'] for node_obj in json_set['Nodes']}
+  rev_node_list  = [node_obj for node_obj in node_list
+                          if node_obj.node_attributes.initial_population >= gdata.demog_min_pop]
+  node_list      = rev_node_list
+  node_name_dict = {node_obj.name: node_obj.forced_id for node_obj in node_list}
 
   gdata.demog_node = node_name_dict
 
 
+  # ***** Create primary file *****
+
+  ref_name   = 'polio-custom'
+  demog_obj  = Demographics(nodes=node_list, idref=ref_name)
+
+  # Save filename to global data for use in other functions
+  gdata.demog_files.append(DEMOG_FILENAME)
+
+
   # ***** Update defaults in primary file ****
 
+  demog_obj.raw['Defaults']['NodeAttributes'].clear()
   nadict = dict()
-
   nadict['InfectivityOverdispersion']   =   PROC_DISPER
+  demog_obj.raw['Defaults']['NodeAttributes'].update(nadict)
 
-  json_set['Defaults']['NodeAttributes'].update(nadict)
-
-
+  demog_obj.raw['Defaults']['IndividualAttributes'].clear()
   iadict = dict()
-
   iadict['AcquisitionHeterogeneityVariance']   =   IND_RISK_VAR
-
-  json_set['Defaults']['IndividualAttributes'].update(iadict)
-
-
-  ipdict = dict()
+  demog_obj.raw['Defaults']['IndividualAttributes'].update(iadict)
 
   if(not USE_ZGRP):
+    pop_frac = [0.0, 1.0]
     mult_mat = np.array([[0.0, 0.0],
                          [0.0, 1.0]])
 
-    ipdict['Initial_Distribution']  = [0.0, 1.0]
-    ipdict['Property']              = 'Geographic'
-    ipdict['Values']                = ['L00','L01']
-    ipdict['Transitions']           = list()
-    ipdict['TransmissionMatrix']    = {'Matrix':  mult_mat.tolist() ,
-                                       'Route':           'Contact' }
-
-  json_set['Defaults']['IndividualProperties'].append(ipdict)
+    demog_obj.AddIndividualPropertyAndHINT(InitialDistribution  = pop_frac,
+                                           Property             = 'Geographic',
+                                           Values               = ['L00','L01'],
+                                           TransmissionMatrix   = mult_mat.tolist() )
 
 
-  # ***** Populate birth, mortality, initial ages in vital dynamics overlays *****
+  # ***** Populate vital dynamics overlays *****
 
   # Remove mortality aliases from ref data
   ddeath_keys = list(dict_death.keys())
@@ -211,9 +198,9 @@ def demographicsBuilder():
 
   # Create list of vital dynamics overlays
   vd_over_list = list()
-  for node_dict in json_set['Nodes']:
-    node_name  = node_dict['Name']
-    node_id    = node_dict['NodeID']
+  for node_dict in demog_obj.nodes:
+    node_name  = node_dict.name
+    node_id    = node_dict.forced_id
     node_birth = None
     node_death = None
 
@@ -250,47 +237,52 @@ def demographicsBuilder():
     over_set = dict()
 
     # Age initialization magic
-    b_rate   = data_tup[0].item()
+    brth_rate   = data_tup[0].item()
     d_rate_y = data_tup[1].tolist()
     d_rate_x = dict_death['BIN_EDGES']
-    (grow_rate, age_x, age_y) = demoCalc_AgeDist(b_rate,d_rate_x,d_rate_y)
+    force_v  = 12*[1.0] # No seasonal forcing
+    (grow_rate, age_x, age_y) = demoCalc_AgeDist(brth_rate,d_rate_x,d_rate_y)
 
     # Update initial node populations
-    for node_dict in json_set['Nodes']:
-      node_name  = node_dict['Name']
-      node_id    = node_dict['NodeID']
+    for node_dict in demog_obj.nodes:
+      node_name  = node_dict.name
+      node_id    = node_dict.forced_id
       if(node_id in data_tup[2]):
         start_year = (gdata.start_off+TIME_START)/365.0 + 1900
         ref_year   = ipop_time[loc_name]
         mult_fac   = grow_rate**(start_year-ref_year)
-        node_dict['NodeAttributes']['InitialPopulation'] =  \
-             int(mult_fac * node_dict['NodeAttributes']['InitialPopulation'])
+        node_dict.node_attributes.initial_population =  \
+             int(mult_fac * node_dict.node_attributes.initial_population)
 
-    over_set['Metadata'] = { 'IdReference':   'polio-custom' }
-    over_set['Defaults'] = { 'IndividualAttributes': dict()  ,
-                             'NodeAttributes':       dict()  }
-    over_set['Nodes']    = [{'NodeID':val} for val in data_tup[2]]
+    dover_obj                                               = DemographicsOverlay()
+    dover_obj.node_attributes                               = Node.NodeAttributes()
+    dover_obj.individual_attributes                         = Node.IndividualAttributes()
+    dover_obj.individual_attributes.age_distribution        = Node.IndividualAttributes.AgeDistribution()
+    dover_obj.individual_attributes.mortality_distribution  = Node.IndividualAttributes.MortalityDistribution()
 
-    over_set['Defaults']['NodeAttributes']['GrowthRate'] = grow_rate
-    over_set['Defaults']['NodeAttributes']['BirthRate']  = b_rate
-    over_set['Defaults']['IndividualAttributes']['MortalityDistribution'] = \
-               {'NumPopulationGroups':                     [2,len(d_rate_x)] ,
-                'NumDistributionAxes':                                     2 ,
-                'AxisNames':                                ['gender','age'] ,
-                'AxisScaleFactors':                                    [1,1] ,
-                'ResultScaleFactor':                                       1 ,
-                'PopulationGroups':                        [[0,1], d_rate_x] ,
-                'ResultValues':                          [d_rate_y,d_rate_y] }
-    over_set['Defaults']['IndividualAttributes']['AgeDistribution'] = \
-               {'DistributionValues':                                [age_x] ,
-                'ResultScaleFactor':                                       1 ,
-                'ResultValues':                                      [age_y] }
+    dover_obj.meta_data  = {'IdReference': ref_name}
+
+    dover_obj.nodes      = [nodeid for nodeid in data_tup[2]]
+
+    dover_obj.node_attributes.birth_rate   = brth_rate
+    dover_obj.node_attributes.growth_rate  = grow_rate
+
+    dover_obj.individual_attributes.age_distribution.distribution_values  = [age_x]
+    dover_obj.individual_attributes.age_distribution.result_scale_factor  = 1
+    dover_obj.individual_attributes.age_distribution.result_values        = [age_y]
+
+    dover_obj.individual_attributes.mortality_distribution.axis_names             = ['gender','age']
+    dover_obj.individual_attributes.mortality_distribution.axis_scale_factor      = [1,1]
+    dover_obj.individual_attributes.mortality_distribution.num_distribution_axes  = 2
+    dover_obj.individual_attributes.mortality_distribution.num_population_groups  = [2,len(d_rate_x)]
+    dover_obj.individual_attributes.mortality_distribution.population_groups      = [[0,1], d_rate_x]
+    dover_obj.individual_attributes.mortality_distribution.result_scale_factor    = 1
+    dover_obj.individual_attributes.mortality_distribution.result_values          = [d_rate_y,d_rate_y]
 
     nfname = DEMOG_FILENAME.rsplit('.',1)[0] + '_vd{:03}.json'.format(k1)
     nfname = os.path.join(PATH_OVERLAY,nfname)
     gdata.demog_files.append(nfname)
-    with open(nfname,'w')  as fid01:
-      json.dump(over_set,fid01,sort_keys=True)
+    dover_obj.to_file(file_name=nfname)
 
 
   # ***** Populate susceptibility overlays *****
@@ -318,11 +310,10 @@ def demographicsBuilder():
 
   # Create list of initial susceptibility overlays
   is_over_list = list()
-  for node_dict in json_set['Nodes']:
-    node_name  = node_dict['Name']
-    node_id    = node_dict['NodeID']
+  for node_dict in demog_obj.nodes:
+    node_name    = node_dict.name
+    node_id      = node_dict.forced_id
     node_initsus = None
-
 
     for k1 in range(isus_name.shape[0]):
       rname = isus_name[k1]
@@ -353,32 +344,31 @@ def demographicsBuilder():
     isus_x     = [0.0] + (365.0*(isus_ages+3.0)/12.0).tolist() + [365.0*10.0]
     isus_y     = [1.0] + is_over_list[k1][0].tolist()          + [0.0]
 
-    over_set   = dict()
+    dover_obj                                                    = DemographicsOverlay()
+    dover_obj.individual_attributes                              = Node.IndividualAttributes()
+    dover_obj.individual_attributes.susceptibility_distribution  = Node.IndividualAttributes.SusceptibilityDistribution()
 
-    over_set['Metadata'] = { 'IdReference':   'polio-custom' }
-    over_set['Defaults'] = { 'IndividualAttributes': dict()  ,
-                             'NodeAttributes':       dict()  }
-    over_set['Nodes']    = [{'NodeID':val} for val in is_over_list[k1][1]]
+    dover_obj.meta_data  = {'IdReference': ref_name}
 
-    over_set['Defaults']['IndividualAttributes']['SusceptibilityDistribution'] = \
-               {'DistributionValues':                                 isus_x ,
-                'ResultScaleFactor':                                       1 ,
-                'ResultValues':                                       isus_y }
+    dover_obj.nodes      = [nodeid for nodeid in is_over_list[k1][1]]
+
+    dover_obj.individual_attributes.susceptibility_distribution.distribution_values  = isus_x
+    dover_obj.individual_attributes.susceptibility_distribution.result_scale_factor  = 1
+    dover_obj.individual_attributes.susceptibility_distribution.result_values        = isus_y
 
     nfname = DEMOG_FILENAME.rsplit('.',1)[0] + '_is{:03}.json'.format(k1)
     nfname = os.path.join(PATH_OVERLAY,nfname)
     gdata.demog_files.append(nfname)
-    with open(nfname,'w')  as fid01:
-      json.dump(over_set,fid01,sort_keys=True)
+    dover_obj.to_file(file_name=nfname)
 
 
   # ***** Write primary demographics file *****
 
-  with open(DEMOG_FILENAME,'w')  as fid01:
-    json.dump(json_set,fid01,sort_keys=True)
+  demog_obj.generate_file(name=DEMOG_FILENAME)
 
   # Save the demographics object for use in other functions
-  gdata.demog_dict       = json_set
+  gdata.demog_object = demog_obj
+
 
 
   return None
