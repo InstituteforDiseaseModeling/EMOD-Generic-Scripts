@@ -1,6 +1,6 @@
 #********************************************************************************
 #
-# Builds a config.json file to be used as input to the DTK.
+# Builds a config file for input to the DTK.
 #
 # Python 3.6.0
 #
@@ -16,8 +16,7 @@ from emod_api.config import default_from_schema_no_validation as dfs
 
 #********************************************************************************
 
-# Function for setting config parameters 
-def configParamFunction(config):
+def update_config_obj(config):
 
   # ***** Get variables for this simulation *****
   R0             = gdata.var_params['R0']
@@ -107,12 +106,16 @@ def configParamFunction(config):
 def configBuilder():
 
   FILE_CONFIG  =  'config_useful.json'
-  FILE_DEFAULT =  'default_config.json'
   SCHEMA_PATH  =  gdata.schema_path
 
+  default_conf = dfs.get_default_config_from_schema(SCHEMA_PATH,as_rod=True)
 
-  dfs.write_default_from_schema(SCHEMA_PATH)
-  dfs.write_config_from_default_and_params(FILE_DEFAULT, configParamFunction, FILE_CONFIG)
+  # Probably ought to be an emod-api call
+  config_obj = update_config_obj(default_conf);
+  config_obj.parameters.finalize()
+  with open(FILE_CONFIG, 'w') as fid01:
+    json.dump(config_obj, fid01, sort_keys=True, indent=4)
+
 
   return FILE_CONFIG
 

@@ -1,6 +1,6 @@
 #********************************************************************************
 #
-# Builds a config.json file to be used as input to the DTK.
+# Builds a config file for input to the DTK.
 #
 # Python 3.6.0
 #
@@ -12,11 +12,11 @@ import global_data as gdata
 
 import numpy as np
 
-from emod_api.config        import default_from_schema_no_validation as dfs
+from emod_api.config import default_from_schema_no_validation as dfs
 
 #********************************************************************************
 
-def maxCoeff(exp_vals):
+def max_coeff_ref(exp_vals):
 
   if(np.min(exp_vals)<0.0 or np.max(exp_vals)>8.0):
     raise Exception('Network exponent out of range.')
@@ -34,8 +34,7 @@ def maxCoeff(exp_vals):
 
 #********************************************************************************
 
-# Function for setting config parameters 
-def configParamFunction(config):
+def update_config_obj(config):
 
   START_DAY       = gdata.start_off
 
@@ -116,7 +115,7 @@ def configParamFunction(config):
 
 
   # ***** Network Infectivity *****
-  max_k     = maxCoeff(NI_POWER)
+  max_k     = max_coeff_ref(NI_POWER)
   ni_coeff  = [np.exp(max_k[k1]+NI_LN_MULT[k1]) for k1 in range(len(max_k))]
 
   config.parameters.Enable_Network_Infectivity               =   1
@@ -220,6 +219,7 @@ def configParamFunction(config):
 
   config.parameters.Custom_Reports_Filename            = gdata.reports_file
 
+
   return config
 
 #********************************************************************************
@@ -227,11 +227,16 @@ def configParamFunction(config):
 def configBuilder():
 
   FILE_CONFIG  =  'config_useful.json'
-  FILE_DEFAULT =  'default_config.json'
   SCHEMA_PATH  =  gdata.schema_path
 
-  dfs.write_default_from_schema(SCHEMA_PATH)
-  dfs.write_config_from_default_and_params(FILE_DEFAULT, configParamFunction, FILE_CONFIG)
+  default_conf = dfs.get_default_config_from_schema(SCHEMA_PATH,as_rod=True)
+
+  # Probably ought to be an emod-api call
+  config_obj = update_config_obj(default_conf);
+  config_obj.parameters.finalize()
+  with open(FILE_CONFIG, 'w') as fid01:
+    json.dump(config_obj, fid01, sort_keys=True, indent=4)
+
 
   return FILE_CONFIG
 
