@@ -57,7 +57,7 @@ def run_sims():
                       priority        = 'Normal',
                       simulation_root = '$COMPS_PATH(USER)',
                       node_group      = 'idm_abcd',
-                      num_cores       = '1',
+                      num_cores       = '4',
                       num_retries     = '0',
                       exclusive       = 'False')
 
