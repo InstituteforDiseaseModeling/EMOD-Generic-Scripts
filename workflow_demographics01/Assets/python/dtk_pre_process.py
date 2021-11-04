@@ -19,17 +19,24 @@ import emod_api
 
 #*******************************************************************************
 
+API_CUR = emod_api.__version__
+API_MIN = '1.16.5'
+
+#*******************************************************************************
+
 def application(config_filename_in):
 
   PFILE   = 'param_dict.json'
   I_FILE  = 'idx_str_file.txt'
   EXP_C   = 'EXP_CONSTANT'
   EXP_V   = 'EXP_VARIABLE'
-  ASSETS  = 'Assets'
 
 
-  # Declare current version of emod-api
-  print('Using emod-api {:s}'.format(emod_api.__version__))
+  # Declare current version of emod-api; check min version
+  print('Using emod-api {:s}'.format(API_CUR))
+  for ver_val in zip(API_CUR.split('.'),API_MIN.split('.')):
+    if(ver_val[0] < ver_val[1]):
+      raise Exception('Using emod-api {:s}; minimum version is {:s}'.format(API_CUR,API_MIN))
 
 
   # Read index of simulation parameter set
@@ -40,7 +47,7 @@ def application(config_filename_in):
 
   # Read parameter dictionary file
   param_dict  = dict()
-  param_paths = ['.',ASSETS]
+  param_paths = ['.','Assets']
 
   for ppath in param_paths:
     pfileopt = os.path.join(ppath,PFILE)
