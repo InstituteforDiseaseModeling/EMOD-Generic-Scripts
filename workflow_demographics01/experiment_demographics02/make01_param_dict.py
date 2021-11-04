@@ -25,8 +25,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['exp_name']     = 'demographics02'
-param_dict['num_sims']     =  720
+param_dict['exp_name']     = 'DemographicsSweep-UK01'
+param_dict['num_sims']     =   720
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 

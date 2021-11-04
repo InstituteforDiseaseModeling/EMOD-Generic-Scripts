@@ -25,8 +25,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['exp_name'] = 'ANG_Base_Age_UrbRur01'
-param_dict['num_sims'] = 700
+param_dict['exp_name']     = 'SARS-CoV-2-ANG_UrbRur01'
+param_dict['num_sims']     =   700
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -34,15 +34,15 @@ param_dict['EXP_CONSTANT'] = dict()
 np.random.seed(4)
 
 # Convenience naming
-nsims = param_dict['num_sims']
+NSIMS = param_dict['num_sims']
 
 
 
 # ***** Specify sim-variable parameters *****
 
-param_dict['EXP_VARIABLE']['run_number']                   =   list(range(nsims))
+param_dict['EXP_VARIABLE']['run_number']                   =   list(range(NSIMS))
 
-param_dict['EXP_VARIABLE']['num_nodes']                    =  (np.random.choice([100,150,200,250], nsims)).tolist()
+param_dict['EXP_VARIABLE']['num_nodes']                    =  (np.random.choice([100,150,200,250], NSIMS)).tolist()
 
 
 # ***** Constants for this experiment *****

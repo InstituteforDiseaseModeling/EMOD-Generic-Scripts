@@ -26,7 +26,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['exp_name']     = 'cVDPV2_NGA_100km_SIAs'
-param_dict['num_sims']     = 350
+param_dict['num_sims']     =   350
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
