@@ -12,8 +12,8 @@ import numpy as np
 
 # This script makes a json dictionary that is used by the pre-processing script
 # in EMOD. Variable names defined here will be available to use in creating
-# the input files. Please don't change the variable name for 'exp_name' or
-# for 'num_sims' because those are also used in scripts outside of EMOD.
+# the input files. Please don't change the variable name for 'EXP_NAME' or
+# for 'NUM_SIMS' because those are also used in scripts outside of EMOD.
 
 # The pre-process script will open the json dict created by this method. For
 # everything in the 'EXP_VARIABLE' key, that script will assume a list and
@@ -25,8 +25,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['exp_name']     = 'SARS-CoV-2-ETH_UrbRur01'
-param_dict['num_sims']     =   700
+param_dict['EXP_NAME']     = 'SARS-CoV-2-ETH_UrbRur01'
+param_dict['NUM_SIMS']     =   700
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -34,7 +34,7 @@ param_dict['EXP_CONSTANT'] = dict()
 np.random.seed(4)
 
 # Convenience naming
-NSIMS = param_dict['num_sims']
+NSIMS = param_dict['NUM_SIMS']
 
 
 

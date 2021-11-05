@@ -56,7 +56,7 @@ R0       = np.array(param_dict['EXP_VARIABLE']['R0'])
 ACQ_VAR  = np.array(param_dict['EXP_VARIABLE']['indiv_variance_acq'])
 COR_VAL  = np.array(param_dict['EXP_VARIABLE']['correlation_acq_trans'])
 
-inf_mat = np.zeros(param_dict['num_sims'])
+inf_mat = np.zeros(param_dict['NUM_SIMS'])
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   inf_mat[sim_idx] = np.array(data_brick[sim_idx_str])

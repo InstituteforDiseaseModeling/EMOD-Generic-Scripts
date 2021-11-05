@@ -32,7 +32,7 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 with open(os.path.join(tpath,'data_brick_calib.json')) as fid01:
   data_brick_calib = json.load(fid01)
 
-nsims    = int(param_dict['num_sims'])
+nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mortality_mult'])
 

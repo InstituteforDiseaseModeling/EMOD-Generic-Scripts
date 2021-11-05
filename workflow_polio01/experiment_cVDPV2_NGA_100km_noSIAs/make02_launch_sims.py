@@ -45,12 +45,6 @@ def sweep_func(simulation, arg_tuple):
 # Start and experiment on COMPS
 def run_sims():
 
-  # Get experiment parameters from json file
-  with open(PATH_PARAM) as fid01:
-    param_dict = json.load(fid01)
-  exp_name = param_dict['exp_name']
-  num_sims = param_dict['num_sims']
-
   # Prepare the platform
   plat_obj = Platform(block           = 'COMPS',
                       endpoint        = 'https://comps.idmod.org',
@@ -65,6 +59,12 @@ def run_sims():
   # Create EMODTask
   task_obj = EMODTask.from_files(ep4_path = PATH_PYTHON)
   task_obj.set_sif(PATH_ENV)
+
+  # Get experiment parameters from json file
+  with open(PATH_PARAM) as fid01:
+    param_dict = json.load(fid01)
+  EXP_NAME = param_dict['EXP_NAME']
+  NUM_SIMS = param_dict['NUM_SIMS']
 
   # Add the parameters dictionary to assets
   param_asset = Asset(absolute_path=PATH_PARAM)
@@ -93,12 +93,12 @@ def run_sims():
   #   second-values are actually the SAME DICTIONARY (no deep copy) so don't make any changes
   #   in the sweep function.
   build_obj     = SimulationBuilder()
-  sim_id_list   = list(range(num_sims))
-  dict_list     = num_sims*[param_dict['EXP_VARIABLE']]
+  sim_id_list   = list(range(NUM_SIMS))
+  dict_list     = NUM_SIMS*[param_dict['EXP_VARIABLE']]
   build_obj.add_sweep_definition(sweep_func, list(zip(sim_id_list,dict_list)))
 
   # Create an experiment from builder
-  experiment = Experiment.from_builder(build_obj, task_obj, name=exp_name)
+  experiment = Experiment.from_builder(build_obj, task_obj, name=EXP_NAME)
 
   # Run experiment
   plat_obj.run_items(experiment)

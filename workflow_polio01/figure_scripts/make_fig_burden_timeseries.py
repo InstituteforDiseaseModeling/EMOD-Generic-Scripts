@@ -62,7 +62,7 @@ for k1 in range(len(DIRNAMES)):
   with open(os.path.join(tpath,'param_dict.json')) as fid01:
     param_dict = json.load(fid01)
 
-  n_sims   = param_dict['num_sims']
+  n_sims   = param_dict['NUM_SIMS']
   n_tstep  = int(param_dict['EXP_CONSTANT']['num_tsteps'])
   n_nodes  = len(node_name_dict)
 
