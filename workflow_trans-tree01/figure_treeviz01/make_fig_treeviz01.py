@@ -35,7 +35,6 @@ def print_branch(axs_id, leaf_list, c_yval, pxy=None):
         xdat = [pxy[0]+0.25, pxy[0]+0.5, pxy[0]+0.5, new_pxy[0]-0.25]
         ydat = [pxy[1],      pxy[1],     new_pxy[1], new_pxy[1]]
       else: # Secondary infection on same timestep; edge case from seeding
-        print(pxy,new_pxy)
         xdat = [pxy[0],   new_pxy[0]]
         ydat = [pxy[1]+1, new_pxy[1]-1]
       axs_id.plot(xdat, ydat, lw=0.5, c='k')
