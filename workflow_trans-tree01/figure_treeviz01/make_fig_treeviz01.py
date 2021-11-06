@@ -25,12 +25,19 @@ def rec_tree(targ_id):
 
 def print_branch(axs_id, leaf_list, c_yval, pxy=None):
 
-  for leaf_val in leaf_list:
+  sort_leaf = sorted(leaf_list, key=lambda val: val[0], reverse=True)
+
+  for leaf_val in sort_leaf:
     axs_id.plot(leaf_val[0], c_yval, marker='.', lw=0, c='r', ms=0.5)
     new_pxy = (leaf_val[0], c_yval)
     if(pxy):
-      xdat = [pxy[0]+0.25, pxy[0]+0.5, pxy[0]+0.5, new_pxy[0]-0.25]
-      ydat = [pxy[1],      pxy[1],     new_pxy[1], new_pxy[1]]
+      if(pxy[0] < new_pxy[0]):
+        xdat = [pxy[0]+0.25, pxy[0]+0.5, pxy[0]+0.5, new_pxy[0]-0.25]
+        ydat = [pxy[1],      pxy[1],     new_pxy[1], new_pxy[1]]
+      else: # Secondary infection on same timestep; edge case from seeding
+        print(pxy,new_pxy)
+        xdat = [pxy[0],   new_pxy[0]]
+        ydat = [pxy[1]+1, new_pxy[1]-1]
       axs_id.plot(xdat, ydat, lw=0.5, c='k')
     c_yval = print_branch(axs_id, leaf_val[1], c_yval+5, new_pxy)
 
