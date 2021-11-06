@@ -28,3 +28,5 @@ for additional information about how to use the scripts.
   workflow_polio01       - Example outbreak simulations for cVDPV2 in Nigeria.
                            Collab with JG and HL.
 
+  workflow_trans-tree01  - Demonstration of the infector labeling feature and
+                           generation of explicit transmission networks.
