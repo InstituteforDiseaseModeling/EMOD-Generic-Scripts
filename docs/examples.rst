@@ -13,3 +13,4 @@ contributing your own analyses and use of the work flow.
     examples/workflow_demographics01
     examples/workflow_network01
     examples/workflow_polio01
+    examples/workflow_trans-tree01
