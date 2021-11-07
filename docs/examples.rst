@@ -2,8 +2,7 @@
 Examples
 ========
 
-EMOD-Generic provides a set of examples.  Please consider
-contributing your own analyses and use of the work flow.
+EMOD-Generic provides a set of example workflows. Please consider contributing your own analyses.
 
 .. toctree::
     :maxdepth: 1
