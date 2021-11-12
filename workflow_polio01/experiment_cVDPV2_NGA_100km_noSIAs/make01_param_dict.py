@@ -71,8 +71,8 @@ param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 # Base agent weight; less than 10 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =    25.0
 
-# Paramaters of beta distribution for HINT group fraction of infectable agents
-# Values less than 0.01 are re-drawn from the distribution (zero group muzt be <99%)
+# Paramaters for HINT group fraction of infectable agents
+# Non-zero group fraction is param_beta, with scale probability of param_alpha instead
 param_dict['EXP_CONSTANT']['use_zero_group']                       = False
 param_dict['EXP_CONSTANT']['nonzero_group_beta_dist_param_alpha']  =  1.0
 param_dict['EXP_CONSTANT']['nonzero_group_beta_dist_param_beta']   =  1.0

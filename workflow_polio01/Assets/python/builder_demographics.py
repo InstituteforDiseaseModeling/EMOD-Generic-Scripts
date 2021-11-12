@@ -96,9 +96,11 @@ def demographicsBuilder():
       node_obj.node_attributes.infectivity_multiplier = R0_mult
 
       if(USE_ZGRP):
-        nzg_frac = np.random.beta(NZG_ALPHA,NZG_BETA)*NGZ_SCALE
-        if(nzg_frac < 0.01):
-            nzg_frac = 0.01
+        nzg_frac = NZG_BETA
+        prob = np.random.uniform()
+        if prob < NGZ_SCALE:
+          nzg_frac = NZG_ALPHA
+
         nzg_mval = np.power(nzg_frac,-1.0)
 
         pop_frac = [1.0-nzg_frac,nzg_frac]
