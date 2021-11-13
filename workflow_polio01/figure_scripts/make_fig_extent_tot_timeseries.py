@@ -39,8 +39,8 @@ for k1 in range(len(DIRNAMES)):
   ticlab = ['']*25
   axs01.plot([245,245],[0,1000],'k:')
   axs01.plot([610,610],[0,1000],'k:')
-  axs01.text(31.5,    -50,'2016', fontsize=14)
-  axs01.text(31.5+365,-50,'2017', fontsize=14)
+  axs01.text(31.5,     -6,'2016', fontsize=14)
+  axs01.text(31.5+365, -6,'2017', fontsize=14)
 
   axs01.set_xticks(ticks=ticloc)
   axs01.set_xticklabels(ticlab)
