@@ -28,11 +28,11 @@ Client-side speed-up
 There is a known issue that causes the time to create simulations on |COMPS_s| to increase with the size of Python requirements (see https://github.com/InstituteforDiseaseModeling/idmtools/issues/1395). To work around this issue and reduce the time needed, modify the |IT_s| code as follows::
 
     DIRNAME\idmtools\Lib\site-packages\idmtools\entities\templated_simulation.py
-    (line 184)
+    (line 236)
       + sim.task.common_assets = self.base_simulation.task.common_assets
 
     DIRNAME\idmtools\Lib\site-packages\idmtools\entities\itask.py
-    (line 224)
+    (line 281)
       - if k not in ['_task_log']:
       + if k not in ['_task_log','common_assets']:
 
