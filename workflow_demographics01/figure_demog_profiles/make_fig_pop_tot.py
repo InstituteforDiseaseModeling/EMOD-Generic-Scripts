@@ -11,7 +11,7 @@ from dtk_post_process import tpop_xval, tpop_yval
 
 #*******************************************************************************
 
-DIRNAME = 'experiment_demographics01'
+DIRNAME = 'experiment_demog_UK01_sweep'
 
 xvals   = np.array(tpop_xval)
 yref    = np.array(tpop_yval)/1e6
