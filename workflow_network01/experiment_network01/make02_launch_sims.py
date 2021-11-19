@@ -21,7 +21,7 @@ from local_python.emod_exp import exp_from_def_file
 # Paths
 PATH_EXP_DEF  = os.path.abspath('param_dict.json')
 PATH_PYTHON   = os.path.abspath(os.path.join('..', 'Assets', 'python'))
-
+PATH_DATA     = os.path.abspath(os.path.join('..', 'Assets', 'data'))
 PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_CentOS8',   'EMOD_SIF.id'))
 PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_BuildEMOD', 'EMOD_EXE.id'))
 
@@ -41,7 +41,7 @@ def run_sims():
                       exclusive       = 'False')
 
   # Create experiment object
-  exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_ENV, PATH_EXE)
+  exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_ENV, PATH_EXE, PATH_DATA)
 
   # Send experiment to COMPS; start processing
   plat_obj.run_items(exp_obj)

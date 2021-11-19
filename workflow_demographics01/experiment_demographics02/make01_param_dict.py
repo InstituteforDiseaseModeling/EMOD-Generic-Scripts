@@ -25,7 +25,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'DemographicsSweep-UK01'
+param_dict['EXP_NAME']     = 'DemographicsExample-UK01-Calibration'
 param_dict['NUM_SIMS']     =   720
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
@@ -42,11 +42,6 @@ NSIMS = param_dict['NUM_SIMS']
 
 param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 
-# Use historical data for crude birth rate (constant value otherwise)
-param_dict['EXP_VARIABLE']['variable_birthrate']  =  np.random.choice([False,True], p=[0.00,1.00], size=NSIMS).tolist()
-
-# Use historical data for age initialization (equilibrium otherwise)
-param_dict['EXP_VARIABLE']['modified_age_init']   =  np.random.choice([False,True], p=[0.00,1.00], size=NSIMS).tolist()
 
 # Log of age-independent multiplier for mortality rates
 param_dict['EXP_VARIABLE']['log_mortality_mult']  =  np.random.uniform(low=-2.0, high=2.0, size=NSIMS).tolist()
@@ -58,6 +53,11 @@ param_dict['EXP_VARIABLE']['log_mortality_mult']  =  np.random.uniform(low=-2.0,
 # Number of days for simulation
 param_dict['EXP_CONSTANT']['num_tsteps']          =  365.0*30
 
+# Use historical data for crude birth rate (constant value otherwise)
+param_dict['EXP_CONSTANT']['variable_birthrate']  =  True
+
+# Use historical data for age initialization (equilibrium otherwise)
+param_dict['EXP_CONSTANT']['modified_age_init']   =  True
 
 
 # ***** Write parameter dictionary *****
