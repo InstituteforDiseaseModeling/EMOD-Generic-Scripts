@@ -33,7 +33,7 @@ def sweep_func(simulation, arg_tuple):
 
 #*******************************************************************************
 
-def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path_data=None):
+def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path_data):
 
   # Create EMODTask
   task_obj = EMODTask.from_files(ep4_path = path_python)
@@ -63,10 +63,7 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
       task_obj.common_assets.add_asset(param_asset)
 
   # Add everything in the data assets directory as assets;
-  if(path_data):
-    for filename in os.listdir(path_data):
-      param_asset = Asset(absolute_path=os.path.join(path_data,filename),relative_path='data')
-      task_obj.common_assets.add_asset(param_asset)
+  task_obj.common_assets.add_directory(path_data, relative_path='data')
 
   # Create simulation sweep with builder
   #   Odd syntax; sweep definition needs two args: sweep function and a list. The sweep function
