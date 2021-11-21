@@ -1,5 +1,5 @@
 Bootstrap: library
-From: centos:latest
+From: centos:8.4
 
 %post
     dnf install python3 -y
@@ -8,7 +8,7 @@ From: centos:latest
     dnf clean all
 
     python3 -m pip install pip --upgrade
-    python3 -m pip install emod-api --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+    python3 -m pip install emod-api==1.17.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript
 
