@@ -56,12 +56,6 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   exe_asset   = AssetCollection.from_id_file(path_exe)
   task_obj.common_assets.add_assets(exe_asset)
 
-  # Add everything in the python assets directory as assets; dtk files already added
-  for filename in os.listdir(path_python):
-    if(not filename.startswith('dtk') and not filename.startswith('__')):
-      param_asset = Asset(absolute_path=os.path.join(path_python,filename),relative_path='python')
-      task_obj.common_assets.add_asset(param_asset)
-
   # Add everything in the data assets directory as assets;
   task_obj.common_assets.add_directory(path_data, relative_path='data')
 
