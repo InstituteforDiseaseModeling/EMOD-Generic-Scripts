@@ -1,19 +1,20 @@
 # EMOD-Generic
 
-See documentation at https://docs.idmod.org/projects/emod-generic-scripts/en/latest/
-for additional information about how to use the scripts.
+See https://docs.idmod.org/projects/emod-generic-scripts/en/latest/ for
+additional information about how to use these scripts.
+
 
 ## Contents:
 
-  env_CentOS8            - Contains the definition script for a singularity 
-                           image file that is used for for running EMOD on COMPS.
-                           Produces an asset collection ID that is used in the
-                           various workflows.
+  env_Debian10           - Contains the definition scripts for singularity
+                           image files. One image produces the the executable,
+                           schema, and custom reporters; a second image is
+                           used as the environment on COMPS and contains the
+                           python packages available to the embedded python
+                           interpreter. All files remain on COMPS and are
+                           provided to the various workflows as Asset
+                           Collection IDs.
 
-  env_BuildEMOD          - Contains the definition script for a singularity 
-                           image file that builds the EMOD executable.
-                           Produces an asset collection ID that is used in the
-                           various workflows.
 
 
   workflow_covariance01  - Demonstration of the covariance feature.
