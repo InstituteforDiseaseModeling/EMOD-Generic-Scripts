@@ -32,7 +32,7 @@ def make_work():
                       exclusive        = 'False')
 
   # Creates a work item to create the build image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EXE_Debian10',
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Debian10',
                                       definition_file  = 'EMOD_EXE_Debian10.def',
                                       force            = True)
 
