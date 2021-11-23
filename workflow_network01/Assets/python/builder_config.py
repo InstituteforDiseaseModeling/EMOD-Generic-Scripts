@@ -101,7 +101,7 @@ def update_config_obj(config):
 
 def configBuilder():
 
-  FILE_CONFIG  =  'config_useful.json'
+  FILE_CONFIG  =  'config.json'
   SCHEMA_PATH  =  gdata.schema_path
 
   default_conf = dfs.get_default_config_from_schema(SCHEMA_PATH,as_rod=True)
