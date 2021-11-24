@@ -24,9 +24,14 @@ from refdat_deathrate              import data_dict   as dict_death
 
 from aux_demo_calc                 import demoCalc_AgeDist
 
-from emod_api.demographics.Demographics  import Demographics, DemographicsOverlay
-from emod_api.demographics.Node          import Node
-from emod_api.demographics               import DemographicsTemplates as DT
+from emod_api.demographics.Demographics            import Demographics, \
+                                                          DemographicsOverlay
+from emod_api.demographics.Node                    import Node
+from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, \
+                                                          IndividualProperty,   \
+                                                          NodeAttributes
+
+from emod_api.demographics          import DemographicsTemplates as DT
 
 #********************************************************************************
 
@@ -105,12 +110,12 @@ def demographicsBuilder():
         mult_mat = np.array([[0.0,      0.0],
                              [0.0, nzg_mval]])
 
-        ip_obj = Node.IndividualProperty(initial_distribution = pop_frac,
-                                         property             = 'Geographic',
-                                         values               = ['L00','L01'],
-                                         transitions          = list(),
-                                         transmission_matrix  = {'Matrix':  mult_mat.tolist(),
-                                                                 'Route':           'Contact'} )
+        ip_obj = IndividualProperty(initial_distribution = pop_frac,
+                                    property             = 'Geographic',
+                                    values               = ['L00','L01'],
+                                    transitions          = list(),
+                                    transmission_matrix  = {'Matrix':  mult_mat.tolist(),
+                                                            'Route':           'Contact'} )
 
         node_obj.individual_properties.add(ip_obj)
 
@@ -255,10 +260,10 @@ def demographicsBuilder():
              int(mult_fac * node_dict.node_attributes.initial_population)
 
     dover_obj                                               = DemographicsOverlay()
-    dover_obj.node_attributes                               = Node.NodeAttributes()
-    dover_obj.individual_attributes                         = Node.IndividualAttributes()
-    dover_obj.individual_attributes.age_distribution        = Node.IndividualAttributes.AgeDistribution()
-    dover_obj.individual_attributes.mortality_distribution  = Node.IndividualAttributes.MortalityDistribution()
+    dover_obj.node_attributes                               = NodeAttributes()
+    dover_obj.individual_attributes                         = IndividualAttributes()
+    dover_obj.individual_attributes.age_distribution        = IndividualAttributes.AgeDistribution()
+    dover_obj.individual_attributes.mortality_distribution  = IndividualAttributes.MortalityDistribution()
 
     dover_obj.meta_data  = {'IdReference': ref_name}
 
@@ -272,7 +277,7 @@ def demographicsBuilder():
     dover_obj.individual_attributes.age_distribution.result_values        = [age_y]
 
     dover_obj.individual_attributes.mortality_distribution.axis_names             = ['gender','age']
-    dover_obj.individual_attributes.mortality_distribution.axis_scale_factor      = [1,1]
+    dover_obj.individual_attributes.mortality_distribution.axis_scale_factors     = [1,1]
     dover_obj.individual_attributes.mortality_distribution.num_distribution_axes  = 2
     dover_obj.individual_attributes.mortality_distribution.num_population_groups  = [2,len(d_rate_x)]
     dover_obj.individual_attributes.mortality_distribution.population_groups      = [[0,1], d_rate_x]
@@ -345,8 +350,8 @@ def demographicsBuilder():
     isus_y     = [1.0] + is_over_list[k1][0].tolist()          + [0.0]
 
     dover_obj                                                    = DemographicsOverlay()
-    dover_obj.individual_attributes                              = Node.IndividualAttributes()
-    dover_obj.individual_attributes.susceptibility_distribution  = Node.IndividualAttributes.SusceptibilityDistribution()
+    dover_obj.individual_attributes                              = IndividualAttributes()
+    dover_obj.individual_attributes.susceptibility_distribution  = IndividualAttributes.SusceptibilityDistribution()
 
     dover_obj.meta_data  = {'IdReference': ref_name}
 
