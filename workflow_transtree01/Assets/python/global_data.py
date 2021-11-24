@@ -2,8 +2,6 @@
 #
 # Static data module for embedded python in the DTK.
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 # Control params

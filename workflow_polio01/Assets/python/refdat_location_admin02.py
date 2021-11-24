@@ -3,8 +3,6 @@
 # Location data
 #   Longitude and latitude data (x,y)
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 data_dict = \

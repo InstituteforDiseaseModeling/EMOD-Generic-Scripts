@@ -2,8 +2,6 @@
 #
 # Builds a custom_dlls.json file to be used as input to the DTK.
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 import os, sys, json

@@ -2,8 +2,6 @@
 #
 # Steady-state age distribution calculator (a.k.a. magic)
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 import os, sys

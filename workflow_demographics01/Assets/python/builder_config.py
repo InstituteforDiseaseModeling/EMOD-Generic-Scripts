@@ -2,8 +2,6 @@
 #
 # Builds a config file for input to the DTK.
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 import os, sys, json
