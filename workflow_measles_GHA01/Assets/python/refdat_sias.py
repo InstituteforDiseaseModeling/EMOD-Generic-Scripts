@@ -2,8 +2,6 @@
 #
 # SIA data; November 2021 extraction; summary_measles_sias.xls
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 data_dict = \
