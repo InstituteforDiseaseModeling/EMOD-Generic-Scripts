@@ -54,8 +54,8 @@ fig01 = plt.figure(figsize=(8,6))
 axs01 = fig01.add_subplot(111, label=None)
 plt.sca(axs01)
 
-axs01.grid(b=True, which='major', ls='-', lw=0.5, label='')
-axs01.grid(b=True, which='minor', ls=':', lw=0.1)
+axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
 axs01.set_xlim( -0.5,   3.5)
@@ -126,7 +126,7 @@ for k0 in range(len(demog_lev)):
 axs01.text( 0.15, 26.0, '+  Total Pop\nx   Pyramid', fontsize=18)
 
 plt.tight_layout()
-plt.savefig('fig_error01.png')
+plt.savefig('fig_error_01.png')
 plt.close()
 
 #*******************************************************************************

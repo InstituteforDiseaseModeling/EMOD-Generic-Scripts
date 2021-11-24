@@ -17,8 +17,8 @@ fig01 = plt.figure(figsize=(8,6))
 axs01 = fig01.add_subplot(111,label=None)
 plt.sca(axs01)
 
-axs01.grid(b=True, which='major', ls='-', lw=0.5, label='')
-axs01.grid(b=True, which='minor', ls=':', lw=0.1)
+axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
 axs01.set_xlabel('R$_{\mathrm{0}}$',fontsize=16)
@@ -80,8 +80,8 @@ axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str)
 axs01.legend()
 
 # Generate figures
-#plt.savefig(os.path.join('fig_attack01.png'))
-plt.savefig(os.path.join('fig_attack01.svg'))
+#plt.savefig(os.path.join('fig_attackrate01.png'))
+plt.savefig(os.path.join('fig_attackrate01.svg'))
 
 
 plt.close()

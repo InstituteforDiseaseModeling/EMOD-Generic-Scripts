@@ -64,8 +64,8 @@ for k0 in range(len(demog_lev)):
     axs01 = fig01.add_subplot(111, label=None)
     plt.sca(axs01)
 
-    axs01.grid(b=True, which='major', ls='-', lw=0.5, label='')
-    axs01.grid(b=True, which='minor', ls=':', lw=0.1)
+    axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+    axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
     axs01.set_axisbelow(True)
 
     axs01.set_xlabel('Percentage', fontsize=14)
@@ -95,7 +95,7 @@ for k0 in range(len(demog_lev)):
     axs01.text(  3, 87.5, 'Total Pop\n{:6.3f}M'.format(effpop), fontsize=18)
 
     plt.tight_layout()
-    plt.savefig('fig_pyr_{:04d}_set{:02d}.png'.format(1950+k1,k0+1))
+    plt.savefig('fig_pyr_{:04d}_set{:02d}_01.png'.format(1950+k1,k0+1))
     plt.close()
 
 # Figures - Reference
@@ -107,8 +107,8 @@ for k1 in range(len(x_dat_list)):
   axs01 = fig01.add_subplot(111, label=None)
   plt.sca(axs01)
 
-  axs01.grid(b=True, which='major', ls='-', lw=0.5, label='')
-  axs01.grid(b=True, which='minor', ls=':', lw=0.1)
+  axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+  axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
   axs01.set_xlabel('Percentage', fontsize=14)
@@ -133,7 +133,7 @@ for k1 in range(len(x_dat_list)):
   axs01.text(  3, 87.5, 'Total Pop\n{:6.3f}M'.format(effpop), fontsize=18)
 
   plt.tight_layout()
-  plt.savefig('fig_pyr_{:04d}_ref.png'.format(1950+10*k1))
+  plt.savefig('fig_pyr_{:04d}_ref_01.png'.format(1950+10*k1))
   plt.close()
 
 

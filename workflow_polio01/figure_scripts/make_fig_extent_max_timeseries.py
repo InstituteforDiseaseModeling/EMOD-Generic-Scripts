@@ -46,8 +46,8 @@ for k1 in range(len(DIRNAMES)):
   axs01 = fig01.add_subplot(111,label=None)
   plt.sca(axs01)
 
-  axs01.grid(b=True, which='major', ls='-', lw=0.5, label='')
-  axs01.grid(b=True, which='minor', ls=':', lw=0.1)
+  axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+  axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
   axs01.set_title(TITLES[k1],fontsize=14)
