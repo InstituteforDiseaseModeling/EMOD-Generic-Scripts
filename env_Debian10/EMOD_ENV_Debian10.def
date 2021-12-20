@@ -11,7 +11,7 @@ From: debian:10
     apt-get install mpich -y
 
     pip3 install pip -U
-    pip3 install emod-api==1.17.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+    pip3 install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript
 
