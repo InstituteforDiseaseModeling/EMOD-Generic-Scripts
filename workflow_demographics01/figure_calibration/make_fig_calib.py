@@ -1,30 +1,16 @@
 #*******************************************************************************
 
-import os, json, sys
-
-sys.path.append(os.path.join('..','Assets','python'))
+import os, json
 
 import numpy               as np
 import matplotlib.pyplot   as plt
-
-from dtk_post_process import tpop_xval, tpop_yval
-
-from dtk_post_process import uk_1950_frac, uk_1960_frac
-from dtk_post_process import uk_1970_frac, uk_1980_frac
 
 #*******************************************************************************
 
 DIRNAME = 'experiment_demog_UK01_calib'
 
-xvals   = np.array(tpop_xval)
-yref    = np.array(tpop_yval)/1e6
-
-
 # Sim outputs
 tpath = os.path.join('..',DIRNAME)
-
-with open(os.path.join(tpath,'data_brick.json')) as fid01:
-  data_brick = json.load(fid01)
 
 with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
@@ -37,7 +23,7 @@ ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mortality_mult'])
 
 calib_vec = np.zeros(nsims)
-for sim_idx_str in data_brick:
+for sim_idx_str in data_brick_calib:
   sim_idx = int(sim_idx_str)
   calib_vec[sim_idx] = data_brick_calib[sim_idx_str]
 
