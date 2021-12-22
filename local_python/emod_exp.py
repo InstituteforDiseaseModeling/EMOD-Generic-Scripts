@@ -8,7 +8,8 @@ from idmtools.assets                  import Asset, AssetCollection
 from idmtools.builders                import SimulationBuilder
 from idmtools.entities.experiment     import Experiment
 
-from emodpy.emod_task                 import EMODTask
+#from emodpy.emod_task                 import EMODTask
+from emod_task                        import EMODTask
 
 #*******************************************************************************
 
