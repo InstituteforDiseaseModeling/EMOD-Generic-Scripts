@@ -51,7 +51,7 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   task_obj.common_assets.add_asset(param_asset)
 
   # Add the executable and schema
-  exe_asset   = AssetCollection.from_id_file(path_exe)
+  exe_asset = AssetCollection.from_id_file(path_exe)
   task_obj.common_assets.add_assets(exe_asset)
 
   # Add everything in the data assets directory as assets;
