@@ -10,8 +10,8 @@ from idmtools.core.id_file            import write_id_file
 
 # Ought to go in emodpy
 import sys
-sys.path.insert(0, os.path.join('..','..'))
-from local_python.emod_exp import exp_from_def_file
+sys.path.insert(0, os.path.join('..','..','local_python'))
+from emod_exp import exp_from_def_file
 
 # ******************************************************************************
 
