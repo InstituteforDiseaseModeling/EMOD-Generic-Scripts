@@ -10,11 +10,11 @@ Client-side
 
 The client-side workflow uses |IT_s| and |emodpy| to communicate with |COMPS_s|.
 
-#.  Create a parameter dictionary that specifies the values for simulation parameters::
+#.  Create a parameter dictionary that defines the experiment by specifying values for all simulation parameters::
 
         OUTPUT = param_dict.json
 
-#.  Upload the parameter dictionary along with the Python files that use that parameter dictionary to create input files. Run the simulations::
+#.  Upload the parameter dictionary along with the Python files that construct the model inputs. Run the simulations::
 
         OUTPUT = COMPS_ID.id
 

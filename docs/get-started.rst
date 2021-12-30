@@ -12,13 +12,13 @@ Follow the instructions below to
 
 #.  Build the environment::
 
-        cd EMOD-Generic/env_CentOS8
-        python make00_container.py
+        cd EMOD-Generic/env_Debian10
+        python make00_ENV_EMOD.py
 
 #.  Build the executable::
 
-        cd EMOD-Generic/env_BuildEMOD
-        python make00_executable.py
+        cd EMOD-Generic/env_Debian10
+        python make00_EXE_EMOD.py
 
 #.  Run an experiment::
 
@@ -30,4 +30,4 @@ Follow the instructions below to
 #.  Generate figures::
 
         cd EMOD_Generic/workflow_covariance01/figure_attackfrac01
-        make_fig_attackrate01.py
+        python make_fig_attackrate.py
