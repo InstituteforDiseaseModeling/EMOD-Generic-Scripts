@@ -17,6 +17,11 @@ additional information about how to use these scripts.
 
 
 
+  local_python           - Contains additional python scripts that provide
+                           helper functions common to all of the workflows.
+
+
+
   workflow_covariance01  - Demonstration of the covariance feature.
 
   workflow_covid01       - Baseline simulations for SARS-CoV-2 in EMOD. Collab
