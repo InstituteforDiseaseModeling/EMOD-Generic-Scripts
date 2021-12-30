@@ -2,10 +2,11 @@
 workflow_covariance01
 =====================
 
-This examples shows how to:
+This example demonstrates the impact of heterogenity on epidemic attack rate.
+These simulations sweep over R0 with fixed levels for variance in an
+individual's acquisition risk, transmission rate, and covaraince between
+acquisition risk and transmission rate.
 
-- Launch a set of simulations sweeping over R0, variance in an individual's acquisition and correlation
-  transmission rate.
-
-The simulation starts with a single node of entirely susceptible individuals with a constant
-importation pressure of infecteds. There is no age structure, vital dynamics, or waning.
+Each simulation uses a single node of fully susceptible individuals and an
+outbreak is initialized by a constant importation pressure of infected
+individuals. There is no age structure, vital dynamics, or waning.
