@@ -18,7 +18,7 @@ Important features include:
 - Age-structured contact matricies.
 - Overdispersion of the infection rate.
 
-This model does not inlclude:
+This model does not include:
 
 - SARS-CoV-2 variants of concern.
 - Waning immunity, re-infection, or secondary vaccine failure.

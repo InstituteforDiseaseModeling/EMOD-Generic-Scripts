@@ -1,6 +1,6 @@
-============================
-workflow_transmission-tree01
-============================
+====================
+workflow_transtree01
+====================
 
 This example demonstrates the implementation of superspreading behavior and its
 visualization using transmission trees. These simulations use a constant R0
