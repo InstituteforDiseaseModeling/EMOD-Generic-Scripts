@@ -8,6 +8,7 @@ from idmtools.core.platform_factory                           import  Platform
 from idmtools.assets                                          import  AssetCollection
 from idmtools_models.python.python_task                       import  PythonTask
 from idmtools_platform_comps.ssmt_work_items.comps_workitems  import  SSMTWorkItem
+from idmtools.core.id_file                                    import  write_id_file
 
 # ******************************************************************************
 
@@ -50,6 +51,10 @@ def run_the_calibration():
                         transient_assets = ac_obj)
   wi_obj.run(wait_on_done=False)
 
+  # Save calibration id to file
+  write_id_file('CALIB_ID.id', wi_obj)
+  print()
+  print(wi_obj.uid.hex)
 
   return None
 

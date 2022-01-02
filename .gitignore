@@ -7,8 +7,9 @@ StdErr.txt
 data_*.json
 _data_*.json
 
-*data_brick.json
-*param_dict.json
+param_*.json
+_param_*.json
+
 *_ID
 *.log
 *.png

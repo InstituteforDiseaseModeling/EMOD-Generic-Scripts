@@ -8,25 +8,26 @@ import numpy as np
 
 #*******************************************************************************
 
-def next_point_alg(gParam={}, sumVec={}):
+def next_point_alg(gen_param, sum_data, ex_val):
 
   # Control parameters
   radFrac  = 0.05 #0.35
   dimReq   = 8    #3
-  exVal    = -1.0e10
+  frac_opt = 0.95
+
 
   # Local copy of parameters
-  NSIMS      = gParam['NSIMS']
-  nSampOpt   =  int(0.8*NSIMS)
+  NSIMS      = gen_param['NSIMS']
+  nSampOpt   =  int(frac_opt*NSIMS)
   nSampRand  =  NSIMS - nSampOpt
 
-  pNames     =  copy.deepcopy(gParam['pNames'])
-  pRanges    =  copy.deepcopy(gParam['pRanges'])
+  pNames     =  copy.deepcopy(gen_param['PNAMES'])
+  pRanges    =  copy.deepcopy(gen_param['PRANGES'])
   nDim       =  len(pNames)
 
 
   # Get summary values
-  LLVec   = np.array(sumVec['LL']   if 'LL'   in sumVec else [])
+  LLVec   = np.array(sum_data['OBJ_FUN'])
 
 
   # Prep output parameter dictionary
@@ -35,17 +36,12 @@ def next_point_alg(gParam={}, sumVec={}):
     paramDic[pName] = list()
 
 
-  # Log paramter ranges as needed
-  for k1 in range(nDim):
-    vVal = sumVec[pNames[k1]] if pNames[k1] in sumVec else []
-    sumVec[pNames[k1]] = np.array(vVal)
-  #end-k1
-  
   # Vectorize data
-  datVec  = np.transpose(np.array([sumVec[pName] for pName in pNames]))
+  datVec  = np.transpose(np.array([sum_data[pName] for pName in pNames]))
   datMin  = np.array([pRange[0] for pRange in pRanges])
   datMax  = np.array([pRange[1] for pRange in pRanges])
   datSpan = datMax-datMin
+
 
   # Exclude out of range samples
   if(nDim>0):
@@ -53,11 +49,12 @@ def next_point_alg(gParam={}, sumVec={}):
                             np.all(datVec<datMax,axis=1))
     LLVec  = LLVec[inVec]
     datVec = datVec[inVec]
-  #end-if
+
 
   # Copies of input/output 
   datVecExt = np.copy(datVec)
   LLVecSamp = np.copy(LLVec)
+
 
   # Bubble bobble
   while(nSampOpt > 0):
@@ -73,7 +70,7 @@ def next_point_alg(gParam={}, sumVec={}):
       cPointOld = datVecExt[np.argmax(LLVecSamp),:]
 
       # No place left to optimize
-      if(np.max(LLVecSamp)==exVal):
+      if(np.max(LLVecSamp)==ex_val):
         nSampRand = nSampRand + nSampOpt + nsOpt
         break
       #end-if
@@ -92,7 +89,7 @@ def next_point_alg(gParam={}, sumVec={}):
         cPointNew = cPointOld + xN*(radFrac*datSpan)
 
         # Create exclusion zone around old center
-        LLVecSamp[(distVec<=radFrac)] = exVal
+        LLVecSamp[(distVec<=radFrac)] = ex_val
 
         # Truncate target center
         cPointNew = np.maximum(cPointNew,datMin)
@@ -130,7 +127,7 @@ def next_point_alg(gParam={}, sumVec={}):
 
     # Attach new samples
     datVecExt = np.vstack((datVecExt,optSamp))
-    LLVecSamp = np.append(LLVecSamp, nsOpt*[exVal])
+    LLVecSamp = np.append(LLVecSamp, nsOpt*[ex_val])
 
     # Copy to output dictionary
     for k1 in range(nDim):

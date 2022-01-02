@@ -13,12 +13,22 @@ from Assets.emod_opt                    import  next_point_alg
 
 #********************************************************************************
 
+EX_VAL = -1.0e10
+
 def application():
+
+
+  # Arguments to calibration
+  gen_param = {'NSIMS':                                     300 ,
+               'NITER':                                       8 ,
+               'PNAMES':  ['log_mort_mult01','log_mort_mult02'] ,
+               'PRANGES': [       (-2.0,2.0),       (-2.0,2.0)] }
+
 
   # Paths
   PATH_PYTHON   = os.path.abspath(os.path.join('Assets','python'))
   PATH_DATA     = os.path.abspath(os.path.join('Assets','data'))
-  PATH_ENV      = os.path.abspath(os.path.join('Assets','EMOD_SIF.id'))
+  PATH_ENV      = os.path.abspath(os.path.join('Assets','EMOD_ENV.id'))
   PATH_EXE      = os.path.abspath(os.path.join('Assets','EMOD_EXE.id'))
 
   # Prepare the platform
@@ -32,39 +42,58 @@ def application():
                       num_retries     = '0',
                       exclusive       = 'False')
 
-  # Initialize iteration number
-  iter_num = 0
-
   # Get initial experiment object
   (exp_id,_,_,_) = read_id_file('COMPS_ID.id')
   exp_obj = plat_obj.get_item(item_id=exp_id, item_type=ItemType.EXPERIMENT)
 
-  1/0
+  # Get initial experiment definition file and calibration scores
+  exp_def_file = os.path.join('Assets','param_dict.json')
+  calib_score  = 'calval_out.json'
+  resp_dict    = plat_obj.get_files(exp_obj,[exp_def_file,calib_score])
+  param_dict   = json.loads(resp_dict[list(resp_dict.keys())[0]][exp_def_file].decode())
+  calib_list   = [json.loads(resp_dict[simid][calib_score].decode()) for simid in resp_dict.keys()]
+  calib_dict   = dict()
+  for cal_entry in calib_list:
+    calib_dict.update(cal_entry)
+  with open('param_dict_iter{:02d}.json'.format(0), 'w') as fid01:
+    json.dump(param_dict, fid01, sort_keys=True, indent=4)
+  with open('data_calib_iter{:02d}.json'.format(0), 'w') as fid01:
+    json.dump(calib_dict, fid01, sort_keys=True, indent=4)
+
+  # Set base name
+  EXP_BASE_NAME = param_dict['EXP_NAME']
 
   # Iterate
-  for iter_num in range(3):
+  for iter_num in range(gen_param['NITER']):
 
-    # Get experiment definition file
-    exp_def_file = os.path.join('Assets','param_dict.json')
-    resp_dict    = plat_obj.get_files(exp_obj,[exp_def_file])
-    param_dict   = json.loads(resp_dict[list(resp_dict.keys())[0]][exp_def_file].decode())
-    with open('param_dict_iter{:02d}.json'.format(iter_num), 'w') as fid01:
-      json.dump(param_dict, fid01, sort_keys=True, indent=4)
+    # Create summary data object
+    sum_data = {pname:list() for pname in gen_param['PNAMES']}
+    obj_data = list()
+    for k2 in range(iter_num+1):
+      with open('param_dict_iter{:02d}.json'.format(k2)) as fid01:
+        temp_params = json.load(fid01)
+      for var_name in sum_data:
+        sum_data[var_name].extend(temp_params['EXP_VARIABLE'][var_name])
 
-    # Get calibration scores
-    calib_score  = 'calval_out.json'
-    resp_dict    = plat_obj.get_files(exp_obj,[calib_score])
-    calib_list   = [json.loads(resp_dict[simid][calib_score].decode()) for simid in resp_dict.keys()]
-    calib_dict   = dict()
-    for cal_entry in calib_list:
-      calib_dict.update(cal_entry)
-    with open('calib_dict_iter{:02d}.json'.format(iter_num), 'w') as fid01:
-      json.dump(calib_dict, fid01, sort_keys=True, indent=4)
+      obj_temp = temp_params['NUM_SIMS']*[EX_VAL]
+      with open('data_calib_iter{:02d}.json'.format(k2)) as fid01:
+        temp_objfun = json.load(fid01)
+      for var_name in temp_objfun:
+        obj_temp[int(var_name)] = -temp_objfun[var_name]
+      obj_data.extend(obj_temp)
 
-    # NEXT POINT AGLORITHM GOES HERE
-    param_dict_new = param_dict   # <----
-    param_dict_new['EXP_NAME'] = param_dict_new['exp_name'] + '_iter{:02d}'.format(iter_num+1)
-    param_dict_new['NUM_SIMS'] = param_dict_new['num_sims']
+    sum_data['OBJ_FUN'] = obj_data
+
+    # Next point algorithm
+    param_out = next_point_alg(gen_param, sum_data, EX_VAL)
+
+    # Create new exp definition file
+    param_dict_new = param_dict
+    param_dict_new['EXP_NAME'] = EXP_BASE_NAME + '_iter{:02d}'.format(iter_num+1)
+    param_dict_new['NUM_SIMS'] = gen_param['NSIMS']
+    for var_name in param_out:
+      param_dict_new['EXP_VARIABLE'][var_name] = param_out[var_name]
+
     PATH_EXP_DEF = os.path.abspath('param_dict.json')
     with open(PATH_EXP_DEF, 'w') as fid01:
       json.dump(param_dict_new, fid01, sort_keys=True, indent=4)
@@ -81,6 +110,18 @@ def application():
 
     # Update iteration
     exp_obj = exp_obj_new
+
+    # Save experiment definition file and calibration scores to calibration object
+    resp_dict    = plat_obj.get_files(exp_obj,[exp_def_file,calib_score])
+    param_dict   = json.loads(resp_dict[list(resp_dict.keys())[0]][exp_def_file].decode())
+    calib_list   = [json.loads(resp_dict[simid][calib_score].decode()) for simid in resp_dict.keys()]
+    calib_dict   = dict()
+    for cal_entry in calib_list:
+      calib_dict.update(cal_entry)
+    with open('param_dict_iter{:02d}.json'.format(iter_num+1), 'w') as fid01:
+      json.dump(param_dict, fid01, sort_keys=True, indent=4)
+    with open('data_calib_iter{:02d}.json'.format(iter_num+1), 'w') as fid01:
+      json.dump(calib_dict, fid01, sort_keys=True, indent=4)
 
 
   return None

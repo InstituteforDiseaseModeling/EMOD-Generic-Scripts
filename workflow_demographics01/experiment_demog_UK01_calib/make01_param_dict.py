@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'DemogExample-UK01-Calib'
-param_dict['NUM_SIMS']     =   720
+param_dict['NUM_SIMS']     =   300
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -41,7 +41,8 @@ NSIMS = param_dict['NUM_SIMS']
 param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 
 # Log of age-independent multiplier for mortality rates
-param_dict['EXP_VARIABLE']['log_mortality_mult']  =  np.random.uniform(low=-2.0, high=2.0, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['log_mort_mult01']  =  np.random.uniform(low=-2.0, high=2.0, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['log_mort_mult02']  =  np.random.uniform(low=-2.0, high=2.0, size=NSIMS).tolist()
 
 
 
