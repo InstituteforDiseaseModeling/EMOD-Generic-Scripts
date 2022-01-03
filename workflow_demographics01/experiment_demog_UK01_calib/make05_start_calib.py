@@ -37,7 +37,6 @@ def run_the_calibration():
   with open('param_calib.json','w') as fid01:
     json.dump(param_calib,fid01)
 
-
   # Connect to COMPS; needs to be the same environment used to run the sims
   plat_obj = Platform(block        = 'COMPS',
                       endpoint     = 'https://comps.idmod.org',
