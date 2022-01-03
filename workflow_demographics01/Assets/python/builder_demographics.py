@@ -43,6 +43,7 @@ def demographicsBuilder():
   MOD_AGE_INIT   = gdata.var_params['modified_age_init']
   MORT_MULT01    = np.exp(gdata.var_params['log_mort_mult01'])
   MORT_MULT02    = np.exp(gdata.var_params['log_mort_mult02'])
+  MORT_MULT03    = np.exp(gdata.var_params['log_mort_mult03'])
 
 
   # ***** Populate nodes in primary file *****
@@ -67,8 +68,9 @@ def demographicsBuilder():
   birth_rate      = br_base_val/1000.0/365.0
   mort_vec_X      = dict_death['BIN_EDGES']
   mort_vec_Y      = np.array(dict_death[SETTING])
-  mort_vec_Y[:12] = mort_vec_Y[:12]*MORT_MULT01
-  mort_vec_Y[12:] = mort_vec_Y[12:]*MORT_MULT02
+  mort_vec_Y[ 0: 6] = mort_vec_Y[ 0: 6]*MORT_MULT01
+  mort_vec_Y[ 6:24] = mort_vec_Y[ 6:24]*MORT_MULT02
+  mort_vec_Y[24:36] = mort_vec_Y[24:36]*MORT_MULT03
   mort_vec_Y      = mort_vec_Y.tolist()
   forcing_vec     = 12*[1.0]                 # No seasonal forcing
 

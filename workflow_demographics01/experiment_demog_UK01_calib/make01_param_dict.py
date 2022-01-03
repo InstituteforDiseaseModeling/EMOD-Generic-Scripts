@@ -41,8 +41,9 @@ NSIMS = param_dict['NUM_SIMS']
 param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 
 # Log of age-independent multiplier for mortality rates
-param_dict['EXP_VARIABLE']['log_mort_mult01']  =  np.random.uniform(low=-2.0, high=2.0, size=NSIMS).tolist()
-param_dict['EXP_VARIABLE']['log_mort_mult02']  =  np.random.uniform(low=-2.0, high=2.0, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['log_mort_mult01']  =  np.random.uniform(low=-4.0, high=4.0, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['log_mort_mult02']  =  np.random.uniform(low=-4.0, high=4.0, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['log_mort_mult03']  =  np.random.uniform(low=-4.0, high=4.0, size=NSIMS).tolist()
 
 
 

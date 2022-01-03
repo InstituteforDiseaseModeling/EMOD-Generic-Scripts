@@ -15,21 +15,18 @@ from Assets.emod_opt                    import  next_point_alg
 
 EX_VAL = -1.0e10
 
+# Paths
+PATH_PYTHON   = os.path.abspath(os.path.join('Assets','python'))
+PATH_DATA     = os.path.abspath(os.path.join('Assets','data'))
+PATH_ENV      = os.path.abspath(os.path.join('Assets','EMOD_ENV.id'))
+PATH_EXE      = os.path.abspath(os.path.join('Assets','EMOD_EXE.id'))
+
+
 def application():
 
-
-  # Arguments to calibration
-  gen_param = {'NSIMS':                                     300 ,
-               'NITER':                                       8 ,
-               'PNAMES':  ['log_mort_mult01','log_mort_mult02'] ,
-               'PRANGES': [       (-2.0,2.0),       (-2.0,2.0)] }
-
-
-  # Paths
-  PATH_PYTHON   = os.path.abspath(os.path.join('Assets','python'))
-  PATH_DATA     = os.path.abspath(os.path.join('Assets','data'))
-  PATH_ENV      = os.path.abspath(os.path.join('Assets','EMOD_ENV.id'))
-  PATH_EXE      = os.path.abspath(os.path.join('Assets','EMOD_EXE.id'))
+  # Get calibration parameters
+  with open('param_calib.json') as fid01:
+    gen_param = json.load(fid01)
 
   # Prepare the platform
   plat_obj = Platform(block           = 'COMPS',
@@ -64,10 +61,10 @@ def application():
   EXP_BASE_NAME = param_dict['EXP_NAME']
 
   # Iterate
-  for iter_num in range(gen_param['NITER']):
+  for iter_num in range(gen_param['NUM_ITER']):
 
     # Create summary data object
-    sum_data = {pname:list() for pname in gen_param['PNAMES']}
+    sum_data = {pname:list() for pname in gen_param['VAR_NAMES']}
     obj_data = list()
     for k2 in range(iter_num+1):
       with open('param_dict_iter{:02d}.json'.format(k2)) as fid01:
@@ -90,7 +87,7 @@ def application():
     # Create new exp definition file
     param_dict_new = param_dict
     param_dict_new['EXP_NAME'] = EXP_BASE_NAME + '_iter{:02d}'.format(iter_num+1)
-    param_dict_new['NUM_SIMS'] = gen_param['NSIMS']
+    param_dict_new['NUM_SIMS'] = gen_param['NUM_SIMS']
     for var_name in param_out:
       param_dict_new['EXP_VARIABLE'][var_name] = param_out[var_name]
 

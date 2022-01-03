@@ -17,12 +17,12 @@ def next_point_alg(gen_param, sum_data, ex_val):
 
 
   # Local copy of parameters
-  NSIMS      = gen_param['NSIMS']
-  nSampOpt   =  int(frac_opt*NSIMS)
-  nSampRand  =  NSIMS - nSampOpt
+  NUM_SIMS   = gen_param['NUM_SIMS']
+  nSampOpt   =  int(frac_opt*NUM_SIMS)
+  nSampRand  =  NUM_SIMS - nSampOpt
 
-  pNames     =  copy.deepcopy(gen_param['PNAMES'])
-  pRanges    =  copy.deepcopy(gen_param['PRANGES'])
+  pNames     =  copy.deepcopy(gen_param['VAR_NAMES'])
+  pRanges    =  copy.deepcopy(gen_param['VAR_RANGES'])
   nDim       =  len(pNames)
 
 

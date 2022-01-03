@@ -2,7 +2,7 @@
 #
 #*******************************************************************************
 
-import os
+import os, json
 
 from idmtools.core.platform_factory                           import  Platform
 from idmtools.assets                                          import  AssetCollection
@@ -24,6 +24,20 @@ PATH_LOCAL    = os.path.abspath(os.path.join('..', '..', 'local_python'))
 # Start a work item on COMPS
 def run_the_calibration():
 
+  # Arguments to calibration
+  param_calib = {'NUM_SIMS':                                     300 ,
+                 'NUM_ITER':                                       8 ,
+                 'VAR_NAMES':                   [ 'log_mort_mult01',
+                                                  'log_mort_mult02',
+                                                  'log_mort_mult03'] ,
+                 'VAR_RANGES':                  [       (-4.0, 4.0),
+                                                        (-4.0, 4.0),
+                                                        (-4.0, 4.0)] }
+
+  with open('param_calib.json','w') as fid01:
+    json.dump(param_calib,fid01)
+
+
   # Connect to COMPS; needs to be the same environment used to run the sims
   plat_obj = Platform(block        = 'COMPS',
                       endpoint     = 'https://comps.idmod.org',
@@ -44,6 +58,7 @@ def run_the_calibration():
   ac_obj = AssetCollection()
   ac_obj.add_asset('COMPS_ID.id')
   ac_obj.add_asset('idmtools.ini')
+  ac_obj.add_asset('param_calib.json')
 
   # Es liebten alle Frauen
   wi_obj = SSMTWorkItem(name             = 'Calibd_EMOD',
