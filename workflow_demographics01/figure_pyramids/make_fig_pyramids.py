@@ -116,7 +116,10 @@ for k0 in range(len(demog_lev)):
     axs01.set_ylabel('Age (yrs)', fontsize=14)
 
     if(k1 == 3):
-      pass
+      axs02 = axs01.twinx()
+      axs02.set_ylabel('Reference', fontsize=24)
+      axs02.set_yticks(ticks=[0,1])
+      axs02.set_yticklabels(['',''])
 
     axs01.set_xlim(  -8,   8)
     axs01.set_ylim(   0, 100)
