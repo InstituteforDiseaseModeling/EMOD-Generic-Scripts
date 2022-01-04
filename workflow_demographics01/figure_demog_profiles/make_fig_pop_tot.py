@@ -30,7 +30,7 @@ nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
-mort_set = np.array(param_dict['EXP_VARIABLE']['log_mortality_mult'])
+mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
 pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
 for sim_idx_str in data_brick:
@@ -48,7 +48,7 @@ axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
 axs01.set_xlabel('Year', fontsize=14)
-axs01.set_ylabel('Population (M)', fontsize=14)
+axs01.set_ylabel('UK Population (M)', fontsize=14)
 
 axs01.set_xlim( 0, 30)
 axs01.set_ylim(50, 58)
@@ -63,13 +63,13 @@ ticlab = ['50', '52', '54', '56', '58', '60']
 axs01.set_yticks(ticks=ticloc)
 axs01.set_yticklabels(ticlab,fontsize=14)
 
-
 demog_lev = [False,  True,  True,  True]
 mod_init  = [False, False,  True,  True]
-mort_mul  = [  0.0,   0.0,   0.0,  0.23]
+mort_mul  = [  0.0,   0.0,   0.0,  0.28]
+
 clr_val   = [    0,     2,     4,     3]
 off_val   = [-0.15, -0.05,  0.05,  0.15]
-lab_val   = ['Equilibrium', 'Forcing+InitEquilib', 'Forcing+InitHistory', 'Forcing+InitHistory+AdjustMort']
+lab_val   = ['Equilib Demog', '+Birth Rate Data', '+Init Age Data', '+Adjusted Mortality']
 
 for k0 in range(len(demog_lev)):
 
@@ -84,10 +84,10 @@ for k0 in range(len(demog_lev)):
   yvals       = pop_dat/100000*yref[0]
   yvals_err   = pop_dat_err/100000*yref[0]
 
-  axs01.errorbar(xvals+off_val[k0], yvals, yerr=yvals_err, zorder=3,
+  axs01.errorbar(xvals+off_val[k0], yvals, yerr=yvals_err,
                  c='C{:d}'.format(clr_val[k0]), lw=2, label=lab_val[k0])
 
-axs01.plot(xvals, yref, lw=0, c='k', marker='.', markersize=14, label='Data', zorder=1)
+axs01.plot(xvals, yref, lw=0, c='k', marker='.', markersize=14, label='Data',zorder=4)
 axs01.legend()
 
 plt.tight_layout()

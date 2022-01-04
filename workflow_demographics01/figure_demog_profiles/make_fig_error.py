@@ -29,14 +29,14 @@ with open(os.path.join(tpath,'data_brick.json')) as fid01:
 with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
-with open(os.path.join(tpath,'data_brick_calib.json')) as fid01:
+with open(os.path.join(tpath,'data_calib.json')) as fid01:
   data_brick_calib = json.load(fid01)
 
 nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
-mort_set = np.array(param_dict['EXP_VARIABLE']['log_mortality_mult'])
+mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
 pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
 for sim_idx_str in data_brick:
@@ -71,13 +71,12 @@ ticlab = ['0', '5', '10', '15', '20', '25', '30']
 axs01.set_yticks(ticks=ticloc)
 axs01.set_yticklabels(ticlab,fontsize=14)
 
-axs01.set_xlabel('Sim Set', fontsize=14)
 axs01.set_ylabel('Error Metric', fontsize=14)
-
 
 demog_lev = [False,  True,  True,  True]
 mod_init  = [False, False,  True,  True]
-mort_mul  = [  0.0,   0.0,   0.0,  0.23]
+mort_mul  = [  0.0,   0.0,   0.0,  0.28]
+
 clr_val   = [    0,     2,     4,     3]
 
 for k0 in range(len(demog_lev)):
@@ -95,10 +94,6 @@ for k0 in range(len(demog_lev)):
   ref_pop     = 100000*yref/yref[0]
 
   err_score1  = np.sqrt(np.sum(np.power(100*(pop_dat-ref_pop)/ref_pop,2.0)))
-
-  axs01.plot(k0, err_score1, '+', c='C{:d}'.format(clr_val[k0]), ms=16, mew=4)
-
-
   err_score2  = 0
 
   simdat1950  = 100*pyr_mat_avg[ 0,:]/np.sum(pyr_mat_avg[ 0,:])
@@ -117,13 +112,27 @@ for k0 in range(len(demog_lev)):
   refdat1980  = 100*np.array(uk_1980_frac[1:])
   err_score2  = err_score2 + np.sqrt(np.sum(np.power(simdat1980-refdat1980,2.0)))
 
-  axs01.plot(k0, err_score2, 'x', c='C{:d}'.format(clr_val[k0]), ms=16, mew=4)
-
   axs01.plot(k0+0*calib_set, calib_set, '.', c='C{:d}'.format(clr_val[k0]))
 
+  axs01.plot(k0, err_score1,         '+', c='C{:d}'.format(clr_val[k0]), ms=16, mew=4)
+  axs01.plot(k0, err_score2,         'x', c='C{:d}'.format(clr_val[k0]), ms=16, mew=4)
   axs01.plot(k0, np.mean(calib_set), 'o', c='C{:d}'.format(clr_val[k0]), ms=16, mew=4)
 
-axs01.text( 0.15, 26.0, '+  Total Pop\nx   Pyramid', fontsize=18)
+ticloc = [-0.5, 0.5, 1.5, 2.5]
+ticlab = [' Init Age = Equilib\n Birth Rate = Equilib\n Mortality = Equilib',
+          '  Init Age = Equilib\n  Birth Rate = Data\n  Mortality = Equilib',
+          '  Init Age = Data\n  Birth Rate = Data\n  Mortality = Equilib',
+          '   Init Age = Data\n   Birth Rate = Data\n   Mortality = Calib']
+axs01.set_xticks(ticks=ticloc)
+axs01.set_xticklabels(ticlab,ha='left',fontsize=12)
+
+axs01.text( 0.20, 28.0, 'Sum',       fontsize=18, va='center')
+axs01.text( 0.20, 26.0, 'Total Pop', fontsize=18, va='center')
+axs01.text( 0.20, 24.0, 'Pyramid',   fontsize=18, va='center')
+
+axs01.plot( 0.10, 28.14, 'o', ms=12, mew=3, c='k')
+axs01.plot( 0.10, 26.07, '+', ms=13, mew=3, c='k')
+axs01.plot( 0.10, 24.00, 'x', ms=13, mew=3, c='k')
 
 plt.tight_layout()
 plt.savefig('fig_error_01.png')

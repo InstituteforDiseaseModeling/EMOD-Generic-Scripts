@@ -91,9 +91,9 @@ x3data = np.array(x3data)
 cdata  = np.array(cdata)
 sidx   = np.argsort(cdata)
 
-axs01.scatter(x1data[sidx], x2data[sidx], c=cdata[sidx], vmin=-30)
-axs02.scatter(x1data[sidx], x3data[sidx], c=cdata[sidx], vmin=-30)
-axs03.scatter(x2data[sidx], x3data[sidx], c=cdata[sidx], vmin=-30)
+axs01.scatter(x1data[sidx], x2data[sidx], c=cdata[sidx], vmin=-20)
+axs02.scatter(x1data[sidx], x3data[sidx], c=cdata[sidx], vmin=-20)
+axs03.scatter(x2data[sidx], x3data[sidx], c=cdata[sidx], vmin=-20)
 
 
 # Save figure
