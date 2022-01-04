@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'DemogExample-UK01-Sweep'
-param_dict['NUM_SIMS']     =   720
+param_dict['NUM_SIMS']     =   600
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -38,16 +38,21 @@ NSIMS = param_dict['NUM_SIMS']
 
 # ***** Specify sim-variable parameters *****
 
+p_levels = [[False,  True,  True,  True],
+            [False, False,  True,  True],
+            [  0.0,   0.0,   0.0,  0.28]]
+rand_lev = np.random.randint(0,4,size=NSIMS).tolist()
+
 param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 
 # Use historical data for crude birth rate (constant value otherwise)
-param_dict['EXP_VARIABLE']['variable_birthrate']  =  np.random.choice([False,True], p=[0.25,0.75], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['variable_birthrate']  =  [p_levels[0][val] for val in rand_lev]
 
 # Use historical data for age initialization (equilibrium otherwise)
-param_dict['EXP_VARIABLE']['modified_age_init']   =  np.random.choice([False,True], p=[0.50,0.50], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['modified_age_init']   =  [p_levels[1][val] for val in rand_lev]
 
 # Log of age-independent multiplier for mortality rates
-param_dict['EXP_VARIABLE']['log_mortality_mult']  =  np.random.choice([0.00, 0.23], p=[0.75,0.25], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['log_mort_mult03']     =  [p_levels[2][val] for val in rand_lev]
 
 
 
@@ -55,6 +60,10 @@ param_dict['EXP_VARIABLE']['log_mortality_mult']  =  np.random.choice([0.00, 0.2
 
 # Number of days for simulation
 param_dict['EXP_CONSTANT']['num_tsteps']          =  365.0*30
+
+# Log of age-dependent multiplier for mortality rates
+param_dict['EXP_CONSTANT']['log_mort_mult01']     =    0.0
+param_dict['EXP_CONSTANT']['log_mort_mult02']     =    0.0
 
 
 

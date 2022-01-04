@@ -30,7 +30,7 @@ def get_sim_files():
                       environment  = 'Calculon')
 
   # Creates a single docker work item to collect the specified files and download
-  dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
+  dwi_obj = DownloadWorkItem(name                         = 'RetreiveFiles',
                              related_experiments          = [exp_id],
                              file_patterns                = ['parsed_out.json',
                                                              'calval_out.json'],
@@ -62,7 +62,7 @@ def proc_files():
   with open('data_brick.json','w') as fid01:
     json.dump(merged_data,fid01)
 
-  with open('data_brick_calib.json','w') as fid01:
+  with open('data_calib.json','w') as fid01:
     json.dump(merged_calib,fid01)
 
 
