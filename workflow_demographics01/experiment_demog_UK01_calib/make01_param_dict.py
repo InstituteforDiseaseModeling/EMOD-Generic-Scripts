@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'DemogExample-UK01-Calib'
-param_dict['NUM_SIMS']     =   300
+param_dict['NUM_SIMS']     =   700
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 

@@ -25,8 +25,8 @@ PATH_LOCAL    = os.path.abspath(os.path.join('..', '..', 'local_python'))
 def run_the_calibration():
 
   # Arguments to calibration
-  param_calib = {'NUM_SIMS':                                     300 ,
-                 'NUM_ITER':                                       8 ,
+  param_calib = {'NUM_SIMS':                                     700 ,
+                 'NUM_ITER':                                      16 ,
                  'VAR_NAMES':                   [ 'log_mort_mult01',
                                                   'log_mort_mult02',
                                                   'log_mort_mult03'] ,
