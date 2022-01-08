@@ -1,5 +1,5 @@
 ======================
-workflow_measles_GHA01
+workflow_measles_gha01
 ======================
 
-Documentation goes here
+Documentation goes here.
