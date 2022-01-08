@@ -1,7 +1,5 @@
 #********************************************************************************
 #
-# Python 3.6.0
-#
 #********************************************************************************
 
 import json
@@ -25,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'MEAS-GHA-Base'
+param_dict['EXP_NAME']     = 'MEAS-GHA-Base01'
 param_dict['NUM_SIMS']     =   350
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()

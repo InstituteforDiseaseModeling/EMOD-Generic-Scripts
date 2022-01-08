@@ -33,7 +33,11 @@ def application(config_filename_in):
   # Declare current version of emod-api; check min version
   print('Using emod-api {:s}'.format(API_CUR))
   for ver_val in zip(API_CUR.split('.'),API_MIN.split('.')):
-    if(ver_val[0] < ver_val[1]):
+    if(ver_val[0] >  ver_val[1]):
+      break
+    if(ver_val[0] == ver_val[1]):
+      continue
+    if(ver_val[0] <  ver_val[1]):
       raise Exception('Using emod-api {:s}; minimum version is {:s}'.format(API_CUR,API_MIN))
 
 

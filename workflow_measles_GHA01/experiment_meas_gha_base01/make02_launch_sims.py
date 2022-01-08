@@ -1,7 +1,5 @@
 #*******************************************************************************
 #
-# Python 3.6
-#
 #*******************************************************************************
 
 import os
@@ -12,8 +10,8 @@ from idmtools.core.id_file            import write_id_file
 
 # Ought to go in emodpy
 import sys
-sys.path.insert(0, os.path.join('..','..'))
-from local_python.emod_exp import exp_from_def_file
+sys.path.insert(0, os.path.join('..','..','local_python'))
+from emod_exp import exp_from_def_file
 
 # ******************************************************************************
 
@@ -22,8 +20,8 @@ from local_python.emod_exp import exp_from_def_file
 PATH_EXP_DEF  = os.path.abspath('param_dict.json')
 PATH_PYTHON   = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA     = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_CentOS8',   'EMOD_SIF.id'))
-PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_BuildEMOD', 'EMOD_EXE.id'))
+PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Debian10', 'EMOD_ENV.id'))
+PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Debian10', 'EMOD_EXE.id'))
 
 
 # Start and experiment on COMPS
@@ -36,7 +34,7 @@ def run_sims():
                       priority        = 'Normal',
                       simulation_root = '$COMPS_PATH(USER)',
                       node_group      = 'idm_abcd',
-                      num_cores       = '2',
+                      num_cores       = '1',
                       num_retries     = '0',
                       exclusive       = 'False')
 
