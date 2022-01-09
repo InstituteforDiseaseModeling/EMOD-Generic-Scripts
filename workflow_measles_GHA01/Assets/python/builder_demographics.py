@@ -21,9 +21,13 @@ from refdat_deathrate              import data_dict   as dict_death
 
 from aux_demo_calc                 import demoCalc_AgeDist
 
-from emod_api.demographics.Demographics  import Demographics, DemographicsOverlay
-from emod_api.demographics.Node          import Node
-from emod_api.demographics               import DemographicsTemplates as DT
+from emod_api.demographics.Demographics            import Demographics, \
+                                                          DemographicsOverlay
+from emod_api.demographics.Node                    import Node
+from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, \
+                                                          NodeAttributes
+
+from emod_api.demographics          import DemographicsTemplates as DT
 
 #********************************************************************************
 
@@ -203,10 +207,10 @@ def demographicsBuilder():
 
     # Vital dynamics overlays
     dover_obj                                               = DemographicsOverlay()
-    dover_obj.node_attributes                               = Node.NodeAttributes()
-    dover_obj.individual_attributes                         = Node.IndividualAttributes()
-    dover_obj.individual_attributes.age_distribution        = Node.IndividualAttributes.AgeDistribution()
-    dover_obj.individual_attributes.mortality_distribution  = Node.IndividualAttributes.MortalityDistribution()
+    dover_obj.node_attributes                               = NodeAttributes()
+    dover_obj.individual_attributes                         = IndividualAttributes()
+    dover_obj.individual_attributes.age_distribution        = IndividualAttributes.AgeDistribution()
+    dover_obj.individual_attributes.mortality_distribution  = IndividualAttributes.MortalityDistribution()
 
     dover_obj.meta_data  = {'IdReference': REF_NAME}
 
@@ -220,7 +224,7 @@ def demographicsBuilder():
     dover_obj.individual_attributes.age_distribution.result_values        = [age_y]
 
     dover_obj.individual_attributes.mortality_distribution.axis_names             = ['gender','age']
-    dover_obj.individual_attributes.mortality_distribution.axis_scale_factor      = [1,1]
+    dover_obj.individual_attributes.mortality_distribution.axis_scale_factors     = [1,1]
     dover_obj.individual_attributes.mortality_distribution.num_distribution_axes  = 2
     dover_obj.individual_attributes.mortality_distribution.num_population_groups  = [2,len(d_rate_x)]
     dover_obj.individual_attributes.mortality_distribution.population_groups      = [[0,1], d_rate_x]
@@ -249,8 +253,8 @@ def demographicsBuilder():
 
     # Initial susceptibility overlays
     dover_obj                                                    = DemographicsOverlay()
-    dover_obj.individual_attributes                              = Node.IndividualAttributes()
-    dover_obj.individual_attributes.susceptibility_distribution  = Node.IndividualAttributes.SusceptibilityDistribution()
+    dover_obj.individual_attributes                              = IndividualAttributes()
+    dover_obj.individual_attributes.susceptibility_distribution  = IndividualAttributes.SusceptibilityDistribution()
 
     dover_obj.meta_data  = {'IdReference': REF_NAME}
 

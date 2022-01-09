@@ -68,7 +68,7 @@ param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 
 # Individual level risk variance (risk of acquisition multiplier; mean = 1.0; log-normal distribution)
-param_dict['EXP_CONSTANT']['ind_variance_risk']    =     1.2
+param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.9
 
 # Base agent weight; less than 10 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =    40.0
