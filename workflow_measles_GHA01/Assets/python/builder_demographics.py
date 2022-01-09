@@ -9,7 +9,7 @@ import os, sys, json
 import global_data as gdata
 
 import numpy                    as    np
-import scipy.optimize           as opt
+import scipy.optimize           as    opt
 
 from refdat_population_100km       import data_dict   as dict_pop
 from refdat_area_100km             import data_dict   as dict_area

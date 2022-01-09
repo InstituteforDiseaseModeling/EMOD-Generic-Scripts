@@ -9,7 +9,7 @@ import matplotlib         as mpl
 
 #*******************************************************************************
 
-DIRNAME = 'experiment_MEAS-GHA-Base01'
+DIRNAME = 'experiment_meas_gha_base01'
 YMAX    =  2000
 
 targfile = os.path.join('..',DIRNAME,'param_dict.json')
@@ -18,17 +18,21 @@ with open(targfile) as fid01:
 
 targfile = os.path.join('..',DIRNAME,'data_brick.json')
 with open(targfile) as fid01:
-  dbrick = json.load(fid01)
+  data_brick = json.load(fid01)
 
 nsims    = int(param_dict['NUM_SIMS'])
-tvals    = dbrick.pop('tstamps')
-ntstp    = len(tvals)-12
 
+tvals    = data_brick.pop('tstamps')
+ntstp    = len(tvals)
 infBlock = np.zeros((nsims,ntstp))
-for simKey in dbrick:
-  idx    = int(simKey)
-  infDat = np.array(dbrick[simKey])
-  infBlock[idx,:] = infDat[12:]
+
+for sim_idx_str in data_brick:
+  try:
+    sim_idx = int(sim_idx_str)
+  except:
+    continue
+  infDat = np.array(data_brick[sim_idx_str]['timeseries'])
+  infBlock[sim_idx,:] = infDat
 
 
 # Figure
@@ -37,14 +41,12 @@ fig01 = plt.figure(figsize=(8,6))
 axs01  = fig01.add_subplot(111)
 plt.sca(axs01)
 
-axs01.grid(b=True, which='major', ls='-', lw=0.5, label='')
-axs01.grid(b=True, which='minor', ls=':', lw=0.1)
+axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
 yval = np.median(infBlock,axis=0)
 xval = np.array(tvals)/365+1900
-xval = xval[12:]
-
 
 infDatSetSort = np.sort(infBlock,axis=0)
 infDatSetSort = infDatSetSort  
@@ -64,8 +66,7 @@ axs01.set_xlim(2010, 2020)
 axs01.set_ylim(   0, YMAX)
 axs01.tick_params(axis='x', labelsize=16)
 
-#plt.savefig('fig_clouds01.png')
-plt.savefig('fig_clouds01.svg')
+plt.savefig('fig_clouds01.png')
 
 plt.close()
 
