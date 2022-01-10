@@ -43,7 +43,7 @@ def demographicsBuilder():
   PROC_DISPER  = gdata.var_params['proc_overdispersion']
   IND_RISK_VAR = gdata.var_params['ind_variance_risk']
   R0           = gdata.var_params['R0']
-  IMP_CASE     = gdata.var_params['import_rate']
+  LOG10_IMP    = gdata.var_params['log10_import_rate']
 
 
   PATH_OVERLAY = 'demog_overlay'
@@ -57,6 +57,7 @@ def demographicsBuilder():
   node_list = list()
   node_id   = 0
   ipop_time = dict()
+  imp_case  = np.power(10.0, LOG10_IMP)
 
   for loc_name in dict_pop:
     if(any([loc_name.startswith(val) for val in GEOG_LIST])):
@@ -70,7 +71,7 @@ def demographicsBuilder():
                       forced_id        = node_id,
                       area             = dict_area[loc_name])
 
-      imp_rate = IMP_CASE*dict_pop[loc_name][0]/1.0e5
+      imp_rate = imp_case*dict_pop[loc_name][0]/1.0e5
       node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate}
 
       node_list.append(node_obj)
