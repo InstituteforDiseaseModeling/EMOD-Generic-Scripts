@@ -82,7 +82,7 @@ for k1 in range(param_calib['NUM_ITER']+1):
   calib_vec = np.zeros(nsims)
   for sim_idx_str in calib_dict:
     sim_idx = int(sim_idx_str)
-    calib_vec[sim_idx] = -calib_dict[sim_idx_str]
+    calib_vec[sim_idx] = calib_dict[sim_idx_str]
   cdata.extend(calib_vec.tolist())
 
 x1data = np.array(x1data)
