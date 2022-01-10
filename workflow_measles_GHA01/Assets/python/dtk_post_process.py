@@ -8,6 +8,8 @@ import global_data as gdata
 
 import numpy as np
 
+from aux_obj_calc     import     norpois_opt
+
 #********************************************************************************
 
 pop_age_days  = [     0,   1825,   3650,   5475,   7300,   9125,  10950,  12775,
@@ -74,14 +76,18 @@ def application(output_path):
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
-
-
-  # Common data
-  parsed_dat['tstamps'] = (np.diff(tstamps)/2.0 + tstamps[:-1]).tolist()
+  calval_dat = {key_str: dict()}
 
 
   # Monthly timeseries
   parsed_dat[key_str]['timeseries']   = inf_mo.tolist()
+
+
+  # Calibration score from timeseries data
+  (obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
+
+  calval_dat[key_str]              = float(obj_val)
+  parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
 
 
   # Sample population pyramid every year
@@ -103,9 +109,19 @@ def application(output_path):
   parsed_dat[key_str]['pyramid'] = pyr_dat.tolist()
 
 
+  # Common output data
+  parsed_dat['tstamps'] = (np.diff(tstamps)/2.0 + tstamps[:-1]).tolist()
+
+
   # Write output dictionary
   with open('parsed_out.json','w') as fid01:
     json.dump(parsed_dat, fid01)
+
+
+  # Write calibration score
+  with open('calval_out.json','w') as fid01:
+    json.dump(calval_dat, fid01)
+
 
   return None
 
