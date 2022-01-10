@@ -30,7 +30,7 @@ def get_sim_files():
                       environment  = 'Calculon')
 
   # Creates a single docker work item to collect the specified files and download
-  dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
+  dwi_obj = DownloadWorkItem(name                         = 'RetreiveFiles',
                              related_experiments          = [exp_id],
                              file_patterns                = ['parsed_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',

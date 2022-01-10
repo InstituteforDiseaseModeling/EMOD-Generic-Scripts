@@ -88,6 +88,7 @@ def application():
     param_dict_new = param_dict
     param_dict_new['EXP_NAME'] = EXP_BASE_NAME + '_iter{:02d}'.format(iter_num+1)
     param_dict_new['NUM_SIMS'] = gen_param['NUM_SIMS']
+    param_dict_new['EXP_VARIABLE']['run_number'] = list(range(gen_param['NUM_SIMS']))
     for var_name in param_out:
       param_dict_new['EXP_VARIABLE'][var_name] = param_out[var_name]
 

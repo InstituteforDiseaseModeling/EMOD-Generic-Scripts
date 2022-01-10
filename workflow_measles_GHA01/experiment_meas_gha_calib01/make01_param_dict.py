@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'MEAS-GHA-Calib01'
-param_dict['NUM_SIMS']     =   350
+param_dict['NUM_SIMS']     =   1050
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -40,6 +40,21 @@ NSIMS = param_dict['NUM_SIMS']
 
 param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 
+# Coverage of SIAs in WHO calendar
+param_dict['EXP_VARIABLE']['SIA_cover_GHA-2010']   = np.random.uniform(low=  0.6, high=   0.9, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['SIA_cover_GHA-2013']   = np.random.uniform(low=  0.6, high=   0.9, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['SIA_cover_GHA-2018']   = np.random.uniform(low=  0.6, high=   0.9, size=NSIMS).tolist()
+
+# R0 seasonality
+param_dict['EXP_VARIABLE']['R0_peak_magnitude']    = np.random.uniform(low=  1.0, high=   1.5, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['R0_peak_day']          = np.random.uniform(low=  1.0, high= 100.0, size=NSIMS).tolist()
+
+# Importation rate per-100k per-day
+param_dict['EXP_VARIABLE']['log10_import_rate']    = np.random.uniform(low= -2.0, high=   1.0, size=NSIMS).tolist()
+
+# Individual level risk variance (risk of acquisition multiplier; mean = 1.0; log-normal distribution)
+param_dict['EXP_VARIABLE']['ind_variance_risk']    = np.random.uniform(low=  0.2, high=   2.0, size=NSIMS).tolist()
+
 
 
 # ***** Constants for this experiment *****
@@ -52,19 +67,9 @@ param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*12.0
 
 # Coverage of SIAs in WHO calendar
 param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2010']   =     0.90
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2013']   =     0.90
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2018']   =     0.90
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0
-
-# R0 seasonality
-param_dict['EXP_CONSTANT']['R0_peak_magnitude']    =     1.2
-param_dict['EXP_CONSTANT']['R0_peak_day']          =    30.0
-
-# Importation rate per-100k per-day
-param_dict['EXP_CONSTANT']['log10_import_rate']    =    -1.0
 
 # Parameters for gravity model for network connections
 param_dict['EXP_CONSTANT']['net_inf_power']        =  [ 2.0  ]
@@ -73,9 +78,6 @@ param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 
 # Correlation between acqusition and transmission heterogeneity
 param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
-
-# Individual level risk variance (risk of acquisition multiplier; mean = 1.0; log-normal distribution)
-param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.9
 
 # Base agent weight; less than 10 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =    25.0

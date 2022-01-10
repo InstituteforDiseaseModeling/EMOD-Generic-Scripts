@@ -27,12 +27,20 @@ def run_the_calibration():
   # Arguments to calibration
   param_calib = {'NUM_SIMS':                                     350 ,
                  'NUM_ITER':                                      24 ,
-                 'VAR_NAMES':                   [ 'log_mort_mult01',
-                                                  'log_mort_mult02',
-                                                  'log_mort_mult03'] ,
-                 'VAR_RANGES':                  [       (-4.0, 4.0),
-                                                        (-4.0, 4.0),
-                                                        (-4.0, 4.0)] }
+                 'VAR_NAMES':                [ 'SIA_cover_GHA-2010',
+                                               'SIA_cover_GHA-2013',
+                                               'SIA_cover_GHA-2018',
+                                               'R0_peak_magnitude' ,
+                                               'R0_peak_day'       ,
+                                               'log10_import_rate' ,
+                                               'ind_variance_risk' ] ,
+                 'VAR_RANGES':               [     ( 0.6,   0.9)   ,
+                                                   ( 0.6,   0.9)   ,
+                                                   ( 0.6,   0.9)   ,
+                                                   ( 1.0,   1.5)   ,
+                                                   ( 1.0, 100.0)   ,
+                                                   (-2.0,   1.0)   ,
+                                                   ( 0.2,   2.0)   ] }
 
   with open('param_calib.json','w') as fid01:
     json.dump(param_calib,fid01)

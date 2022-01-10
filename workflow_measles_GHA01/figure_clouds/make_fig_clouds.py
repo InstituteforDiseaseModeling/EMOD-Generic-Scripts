@@ -10,7 +10,7 @@ import matplotlib         as mpl
 #*******************************************************************************
 
 DIRNAME = 'experiment_meas_gha_base01'
-YMAX    =  2000
+YMAX    =  2500
 
 targfile = os.path.join('..',DIRNAME,'param_dict.json')
 with open(targfile) as fid01:
