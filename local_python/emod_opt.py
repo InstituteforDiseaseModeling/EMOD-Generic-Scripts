@@ -58,7 +58,7 @@ def next_point_alg(gen_param, sum_data, ex_val):
 
   # Bubble bobble
   while(nSampOpt > 0):
-    
+
     # Apportion sample
     nsOpt = min(dimReq*nDim,nSampOpt)
     nSampOpt = nSampOpt - nsOpt
@@ -73,8 +73,7 @@ def next_point_alg(gen_param, sum_data, ex_val):
       if(np.max(LLVecSamp)==ex_val):
         nSampRand = nSampRand + nSampOpt + nsOpt
         break
-      #end-if
-    
+
       # Calculate sample density around best point
       distVec  = np.linalg.norm((datVecExt-cPointOld)/datSpan,axis=1)
       localVec = datVecExt[(distVec<=radFrac),:]
@@ -106,12 +105,12 @@ def next_point_alg(gen_param, sum_data, ex_val):
         else:
           # Good target region
           stillThinking = False
-        #end-if
+
       else:
         # Insufficient point density; no extrapolation
         cPointNew = cPointOld
         stillThinking = False
-      #end-if
+
     #end-while
 
     # Sample locally
@@ -149,7 +148,5 @@ def next_point_alg(gen_param, sum_data, ex_val):
 
   # Return next parameter set
   return paramDic
-  
-#end-expOptim
 
 #*******************************************************************************
