@@ -71,18 +71,23 @@ def update_config_obj(config):
   config.parameters.Base_Infectivity_Scale                   = R0/8.0
   config.parameters.Base_Infectivity_Shape                   =    1.0
 
-  config.parameters.Incubation_Period_Distribution           = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Incubation_Period_Gaussian_Mean          =   10.0
-  config.parameters.Incubation_Period_Gaussian_Std_Dev       =    2.0
+  config.parameters.Incubation_Period_Distribution           = 'GAMMA_DISTRIBUTION'
+  config.parameters.Incubation_Period_Scale                  =    1.0
+  config.parameters.Incubation_Period_Shape                  =    3.5
 
   config.parameters.Infectious_Period_Distribution           = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Infectious_Period_Gaussian_Mean          =    8.0
+  config.parameters.Infectious_Period_Gaussian_Mean          =   18.0
   config.parameters.Infectious_Period_Gaussian_Std_Dev       =    2.0
+
+
+  config.parameters.Enable_Nonuniform_Shedding               =    1.0
+  config.parameters.Shedding_Distribution_Alpha              =   10.0
+  config.parameters.Shedding_Distribution_Beta               =   10.0
 
   config.parameters.Enable_Infection_Rate_Overdispersion     =    1
   config.parameters.Enable_Infectivity_Scaling               =    1
 
-  config.parameters.Symptomatic_Infectious_Offset            =    4.0
+  config.parameters.Symptomatic_Infectious_Offset            =   11.0
 
   config.parameters.Enable_Disease_Mortality                 =    0
 
