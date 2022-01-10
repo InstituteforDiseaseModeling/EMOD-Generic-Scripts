@@ -76,7 +76,7 @@ def application():
       with open('data_calib_iter{:02d}.json'.format(k2)) as fid01:
         temp_objfun = json.load(fid01)
       for var_name in temp_objfun:
-        obj_temp[int(var_name)] = -temp_objfun[var_name]
+        obj_temp[int(var_name)] = temp_objfun[var_name]
       obj_data.extend(obj_temp)
 
     sum_data['OBJ_FUN'] = obj_data
