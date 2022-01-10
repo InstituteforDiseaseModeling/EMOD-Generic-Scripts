@@ -51,13 +51,20 @@ param_dict['EXP_CONSTANT']['start_time']           =   40150-2*365
 param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*12.0
 
 # Coverage of SIAs in WHO calendar
-param_dict['EXP_CONSTANT']['SIA_coverage']         =     0.90
+param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90
+param_dict['EXP_CONSTANT']['SIA_cover_GHA-2010']   =     0.90
+param_dict['EXP_CONSTANT']['SIA_cover_GHA-2013']   =     0.90
+param_dict['EXP_CONSTANT']['SIA_cover_GHA-2018']   =     0.90
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0
 
+# R0 seasonality
+param_dict['EXP_CONSTANT']['R0_peak_magnitude']    =     1.2
+param_dict['EXP_CONSTANT']['R0_peak_day']          =    30.0
+
 # Importation rate per-100k per-day
-param_dict['EXP_CONSTANT']['import_rate']          =     0.1
+param_dict['EXP_CONSTANT']['log10_import_rate']    =    -1.0
 
 # Parameters for gravity model for network connections
 param_dict['EXP_CONSTANT']['net_inf_power']        =  [ 2.0  ]
@@ -71,7 +78,7 @@ param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.9
 
 # Base agent weight; less than 10 may have memory issues
-param_dict['EXP_CONSTANT']['agent_rate']           =    40.0
+param_dict['EXP_CONSTANT']['agent_rate']           =    25.0
 
 # Abort sim if running for more than specified time in minutes
 param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
