@@ -71,7 +71,8 @@ def next_point_alg(gen_param, sum_data, ex_val):
 
       # No place left to optimize
       if(np.max(LLVecSamp)==ex_val):
-        nSampRand = nSampRand + nSampOpt + nsOpt
+        nSampRand = nSampRand + nSampOpt
+        nSampOpt  = 0
         break
 
       # Calculate sample density around best point
