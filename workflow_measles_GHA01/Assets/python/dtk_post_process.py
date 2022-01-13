@@ -2,7 +2,7 @@
 #
 #********************************************************************************
 
-import os, sys, shutil, json
+import os, sys, shutil, json, sqlite3
 
 import global_data as gdata
 
@@ -52,6 +52,7 @@ def application(output_path):
   BIN_EDGES = np.insert(BIN_EDGES, 0, REF_DAY + 0.5)
 
   SIM_IDX         = gdata.sim_index
+  PREV_TIME       = gdata.prev_proc_time
   REP_MAP_DICT    = gdata.demog_node_map    # LGA Dotname:     [NodeIDs]
   REP_DEX_DICT    = gdata.demog_rep_index   # LGA Dotname:  Output row number
 
@@ -59,6 +60,19 @@ def application(output_path):
   # ***** Get variables for this simulation *****
   TIME_START      = gdata.var_params['start_time']
   TIME_DELTA      = gdata.var_params['num_tsteps']
+
+
+  # Connect to SQL database; retreive new entries
+  connection_obj = sqlite3.connect('simulation_events.db')
+  cursor_obj     = connection_obj.cursor()
+
+  sql_cmd = "SELECT * FROM SIM_EVENTS WHERE SIM_TIME > {:.1f}".format(PREV_TIME)
+  cursor_obj.execute(sql_cmd)
+  row_list = cursor_obj.fetchall()
+
+  data_time = np.array([val[0] for val in row_list], dtype = float)  # Time
+  data_node = np.array([val[2] for val in row_list], dtype = int  )  # Node
+  data_mcw  = np.array([val[4] for val in row_list], dtype = float)  # MCW
 
 
   # Timestamps
@@ -70,7 +84,7 @@ def application(output_path):
     inset_chart = json.load(fid01)
   inf_day = inset_chart['Channels']['New Infections']['Data']
 
-  (inf_mo, tstamps) = np.histogram(time_vec, bins=BIN_EDGES, weights=inf_day)
+  (inf_mo, tstamps) = np.histogram(data_time, bins=BIN_EDGES, weights=data_mcw)
 
 
   # Prep output dictionary
