@@ -160,7 +160,7 @@ def update_config_obj(config):
   config.parameters.Enable_Default_Reporting                 =   1
   config.parameters.Enable_Demographics_Reporting            =   1
   config.parameters.Enable_Event_DB                          =   1
-  config.parameters.SQL_Events                               =   []
+  config.parameters.SQL_Events                               =   ["NewlySymptomatic"]
 
   config.parameters.Enable_Spatial_Output                    =   0
 
