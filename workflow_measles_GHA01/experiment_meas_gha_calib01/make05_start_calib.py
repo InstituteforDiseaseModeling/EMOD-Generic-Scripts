@@ -26,7 +26,7 @@ def run_the_calibration():
 
   # Arguments to calibration
   param_calib = {'NUM_SIMS':                                     350 ,
-                 'NUM_ITER':                                      24 ,
+                 'NUM_ITER':                                      32 ,
                  'VAR_NAMES':                [ 'SIA_cover_GHA-2010',
                                                'SIA_cover_GHA-2013',
                                                'SIA_cover_GHA-2018',
@@ -39,7 +39,7 @@ def run_the_calibration():
                                                    ( 0.6,   0.9)   ,
                                                    ( 1.0,   1.5)   ,
                                                    ( 1.0, 100.0)   ,
-                                                   (-2.0,   1.0)   ,
+                                                   (-1.0,   2.5)   ,
                                                    ( 0.2,   2.0)   ] }
 
   with open('param_calib.json','w') as fid01:

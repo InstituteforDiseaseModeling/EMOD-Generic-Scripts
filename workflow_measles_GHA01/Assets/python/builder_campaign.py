@@ -31,6 +31,7 @@ def campaignBuilder():
   TIME_START   = gdata.var_params['start_time']
   PEAK_SIZE    = gdata.var_params['R0_peak_magnitude']
   PEAK_TIME    = gdata.var_params['R0_peak_day']
+  PEAK_WIDE    = gdata.var_params['R0_peak_width']
 
   # ***** Events *****
 
@@ -80,7 +81,7 @@ def campaignBuilder():
   pdict      = {'startday':       TIME_START ,
                 'nodes':          all_nodes ,
                 'peak_size':      PEAK_SIZE ,
-                'peak_wide':      45.0 ,
+                'peak_wide':      PEAK_WIDE ,
                 'peak_time':      PEAK_TIME }
 
   camp_module.add(IV_BumpR0(pdict))
@@ -197,12 +198,16 @@ def IV_BumpR0(params=dict()):
   else:
     dx_val = peak_wid
 
-  y_bound  = y_peak - (y_peak-1)/peak_wid * dx_val
-  xyvals   = set([(   0.0, y_bound),
-                  (x_init,     1.0),
-                  (x_peak,  y_peak),
-                  (x_ends,     1.0),
-                  ( 365.0, y_bound)])
+  #y_bound  = y_peak - (y_peak-1)/peak_wid * dx_val
+  y_bound  = y_peak - (y_peak-1)*(dx_val>=peak_wid)
+
+  xyvals   = set([(   0.0,     y_bound),
+                  (x_init,         1.0),
+                  (x_init+0.1,  y_peak),
+                  (x_peak,      y_peak),
+                  (x_ends-0.1,  y_peak),
+                  (x_ends,         1.0),
+                  ( 365.0,     y_bound)])
   xyvals   = sorted(list(xyvals), key=lambda val: val[0])
 
   camp_iv01.Multiplier_By_Duration.Times      = [val[0] for val in xyvals]

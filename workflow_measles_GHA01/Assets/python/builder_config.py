@@ -119,13 +119,12 @@ def update_config_obj(config):
 
 
   # ***** Network Infectivity *****
-  max_k     = max_coeff_ref(NI_POWER)
-  ni_coeff  = [np.exp(max_k[k1]+NI_LN_MULT[k1]) for k1 in range(len(max_k))]
+  ni_coeff  = np.exp(max_coeff_ref(NI_POWER) + NI_LN_MULT)
 
   config.parameters.Enable_Network_Infectivity               =   1
 
-  config.parameters.Network_Infectivity_Coefficient          =   ni_coeff
-  config.parameters.Network_Infectivity_Exponent             =   NI_POWER
+  config.parameters.Network_Infectivity_Coefficient          =   [ni_coeff]
+  config.parameters.Network_Infectivity_Exponent             =   [NI_POWER]
   config.parameters.Network_Infectivity_Max_Export_Frac      =   NI_MAXFRAC
   config.parameters.Network_Infectivity_Min_Distance         =   1
 

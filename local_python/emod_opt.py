@@ -11,8 +11,8 @@ import numpy as np
 def next_point_alg(gen_param, sum_data, ex_val):
 
   # Control parameters
-  radFrac  = 0.05 #0.35
-  dimReq   = 8    #3
+  radFrac  = 0.10 #0.35
+  dimReq   = 6    #3
   frac_opt = 0.95
 
 
