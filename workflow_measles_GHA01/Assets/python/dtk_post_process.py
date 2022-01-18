@@ -48,7 +48,7 @@ def application(output_path):
 
   DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
   REF_DAY   = 111*365                                 # Start log in 2011
-  BIN_EDGES = np.cumsum(14*DAY_BINS) + REF_DAY + 0.5  # Log for 14 years
+  BIN_EDGES = np.cumsum(15*DAY_BINS) + REF_DAY + 0.5  # Log for 15 years
   BIN_EDGES = np.insert(BIN_EDGES, 0, REF_DAY + 0.5)
 
   SIM_IDX         = gdata.sim_index
@@ -74,6 +74,9 @@ def application(output_path):
   data_node = np.array([val[2] for val in row_list], dtype = int  )  # Node
   data_mcw  = np.array([val[4] for val in row_list], dtype = float)  # MCW
 
+  gdata.data_vec_time = np.append(gdata.data_vec_time, data_time)
+  gdata.data_vec_node = np.append(gdata.data_vec_node, data_node)
+  gdata.data_vec_mcw  = np.append(gdata.data_vec_mcw,  data_mcw)
 
   # Timestamps
   time_vec = np.arange(TIME_START, TIME_START + TIME_DELTA)
@@ -84,7 +87,9 @@ def application(output_path):
     inset_chart = json.load(fid01)
   inf_day = inset_chart['Channels']['New Infections']['Data']
 
-  (inf_mo, tstamps) = np.histogram(data_time, bins=BIN_EDGES, weights=data_mcw)
+  (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
+                                   bins    = BIN_EDGES,
+                                   weights = gdata.data_vec_mcw)
 
 
   # Prep output dictionary
