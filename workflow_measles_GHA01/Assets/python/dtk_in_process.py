@@ -117,6 +117,8 @@ def application(timestep):
     camp_module.add(IV_SIA(pdict))
     camp_module.save(filename=CAMP_FILE)
 
+    return CAMP_FILE
+
 
   return None
 
