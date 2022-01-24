@@ -1,0 +1,61 @@
+Bootstrap: library
+From: ubuntu:20.04
+
+%post
+    apt-get update
+
+    apt-get install software-properties-common -y
+    apt-get update
+    add-apt-repository universe
+
+    apt-get upgrade -y
+
+    apt-get install build-essential -y
+
+    apt-get install python3-dev -y
+    apt-get install libmpich-dev -y
+    apt-get install libsqlite3-dev -y
+    apt-get install libboost-dev -y
+
+    apt-get install git -y
+    apt-get install scons -y
+
+    apt-get clean
+
+    git clone https://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@github.com/kfrey-idm/DtkTrunk.git
+
+    cd DtkTrunk
+
+    git fetch
+    git checkout Generic-Ongoing
+
+    export USER=CalculonUser-EMOD
+
+    scons --Release --jobs=4 --Disease=Generic
+
+    cd ..
+
+    mkdir outputs
+    cp DtkTrunk/build/x64/Release/Eradication/Eradication outputs/Eradication
+
+    mkdir outputs/reporter_plugins
+    cp DtkTrunk/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+
+    outputs/Eradication --get-schema --schema-path outputs/schema.json -P DtkTrunk/Scripts
+
+    rm -r DtkTrunk
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container for building EMOD.
