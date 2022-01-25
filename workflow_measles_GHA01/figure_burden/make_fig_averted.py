@@ -9,7 +9,7 @@ import matplotlib.cm      as cm
 
 #*******************************************************************************
 
-DIRNAME = 'experiment_meas_gha_test03'
+DIRNAME = 'experiment_meas_gha_test04'
 
 targfile = os.path.join('..',DIRNAME,'param_dict.json')
 with open(targfile) as fid01:
@@ -91,21 +91,30 @@ cval = infBlock[:,-1]
 gdx2 = np.argsort(cval)[::-1]
 
 # Binning
-nbins = 6
-(xvec,yvec) = np.meshgrid(np.linspace(-3,-1,nbins),np.linspace(0,1000,nbins))
-zmat        = np.zeros((nbins-1,nbins-1))
-xmat        = xvec
-ymat        = yvec
-for k1 in range(nbins-1):
-  for k2 in range(nbins-1):
-    gidx = (xval>xmat[k1,k2]) & (xval<xmat[k1,k2+1]) & (yval>ymat[k1,k2]) & (yval<ymat[k1+1,k2])
+nbins = 8
+dyval        = (1000-0)/(nbins-1)
+dxval        = ((-1)-(-3))/(nbins-1)
+(xvec,yvec) = np.meshgrid(np.linspace(-3-dxval/2,-1+dxval/2,nbins+1),np.linspace(0-dyval/2,1000+dyval/2,nbins+1))
+zmat        = np.zeros((nbins,nbins))
+
+print(dxval,dyval)
+print(xvec[1,1]-xvec[0,0],yvec[1,1]-yvec[0,0])
+
+for k1 in range(nbins):
+  for k2 in range(nbins):
+    gidx = (xval>xvec[k1,k2]) & (xval<xvec[k1,k2+1]) & (yval>yvec[k1,k2]) & (yval<yvec[k1+1,k2])
     zmat[k1,k2] = np.mean(cval[gidx])
 
-plt.contour(np.power(10.0,xmat[:-1,:-1]+(xmat[1,1]-xmat[0,0])/2),
-                          ymat[:-1,:-1]+(ymat[1,1]-ymat[0,0])/2,
-                          zmat, levels=[100e3,150e3,200e3,225e3])
+plt.contour(np.power(10.0,xvec[:-1,:-1]+dxval/2),
+                          yvec[:-1,:-1]+dyval/2,
+                          zmat, levels=[101e3,151e3,201e3,226e3],linewidths=3, vmin=0, vmax=250e3)
 
-axs01.scatter(np.power(10.0,xval[gdx2]), yval[gdx2], c=cval[gdx2], s=16, vmin=0, vmax=300e3)
+axs01.scatter(np.power(10.0,xval[gdx2]), yval[gdx2], c=cval[gdx2], s=2, vmin=0, vmax=300e3, alpha=0.7)
+
+ticloc = [0.001, 0.01, 0.1]
+ticlab = ['0.1%','1.0%','10%']
+axs01.set_xticks(ticks=ticloc)
+axs01.set_xticklabels(ticlab)
 
 cbar_handle = plt.colorbar(cm.ScalarMappable(cmap=virmap), shrink=0.75)
 
@@ -119,6 +128,6 @@ cbar_handle.set_ticklabels(ticlab)
 cbar_handle.set_label('Cumulative Infections',fontsize=14,labelpad=10)
 cbar_handle.ax.tick_params(labelsize=14)
 
-plt.savefig('fig_averted_t03.png')
+plt.savefig('fig_averted_t04.png')
 plt.close()
 
