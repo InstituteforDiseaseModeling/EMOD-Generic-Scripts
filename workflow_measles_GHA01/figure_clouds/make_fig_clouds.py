@@ -97,19 +97,20 @@ for k1 in ticloc[:-1]:
   axs01.text(k1+0.5,-0.04*YMAX,str(k1),fontsize=11,ha='center')
 
 sia01 = np.array([40460,40460])/365+1900
-axs01.plot(sia01,[0,YMAX],color='C2',linewidth=3,ls=':')
+axs01.plot(sia01,[0,YMAX],color='c',linewidth=3,ls=':')
 axs01.text(sia01[0]+0.2,0.9*YMAX,'SIA',fontsize=13)
 
 sia02 = np.array([41508,41508])/365+1900
-axs01.plot(sia02,[0,YMAX],color='C2',linewidth=5,ls='--')
+axs01.plot(sia02,[0,YMAX],color='c',linewidth=5,ls='--')
 axs01.text(sia02[0]+0.2,0.9*YMAX,'RCV Catch-up',fontsize=13)
 
 sia03 = np.array([43365,43365])/365+1900
-axs01.plot(sia03,[0,YMAX],color='C2',linewidth=3,ls=':')
+axs01.plot(sia03,[0,YMAX],color='c',linewidth=3,ls=':')
 axs01.text(sia03[0]+0.2,0.9*YMAX,'SIA',fontsize=13)
 
+plt.tight_layout()
+plt.savefig('fig_clouds_base.png')
 
-plt.savefig('fig_clouds_b01.png')
 plt.close()
 
 #*******************************************************************************
