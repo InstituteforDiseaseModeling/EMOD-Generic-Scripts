@@ -23,8 +23,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-DRC-DemogSteadyState01'
-param_dict['NUM_SIMS']     =  250
+param_dict['EXP_NAME']     = 'Rubella-DRC-DemogSteadyState02'
+param_dict['NUM_SIMS']     =  4500
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -43,6 +43,9 @@ param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 # Infectivity
 param_dict['EXP_VARIABLE']['R0']                  = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
 
+# RI rate for MR
+param_dict['EXP_VARIABLE']['RI_rate']             = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
+
 
 
 # ***** Constants for this experiment *****
@@ -58,9 +61,6 @@ param_dict['EXP_CONSTANT']['max_clock_minutes']   = 180.0
 
 # Rate of exogeneous case importation - TO DO
 #param_dict['EXP_CONSTANT']['log10_import_rate']   =   -1.682
-
-# RI rate for measles
-param_dict['EXP_CONSTANT']['RI_rate']             =    0.00
 
 
 
