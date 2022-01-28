@@ -14,6 +14,8 @@ pop_age_days = [     0,   1825,   3650,   5475,   7300,   9125,  10950,  12775,
                  14600,  16425,  18250,  20075,  21900,  23725,  25550,  27375,
                  29200,  31025,  32850,  34675,  36500]
 
+tpop_2020    = 89561000
+
 #********************************************************************************
 
 def application(output_path):
@@ -59,8 +61,6 @@ def application(output_path):
                   '90-94', '95-99']
   inf_dat      = np.zeros((int(np.ceil(TIME_DELTA/365.0)),len(age_key_list)))
   inf_mat_dat  = np.array(binned_output['Channels']['New Infections']['Data'])
-
-  print(inf_mat_dat.shape)
 
   for k1 in range(inf_dat.shape[1]):
     inf_vec_dat = inf_mat_dat[k1,:]
