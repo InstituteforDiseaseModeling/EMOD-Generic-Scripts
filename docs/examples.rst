@@ -12,4 +12,5 @@ EMOD-Generic provides a set of example workflows. Please consider contributing y
     examples/workflow_demographics01
     examples/workflow_network01
     examples/workflow_polio01
+    examples/workflow_rubella_drc01
     examples/workflow_transtree01
