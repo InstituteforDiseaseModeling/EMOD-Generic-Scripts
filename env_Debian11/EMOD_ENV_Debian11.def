@@ -1,13 +1,8 @@
 Bootstrap: docker
-From: ubuntu:20.04
+From: debian:11.2
 
 %post
     apt-get update
-
-    apt-get install software-properties-common -y
-    apt-get update
-    add-apt-repository universe
-
     apt-get upgrade -y
 
     apt-get install python3 -y
