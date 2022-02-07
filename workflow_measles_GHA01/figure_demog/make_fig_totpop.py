@@ -74,7 +74,7 @@ axs01.errorbar(xvals[:nyear]-0.5, yvals, yerr=yvals_err, lw=2)
 axs01.plot(xvals[:nyear], yref[:nyear], lw=0, c='k', marker='.', markersize=14, label='Data',zorder=4)
 
 plt.tight_layout()
-plt.savefig('fig_totpop01.png')
+plt.savefig('fig_totpop_01.png')
 plt.close()
 
 #*******************************************************************************
