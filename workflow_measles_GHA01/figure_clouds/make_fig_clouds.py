@@ -56,12 +56,6 @@ axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
 axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
-
-#xv1 = np.array(param_dict['EXP_VARIABLE']['log10_import_rate'])
-#xv2 = np.array(param_dict['EXP_VARIABLE']['ind_variance_risk'])
-#xv3 = np.array(param_dict['EXP_VARIABLE']['SIA_cover_GHA-2018'])
-
-#gidx = (xv1 < -0.3) & (xv1 > -0.7) & (xv3 < 0.45) & (xv2 < 1.0) #& (xv2 < 1.4) &
 gidx = (cdata > -4000)
 
 infBlock = infBlock[gidx,:]
@@ -109,7 +103,7 @@ axs01.plot(sia03,[0,YMAX],color='c',linewidth=3,ls=':')
 axs01.text(sia03[0]+0.2,0.9*YMAX,'SIA',fontsize=13)
 
 plt.tight_layout()
-plt.savefig('fig_clouds_base.png')
+plt.savefig('fig_clouds_base01.png')
 
 plt.close()
 

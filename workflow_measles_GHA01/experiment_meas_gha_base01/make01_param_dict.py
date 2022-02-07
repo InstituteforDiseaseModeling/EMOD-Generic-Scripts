@@ -45,10 +45,10 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 # ***** Constants for this experiment *****
 
 # Time stamp for sim start (Jan 1, 2010 = 40150)
-param_dict['EXP_CONSTANT']['start_time']           =   40150-2*365
+param_dict['EXP_CONSTANT']['start_time']           =   40150.0 - 365.0*2.0
 
 # Number of days to run simulation
-param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*12.0
+param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(2.0 + 10.0 + 6.0) + 1
 
 # Coverage of SIAs in WHO calendar
 param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90
@@ -86,6 +86,12 @@ param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
 
 # Node level overdispersion; 0.0 = Poisson
 param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.4
+
+# Reactive campaign case threshold (observed) for admin-1
+param_dict['EXP_CONSTANT']['adm01_case_threshold'] =   1.0e6
+
+# Reactive campaign case threshold (observed) for admin-1
+param_dict['EXP_CONSTANT']['log10_min_reporting']  =   -7
 
 
 
