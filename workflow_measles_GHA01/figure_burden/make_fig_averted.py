@@ -9,7 +9,7 @@ import matplotlib.cm      as cm
 
 #*******************************************************************************
 
-DIRNAME = 'experiment_meas_gha_test04'
+DIRNAME = 'experiment_meas_gha_test01'
 
 targfile = os.path.join('..',DIRNAME,'param_dict.json')
 with open(targfile) as fid01:
@@ -56,8 +56,6 @@ num_cases             = num_cases[gidx]
 infBlock[:,:test_idx] = 0
 infBlock              = np.cumsum(infBlock,axis=1)
 
-print(infBlock.shape,log10_rep.shape,num_cases.shape)
-
 
 # Figure
 fig01 = plt.figure(figsize=(8,5))
@@ -70,15 +68,8 @@ axs01.set_axisbelow(True)
 
 axs01.set_xlabel('Minimum Surveillance',fontsize=14)
 axs01.set_ylabel('Case Threshold for Response', fontsize=14)
-#axs01.set_title('Lab Rejected Cases: 2015 - 2017',fontsize=18)
 
 axs01.set_xscale('log')
-
-#axs01.spines['top'].set_color('none')
-#axs01.spines['bottom'].set_color('none')
-#axs01.spines['left'].set_color('none')
-#axs01.spines['right'].set_color('none')
-#axs01.tick_params(labelcolor='w', top=False, bottom=False, left=False, right=False)
 
 axs01.set_xlim(  1e-3, 1e-1)
 axs01.set_ylim(  0, 1000)
@@ -97,8 +88,6 @@ dxval        = ((-1)-(-3))/(nbins-1)
 (xvec,yvec) = np.meshgrid(np.linspace(-3-dxval/2,-1+dxval/2,nbins+1),np.linspace(0-dyval/2,1000+dyval/2,nbins+1))
 zmat        = np.zeros((nbins,nbins))
 
-print(dxval,dyval)
-print(xvec[1,1]-xvec[0,0],yvec[1,1]-yvec[0,0])
 
 for k1 in range(nbins):
   for k2 in range(nbins):
@@ -128,6 +117,7 @@ cbar_handle.set_ticklabels(ticlab)
 cbar_handle.set_label('Cumulative Infections',fontsize=14,labelpad=10)
 cbar_handle.ax.tick_params(labelsize=14)
 
-plt.savefig('fig_averted_t04.png')
+plt.savefig('fig_averted_01.png')
 plt.close()
 
+#*******************************************************************************

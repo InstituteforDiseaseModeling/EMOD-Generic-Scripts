@@ -9,7 +9,7 @@ import matplotlib         as mpl
 
 #*******************************************************************************
 
-DIRNAME = 'experiment_meas_gha_base03'
+DIRNAME = 'experiment_meas_gha_base01'
 YMAX    =  400e3
 
 targfile = os.path.join('..',DIRNAME,'param_dict.json')
@@ -98,8 +98,7 @@ for k1 in ticlocx:
   axs01.text(k1+0.5,-0.04*YMAX,str(k1),fontsize=11,ha='center')
 
 
-plt.savefig('fig_clouds_b02.png')
+plt.savefig('fig_clouds_01.png')
 plt.close()
 
 #*******************************************************************************
-
