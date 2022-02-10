@@ -20,6 +20,8 @@ PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Debian10', 'EMOD_E
 PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Debian10', 'EMOD_EXE.id'))
 PATH_LOCAL    = os.path.abspath(os.path.join('..', '..', 'local_python'))
 
+DOCK_PACK     = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
+
 
 # Start a work item on COMPS
 def run_the_calibration():
@@ -62,7 +64,8 @@ def run_the_calibration():
   # Es liebten alle Frauen
   wi_obj = SSMTWorkItem(name             = 'Calibd_EMOD',
                         task             = task_obj,
-                        transient_assets = ac_obj)
+                        transient_assets = ac_obj,
+                        docker_image     = DOCK_PACK)
   wi_obj.run(wait_on_done=False)
 
   # Save calibration id to file

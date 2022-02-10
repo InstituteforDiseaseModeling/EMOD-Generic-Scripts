@@ -5,6 +5,9 @@ Some filenames must remain unchanged: EMOD looks for 'dtk_pre_process.py',
 files contain a function called 'application'. Everything else can be
 user-defined.
 
+#### data
+Contains csv files and json files for use by python while running EMOD.
+
 
 
 Server-side, each simulation runs the EMOD executable. Almost the first thing

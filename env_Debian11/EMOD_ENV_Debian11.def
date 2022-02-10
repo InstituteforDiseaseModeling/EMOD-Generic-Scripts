@@ -1,0 +1,28 @@
+Bootstrap: docker
+From: debian:11.2
+
+%post
+    apt-get update
+    apt-get upgrade -y
+
+    apt-get install python3 -y
+    apt-get install python3-pip -y
+    apt-get install mpich -y
+
+    pip3 install pip -U
+    pip3 install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container for running EMOD using emod-api for file support.

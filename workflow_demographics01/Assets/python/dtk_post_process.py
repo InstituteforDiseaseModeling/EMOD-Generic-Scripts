@@ -107,7 +107,7 @@ def application(output_path):
   refpyr1980  = np.array(uk_1980_frac[1:])
   err_score   = err_score + np.sqrt(np.sum(np.power(100*(simpyr1980-refpyr1980),2.0)))
 
-  calval_dat[key_str] = float(err_score)
+  calval_dat[key_str] = -float(err_score)
 
 
   # Write output dictionary
