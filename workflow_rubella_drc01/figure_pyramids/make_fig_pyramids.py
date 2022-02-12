@@ -29,7 +29,6 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 
-#mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
 pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
 for sim_idx_str in data_brick:

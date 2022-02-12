@@ -59,9 +59,6 @@ param_dict['EXP_CONSTANT']['num_tsteps']          =  365.0*50.0
 # Maximum wall-time for simulation
 param_dict['EXP_CONSTANT']['max_clock_minutes']   = 180.0
 
-# Rate of exogeneous case importation - TO DO
-#param_dict['EXP_CONSTANT']['log10_import_rate']   =   -1.682
-
 
 
 # ***** Write parameter dictionary *****
