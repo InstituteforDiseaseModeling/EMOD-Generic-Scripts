@@ -26,6 +26,7 @@ fe_frtr_dhs   = [  0,   0,   9, 148,  # DHS fertility rate (FE_FRTR_W)
 
 fe_frtr_dhs   = np.array(fe_frtr_dhs)/1000.0  # Births, per-woman, per 3yrs
 fe_frtr_dhs   = fe_frtr_dhs/3.0               # Births, per-woman, per yr
+fe_bak        = fe_frtr_dhs                   
 fe_frtr_dhs   = fe_frtr_dhs*(9.0/12.0)        # Fraction pregnant, per-woman, per-year
 fe_frtr_dhs   = fe_frtr_dhs*(0.85*13/39 + 0.50*13/39 + 0.50*4/39)
                                               # Probability of CRS during pregnancy
@@ -90,8 +91,17 @@ ref_rat     = tpop_2020/np.sum(pyr_mat_avg[20,:])
 pop_tot     = np.sum(pyr_mat_avg,axis=1)
 pop_tot     = np.diff(pop_tot)/2.0 + pop_tot[:-1]
 
+# Annual crude births implied by fertility distribution
+frt_dist_br = np.sum(pyr_mat_avg/2.0*fe_bak,axis=1)
+frt_dist_br = np.diff(frt_dist_br)/2.0 + frt_dist_br[:-1]
+
+# Annual crude births simulated in model
 br_force    = np.interp(np.arange(2000.5,2050),br_mult_xvec,br_mult_yvec)
 birth_vec   = pop_tot*br_base_val*br_force/1000
+
+# Normalization timeseries required for CRS calculation
+norm_crs_timevec = birth_vec/frt_dist_br
+
 
 
 # Figures
@@ -150,7 +160,7 @@ for ri_val in ri_lev:
   gidx        = (ri_vec==ri_val)
   inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
   crs_mat     = inf_mat_avg*crs_prob_vec
-  ydat        = np.sum(crs_mat,axis=1)/birth_vec*1e3
+  ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
   xdat        = np.arange(0,50) + 0.5
 
   axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
