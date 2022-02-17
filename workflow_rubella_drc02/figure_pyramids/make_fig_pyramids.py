@@ -7,9 +7,11 @@ sys.path.append(os.path.join('..','Assets','python'))
 import numpy               as np
 import matplotlib.pyplot   as plt
 
-from dtk_post_process import pop_age_days, tpop_2020
+from builder_demographics import pop_age_days
+from dtk_post_process     import tpop_2020
 
 #*******************************************************************************
+
 
 DIRNAME = 'experiment_sweepRI_noSIAs'
 
@@ -29,11 +31,11 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 
-
 pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
+
 
 # Figures
 fig01 = plt.figure(figsize=(42,6))
@@ -89,7 +91,6 @@ for k1 in range(0, pyr_mat_avg.shape[0], 10):
 plt.tight_layout()
 plt.savefig('fig_pyr_set_01.png')
 plt.close()
-
 
 
 #*******************************************************************************

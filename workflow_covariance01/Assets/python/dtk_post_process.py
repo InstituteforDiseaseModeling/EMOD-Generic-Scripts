@@ -24,10 +24,16 @@ def application(output_path):
   with open(os.path.join(output_path,'InsetChart.json')) as fid01:
     inset_chart = json.load(fid01)
 
-  tot_inf = np.sum(inset_chart['Channels']['New Infections']['Data'])
-  tot_pop = inset_chart['Channels']['Statistical Population']['Data'][-1]
+  new_inf = np.array(inset_chart['Channels']['New Infections']['Data'])
+  pop_vec = np.array(inset_chart['Channels']['Statistical Population']['Data'])
 
-  parsed_dat[key_str] = int(tot_inf)/tot_pop
+  tot_pop = pop_vec[-1]
+  max_inf = np.argmax(new_inf)
+  tot_inf = np.sum(new_inf)
+  epi_inf = np.sum(new_inf[:max_inf])
+
+  parsed_dat[key_str]['atk_frac']  = int(tot_inf)/tot_pop
+  parsed_dat[key_str]['herd_frac'] = int(epi_inf)/tot_pop
 
 
   # Write output dictionary

@@ -23,8 +23,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-DRC-DemogSteadyState02'
-param_dict['NUM_SIMS']     =  4500
+param_dict['EXP_NAME']     = 'Rubella-DRC-DemogTransition02'
+param_dict['NUM_SIMS']     =  700
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -44,20 +44,26 @@ param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 param_dict['EXP_VARIABLE']['R0']                  = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
 
 # RI rate for MR
-param_dict['EXP_VARIABLE']['RI_rate']             = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
+#param_dict['EXP_VARIABLE']['RI_rate']             = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
 
 
 
 # ***** Constants for this experiment *****
 
-# Start day for simulation
-param_dict['EXP_CONSTANT']['start_time']          =  365.0*(2000-1900)
+# RI rate for MR
+param_dict['EXP_CONSTANT']['RI_rate']               =      0.0
+
+# Initial number of agents 
+param_dict['EXP_CONSTANT']['num_agents']            =  40000
+
+# Log10 of multiplier on exogeneous case importation
+param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
+
+# Name of data file for population pyramid (formatted as 'pop_data_{:s}.csv')
+param_dict['EXP_CONSTANT']['pop_dat_file']          =  'steadystate'   #  'test01'
 
 # Number of days for simulation
-param_dict['EXP_CONSTANT']['num_tsteps']          =  365.0*50.0
-
-# Maximum wall-time for simulation
-param_dict['EXP_CONSTANT']['max_clock_minutes']   = 180.0
+param_dict['EXP_CONSTANT']['num_tsteps']          =    365.0*50.0
 
 
 
