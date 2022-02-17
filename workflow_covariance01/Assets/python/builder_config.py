@@ -17,9 +17,12 @@ from emod_api.config import default_from_schema_no_validation as dfs
 def update_config_obj(config):
 
   # ***** Get variables for this simulation *****
-  R0             = gdata.var_params['R0']
   RUN_NUM        = gdata.var_params['run_number']
   TIME_DELTA     = gdata.var_params['num_tsteps']
+
+  R0             = gdata.var_params['R0']
+  R0_VAR         = gdata.var_params['R0_variance']
+
   CORR_ACQ_TRANS = gdata.var_params['correlation_acq_trans']
 
 
@@ -36,16 +39,24 @@ def update_config_obj(config):
 
 
   # ***** Intrahost *****
-  config.parameters.Base_Infectivity_Distribution                  = 'EXPONENTIAL_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Exponential                   =   R0/8.0
+  inf_prd_mean   = 8.0
+
+  inf_ln_mean    = R0/inf_prd_mean
+  inf_ln_var     = R0_VAR/inf_prd_mean/inf_prd_mean
+  inf_ln_sig     = np.sqrt(np.log(inf_ln_var/inf_ln_mean/inf_ln_mean+1.0))
+  inf_ln_mu      = np.log(inf_ln_mean) - 0.5*inf_ln_sig*inf_ln_sig
+
+  config.parameters.Base_Infectivity_Distribution                  = 'LOG_NORMAL_DISTRIBUTION'
+  config.parameters.Base_Infectivity_Log_Normal_Mu                 = inf_ln_mu
+  config.parameters.Base_Infectivity_Log_Normal_Sigma              = inf_ln_sig
 
   config.parameters.Incubation_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Incubation_Period_Gaussian_Mean                =   10.0
-  config.parameters.Incubation_Period_Gaussian_Std_Dev             =    2.0
+  config.parameters.Incubation_Period_Gaussian_Mean                =    3.0
+  config.parameters.Incubation_Period_Gaussian_Std_Dev             =    0.8
 
   config.parameters.Infectious_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Infectious_Period_Gaussian_Mean                =    8.0
-  config.parameters.Infectious_Period_Gaussian_Std_Dev             =    2.0
+  config.parameters.Infectious_Period_Gaussian_Mean                = inf_prd_mean
+  config.parameters.Infectious_Period_Gaussian_Std_Dev             =    0.8
 
   config.parameters.Enable_Disease_Mortality                       =    0
 
