@@ -8,7 +8,7 @@ additional information about how to use these scripts.
 
 | Directory | Description |
 | --- | --- |
-| env_Debian10 <br /> env_Debian11 <br /> env_Ubuntu20 |  Contains the definition scripts for singularity image files. One image produces the the EMOD executable, schema, and custom reporters; a second image is used as the environment for running EMOD on COMPS and contains the python packages available to the embedded python interpreter. All files remain on COMPS and are provided to the various workflows as Asset Collection IDs. |
+| env_Debian10 <br /> env_Debian11 <br /> env_Fedora35 <br /> env_Ubuntu20 |  Contains the definition scripts for singularity image files. One image produces the the EMOD executable, schema, and custom reporters; a second image is used as the environment for running EMOD on COMPS and contains the python packages available to the embedded python interpreter. All files remain on COMPS and are provided to the various workflows as Asset Collection IDs. |
 | local_python             | Contains additional python scripts that provide helper functions common to all of the workflows. |
 | workflow_covariance01    | Demonstration of the covariance feature. |
 | workflow_covid01         | Baseline simulations for SARS-CoV-2 in EMOD. Collab with MvG. |
