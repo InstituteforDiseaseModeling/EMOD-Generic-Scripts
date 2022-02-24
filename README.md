@@ -17,4 +17,5 @@ additional information about how to use these scripts.
 | workflow_network01       | Demonstration of the network infectivity feature. |
 | workflow_polio01         | Example outbreak simulations for cVDPV2 in Nigeria. Collab with JG and HL. |
 | workflow_rubella_drc01   | Example of rubella vaccine introduction for the Democratic Republic of the Congo assuming rollout through routine immunization services only. |
+| workflow_rubella_drc02   | TBD |
 | workflow_transtree01     | Demonstration of the infector labeling feature and generation of explicit transmission networks. |
