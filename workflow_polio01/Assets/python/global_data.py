@@ -21,6 +21,9 @@ demog_min_pop   = 0
 demog_node_map  = dict()      # LGA:     [NodeIDs]
 demog_rep_index = dict()      # LGA:  Output row number
 demog_object    = None
+demog_kid_dict  = dict()
+demog_dist_mat  = None
+
 
 # Other stuff
 first_call_bool = True

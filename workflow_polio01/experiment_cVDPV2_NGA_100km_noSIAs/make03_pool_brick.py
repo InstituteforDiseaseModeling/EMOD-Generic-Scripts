@@ -15,8 +15,7 @@ import numpy as np
 
 
 # Paths
-PATH_TEMP    = os.path.abspath('temp_dir')
-PATH_OUTPUT  = os.path.abspath('output')
+PATH_TEMP  = os.path.abspath('temp_dir')
 
 
 
@@ -33,9 +32,7 @@ def get_sim_files():
   # Creates a single docker work item to collect the specified files and download
   dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
                              related_experiments          = [exp_id],
-                             file_patterns                = ['output/lga_timeseries.csv',
-                                                             'idx_str_file.txt',
-                                                             'node_names.json'],
+                             file_patterns                = ['parsed_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',
                              output_path                  = PATH_TEMP)
 
@@ -46,22 +43,18 @@ def get_sim_files():
 
 def proc_files():
 
-  if(not os.path.isdir(PATH_OUTPUT)):
-    os.mkdir(PATH_OUTPUT)
+  merged_dict = dict()
 
   # Aggregates all the data from downloaded files into a single dictionary
   for (root_path, dirs_list, files_list) in os.walk(PATH_TEMP):
     for file_name in files_list:
-      if(file_name == 'lga_timeseries.csv'):
-        with open(os.path.join(root_path,'..','idx_str_file.txt')) as fid01:
-          sim_index = int(fid01.readline())
-        targ_file = os.path.join(PATH_OUTPUT,'inf_circ_{:05d}.csv'.format(sim_index))
-        shutil.copyfile(os.path.join(root_path,'lga_timeseries.csv'),targ_file)
-        if(sim_index == 0):
-          targ_file = os.path.join(PATH_OUTPUT,'node_names.json')
-          shutil.copyfile(os.path.join(root_path,'..','node_names.json'),targ_file)
+      if(file_name == 'parsed_out.json'):
+        with open(os.path.join(root_path,file_name)) as fid01:
+          sim_dict = json.load(fid01)
+        merged_dict.update(sim_dict)
 
-
+  with open('data_brick.json','w') as fid01:
+    json.dump(merged_dict,fid01)
 
   # DELETE ALL TEMPORARY FILES
   shutil.rmtree(PATH_TEMP)

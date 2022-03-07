@@ -23,6 +23,7 @@ from refdat_birthrate              import data_dict   as dict_birth
 from refdat_deathrate              import data_dict   as dict_death
 
 from aux_demo_calc                 import demoCalc_AgeDist
+from aux_demo_calc                 import demoCalc_hDist
 
 from emod_api.demographics.Demographics            import Demographics, \
                                                           DemographicsOverlay
@@ -30,8 +31,6 @@ from emod_api.demographics.Node                    import Node
 from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, \
                                                           IndividualProperty,   \
                                                           NodeAttributes
-
-from emod_api.demographics          import DemographicsTemplates as DT
 
 #********************************************************************************
 
@@ -120,6 +119,25 @@ def demographicsBuilder():
         node_obj.individual_properties.add(ip_obj)
 
       node_list.append(node_obj)
+
+
+  # ***** Build distance matrix *****
+
+  num_nodes = len(node_list)
+
+  # Lat/long vectors
+  xyt_vec = np.zeros((num_nodes,2))
+  for k1 in range(xyt_vec.shape[0]):
+    vec_idx = node_list[k1].forced_id-1
+    xyt_vec[vec_idx,0] = node_list[k1].lon
+    xyt_vec[vec_idx,1] = node_list[k1].lat
+
+  # Distance matrix
+  dist_mat = np.zeros((num_nodes,num_nodes))
+  for k1 in range(dist_mat.shape[0]):
+    dist_mat[k1,:] = demoCalc_hDist(xyt_vec[k1,1],xyt_vec[k1,0],xyt_vec[:,1],xyt_vec[:,0])
+
+  gdata.demog_dist_mat = dist_mat
 
 
   # ***** Write node name bookkeeping *****
@@ -237,6 +255,8 @@ def demographicsBuilder():
 
   # ***** Write vital dynamics overlays *****
 
+  demog_kid_dict = dict()
+
   for k1 in range(len(vd_over_list)):
     data_tup = vd_over_list[k1]
     over_set = dict()
@@ -248,7 +268,10 @@ def demographicsBuilder():
     force_v  = 12*[1.0] # No seasonal forcing
     (grow_rate, age_x, age_y) = demoCalc_AgeDist(brth_rate,d_rate_x,d_rate_y)
 
-    # Update initial node populations
+    # Fraction of populatin between 9 mos and 5 yrs
+    targ_frac = np.interp(5.00*365.0, age_y, age_x) - np.interp(0.75*365.0, age_y, age_x)
+
+    # Update initial node populations; calculate target populations
     for node_dict in demog_obj.nodes:
       node_name  = node_dict.name
       node_id    = node_dict.forced_id
@@ -256,8 +279,9 @@ def demographicsBuilder():
         start_year = (gdata.start_off+TIME_START)/365.0 + 1900
         ref_year   = ipop_time[loc_name]
         mult_fac   = grow_rate**(start_year-ref_year)
-        node_dict.node_attributes.initial_population =  \
-             int(mult_fac * node_dict.node_attributes.initial_population)
+        new_pop    = int(mult_fac * node_dict.node_attributes.initial_population)
+        node_dict.node_attributes.initial_population = new_pop
+        demog_kid_dict[node_name] = int(new_pop*targ_frac)
 
     dover_obj                                               = DemographicsOverlay()
     dover_obj.node_attributes                               = NodeAttributes()
@@ -288,6 +312,12 @@ def demographicsBuilder():
     nfname = os.path.join(PATH_OVERLAY,nfname)
     gdata.demog_files.append(nfname)
     dover_obj.to_file(file_name=nfname)
+
+  # Save the target populations for use in other functions
+  gdata.demog_kid_dict = demog_kid_dict
+
+  with open('targ_pop_9mo_5yr.json','w')  as fid01:
+    json.dump(demog_kid_dict,fid01,sort_keys=True,indent=3)
 
 
   # ***** Populate susceptibility overlays *****

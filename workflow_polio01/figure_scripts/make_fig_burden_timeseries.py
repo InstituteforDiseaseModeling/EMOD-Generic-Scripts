@@ -9,18 +9,25 @@ EPS = np.finfo(np.float32).eps
 
 #*******************************************************************************
 
+
 DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
             'experiment_cVDPV2_NGA_100km_SIAs']
 
 TITLES   = ['May 2017 Outbreak\nNo SIAs Post Cessation',
             'May 2017 Outbreak\nEMOD SIA Calendar through Outbreak']
 
-for k1 in range(len(DIRNAMES)):
+nfigs = len(DIRNAMES)
+
+
+# Figure setup
+fig01 = plt.figure(figsize=(8*nfigs,6))
+
+
+# Add plots
+for k1 in range(nfigs):
   dirval = DIRNAMES[k1]
 
-  # Figure setup
-  fig01 = plt.figure(figsize=(8,6))
-  axs01 = fig01.add_subplot(111,label=None)
+  axs01 = fig01.add_subplot(1, nfigs, k1+1)
   plt.sca(axs01)
 
   axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
@@ -53,39 +60,36 @@ for k1 in range(len(DIRNAMES)):
   # Sim outputs
   tpath = os.path.join('..',dirval)
 
-  with open(os.path.join(tpath,'output','node_names.json')) as fid01:
-    node_name_dict = json.load(fid01)
-
-  with open(os.path.join(tpath,'data_totinf.json')) as fid01:
-    inf_brick  = json.load(fid01)
+  with open(os.path.join(tpath,'data_brick.json')) as fid01:
+    data_brick  = json.load(fid01)
 
   with open(os.path.join(tpath,'param_dict.json')) as fid01:
     param_dict = json.load(fid01)
 
-  n_sims   = param_dict['NUM_SIMS']
-  n_tstep  = int(param_dict['EXP_CONSTANT']['num_tsteps'])
-  n_nodes  = len(node_name_dict)
+  node_names = data_brick.pop('node_names')
+  n_sims     = param_dict['NUM_SIMS']
+  n_tstep    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 
   tot_inf = np.zeros((n_sims, n_tstep))
-  for sim_idx_str in inf_brick:
+  for sim_idx_str in data_brick:
     sim_idx = int(sim_idx_str)
-    tot_inf[sim_idx,:] = np.cumsum(np.array(inf_brick[sim_idx_str]))
+    tot_inf[sim_idx,:] = np.cumsum(np.array(data_brick[sim_idx_str]['totinf']))
 
-  gdex   = (tot_inf[:,-1]>5000)
+  gdix   = (tot_inf[:,-1]>5000)
 
-  axs01.text(30,325e3,'Outbreak Probability: {:4.2f}'.format(np.sum(gdex)/n_sims),fontsize=14)
+  axs01.text(30,325e3,'Outbreak Probability: {:4.2f}'.format(np.sum(gdix)/n_sims),fontsize=14)
   
   xval   = np.arange(n_tstep) + 0.0
-  yval1  = np.mean(tot_inf[gdex,:],axis=0)
-  yval2  = tot_inf[gdex,:]
+  yval1  = np.mean(tot_inf[gdix,:],axis=0)
+  yval2  = tot_inf[gdix,:]
   scplt1 = axs01.plot(xval, yval1, c='C0')
-  for k3 in range(np.sum(gdex)):
+  for k3 in range(np.sum(gdix)):
     scplt2 = axs01.plot(xval[5::10], yval2[k3,5::10], '.', c='C0')
 
-  # Generate figure
-  #plt.savefig(os.path.join('fig_burden_{:s}_01.png'.format(dirval)))
-  plt.savefig(os.path.join('fig_burden_{:s}_01.svg'.format(dirval)))
 
-  plt.close()
+# Generate figure
+plt.tight_layout()
+plt.savefig('fig_burden_01.png')
+plt.close()
 
 #*******************************************************************************

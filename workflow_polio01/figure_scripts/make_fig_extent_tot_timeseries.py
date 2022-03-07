@@ -5,8 +5,6 @@ import os, json
 import numpy              as np
 import matplotlib.pyplot  as plt
 
-EPS = np.finfo(np.float32).eps
-
 #*******************************************************************************
 
 DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
@@ -15,12 +13,16 @@ DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
 TITLES   = ['May 2017 Outbreak\nNo SIAs Post Cessation',
             'May 2017 Outbreak\nEMOD SIA Calendar through Outbreak']
 
+nfigs = len(DIRNAMES)
+
+
+# Figure setup
+fig01 = plt.figure(figsize=(8*nfigs,6))
+
 for k1 in range(len(DIRNAMES)):
   dirval = DIRNAMES[k1]
 
-  # Figure setup
-  fig01 = plt.figure(figsize=(8,6))
-  axs01 = fig01.add_subplot(111,label=None)
+  axs01 = fig01.add_subplot(1, nfigs, k1+1)
   plt.sca(axs01)
 
   axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
@@ -48,51 +50,42 @@ for k1 in range(len(DIRNAMES)):
   # Sim outputs
   tpath = os.path.join('..',dirval)
 
-  with open(os.path.join(tpath,'output','node_names.json')) as fid01:
-    node_name_dict = json.load(fid01)
-
-  with open(os.path.join(tpath,'data_fatime.json')) as fid01:
-    data_brick = json.load(fid01)
-
-  with open(os.path.join(tpath,'data_totinf.json')) as fid01:
-    inf_brick  = json.load(fid01)
+  with open(os.path.join(tpath,'data_brick.json')) as fid01:
+    data_brick  = json.load(fid01)
 
   with open(os.path.join(tpath,'param_dict.json')) as fid01:
     param_dict = json.load(fid01)
 
-  n_sims   = param_dict['NUM_SIMS']
-  n_tstep  = int(param_dict['EXP_CONSTANT']['num_tsteps'])
-  n_nodes  = len(node_name_dict)
+  node_names = data_brick.pop('node_names')
+  n_sims     = param_dict['NUM_SIMS']
+  n_tstep    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
+  n_nodes    = len(node_names)
 
+  tot_inf = np.zeros((n_sims, n_tstep))
   vel_mat = np.zeros((n_sims, n_nodes))
   for sim_idx_str in data_brick:
     sim_idx = int(sim_idx_str)
-    vel_mat[sim_idx,:] = np.array(data_brick[sim_idx_str])
-
-  tot_inf = np.zeros((n_sims, n_tstep))
-  for sim_idx_str in inf_brick:
-    sim_idx = int(sim_idx_str)
-    tot_inf[sim_idx,:] = np.cumsum(np.array(inf_brick[sim_idx_str]))
+    tot_inf[sim_idx,:] = np.cumsum(np.array(data_brick[sim_idx_str]['totinf']))
+    vel_mat[sim_idx,:] = np.array(data_brick[sim_idx_str]['fatime'])
 
   mean_vel = np.zeros((n_sims, n_tstep))
   for k2 in range(n_tstep):
     mean_vel[:,k2] = np.sum((vel_mat<k2)&(vel_mat>0),axis=1)
 
-  gdex   = (tot_inf[:,-1]>5000)
+  gdix   = (tot_inf[:,-1]>5000)
 
-  axs01.text(30,97.5,'Outbreak Probability: {:4.2f}'.format(np.sum(gdex)/n_sims),fontsize=14)
+  axs01.text(30,97.5,'Outbreak Probability: {:4.2f}'.format(np.sum(gdix)/n_sims),fontsize=14)
 
   xval   = np.arange(n_tstep)+0.0
-  yval1  = np.mean(mean_vel[gdex,:],axis=0)
-  yval2  = mean_vel[gdex,:]
+  yval1  = np.mean(mean_vel[gdix,:],axis=0)
+  yval2  = mean_vel[gdix,:]
   scplt1 = axs01.plot(xval, yval1, c='C0')
-  for k3 in range(np.sum(gdex)):
+  for k3 in range(np.sum(gdix)):
     scplt2 = axs01.plot(xval[5::10], yval2[k3,5::10], '.', c='C0')
 
-  # Generate figure
-  #plt.savefig(os.path.join('fig_extent_total_{:s}_01.png'.format(dirval)))
-  plt.savefig(os.path.join('fig_extent_total_{:s}_01.svg'.format(dirval)))
-
-  plt.close()
+# Generate figure
+plt.tight_layout()
+plt.savefig('fig_extent_total_01.png')
+plt.close()
 
 #*******************************************************************************

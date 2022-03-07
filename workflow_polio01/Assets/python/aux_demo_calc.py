@@ -60,3 +60,18 @@ def demoCalc_AgeDist(bval, mvecX_in, mvecY):
   return ((gR.tolist())[0],(avecX[:-1]).tolist(),(avecY).tolist())
 
 #********************************************************************************
+
+# Calculated haversine distance
+def demoCalc_hDist(lat1, long1, lat2, long2):
+
+  lat1  = np.pi*lat1 /180.0
+  lat2  = np.pi*lat2 /180.0
+  long1 = np.pi*long1/180.0
+  long2 = np.pi*long2/180.0
+
+  delt = 6371*2*np.arcsin(np.sqrt(np.sin(0.5*lat2-0.5*lat1)**2 +
+                     np.cos(lat2)*np.cos(lat1)*np.sin(0.5*long2-0.5*long1)**2))
+
+  return delt
+
+#*******************************************************************************
