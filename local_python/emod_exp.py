@@ -46,6 +46,7 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
 
   EXP_NAME = param_dict['EXP_NAME']
   NUM_SIMS = param_dict['NUM_SIMS']
+  VAR_DICT = param_dict['EXP_VARIABLE']
 
   # Add the parameters dictionary to assets
   param_asset = Asset(absolute_path=path_param_dict)
@@ -67,7 +68,7 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   #   in the sweep function.
   build_obj     = SimulationBuilder()
   sim_id_list   = list(range(NUM_SIMS))
-  dict_list     = NUM_SIMS*[param_dict['EXP_VARIABLE']]
+  dict_list     = NUM_SIMS*[VAR_DICT]
   build_obj.add_sweep_definition(sweep_func, list(zip(sim_id_list,dict_list)))
 
   # Create an experiment from builder
