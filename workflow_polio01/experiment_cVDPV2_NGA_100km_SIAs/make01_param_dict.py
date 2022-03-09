@@ -77,8 +77,8 @@ param_dict['EXP_CONSTANT']['nonzero_group_beta_dist_param_beta']   =  1.0
 param_dict['EXP_CONSTANT']['nonzero_group_scale']                  =  1.0
 
 # R0 values for cVDPV and Sabin; linear interpolation; requires R0 > R0_OPV
-param_dict['EXP_CONSTANT']['R0']                   =    10.0
-param_dict['EXP_CONSTANT']['R0_OPV']               =     2.5
+param_dict['EXP_CONSTANT']['R0']                   =    12.0
+param_dict['EXP_CONSTANT']['R0_OPV']               =     4.0
 
 # Transmissibility of nOPV with respect to Sabin
 param_dict['EXP_CONSTANT']['R0_nOPV_mult']         =     0.5
