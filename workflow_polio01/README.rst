@@ -3,7 +3,7 @@ workflow_polio01
 ================
 
 Demonstration simulations for poliovirus type-2 transmission in Nigeria. The
-model strcuture was used to examine the impact Sabin vaccine reversion dynamics
+model structure was used to examine the impact Sabin vaccine reversion dynamics
 in contrast to nOPV vaccines.
 
 Important features include:
