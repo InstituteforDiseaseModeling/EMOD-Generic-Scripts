@@ -5,21 +5,21 @@ import os, sys, json
 import numpy              as np
 import matplotlib.pyplot  as plt
 
-ext_py_path = os.path.join('..','Assets','python')
-if(ext_py_path not in sys.path):
-  sys.path.append(ext_py_path)
+sys.path.append(os.path.join('..','Assets','python'))
 
 from refdat_age_pyr import age_pyr_fun
 
 #*******************************************************************************
 
-intlist   = [221,222,223,224]
 pname_long = ['AFRO:ANG','AFRO:ETH','EURO:ITA','EURO:UKR']
 pname      = ['Angola','Ethiopia','Italy','Ukraine']
 
+CM      = np.array([ 70,130,180])/255
+CF      = np.array([238,121,137])/255
+
 
 # Figure
-fig01 = plt.figure(figsize=(12.8,9.6))
+fig01 = plt.figure(figsize=(28,6))
 
 axs00 = fig01.add_subplot(111)
 
@@ -33,8 +33,7 @@ for k0 in range(len(pname)):
 
   pn  = pname[k0]
   pnl = pname_long[k0]
-  figint = intlist[k0]
-  axs01  = fig01.add_subplot(figint)
+  axs01  = fig01.add_subplot(1,4,k0+1)
 
   plt.sca(axs01)
 
@@ -59,15 +58,15 @@ for k0 in range(len(pname)):
 
   daty = np.array(age_pyr_fun(pnl)[1])
   datx = np.arange(2.5,80,5)
-  axs01.barh(datx, daty/2,color='C0',height=4.95,edgecolor='k')
-  axs01.barh(datx,-daty/2,color='C0',height=4.95,edgecolor='k')
+  axs01.barh(datx, daty/2,color=CF,height=4.95,edgecolor='k')
+  axs01.barh(datx,-daty/2,color=CM,height=4.95,edgecolor='k')
 
 axs00.set_xlabel('Percentage',fontsize=26)
 axs00.set_ylabel('Age (years)',fontsize=26)
 
-#plt.savefig('fig_poppyr01.png')
-plt.savefig('fig_poppyr01.svg')
-
+# Generate figure
+plt.tight_layout()
+plt.savefig('fig_poppyr_01.png')
 plt.close()
 
 #*******************************************************************************

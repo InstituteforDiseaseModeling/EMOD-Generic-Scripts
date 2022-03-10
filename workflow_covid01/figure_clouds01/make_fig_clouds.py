@@ -100,9 +100,9 @@ for k0 in range(len(pname)):
 axs00.set_xlabel('Days Post Introduction',fontsize=26)
 axs00.set_ylabel('Daily Infections per-100k',fontsize=26)
 
-#plt.savefig('fig_clouds01.png')
-plt.savefig('fig_clouds01.svg')
-
+# Generate figure
+plt.tight_layout()
+plt.savefig('fig_clouds_01.png')
 plt.close()
 
 #*******************************************************************************
