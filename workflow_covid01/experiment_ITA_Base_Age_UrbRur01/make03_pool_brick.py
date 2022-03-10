@@ -16,6 +16,7 @@ import numpy as np
 
 # Paths
 PATH_TEMP  = os.path.abspath('temp_dir')
+DOCK_PACK  = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
 
 
 
@@ -34,7 +35,8 @@ def get_sim_files():
                              related_experiments          = [exp_id],
                              file_patterns                = ['parsed_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',
-                             output_path                  = PATH_TEMP)
+                             output_path                  = PATH_TEMP,
+                             docker_image                 = DOCK_PACK)
 
   # Wait until everything is downloaded
   dwi_obj.run(wait_on_done=True, platform=plat_obj)
