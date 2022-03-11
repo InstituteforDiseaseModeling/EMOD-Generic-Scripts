@@ -12,12 +12,12 @@ Follow the instructions below to
 
 #.  Build the environment::
 
-        cd EMOD-Generic/env_Debian10
+        cd EMOD-Generic/env_Debian11
         python make00_ENV_EMOD.py
 
 #.  Build the executable::
 
-        cd EMOD-Generic/env_Debian10
+        cd EMOD-Generic/env_Debian11
         python make00_EXE_EMOD.py
 
 #.  Run an experiment::

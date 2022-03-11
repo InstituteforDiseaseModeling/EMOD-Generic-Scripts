@@ -20,7 +20,7 @@ The client-side workflow uses |IT_s| and |emodpy| to communicate with |COMPS_s|.
 
 #.  Collect results from the server::
 
-        OUTPUT = data_brick.json (and others)
+        OUTPUT = data_brick.json
 
 Client-side speed-up
 --------------------
