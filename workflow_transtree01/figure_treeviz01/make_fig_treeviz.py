@@ -11,6 +11,7 @@ import matplotlib.pyplot  as plt
 
 DIRNAME = 'experiment_transtree01'
 
+
 def rec_tree(targ_id):
 
   subdat  = tree_dat[tree_dat[:,3]==targ_id,:]
@@ -77,7 +78,6 @@ gdex0 = np.argwhere(obr_bool & (BI_VAR==0.0))[0,0]
 gdex1 = np.argwhere(obr_bool & (BI_VAR==1.0))[0,0]
 
 
-
 # Figure setup
 fig01 = plt.figure(figsize=(48,36))
 
@@ -95,7 +95,6 @@ t_struct = rec_tree(0)
 print_branch(axs01, t_struct, 0)
 
 
-
 axs01 = fig01.add_subplot(122,label=None)
 plt.sca(axs01)
 axs01.tick_params(labelcolor='w', top=False, bottom=False, left=False, right=False)
@@ -110,12 +109,9 @@ t_struct = rec_tree(0)
 print_branch(axs01, t_struct, 0)
 
 
-
 # Generate figures
-#plt.savefig(os.path.join('fig_transtree01.png'))
-plt.savefig(os.path.join('fig_transtree01.svg'))
-
-
+plt.tight_layout()
+plt.savefig('fig_transtree_01.png')
 plt.close()
 
 #*******************************************************************************
