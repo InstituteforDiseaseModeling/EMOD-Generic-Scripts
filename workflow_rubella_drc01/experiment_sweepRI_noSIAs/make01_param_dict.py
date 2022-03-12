@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-DRC-DemogSteadyState02'
+param_dict['EXP_NAME']     = 'Rubella-DRC-DemogSteadyState01'
 param_dict['NUM_SIMS']     =  4500
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()

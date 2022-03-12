@@ -11,18 +11,29 @@ from dtk_post_process      import  tpop_2020
 
 from builder_demographics  import  br_base_val
 
-# TO DO: Build this vector in asset files
-# (probability an infection in age-bracket results in CRS)
-conv_vec = [0.0,                    0.0,
-            0.0005639423076923077,  0.009273717948717949,
-            0.02374823717948718,    0.024312179487179489,
-            0.018296794871794875,   0.020740544871794873,
-            0.006140705128205128,   0.0005639423076923077,
-            0.0,                    0.0,
-            0.0,                    0.0,
-            0.0,                    0.0,
-            0.0,                    0.0,
-            0.0,                    0.0]
+EPS = np.finfo(float).eps
+
+# Probability vector (20 age bins, 5yr each) that a rubella infection will
+# result in a case of congenital rubella syndrome (CRS).
+crs_prob_vec  = np.ones(20)           # Start with uniform, unity probability
+crs_prob_vec  = crs_prob_vec * 0.5    # Probability female
+
+
+fe_frtr_dhs   = [  0,   0,   9, 148,  # DHS fertility rate (FE_FRTR_W)
+                 379, 388, 292, 331,  # (births per 1k women per 3yrs)
+                  98,   9,   0,   0,
+                   0,   0,   0,   0,
+                   0,   0,   0,   0]
+
+
+fe_frtr_dhs   = np.array(fe_frtr_dhs)/1000.0  # Births, per-woman, per 3yrs
+fe_frtr_dhs   = fe_frtr_dhs/3.0               # Births, per-woman, per yr
+fe_bak        = fe_frtr_dhs                   
+fe_frtr_dhs   = fe_frtr_dhs*(9.0/12.0)        # Fraction pregnant, per-woman, per-year
+fe_frtr_dhs   = fe_frtr_dhs*(0.85*13/39 + 0.50*13/39 + 0.50*4/39)
+                                              # Probability of CRS during pregnancy
+
+crs_prob_vec  = crs_prob_vec * fe_frtr_dhs
 
 #*******************************************************************************
 
@@ -53,8 +64,6 @@ inf_mat = np.zeros((nsims,int(ntstp/365),20))
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   inf_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['inf_data'])
-
-
 
 
 pyr_mat_avg = np.mean(pyr_mat,axis=0)
@@ -120,7 +129,7 @@ axs01.set_xticklabels(ticlab)
 for ri_val in ri_lev:
   gidx        = (ri_vec==ri_val)
   inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
-  crs_mat     = inf_mat_avg*conv_vec
+  crs_mat     = inf_mat_avg*crs_prob_vec
   ydat        = np.sum(crs_mat,axis=1)/birth_vec*1e3
   xdat        = np.arange(0,50) + 0.5
 
@@ -131,7 +140,5 @@ axs01.legend()
 plt.tight_layout()
 plt.savefig('fig_inf_set_01.png')
 plt.close()
-
-
 
 #*******************************************************************************
