@@ -10,7 +10,7 @@ From: fedora:35
 
     dnf clean all
 
-    pip3 install pip -U
+    pip3 install pip              --upgrade
     pip3 install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript

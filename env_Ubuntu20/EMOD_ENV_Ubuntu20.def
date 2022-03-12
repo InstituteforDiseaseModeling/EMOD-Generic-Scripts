@@ -14,7 +14,7 @@ From: ubuntu:20.04
     apt-get install python3-pip -y
     apt-get install mpich -y
 
-    pip3 install pip -U
+    pip3 install pip              --upgrade
     pip3 install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript

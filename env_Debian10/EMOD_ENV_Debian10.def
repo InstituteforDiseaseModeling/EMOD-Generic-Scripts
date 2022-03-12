@@ -6,11 +6,12 @@ From: debian:10
 
     apt-get update
     apt-get upgrade -y
+
     apt-get install python3 -y
     apt-get install python3-pip -y
     apt-get install mpich -y
 
-    pip3 install pip -U
+    pip3 install pip              --upgrade
     pip3 install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript
