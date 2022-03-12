@@ -7,7 +7,7 @@ From: almalinux:8.5
     dnf clean all
 
     python3 -m pip install pip              --upgrade
-    python3 -m pip install emod-api==1.22.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+    python3 -m pip install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript
 
