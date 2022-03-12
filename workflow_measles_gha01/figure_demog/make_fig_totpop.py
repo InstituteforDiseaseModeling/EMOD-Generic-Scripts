@@ -47,15 +47,17 @@ axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
 axs01.set_xlabel('Year', fontsize=14)
-axs01.set_ylabel('GHA Population (M)', fontsize=14)
+axs01.set_ylabel('Ghana - Total Population (M)', fontsize=14)
 
-#axs01.set_xlim( 0, 30)
-axs01.set_ylim(22, 32)
+axs01.set_xlim( 2007.5, 2027)
+axs01.set_ylim(   22,     38)
 
-#ticloc = [0, 5, 10, 15, 20, 25, 30]
-#ticlab = ['1950', '1955', '1960', '1965', '1970', '1975', '1980']
-#axs01.set_xticks(ticks=ticloc)
-#axs01.set_xticklabels(ticlab,fontsize=14)
+ticloc = np.arange(2008, 2028)
+ticlab = ['2008','','','','2012','','','',
+          '2016','','','','2020','','','',
+          '2024','','','']
+axs01.set_xticks(ticks=ticloc)
+axs01.set_xticklabels(ticlab,fontsize=14)
 
 axs01.tick_params(axis='x', labelsize=14)
 axs01.tick_params(axis='y', labelsize=14)

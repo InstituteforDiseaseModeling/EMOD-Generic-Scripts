@@ -97,7 +97,7 @@ axs01.set_yticklabels(ticlaby)
 for k1 in ticlocx:
   axs01.text(k1+0.5,-0.04*YMAX,str(k1),fontsize=11,ha='center')
 
-
+plt.tight_layout()
 plt.savefig('fig_clouds_01.png')
 plt.close()
 

@@ -16,6 +16,7 @@ import numpy as np
 
 # Paths
 PATH_TEMP  = os.path.abspath('temp_dir')
+DOCK_PACK  = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
 
 
 
@@ -30,12 +31,13 @@ def get_sim_files():
                       environment  = 'Calculon')
 
   # Creates a single docker work item to collect the specified files and download
-  dwi_obj = DownloadWorkItem(name                         = 'RetreiveFiles',
+  dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
                              related_experiments          = [exp_id],
                              file_patterns                = ['parsed_out.json',
                                                              'calval_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',
-                             output_path                  = PATH_TEMP)
+                             output_path                  = PATH_TEMP,
+                             docker_image                 = DOCK_PACK)
 
   # Wait until everything is downloaded
   dwi_obj.run(wait_on_done=True, platform=plat_obj)

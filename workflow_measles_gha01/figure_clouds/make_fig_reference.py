@@ -67,7 +67,6 @@ axs01.text(sia03[0]+0.2,0.9*YMAX,'SIA',fontsize=13)
 
 plt.tight_layout()
 plt.savefig('fig_reference_01.png')
-
 plt.close()
 
 #*******************************************************************************

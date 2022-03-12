@@ -117,6 +117,7 @@ cbar_handle.set_ticklabels(ticlab)
 cbar_handle.set_label('Cumulative Infections',fontsize=14,labelpad=10)
 cbar_handle.ax.tick_params(labelsize=14)
 
+plt.tight_layout()
 plt.savefig('fig_averted_01.png')
 plt.close()
 
