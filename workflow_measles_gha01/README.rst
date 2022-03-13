@@ -2,4 +2,6 @@
 workflow_measles_gha01
 ======================
 
-Simulations examining RDT impact using Ghana as an example context.
+Simulations examining RDT impact using Ghana as an example context. Work
+presented as part of Feb 2022 co-chair.
+
