@@ -13,6 +13,7 @@ Important features include:
 
 - Multi-node network used to represent the country of Ghana at the 10km scale.
 - Network infectivity contagion transfer between nodes.
+- Spatially varying rates of routine immunization.
 - Acquisition-transmission covariance.
 - Pre-specified calendar of supplemental immunization activities (SIAs).
 - Maternally derived immunity.
