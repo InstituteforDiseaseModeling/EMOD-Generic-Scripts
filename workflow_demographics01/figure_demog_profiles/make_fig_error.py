@@ -89,7 +89,7 @@ for k0 in range(len(demog_lev)):
   pop_dat     = np.sum(pyr_mat_avg,axis=1)
   pop_dat_err = np.sum(pyr_mat_std,axis=1)
 
-  calib_set   = calib_vec[gidx]
+  calib_set   = -calib_vec[gidx]
 
   ref_pop     = 100000*yref/yref[0]
 
