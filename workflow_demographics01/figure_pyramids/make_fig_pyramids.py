@@ -143,6 +143,4 @@ for k0 in range(len(demog_lev)):
   plt.savefig('fig_pyr_set{:02d}_01.png'.format(k0+1))
   plt.close()
 
-
-
 #*******************************************************************************

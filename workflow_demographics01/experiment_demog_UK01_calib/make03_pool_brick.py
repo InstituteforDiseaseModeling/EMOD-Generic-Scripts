@@ -16,6 +16,7 @@ import numpy as np
 
 # Paths
 PATH_TEMP  = os.path.abspath('temp_dir')
+DOCK_PACK  = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
 
 
 
@@ -30,11 +31,13 @@ def get_sim_files():
                       environment  = 'Calculon')
 
   # Creates a single docker work item to collect the specified files and download
-  dwi_obj = DownloadWorkItem(name                         = 'RetreiveFiles',
+  dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
                              related_experiments          = [exp_id],
-                             file_patterns                = ['calval_out.json'],
+                             file_patterns                = ['parsed_out.json',
+                                                             'calval_out.json'],
                              simulation_prefix_format_str = 'temp/{simulation.id}',
-                             output_path                  = PATH_TEMP)
+                             output_path                  = PATH_TEMP,
+                             docker_image                 = DOCK_PACK)
 
   # Wait until everything is downloaded
   dwi_obj.run(wait_on_done=True, platform=plat_obj)
@@ -49,10 +52,17 @@ def proc_files():
   # Aggregates all the data from downloaded files into a single dictionary
   for (root_path, dirs_list, files_list) in os.walk(PATH_TEMP):
     for file_name in files_list:
+      if(file_name == 'parsed_out.json'):
+        with open(os.path.join(root_path,file_name)) as fid01:
+          sim_dict = json.load(fid01)
+        merged_data.update(sim_dict)
       if(file_name == 'calval_out.json'):
         with open(os.path.join(root_path,file_name)) as fid01:
           sim_dict = json.load(fid01)
         merged_calib.update(sim_dict)
+
+  with open('data_brick.json','w') as fid01:
+    json.dump(merged_data,fid01)
 
   with open('data_calib.json','w') as fid01:
     json.dump(merged_calib,fid01)

@@ -16,8 +16,8 @@ from idmtools.core.id_file                                    import  write_id_f
 # Paths
 PATH_PYTHON   = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA     = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Debian10', 'EMOD_ENV.id'))
-PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Debian10', 'EMOD_EXE.id'))
+PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Debian11', 'EMOD_ENV.id'))
+PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Debian11', 'EMOD_EXE.id'))
 PATH_LOCAL    = os.path.abspath(os.path.join('..', '..', 'local_python'))
 
 DOCK_PACK     = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
@@ -27,8 +27,8 @@ DOCK_PACK     = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worke
 def run_the_calibration():
 
   # Arguments to calibration
-  param_calib = {'NUM_SIMS':                                     700 ,
-                 'NUM_ITER':                                      16 ,
+  param_calib = {'NUM_SIMS':                                    1000 ,
+                 'NUM_ITER':                                       8 ,
                  'VAR_NAMES':                   [ 'log_mort_mult01',
                                                   'log_mort_mult02',
                                                   'log_mort_mult03'] ,
@@ -62,7 +62,7 @@ def run_the_calibration():
   ac_obj.add_asset('param_calib.json')
 
   # Es liebten alle Frauen
-  wi_obj = SSMTWorkItem(name             = 'Calibd_EMOD',
+  wi_obj = SSMTWorkItem(name             = 'Calibd_EMOD_DemogExample-UK01',
                         task             = task_obj,
                         transient_assets = ac_obj,
                         docker_image     = DOCK_PACK)
