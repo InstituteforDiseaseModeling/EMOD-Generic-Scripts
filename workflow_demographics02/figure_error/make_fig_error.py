@@ -86,7 +86,7 @@ y_ref = tpop_dat[yidx]
 axs01.plot(chart_yrs, 100*(y_sim-y_ref)/y_ref, c='k', marker='.', ms=14)
 
 plt.tight_layout()
-plt.savefig('fig_error_tpop_01.png')
+plt.savefig('fig_err_{:s}_01.png'.format(pop_dat_str))
 plt.close()
 
 

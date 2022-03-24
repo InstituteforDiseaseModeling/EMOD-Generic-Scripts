@@ -103,16 +103,24 @@ def demographicsBuilder():
   mortvecs   = 1.0-np.power(1.0-diff_ratio,1.0/pow_vec)
   tot_pop    = np.sum(pop_mat,axis=0)
 
-  npop_mod   = pop_mat[0,1:]#/(np.power(1-mortvecs[0,:],365.0*2.5))
-
-  brate_vec  = np.round(npop_mod/tot_pop[:-1]/5.0*1000.0,1)
+  brate_vec  = np.round(pop_mat[0,1:]/tot_pop[:-1]/5.0*1000.0,1)
   brate_val  = np.interp(year_init, year_vec[:-1], brate_vec)
 
   yrs_off    = year_vec[:-1]-year_init
   yrs_dex    = (yrs_off>0)
 
-  gdata.brate_mult_x = [0.0] + (365.0*yrs_off[yrs_dex]).tolist()
-  gdata.brate_mult_y = [1.0] + (brate_vec[yrs_dex]/brate_val).tolist()
+  brmultx_01 = np.array([0.0] + (365.0*yrs_off[yrs_dex]).tolist())
+  brmulty_01 = np.array([1.0] + (brate_vec[yrs_dex]/brate_val).tolist())
+  brmultx_02 = np.zeros(2*len(brmultx_01)-1)
+  brmulty_02 = np.zeros(2*len(brmulty_01)-1)
+
+  brmultx_02[0::2] = brmultx_01[0:]
+  brmulty_02[0::2] = brmulty_01[0:]
+  brmultx_02[1::2] = brmultx_01[1:]-0.5
+  brmulty_02[1::2] = brmulty_01[0:-1]
+
+  gdata.brate_mult_x = brmultx_02.tolist()
+  gdata.brate_mult_y = brmulty_02.tolist() 
 
   age_y        = pop_age_days
   age_init_cdf = np.cumsum(pop_init[:-1])/np.sum(pop_init)
