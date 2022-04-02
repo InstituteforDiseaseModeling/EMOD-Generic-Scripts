@@ -20,8 +20,8 @@ def make_work():
                       environment  = 'Calculon')
 
   # Creates a single work item to create the image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_ENV_Ubuntu20',
-                                      definition_file  = 'EMOD_ENV_Ubuntu20.def',
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_ENV_Ubuntu22',
+                                      definition_file  = 'EMOD_ENV_Ubuntu22.def',
                                       force            = True)
 
   # Wait until the image is built
