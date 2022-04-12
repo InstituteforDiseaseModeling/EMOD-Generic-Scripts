@@ -36,6 +36,7 @@ pop_age_days = [     0,    1825,    3650,    5475,    7300,    9125,
 def demographicsBuilder():
 
   BASE_YEAR        = gdata.base_year
+  MAX_DAILY_MORT   = 0.01
 
   DEMOG_FILENAME   = 'demographics.json'
   PATH_OVERLAY     = 'demog_overlay'
@@ -56,10 +57,9 @@ def demographicsBuilder():
   fname_pop = os.path.join('Assets','data','pop_dat_{:s}.csv'.format(POP_DAT_STR))
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
-  year_vec  = pop_input[0,:] - BASE_YEAR
-  year_init = START_YEAR     - BASE_YEAR
-  pop_mat   = pop_input[1:,:]
-  pop_mat   = np.append(pop_mat, np.zeros((1,year_vec.shape[0])),axis=0)
+  year_vec  = pop_input[0,:]  - BASE_YEAR
+  year_init = START_YEAR      - BASE_YEAR
+  pop_mat   = pop_input[1:,:] + 0.1
 
   pop_init  = [np.interp(year_init, year_vec, pop_mat[idx,:]) for idx in range(pop_mat.shape[0])]
 
@@ -99,11 +99,16 @@ def demographicsBuilder():
   # ***** Calculate vital dynamics ****
 
   diff_ratio = (pop_mat[:-1,:-1]-pop_mat[1:,1:])/pop_mat[:-1,:-1]
-  pow_vec    = 365.0*np.diff(year_vec)
+  t_delta    = np.diff(year_vec)
+  pow_vec    = 365.0*t_delta
   mortvecs   = 1.0-np.power(1.0-diff_ratio,1.0/pow_vec)
+  mortvecs   = np.minimum(mortvecs, MAX_DAILY_MORT)
+  mortvecs   = np.maximum(mortvecs,            0.0)
   tot_pop    = np.sum(pop_mat,axis=0)
+  tpop_mid   = (tot_pop[:-1]+tot_pop[1:])/2.0
+  pop_corr   = np.exp(-mortvecs[0,:]*pow_vec/2.0)
 
-  brate_vec  = np.round(pop_mat[0,1:]/tot_pop[:-1]/5.0*1000.0,1)
+  brate_vec  = np.round(pop_mat[0,1:]/tpop_mid/t_delta*1000.0,1)/pop_corr
   brate_val  = np.interp(year_init, year_vec[:-1], brate_vec)
 
   yrs_off    = year_vec[:-1]-year_init
@@ -145,7 +150,7 @@ def demographicsBuilder():
   mort_mat[1:-2:2,0::2] = mortvecs
   mort_mat[0:-2:2,1::2] = mortvecs[:,:-1]
   mort_mat[1:-2:2,1::2] = mortvecs[:,:-1]
-  mort_mat[-2:   , :]   = 1.0
+  mort_mat[-2:   , :]   = MAX_DAILY_MORT
 
   # Vital dynamics overlays
   vd_over_dict['Defaults']  =  { 'IndividualAttributes':         dict() ,

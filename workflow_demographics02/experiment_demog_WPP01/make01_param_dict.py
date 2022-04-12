@@ -49,7 +49,7 @@ param_dict['EXP_CONSTANT']['num_agents']           =  5000
 
 # Years for simulation (1950 <= yrs <= 2090)
 param_dict['EXP_CONSTANT']['start_year']           =  1950
-param_dict['EXP_CONSTANT']['num_years']            =    50
+param_dict['EXP_CONSTANT']['num_years']            =    70
 
 # Country code
 param_dict['EXP_CONSTANT']['pop_dat_file']         =  'ETH'

@@ -132,7 +132,7 @@ for k1 in range(num_charts):
   pop_dat     = pop_mat_dat[:,gidx]
   tpop        = np.sum(pop_dat)
 
-  pop_dat_n     = 100*pop_dat/tpop
+  pop_dat_n   = 100*(pop_dat[:-1]/tpop)
 
   axs01.barh(ydat[1:],  pop_dat_n/2.0, height=4.75, color=CF)
   axs01.barh(ydat[1:], -pop_dat_n/2.0, height=4.75, color=CM)
