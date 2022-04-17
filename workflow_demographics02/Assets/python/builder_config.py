@@ -74,6 +74,7 @@ def update_config_obj(config):
   config.parameters.Individual_Sampling_Type                       = 'FIXED_SAMPLING'
   config.parameters.Base_Individual_Sample_Rate                    = INIT_AGENT/INIT_POP
 
+
   # ***** Demographic parameters *****
   config.parameters.Enable_Demographics_Builtin                    =    0
 
@@ -85,7 +86,6 @@ def update_config_obj(config):
   config.parameters.Age_Initialization_Distribution_Type           = 'DISTRIBUTION_COMPLEX'
   config.parameters.Enable_Natural_Mortality                       =    1
   config.parameters.Death_Rate_Dependence                          = 'NONDISEASE_MORTALITY_BY_YEAR_AND_AGE_FOR_EACH_GENDER'
-
 
   config.parameters.Demographics_Filenames                         = gdata.demog_files
 
