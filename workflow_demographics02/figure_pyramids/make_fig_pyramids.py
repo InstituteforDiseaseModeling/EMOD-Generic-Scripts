@@ -16,9 +16,6 @@ DIRNAMES = ['experiment_demog_WPP_estimates01',
             'experiment_demog_WPP_projections01']
 
 
-DIRNAME = 'experiment_demog_WPP01'
-
-
 CM    = np.array([ 70,130,180])/255
 CF    = np.array([238,121,137])/255
 
