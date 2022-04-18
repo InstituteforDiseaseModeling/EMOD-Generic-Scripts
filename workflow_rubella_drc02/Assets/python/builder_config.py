@@ -17,23 +17,25 @@ from emod_api.config import default_from_schema_no_validation as dfs
 # Function for setting config parameters 
 def update_config_obj(config):
 
-  TIME_START     = gdata.start_time
   MAX_CLOCK      = gdata.max_clock
+  INIT_POP       = gdata.init_pop
+  BASE_YEAR      = gdata.base_year
+  START_YEAR     = gdata.start_year
 
 
   # ***** Get variables for this simulation *****
   RUN_NUM        = gdata.var_params['run_number']
   TIME_DELTA     = gdata.var_params['num_tsteps']
   R0             = gdata.var_params['R0']
+  INIT_AGENT     = gdata.var_params['num_agents']
 
 
-
-  # ***** Random number seed ****
+  # ***** Random number seed *****
   config.parameters.Run_Number                                     = RUN_NUM
 
 
   # ***** Time *****
-  config.parameters.Start_Time                                     = TIME_START
+  config.parameters.Start_Time                                     = 365.0*(START_YEAR-BASE_YEAR)
   config.parameters.Simulation_Duration                            = TIME_DELTA
 
   config.parameters.Enable_Termination_On_Total_Wall_Time          =   1
@@ -80,18 +82,17 @@ def update_config_obj(config):
   config.parameters.Enable_Interventions                           =    1
   config.parameters.Campaign_Filename                              = gdata.camp_file
 
-  # ***** Infectivity *****
-  config.parameters.Enable_Acquisition_Heterogeneity               =    1
-  config.parameters.Acquisition_Transmission_Correlation           =    0.0
 
-  config.parameters.Enable_Infection_Rate_Overdispersion           =    1
+  # ***** Infectivity *****
+  config.parameters.Enable_Acquisition_Heterogeneity               =    0
+  config.parameters.Enable_Infection_Rate_Overdispersion           =    0
   config.parameters.Enable_Infectivity_Reservoir                   =    1
 
 
   # ***** Adapted sampling *****
   config.parameters.Individual_Sampling_Type                       = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
   config.parameters.Min_Node_Population_Samples                    =  20.0
-  config.parameters.Base_Individual_Sample_Rate                    =   1.0
+  config.parameters.Base_Individual_Sample_Rate                    = INIT_AGENT/INIT_POP
   config.parameters.Relative_Sample_Rate_Immune                    =   0.01
   config.parameters.Immune_Threshold_For_Downsampling              =   1.0e-5
   config.parameters.Immune_Downsample_Min_Age                      = 365.0

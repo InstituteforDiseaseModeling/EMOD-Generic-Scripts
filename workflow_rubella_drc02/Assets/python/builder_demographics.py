@@ -19,8 +19,6 @@ from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, 
 
 #********************************************************************************
 
-EPS = np.finfo(float).eps
-
 mr_xval      = [     0.6,  1829.5,  1829.6,  3659.5,  3659.6,  5489.5,
                   5489.6,  7289.5,  7289.6,  9119.5,  9119.6, 10949.5,
                  10949.6, 12779.5, 12779.6, 14609.5, 14609.6, 16439.5,
@@ -38,32 +36,48 @@ pop_age_days = [     0,    1825,    3650,    5475,    7300,    9125,
 
 def demographicsBuilder():
 
-  DEMOG_FILENAME = 'demographics.json'
-  SETTING        = 'AFRO:DRCONGO'
+  BASE_YEAR        = gdata.base_year
+  START_YEAR       = gdata.start_year
+  MAX_DAILY_MORT   = 0.01
 
-  PATH_OVERLAY = 'demog_overlay'
+  DEMOG_FILENAME   = 'demographics.json'
+  PATH_OVERLAY     = 'demog_overlay'
+  SETTING          = 'AFRO:DRCONGO'
+
+  gdata.demog_files.append(DEMOG_FILENAME)
+
   if(not os.path.exists(PATH_OVERLAY)):
     os.mkdir(PATH_OVERLAY)
 
 
   # ***** Get variables for this simulation *****
   R0           = gdata.var_params['R0']
-  INIT_AGENT   = gdata.var_params['num_agents']
   LOG10_IMP    = gdata.var_params['log10_import_mult']
   POP_DAT_STR  = gdata.var_params['pop_dat_file']
 
 
+  # ***** Load reference data *****
+  fname_pop = os.path.join('Assets','data','pop_dat_{:s}.csv'.format(POP_DAT_STR))
+  pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
+
+  year_vec  = pop_input[0,:]  - BASE_YEAR
+  year_init = START_YEAR      - BASE_YEAR
+  pop_mat   = pop_input[1:,:] + 0.1
+
+  pop_init  = [np.interp(year_init, year_vec, pop_mat[idx,:]) for idx in range(pop_mat.shape[0])]
+
+
   # ***** Populate nodes in primary file *****
   node_list = list()
-  imp_rate  = 0.03229*R0/6.0*INIT_AGENT/200000.0
 
-  init_pop   = int(INIT_AGENT)
-  node_id    = 1
-  node_name  = SETTING+':A{:05d}'.format(node_id)
+  gdata.init_pop  = int(np.sum(pop_init))
+  node_id         = 1
+  node_name       = SETTING+':A{:05d}'.format(node_id)
+  imp_rate        = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
 
   node_obj = Node(lat         = 0.0,
                   lon         = 0.0,
-                  pop         = init_pop,
+                  pop         = gdata.init_pop,
                   name        = node_name,
                   forced_id   = node_id,
                   area        = 0.0)
@@ -80,58 +94,68 @@ def demographicsBuilder():
 
   demog_obj.raw['Defaults']['NodeAttributes'].clear()
   nadict = dict()
-  nadict['InfectivityOverdispersion']        =   0.0
-  nadict['InfectivityMultiplier']            =   1.0
   demog_obj.raw['Defaults']['NodeAttributes'].update(nadict)
 
   demog_obj.raw['Defaults']['IndividualAttributes'].clear()
   iadict = dict()
-  iadict['AcquisitionHeterogeneityVariance'] =   0.0
   demog_obj.raw['Defaults']['IndividualAttributes'].update(iadict)
 
 
   # ***** Calculate vital dynamics ****
 
-  fname_pop = os.path.join('Assets','data','pop_data_{:s}.csv'.format(POP_DAT_STR))
-  pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
-
-  year_vec  = pop_input[0,:]
-  pop_mat   = pop_input[1:,:]
-  pop_mat   = np.append(pop_mat, np.zeros((1,year_vec.shape[0])),axis=0)
-
-  diff_ratio = pop_mat[1:,1:]/(pop_mat[:-1,:-1]+EPS)
-  pow_vec    = 365.0*np.diff(year_vec)
-  mortvecs   = 1.0-np.power(diff_ratio,1.0/pow_vec)
+  diff_ratio = (pop_mat[:-1,:-1]-pop_mat[1:,1:])/pop_mat[:-1,:-1]
+  t_delta    = np.diff(year_vec)
+  pow_vec    = 365.0*t_delta
+  mortvecs   = 1.0-np.power(1.0-diff_ratio,1.0/pow_vec)
+  mortvecs   = np.minimum(mortvecs, MAX_DAILY_MORT)
+  mortvecs   = np.maximum(mortvecs,            0.0)
   tot_pop    = np.sum(pop_mat,axis=0)
+  tpop_mid   = (tot_pop[:-1]+tot_pop[1:])/2.0
+  pop_corr   = np.exp(-mortvecs[0,:]*pow_vec/2.0)
 
-  brate_vec  = np.round(pop_mat[0,1:]/tot_pop[:-1]/5.0*1000.0,1)
-  brate_val  = brate_vec[0]
+  brate_vec  = np.round(pop_mat[0,1:]/tpop_mid/t_delta*1000.0,1)/pop_corr
+  brate_val  = np.interp(year_init, year_vec[:-1], brate_vec)
 
-  gdata.brate_mult_x = year_vec[:-1].tolist()
-  gdata.brate_mult_y = (brate_vec/brate_val).tolist()
+  yrs_off    = year_vec[:-1]-year_init
+  yrs_dex    = (yrs_off>0)
+
+  brmultx_01 = np.array([0.0] + (365.0*yrs_off[yrs_dex]).tolist())
+  brmulty_01 = np.array([1.0] + (brate_vec[yrs_dex]/brate_val).tolist())
+  brmultx_02 = np.zeros(2*len(brmultx_01)-1)
+  brmulty_02 = np.zeros(2*len(brmulty_01)-1)
+
+  brmultx_02[0::2] = brmultx_01[0:]
+  brmulty_02[0::2] = brmulty_01[0:]
+  brmultx_02[1::2] = brmultx_01[1:]-0.5
+  brmulty_02[1::2] = brmulty_01[0:-1]
+
+  gdata.brate_mult_x = brmultx_02.tolist()
+  gdata.brate_mult_y = brmulty_02.tolist() 
 
   age_y        = pop_age_days
-  age_init_cdf = np.cumsum(pop_mat[:-1,0])/np.sum(pop_mat[:,0])
+  age_init_cdf = np.cumsum(pop_init[:-1])/np.sum(pop_init)
   age_x        = [0] + age_init_cdf.tolist()
-
-  mortvecs_alt = np.copy(mortvecs)
-  for k1 in range(mortvecs_alt.shape[0]-1):
-    mortvecs_alt[k1,:] = np.power(mortvecs_alt[k1,:],2.0)/mortvecs_alt[k1+1,:]
 
 
   # ***** Write vital dynamics and susceptibility initialization overlays *****
 
   vd_over_dict = dict()
 
-  birth_rate   = brate_val/1000.0/365.0
-  mort_vec_X   = mr_xval
-  mort_year    = year_vec[:-1].tolist()
+  birth_rate      = brate_val/365.0/1000.0
+  mort_vec_X      = mr_xval
+  mort_year       = np.zeros(2*year_vec.shape[0]-3)
+
+  mort_year[0::2] = year_vec[0:-1]
+  mort_year[1::2] = year_vec[1:-1]-1e-4
+  mort_year       = mort_year.tolist()
 
   mort_mat = np.zeros((len(mort_vec_X),len(mort_year)))
 
-  mort_mat[0:-2:2,:] = mortvecs_alt
-  mort_mat[1:-2:2,:] = mortvecs_alt
-  mort_mat[-2:   ,:] = 1.0
+  mort_mat[0:-2:2,0::2] = mortvecs
+  mort_mat[1:-2:2,0::2] = mortvecs
+  mort_mat[0:-2:2,1::2] = mortvecs[:,:-1]
+  mort_mat[1:-2:2,1::2] = mortvecs[:,:-1]
+  mort_mat[-2:   , :]   = MAX_DAILY_MORT
 
   # Vital dynamics overlays
   vd_over_dict['Defaults']  =  { 'IndividualAttributes':         dict() ,
