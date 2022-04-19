@@ -13,7 +13,7 @@ EMOD-Generic provides a set of example workflows. Please consider contributing y
     examples/workflow_demographics02
     examples/workflow_measles_gha01
     examples/workflow_network01
-    examples/workflow_polio01
+    examples/workflow_polio_nga01
     examples/workflow_rubella_drc01
     examples/workflow_rubella_drc02
     examples/workflow_transtree01
