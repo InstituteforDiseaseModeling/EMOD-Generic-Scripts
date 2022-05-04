@@ -11,9 +11,13 @@ import global_data as gdata
 import numpy                    as    np
 import scipy.optimize           as    opt
 
-from refdat_population_100km       import data_dict   as dict_pop
-from refdat_area_100km             import data_dict   as dict_area
-from refdat_location_100km         import data_dict   as dict_longlat
+from refdat_population_admin02     import data_dict   as dict_pop_admin02
+from refdat_area_admin02           import data_dict   as dict_area_admin02
+from refdat_location_admin02       import data_dict   as dict_longlat_admin02
+
+from refdat_population_100km       import data_dict   as dict_pop_100km
+from refdat_area_100km             import data_dict   as dict_area_100km
+from refdat_location_100km         import data_dict   as dict_longlat_100km
 
 from refdat_alias                  import data_dict   as dict_alias
 from refdat_birthrate              import data_dict   as dict_birth
@@ -27,8 +31,6 @@ from emod_api.demographics.Node                    import Node
 from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, \
                                                           NodeAttributes
 
-from emod_api.demographics          import DemographicsTemplates as DT
-
 #********************************************************************************
 
 def demographicsBuilder():
@@ -39,6 +41,8 @@ def demographicsBuilder():
 
 
   # ***** Get variables for this simulation *****
+  SUB_LGA      = True
+
   TIME_START   = gdata.var_params['start_time']
   PROC_DISPER  = gdata.var_params['proc_overdispersion']
   IND_RISK_VAR = gdata.var_params['ind_variance_risk']
@@ -53,14 +57,30 @@ def demographicsBuilder():
 
   # ***** Populate nodes in primary file *****
 
-  # Add nodes
   node_list = list()
+
+  if(SUB_LGA):
+    dict_pop     = dict_pop_100km
+    dict_area    = dict_area_100km
+    dict_longlat = dict_longlat_100km
+  else:
+    dict_pop     = dict_pop_admin02
+    dict_area    = dict_area_admin02
+    dict_longlat = dict_longlat_admin02
+
+  # Remove location aliases from geography list
+  for rname in GEOG_LIST:
+    if(rname in dict_alias):
+      for rname_val in dict_alias[rname]:
+        GEOG_LIST.append(rname_val)
+
+  # Add nodes
   node_id   = 0
   ipop_time = dict()
   imp_case  = np.power(10.0, LOG10_IMP)
 
   for loc_name in dict_pop:
-    if(any([loc_name.startswith(val) for val in GEOG_LIST])):
+    if(any([loc_name.startswith(val+':') or val == loc_name for val in GEOG_LIST])):
       ipop_time[loc_name] = dict_pop[loc_name][1] + 0.5
       node_id   = node_id + 1
 
@@ -72,6 +92,7 @@ def demographicsBuilder():
                       area             = dict_area[loc_name])
 
       imp_rate = imp_case*dict_pop[loc_name][0]/1.0e5
+
       node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate}
 
       node_list.append(node_obj)
@@ -79,11 +100,9 @@ def demographicsBuilder():
 
   # ***** Write node name bookkeeping *****
 
-  adm02_list = set([val.rsplit(':',1)[0] for val in list(dict_pop.keys())])
-
   nname_dict    = {node_obj.name: node_obj.forced_id for node_obj in node_list}
-  node_rep_list = sorted([nname for nname in adm02_list if
-                                            any([nname.startswith(val) for val in GEOG_LIST])])
+  node_rep_list = sorted([nname for nname in dict_pop_admin02.keys() if
+                                            any([nname.startswith(val+':') or val == nname for val in GEOG_LIST])])
   rep_groups    = {nrep:[nname_dict[val] for val  in nname_dict.keys() if val.startswith(nrep+':') or val == nrep]
                                          for nrep in node_rep_list}
 

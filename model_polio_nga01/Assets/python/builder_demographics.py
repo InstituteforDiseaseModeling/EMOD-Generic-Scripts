@@ -37,6 +37,7 @@ from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, 
 def demographicsBuilder():
 
   DEMOG_FILENAME = 'demographics.json'
+  REF_NAME       = 'polio-custom'
   GEOG_LIST      = ['AFRO:NIGERIA']
 
 
@@ -75,12 +76,18 @@ def demographicsBuilder():
     dict_area    = dict_area_admin02
     dict_longlat = dict_longlat_admin02
 
+  # Remove location aliases from geography list
+  for rname in GEOG_LIST:
+    if(rname in dict_alias):
+      for rname_val in dict_alias[rname]:
+        GEOG_LIST.append(rname_val)
+
   # Add nodes
   node_id   = 0
   ipop_time = dict()
 
   for loc_name in dict_pop:
-    if(any([loc_name.startswith(val) for val in GEOG_LIST])):
+    if(any([loc_name.startswith(val+':') or val == loc_name for val in GEOG_LIST])):
       ipop_time[loc_name] = dict_pop[loc_name][1] + 0.5
       node_id   = node_id + 1
 
@@ -144,7 +151,7 @@ def demographicsBuilder():
 
   nname_dict     = {node_obj.name: node_obj.forced_id for node_obj in node_list}
   node_rep_list  = sorted([nname for nname in dict_pop_admin02.keys() if
-                                             any([nname.startswith(val) for val in GEOG_LIST])])
+                                             any([nname.startswith(val+':') or val == nname for val in GEOG_LIST])])
   rep_groups     = {nrep:[nname_dict[val] for val  in nname_dict.keys() if val.startswith(nrep+':') or val == nrep]
                                           for nrep in node_rep_list}
 
@@ -171,8 +178,7 @@ def demographicsBuilder():
 
   # ***** Create primary file *****
 
-  ref_name   = 'polio-custom'
-  demog_obj  = Demographics(nodes=node_list, idref=ref_name)
+  demog_obj  = Demographics(nodes=node_list, idref=REF_NAME)
 
   # Save filename to global data for use in other functions
   gdata.demog_files.append(DEMOG_FILENAME)
