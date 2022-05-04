@@ -2,18 +2,18 @@
 Examples
 ========
 
-EMOD-Generic provides a set of example workflows. Please consider contributing your own analyses.
+EMOD-Generic provides a set of example models. Please consider contributing your own analyses.
 
 .. toctree::
     :maxdepth: 1
 
-    examples/workflow_covariance01
-    examples/workflow_covid01
-    examples/workflow_demographics01
-    examples/workflow_demographics02
-    examples/workflow_measles_gha01
-    examples/workflow_network01
-    examples/workflow_polio_nga01
-    examples/workflow_rubella_drc01
-    examples/workflow_rubella_drc02
-    examples/workflow_transtree01
+    examples/model_covariance01
+    examples/model_covid01
+    examples/model_demographics01
+    examples/model_demographics02
+    examples/model_measles_gha01
+    examples/model_network01
+    examples/model_polio_nga01
+    examples/model_rubella_drc01
+    examples/model_rubella_drc02
+    examples/model_transtree01

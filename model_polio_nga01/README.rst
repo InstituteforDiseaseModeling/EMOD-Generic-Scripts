@@ -1,6 +1,6 @@
-================
-workflow_polio01
-================
+=============
+model_polio01
+=============
 
 Demonstration simulations for poliovirus type-2 transmission in Nigeria. The
 model structure was used to examine the impact Sabin vaccine reversion dynamics

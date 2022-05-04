@@ -1,6 +1,6 @@
-==================
-workflow_network01
-==================
+===============
+model_network01
+===============
 
 This example demonstrates the implementation of the spread of infectivity on a
 network. Each simulation has a default network of 625 nodes (25-by-25 grid)

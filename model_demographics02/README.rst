@@ -1,6 +1,6 @@
-=======================
-workflow_demographics02
-=======================
+====================
+model_demographics02
+====================
 
 This example demonstrates the implementation of vital dynamics (births, deaths,
 and aging) to reproduce data from UN World Population Prospects between the

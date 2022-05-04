@@ -1,6 +1,6 @@
-=======================
-workflow_demographics01
-=======================
+====================
+model_demographics01
+====================
 
 This example demonstrates the implementation of vital dynamics (births, deaths,
 and aging) to reproduce the population pyramid of the United Kingdom over the

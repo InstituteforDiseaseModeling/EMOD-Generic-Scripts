@@ -1,6 +1,6 @@
-======================
-workflow_rubella_drc01
-======================
+===================
+model_rubella_drc01
+===================
 
 Simulations that produce Figure 5 in the manuscript "Examination of scenarios
 introducing rubella vaccine in the Democratic Republic of the Congo." These
