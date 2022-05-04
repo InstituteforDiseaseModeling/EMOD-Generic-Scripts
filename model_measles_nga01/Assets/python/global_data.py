@@ -9,6 +9,9 @@ sim_index       = 0
 var_params      = dict()
 schema_path     = 'Assets/schema.json'
 
+start_time      = 365.0*(2008-1900)
+base_year       = 1900
+
 # Filename params
 demog_files     = list()
 camp_file       = None

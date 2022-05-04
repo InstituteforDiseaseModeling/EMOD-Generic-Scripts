@@ -11,9 +11,13 @@ import global_data as gdata
 import numpy                    as    np
 import scipy.optimize           as    opt
 
-from refdat_population_100km       import data_dict   as dict_pop
-from refdat_area_100km             import data_dict   as dict_area
-from refdat_location_100km         import data_dict   as dict_longlat
+from refdat_population_admin02     import data_dict   as dict_pop_admin02
+from refdat_area_admin02           import data_dict   as dict_area_admin02
+from refdat_location_admin02       import data_dict   as dict_longlat_admin02
+
+from refdat_population_100km       import data_dict   as dict_pop_100km
+from refdat_area_100km             import data_dict   as dict_area_100km
+from refdat_location_100km         import data_dict   as dict_longlat_100km
 
 from refdat_alias                  import data_dict   as dict_alias
 from refdat_birthrate              import data_dict   as dict_birth
@@ -39,7 +43,7 @@ def demographicsBuilder():
 
 
   # ***** Get variables for this simulation *****
-  TIME_START   = gdata.var_params['start_time']
+  TIME_START   = gdata.start_time
   PROC_DISPER  = gdata.var_params['proc_overdispersion']
 
   NODE_R0_VAR  = gdata.var_params['node_variance_R0']
@@ -67,6 +71,12 @@ def demographicsBuilder():
     dict_pop     = dict_pop_admin02
     dict_area    = dict_area_admin02
     dict_longlat = dict_longlat_admin02
+
+  # Remove location aliases from geography list
+  for rname in GEOG_LIST:
+    if(rname in dict_alias):
+      for rname_val in dict_alias[rname]:
+        GEOG_LIST.append(rname_val)
 
   node_id   = 0
   ipop_time = dict()
@@ -99,7 +109,7 @@ def demographicsBuilder():
 
   nname_dict     = {node_obj.name: node_obj.forced_id for node_obj in node_list}
   node_rep_list  = sorted([nname for nname in dict_pop_admin02.keys() if
-                                             any([nname.startswith(val) for val in GEOG_LIST])])
+                                             any([nname.startswith(val+':') or val == nname for val in GEOG_LIST])])
   rep_groups     = {nrep:[nname_dict[val] for val  in nname_dict.keys() if val.startswith(nrep+':') or val == nrep]
                                           for nrep in node_rep_list}
 

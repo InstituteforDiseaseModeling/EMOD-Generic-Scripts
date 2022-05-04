@@ -23,8 +23,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'MEAS-GHA-Base01'
-param_dict['NUM_SIMS']     =  1400
+param_dict['EXP_NAME']     = 'MEAS-NGA-Base01'
+param_dict['NUM_SIMS']     =    10
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -43,9 +43,6 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 
 
 # ***** Constants for this experiment *****
-
-# Time stamp for sim start (Jan 1, 2010 = 40150)
-param_dict['EXP_CONSTANT']['start_time']           =   40150.0 - 365.0*2.0
 
 # Number of days to run simulation
 param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(2.0 + 10.0 + 6.0) + 1

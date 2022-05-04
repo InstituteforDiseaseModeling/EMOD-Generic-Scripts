@@ -44,7 +44,7 @@ def update_config_obj(config):
 
   RUN_NUM         = gdata.var_params['run_number']
 
-  TIME_START      = gdata.var_params['start_time']
+  TIME_START      = gdata.start_time
   TIME_DELTA      = gdata.var_params['num_tsteps']
 
   AGENT_RATE      = gdata.var_params['agent_rate']

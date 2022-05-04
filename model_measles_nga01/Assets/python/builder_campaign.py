@@ -28,7 +28,7 @@ def campaignBuilder():
 
 
   # ***** Get variables for this simulation *****
-  TIME_START   = gdata.var_params['start_time']
+  TIME_START   = gdata.start_time
   PEAK_SIZE    = gdata.var_params['R0_peak_magnitude']
   PEAK_TIME    = gdata.var_params['R0_peak_day']
   PEAK_WIDE    = gdata.var_params['R0_peak_width']
