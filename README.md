@@ -1,9 +1,16 @@
 # EMOD-Generic
 
-See https://docs.idmod.org/projects/emod-generic-scripts/en/latest/ for
+See documentation at https://docs.idmod.org/projects/emod-generic-scripts/en/latest/ for
 additional information about how to use these scripts.
 
+To build the documentation locally, do the following:
 
+1. Create and activate a venv.
+2. Navigate to the root directory of the repo and enter the following
+
+    ```
+    pip install -r docs/requirements.txt
+    ```
 ## Contents:
 
 | Directory | Description |
