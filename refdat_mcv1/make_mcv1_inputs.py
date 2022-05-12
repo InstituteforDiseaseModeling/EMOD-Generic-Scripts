@@ -22,6 +22,7 @@ with open(fname, errors='ignore') as fid01:
   flines = [val.strip().split(',') for val in fid01.readlines()[1:]]
 
 dat_lines = [val for val in flines if val[1]==tlc_dict[COUNTRY]]
+year_vec  = np.arange(2000,2020)
 
 
 # Get nameset
@@ -61,33 +62,33 @@ for lval in dat_lines:
   if(dotname not in adm02_names):
     raise Exception(dotname+' not found.')
   if(dotname not in mcv1_dict):
-    mcv1_dict[dotname] = list()
+    mcv1_dict[dotname] = np.zeros(year_vec.shape[0])
+
+  year_val = int(lval[6])
+  idx_val  = year_val%2000
+  frac_val = float(lval[13])
+  mcv1_dict[dotname][idx_val] = frac_val
 
 
-print(len(mcv1_dict))
+# Format outputs
+mcv1_mat = np.zeros((len(mcv1_dict),len(year_vec)))
+sum_dict = dict()
+sum_dict['namevec'] = sorted(list(mcv1_dict.keys()))
+sum_dict['timevec'] = (365.0*(year_vec+0.5-1900)).tolist()
+for k1 in range(len(sum_dict['namevec'])):
+  mcv1_mat[k1,:] = mcv1_dict[sum_dict['namevec'][k1]]
+
+
+# Write data files
+with open('{:s}_MCV1.json'.format(COUNTRY),'w') as fid01:
+  json.dump(sum_dict, fid01, indent=2, sort_keys=True)
+
+np.savetxt('{:s}_MCV1.csv'.format(COUNTRY),mcv1_mat,delimiter=',',fmt='%5.3f')
+
+
+
 1/0
 
-
-
-#Get admin01 name set
-admin01 = sorted(list(dict_birth.keys()))
-
-
-# Propagate aliases in mortality data
-for reg_name in list(dict_death.keys()):
-  if(reg_name in dict_alias):
-    for sub_reg in dict_alias[reg_name]:
-      dict_death[sub_reg] = dict_death[reg_name]
-
-
-# Sum populations to admin01
-adm01_pop = dict()
-for k1 in range(len(admin01)):
-  cum_pop = 0
-  for adm02 in dict_pop_admin02:
-    if(adm02.startswith(admin01[k1]+':')):
-      cum_pop += dict_pop_admin02[adm02][0]
-  adm01_pop[admin01[k1]] = cum_pop
 
 
 # Figure
