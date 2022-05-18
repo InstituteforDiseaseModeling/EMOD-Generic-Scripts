@@ -48,6 +48,10 @@ def campaignBuilder():
         if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
           node_list.append(node_dict[node_name])
 
+    # Empty node list interpreted by emod-api as all-nodes because
+    if(not node_list):
+      continue
+
     pdict     = {'startday':       TIME_START ,
                  'nodes':          node_list ,
                  'coverage':       coverage  }
@@ -67,6 +71,10 @@ def campaignBuilder():
       for node_name in node_opts:
         if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
           node_list.append(node_dict[node_name])
+
+    # Empty node list interpreted by emod-api as all-nodes because
+    if(not node_list):
+      continue
 
     pdict     = {'startday':       start_val ,
                  'nodes':          node_list ,

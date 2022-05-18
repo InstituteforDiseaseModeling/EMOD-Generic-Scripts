@@ -45,7 +45,7 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 # ***** Constants for this experiment *****
 
 # Number of days to run simulation
-param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(2.0 + 10.0) + 1
+param_dict['EXP_CONSTANT']['num_tsteps']           =   75#365.0*(2.0 + 10.0) + 1
 
 # Coverage of SIAs in WHO calendar
 param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90

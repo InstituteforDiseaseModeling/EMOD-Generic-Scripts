@@ -180,6 +180,11 @@ def configBuilder():
   # Probably ought to be an emod-api call
   config_obj = update_config_obj(default_conf);
   config_obj.parameters.finalize()
+
+
+  config_obj.parameters['logLevel_Memory']                   = 'DEBUG'
+  config_obj.parameters['logLevel_StandardEventCoordinator'  = 'WARNING'
+
   with open(FILE_CONFIG, 'w') as fid01:
     json.dump(config_obj, fid01, sort_keys=True, indent=4)
 
