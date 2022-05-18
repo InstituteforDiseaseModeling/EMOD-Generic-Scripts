@@ -20,8 +20,6 @@ def application(timestep):
   FIRST_CALL    = gdata.first_call_bool
   NODE_DICT     = gdata.demog_node
 
-  CASE_THRESH   = gdata.var_params['adm01_case_threshold']
-  LOG_REP_RATE  = gdata.var_params['log10_min_reporting']
 
   proc_time     = float(timestep)
 
@@ -84,40 +82,6 @@ def application(timestep):
 
   # Record timestamp of previous process
   gdata.prev_proc_time = proc_time
-
-
-  # Only do response starting in 2020
-  if(proc_time > 43800.0):
-    for k1 in range(gdata.max_node_id):
-      nid_val  = k1 + 1
-      gidx     = (data_node==nid_val)
-      min_rate = np.power(10.0,LOG_REP_RATE)
-      nreprate = np.maximum(gdata.nobs_vec[nid_val-1],min_rate)
-      obs_inf  = np.sum(data_mcw[gidx])*nreprate
-      for adm01_tup in gdata.adm01_list:
-        if(nid_val in adm01_tup[1]):
-          adm01_tup[2] += obs_inf
-
-
-  # Reactive campaign
-  targ_nodes = list()
-  for adm01_tup in gdata.adm01_list:
-    if(adm01_tup[2] > CASE_THRESH):
-      targ_nodes.extend(adm01_tup[1])
-      adm01_tup[2] = 0
-
-  if(len(targ_nodes) > 0):
-    camp_module.reset()
-    pdict     = {'startday':  proc_time+30.0 ,
-                 'nodes':         targ_nodes ,
-                 'agemin':        0.75*365.0 ,
-                 'agemax':        5.00*365.0 ,
-                 'coverage':            0.50 }
-    CAMP_FILE = 'campaign_{:05d}.json'.format(int(proc_time))
-    camp_module.add(IV_SIA(pdict))
-    camp_module.save(filename=CAMP_FILE)
-
-    return CAMP_FILE
 
 
   return None

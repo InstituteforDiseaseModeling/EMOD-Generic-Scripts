@@ -45,6 +45,7 @@ def demographicsBuilder():
   # ***** Get variables for this simulation *****
   TIME_START   = gdata.start_time
   PROC_DISPER  = gdata.var_params['proc_overdispersion']
+  SUB_LGA      = gdata.var_params['use_10k_res']
 
   NODE_R0_VAR  = gdata.var_params['node_variance_R0']
   IND_RISK_VAR = gdata.var_params['ind_variance_risk']
@@ -136,7 +137,7 @@ def demographicsBuilder():
 
   # ***** Create primary file *****
 
-  demog_obj  = Demographics(nodes=node_list, idref=ref_name)
+  demog_obj  = Demographics(nodes=node_list, idref=REF_NAME)
 
   # Save filename to global data for use in other functions
   gdata.demog_files.append(DEMOG_FILENAME)
@@ -238,7 +239,7 @@ def demographicsBuilder():
     dover_obj.individual_attributes.age_distribution        = IndividualAttributes.AgeDistribution()
     dover_obj.individual_attributes.mortality_distribution  = IndividualAttributes.MortalityDistribution()
 
-    dover_obj.meta_data  = {'IdReference': ref_name}
+    dover_obj.meta_data  = {'IdReference': REF_NAME}
 
     dover_obj.nodes      = [nodeid for nodeid in data_tup[2]]
 
@@ -282,7 +283,7 @@ def demographicsBuilder():
     dover_obj.individual_attributes                              = IndividualAttributes()
     dover_obj.individual_attributes.susceptibility_distribution  = IndividualAttributes.SusceptibilityDistribution()
 
-    dover_obj.meta_data  = {'IdReference': ref_name}
+    dover_obj.meta_data  = {'IdReference': REF_NAME}
 
     dover_obj.nodes      = [nodeid for nodeid in data_tup[2]]
 

@@ -45,7 +45,7 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 # ***** Constants for this experiment *****
 
 # Number of days to run simulation
-param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(2.0 + 10.0 + 6.0) + 1
+param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(2.0 + 10.0) + 1
 
 # Coverage of SIAs in WHO calendar
 param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90
@@ -72,23 +72,29 @@ param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 # Correlation between acqusition and transmission heterogeneity
 param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 
-# Individual level risk variance (risk of acquisition multiplier; mean = 1.0; log-normal distribution)
+# Individual level risk variance (acquisition multiplier; mean = 1.0; log-normal distribution)
 param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.6
-
-# Base agent weight; less than 10 may have memory issues
-param_dict['EXP_CONSTANT']['agent_rate']           =    25.0
 
 # Abort sim if running for more than specified time in minutes
 param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
 
+# Base agent weight; less than 5 may have memory issues
+param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
+
+# Nodel level R0 variance (log-normal distribution)
+param_dict['EXP_CONSTANT']['node_variance_R0']     =     0.0
+
 # Node level overdispersion; 0.0 = Poisson
-param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.4
+param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
+
+# Subdivide LGAs into 100km^2 regions
+param_dict['EXP_CONSTANT']['use_10k_res']          =    True
 
 # Reactive campaign case threshold (observed) for admin-1
-param_dict['EXP_CONSTANT']['adm01_case_threshold'] =   1.0e6
+#param_dict['EXP_CONSTANT']['adm01_case_threshold'] =   1.0e6
 
 # Reactive campaign case threshold (observed) for admin-1
-param_dict['EXP_CONSTANT']['log10_min_reporting']  =   -7
+#param_dict['EXP_CONSTANT']['log10_min_reporting']  =   -7
 
 
 

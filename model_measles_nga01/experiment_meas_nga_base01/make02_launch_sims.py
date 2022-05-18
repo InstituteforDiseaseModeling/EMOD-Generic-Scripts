@@ -33,7 +33,7 @@ def run_sims():
                       environment     = 'Calculon',
                       priority        = 'Normal',
                       simulation_root = '$COMPS_PATH(USER)',
-                      node_group      = 'idm_abcd',
+                      node_group      = 'idm_48cores',
                       num_cores       = '1',
                       num_retries     = '0',
                       exclusive       = 'False')
