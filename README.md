@@ -27,3 +27,6 @@ To build the documentation locally, do the following:
 | model_rubella_drc01   | Example of rubella vaccine introduction for the Democratic Republic of the Congo assuming rollout through routine immunization services only. |
 | model_rubella_drc02   | Extension of the DRC01 workflow examining time-varying demographics and correcting DHS fertility rate values. |
 | model_transtree01     | Demonstration of the infector labeling feature and generation of explicit transmission networks. |
+| refdat_mcv1           | IHME MCV1 coverage estimates used to construct input files for EMOD simulations. |
+| refdat_namesets       | Namesets used for region identification. |
+| refdat_poppyr         | UN WPP age structured population estimates used to construct input files for EMOD simulations. |
