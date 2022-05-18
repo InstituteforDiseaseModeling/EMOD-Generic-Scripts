@@ -33,7 +33,13 @@ def reprule(revval):
 
 tlc_dict = \
 {
-  'NGA': 'Nigeria'
+  'COD':'DEMOCRATIC REPUBLIC OF THE CONGO',
+  'ETH':'ETHIOPIA',
+  'GBR':'UNITED KINGDOM',
+  'GHA':'GHANA',
+  'IND':'INDIA',
+  'NGA':'NIGERIA',
+  'PAK':'PAKISTAN'
 }
 
 #*******************************************************************************
