@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: almalinux:8.5
+From: almalinux:8.6
 
 %post
     dnf install python39-devel -y
@@ -16,12 +16,13 @@ From: almalinux:8.5
     python3 -m pip install scons
 
     export USER=CalculonUser-EMOD
+
     export PATH=$PATH:/usr/lib64/mpich/bin
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
 
-    git clone https://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@github.com/kfrey-idm/DtkTrunk.git
+    git clone https://github.com/kfrey-idm/EMOD
 
-    cd DtkTrunk
+    cd EMOD
 
     git fetch
     git checkout Generic-Ongoing
@@ -31,14 +32,14 @@ From: almalinux:8.5
     cd ..
 
     mkdir outputs
-    cp DtkTrunk/build/x64/Release/Eradication/Eradication outputs/Eradication
+    cp EMOD/build/x64/Release/Eradication/Eradication outputs/Eradication
 
     mkdir outputs/reporter_plugins
-    cp DtkTrunk/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+    cp EMOD/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
 
-    outputs/Eradication --get-schema --schema-path outputs/schema.json -P DtkTrunk/Scripts
+    outputs/Eradication --get-schema --schema-path outputs/schema.json -P EMOD/Scripts
 
-    rm -r DtkTrunk
+    rm -r EMOD
 
 %runscript
 

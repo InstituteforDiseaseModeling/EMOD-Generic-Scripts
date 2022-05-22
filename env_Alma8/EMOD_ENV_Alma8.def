@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: almalinux:8.5
+From: almalinux:8.6
 
 %post
     dnf upgrade -y
