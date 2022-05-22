@@ -31,9 +31,8 @@ ref_dat   = []
 def application(output_path):
 
   DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
-  REF_DAY   = 111*365                                 # Start log in 2011
-  BIN_EDGES = np.cumsum(15*DAY_BINS) + REF_DAY + 0.5  # Log for 15 years
-  BIN_EDGES = np.insert(BIN_EDGES, 0, REF_DAY + 0.5)
+  BIN_EDGES = np.cumsum(15*DAY_BINS) + gdata.start_log + 0.5  # Hist for 15 years
+  BIN_EDGES = np.insert(BIN_EDGES, 0, gdata.start_log + 0.5)
 
   SIM_IDX         = gdata.sim_index
   PREV_TIME       = gdata.prev_proc_time
@@ -63,30 +62,28 @@ def application(output_path):
   gdata.data_vec_mcw  = np.append(gdata.data_vec_mcw,  data_mcw)
 
 
-  # Timestamps
-  time_vec = np.arange(TIME_START, TIME_START + TIME_DELTA)
-
-
-  # Aggregate new infections by month, by admin01
-  adm1_list  = list(set([val.rsplit(':',1)[0] for val in REP_MAP_DICT.keys()]))
-  adm1_dict  = {adm1:[NODEID_DICT[val] for val in NODEID_DICT.keys() if val.startswith(adm1+':')]
-                                       for adm1 in adm1_list}
-
-  for adm1_name in adm1_dict:
-    subset_data = 
-    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
-                                     bins    = BIN_EDGES,
-                                     weights = gdata.data_vec_mcw)
-
-
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
   calval_dat = {key_str: dict()}
 
 
-  # Monthly timeseries
-  parsed_dat[key_str]['timeseries']   = inf_mo.tolist()
+  # Timestamps
+  time_vec = np.arange(TIME_START, TIME_START + TIME_DELTA)
+
+
+  # Aggregate new infections to timeseries by month, by admin01
+  adm1_list  = list(set([val.rsplit(':',1)[0] for val in REP_MAP_DICT.keys()]))
+  adm1_dict  = {adm1:[NODEID_DICT[val] for val in NODEID_DICT.keys() if val.startswith(adm1+':')]
+                                       for adm1 in adm1_list}
+
+  for adm1_name in adm1_dict:
+    rep_bool          = np.isin(gdata.data_vec_node,adm1_dict[adm1_name])
+    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
+                                     bins    = BIN_EDGES,
+                                     weights = gdata.data_vec_mcw[rep_bool])
+
+    parsed_dat[key_str][adm1_name] = inf_mo.tolist()
 
 
   # Calibration score from timeseries data
@@ -96,7 +93,7 @@ def application(output_path):
   #parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
 
 
-  # Sample population pyramid every year
+  # Sample total population pyramid every year
   with open(os.path.join(output_path,'DemographicsSummary.json')) as fid01:
     demog_output = json.load(fid01)
 

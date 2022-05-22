@@ -10,6 +10,7 @@ var_params      = dict()
 schema_path     = 'Assets/schema.json'
 
 start_time      = 365.0*(2008-1900)
+start_log       = 365.0*(2011-1900)
 base_year       = 1900
 
 # Filename params

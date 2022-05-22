@@ -44,7 +44,6 @@ def update_config_obj(config):
 
   RUN_NUM         = gdata.var_params['run_number']
 
-  TIME_START      = gdata.start_time
   TIME_DELTA      = gdata.var_params['num_tsteps']
 
   AGENT_RATE      = gdata.var_params['agent_rate']
@@ -59,7 +58,7 @@ def update_config_obj(config):
 
 
   # ***** Time *****
-  config.parameters.Start_Time                               = TIME_START
+  config.parameters.Start_Time                               = gdata.start_time
   config.parameters.Simulation_Duration                      = TIME_DELTA
 
   config.parameters.Enable_Termination_On_Total_Wall_Time    =   1
@@ -159,6 +158,7 @@ def update_config_obj(config):
   config.parameters.Enable_Default_Reporting                 =   1
   config.parameters.Enable_Demographics_Reporting            =   1
   config.parameters.Enable_Event_DB                          =   1
+  config.parameters.SQL_Start_Time                           = gdata.start_log
   config.parameters.SQL_Events                               =   ["NewlySymptomatic"]
 
   config.parameters.Enable_Spatial_Output                    =   0
@@ -182,7 +182,7 @@ def configBuilder():
   config_obj.parameters.finalize()
 
   # Need to get these listed in the schema
-  config_obj.parameters['logLevel_Memory']                   = 'DEBUG'
+  #config_obj.parameters['logLevel_Memory']                   = 'DEBUG'
   config_obj.parameters['logLevel_StandardEventCoordinator'] = 'WARNING'
   config_obj.parameters['logLevel_SimulationEventContext']   = 'WARNING'
 
