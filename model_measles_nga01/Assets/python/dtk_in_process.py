@@ -31,30 +31,6 @@ def application(timestep):
     gdata.data_vec_node = np.array(list())
     gdata.data_vec_mcw  = np.array(list())
 
-    gdata.max_node_id   = max([NODE_DICT[val] for val in NODE_DICT])
-
-    adm01_name = list(set([':'.join(val.split(':')[:3]) for val in NODE_DICT]))
-    adm01_list = [[val,list(),0] for val in adm01_name]
-    for nname in NODE_DICT:
-      for adm01_tup in adm01_list:
-        if(nname.startswith(adm01_tup[0]+':')):
-          adm01_tup[1].append(NODE_DICT[nname])
-
-    adm02_name = list(set([':'.join(val.split(':')[:4]) for val in NODE_DICT]))
-    adm02_rate = {val:np.random.beta(0.33,8.0) for val in adm02_name}
-
-    with open('adm02_obsrate.json','w') as fid01:
-      json.dump(adm02_rate,fid01,sort_keys=True,indent=3)
-
-    nobs_list = np.zeros(gdata.max_node_id,dtype=float)
-    for nname in NODE_DICT:
-      for adm02_name in adm02_rate:
-        if(nname.startswith(adm02_name+':')):
-          nobs_list[NODE_DICT[nname]-1] = adm02_rate[adm02_name]
-
-    gdata.adm01_list = adm01_list
-    gdata.nobs_vec   = nobs_list
-
     print("Hello and goodbye from in-process at time {:.1f}".format(proc_time))
 
 

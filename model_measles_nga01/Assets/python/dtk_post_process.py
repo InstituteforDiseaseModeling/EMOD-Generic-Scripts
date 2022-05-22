@@ -16,33 +16,15 @@ pop_age_days  = [     0,   1825,   3650,   5475,   7300,   9125,  10950,  12775,
                   14600,  16425,  18250,  20075,  21900,  23725,  25550,  27375,
                   29200,  31025,  32850,  34675,  36500]
 
-gha_2010_frac = [0.1448, 0.1294, 0.1187, 0.1065, 0.0956, 0.0815, 0.0692, 0.0604,
-                 0.0519, 0.0425, 0.0315, 0.0218, 0.0178, 0.0123, 0.0084, 0.0049,
-                 0.0021, 0.0006, 0.0001, 0.0000, 0.0000]
+nga_2010_frac = []
 
-gha_2020_frac = [0.1343, 0.1251, 0.1120, 0.1010, 0.0921, 0.0817, 0.0729, 0.0619,
-                 0.0523, 0.0452, 0.0383, 0.0304, 0.0215, 0.0136, 0.0096, 0.0051,
-                 0.0022, 0.0007, 0.0001, 0.0000, 0.0000]
+nga_2020_frac = []
 
-tpop_xval = [  2008.5,   2009.5,   2010.5,   2011.5,   2012.5,   2013.5,
-               2014.5,   2015.5,   2016.5,   2017.5,   2018.5,   2019.5,
-               2020.5,   2021.5,   2022.5,   2023.5,   2024.5,   2025.5,
-               2026.5]
+tpop_xval = []
 
-tpop_yval = [23563832, 24170943, 24779614, 25387713, 25996454, 26607641,
-             27224480, 27849203, 28481947, 29121464, 29767108, 30417858,
-             31072945, 31732000, 32395000, 33063000, 33734000, 34409000,
-             35087000]
+tpop_yval = []
 
-ref_dat   = [  4,  17,  26,  11,  11,   6,   5,   8,  13,  17,  12,   6,
-              32,  47,  73,  48,  39,  33,  15,  27,  11,   7,  14,   1,
-              38,  48,  58,  71,  25,  10,  16,  14,  20,   5,   9,   8,
-              38,  35,  21,  13,  14,  16,   2,   1,   1,   1,   0,   0,
-               1,   5,   3,   7,  11,   4,   3,   3,   5,   4,   5,   0,
-               6,   5,   9,  39,  78,  90,  74,  96,  38,  17,   2,   1,
-              12,   4,  14,  80, 191, 167,  52,   1,   5, 166, 147, 104,
-             161, 194,  51,  66, 144,  39,  19,  66,  95, 198, 137,  38,
-              30, 260, 250, 242, 100,  37,  43,  72,  47,  77, 189,  73]
+ref_dat   = []
 
 #********************************************************************************
 
@@ -56,11 +38,11 @@ def application(output_path):
   SIM_IDX         = gdata.sim_index
   PREV_TIME       = gdata.prev_proc_time
   REP_MAP_DICT    = gdata.demog_node_map    # LGA Dotname:     [NodeIDs]
-  REP_DEX_DICT    = gdata.demog_rep_index   # LGA Dotname:  Output row number
+  NODEID_DICT     = gdata.demog_node        # Node Dotname:    ForcedID
+  TIME_START      = gdata.start_time
 
 
   # ***** Get variables for this simulation *****
-  TIME_START      = gdata.var_params['start_time']
   TIME_DELTA      = gdata.var_params['num_tsteps']
 
 
@@ -80,18 +62,21 @@ def application(output_path):
   gdata.data_vec_node = np.append(gdata.data_vec_node, data_node)
   gdata.data_vec_mcw  = np.append(gdata.data_vec_mcw,  data_mcw)
 
+
   # Timestamps
   time_vec = np.arange(TIME_START, TIME_START + TIME_DELTA)
 
 
-  # Aggregate new infections by month
-  with open(os.path.join(output_path,'InsetChart.json')) as fid01:
-    inset_chart = json.load(fid01)
-  inf_day = inset_chart['Channels']['New Infections']['Data']
+  # Aggregate new infections by month, by admin01
+  adm1_list  = list(set([val.rsplit(':',1)[0] for val in REP_MAP_DICT.keys()]))
+  adm1_dict  = {adm1:[NODEID_DICT[val] for val in NODEID_DICT.keys() if val.startswith(adm1+':')]
+                                       for adm1 in adm1_list}
 
-  (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
-                                   bins    = BIN_EDGES,
-                                   weights = gdata.data_vec_mcw)
+  for adm1_name in adm1_dict:
+    subset_data = 
+    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
+                                     bins    = BIN_EDGES,
+                                     weights = gdata.data_vec_mcw)
 
 
   # Prep output dictionary
@@ -105,10 +90,10 @@ def application(output_path):
 
 
   # Calibration score from timeseries data
-  (obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
+  #(obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
 
-  calval_dat[key_str]              = float(obj_val)
-  parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
+  #calval_dat[key_str]              = float(obj_val)
+  #parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
 
 
   # Sample population pyramid every year

@@ -13,30 +13,6 @@ data_dict = \
       "nodes": [
          "AFRO:GHANA"
       ]
-   },
-   "GHA-2010": {
-      "date": 40460,
-      "age_min":  270,
-      "age_max": 1825,
-      "nodes": [
-         "AFRO:GHANA"
-      ]
-   },
-   "GHA-2013": {
-      "date": 41508,
-      "age_min":  270,
-      "age_max": 5475,
-      "nodes": [
-         "AFRO:GHANA"
-      ]
-   },
-   "GHA-2018": {
-      "date": 43365,
-      "age_min":  270,
-      "age_max": 1825,
-      "nodes": [
-         "AFRO:GHANA"
-      ]
    }
 }
 

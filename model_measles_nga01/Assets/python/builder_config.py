@@ -132,7 +132,7 @@ def update_config_obj(config):
 
   # ***** Adapted sampling *****
   config.parameters.Individual_Sampling_Type                 = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
-  config.parameters.Min_Node_Population_Samples              = 100.0
+  config.parameters.Min_Node_Population_Samples              = gdata.demog_min_pop
   config.parameters.Base_Individual_Sample_Rate              =   1.0/AGENT_RATE
   config.parameters.Relative_Sample_Rate_Immune              =   0.02
   config.parameters.Immune_Threshold_For_Downsampling        =   1.0e-5
@@ -181,9 +181,10 @@ def configBuilder():
   config_obj = update_config_obj(default_conf);
   config_obj.parameters.finalize()
 
-
+  # Need to get these listed in the schema
   config_obj.parameters['logLevel_Memory']                   = 'DEBUG'
-  config_obj.parameters['logLevel_StandardEventCoordinator'  = 'WARNING'
+  config_obj.parameters['logLevel_StandardEventCoordinator'] = 'WARNING'
+  config_obj.parameters['logLevel_SimulationEventContext']   = 'WARNING'
 
   with open(FILE_CONFIG, 'w') as fid01:
     json.dump(config_obj, fid01, sort_keys=True, indent=4)

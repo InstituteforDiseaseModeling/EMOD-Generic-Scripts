@@ -116,16 +116,7 @@ def demographicsBuilder():
 
   gdata.demog_node_map = rep_groups
 
-  node_rep_dict = {val[0]:val[1]+1 for val in zip(node_rep_list,range(len(node_rep_list)))}
-  with open('node_names.json','w')  as fid01:
-    json.dump(node_rep_dict,fid01,sort_keys=True)
-
-  gdata.demog_rep_index = node_rep_dict
-
-
   # ***** Prune small nodes *****
-
-  gdata.demog_min_pop = 50
 
   rev_node_list  = [node_obj for node_obj in node_list
                           if node_obj.node_attributes.initial_population >= gdata.demog_min_pop]
