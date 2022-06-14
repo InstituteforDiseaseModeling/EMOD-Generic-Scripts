@@ -20,8 +20,8 @@ def make_work():
                       environment  = 'Calculon')
 
   # Creates a single work item to create the image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_ENV_Alma8',
-                                      definition_file  = 'EMOD_ENV_Alma8.def',
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_ENV_Alma9',
+                                      definition_file  = 'EMOD_ENV_Alma9.def',
                                       force            = True)
 
   # Wait until the image is built

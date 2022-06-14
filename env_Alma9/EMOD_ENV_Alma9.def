@@ -1,16 +1,17 @@
 Bootstrap: docker
-From: almalinux:8.6
+From: almalinux:9.0
 
 %post
     dnf upgrade -y
 
-    dnf -y install python39
+    dnf -y install python
+    dnf -y install python-pip
     dnf -y install mpich
 
     dnf clean all
 
-    pip3 install pip              --upgrade
-    pip3 install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+    pip install pip              --upgrade
+    pip install emod-api==1.19.2 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript
 

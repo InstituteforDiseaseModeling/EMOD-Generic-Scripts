@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: debian:11.2
+From: debian:11.3
 
 %post
     apt-get update
@@ -17,9 +17,9 @@ From: debian:11.2
 
     apt-get clean
 
-    git clone https://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@github.com/kfrey-idm/DtkTrunk.git
+    git clone https://github.com/kfrey-idm/EMOD
 
-    cd DtkTrunk
+    cd EMOD
 
     git fetch
     git checkout Generic-Ongoing
@@ -31,14 +31,14 @@ From: debian:11.2
     cd ..
 
     mkdir outputs
-    cp DtkTrunk/build/x64/Release/Eradication/Eradication outputs/Eradication
+    cp EMOD/build/x64/Release/Eradication/Eradication outputs/Eradication
 
     mkdir outputs/reporter_plugins
-    cp DtkTrunk/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+    cp EMOD/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
 
-    outputs/Eradication --get-schema --schema-path outputs/schema.json -P DtkTrunk/Scripts
+    outputs/Eradication --get-schema --schema-path outputs/schema.json -P EMOD/Scripts
 
-    rm -r DtkTrunk
+    rm -r EMOD
 
 %runscript
 

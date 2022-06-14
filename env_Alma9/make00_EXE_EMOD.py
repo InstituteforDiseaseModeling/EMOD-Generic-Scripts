@@ -30,15 +30,15 @@ def make_work():
                       exclusive        = 'False')
 
   # Creates a work item to create the build image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Alma8',
-                                      definition_file  = 'EMOD_EXE_Alma8.def',
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Alma9',
+                                      definition_file  = 'EMOD_EXE_Alma9.def',
                                       force            = True)
 
   # Wait until the build image is finished
   ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
 
   # Magic words
-  cmd_line = 'singularity exec Assets/EMOD_EXE_Alma8.sif cp -r /outputs/. .'
+  cmd_line = 'singularity exec Assets/EMOD_EXE_Alma9.sif cp -r /outputs/. .'
 
   # Create CommandTask
   task_obj = CommandTask(command=cmd_line)

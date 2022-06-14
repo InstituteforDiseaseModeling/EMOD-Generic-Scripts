@@ -1,26 +1,24 @@
 Bootstrap: docker
-From: ubuntu:22.04
+From: almalinux:9.0
 
 %post
-    apt-get update
+    dnf install python-devel -y
+    dnf install mpich-devel -y
+    dnf install sqlite-devel -y
+    dnf install boost-devel -y
+    dnf install git -y
 
-    apt-get install software-properties-common -y
-    apt-get update
-    add-apt-repository universe
+    dnf group install "Development Tools" -y
 
-    apt-get upgrade -y
+    dnf clean all
 
-    apt-get install build-essential -y
+    python3 -m pip install pip --upgrade
+    python3 -m pip install scons
 
-    apt-get install python3-dev -y
-    apt-get install libmpich-dev -y
-    apt-get install libsqlite3-dev -y
-    apt-get install libboost-dev -y
+    export USER=CalculonUser-EMOD
 
-    apt-get install git -y
-    apt-get install scons -y
-
-    apt-get clean
+    export PATH=$PATH:/usr/lib64/mpich/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
 
     git clone https://github.com/kfrey-idm/EMOD
 
@@ -28,8 +26,6 @@ From: ubuntu:22.04
 
     git fetch
     git checkout Generic-Ongoing
-
-    export USER=CalculonUser-EMOD
 
     scons --Release --jobs=4 --Disease=Generic
 

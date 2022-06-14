@@ -1,24 +1,21 @@
 Bootstrap: docker
-From: almalinux:8.6
+From: fedora:36
 
 %post
-    dnf install python39-devel -y
+    dnf upgrade -y
+
+    dnf group install "Development Tools" -y
+    dnf install gcc-c++ -y
+
+    dnf install python3-devel -y
     dnf install mpich-devel -y
     dnf install sqlite-devel -y
     dnf install boost-devel -y
-    dnf install git -y
 
-    dnf group install "Development Tools" -y
+    dnf install git -y
+    dnf install scons -y
 
     dnf clean all
-
-    python3 -m pip install pip --upgrade
-    python3 -m pip install scons
-
-    export USER=CalculonUser-EMOD
-
-    export PATH=$PATH:/usr/lib64/mpich/bin
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
 
     git clone https://github.com/kfrey-idm/EMOD
 
@@ -26,6 +23,9 @@ From: almalinux:8.6
 
     git fetch
     git checkout Generic-Ongoing
+
+    export USER=CalculonUser-EMOD
+    export PATH=$PATH:/usr/lib64/mpich/bin
 
     scons --Release --jobs=4 --Disease=Generic
 
