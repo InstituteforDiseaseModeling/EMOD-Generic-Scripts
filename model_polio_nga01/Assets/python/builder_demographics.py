@@ -295,7 +295,7 @@ def demographicsBuilder():
     dover_obj.individual_attributes.age_distribution        = IndividualAttributes.AgeDistribution()
     dover_obj.individual_attributes.mortality_distribution  = IndividualAttributes.MortalityDistribution()
 
-    dover_obj.meta_data  = {'IdReference': ref_name}
+    dover_obj.meta_data  = {'IdReference': REF_NAME}
 
     dover_obj.nodes      = [nodeid for nodeid in data_tup[2]]
 
@@ -389,7 +389,7 @@ def demographicsBuilder():
     dover_obj.individual_attributes                              = IndividualAttributes()
     dover_obj.individual_attributes.susceptibility_distribution  = IndividualAttributes.SusceptibilityDistribution()
 
-    dover_obj.meta_data  = {'IdReference': ref_name}
+    dover_obj.meta_data  = {'IdReference': REF_NAME}
 
     dover_obj.nodes      = [nodeid for nodeid in is_over_list[k1][1]]
 
