@@ -1,5 +1,7 @@
 #*******************************************************************************
 
+# Rules for name cleaning; supports multiple
+
 def reprule(revval):
 
   revval = revval.upper()
@@ -9,13 +11,13 @@ def reprule(revval):
   revval = revval.replace('Ã¯',   'I')
   revval = revval.replace('Û',    'U')
   revval = revval.replace('Ñ',    'NY')
-    
+
   revval = revval.replace(' ',    '_')
   revval = revval.replace('-',    '_')
   revval = revval.replace('/',    '_')
   revval = revval.replace(',',    '_')
   revval = revval.replace('\\',   '_')
-  
+
   revval = revval.replace('\'',   '')
   revval = revval.replace('"',    '')
   revval = revval.replace('.',    '')
@@ -31,11 +33,13 @@ def reprule(revval):
 
 #*******************************************************************************
 
+# Dictionary of three letter country codes; supports WPP population inputs
+
 tlc_dict = \
 {
-  'COD':'DEMOCRATIC REPUBLIC OF THE CONGO',
+  'COD':'DEMOCRATIC_REPUBLIC_OF_THE_CONGO',
   'ETH':'ETHIOPIA',
-  'GBR':'UNITED KINGDOM',
+  'GBR':'UNITED_KINGDOM',
   'GHA':'GHANA',
   'IND':'INDIA',
   'NGA':'NIGERIA',
@@ -44,10 +48,74 @@ tlc_dict = \
 
 #*******************************************************************************
 
+# Dictionary of aliases for DHS regions; supports multiple
+
+dhs_groups = \
+{
+  'AFRO:NIGERIA:NORTH_CENTRAL': [
+    'AFRO:NIGERIA:BENUE',
+    'AFRO:NIGERIA:FCT_ABUJA',
+    'AFRO:NIGERIA:KOGI',
+    'AFRO:NIGERIA:KWARA',
+    'AFRO:NIGERIA:NASARAWA',
+    'AFRO:NIGERIA:NIGER',
+    'AFRO:NIGERIA:PLATEAU'
+  ],
+  'AFRO:NIGERIA:NORTH_EAST': [
+    'AFRO:NIGERIA:ADAMAWA',
+    'AFRO:NIGERIA:BAUCHI',
+    'AFRO:NIGERIA:BORNO',
+    'AFRO:NIGERIA:GOMBE',
+    'AFRO:NIGERIA:TARABA',
+    'AFRO:NIGERIA:YOBE'
+  ],
+  'AFRO:NIGERIA:NORTH_WEST': [
+    'AFRO:NIGERIA:JIGAWA',
+    'AFRO:NIGERIA:KADUNA',
+    'AFRO:NIGERIA:KANO',
+    'AFRO:NIGERIA:KATSINA',
+    'AFRO:NIGERIA:KEBBI',
+    'AFRO:NIGERIA:SOKOTO',
+    'AFRO:NIGERIA:ZAMFARA'
+  ],
+  'AFRO:NIGERIA:SOUTH_EAST': [
+    'AFRO:NIGERIA:ABIA',
+    'AFRO:NIGERIA:ANAMBRA',
+    'AFRO:NIGERIA:EBONYI',
+    'AFRO:NIGERIA:ENUGU',
+    'AFRO:NIGERIA:IMO'
+  ],
+  'AFRO:NIGERIA:SOUTH_SOUTH': [
+    'AFRO:NIGERIA:AKWA_IBOM',
+    'AFRO:NIGERIA:BAYELSA',
+    'AFRO:NIGERIA:CROSS_RIVER',
+    'AFRO:NIGERIA:DELTA',
+    'AFRO:NIGERIA:EDO',
+    'AFRO:NIGERIA:RIVERS'
+  ],
+  'AFRO:NIGERIA:SOUTH_WEST': [
+    'AFRO:NIGERIA:EKITI',
+    'AFRO:NIGERIA:LAGOS',
+    'AFRO:NIGERIA:OGUN',
+    'AFRO:NIGERIA:ONDO',
+    'AFRO:NIGERIA:OSUN',
+    'AFRO:NIGERIA:OYO'
+  ]
+}
+
+#*******************************************************************************
+
+# Dictionary of admin01 aliases; supports mc1 coverage estimates
+#     IHME GHA uses pre-2018 nameset
+
 adm01_alias_dict = \
 {
   'IHME':
   {
+    'GHA':
+    {
+      #
+    },
     'NGA':
     {
       'NASSARAWA':'NASARAWA',
@@ -58,10 +126,26 @@ adm01_alias_dict = \
 
 #*******************************************************************************
 
+# Dictionary of admin02 aliases; supports mcv1 coverage estimates
+#     IHME GHA uses pre-2018 nameset
+
 adm02_alias_dict = \
 {
   'IHME':
   {
+    'GHA':
+    {
+      #'AFIGYA_KWABRE':'',
+      #'AFIGYA_SEKYERE':'',
+      #'AHAFO_ANO_SOUTH':'',
+      #'ATWIMA_NWABIAGYA':'',
+      #'BOSOMTWE_ATWIMA_KWANWOMA':'',
+      #'EJISU_JUABEN':'',
+      #'EJURA_SEKYE_DUMASE':'',
+      #'KMA':'',
+      #'KWABRE':'',
+      #'SEKYERE_AFRAM_PLAINS':''
+    },
     'NGA':
     {
       'AROCHUKW':'AROCHUKWU',

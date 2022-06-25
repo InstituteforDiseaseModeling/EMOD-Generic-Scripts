@@ -13,11 +13,11 @@ from  aux_namematch  import  adm01_alias_dict, adm02_alias_dict
 
 
 # Set three letter country code
-COUNTRY = 'NGA'
+COUNTRY = ''
 
 
 # Parse CSV
-ihme_file = r'IHME_LMIC_MCV1_2000_2019_ADMIN_2_Y2020M12D16.CSV'
+ihme_file = r'IHME_LMIC_MCV1_2000_2019_ADMIN_2_Y2020M12D16.csv'
 with open(ihme_file, errors='ignore') as fid01:
   flines = [val.strip().split(',') for val in fid01.readlines()[1:]]
 
