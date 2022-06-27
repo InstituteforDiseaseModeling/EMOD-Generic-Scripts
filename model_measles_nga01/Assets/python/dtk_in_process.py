@@ -31,7 +31,7 @@ def application(timestep):
     gdata.data_vec_node = np.array(list())
     gdata.data_vec_mcw  = np.array(list())
 
-    print("Hello and goodbye from in-process at time {:.1f}".format(proc_time))
+    print("Hello from in-process at time {:.1f}".format(proc_time))
 
 
   # Only evaluate every month-ish

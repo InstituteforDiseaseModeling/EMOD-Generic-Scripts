@@ -33,8 +33,6 @@ def application(timestep):
     gdata.data_vec_node = np.array(list())
     gdata.data_vec_mcw  = np.array(list())
 
-    gdata.max_node_id   = max([NODE_DICT[val] for val in NODE_DICT])
-
     adm01_name = list(set([':'.join(val.split(':')[:3]) for val in NODE_DICT]))
     adm01_list = [[val,list(),0] for val in adm01_name]
     for nname in NODE_DICT:
@@ -57,7 +55,7 @@ def application(timestep):
     gdata.adm01_list = adm01_list
     gdata.nobs_vec   = nobs_list
 
-    print("Hello and goodbye from in-process at time {:.1f}".format(proc_time))
+    print("Hello from in-process at time {:.1f}".format(proc_time))
 
 
   # Only evaluate every month-ish

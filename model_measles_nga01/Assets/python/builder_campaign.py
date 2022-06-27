@@ -8,8 +8,6 @@ import os, sys, json
 
 import global_data as gdata
 
-from refdat_sias          import data_dict   as dict_sia
-
 import numpy as np
 
 import emod_api.campaign     as     camp_module
@@ -71,12 +69,19 @@ def campaignBuilder():
 
 
   # Add MCV SIAs
+  with open(os.path.join('Assets','data','NGA_MCV_SIA.json')) as fid01:
+    dict_sia = json.load(fid01)
+
   for sia_name in dict_sia:
     sia_obj    = dict_sia[sia_name]
-    SIA_COVER  = gdata.var_params['SIA_cover_{:s}'.format(sia_name)]
     start_val  = sia_obj['date']
+    if(start_val < TIME_START):
+      continue
+
+    SIA_COVER  = 0.50
     age_min    = sia_obj['age_min']
     age_max    = sia_obj['age_max']
+    targ_frac  = sia_obj['targ_frac']
     node_list  = list()
     for targ_val in sia_obj['nodes']:
       for node_name in node_opts:
@@ -91,7 +96,7 @@ def campaignBuilder():
                  'nodes':          node_list ,
                  'agemin':         age_min ,
                  'agemax':         age_max ,
-                 'coverage':       SIA_COVER }
+                 'coverage':       SIA_COVER*targ_frac }
 
     camp_module.add(IV_SIA(pdict))
 

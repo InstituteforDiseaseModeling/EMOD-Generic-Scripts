@@ -44,7 +44,6 @@ def update_config_obj(config):
 
   RUN_NUM         = gdata.var_params['run_number']
 
-  TIME_START      = gdata.var_params['start_time']
   TIME_DELTA      = gdata.var_params['num_tsteps']
 
   AGENT_RATE      = gdata.var_params['agent_rate']
@@ -59,7 +58,7 @@ def update_config_obj(config):
 
 
   # ***** Time *****
-  config.parameters.Start_Time                               = TIME_START
+  config.parameters.Start_Time                               = gdata.start_time
   config.parameters.Simulation_Duration                      = TIME_DELTA
 
   config.parameters.Enable_Termination_On_Total_Wall_Time    =   1
@@ -132,7 +131,7 @@ def update_config_obj(config):
 
   # ***** Adapted sampling *****
   config.parameters.Individual_Sampling_Type                 = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
-  config.parameters.Min_Node_Population_Samples              = 100.0
+  config.parameters.Min_Node_Population_Samples              = gdata.demog_min_pop
   config.parameters.Base_Individual_Sample_Rate              =   1.0/AGENT_RATE
   config.parameters.Relative_Sample_Rate_Immune              =   0.02
   config.parameters.Immune_Threshold_For_Downsampling        =   1.0e-5
@@ -159,6 +158,7 @@ def update_config_obj(config):
   config.parameters.Enable_Default_Reporting                 =   1
   config.parameters.Enable_Demographics_Reporting            =   1
   config.parameters.Enable_Event_DB                          =   1
+  config.parameters.SQL_Start_Time                           = gdata.start_log
   config.parameters.SQL_Events                               =   ["NewlySymptomatic"]
 
   config.parameters.Enable_Spatial_Output                    =   0
@@ -180,6 +180,12 @@ def configBuilder():
   # Probably ought to be an emod-api call
   config_obj = update_config_obj(default_conf);
   config_obj.parameters.finalize()
+
+  # Need to get these listed in the schema
+  #config_obj.parameters['logLevel_Memory']                   = 'DEBUG'
+  config_obj.parameters['logLevel_StandardEventCoordinator'] = 'WARNING'
+  config_obj.parameters['logLevel_SimulationEventContext']   = 'WARNING'
+
   with open(FILE_CONFIG, 'w') as fid01:
     json.dump(config_obj, fid01, sort_keys=True, indent=4)
 

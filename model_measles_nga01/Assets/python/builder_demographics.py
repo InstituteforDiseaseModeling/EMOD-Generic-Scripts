@@ -123,7 +123,8 @@ def demographicsBuilder():
   node_list      = rev_node_list
   node_name_dict = {node_obj.name: node_obj.forced_id for node_obj in node_list}
 
-  gdata.demog_node = node_name_dict
+  gdata.demog_node   = node_name_dict
+  gdata.max_node_id  = max([node_name_dict[val] for val in node_name_dict])
 
 
   # ***** Create primary file *****

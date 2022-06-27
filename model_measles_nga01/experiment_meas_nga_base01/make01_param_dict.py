@@ -44,14 +44,8 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 
 # ***** Constants for this experiment *****
 
-# Number of days to run simulation
+# Number of days to run simulation (start Jan 1, 2008 = 40150)
 param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0#365.0*(2.0 + 10.0) + 1
-
-# Coverage of SIAs in WHO calendar
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2010']   =     0.85
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2013']   =     0.55
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2018']   =     0.40
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0
@@ -89,12 +83,6 @@ param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
 
 # Subdivide LGAs into 100km^2 regions
 param_dict['EXP_CONSTANT']['use_10k_res']          =    True
-
-# Reactive campaign case threshold (observed) for admin-1
-#param_dict['EXP_CONSTANT']['adm01_case_threshold'] =   1.0e6
-
-# Reactive campaign case threshold (observed) for admin-1
-#param_dict['EXP_CONSTANT']['log10_min_reporting']  =   -7
 
 
 

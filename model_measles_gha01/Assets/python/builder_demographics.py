@@ -41,11 +41,12 @@ def demographicsBuilder():
 
 
   # ***** Get variables for this simulation *****
+  TIME_START   = gdata.start_time
+  PROC_DISPER  = gdata.var_params['proc_overdispersion']
   SUB_LGA      = True
 
-  TIME_START   = gdata.var_params['start_time']
-  PROC_DISPER  = gdata.var_params['proc_overdispersion']
   IND_RISK_VAR = gdata.var_params['ind_variance_risk']
+
   R0           = gdata.var_params['R0']
   LOG10_IMP    = gdata.var_params['log10_import_rate']
 
@@ -117,14 +118,13 @@ def demographicsBuilder():
 
   # ***** Prune small nodes *****
 
-  gdata.demog_min_pop = 50
-
   rev_node_list  = [node_obj for node_obj in node_list
                           if node_obj.node_attributes.initial_population >= gdata.demog_min_pop]
   node_list      = rev_node_list
   node_name_dict = {node_obj.name: node_obj.forced_id for node_obj in node_list}
 
-  gdata.demog_node = node_name_dict
+  gdata.demog_node   = node_name_dict
+  gdata.max_node_id  = max([node_name_dict[val] for val in node_name_dict])
 
 
   # ***** Create primary file *****

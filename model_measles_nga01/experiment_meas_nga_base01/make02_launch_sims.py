@@ -20,8 +20,8 @@ from emod_exp import exp_from_def_file
 PATH_EXP_DEF  = os.path.abspath('param_dict.json')
 PATH_PYTHON   = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA     = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Alma8', 'EMOD_ENV.id'))
-PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Alma8', 'EMOD_EXE.id'))
+PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Alma9', 'EMOD_ENV.id'))
+PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Alma9', 'EMOD_EXE.id'))
 
 
 # Start and experiment on COMPS

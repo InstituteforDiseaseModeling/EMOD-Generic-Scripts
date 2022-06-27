@@ -8,9 +8,7 @@ import os, sys, json
 
 import global_data as gdata
 
-from refdat_sias          import data_dict   as dict_sia
 from refdat_ri            import data_dict   as dict_ri
-
 
 import numpy as np
 
@@ -28,7 +26,7 @@ def campaignBuilder():
 
 
   # ***** Get variables for this simulation *****
-  TIME_START   = gdata.var_params['start_time']
+  TIME_START   = gdata.start_time
   PEAK_SIZE    = gdata.var_params['R0_peak_magnitude']
   PEAK_TIME    = gdata.var_params['R0_peak_day']
   PEAK_WIDE    = gdata.var_params['R0_peak_width']
@@ -48,6 +46,10 @@ def campaignBuilder():
         if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
           node_list.append(node_dict[node_name])
 
+    # Empty node list interpreted by emod-api as all-nodes because reasons
+    if(not node_list):
+      continue
+
     pdict     = {'startday':       TIME_START ,
                  'nodes':          node_list ,
                  'coverage':       coverage  }
@@ -56,23 +58,34 @@ def campaignBuilder():
 
 
   # Add MCV SIAs
+  with open(os.path.join('Assets','data','GHA_MCV_SIA.json')) as fid01:
+    dict_sia = json.load(fid01)
+
   for sia_name in dict_sia:
     sia_obj    = dict_sia[sia_name]
-    SIA_COVER  = gdata.var_params['SIA_cover_{:s}'.format(sia_name)]
     start_val  = sia_obj['date']
+    if(start_val < TIME_START):
+      continue
+
+    SIA_COVER  = gdata.var_params['SIA_cover_{:s}'.format(sia_name)]
     age_min    = sia_obj['age_min']
     age_max    = sia_obj['age_max']
+    targ_frac  = sia_obj['targ_frac']
     node_list  = list()
     for targ_val in sia_obj['nodes']:
       for node_name in node_opts:
         if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
           node_list.append(node_dict[node_name])
 
+    # Empty node list interpreted by emod-api as all-nodes because reasons
+    if(not node_list):
+      continue
+
     pdict     = {'startday':       start_val ,
                  'nodes':          node_list ,
                  'agemin':         age_min ,
                  'agemax':         age_max ,
-                 'coverage':       SIA_COVER }
+                 'coverage':       SIA_COVER*targ_frac }
 
     camp_module.add(IV_SIA(pdict))
 

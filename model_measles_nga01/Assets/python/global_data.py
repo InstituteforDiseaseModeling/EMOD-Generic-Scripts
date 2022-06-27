@@ -21,12 +21,14 @@ reports_file    = None
 demog_dict      = dict()
 demog_node      = dict()
 demog_node_map  = dict()      # LGA:     [NodeIDs]
+
 demog_object    = None
 demog_min_pop   = 100
 
 # Other stuff
 first_call_bool = True
 prev_proc_time  = -1.0
+max_node_id     = 0
 
 data_vec_time   = None
 data_vec_node   = None
