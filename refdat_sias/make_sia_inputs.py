@@ -14,13 +14,13 @@ COUNTRY = ''
 
 
 # Get nameset
-fname = os.path.join('..','refdat_namesets','{:s}_NAMES_ADMIN02.csv'.format(COUNTRY))
+fname = os.path.join('..','refdat_namesets','{:s}_NAMES_LEV02.csv'.format(COUNTRY))
 with open(fname) as fid01:
-  adm02_names = sorted([val.strip() for val in fid01.readlines()])
+  lev02_names = sorted([val.strip() for val in fid01.readlines()])
 
-adm01_names = sorted(list(set([val.rsplit(':',1)[0] for val in adm02_names])))
-adm00_names = sorted(list(set([val.rsplit(':',2)[0] for val in adm02_names])))
-who_region  = adm02_names[0].split(':')[0]
+lev01_names = sorted(list(set([val.rsplit(':',1)[0] for val in lev02_names])))
+lev00_names = sorted(list(set([val.rsplit(':',2)[0] for val in lev02_names])))
+who_region  = lev02_names[0].split(':')[0]
 
 
 # Parse CSV
@@ -40,13 +40,13 @@ for lval in flines:
   if(':'.join(dotparts[0:1]) != who_region):
     continue
 
-  if(':'.join(dotparts[0:2]) not in adm00_names):
+  if(':'.join(dotparts[0:2]) not in lev00_names):
     continue
 
-  if(len(dotparts)>2 and ':'.join(dotparts[:3]) not in adm01_names):
+  if(len(dotparts)>2 and ':'.join(dotparts[:3]) not in lev01_names):
     raise Exception(lval[0]+' not found in nameset.')
 
-  if(len(dotparts)>3 and ':'.join(dotparts[:4]) not in adm02_names):
+  if(len(dotparts)>3 and ':'.join(dotparts[:4]) not in lev02_names):
     raise Exception(lval[0]+' not found in nameset.')
 
   new_key = True
