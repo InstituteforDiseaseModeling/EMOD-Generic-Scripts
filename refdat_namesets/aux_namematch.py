@@ -6,11 +6,20 @@ def reprule(revval):
 
   revval = revval.upper()
 
+  revval = revval.replace('Â',    'A')
+  revval = revval.replace('Á',    'A')
+  revval = revval.replace('Ç',    'C')
+  revval = revval.replace('Ê',    'E')
   revval = revval.replace('É',    'E')
+  revval = revval.replace('È',    'E')
   revval = revval.replace('Ï',    'I')
   revval = revval.replace('Ã¯',   'I')
-  revval = revval.replace('Û',    'U')
+  revval = revval.replace('Í',    'I')
   revval = revval.replace('Ñ',    'NY')
+  revval = revval.replace('Ô',    'O')
+  revval = revval.replace('Ó',    'O')
+  revval = revval.replace('Û',    'U')
+  revval = revval.replace('Ú',    'U')
 
   revval = revval.replace(' ',    '_')
   revval = revval.replace('-',    '_')
