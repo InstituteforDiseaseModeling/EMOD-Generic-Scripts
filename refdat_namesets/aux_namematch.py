@@ -42,7 +42,7 @@ def reprule(revval):
 
 #*******************************************************************************
 
-# Dictionary of three letter country codes; supports WPP population inputs
+# Dictionary of three letter country codes;
 
 tlc_dict = \
 {
@@ -121,6 +121,9 @@ adm01_alias_dict = \
 {
   'IHME':
   {
+    'COD':
+    {
+    },
     'GHA':
     {
       #
@@ -142,6 +145,9 @@ adm02_alias_dict = \
 {
   'IHME':
   {
+    'COD':
+    {
+    },
     'GHA':
     {
       #'AFIGYA_KWABRE':'',
