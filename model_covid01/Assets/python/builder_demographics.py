@@ -40,7 +40,6 @@ def demographicsBuilder():
   json_set = dict()
 
 
-
   # ***** Detailed node attributes *****
 
   # Add node list
@@ -70,9 +69,8 @@ def demographicsBuilder():
     json_set['Nodes'].append(nodeDic)
 
 
-
   # ***** Metadata and default attributes *****
-  
+
   # Create metadata dictionary
   json_set['Metadata'] = { 'IdReference':   'covid-custom' }
 
@@ -81,20 +79,12 @@ def demographicsBuilder():
                            'IndividualProperties': list()  ,
                            'NodeAttributes':       dict()  }
 
-
-  
   # Add default node attributes
   nadict = dict()
 
-
-  nadict['BirthRate']                   =   0.0
   nadict['InfectivityOverdispersion']   =   2.1
-  nadict['Airport']                     =   0
-  nadict['Region']                      =   1  
-  nadict['Seaport']                     =   0 
 
   json_set['Defaults']['NodeAttributes'].update(nadict)
-
 
   # Add default individual properties
   ipdict = dict()
@@ -109,7 +99,6 @@ def demographicsBuilder():
   json_set['Defaults']['IndividualProperties'].append(ipdict)
 
 
-
   # ***** Write primary demographics file *****
 
   with open(gdata.demog_files[0],'w')  as fid01:
@@ -118,13 +107,14 @@ def demographicsBuilder():
   gdata.demog_dict       = json_set
 
 
-
   # ***** Write migration files *****
+  num_dat = 30
   migJson = {'Metadata': { 'IdReference':   'covid-custom' ,
                            'NodeCount':          NUM_NODES ,
-                           'DatavalueCount':            30 } }
-  migJson['NodeOffsets'] = ''.join(['{:08d}{:0>8s}'.format(k1,hex(k1*360)[2:])
-                                                  for k1 in range(NUM_NODES)])
+                           'DatavalueCount':       num_dat } }
+  migJson['NodeOffsets'] = ''.join(['{:0>8s}{:0>8s}'.format(hex(k1+1         )[2:],
+                                                            hex(k1*12*num_dat)[2:])
+                                                     for k1 in range(NUM_NODES)])
   
   with open('regional_migration.bin.json','w') as fid01:
     json.dump(migJson,fid01,sort_keys=True)
@@ -141,6 +131,7 @@ def demographicsBuilder():
   nlocs[6*NUM_NODES:7*NUM_NODES,:] += [ 0.0, 0.0]
   nlocs[7*NUM_NODES:8*NUM_NODES,:] += [ 1.0, 0.0]
   nlocs[8*NUM_NODES:9*NUM_NODES,:] += [-1.0, 0.0]
+
   nlocs[0*NUM_NODES:1*NUM_NODES,:] += [ 0.0, 0.0]
   nlocs[1*NUM_NODES:2*NUM_NODES,:] += [ 0.0, 0.0]
   nlocs[2*NUM_NODES:3*NUM_NODES,:] += [ 0.0, 0.0]
@@ -155,15 +146,14 @@ def demographicsBuilder():
 
   outbytes = io.BytesIO()
   for k1 in range(NUM_NODES):
-    for k2 in range(1,31):
+    for k2 in range(1,num_dat+1):
       if(distgrid.shape[0] > k2):
         tnode = int(np.mod(nborlist[k1,k2],NUM_NODES))+1
       else:
         tnode = 0
-      #end-if
       outbytes.write(tnode.to_bytes(4,byteorder='little'))
-    #end-k2
-    for k2 in range(1,31):
+
+    for k2 in range(1,num_dat+1):
       if(distgrid.shape[0] > k2):
         idnode = nborlist[k1,k2]
         tnode  = int(np.mod(nborlist[k1,k2],NUM_NODES))
@@ -171,10 +161,9 @@ def demographicsBuilder():
         val    = np.array([migrat],dtype=np.float64)
       else:
         val = np.array([0.0],dtype=np.float64)
-      #end-if
+
       outbytes.write(val.tobytes())
-    #end-k2
-  #end-k1
+
   with open('regional_migration.bin','wb') as fid01:
     fid01.write(outbytes.getvalue())
 
