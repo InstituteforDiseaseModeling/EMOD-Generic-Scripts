@@ -15,6 +15,6 @@ EMOD-Generic provides a set of example models. Please consider contributing your
     examples/model_measles_nga01
     examples/model_network01
     examples/model_polio_nga01
-    examples/model_rubella_drc01
-    examples/model_rubella_drc02
+    examples/model_rubella_cod01
+    examples/model_rubella_cod02
     examples/model_transtree01

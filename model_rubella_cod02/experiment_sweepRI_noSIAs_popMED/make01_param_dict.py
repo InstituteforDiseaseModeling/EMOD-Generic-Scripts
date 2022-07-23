@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-DRC-DemogSteadyState01'
+param_dict['EXP_NAME']     = 'Rubella-COD-DemogMedian02'
 param_dict['NUM_SIMS']     =  4500
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
@@ -38,26 +38,33 @@ NSIMS = param_dict['NUM_SIMS']
 
 # ***** Specify sim-variable parameters *****
 
-param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
+param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 
 # Infectivity
-param_dict['EXP_VARIABLE']['R0']                  = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
 
 # RI rate for MR
-param_dict['EXP_VARIABLE']['RI_rate']             = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
 
 
 
 # ***** Constants for this experiment *****
 
-# Start day for simulation
-param_dict['EXP_CONSTANT']['start_time']          =  365.0*(2000-1900)
+# RI rate multiplier for MR
+param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
+param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year; RI starts in 2020; linear interpolation
+
+# Log10 of multiplier on exogeneous case importation
+param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
+
+# Name of data file for population pyramid
+param_dict['EXP_CONSTANT']['pop_dat_file']          =  'median'
+
+# Initial number of agents 
+param_dict['EXP_CONSTANT']['num_agents']            = 100000
 
 # Number of days for simulation
-param_dict['EXP_CONSTANT']['num_tsteps']          =  365.0*50.0
-
-# Maximum wall-time for simulation
-param_dict['EXP_CONSTANT']['max_clock_minutes']   = 180.0
+param_dict['EXP_CONSTANT']['num_tsteps']            =    365.0*50.0
 
 
 
