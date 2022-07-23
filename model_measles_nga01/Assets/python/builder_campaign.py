@@ -29,10 +29,12 @@ def campaignBuilder():
   PEAK_TIME    = gdata.var_params['R0_peak_day']
   PEAK_WIDE    = gdata.var_params['R0_peak_width']
 
+
   # ***** Events *****
 
   node_dict = gdata.demog_node
   node_opts = list(node_dict.keys())
+
 
   # Add MCV1 RI
   mcv1_dat = np.loadtxt(os.path.join('Assets','data', 'NGA_MCV1.csv'), delimiter=',')
@@ -88,7 +90,6 @@ def campaignBuilder():
         if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
           node_list.append(node_dict[node_name])
 
-    # Empty node list interpreted by emod-api as all-nodes because
     if(not node_list):
       continue
 
