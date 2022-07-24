@@ -50,17 +50,13 @@ param_dict['EXP_VARIABLE']['log10_min_reporting']  = np.random.uniform(low= -3.0
 
 # ***** Constants for this experiment *****
 
-# Time stamp for sim start (Jan 1, 2010 = 40150)
-param_dict['EXP_CONSTANT']['start_time']           =   40150.0 - 365.0*2.0
-
-# Number of days to run simulation
+# Number of days to run simulation (start Jan 1, 2008 = 40150)
 param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(2.0 + 10.0 + 6.0) + 1
 
 # Coverage of SIAs in WHO calendar
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2006']   =     0.90
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2010']   =     0.85
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2013']   =     0.55
-param_dict['EXP_CONSTANT']['SIA_cover_GHA-2018']   =     0.40
+param_dict['EXP_CONSTANT']['SIA_cover_GHA_2010_4'] =     0.85
+param_dict['EXP_CONSTANT']['SIA_cover_GHA_2013_5'] =     0.55
+param_dict['EXP_CONSTANT']['SIA_cover_GHA_2018_6'] =     0.40
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0
@@ -92,6 +88,12 @@ param_dict['EXP_CONSTANT']['max_clock_minutes']    =   240.0
 
 # Node level overdispersion; 0.0 = Poisson
 param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.4
+
+
+
+
+
+
 
 
 

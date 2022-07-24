@@ -82,7 +82,7 @@ cval = infBlock[:,-1]
 gdx2 = np.argsort(cval)[::-1]
 
 # Binning
-nbins = 8
+nbins = 7
 dyval        = (1000-0)/(nbins-1)
 dxval        = ((-1)-(-3))/(nbins-1)
 (xvec,yvec) = np.meshgrid(np.linspace(-3-dxval/2,-1+dxval/2,nbins+1),np.linspace(0-dyval/2,1000+dyval/2,nbins+1))
@@ -96,9 +96,9 @@ for k1 in range(nbins):
 
 plt.contour(np.power(10.0,xvec[:-1,:-1]+dxval/2),
                           yvec[:-1,:-1]+dyval/2,
-                          zmat, levels=[101e3,151e3,201e3,226e3],linewidths=3, vmin=0, vmax=250e3)
+                          zmat, levels=[80e3,125e3,170e3,197e3],linewidths=3, vmin=0, vmax=230e3)
 
-axs01.scatter(np.power(10.0,xval[gdx2]), yval[gdx2], c=cval[gdx2], s=2, vmin=0, vmax=300e3, alpha=0.7)
+axs01.scatter(np.power(10.0,xval[gdx2]), yval[gdx2], c=cval[gdx2], s=2, vmin=0, vmax=250e3, alpha=0.7)
 
 ticloc = [0.001, 0.01, 0.1]
 ticlab = ['0.1%','1.0%','10%']
@@ -109,8 +109,8 @@ cbar_handle = plt.colorbar(cm.ScalarMappable(cmap=virmap), shrink=0.75)
 
 axs01.plot([0.04, 0.04],[0,1000],'k:')
 
-ticloc = [0.000,0.333,0.667,1.000]
-ticlab = ['0','100k','200k','300k']
+ticloc = [0.0,0.2,0.4,0.6,0.8,1.0]
+ticlab = ['0','50k','100k','150k','200k','250k']
 
 cbar_handle.set_ticks(ticks=ticloc)
 cbar_handle.set_ticklabels(ticlab)

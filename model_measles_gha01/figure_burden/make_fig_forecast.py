@@ -10,7 +10,7 @@ import matplotlib         as mpl
 #*******************************************************************************
 
 DIRNAME = 'experiment_meas_gha_base01'
-YMAX    =  400e3
+YMAX    =  350e3
 
 targfile = os.path.join('..',DIRNAME,'param_dict.json')
 with open(targfile) as fid01:
@@ -89,8 +89,8 @@ ticlabx = ['','','','','','']
 axs01.set_xticks(ticks=ticlocx)
 axs01.set_xticklabels(ticlabx)
 
-ticlocy = [0, 50e3, 100e3, 150e3, 200e3, 250e3, 300e3, 350e3, YMAX]
-ticlaby = ['0','','100k','','200k','','300k','','400k']
+ticlocy = [0, 50e3, 100e3, 150e3, 200e3, 250e3, 300e3, YMAX]
+ticlaby = ['0','','100k','','200k','','300k','']
 axs01.set_yticks(ticks=ticlocy)
 axs01.set_yticklabels(ticlaby)
 
@@ -98,7 +98,7 @@ for k1 in ticlocx:
   axs01.text(k1+0.5,-0.04*YMAX,str(k1),fontsize=11,ha='center')
 
 plt.tight_layout()
-plt.savefig('fig_clouds_01.png')
+plt.savefig('fig_forecast_01.png')
 plt.close()
 
 #*******************************************************************************

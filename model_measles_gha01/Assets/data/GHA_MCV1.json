@@ -1,0 +1,42 @@
+{
+  "namevec": [
+    "AFRO:GHANA:AHAFO",
+    "AFRO:GHANA:ASHANTI",
+    "AFRO:GHANA:BONO",
+    "AFRO:GHANA:BONO_EAST",
+    "AFRO:GHANA:CENTRAL",
+    "AFRO:GHANA:EASTERN",
+    "AFRO:GHANA:GREATER_ACCRA",
+    "AFRO:GHANA:NORTHERN",
+    "AFRO:GHANA:NORTHERN_EAST",
+    "AFRO:GHANA:OTI",
+    "AFRO:GHANA:SAVANNAH",
+    "AFRO:GHANA:UPPER_EAST",
+    "AFRO:GHANA:UPPER_WEST",
+    "AFRO:GHANA:VOLTA",
+    "AFRO:GHANA:WESTERN",
+    "AFRO:GHANA:WESTERN_NORTH"
+  ],
+  "timevec": [
+    36682.5,
+    37047.5,
+    37412.5,
+    37777.5,
+    38142.5,
+    38507.5,
+    38872.5,
+    39237.5,
+    39602.5,
+    39967.5,
+    40332.5,
+    40697.5,
+    41062.5,
+    41427.5,
+    41792.5,
+    42157.5,
+    42522.5,
+    42887.5,
+    43252.5,
+    43617.5
+  ]
+}
