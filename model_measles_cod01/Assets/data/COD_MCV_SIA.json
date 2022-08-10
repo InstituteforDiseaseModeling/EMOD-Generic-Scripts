@@ -1,0 +1,391 @@
+{
+  "COD_2002_1": {
+    "age_max": 5475,
+    "age_min": 182,
+    "date": 37581,
+    "nodes": [
+      "AFRO:DRCONGO:KASAI_ORIENTAL",
+      "AFRO:DRCONGO:LOMAMI",
+      "AFRO:DRCONGO:NORD_KIVU",
+      "AFRO:DRCONGO:SANKURU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2004_2": {
+    "age_max": 5475,
+    "age_min": 182,
+    "date": 38243,
+    "nodes": [
+      "AFRO:DRCONGO:HAUT_KATANGA",
+      "AFRO:DRCONGO:HAUT_LOMAMI",
+      "AFRO:DRCONGO:KASAI",
+      "AFRO:DRCONGO:KASAI_CENTRAL",
+      "AFRO:DRCONGO:LUALABA",
+      "AFRO:DRCONGO:MANIEMA",
+      "AFRO:DRCONGO:SUD_KIVU",
+      "AFRO:DRCONGO:TANGANYIKA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2005_3": {
+    "age_max": 5475,
+    "age_min": 182,
+    "date": 38608,
+    "nodes": [
+      "AFRO:DRCONGO:BAS_UELE",
+      "AFRO:DRCONGO:EQUATEUR",
+      "AFRO:DRCONGO:HAUT_UELE",
+      "AFRO:DRCONGO:ITURI",
+      "AFRO:DRCONGO:MONGALA",
+      "AFRO:DRCONGO:NORD_UBANGI",
+      "AFRO:DRCONGO:SUD_UBANGI",
+      "AFRO:DRCONGO:TSHOPO",
+      "AFRO:DRCONGO:TSHUAPA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2006_4": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 38811,
+    "nodes": [
+      "AFRO:DRCONGO:KASAI_ORIENTAL",
+      "AFRO:DRCONGO:LOMAMI",
+      "AFRO:DRCONGO:SANKURU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2006_5": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 38964,
+    "nodes": [
+      "AFRO:DRCONGO:NORD_KIVU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2006_6": {
+    "age_max": 5475,
+    "age_min": 182,
+    "date": 38995,
+    "nodes": [
+      "AFRO:DRCONGO:KINSHASA",
+      "AFRO:DRCONGO:KWANGO",
+      "AFRO:DRCONGO:KWILU",
+      "AFRO:DRCONGO:MAI_NDOMBE"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2006_7": {
+    "age_max": 5475,
+    "age_min": 182,
+    "date": 39025,
+    "nodes": [
+      "AFRO:DRCONGO:KONGO_CENTRAL"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2007_8": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 39299,
+    "nodes": [
+      "AFRO:DRCONGO:HAUT_KATANGA",
+      "AFRO:DRCONGO:HAUT_LOMAMI",
+      "AFRO:DRCONGO:KASAI",
+      "AFRO:DRCONGO:KASAI_CENTRAL",
+      "AFRO:DRCONGO:LUALABA",
+      "AFRO:DRCONGO:MANIEMA",
+      "AFRO:DRCONGO:SUD_KIVU",
+      "AFRO:DRCONGO:TANGANYIKA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2008_9": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 39753,
+    "nodes": [
+      "AFRO:DRCONGO:BAS_UELE",
+      "AFRO:DRCONGO:EQUATEUR",
+      "AFRO:DRCONGO:HAUT_UELE",
+      "AFRO:DRCONGO:ITURI",
+      "AFRO:DRCONGO:MONGALA",
+      "AFRO:DRCONGO:NORD_UBANGI",
+      "AFRO:DRCONGO:SUD_UBANGI",
+      "AFRO:DRCONGO:TSHOPO",
+      "AFRO:DRCONGO:TSHUAPA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2009_10": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40103,
+    "nodes": [
+      "AFRO:DRCONGO:KINSHASA",
+      "AFRO:DRCONGO:KONGO_CENTRAL",
+      "AFRO:DRCONGO:NORD_KIVU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2010_11": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40174,
+    "nodes": [
+      "AFRO:DRCONGO:KWANGO",
+      "AFRO:DRCONGO:KWILU",
+      "AFRO:DRCONGO:MAI_NDOMBE"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2011_12": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40666,
+    "nodes": [
+      "AFRO:DRCONGO:HAUT_KATANGA",
+      "AFRO:DRCONGO:HAUT_LOMAMI",
+      "AFRO:DRCONGO:LUALABA",
+      "AFRO:DRCONGO:MANIEMA",
+      "AFRO:DRCONGO:SUD_KIVU",
+      "AFRO:DRCONGO:TANGANYIKA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2011_13": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40727,
+    "nodes": [
+      "AFRO:DRCONGO:KASAI_ORIENTAL",
+      "AFRO:DRCONGO:LOMAMI",
+      "AFRO:DRCONGO:SANKURU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2011_14": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40788,
+    "nodes": [
+      "AFRO:DRCONGO:BAS_UELE",
+      "AFRO:DRCONGO:EQUATEUR",
+      "AFRO:DRCONGO:HAUT_UELE",
+      "AFRO:DRCONGO:ITURI",
+      "AFRO:DRCONGO:MONGALA",
+      "AFRO:DRCONGO:NORD_UBANGI",
+      "AFRO:DRCONGO:SUD_UBANGI",
+      "AFRO:DRCONGO:TSHOPO",
+      "AFRO:DRCONGO:TSHUAPA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2011_15": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40880,
+    "nodes": [
+      "AFRO:DRCONGO:KINSHASA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2012_16": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 40911,
+    "nodes": [
+      "AFRO:DRCONGO:KONGO_CENTRAL",
+      "AFRO:DRCONGO:KWANGO",
+      "AFRO:DRCONGO:KWILU",
+      "AFRO:DRCONGO:MAI_NDOMBE",
+      "AFRO:DRCONGO:NORD_KIVU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2012_17": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 41092,
+    "nodes": [
+      "AFRO:DRCONGO:KASAI",
+      "AFRO:DRCONGO:KASAI_CENTRAL"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2013_18": {
+    "age_max": 3285,
+    "age_min": 182,
+    "date": 41516,
+    "nodes": [
+      "AFRO:DRCONGO:BAS_UELE",
+      "AFRO:DRCONGO:EQUATEUR",
+      "AFRO:DRCONGO:HAUT_UELE",
+      "AFRO:DRCONGO:ITURI",
+      "AFRO:DRCONGO:MONGALA",
+      "AFRO:DRCONGO:NORD_UBANGI",
+      "AFRO:DRCONGO:SUD_UBANGI",
+      "AFRO:DRCONGO:TSHOPO",
+      "AFRO:DRCONGO:TSHUAPA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2013_19": {
+    "age_max": 3285,
+    "age_min": 182,
+    "date": 41593,
+    "nodes": [
+      "AFRO:DRCONGO:NORD_KIVU",
+      "AFRO:DRCONGO:SUD_KIVU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2014_20": {
+    "age_max": 3285,
+    "age_min": 182,
+    "date": 41691,
+    "nodes": [
+      "AFRO:DRCONGO:HAUT_KATANGA",
+      "AFRO:DRCONGO:HAUT_LOMAMI",
+      "AFRO:DRCONGO:LUALABA",
+      "AFRO:DRCONGO:MANIEMA",
+      "AFRO:DRCONGO:TANGANYIKA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2014_21": {
+    "age_max": 3285,
+    "age_min": 182,
+    "date": 41761,
+    "nodes": [
+      "AFRO:DRCONGO:KASAI",
+      "AFRO:DRCONGO:KASAI_CENTRAL",
+      "AFRO:DRCONGO:KASAI_ORIENTAL",
+      "AFRO:DRCONGO:LOMAMI",
+      "AFRO:DRCONGO:SANKURU"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2014_22": {
+    "age_max": 3285,
+    "age_min": 182,
+    "date": 41789,
+    "nodes": [
+      "AFRO:DRCONGO:KINSHASA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2014_23": {
+    "age_max": 3285,
+    "age_min": 182,
+    "date": 41824,
+    "nodes": [
+      "AFRO:DRCONGO:KONGO_CENTRAL",
+      "AFRO:DRCONGO:KWANGO",
+      "AFRO:DRCONGO:KWILU",
+      "AFRO:DRCONGO:MAI_NDOMBE"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2016_24": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 42583,
+    "nodes": [
+      "AFRO:DRCONGO:BAS_UELE",
+      "AFRO:DRCONGO:EQUATEUR",
+      "AFRO:DRCONGO:HAUT_UELE",
+      "AFRO:DRCONGO:ITURI",
+      "AFRO:DRCONGO:MANIEMA",
+      "AFRO:DRCONGO:MONGALA",
+      "AFRO:DRCONGO:NORD_KIVU",
+      "AFRO:DRCONGO:NORD_UBANGI",
+      "AFRO:DRCONGO:SUD_KIVU",
+      "AFRO:DRCONGO:SUD_UBANGI",
+      "AFRO:DRCONGO:TSHOPO",
+      "AFRO:DRCONGO:TSHUAPA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2016_25": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 42623,
+    "nodes": [
+      "AFRO:DRCONGO:KINSHASA",
+      "AFRO:DRCONGO:KONGO_CENTRAL",
+      "AFRO:DRCONGO:KWANGO",
+      "AFRO:DRCONGO:KWILU",
+      "AFRO:DRCONGO:MAI_NDOMBE"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2017_26": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 42754,
+    "nodes": [
+      "AFRO:DRCONGO:HAUT_KATANGA",
+      "AFRO:DRCONGO:HAUT_LOMAMI",
+      "AFRO:DRCONGO:KASAI",
+      "AFRO:DRCONGO:KASAI_CENTRAL",
+      "AFRO:DRCONGO:KASAI_ORIENTAL",
+      "AFRO:DRCONGO:LOMAMI",
+      "AFRO:DRCONGO:LUALABA",
+      "AFRO:DRCONGO:SANKURU",
+      "AFRO:DRCONGO:TANGANYIKA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2019_27": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 43734,
+    "nodes": [
+      "AFRO:DRCONGO:BAS_UELE",
+      "AFRO:DRCONGO:EQUATEUR",
+      "AFRO:DRCONGO:HAUT_UELE",
+      "AFRO:DRCONGO:ITURI",
+      "AFRO:DRCONGO:MANIEMA",
+      "AFRO:DRCONGO:MONGALA",
+      "AFRO:DRCONGO:NORD_KIVU",
+      "AFRO:DRCONGO:NORD_UBANGI",
+      "AFRO:DRCONGO:SUD_KIVU",
+      "AFRO:DRCONGO:SUD_UBANGI",
+      "AFRO:DRCONGO:TSHOPO",
+      "AFRO:DRCONGO:TSHUAPA"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2019_28": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 43768,
+    "nodes": [
+      "AFRO:DRCONGO:KINSHASA",
+      "AFRO:DRCONGO:KONGO_CENTRAL",
+      "AFRO:DRCONGO:KWANGO",
+      "AFRO:DRCONGO:KWILU",
+      "AFRO:DRCONGO:MAI_NDOMBE"
+    ],
+    "targ_frac": 1.0
+  },
+  "COD_2019_29": {
+    "age_max": 1825,
+    "age_min": 182,
+    "date": 43778,
+    "nodes": [
+      "AFRO:DRCONGO:HAUT_KATANGA",
+      "AFRO:DRCONGO:HAUT_LOMAMI",
+      "AFRO:DRCONGO:KASAI",
+      "AFRO:DRCONGO:KASAI_CENTRAL",
+      "AFRO:DRCONGO:KASAI_ORIENTAL",
+      "AFRO:DRCONGO:LOMAMI",
+      "AFRO:DRCONGO:LUALABA",
+      "AFRO:DRCONGO:SANKURU",
+      "AFRO:DRCONGO:TANGANYIKA"
+    ],
+    "targ_frac": 1.0
+  }
+}

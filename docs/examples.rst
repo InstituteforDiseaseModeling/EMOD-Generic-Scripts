@@ -11,6 +11,7 @@ EMOD-Generic provides a set of example models. Please consider contributing your
     examples/model_covid01
     examples/model_demographics01
     examples/model_demographics02
+    examples/model_measles_cod01
     examples/model_measles_gha01
     examples/model_measles_nga01
     examples/model_network01
