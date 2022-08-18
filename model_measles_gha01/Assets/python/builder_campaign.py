@@ -60,7 +60,7 @@ def campaignBuilder():
       init_mcv1 = np.mean(mcv1_vec[:3])
 
     time_list = [0.0]       + (time_vec[time_vec>0.0]).tolist() + [365.0*100]
-    mcv1_list = [init_mcv1] + (mcv1_vec[time_vec>0.0]).tolist() + [np.mean(mcv1_vec[-3])]
+    mcv1_list = [init_mcv1] + (mcv1_vec[time_vec>0.0]).tolist() + [np.mean(mcv1_vec[-3:])]
 
     pdict     = {'startday':       TIME_START ,
                  'nodes':          node_list  ,
