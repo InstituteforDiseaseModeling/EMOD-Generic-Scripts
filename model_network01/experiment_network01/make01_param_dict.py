@@ -56,6 +56,9 @@ param_dict['EXP_CONSTANT']['network_exponent']    =     4.0
 # Max node export fraction
 param_dict['EXP_CONSTANT']['max_export']          =     0.1
 
+# Max node export fraction
+param_dict['EXP_CONSTANT']['min_connect']         =     1.0e-8
+
 
 # ***** Write parameter dictionary *****
 

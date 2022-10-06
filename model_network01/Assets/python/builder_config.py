@@ -23,6 +23,7 @@ def update_config_obj(config):
   NET_INF_COEF   = gdata.var_params['network_coefficient']
   NET_INF_DPOW   = gdata.var_params['network_exponent']
   MAX_FRAC       = gdata.var_params['max_export']
+  MIN_CONNECT    = gdata.var_params['min_connect']
 
 
   # ***** Random number seed ****
@@ -53,6 +54,7 @@ def update_config_obj(config):
   # ***** Interventions *****
   config.parameters.Enable_Network_Infectivity                     =    1
   config.parameters.Network_Infectivity_Max_Export_Frac            = MAX_FRAC
+  config.parameters.Network_Infectivity_Min_Connection             = MIN_CONNECT
 
   config.parameters.Network_Infectivity_Coefficient                =   [NET_INF_COEF]
   config.parameters.Network_Infectivity_Exponent                   =   [NET_INF_DPOW]
