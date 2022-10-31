@@ -34,10 +34,13 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 
 nsims        = int(param_dict['NUM_SIMS'])
 pop_dat_str  =     param_dict['EXP_CONSTANT']['nga_state_name']
+sia_list     =     param_dict['EXP_CONSTANT']['test_sias']
 
 tvals    = data_brick.pop('tstamps')
 ntstp    = len(tvals)
 infBlock = np.zeros((nsims,ntstp))
+sia_num  = np.zeros((len(sia_list),nsims))
+sia_den  = np.zeros((len(sia_list),nsims))
 
 
 for sim_idx_str in data_brick:
@@ -46,7 +49,11 @@ for sim_idx_str in data_brick:
   except:
     continue
   infDat = np.array(data_brick[sim_idx_str]['inf_mo'])
+  siaVal = np.array(data_brick[sim_idx_str]['sia_summary'])
+
   infBlock[sim_idx,:] = infDat/1000
+  sia_num[:,sim_idx]  = siaVal[:,1]
+  sia_den[:,sim_idx]  = siaVal[:,2]
 
 
 # Figure
@@ -77,15 +84,16 @@ for patwid in [0.45,0.375,0.25]:
 axs01.plot(xval,yval,color='C0',linewidth=2)
 axs01.set_ylabel('Monthly Cases (thousands) - Simulated',fontsize=16)
 
-#axs01.set_xlim(2010, 2020)
-#axs01.set_ylim(   0, YMAX)
+ylim_val = axs01.get_ylim()
+for k1 in range(len(sia_list)):
+  sia_time   = sia_list[k1]
+  num_immune = np.mean(sia_num[k1,:])
+  num_target = np.mean(sia_den[k1,:])
 
-#ticloc = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
-#ticlab = ['','','','','','','','','','','']
-#axs01.set_xticks(ticks=ticloc)
-#axs01.set_xticklabels(ticlab)
-#for k1 in ticloc[:-1]:
-  #axs01.text(k1+0.5,-0.04*YMAX,str(k1),fontsize=11,ha='center')
+  axs01.plot([sia_time,sia_time],[0,0.7*ylim_val[1]],'g--',lw=2)
+  stat_str = 'Year: {:7.2f}; Immunized: {:.0f}; Targetted: {:.0f}; Frac: {:4.2f}'
+  print(stat_str.format(sia_time,num_immune,num_target,num_immune/num_target))
+
 
 plt.tight_layout()
 plt.savefig('fig_inf_{:s}_01.png'.format(pop_dat_str))
