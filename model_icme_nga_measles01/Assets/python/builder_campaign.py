@@ -33,7 +33,7 @@ def campaignBuilder():
 
 
   # ***** Get variables for this simulation *****
-
+  SIA_ADDLIST   = gdata.var_params['test_sias']
 
 
   # ***** Events *****
@@ -130,6 +130,17 @@ def campaignBuilder():
   camp_module.add(IV_BumpR0(pdict))
 
 
+  # Use custom spec for intervention schedule
+  for year_val in SIA_ADDLIST:
+    start_val  = (year_val-BASE_YEAR)*365.0
+
+    # Create and add intervention
+    pdict      = {'startday':       start_val ,
+                  'nodes':          all_nodes }
+    camp_module.add(IV_SIA_ALT(pdict))
+
+
+
   #  ***** End file construction *****
   camp_module.save(filename=CAMP_FILENAME)
 
@@ -199,6 +210,7 @@ def IV_MCV1(params=dict()):
   camp_iv02.Delay_Period_Gaussian_Std_Dev               =   90.0
 
   camp_iv03.Acquire_Config                              = camp_wane
+  camp_iv03.Cost_To_Consumer                            = 0.0
 
   camp_wane.Initial_Effect                              =    1.0
 
@@ -229,6 +241,7 @@ def IV_SIA(params=dict()):
   camp_coord.Target_Age_Max                 = params['agemax']/365.0
 
   camp_iv01.Acquire_Config                  = camp_wane
+  camp_iv01.Cost_To_Consumer                = 0.0
 
   camp_wane.Initial_Effect                  = 1.0
 
@@ -283,6 +296,36 @@ def IV_BumpR0(params=dict()):
 
   camp_iv01.Multiplier_By_Duration.Times      = [val[0] for val in xyvals]
   camp_iv01.Multiplier_By_Duration.Values     = [val[1] for val in xyvals]
+
+  return camp_event
+
+#********************************************************************************
+
+# Distribute vaccines using OutbreakIndividual infections
+def IV_SIA_ALT(params=dict()):
+
+  SCHEMA_PATH   =  gdata.schema_path
+
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv    = s2c.get_class_with_defaults('OutbreakIndividual',        SCHEMA_PATH)
+
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
+
+  camp_event.Event_Coordinator_Config       = camp_coord
+  camp_event.Start_Day                      = params['startday']
+  camp_event.Nodeset_Config                 = node_set
+
+  camp_coord.Intervention_Config            = camp_iv
+  camp_coord.Demographic_Coverage           =  0.75
+  camp_coord.Target_Demographic             = 'ExplicitAgeRanges'
+  camp_coord.Target_Age_Min                 =  0.75
+  camp_coord.Target_Age_Max                 =  5.00
+
+  camp_iv.Clade                             = 0
+  camp_iv.Genome                            = 1
+  camp_iv.Ignore_Immunity                   = 0
+  camp_iv.Cost_To_Consumer                  = 1.0
 
   return camp_event
 

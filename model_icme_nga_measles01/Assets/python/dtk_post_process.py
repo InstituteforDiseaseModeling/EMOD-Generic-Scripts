@@ -15,10 +15,12 @@ import numpy as np
 def application(output_path):
 
   SIM_IDX       = gdata.sim_index
+  BASE_YEAR     = gdata.base_year
 
 
   # ***** Get variables for this simulation *****
   TIME_YEARS    = gdata.var_params['num_years']
+  SIA_ADDLIST   = gdata.var_params['test_sias']
 
 
 
@@ -65,10 +67,39 @@ def application(output_path):
   parsed_dat[key_str]['pyr_data'] = pyr_dat.tolist()
 
 
+  # Get campaign doses
+  parsed_dat[key_str]['sia_summary'] = list()
+
+  with open(os.path.join(output_path,'InsetChart.json')) as fid01:
+    inset_chart = json.load(fid01)
+  sia_doses = np.diff(np.array(inset_chart['Channels']['Campaign Cost']['Data']))
+  sia_doses = sia_doses[sia_doses>0]
+
+
+  # Post-process strain reporter
+  strain_dat = np.loadtxt(os.path.join(output_path,'ReportStrainTracking01.csv'),delimiter=',',skiprows=1,ndmin=2)
+  rep_bool   = (strain_dat[:,3]==1)
+  targ_dat   = strain_dat[rep_bool,:]
+  for k1 in range(len(SIA_ADDLIST)):
+    year_val   = SIA_ADDLIST[k1]
+    targ_val   = sia_doses[k1]
+    start_val  = np.ceil((year_val-BASE_YEAR)*365.0)
+    rep_bool   = (targ_dat[:,0]==start_val)
+    num_inf    = np.sum(targ_dat[rep_bool,4])
+    parsed_dat[key_str]['sia_summary'].append([start_val, num_inf, targ_val])
+
+
   # Aggregate new infections to timeseries by month
   (inf_mo, tstamps) = np.histogram(data_time,
                                    bins    = BIN_EDGES,
                                    weights = data_mcw)
+
+  # Correct for SIA doses as infections
+  for k1 in range(len(parsed_dat[key_str]['sia_summary'])):
+    for k2 in range(len(BIN_EDGES)):
+      if(parsed_dat[key_str]['sia_summary'][k1][0]<BIN_EDGES[k2]):
+        inf_mo[k2-1] -= parsed_dat[key_str]['sia_summary'][k1][1]
+        break
 
   parsed_dat[key_str]['inf_mo'] = inf_mo.tolist()
 

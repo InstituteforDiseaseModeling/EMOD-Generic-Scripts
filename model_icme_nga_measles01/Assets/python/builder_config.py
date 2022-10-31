@@ -41,7 +41,7 @@ def update_config_obj(config):
   START_YEAR     = gdata.start_year
 
   # ***** Get variables for this simulation *****
-  R0              = gdata.var_params['R0']
+  R0             = gdata.var_params['R0']
 
   RUN_NUM        = gdata.var_params['run_number']
   TIME_YEARS     = gdata.var_params['num_years']
@@ -60,7 +60,6 @@ def update_config_obj(config):
   config.parameters.Wall_Time_Maximum_In_Minutes                   = MAX_CLOCK
 
 
-  # ***** Intrahost *****
   # ***** Intrahost *****
   config.parameters.Base_Infectivity_Distribution            = 'GAMMA_DISTRIBUTION'
   config.parameters.Base_Infectivity_Scale                   = R0/8.0
@@ -123,6 +122,17 @@ def update_config_obj(config):
   config.parameters.Enable_Infection_Rate_Overdispersion     =    0
 
   config.parameters.Enable_Infectivity_Reservoir             =    1
+
+
+  # ***** Multistrain *****
+
+  config.parameters.Enable_Strain_Tracking                 =  1
+  config.parameters.Enable_Genome_Dependent_Infectivity    =  1
+  config.parameters.Enable_Genome_Mutation                 =  0
+
+  config.parameters.Number_of_Clades                       =  1
+  config.parameters.Log2_Number_of_Genomes_per_Clade       =  1
+  config.parameters.Genome_Infectivity_Multipliers         = [1.0, 0.0]
 
 
   # ***** Adapted sampling *****

@@ -47,12 +47,17 @@ param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 # Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']           = 250000
 
-# Number of simulated years (start year is 2015)
-param_dict['EXP_CONSTANT']['num_years']            =     15
-
 # Name of Nigerian state
 # e.g., KANO, JIGAWA
 param_dict['EXP_CONSTANT']['nga_state_name']       =  'KANO'
+
+# Timing of test SIAs
+param_dict['EXP_CONSTANT']['test_sias']            =  [2024.25, 2027.75]
+
+
+
+# Number of simulated years (start year is 2015)
+param_dict['EXP_CONSTANT']['num_years']            =     15
 
 # Infectivity
 param_dict['EXP_CONSTANT']['R0']                  =      14.0

@@ -28,13 +28,21 @@ def dllcBuilder():
   # ***** Custom reporters *****
   json_set['Custom_Reports'] = \
     {
-     'Use_Explicit_Dlls': 1
+     'Use_Explicit_Dlls': 1,
+     'ReportStrainTracking':
+       {
+        'Enabled':  1,
+        'Reports': []
+       }
     }
 
 
   # ***** Additional reporters *****
 
-  # None
+  # Strain reporting
+  repDic = { 'Report_Name':      'ReportStrainTracking01.csv' }
+
+  json_set['Custom_Reports']['ReportStrainTracking']['Reports'].append(repDic)
 
 
   #  ***** End file construction *****
