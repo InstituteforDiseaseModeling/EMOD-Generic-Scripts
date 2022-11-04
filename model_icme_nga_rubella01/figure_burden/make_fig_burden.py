@@ -54,6 +54,8 @@ nsims        = int(param_dict['NUM_SIMS'])
 nyears       = int(param_dict['EXP_CONSTANT']['num_years'])
 state_name   =     param_dict['EXP_CONSTANT']['nga_state_name']
 
+use_ri       = np.array(param_dict['EXP_VARIABLE']['use_RI'])
+
 pyr_mat      = np.zeros((nsims,nyears+1,20))
 inf_mat      = np.zeros((nsims,nyears,20))
 
@@ -138,13 +140,17 @@ axs01.set_ylabel('Total Infections per 100k', fontsize=14)
 axs01.set_xlim(INIT_YR+YR_DIFF, INIT_YR+nyears-YR_DIFF)
 axs01.set_ylim(   0, 6000)
 
-inf_mat_avg = np.mean(inf_mat[:,:,:],axis=0)
-ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
+inf_mat_avg = np.mean(inf_mat[(use_ri==True), :,:],axis=0)
+ydat1       = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
+inf_mat_avg = np.mean(inf_mat[(use_ri==False),:,:],axis=0)
+ydat2       = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
+
 xdat        = np.arange(INIT_YR, INIT_YR+nyears) + 0.5
 
 axs01.text( 2021, 5500, state_name, fontsize=18)
 
-axs01.plot(xdat,ydat)
+axs01.plot(xdat,ydat1)
+axs01.plot(xdat,ydat2)
 
 
 # Figures - Sims - CRS
@@ -161,12 +167,32 @@ axs01.set_ylabel('CRS Burden per 1k Births', fontsize=14)
 axs01.set_xlim(INIT_YR+YR_DIFF, INIT_YR+nyears-YR_DIFF)
 axs01.set_ylim(            0.0,  4.0)
 
-inf_mat_avg = np.mean(inf_mat[:,:,:],axis=0)
+inf_mat_avg = np.mean(inf_mat[(use_ri==True), :,:],axis=0)
 crs_mat     = inf_mat_avg*crs_prob_vec
-ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
+ydat1       = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
+inf_mat_avg = np.mean(inf_mat[(use_ri==False),:,:],axis=0)
+crs_mat     = inf_mat_avg*crs_prob_vec
+ydat2       = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
 xdat        = np.arange(INIT_YR, INIT_YR+nyears) + 0.5
 
-axs01.plot(xdat,ydat)
+xrow = xdat[:, np.newaxis].T
+
+inf_mat_sub = inf_mat[(use_ri==True), :,:]
+crs_mat     = inf_mat_sub*crs_prob_vec
+ydatout       = np.sum(crs_mat,axis=2)/birth_vec*norm_crs_timevec*1e3
+outval = np.vstack((xrow,ydatout))
+np.savetxt('CRS_{:s}_RCV_No.csv'.format(state_name),outval,delimiter=',',fmt='%.2f')
+
+inf_mat_sub = inf_mat[(use_ri==False), :,:]
+crs_mat     = inf_mat_sub*crs_prob_vec
+ydatout       = np.sum(crs_mat,axis=2)/birth_vec*norm_crs_timevec*1e3
+outval = np.vstack((xrow,ydatout))
+np.savetxt('CRS_{:s}_RCV_Yes.csv'.format(state_name),outval,delimiter=',',fmt='%.2f')
+
+
+axs01.plot(xdat,ydat1,label='RCV - Constant')
+axs01.plot(xdat,ydat2,label='RCV - None')
+axs01.legend(fontsize=16)
 
 
 plt.tight_layout()

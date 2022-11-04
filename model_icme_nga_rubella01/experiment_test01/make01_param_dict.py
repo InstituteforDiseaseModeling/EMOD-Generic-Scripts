@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'ExampleRubella01-NGA_admin02'
-param_dict['NUM_SIMS']     =   100
+param_dict['NUM_SIMS']     =   250
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -43,12 +43,15 @@ param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
 # Gamma distribution: mean = shape*scale; variance = shape*scale^2
 param_dict['EXP_VARIABLE']['R0']                  = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
 
+# Use measles RI starting in 2025
+param_dict['EXP_VARIABLE']['use_RI']              = np.random.choice([True,False], size=NSIMS).tolist()
+
 
 
 # ***** Constants for this experiment *****
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']           = 100000
+param_dict['EXP_CONSTANT']['num_agents']           = 200000
 
 # Number of simulated years (start year is 2015)
 param_dict['EXP_CONSTANT']['num_years']            =     30
@@ -56,9 +59,6 @@ param_dict['EXP_CONSTANT']['num_years']            =     30
 # Name of Nigerian state
 # e.g., KANO, JIGAWA
 param_dict['EXP_CONSTANT']['nga_state_name']       =  'KANO'
-
-# Use measles RI starting in 2025
-param_dict['EXP_CONSTANT']['use_RI']               =  False
 
 
 
