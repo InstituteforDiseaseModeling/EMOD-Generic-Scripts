@@ -35,6 +35,10 @@ def campaignBuilder():
   # ***** Get variables for this simulation *****
   SIA_ADDLIST   = gdata.var_params['test_sias']
 
+  CHANGE_RI     = 0.0
+  if('change_RI' in gdata.var_params):
+    CHANGE_RI     = gdata.var_params['change_RI']
+
 
   # ***** Events *****
 
@@ -76,8 +80,14 @@ def campaignBuilder():
     else:
       init_mcv1 = np.mean(mcv1_vec[:3])
 
-    time_list = [0.0]       + (time_vec[time_vec>0.0]).tolist() + [365.0*100]
+    time_list = [0.0]       + (time_vec[time_vec>0.0]).tolist() + [365.0]
     mcv1_list = [init_mcv1] + (mcv1_vec[time_vec>0.0]).tolist() + [np.mean(mcv1_vec[-3:])]
+
+    for k2 in range(1,100):
+      new_time = time_list[-1] + 365.0
+      new_rate = max((1.0 - (1.0-mcv1_list[-1]) * (1.0-CHANGE_RI)),0.0)
+      time_list.append(new_time)
+      mcv1_list.append(new_rate)
 
     pdict     = {'startday':       start_day ,
                  'nodes':          node_list ,

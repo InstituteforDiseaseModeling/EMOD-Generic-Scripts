@@ -60,6 +60,9 @@ param_dict['EXP_CONSTANT']['num_years']            =     30
 # e.g., KANO, JIGAWA
 param_dict['EXP_CONSTANT']['nga_state_name']       =  'KANO'
 
+# Annual relative change in RI rates
+param_dict['EXP_CONSTANT']['change_RI']            =      0.02
+
 
 
 # ***** Write parameter dictionary *****

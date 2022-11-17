@@ -60,9 +60,10 @@ param_dict['EXP_CONSTANT']['test_sias']            =  [2024.25, 2027.75]
 param_dict['EXP_CONSTANT']['num_years']            =     15
 
 # Infectivity
-param_dict['EXP_CONSTANT']['R0']                  =      14.0
+param_dict['EXP_CONSTANT']['R0']                   =      14.0
 
-
+# Annual relative change in RI rates
+param_dict['EXP_CONSTANT']['change_RI']            =      0.02
 
 
 # ***** Write parameter dictionary *****
