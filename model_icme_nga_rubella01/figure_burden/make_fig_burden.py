@@ -190,7 +190,7 @@ outval = np.vstack((xrow,ydatout))
 np.savetxt('CRS_{:s}_RCV_Yes.csv'.format(state_name),outval,delimiter=',',fmt='%.2f')
 
 
-axs01.plot(xdat,ydat1,label='RCV - Constant')
+axs01.plot(xdat,ydat1,label='RCV - Start in 2025')
 axs01.plot(xdat,ydat2,label='RCV - None')
 axs01.legend(fontsize=16)
 
