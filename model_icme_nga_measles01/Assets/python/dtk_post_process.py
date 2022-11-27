@@ -86,7 +86,7 @@ def application(output_path):
     start_val  = np.ceil((year_val-BASE_YEAR)*365.0)
     rep_bool   = (targ_dat[:,0]==start_val)
     num_inf    = np.sum(targ_dat[rep_bool,4])
-    parsed_dat[key_str]['sia_summary'].append([start_val, num_inf, targ_val])
+    parsed_dat[key_str]['sia_summary'].append([float(start_val), float(num_inf), float(targ_val)])
 
 
   # Aggregate new infections to timeseries by month
