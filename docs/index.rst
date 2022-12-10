@@ -21,5 +21,6 @@ Contents
 
    get-started
    workflow
+   cookiecutter
    examples
 
