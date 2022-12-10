@@ -4,7 +4,7 @@ Get started
 
 Follow the instructions below to
 
-#.  Set up a virtual environment (e.g. conda).
+#.  Set up a virtual python environment (e.g. conda).
 
 #.  Install requirements via `pip` using the |IDM_s| artifactory::
 
