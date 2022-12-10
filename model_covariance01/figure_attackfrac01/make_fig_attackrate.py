@@ -39,7 +39,7 @@ xref = np.linspace(1.01,2.0,200)
 yref = np.zeros(xref.shape)
 for k1 in range(yref.shape[0]):
   yref[k1] = spopt.brentq(KMlimt, 1e-5, 1, args=(xref[k1]))
-axs01.plot(xref,yref,'k-',lw=5.0,label='Attack Rate')
+axs01.plot(xref,yref,'k-',lw=5.0,label='Attack Rate - Analytic Solution')
 
 
 # Sim outputs
@@ -62,34 +62,36 @@ acq_var_lev = sorted(list(set(np.round(ACQ_VAR,2).tolist())))
 cor_lev     = sorted(list(set(np.round(COR_VAL,2).tolist())))
 inf_var_lev = [0.5]
 
-inf_mat  = np.zeros(param_dict['NUM_SIMS'])
+inf_mat  = np.zeros(param_dict['NUM_SIMS']) - 1.0
 hrd_mat  = np.zeros(param_dict['NUM_SIMS'])
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   inf_mat[sim_idx] = np.array(data_brick[sim_idx_str]['atk_frac'])
   hrd_mat[sim_idx] = np.array(data_brick[sim_idx_str]['herd_frac'])
 
-gidx      = (R0_VAR == r0_var_lev[2]) & (ACQ_VAR == acq_var_lev[0]) & (COR_VAL == cor_lev[0])
+fidx = (inf_mat>=0.0)
+
+gidx      = fidx & (R0_VAR == r0_var_lev[2]) & (ACQ_VAR == acq_var_lev[0]) & (COR_VAL == cor_lev[0])
 str_set   = ['{:3.1f}'.format(inf_var_lev[0]),'{:3.1f}'.format(acq_var_lev[0]),'{:3.1f}'.format(cor_lev[0])]
 label_str = 'Var$_{trans}$='+str_set[0]+'; Var$_{acq}$='+str_set[1]+'; Corr='+str_set[2]
 axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str, c='C0')
 
-gidx      = (R0_VAR == r0_var_lev[2]) & (ACQ_VAR == acq_var_lev[1]) & (COR_VAL == cor_lev[0])
+gidx      = fidx & (R0_VAR == r0_var_lev[2]) & (ACQ_VAR == acq_var_lev[1]) & (COR_VAL == cor_lev[0])
 str_set   = ['{:3.1f}'.format(inf_var_lev[0]),'{:3.1f}'.format(acq_var_lev[1]),'{:3.1f}'.format(cor_lev[0])]
 label_str = 'Var$_{trans}$='+str_set[0]+'; Var$_{acq}$='+str_set[1]+'; Corr='+str_set[2]
 axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str, c='C1')
 
-gidx      = (R0_VAR == r0_var_lev[1]) & (ACQ_VAR == acq_var_lev[1]) & (COR_VAL == cor_lev[1])
+gidx      = fidx & (R0_VAR == r0_var_lev[1]) & (ACQ_VAR == acq_var_lev[1]) & (COR_VAL == cor_lev[1])
 str_set   = ['{:3.1f}'.format(inf_var_lev[0]),'{:3.1f}'.format(acq_var_lev[1]),'{:3.1f}'.format(cor_lev[1])]
 label_str = 'Var$_{trans}$='+str_set[0]+'; Var$_{acq}$='+str_set[1]+'; Corr='+str_set[2]
 axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str, c='C2')
 
-gidx      = (R0_VAR == r0_var_lev[0]) & (ACQ_VAR == acq_var_lev[1]) & (COR_VAL == cor_lev[2])
+gidx      = fidx & (R0_VAR == r0_var_lev[0]) & (ACQ_VAR == acq_var_lev[1]) & (COR_VAL == cor_lev[2])
 str_set   = ['{:3.1f}'.format(inf_var_lev[0]),'{:3.1f}'.format(acq_var_lev[1]),'{:3.1f}'.format(cor_lev[2])]
 label_str = 'Var$_{trans}$='+str_set[0]+'; Var$_{acq}$='+str_set[1]+'; Corr='+str_set[2]
 axs01.plot(R0[gidx], inf_mat[gidx], lw=0.0, marker='.', label=label_str, c='C3')
 
-#axs01.legend()
+axs01.legend(fontsize=8)
 
 
 # Generate figures
