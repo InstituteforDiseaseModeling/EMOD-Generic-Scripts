@@ -2,7 +2,7 @@
 #
 #*******************************************************************************
 
-import os, json
+import os
 
 from idmtools.core.platform_factory                           import  Platform
 from idmtools.assets                                          import  AssetCollection
@@ -26,19 +26,6 @@ DOCK_PACK     = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worke
 # Start a work item on COMPS
 def run_the_calibration():
 
-  # Arguments to calibration
-  param_calib = {'NUM_SIMS':                                    1000 ,
-                 'NUM_ITER':                                       8 ,
-                 'VAR_NAMES':                   [ 'log_mort_mult01',
-                                                  'log_mort_mult02',
-                                                  'log_mort_mult03'] ,
-                 'VAR_RANGES':                  [       (-4.0, 4.0),
-                                                        (-4.0, 4.0),
-                                                        (-4.0, 4.0)] }
-
-  with open('param_calib.json','w') as fid01:
-    json.dump(param_calib,fid01)
-
   # Connect to COMPS; needs to be the same environment used to run the sims
   plat_obj = Platform(block        = 'COMPS',
                       endpoint     = 'https://comps.idmod.org',
@@ -54,12 +41,12 @@ def run_the_calibration():
   task_obj.common_assets.add_directory(PATH_LOCAL)
   task_obj.common_assets.add_asset(PATH_ENV)
   task_obj.common_assets.add_asset(PATH_EXE)
+  task_obj.common_assets.add_asset('param_dict.json')
 
   # Add working directory assets
   ac_obj = AssetCollection()
-  ac_obj.add_asset('COMPS_ID.id')
   ac_obj.add_asset('idmtools.ini')
-  ac_obj.add_asset('param_calib.json')
+
 
   # Es liebten alle Frauen
   wi_obj = SSMTWorkItem(name             = 'Calibd_EMOD_DemogExample-UK01',
@@ -69,7 +56,7 @@ def run_the_calibration():
   wi_obj.run(wait_on_done=False)
 
   # Save calibration id to file
-  write_id_file('CALIB_ID.id', wi_obj)
+  write_id_file('COMPS_ID.id', wi_obj)
   print()
   print(wi_obj.uid.hex)
 

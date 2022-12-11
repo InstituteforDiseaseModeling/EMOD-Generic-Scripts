@@ -15,9 +15,8 @@ DIRNAME = 'experiment_demog_UK01_calib'
 tpath = os.path.join('..',DIRNAME)
 
 # Calibration parameters
-with open(os.path.join(tpath,'param_calib.json')) as fid01:
+with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_calib = json.load(fid01)
-
 
 # Create figure
 fig01 = plt.figure(figsize=(24,6))
@@ -72,8 +71,8 @@ cdata  = list()
 with open(os.path.join(tpath,'param_dict_iters.json')) as fid01:
   param_dict = json.load(fid01)
 
-with open(os.path.join(tpath,'data_calib_iters.json')) as fid01:
-  calib_dict = json.load(fid01)
+with open(os.path.join(tpath,'data_brick_iters.json')) as fid01:
+  data_brick = json.load(fid01)
 
 for iter_num_str in param_dict:
 
@@ -83,16 +82,18 @@ for iter_num_str in param_dict:
   x2data.extend(param_dict[iter_num_str]['EXP_VARIABLE']['log_mort_mult02'])
   x3data.extend(param_dict[iter_num_str]['EXP_VARIABLE']['log_mort_mult03'])
 
-  calib_vec = np.zeros(nsims)
-  for sim_idx_str in calib_dict[iter_num_str]:
+  calib_vec = np.zeros(nsims) + 1
+  for sim_idx_str in data_brick[iter_num_str]:
     sim_idx = int(sim_idx_str)
-    calib_vec[sim_idx] = calib_dict[iter_num_str][sim_idx_str]
+    calib_vec[sim_idx] = data_brick[iter_num_str][sim_idx_str]['cal_val']
   cdata.extend(calib_vec.tolist())
 
-x1data = np.array(x1data)
-x2data = np.array(x2data)
-x3data = np.array(x3data)
 cdata  = np.array(cdata)
+fidx   = (cdata<0)
+cdata  = cdata[fidx]
+x1data = np.array(x1data)[fidx]
+x2data = np.array(x2data)[fidx]
+x3data = np.array(x3data)[fidx]
 sidx   = np.argsort(cdata)
 
 axs01.scatter(x1data[sidx], x2data[sidx], c=cdata[sidx], vmin=-20)

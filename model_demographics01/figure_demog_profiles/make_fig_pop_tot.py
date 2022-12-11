@@ -32,10 +32,12 @@ var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
+pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
-  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str])
+  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_dat'])
+
+fidx = (pyr_mat[:,0,0]>=0)
 
 # Figures
 fig01 = plt.figure(figsize=(8,6))
@@ -73,7 +75,7 @@ lab_val   = ['Equilib Demog', '+Birth Rate Data', '+Init Age Data', '+Adjusted M
 
 for k0 in range(len(demog_lev)):
 
-  gidx        = (var_set==demog_lev[k0]) & (age_set==mod_init[k0]) & (mort_set==mort_mul[k0])
+  gidx        = fidx & (var_set==demog_lev[k0]) & (age_set==mod_init[k0]) & (mort_set==mort_mul[k0])
 
   pyr_mat_avg = np.mean(pyr_mat[gidx,:,:],axis=0)
   pyr_mat_std = np.std(pyr_mat[gidx,:,:],axis=0)

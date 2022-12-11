@@ -29,24 +29,23 @@ with open(os.path.join(tpath,'data_brick.json')) as fid01:
 with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
-with open(os.path.join(tpath,'data_calib.json')) as fid01:
-  data_brick_calib = json.load(fid01)
-
 nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
+pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
-  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str])
+  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_dat'])
+
+fidx = (pyr_mat[:,0,0]>=0)
 
 calib_vec = np.zeros(nsims)
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
-  calib_vec[sim_idx] = data_brick_calib[sim_idx_str]
+  calib_vec[sim_idx] = data_brick[sim_idx_str]['cal_val']
 
 # Figures
 fig01 = plt.figure(figsize=(8,6))
@@ -81,7 +80,7 @@ clr_val   = [    0,     2,     4,     3]
 
 for k0 in range(len(demog_lev)):
 
-  gidx        = (var_set==demog_lev[k0]) & (age_set==mod_init[k0]) & (mort_set==mort_mul[k0])
+  gidx        = fidx & (var_set==demog_lev[k0]) & (age_set==mod_init[k0]) & (mort_set==mort_mul[k0])
 
   pyr_mat_avg = np.mean(pyr_mat[gidx,:,:],axis=0)
   pyr_mat_std = np.std(pyr_mat[gidx,:,:],axis=0)

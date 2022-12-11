@@ -40,10 +40,12 @@ var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
+pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
-  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str])
+  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_dat'])
+
+fidx = (pyr_mat[:,0,0]>=0)
 
 demog_lev = [False,  True,  True,  True]
 mod_init  = [False, False,  True,  True]
@@ -54,7 +56,7 @@ x_dat_list = [uk_1950_frac, uk_1960_frac, uk_1970_frac, uk_1980_frac]
 for k0 in range(len(demog_lev)):
 
   fig01 = plt.figure(figsize=(24,12))
-  gidx  = (var_set==demog_lev[k0]) & (age_set==mod_init[k0]) & (mort_set==mort_mul[k0])
+  gidx  = fidx & (var_set==demog_lev[k0]) & (age_set==mod_init[k0]) & (mort_set==mort_mul[k0])
 
   pyr_mat_avg = np.mean(pyr_mat[gidx,:,:],axis=0)
   pyr_mat_std = np.std(pyr_mat[gidx,:,:],axis=0)

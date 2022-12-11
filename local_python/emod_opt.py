@@ -17,12 +17,12 @@ def next_point_alg(gen_param, sum_data, ex_val):
 
 
   # Local copy of parameters
-  NUM_SIMS   = gen_param['NUM_SIMS']
+  NUM_SIMS   =  gen_param['NUM_SIMS']
   nSampOpt   =  int(frac_opt*NUM_SIMS)
   nSampRand  =  NUM_SIMS - nSampOpt
 
-  pNames     =  copy.deepcopy(gen_param['VAR_NAMES'])
-  pRanges    =  copy.deepcopy(gen_param['VAR_RANGES'])
+  pNames     =  gen_param['VAR_NAMES']
+  pRanges    =  gen_param['VAR_RANGES']
   nDim       =  len(pNames)
 
 
@@ -66,14 +66,16 @@ def next_point_alg(gen_param, sum_data, ex_val):
     # Attribute point density
     stillThinking = True
     while(stillThinking):
-      # Choose best current point
-      cPointOld = datVecExt[np.argmax(LLVecSamp),:]
 
       # No place left to optimize
-      if(np.max(LLVecSamp)==ex_val):
-        nSampRand = nSampRand + nSampOpt
+      if(len(LLVecSamp) == 0 or np.max(LLVecSamp)==ex_val):
+        nSampRand = nSampRand + nSampOpt + nsOpt
         nSampOpt  = 0
+        nsOpt     = 0
         break
+
+      # Choose best current point
+      cPointOld = datVecExt[np.argmax(LLVecSamp),:]
 
       # Calculate sample density around best point
       distVec  = np.linalg.norm((datVecExt-cPointOld)/datSpan,axis=1)
@@ -112,28 +114,25 @@ def next_point_alg(gen_param, sum_data, ex_val):
         cPointNew = cPointOld
         stillThinking = False
 
-    #end-while
-
     # Sample locally
-    optSamp = np.random.randn(nsOpt,nDim)
-    optSamp = optSamp/np.linalg.norm(optSamp,axis=1)[:,None]
-    optSamp = optSamp*np.power(np.random.rand(nsOpt,1),1.0/float(nDim))
-    optSamp = optSamp*(datSpan*radFrac)
-    optSamp = optSamp+cPointNew
- 
-    # Truncate local samples
-    optSamp = np.maximum(optSamp,datMin)
-    optSamp = np.minimum(optSamp,datMax)
+    if(nsOpt):
+      optSamp = np.random.randn(nsOpt,nDim)
+      optSamp = optSamp/np.linalg.norm(optSamp,axis=1)[:,None]
+      optSamp = optSamp*np.power(np.random.rand(nsOpt,1),1.0/float(nDim))
+      optSamp = optSamp*(datSpan*radFrac)
+      optSamp = optSamp+cPointNew
 
-    # Attach new samples
-    datVecExt = np.vstack((datVecExt,optSamp))
-    LLVecSamp = np.append(LLVecSamp, nsOpt*[ex_val])
+      # Truncate local samples
+      optSamp = np.maximum(optSamp,datMin)
+      optSamp = np.minimum(optSamp,datMax)
 
-    # Copy to output dictionary
-    for k1 in range(nDim):
-      paramDic[pNames[k1]].extend((optSamp[:,k1]).tolist())
+      # Attach new samples
+      datVecExt = np.vstack((datVecExt,optSamp))
+      LLVecSamp = np.append(LLVecSamp, nsOpt*[ex_val])
 
-  #end-nsOpt
+      # Copy to output dictionary
+      for k1 in range(nDim):
+        paramDic[pNames[k1]].extend((optSamp[:,k1]).tolist())
 
 
   # Add some random global samples
