@@ -25,8 +25,8 @@ for pn in pname:
     with open(targfile) as fid01:
       parlist[pn] = json.load(fid01)
 
-    nSims  = 1000#parlist[pn]['num_sims']
-    nTimes = 730#np.array(parlist[pn]['nTsteps'])
+    nSims  = parlist[pn]['NUM_SIMS']
+    nTimes = np.array(parlist[pn]['EXP_CONSTANT']['nTsteps'])
     nTime  = np.max(nTimes)
 
     infBlock = np.zeros((nSims,nTime))
