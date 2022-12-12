@@ -36,6 +36,8 @@ for sim_idx_str in data_brick:
     continue
   pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyramid'])
 
+fidx = (pyr_mat[:,0,0]>=0)
+
 # Figures
 fig01 = plt.figure(figsize=(8,6))
 
@@ -62,8 +64,8 @@ axs01.set_xticklabels(ticlab,fontsize=14)
 axs01.tick_params(axis='x', labelsize=14)
 axs01.tick_params(axis='y', labelsize=14)
 
-pyr_mat_avg = np.mean(pyr_mat,axis=0)
-pyr_mat_std = np.std(pyr_mat,axis=0)
+pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
+pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
 
 pop_dat     = np.sum(pyr_mat_avg,axis=1)
 pop_dat_err = np.sum(pyr_mat_std,axis=1)

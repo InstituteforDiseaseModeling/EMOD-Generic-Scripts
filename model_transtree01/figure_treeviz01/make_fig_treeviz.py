@@ -54,14 +54,12 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
 BI_VAR = np.array(param_dict['EXP_VARIABLE']['base_inf_stddev_mult'])
+nsims  = int(param_dict['NUM_SIMS'])
 
-sim_idx_list = sorted(data_brick.keys())
-tree_list    = list()
-for k1 in range(len(sim_idx_list)):
-  if(k1 != int(sim_idx_list[k1])):
-    raise Exception('Sim index mismatch')
-  tree_list.append(np.array(data_brick[sim_idx_list[k1]]))
-
+tree_list = [np.array([]) for k1 in range(nsims)]
+for idx_str in data_brick:
+  idx_val = int(idx_str)
+  tree_list[idx_val] = np.array(data_brick[idx_str])
 
 # Simulations with outbreak
 obr_bool = np.array([tree.shape[0]>100 for tree in tree_list])

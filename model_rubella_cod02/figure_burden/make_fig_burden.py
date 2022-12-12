@@ -59,7 +59,7 @@ for dirname in DIRNAMES:
     ri_vec = np.ones(nsims) * param_dict['EXP_CONSTANT']['RI_rate']
 
   ri_lev       = sorted(list(set(ri_vec.tolist())))
-  pyr_mat      = np.zeros((nsims,int(ntstp/365)+1,20))
+  pyr_mat      = np.zeros((nsims,int(ntstp/365)+1,20))-1
   inf_mat      = np.zeros((nsims,int(ntstp/365),20))
 
   for sim_idx_str in data_brick:
@@ -69,6 +69,8 @@ for dirname in DIRNAMES:
   for sim_idx_str in data_brick:
     sim_idx = int(sim_idx_str)
     inf_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['inf_data'])
+
+  fidx = (pyr_mat[:,0,0]>=0)
 
   fname_pop = os.path.join('..','Assets','data','pop_dat_{:s}.csv'.format(pop_dat_str))
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
@@ -105,7 +107,7 @@ for dirname in DIRNAMES:
   br_mult_xvec = brmultx_02.tolist()
   br_mult_yvec = brmulty_02.tolist() 
 
-  pyr_mat_avg = np.mean(pyr_mat,axis=0)
+  pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
   pop_tot     = np.sum(pyr_mat_avg,axis=1)
   pop_tot     = np.diff(pop_tot)/2.0 + pop_tot[:-1]
 
@@ -141,7 +143,7 @@ for dirname in DIRNAMES:
   axs01.set_ylim(   0, 6000)
 
   for ri_val in ri_lev:
-    gidx        = (ri_vec==ri_val)
+    gidx        = (ri_vec==ri_val) & fidx
     inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
     ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
     xdat        = np.arange(INIT_YR, INIT_YR+int(ntstp/365)) + 0.5
@@ -166,7 +168,7 @@ for dirname in DIRNAMES:
   axs01.set_ylim( 0.0,  4.0)
 
   for ri_val in ri_lev:
-    gidx        = (ri_vec==ri_val)
+    gidx        = (ri_vec==ri_val) & fidx
     inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
     crs_mat     = inf_mat_avg*crs_prob_vec
     ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3

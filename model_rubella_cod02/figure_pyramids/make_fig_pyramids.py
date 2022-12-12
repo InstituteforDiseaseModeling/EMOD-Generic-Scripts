@@ -35,7 +35,7 @@ for dirname in DIRNAMES:
   ntstp        = int(param_dict['EXP_CONSTANT']['num_tsteps'])
   pop_dat_str  =     param_dict['EXP_CONSTANT']['pop_dat_file']
 
-  pyr_mat      = np.zeros((nsims,int(ntstp/365)+1,20))
+  pyr_mat      = np.zeros((nsims,int(ntstp/365)+1,20))-1
   year_vec     = np.arange(INIT_YR, INIT_YR+int(ntstp/365)+1)
   chart_yrs    = year_vec[np.mod(year_vec,10)==0]
   num_charts   = chart_yrs.shape[0]
@@ -46,11 +46,13 @@ for dirname in DIRNAMES:
     sim_idx = int(sim_idx_str)
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
 
+  fidx = (pyr_mat[:,0,0]>=0)
+
   fname_pop = os.path.join('..','Assets','data','pop_dat_{:s}.csv'.format(pop_dat_str))
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
-  pyr_mat_avg = np.mean(pyr_mat,axis=0)
-  pyr_mat_std = np.std(pyr_mat,axis=0)
+  pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
+  pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
 
 
   # Figures - Sims

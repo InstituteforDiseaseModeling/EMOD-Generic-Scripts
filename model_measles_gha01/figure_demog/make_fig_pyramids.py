@@ -34,7 +34,7 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
+pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
 for sim_idx_str in data_brick:
   try:
     sim_idx = int(sim_idx_str)
@@ -42,12 +42,14 @@ for sim_idx_str in data_brick:
     continue
   pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyramid'])
 
+fidx = (pyr_mat[:,0,0]>=0)
+
 x_dat_list = [gha_2010_frac, gha_2020_frac]
 
 fig01 = plt.figure(figsize=(12,12))
 
-pyr_mat_avg = np.mean(pyr_mat,axis=0)
-pyr_mat_std = np.std(pyr_mat,axis=0)
+pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
+pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
 
 # Figures - Sims
 for k1 in range(2, pyr_mat_avg.shape[0], 10):

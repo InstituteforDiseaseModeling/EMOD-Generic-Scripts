@@ -55,7 +55,7 @@ ri_vec   = np.array(param_dict['EXP_VARIABLE']['RI_rate'])
 ri_lev   = sorted(list(set(ri_vec.tolist())))
 
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
+pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
@@ -65,8 +65,9 @@ for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   inf_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['inf_data'])
 
+fidx = (pyr_mat[:,0,0]>=0)
 
-pyr_mat_avg = np.mean(pyr_mat,axis=0)
+pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
 ref_rat     = tpop_2020/np.sum(pyr_mat_avg[20,:])
 pop_tot     = np.sum(pyr_mat_avg,axis=1)
 pop_tot     = np.diff(pop_tot)/2.0 + pop_tot[:-1]
@@ -98,7 +99,7 @@ axs01.set_xticks(ticks=ticloc)
 axs01.set_xticklabels(ticlab)
 
 for ri_val in ri_lev:
-  gidx        = (ri_vec==ri_val)
+  gidx        = (ri_vec==ri_val) & fidx
   inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
   ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
   xdat        = np.arange(0,50) + 0.5
@@ -127,7 +128,7 @@ axs01.set_xticks(ticks=ticloc)
 axs01.set_xticklabels(ticlab)
 
 for ri_val in ri_lev:
-  gidx        = (ri_vec==ri_val)
+  gidx        = (ri_vec==ri_val) & fidx
   inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
   crs_mat     = inf_mat_avg*crs_prob_vec
   ydat        = np.sum(crs_mat,axis=1)/birth_vec*1e3

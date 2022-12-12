@@ -1,74 +1,35 @@
-#********************************************************************************
+#*******************************************************************************
 #
 #*******************************************************************************
 
-import os, sys, shutil, json
+import os, json
 
-from idmtools.core.platform_factory                    import  Platform
-from idmtools_platform_comps.utils.download.download   import  DownloadWorkItem
-from idmtools.core.id_file                             import  read_id_file
+from idmtools.core.id_file  import  read_id_file
 
-import numpy as np
+# Ought to go in emodpy
+import sys
+LOCAL_PATH = os.path.abspath(os.path.join('..','..','local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from emod_reduce import get_sim_files
 
 # ******************************************************************************
 
-
-
-# Paths
-PATH_TEMP  = os.path.abspath('temp_dir')
-DOCK_PACK  = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
-
-
-
-def get_sim_files():
+def get_data_brick():
 
   # Get Experiment ID
   (exp_id,_,_,_) = read_id_file('COMPS_ID.id')
 
-  # Connect to COMPS; needs to be the same environment used to run the sims
-  plat_obj = Platform(block        = 'COMPS',
-                      endpoint     = 'https://comps.idmod.org',
-                      environment  = 'Calculon')
+  # Reduce output and write data brick
+  data_brick = get_sim_files(exp_id, LOCAL_PATH)
+  with open('data_brick.json', 'w') as fid01:
+    json.dump(data_brick, fid01)
 
-  # Creates a single docker work item to collect the specified files and download
-  dwi_obj = DownloadWorkItem(item_name                    = 'RetreiveFiles01',
-                             related_experiments          = [exp_id],
-                             file_patterns                = ['parsed_out.json'],
-                             simulation_prefix_format_str = 'temp/{simulation.id}',
-                             output_path                  = PATH_TEMP,
-                             docker_image                 = DOCK_PACK)
-
-  # Wait until everything is downloaded
-  dwi_obj.run(wait_on_done=True, platform=plat_obj)
-
-
-
-def proc_files():
-
-  merged_dict = dict()
-
-  # Aggregates all the data from downloaded files into a single dictionary
-  for (root_path, dirs_list, files_list) in os.walk(PATH_TEMP):
-    for file_name in files_list:
-      if(file_name == 'parsed_out.json'):
-        with open(os.path.join(root_path,file_name)) as fid01:
-          sim_dict = json.load(fid01)
-        merged_dict.update(sim_dict)
-
-  with open('data_brick.json','w') as fid01:
-    json.dump(merged_dict,fid01)
-
-  # DELETE ALL TEMPORARY FILES
-  shutil.rmtree(PATH_TEMP)
-
-
+  return None
 
 # ******************************************************************************
 
 if(__name__ == "__main__"):
 
-  get_sim_files()
-
-  proc_files()
+  get_data_brick()
 
 # ******************************************************************************
