@@ -39,7 +39,7 @@ for k0 in range(len(DIRNAMES)):
   num_years    = int(param_dict['EXP_CONSTANT']['num_years'])
   pop_dat_str  =     param_dict['EXP_CONSTANT']['pop_dat_file']
 
-  pyr_mat      = np.zeros((nsims,num_years+1,20))
+  pyr_mat      = np.zeros((nsims,num_years+1,20))-1
   year_vec     = np.arange(init_year, init_year+num_years+1)
   chart_yrs    = year_vec[np.mod(year_vec,10)==0]
   num_charts   = chart_yrs.shape[0]
@@ -51,14 +51,16 @@ for k0 in range(len(DIRNAMES)):
     sim_idx = int(sim_idx_str)
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
 
+  fidx = (pyr_mat[:,0,0]>=0)
+
   fname_pop = os.path.join('..','Assets','data','pop_dat_{:s}.csv'.format(pop_dat_str))
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec_dat  = pop_input[0, :]
   pop_mat_dat   = pop_input[1:,:]
 
-  pyr_mat_avg = np.mean(pyr_mat,axis=0)
-  pyr_mat_std = np.std(pyr_mat,axis=0)
+  pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
+  pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
 
   # Figures - Sims
   for k1 in range(num_charts):

@@ -2,7 +2,7 @@
 #
 #*******************************************************************************
 
-import os
+import os, json
 
 from idmtools.core.id_file  import  read_id_file
 
@@ -21,7 +21,7 @@ def get_data_brick():
 
   # Reduce output and write data brick
   data_brick = get_sim_files(exp_id, LOCAL_PATH)
-  with open('data_brick.json', 'w'):
+  with open('data_brick.json', 'w') as fid01:
     json.dump(data_brick, fid01)
 
   return None

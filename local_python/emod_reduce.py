@@ -95,7 +95,7 @@ def get_sim_files(exp_id='', LOCAL_PATH=''):
 
   # Download reduced output and delete work item
   resp_dict = plat.get_files(wi_obj,[DATA_BRICK])
-  ret_val   = resp_dict[DATA_BRICK].decode()
+  ret_val   = json.loads(resp_dict[DATA_BRICK].decode())
   plat_obj  = wi_obj.get_platform_object()
   plat_obj.delete()
 
