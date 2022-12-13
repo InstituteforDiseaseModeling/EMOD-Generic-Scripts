@@ -19,20 +19,14 @@ targfile = os.path.join('..',DIRNAME,'data_brick.json')
 with open(targfile) as fid01:
   data_brick = json.load(fid01)
 
-targfile = os.path.join('..',DIRNAME,'data_calib.json')
-with open(targfile) as fid01:
-  calib_dict = json.load(fid01)
-
-
 nsims     = int(param_dict['NUM_SIMS'])
 log10_rep = np.array(param_dict['EXP_VARIABLE']['log10_min_reporting'])
 num_cases = np.array(param_dict['EXP_VARIABLE']['adm01_case_threshold'])
 
-
 tvals    = data_brick.pop('tstamps')
 ntstp    = len(tvals)
 infBlock = np.zeros((nsims,ntstp))
-sclVal   = np.zeros((nsims,1))
+sclVal   = np.zeros((nsims,1))-1
 cdata    = np.zeros(nsims)
 
 for sim_idx_str in data_brick:
@@ -40,13 +34,14 @@ for sim_idx_str in data_brick:
     sim_idx = int(sim_idx_str)
   except:
     continue
-  infDat = np.array(data_brick[sim_idx_str]['timeseries'])
-  infBlock[sim_idx,:] = infDat
+  infBlock[sim_idx,:] = np.array(data_brick[sim_idx_str]['timeseries'])
   sclVal[sim_idx,0]   = data_brick[sim_idx_str]['rep_rate']
-  cdata[sim_idx]      = calib_dict[sim_idx_str]
+  cdata[sim_idx]      = data_brick[sim_idx_str]['cal_val']
+
+fidx = (sclVal[:,0]>=0)
 
 ntval    = np.array(tvals)/365+1900
-gidx     = (cdata > -4000)
+gidx     = (cdata > -4000) & fidx
 nusim    = np.sum(gidx)
 test_idx = np.argwhere(ntval>2020)[0][0]
 
@@ -105,7 +100,7 @@ ticlab = ['0.1%','1.0%','10%']
 axs01.set_xticks(ticks=ticloc)
 axs01.set_xticklabels(ticlab)
 
-cbar_handle = plt.colorbar(cm.ScalarMappable(cmap=virmap), shrink=0.75)
+cbar_handle = plt.colorbar(cm.ScalarMappable(cmap=virmap), ax=axs01, shrink=0.75)
 
 axs01.plot([0.04, 0.04],[0,1000],'k:')
 

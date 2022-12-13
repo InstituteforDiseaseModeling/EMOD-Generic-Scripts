@@ -20,17 +20,11 @@ targfile = os.path.join('..',DIRNAME,'data_brick.json')
 with open(targfile) as fid01:
   data_brick = json.load(fid01)
 
-targfile = os.path.join('..',DIRNAME,'data_calib.json')
-with open(targfile) as fid01:
-  calib_dict = json.load(fid01)
-
-
 nsims    = int(param_dict['NUM_SIMS'])
-
 tvals    = data_brick.pop('tstamps')
 ntstp    = len(tvals)
 infBlock = np.zeros((nsims,ntstp))
-sclVal   = np.zeros((nsims,1))
+sclVal   = np.zeros((nsims,1))-1
 cdata    = np.zeros(nsims)
 
 for sim_idx_str in data_brick:
@@ -38,11 +32,11 @@ for sim_idx_str in data_brick:
     sim_idx = int(sim_idx_str)
   except:
     continue
-  infDat = np.array(data_brick[sim_idx_str]['timeseries'])
-  infBlock[sim_idx,:] = infDat
+  infBlock[sim_idx,:] = np.array(data_brick[sim_idx_str]['timeseries'])
   sclVal[sim_idx,0]   = data_brick[sim_idx_str]['rep_rate']
-  cdata[sim_idx]      = calib_dict[sim_idx_str]
+  cdata[sim_idx]      = data_brick[sim_idx_str]['cal_val']
 
+fidx = (sclVal[:,0]>=0)
 
 # Figure
 fig01 = plt.figure(figsize=(8,6))
@@ -56,7 +50,7 @@ axs01.set_axisbelow(True)
 
 xval     = np.array(tvals)/365+1900
 
-gidx     = (cdata > -4000)
+gidx     = (cdata > -4000) & fidx
 test_idx = np.argwhere(xval>2020)[0][0]
 
 infBlock              = infBlock[gidx,:]
