@@ -645,11 +645,151 @@
   "NGA_2022_46": {
     "age_max": 1825,
     "age_min": 273,
-    "date": 44705,
+    "date": 44682,
     "nodes": [
-      "AFRO:NIGERIA:LAGOS",
-      "AFRO:NIGERIA:OGUN",
-      "AFRO:NIGERIA:GOMBE"
+      "AFRO:NIGERIA:OGUN"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_47": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44698,
+    "nodes": [
+      "AFRO:NIGERIA:GOMBE",
+      "AFRO:NIGERIA:LAGOS"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_48": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44846,
+    "nodes": [
+      "AFRO:NIGERIA:ONDO",
+      "AFRO:NIGERIA:CROSS_RIVER"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_49": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44854,
+    "nodes": [
+      "AFRO:NIGERIA:BAUCHI",
+      "AFRO:NIGERIA:FCT_ABUJA",
+      "AFRO:NIGERIA:PLATEAU"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_50": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44856,
+    "nodes": [
+      "AFRO:NIGERIA:OYO"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_51": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44857,
+    "nodes": [
+      "AFRO:NIGERIA:NASARAWA"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_52": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44859,
+    "nodes": [
+      "AFRO:NIGERIA:ANAMBRA"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_53": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44860,
+    "nodes": [
+      "AFRO:NIGERIA:OSUN"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_54": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44862,
+    "nodes": [
+      "AFRO:NIGERIA:ENUGU",
+      "AFRO:NIGERIA:BENUE"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_55": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44865,
+    "nodes": [
+      "AFRO:NIGERIA:EKITI"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_56": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44867,
+    "nodes": [
+      "AFRO:NIGERIA:ADAMAWA"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_57": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44868,
+    "nodes": [
+      "AFRO:NIGERIA:RIVERS",
+      "AFRO:NIGERIA:AKWA_IBOM",
+      "AFRO:NIGERIA:NIGER"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_58": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44869,
+    "nodes": [
+      "AFRO:NIGERIA:ZAMFARA"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_59": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44872,
+    "nodes": [
+      "AFRO:NIGERIA:EDO"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_60": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44874,
+    "nodes": [
+      "AFRO:NIGERIA:DELTA"
+    ],
+    "targ_frac": 1.0
+  },
+  "NGA_2022_61": {
+    "age_max": 1825,
+    "age_min": 273,
+    "date": 44875,
+    "nodes": [
+      "AFRO:NIGERIA:JIGAWA"
     ],
     "targ_frac": 1.0
   }
