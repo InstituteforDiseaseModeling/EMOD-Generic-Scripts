@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'DemogExample-WPP_projections01'
+param_dict['EXP_NAME']     = 'DemogExample-WPP-projections01'
 param_dict['NUM_SIMS']     =  100
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()

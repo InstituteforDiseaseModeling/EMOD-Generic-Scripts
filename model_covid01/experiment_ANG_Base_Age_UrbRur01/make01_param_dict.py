@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'SARS-CoV-2-ANG_UrbRur01'
+param_dict['EXP_NAME']     = 'SARS-CoV-2-ANG-UrbRur01'
 param_dict['NUM_SIMS']     =   700
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()

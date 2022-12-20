@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'cVDPV2_NGA_100km_SIAs'
+param_dict['EXP_NAME']     = 'cVDPV2-NGA-100km-SIAs'
 param_dict['NUM_SIMS']     =   350
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
