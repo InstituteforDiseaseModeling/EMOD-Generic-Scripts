@@ -32,7 +32,6 @@ def application(output_path):
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
-  calval_dat = {key_str: dict()}
 
 
   # Connect to SQL database; retreive new entries
@@ -104,12 +103,6 @@ def application(output_path):
   parsed_dat[key_str]['inf_mo'] = inf_mo.tolist()
 
 
-  # Calculate calibration score
-  err_score = 0
-
-  calval_dat[key_str] = float(err_score)
-
-
   # Common output data
   parsed_dat['tstamps'] = (np.diff(tstamps)/2.0 + tstamps[:-1]).tolist()
 
@@ -117,11 +110,6 @@ def application(output_path):
   # Write output dictionary
   with open('parsed_out.json','w') as fid01:
     json.dump(parsed_dat, fid01)
-
-
-  # Write calibration score
-  with open('calval_out.json','w') as fid01:
-    json.dump(calval_dat, fid01)
 
 
   return None
