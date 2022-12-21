@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'ExampleMeasles01-NGA_admin02'
+param_dict['EXP_NAME']     = 'Measles-NGA-adm01-burden01'
 param_dict['NUM_SIMS']     =   100
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
@@ -52,7 +52,7 @@ param_dict['EXP_CONSTANT']['num_agents']           = 250000
 param_dict['EXP_CONSTANT']['nga_state_name']       =  'KANO'
 
 # Timing of test SIAs
-param_dict['EXP_CONSTANT']['test_sias']            =  [2024.25, 2027.75]
+param_dict['EXP_CONSTANT']['test_sias']            =     []
 
 
 
@@ -60,10 +60,10 @@ param_dict['EXP_CONSTANT']['test_sias']            =  [2024.25, 2027.75]
 param_dict['EXP_CONSTANT']['num_years']            =     15
 
 # Infectivity
-param_dict['EXP_CONSTANT']['R0']                   =      14.0
+param_dict['EXP_CONSTANT']['R0']                   =     14.0
 
 # Annual relative change in RI rates
-param_dict['EXP_CONSTANT']['change_RI']            =      0.02
+param_dict['EXP_CONSTANT']['change_RI']            =      0.01
 
 
 # ***** Write parameter dictionary *****

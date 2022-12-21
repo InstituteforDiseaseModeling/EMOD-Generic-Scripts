@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Measles-NGA-adm02-demog01'
+param_dict['EXP_NAME']     = 'Measles-NGA-adm01-demog01'
 param_dict['NUM_SIMS']     =   37*50
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
