@@ -23,10 +23,13 @@ def application(output_path):
   SIA_ADDLIST   = gdata.var_params['test_sias']
 
 
+  DAY_BINS_MO  = [31,28,31,30,31,30,31,31,30,31,30,31]
+  BIN_EDGES_MO = np.cumsum(TIME_YEARS*DAY_BINS_MO) + gdata.start_log + 0.5
+  BIN_EDGES_MO = np.insert(BIN_EDGES_MO, 0, gdata.start_log + 0.5)
 
-  DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
-  BIN_EDGES = np.cumsum(TIME_YEARS*DAY_BINS) + gdata.start_log + 0.5
-  BIN_EDGES = np.insert(BIN_EDGES, 0, gdata.start_log + 0.5)
+  DAY_BINS_YR  = [365]
+  BIN_EDGES_YR = np.cumsum(TIME_YEARS*DAY_BINS_YR) + gdata.start_log + 0.5
+  BIN_EDGES_YR = np.insert(BIN_EDGES_YR, 0, gdata.start_log + 0.5)
 
 
   # Prep output dictionary
@@ -42,9 +45,10 @@ def application(output_path):
   cursor_obj.execute(sql_cmd)
   row_list = cursor_obj.fetchall()
 
-  data_time = np.array([val[0] for val in row_list], dtype = float)  # Time
-  data_node = np.array([val[2] for val in row_list], dtype = int  )  # Node
-  data_mcw  = np.array([val[4] for val in row_list], dtype = float)  # MCW
+  data_time  = np.array([val[0] for val in row_list], dtype = float)  # Time
+  data_event = np.array([val[1] for val in row_list], dtype = str  )  # Event
+  data_node  = np.array([val[2] for val in row_list], dtype = int  )  # Node
+  data_mcw   = np.array([val[4] for val in row_list], dtype = float)  # MCW
 
 
   # Sample population pyramid every year
@@ -89,22 +93,37 @@ def application(output_path):
 
 
   # Aggregate new infections to timeseries by month
-  (inf_mo, tstamps) = np.histogram(data_time,
-                                   bins    = BIN_EDGES,
-                                   weights = data_mcw)
+  gidx = (data_event=='NewlySymptomatic')
+  (inf_mo, tstamps_mo) = np.histogram(data_time[gidx],
+                                      bins    = BIN_EDGES_MO,
+                                      weights = data_mcw[gidx])
 
   # Correct for SIA doses as infections
   for k1 in range(len(parsed_dat[key_str]['sia_summary'])):
-    for k2 in range(len(BIN_EDGES)):
-      if(parsed_dat[key_str]['sia_summary'][k1][0]<BIN_EDGES[k2]):
+    for k2 in range(len(BIN_EDGES_MO)):
+      if(parsed_dat[key_str]['sia_summary'][k1][0]<BIN_EDGES_MO[k2]):
         inf_mo[k2-1] -= parsed_dat[key_str]['sia_summary'][k1][1]
         break
 
   parsed_dat[key_str]['inf_mo'] = inf_mo.tolist()
 
 
+  # Aggregate RI doses to timeseries by year
+  gidx = (data_event=='GP_EVENT_000')
+  (ri_yr, tstamps_yr) = np.histogram(data_time[gidx],
+                                     bins    = BIN_EDGES_YR,
+                                     weights = data_mcw[gidx])
+
+  parsed_dat[key_str]['ri_yr'] = ri_yr.tolist()
+
+  # Get births per year doses
+  births_yr = np.array(inset_chart['Channels']['Births']['Data'])[364::365]
+  parsed_dat[key_str]['births_yr'] = births_yr.tolist()
+
+
   # Common output data
-  parsed_dat['tstamps'] = (np.diff(tstamps)/2.0 + tstamps[:-1]).tolist()
+  parsed_dat['tstamps_mo'] = (np.diff(tstamps_mo)/2.0 + tstamps_mo[:-1]).tolist()
+  parsed_dat['tstamps_yr'] = (np.diff(tstamps_yr)/2.0 + tstamps_yr[:-1]).tolist()
 
 
   # Write output dictionary

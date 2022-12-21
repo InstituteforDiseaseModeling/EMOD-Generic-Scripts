@@ -27,7 +27,6 @@ def campaignBuilder():
   ALL_NODES     = gdata.demog_object.node_ids
   BASE_YEAR     = gdata.base_year
   START_YEAR    = gdata.start_year
-  RCV_YEAR      = gdata.rcv_year
   BR_MULT_X     = gdata.brate_mult_x
   BR_MULT_Y     = gdata.brate_mult_y
 
@@ -216,6 +215,7 @@ def IV_MCV1(params=dict()):
   camp_iv01.Not_Covered_IndividualIntervention_Configs  = []                  # Breaks if not present
 
   camp_iv02.Actual_IndividualIntervention_Configs       = [camp_iv03]
+  camp_iv02.Event_Trigger_Distributed                   = "GP_EVENT_000"
   camp_iv02.Delay_Period_Distribution                   = "GAUSSIAN_DISTRIBUTION"
   camp_iv02.Delay_Period_Gaussian_Mean                  =  300.0
   camp_iv02.Delay_Period_Gaussian_Std_Dev               =   90.0

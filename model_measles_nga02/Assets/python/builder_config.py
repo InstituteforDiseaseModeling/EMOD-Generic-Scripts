@@ -165,7 +165,7 @@ def update_config_obj(config):
 
   config.parameters.Enable_Event_DB                                =    1
   config.parameters.SQL_Start_Time                                 = gdata.start_log
-  config.parameters.SQL_Events                                     =   ["NewlySymptomatic"]
+  config.parameters.SQL_Events                                     =   ["NewlySymptomatic","GP_EVENT_000"]
 
   config.parameters.Custom_Reports_Filename                        = gdata.reports_file
 
