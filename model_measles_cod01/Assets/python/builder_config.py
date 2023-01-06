@@ -93,6 +93,16 @@ def update_config_obj(config):
   config.parameters.Acquisition_Transmission_Correlation     = CORR_ACQ_TRANS
 
 
+  # ***** Multistrain *****
+
+  config.parameters.Enable_Strain_Tracking                 =  1
+  config.parameters.Enable_Genome_Dependent_Infectivity    =  0
+  config.parameters.Enable_Genome_Mutation                 =  0
+
+  config.parameters.Number_of_Clades                       =  1
+  config.parameters.Log2_Number_of_Genomes_per_Clade       =  2
+
+
   # ***** Immunity *****
   config.parameters.Enable_Immunity                                  =   1
   config.parameters.Enable_Immune_Decay                              =   0
