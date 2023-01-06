@@ -53,8 +53,6 @@ def demographicsBuilder():
   POP_DAT_STR      = 'NGA'
   REF_NAME         = 'ICME_NGA'
 
-  gdata.demog_files.append(DEMOG_FILENAME)
-
   if(not os.path.exists(PATH_OVERLAY)):
     os.mkdir(PATH_OVERLAY)
 
