@@ -10,7 +10,8 @@ from idmtools.core.id_file            import write_id_file
 
 # Ought to go in emodpy
 import sys
-sys.path.insert(0, os.path.join('..','..','local_python'))
+LOCAL_PATH = os.path.abspath(os.path.join('..','..','local_python'))
+sys.path.insert(0, LOCAL_PATH)
 from emod_exp import exp_from_def_file
 
 # ******************************************************************************
@@ -33,7 +34,7 @@ def run_sims():
                       environment     = 'Calculon',
                       priority        = 'Normal',
                       simulation_root = '$COMPS_PATH(USER)',
-                      node_group      = 'idm_48cores',
+                      node_group      = 'idm_abcd',
                       num_cores       = '1',
                       num_retries     = '0',
                       exclusive       = 'False')
