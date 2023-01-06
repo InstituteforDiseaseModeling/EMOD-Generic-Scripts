@@ -19,6 +19,10 @@ from refdat_population_100km       import data_dict   as dict_pop_100km
 from refdat_area_100km             import data_dict   as dict_area_100km
 from refdat_location_100km         import data_dict   as dict_longlat_100km
 
+from refdat_birthrate              import data_dict   as dict_birth
+
+from aux_demo_calc                 import demoCalc_AgeDist
+
 from emod_api.demographics.Demographics            import Demographics, \
                                                           DemographicsOverlay
 from emod_api.demographics.Node                    import Node
@@ -27,7 +31,7 @@ from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, 
 
 #********************************************************************************
 
-mort_vec_X   = [     0.6,  1829.5,  1829.6,  3659.5,  3659.6,  5489.5,
+mr_xval      = [     0.6,  1829.5,  1829.6,  3659.5,  3659.6,  5489.5,
                   5489.6,  7289.5,  7289.6,  9119.5,  9119.6, 10949.5,
                  10949.6, 12779.5, 12779.6, 14609.5, 14609.6, 16439.5,
                  16439.6, 18239.5, 18239.6, 20069.5, 20069.6, 21899.5,
@@ -156,20 +160,24 @@ def demographicsBuilder():
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec  = pop_input[0,:]  - BASE_YEAR
+  year_init = START_YEAR      - BASE_YEAR
   pop_mat   = pop_input[1:,:] + 0.1
 
-  pop_init  = [np.interp((START_YEAR-BASE_YEAR), year_vec, pop_mat[idx,:]) for idx in range(pop_mat.shape[0])]
+  # Create overlay list
+  for adm_name in dict_birth:
+    sub_nodes = [node_obj for node_obj in node_list if node_obj.name.startswith(adm_name+':')]
+    vd_over_list.append([year_vec, pop_mat, sub_nodes,adm_name])
 
-  sub_nodes = [node_obj.forced_id for node_obj in node_list]
 
-  vd_over_list.append([year_vec, pop_mat, sub_nodes])
 
   # ***** Populate vital dynamics overlays *****
 
   for k1 in range(len(vd_over_list)):
     year_vec      = vd_over_list[k1][0]
     pop_mat       = vd_over_list[k1][1]
-    node_id_list  = vd_over_list[k1][2]
+    subnode_list  = vd_over_list[k1][2]
+    adm_name      = vd_over_list[k1][3]
+    node_id_list  = [node_obj.forced_id for node_obj in subnode_list]
 
     diff_ratio = (pop_mat[:-1,:-1]-pop_mat[1:,1:])/pop_mat[:-1,:-1]
     t_delta    = np.diff(year_vec)
@@ -182,9 +190,9 @@ def demographicsBuilder():
     pop_corr   = np.exp(-mortvecs[0,:]*pow_vec/2.0)
 
     brate_vec  = np.round(pop_mat[0,1:]/tpop_mid/t_delta*1000.0,1)/pop_corr
-    brate_val  = np.interp((START_YEAR-BASE_YEAR), year_vec[:-1], brate_vec)
+    brate_val  = np.interp(year_init, year_vec[:-1], brate_vec)
 
-    yrs_off    = year_vec[:-1]-(START_YEAR-BASE_YEAR)
+    yrs_off    = year_vec[:-1]-year_init
     yrs_dex    = (yrs_off>0)
 
     brmultx_01 = np.array([0.0] + (365.0*yrs_off[yrs_dex]).tolist())
@@ -199,15 +207,38 @@ def demographicsBuilder():
 
     gdata.brate_mult_list.append([brmultx_02.tolist(), brmulty_02.tolist(), node_id_list])
 
-    age_y        = pop_age_days
-    age_init_cdf = np.cumsum(pop_init[:-1])/np.sum(pop_init)
-    age_x        = [0] + age_init_cdf.tolist()
-
 
     # ***** Write vital dynamics and susceptibility initialization overlays *****
 
+    # Age initialization magic
+    brth_rate = dict_birth[adm_name]
+    mort_init = [np.interp(year_init, year_vec[:-1], mortvecs[idx,:]) for idx in range(mortvecs.shape[0])]
+
+    d_rate_y         = np.zeros(len(mr_xval),dtype=float)
+    d_rate_y[0:-2:2] = mort_init
+    d_rate_y[1:-2:2] = mort_init
+    d_rate_y[-2:]    = MAX_DAILY_MORT
+    d_rate_y         = d_rate_y.tolist()
+
+    d_rate_x  = mr_xval
+    force_v   = 12*[1.0] # No seasonal forcing
+    (grow_rate, age_x, age_y) = demoCalc_AgeDist(brth_rate,d_rate_x,d_rate_y)
+
+    # Update initial node populations
+    for node_dict in subnode_list:
+      node_name  = node_dict.name
+      node_id    = node_dict.forced_id
+      ref_year   = ipop_time[node_name]
+      mult_fac   = grow_rate**(START_YEAR-ref_year)
+      new_pop    = int(mult_fac * node_dict.node_attributes.initial_population)
+      node_dict.node_attributes.initial_population = new_pop
+
+    # Save total initial population
+    gdata.init_pop += sum([node_obj.pop for node_obj in subnode_list])
+
     vd_over_dict = dict()
 
+    mort_vec_X      = mr_xval
     mort_year       = np.zeros(2*year_vec.shape[0]-3)
 
     mort_year[0::2] = year_vec[0:-1]
@@ -229,7 +260,7 @@ def demographicsBuilder():
 
     vd_over_dict['Nodes']     = [{'NodeID':node_id_val} for node_id_val in node_id_list]
 
-    vd_over_dict['Defaults']['NodeAttributes']        = { 'BirthRate':    brate_val/365.0/1000.0 }
+    vd_over_dict['Defaults']['NodeAttributes']        = { 'BirthRate':                 brth_rate }
 
     vd_over_dict['Defaults']['IndividualAttributes']  = { 'AgeDistribution':              dict() ,
                                                           'MortalityDistributionMale':    dict() ,
