@@ -10,8 +10,8 @@ var_params      = dict()
 schema_path     = 'Assets/schema.json'
 
 start_year      = 2006
-start_time      = 365.0*(start_year-1900)
-start_log       = 365.0*(2010-1900)
+start_time      =  365.0*(start_year-1900)
+start_log       =  365.0*(2010-1900)
 base_year       = 1900
 
 max_clock       =  180.0
@@ -26,18 +26,20 @@ demog_node      = dict()
 demog_node_map  = dict()      # Zone:     [NodeIDs]
 
 demog_object    = None
-demog_min_pop   =  50
-
-brate_mult_list = list()
+demog_min_pop   =   50
 
 # Other stuff
 first_call_bool = True
-prev_proc_time  = -1.0
-max_node_id     = 0
+prev_proc_time  =   -1.0
+max_node_id     =    0
+
+init_pop        =    0
 
 data_vec_time   = None
 data_vec_node   = None
 data_vec_mcw    = None
+
+brate_mult_list = list()
 
 #*******************************************************************************
 
