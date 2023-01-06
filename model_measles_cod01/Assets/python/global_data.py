@@ -14,6 +14,8 @@ start_time      = 365.0*(start_year-1900)
 start_log       = 365.0*(2010-1900)
 base_year       = 1900
 
+max_clock       =  180.0
+
 # Filename params
 demog_files     = list()
 camp_file       = None

@@ -45,7 +45,7 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 # ***** Constants for this experiment *****
 
 # Number of days to run simulation (start Jan 1, 2006)
-param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(7.0) + 1
+param_dict['EXP_CONSTANT']['num_tsteps']           =   10#365.0*(7.0) + 1
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0
@@ -68,9 +68,6 @@ param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 
 # Individual level risk variance (acquisition multiplier; mean = 1.0; log-normal distribution)
 param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.6
-
-# Abort sim if running for more than specified time in minutes
-param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
 
 # Base agent weight; less than 5 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
