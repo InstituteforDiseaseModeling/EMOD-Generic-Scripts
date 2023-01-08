@@ -26,7 +26,7 @@ demog_node      = dict()
 demog_node_map  = dict()      # Zone:     [NodeIDs]
 
 demog_object    = None
-demog_min_pop   =   50
+demog_min_pop   =  100
 
 # Other stuff
 first_call_bool = True
