@@ -135,7 +135,7 @@ def update_config_obj(config):
   config.parameters.Network_Infectivity_Coefficient          =   [ni_coeff]
   config.parameters.Network_Infectivity_Exponent             =   [NI_POWER]
   config.parameters.Network_Infectivity_Max_Export_Frac      =   NI_MAXFRAC
-  config.parameters.Network_Infectivity_Min_Connection       =   1.0e-7
+  config.parameters.Network_Infectivity_Min_Connection       =   3.0e-7
   config.parameters.Network_Infectivity_Min_Distance         =   1
 
   config.parameters.Enable_Infectivity_Reservoir             =   1
