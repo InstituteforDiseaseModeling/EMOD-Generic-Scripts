@@ -27,14 +27,13 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
 
 nsims    = int(param_dict['NUM_SIMS'])
 ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
+tvals_mo = data_brick.pop('tstamps')
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))
+pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
 for sim_idx_str in data_brick:
-  try:
-    sim_idx = int(sim_idx_str)
-  except:
-    continue
+  sim_idx = int(sim_idx_str)
   pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyramid'])
+
 
 # Figures
 fig01 = plt.figure(figsize=(8,6))
@@ -46,22 +45,26 @@ axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
 axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
-axs01.set_xlabel('Year', fontsize=14)
-axs01.set_ylabel('D R Congo - Total Population (M)', fontsize=14)
+#axs01.set_xlabel('Year', fontsize=14)
+axs01.set_ylabel('Total Population (M)', fontsize=14)
 
 axs01.set_xlim( 2005.5, 2013.5)
 axs01.set_ylim(   54,     74  )
 
 ticloc = np.arange(2006, 2014)
-ticlab = ['2006','','2008','','2010','','2012','']
+ticlab = ['','','','','','','','']
 axs01.set_xticks(ticks=ticloc)
 axs01.set_xticklabels(ticlab,fontsize=14)
+
+for k1 in range(2006,2013):
+  axs01.text( k1+0.25, 53.3, str(k1), fontsize=14)
 
 axs01.tick_params(axis='x', labelsize=14)
 axs01.tick_params(axis='y', labelsize=14)
 
-pyr_mat_avg = np.mean(pyr_mat,axis=0)
-pyr_mat_std = np.std(pyr_mat,axis=0)
+fidx = (pyr_mat[:,0,0]>=0)
+pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
+pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
 
 pop_dat     = np.sum(pyr_mat_avg,axis=1)
 pop_dat_err = np.sum(pyr_mat_std,axis=1)
