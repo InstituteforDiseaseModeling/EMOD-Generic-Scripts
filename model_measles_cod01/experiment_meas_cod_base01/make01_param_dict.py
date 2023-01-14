@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'MEAS-COD-Base01'
-param_dict['NUM_SIMS']     =    32
+param_dict['NUM_SIMS']     =    100
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -45,7 +45,7 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 # ***** Constants for this experiment *****
 
 # Number of days to run simulation (start Jan 1, 2006)
-param_dict['EXP_CONSTANT']['num_tsteps']           =   10#365.0*(7.0) + 1
+param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(7.0) + 1
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0
@@ -69,14 +69,14 @@ param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 # Individual level risk variance (acquisition multiplier; mean = 1.0; log-normal distribution)
 param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.6
 
-# Base agent weight; less than 5 may have memory issues
+# Base agent weight
 param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
 
 # Node level overdispersion; 0.0 = Poisson
 param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
 
 # Subdivide LGAs into 100km^2 regions
-param_dict['EXP_CONSTANT']['use_10k_res']          =   False
+param_dict['EXP_CONSTANT']['use_10k_res']          =   True
 
 
 
