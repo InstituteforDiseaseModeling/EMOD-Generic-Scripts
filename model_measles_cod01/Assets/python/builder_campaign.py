@@ -28,6 +28,7 @@ def campaignBuilder():
   PEAK_SIZE    = gdata.var_params['R0_peak_magnitude']
   PEAK_TIME    = gdata.var_params['R0_peak_day']
   PEAK_WIDE    = gdata.var_params['R0_peak_width']
+  SIA_COVER    = gdata.var_params['SIA_Coverage']
 
 
   # ***** Events *****
@@ -90,7 +91,6 @@ def campaignBuilder():
     if(start_val < TIME_START):
       continue
 
-    SIA_COVER  = 0.50
     age_min    = sia_obj['age_min']
     age_max    = sia_obj['age_max']
     targ_frac  = sia_obj['targ_frac']

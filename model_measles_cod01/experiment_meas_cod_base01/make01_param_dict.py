@@ -55,6 +55,9 @@ param_dict['EXP_CONSTANT']['R0_peak_day']          =    65.0
 param_dict['EXP_CONSTANT']['R0_peak_width']        =    45.0
 param_dict['EXP_CONSTANT']['R0_peak_magnitude']    =     1.3
 
+# SIA Coverage
+param_dict['EXP_CONSTANT']['SIA_Coverage']         =     0.5
+
 # Importation rate per-100k per-day
 param_dict['EXP_CONSTANT']['log10_import_rate']    =   -0.50
 
