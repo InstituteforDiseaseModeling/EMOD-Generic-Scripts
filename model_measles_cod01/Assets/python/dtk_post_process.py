@@ -26,7 +26,13 @@ tpop_xval = [    2006,     2007,     2008,     2009,
 tpop_yval = [56578046, 58453687, 60411195, 62448572,
              64563853, 66755151, 69020749, 71358804]
 
-ref_dat   = []
+
+ref_dat = [  175,   133,   155,   312,   179,   149,
+             143,   216,   398,   498,   882,  2189,
+            6472,  9046, 18093, 18482, 13197, 16998,
+           20451, 12851,  6256,  4314,  4622,  2996,
+            4164,  3985,  4558,  3635,  3188,  4695,
+            5592,  7444,  6302, 11126, 10794,  8323]
 
 #********************************************************************************
 
@@ -89,10 +95,10 @@ def application(output_path):
 
 
   # Calibration score from timeseries data
-  #(obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
+  (obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
 
-  #calval_dat[key_str]['cal_val']   = float(obj_val)
-  #parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
+  parsed_dat[key_str]['cal_val']   = float(obj_val)
+  parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
 
 
   # Sample total population pyramid every year
