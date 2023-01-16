@@ -73,7 +73,6 @@ def application(output_path):
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
-  calval_dat = {key_str: dict()}
 
 
   # Timestamps
@@ -85,17 +84,18 @@ def application(output_path):
   adm1_dict  = {adm1:[NODEID_DICT[val] for val in NODEID_DICT.keys() if val.startswith(adm1+':')]
                                        for adm1 in adm1_list}
 
+  inf_mo_tot = np.zeros(len(BIN_EDGES)-1)
   for adm1_name in adm1_dict:
     rep_bool          = np.isin(gdata.data_vec_node,adm1_dict[adm1_name])
     (inf_mo, tstamps) = np.histogram(gdata.data_vec_time[rep_bool],
                                      bins    = BIN_EDGES,
                                      weights = gdata.data_vec_mcw[rep_bool])
-
+    inf_mo_tot += inf_mo
     parsed_dat[key_str][adm1_name] = inf_mo.tolist()
 
 
   # Calibration score from timeseries data
-  (obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
+  (obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo_tot[:len(ref_dat)])
 
   parsed_dat[key_str]['cal_val']   = float(obj_val)
   parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
