@@ -23,10 +23,16 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'MEAS-COD-Base01'
-param_dict['NUM_SIMS']     =    100
+param_dict['EXP_NAME']     = 'MEAS-COD-Scan01'
+param_dict['NUM_SIMS']     =   350
+
+param_dict['NUM_ITER']     =     8
+
+
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
+param_dict['EXP_OPTIMIZE'] = dict()
+
 
 # Random number consistency
 np.random.seed(4)
@@ -42,38 +48,56 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 
 
 
+# ***** Parameters to auto-adjust *****
+
+# Log of age-independent multiplier for mortality rates
+param_dict['EXP_OPTIMIZE']['log10_import_rate']   =  [-2.0,  1.0]
+param_dict['EXP_OPTIMIZE']['R0']                  =  [ 6.0, 14.0]
+param_dict['EXP_OPTIMIZE']['SIA_Coverage']        =  [ 0.1,  0.9]
+
+
+
 # ***** Constants for this experiment *****
 
 # Number of days to run simulation (start Jan 1, 2006)
 param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0*(7.0) + 1
 
 # R0 value
-param_dict['EXP_CONSTANT']['R0']                   =    14.0
+param_dict['EXP_CONSTANT']['R0']                   =    12.0
+#param_dict['EXP_VARIABLE']['R0']                   =     np.random.uniform(low=10.0,high=14.0,size=NSIMS).tolist()
+
 
 # R0 seasonality
 param_dict['EXP_CONSTANT']['R0_peak_day']          =    65.0
-param_dict['EXP_CONSTANT']['R0_peak_width']        =    45.0
-param_dict['EXP_CONSTANT']['R0_peak_magnitude']    =     1.3
+param_dict['EXP_CONSTANT']['R0_peak_width']        =    25.0
+param_dict['EXP_CONSTANT']['R0_peak_magnitude']    =     1.0
 
 # SIA Coverage
-param_dict['EXP_CONSTANT']['SIA_Coverage']         =     0.5
+param_dict['EXP_CONSTANT']['SIA_Coverage']         =     0.75
+#param_dict['EXP_VARIABLE']['SIA_Coverage']         =  np.random.choice([0.70, 0.75, 0.80],size=NSIMS).tolist()
 
 # Importation rate per-100k per-day
-param_dict['EXP_CONSTANT']['log10_import_rate']    =   -0.50
+param_dict['EXP_CONSTANT']['log10_import_rate']    =   -2.0
+#param_dict['EXP_VARIABLE']['log10_import_rate']    =  np.random.choice([-1.7,-2.0,-2.3],size=NSIMS).tolist()
 
 # Parameters for gravity model for network connections
-param_dict['EXP_CONSTANT']['net_inf_power']        =    2.0
-param_dict['EXP_CONSTANT']['net_inf_ln_mult']      =   -2.0
+param_dict['EXP_CONSTANT']['net_inf_power']        =    1.5
+#param_dict['EXP_VARIABLE']['net_inf_power']        =  np.random.choice([1.2, 1.4, 1.6],size=NSIMS).tolist()
+
+param_dict['EXP_CONSTANT']['net_inf_ln_mult']      =   -1.2
+#param_dict['EXP_VARIABLE']['net_inf_ln_mult']      =  np.random.choice([-0.4, -0.8, -1.2],size=NSIMS).tolist()
+
 param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 
 # Correlation between acqusition and transmission heterogeneity
-param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
+param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.8
 
 # Individual level risk variance (acquisition multiplier; mean = 1.0; log-normal distribution)
-param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.6
+param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.05
+#param_dict['EXP_VARIABLE']['ind_variance_risk']    =  np.random.choice([0.05,0.20,0.35],size=NSIMS).tolist()
 
 # Base agent weight
-param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
+param_dict['EXP_CONSTANT']['agent_rate']           =    12.0
 
 # Node level overdispersion; 0.0 = Poisson
 param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0

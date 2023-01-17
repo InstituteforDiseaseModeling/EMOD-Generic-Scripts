@@ -103,11 +103,16 @@ def campaignBuilder():
     if(not node_list):
       continue
 
+    if(start_val < 40150):
+      adj_cover = SIA_COVER
+    else:
+      adj_cover = 0.5
+
     pdict     = {'startday':       start_val ,
                  'nodes':          node_list ,
                  'agemin':         age_min ,
                  'agemax':         age_max ,
-                 'coverage':       SIA_COVER*targ_frac }
+                 'coverage':       adj_cover*targ_frac }
 
     camp_module.add(IV_SIA(pdict))
 
