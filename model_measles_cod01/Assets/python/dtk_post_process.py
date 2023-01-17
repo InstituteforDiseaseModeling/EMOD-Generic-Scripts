@@ -101,6 +101,13 @@ def application(output_path):
   parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
 
 
+  # Aggregate timeseries of infections
+  with open(os.path.join(output_path,'InsetChart.json')) as fid01:
+    inset_chart = json.load(fid01)
+  inf_trace = np.array(inset_chart['Channels']['New Infections']['Data'])
+  parsed_dat[key_str]['inf_trace'] = inf_trace.tolist()
+
+
   # Sample total population pyramid every year
   with open(os.path.join(output_path,'DemographicsSummary.json')) as fid01:
     demog_output = json.load(fid01)
