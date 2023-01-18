@@ -48,11 +48,11 @@ axs01.set_axisbelow(True)
 
 nsims    = int(param_dict['NUM_SIMS'])
 
-x1data = np.array(param_dict['EXP_VARIABLE']['SIA_Coverage'])
-x2data = np.array(param_dict['EXP_VARIABLE']['net_inf_ln_mult'])
-x3data = np.array(param_dict['EXP_VARIABLE']['net_inf_power'])
+#x1data = np.array(param_dict['EXP_VARIABLE']['SIA_Coverage'])
+#x2data = np.array(param_dict['EXP_VARIABLE']['net_inf_ln_mult'])
+#x3data = np.array(param_dict['EXP_VARIABLE']['net_inf_power'])
 
-print(np.max(x1data))
+#print(np.max(x1data))
 
 cdata = np.zeros(nsims)
 nplot = 0
@@ -61,28 +61,37 @@ for sim_idx_str in data_brick:
   if(sim_idx_str.isdecimal()):
     sim_idx = int(sim_idx_str)
     if(#x1data[sim_idx] ==  0.80 and
-       x2data[sim_idx] == -1.2  and
+       #x2data[sim_idx] == -1.2  and
        #x3data[sim_idx] ==  1.4 and
        nplot < 50):
     #if(sim_idx == 1327):
-      if(data_brick[sim_idx_str]['cal_val'] < -1e5):
+      if(data_brick[sim_idx_str]['cal_val'] < -9e4):
         continue
-      print(x1data[sim_idx],x2data[sim_idx],x3data[sim_idx])
-      axs01.plot(data_brick[sim_idx_str]['inf_trace'])#,c='C0')
-       #meantra += np.array(data_brick[sim_idx_str]['inf_trace'])
+      sfac = data_brick[sim_idx_str]['rep_rate']
+      if(sfac > 1):
+        continue
+      #print(x1data[sim_idx],x2data[sim_idx],x3data[sim_idx])
+      mobins = np.zeros(3*12,dtype=float)
+      for kstr in data_brick[sim_idx_str]:
+        if kstr.startswith('AFRO:DRCONGO'):
+          mobins += np.array(data_brick[sim_idx_str][kstr])*sfac
+      axs01.plot(2010+((np.arange(3*12)+0.5)/12),mobins)#,c='C0')
+      #axs01.plot(np.array(data_brick[sim_idx_str]['inf_trace'])*sfac)#,c='C0')
+      #meantra += np.array(data_brick[sim_idx_str]['inf_trace'])
       nplot += 1
-      print(data_brick[sim_idx_str]['cal_val'])
+      print(data_brick[sim_idx_str]['cal_val'],sfac)
     cdata[sim_idx] = data_brick[sim_idx_str]['cal_val']
 
 #axs01.plot(np.arange(meantra.shape[0])/365+2006,meantra)
 
 fidx   = (cdata<0)
 cdata  = cdata[fidx]
-x1data = x1data[fidx]
-x2data = x2data[fidx]
+#x1data = x1data[fidx]
+#x2data = x2data[fidx]
 sidx   = np.argsort(cdata)
 
-print(sidx[-1],x1data[sidx[-1]],x2data[sidx[-1]],x3data[sidx[-1]])
+#print(sidx[-1],x1data[sidx[-1]],x2data[sidx[-1]],x3data[sidx[-1]])
+print()
 print(cdata[sidx[-1]])
 
 
