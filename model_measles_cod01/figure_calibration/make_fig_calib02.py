@@ -5,16 +5,13 @@ import os, json
 import numpy               as np
 import matplotlib.pyplot   as plt
 
-from aux_obj_calc     import     norpois_opt
-
-ref_dat = [  175,   133,   155,   312,   179,   149,
-             143,   216,   398,   498,   882,  2189,
-            6472,  9046, 18093, 18482, 13197, 16998,
-           20451, 12851,  6256,  4314,  4622,  2996,
-            4164,  3985,  4558,  3635,  3188,  4695,
-            5592,  7444,  6302, 11126, 10794,  8323]
-
 #*******************************************************************************
+
+
+DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
+BIN_EDGES = np.cumsum(7*DAY_BINS) + 0.5
+BIN_EDGES = np.insert(BIN_EDGES, 0, 0.5)
+
 
 
 DIRNAME = 'experiment_meas_cod_base01'
@@ -34,9 +31,9 @@ with open(os.path.join(tpath,'data_brick.json')) as fid01:
 
 
 # Create figure
-fig01 = plt.figure(figsize=(8,6))
+fig01 = plt.figure(figsize=(24,18))
 
-axs01 = fig01.add_subplot(1, 1, 1)
+axs01 = fig01.add_subplot(1, 1, 1, projection='3d',computed_zorder=False)
 plt.sca(axs01)
 
 axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
@@ -55,63 +52,88 @@ nsims    = int(param_dict['NUM_SIMS'])
 #print(np.max(x1data))
 
 cdata = np.zeros(nsims)
-nplot = 0
-meantra = np.zeros(7*365+1)
+
+inf_cum  = np.zeros(nsims)-1
+inf_cum2 = np.zeros(nsims)-1
+
+wf_mat   = np.zeros((36,48))
+wf_num   = np.zeros(36)
+
 for sim_idx_str in data_brick:
   if(sim_idx_str.isdecimal()):
     sim_idx = int(sim_idx_str)
-    if(#x1data[sim_idx] ==  0.80 and
-       #x2data[sim_idx] == -1.2  and
-       #x3data[sim_idx] ==  1.4 and
-       nplot < 50):
-    #if(sim_idx == 1327):
-      if(data_brick[sim_idx_str]['cal_val'] < -9e4):
-        continue
-      sfac = data_brick[sim_idx_str]['rep_rate']
-      if(sfac > 1):
-        continue
-      #print(x1data[sim_idx],x2data[sim_idx],x3data[sim_idx])
-      mobins = np.zeros(3*12,dtype=float)
-      for kstr in data_brick[sim_idx_str]:
-        if kstr.startswith('AFRO:DRCONGO'):
-          mobins += np.array(data_brick[sim_idx_str][kstr])*sfac
-      axs01.plot(2010+((np.arange(3*12)+0.5)/12),mobins)#,c='C0')
-      #axs01.plot(np.array(data_brick[sim_idx_str]['inf_trace'])*sfac)#,c='C0')
-      #meantra += np.array(data_brick[sim_idx_str]['inf_trace'])
-      nplot += 1
-      print(data_brick[sim_idx_str]['cal_val'],sfac)
     cdata[sim_idx] = data_brick[sim_idx_str]['cal_val']
 
-#axs01.plot(np.arange(meantra.shape[0])/365+2006,meantra)
+    #if(data_brick[sim_idx_str]['cal_val'] < -9e4):
+    #  continue
 
-fidx   = (cdata<0)
-cdata  = cdata[fidx]
-#x1data = x1data[fidx]
-#x2data = x2data[fidx]
-sidx   = np.argsort(cdata)
+    sfac = data_brick[sim_idx_str]['rep_rate']
 
-#print(sidx[-1],x1data[sidx[-1]],x2data[sidx[-1]],x3data[sidx[-1]])
-print()
-print(cdata[sidx[-1]])
+    #if(sfac > 1):
+    #  print(sfac)
+    #  continue
+
+    inf_trace = np.array(data_brick[sim_idx_str]['inf_trace'])
+    (inf_mo, tstamps) = np.histogram(np.arange(inf_trace.shape[0]),
+                                     bins    = BIN_EDGES,
+                                     weights = inf_trace)
+    tstamps = (np.diff(tstamps) + tstamps[:-1])/365.0 + 2006
+
+    #mobins = np.zeros(3*12,dtype=float)
+    #for kstr in data_brick[sim_idx_str]:
+    #  if kstr.startswith('AFRO:DRCONGO'):
+    #    mobins += np.array(data_brick[sim_idx_str][kstr])*sfac
+    #axs01.plot(2010+((np.arange(3*12)+0.5)/12),mobins)#,c='C0')
+
+
+    inf_cum[sim_idx]  = np.sum(inf_trace)
+    inf_cum2[sim_idx] = np.log(np.sum(inf_mo[36:42]))
+
+    if(inf_cum2[sim_idx] < 8):
+      wf_idx = np.argmax(inf_mo[48:])
+      wf_num[wf_idx]   += 1
+      wf_mat[wf_idx,:] += inf_mo[36:]
 
 
 
-#yvals = np.zeros(12*3)
-#xvals = np.array(data_brick['05']['tstamps'])
-#for kstr in data_brick['05']['00153']:
-#  if(kstr.startswith('AFRO:DRCONGO')):
-#    yvals += np.array(data_brick['05']['00153'][kstr])
+print(np.sum(wf_num),np.min(wf_num),np.max(wf_num))
+fidx   = (inf_cum>0)
+print(np.sum(fidx))
+
+nplts = wf_mat.shape[0]
+for k1 in range(nplts):
+  rk1 = nplts - 1 - k1
+  wsh = k1/nplts
+  if(wsh > 0.5):
+    wsh1 = 0.5
+    wsh2 = 1.2*(wsh-0.5)
+  else:
+    wsh1 = wsh
+    wsh2 = 0
+  axs01.bar(tstamps[36:], wf_mat[rk1,:]/wf_num[rk1], zs=rk1, zdir='y', width=(1/12), color=[0.3+wsh1,wsh2,wsh2,0.9], edgecolor='k' )
 
 
+axs01.set_xlim(2009,2013)
+axs01.set_ylim(   0,  35)
+axs01.set_box_aspect((4,9,1))
 
-#axs01.plot(xvals/365+1900,yvals*scal_vec)
+ticloc = [2009,2010,2011,2012,2013]
+ticlab = ['','','','','']
+axs01.set_xticks(ticks=ticloc)
+axs01.set_xticklabels(ticlab,fontsize=14)
 
-#axs01.hist(cdata,bins=250)
-#axs01.scatter(x1data[sidx], x2data[sidx], c=cdata[sidx], vmin=-1.5e5)
+axs01.set_yticks([])
+axs01.set_zticks([])
+
+axs01.xaxis.pane.fill = False
+axs01.yaxis.pane.fill = False
+axs01.zaxis.pane.fill = False
+
+fig01.patch.set_alpha(0.0)
+axs01.patch.set_alpha(0.0)
 
 # Save figure
-plt.tight_layout()
-plt.savefig('fig_calib_02viz.png')
+plt.savefig('fig_calib_interrupt01.svg')
 plt.close()
 
 #*******************************************************************************

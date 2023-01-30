@@ -23,8 +23,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'MEAS-COD-Scan01'
-param_dict['NUM_SIMS']     =   350
+param_dict['EXP_NAME']     = 'MEAS-COD-Bulk01'
+param_dict['NUM_SIMS']     =  2500
 
 param_dict['NUM_ITER']     =     8
 
