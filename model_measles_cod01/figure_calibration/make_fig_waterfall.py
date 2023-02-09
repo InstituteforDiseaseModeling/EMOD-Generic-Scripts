@@ -21,13 +21,11 @@ DIRNAME = 'experiment_meas_cod_base01'
 tpath = os.path.join('..',DIRNAME)
 
 
-
 with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
 with open(os.path.join(tpath,'data_brick.json')) as fid01:
   data_brick = json.load(fid01)
-
 
 
 # Create figure
@@ -41,20 +39,11 @@ axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
 axs01.set_axisbelow(True)
 
 
-
-
 nsims    = int(param_dict['NUM_SIMS'])
 
-#x1data = np.array(param_dict['EXP_VARIABLE']['SIA_Coverage'])
-#x2data = np.array(param_dict['EXP_VARIABLE']['net_inf_ln_mult'])
-#x3data = np.array(param_dict['EXP_VARIABLE']['net_inf_power'])
 
-#print(np.max(x1data))
-
-cdata = np.zeros(nsims)
-
-inf_cum  = np.zeros(nsims)-1
-inf_cum2 = np.zeros(nsims)-1
+inf_cum1  = np.zeros(nsims)-1
+inf_cum2  = np.zeros(nsims)-1
 
 wf_mat   = np.zeros((36,48))
 wf_num   = np.zeros(36)
@@ -62,16 +51,6 @@ wf_num   = np.zeros(36)
 for sim_idx_str in data_brick:
   if(sim_idx_str.isdecimal()):
     sim_idx = int(sim_idx_str)
-    cdata[sim_idx] = data_brick[sim_idx_str]['cal_val']
-
-    #if(data_brick[sim_idx_str]['cal_val'] < -9e4):
-    #  continue
-
-    sfac = data_brick[sim_idx_str]['rep_rate']
-
-    #if(sfac > 1):
-    #  print(sfac)
-    #  continue
 
     inf_trace = np.array(data_brick[sim_idx_str]['inf_trace'])
     (inf_mo, tstamps) = np.histogram(np.arange(inf_trace.shape[0]),
@@ -79,14 +58,7 @@ for sim_idx_str in data_brick:
                                      weights = inf_trace)
     tstamps = (np.diff(tstamps) + tstamps[:-1])/365.0 + 2006
 
-    #mobins = np.zeros(3*12,dtype=float)
-    #for kstr in data_brick[sim_idx_str]:
-    #  if kstr.startswith('AFRO:DRCONGO'):
-    #    mobins += np.array(data_brick[sim_idx_str][kstr])*sfac
-    #axs01.plot(2010+((np.arange(3*12)+0.5)/12),mobins)#,c='C0')
-
-
-    inf_cum[sim_idx]  = np.sum(inf_trace)
+    inf_cum1[sim_idx] = np.sum(inf_trace)
     inf_cum2[sim_idx] = np.log(np.sum(inf_mo[36:42]))
 
     if(inf_cum2[sim_idx] < 8):
@@ -95,9 +67,8 @@ for sim_idx_str in data_brick:
       wf_mat[wf_idx,:] += inf_mo[36:]
 
 
-
 print(np.sum(wf_num),np.min(wf_num),np.max(wf_num))
-fidx   = (inf_cum>0)
+fidx   = (inf_cum1>0)
 print(np.sum(fidx))
 
 nplts = wf_mat.shape[0]
