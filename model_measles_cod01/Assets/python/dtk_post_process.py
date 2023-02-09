@@ -34,12 +34,13 @@ ref_dat = [  175,   133,   155,   312,   179,   149,
             4164,  3985,  4558,  3635,  3188,  4695,
             5592,  7444,  6302, 11126, 10794,  8323]
 
+day_bins  = [31,28,31,30,31,30,31,31,30,31,30,31]
+
 #********************************************************************************
 
 def application(output_path):
 
-  DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
-  BIN_EDGES = np.cumsum(3*DAY_BINS) + gdata.start_log + 0.5  # Hist for 3 years
+  BIN_EDGES = np.cumsum(4*day_bins) + gdata.start_log + 0.5  # Hist for 4 years
   BIN_EDGES = np.insert(BIN_EDGES, 0, gdata.start_log + 0.5)
 
   SIM_IDX         = gdata.sim_index
@@ -121,8 +122,10 @@ def application(output_path):
   for k1 in range(len(age_key_list)):
     age_key_str = 'Population Age {:s}'.format(age_key_list[k1])
     age_vec_dat = np.array(demog_output['Channels'][age_key_str]['Data'])
-    pyr_dat[0,  k1] = age_vec_dat[0]
-    pyr_dat[1:, k1] = age_vec_dat[364::365]
+    for k2 in range(pyr_dat.shape[0]):
+      tidx = max(364 + 365*(k2-1), 0)
+      if(tidx<len(age_vec_dat)):
+        pyr_dat[k2, k1] = age_vec_dat[tidx]
 
   parsed_dat[key_str]['pyramid'] = pyr_dat.tolist()
 

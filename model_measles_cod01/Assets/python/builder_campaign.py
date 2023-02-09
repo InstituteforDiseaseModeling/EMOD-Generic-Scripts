@@ -128,11 +128,6 @@ def campaignBuilder():
   camp_module.add(IV_BumpR0(pdict))
 
 
-  # Add infectivity trough
-  #all_nodes  = [node_dict[val] for val in node_opts]
-  #pdict      = {'nodes':          all_nodes }
-
-
   #  ***** End file construction *****
   camp_module.save(filename=CAMP_FILENAME)
 
@@ -154,7 +149,6 @@ def IV_MCV1(params=dict()):
   camp_iv01  = s2c.get_class_with_defaults('NodeLevelHealthTriggeredIVScaleUpSwitch',  SCHEMA_PATH)
   camp_iv02  = s2c.get_class_with_defaults('DelayedIntervention',                      SCHEMA_PATH)
   camp_iv03  = s2c.get_class_with_defaults('Vaccine',                                  SCHEMA_PATH)
-  camp_wane  = s2c.get_class_with_defaults('WaningEffectConstant',                     SCHEMA_PATH)
 
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
@@ -177,9 +171,7 @@ def IV_MCV1(params=dict()):
   camp_iv02.Delay_Period_Gaussian_Mean                  =  300.0
   camp_iv02.Delay_Period_Gaussian_Std_Dev               =   90.0
 
-  camp_iv03.Acquire_Config                              = camp_wane
-
-  camp_wane.Initial_Effect                              =    1.0
+  camp_iv03.Acquire_Config = {'Initial_Effect': 1.0}
 
   return camp_event
 
@@ -193,7 +185,6 @@ def IV_SIA(params=dict()):
   camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
   camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
   camp_iv01  = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
-  camp_wane  = s2c.get_class_with_defaults('WaningEffectConstant',      SCHEMA_PATH)
 
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
@@ -207,9 +198,9 @@ def IV_SIA(params=dict()):
   camp_coord.Target_Age_Min                 = params['agemin']/365.0
   camp_coord.Target_Age_Max                 = params['agemax']/365.0
 
-  camp_iv01.Acquire_Config                  = camp_wane
+  print(camp_iv01)
 
-  camp_wane.Initial_Effect                  = 1.0
+  camp_iv01.Acquire_Config = {'Initial_Effect': 1.0}
 
   return camp_event
 
@@ -248,7 +239,6 @@ def IV_BumpR0(params=dict()):
   else:
     dx_val = peak_wid
 
-  #y_bound  = y_peak - (y_peak-1)/peak_wid * dx_val
   y_bound  = y_peak - (y_peak-1)*(dx_val>=peak_wid)
 
   xyvals   = set([(   0.0,     y_bound),

@@ -18,7 +18,7 @@ def dllcBuilder():
 
 
   # ***** Get variables for this simulation *****
-  pass
+  START_LOG = gdata.start_log
 
 
   # Dictionary to be written
@@ -29,7 +29,19 @@ def dllcBuilder():
   json_set['Custom_Reports'] = \
     {
      'Use_Explicit_Dlls': 1,
+     'ReportStrainTracking':
+       {
+        'Enabled':  1,
+        'Reports': []
+       }
     }
+
+
+  # Strain reporting
+  repDic = { 'Report_Name':    'ReportStrainTracking01.csv',
+             'Time_Start':      START_LOG                  }
+
+  json_set['Custom_Reports']['ReportStrainTracking']['Reports'].append(repDic)
 
 
   #  ***** End file construction *****

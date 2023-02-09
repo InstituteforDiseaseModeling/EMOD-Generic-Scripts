@@ -11,10 +11,11 @@ schema_path     = 'Assets/schema.json'
 
 start_year      = 2006
 start_time      =  365.0*(start_year-1900)
-start_log       =  365.0*(2010-1900)
+start_log       =  365.0*(2009-1900)
 base_year       = 1900
+check_abort     =  365.0*(2009.5)
 
-max_clock       =  180.0
+max_clock       =  240.0
 
 # Filename params
 demog_files     = list()
@@ -30,6 +31,7 @@ demog_min_pop   =  100
 
 # Other stuff
 first_call_bool = True
+pass_abort      = False
 prev_proc_time  =   -1.0
 max_node_id     =    0
 

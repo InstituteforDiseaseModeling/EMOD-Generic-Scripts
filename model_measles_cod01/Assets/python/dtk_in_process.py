@@ -8,9 +8,7 @@ import global_data as gdata
 
 import numpy as np
 
-import emod_api.campaign     as     camp_module
-
-from builder_campaign   import   IV_SIA
+from dtk_post_process import day_bins
 
 #*******************************************************************************
 
@@ -58,6 +56,21 @@ def application(timestep):
 
   # Record timestamp of previous process
   gdata.prev_proc_time = proc_time
+
+
+  # Check early abort conditions
+  if(proc_time > gdata.check_abort and not gdata.pass_abort):
+    BIN_EDGES = np.cumsum(day_bins) + gdata.start_log + 0.5
+    BIN_EDGES = np.insert(BIN_EDGES, 0, gdata.start_log + 0.5)
+    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
+                                     bins    = BIN_EDGES,
+                                     weights = gdata.data_vec_mcw)
+
+    inf_cum = np.log(np.sum(inf_mo[:6]))
+    if(inf_cum >= 8):
+      return "ABORT"
+    else:
+      gdata.pass_abort = True
 
 
   return None
