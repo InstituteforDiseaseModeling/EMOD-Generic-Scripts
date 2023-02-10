@@ -13,7 +13,7 @@ start_year      = 2006
 start_time      =  365.0*(start_year-1900)
 start_log       =  365.0*(2009-1900)
 base_year       = 1900
-check_abort     =  365.0*(2009.5)
+check_abort     =  365.0*(2009-1900+0.5)
 
 max_clock       =  240.0
 
