@@ -198,8 +198,6 @@ def IV_SIA(params=dict()):
   camp_coord.Target_Age_Min                 = params['agemin']/365.0
   camp_coord.Target_Age_Max                 = params['agemax']/365.0
 
-  print(camp_iv01)
-
   camp_iv01.Acquire_Config = {'Initial_Effect': 1.0}
 
   return camp_event
