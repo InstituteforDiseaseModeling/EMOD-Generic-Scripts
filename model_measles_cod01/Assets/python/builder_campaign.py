@@ -29,6 +29,7 @@ def campaignBuilder():
   PEAK_TIME    = gdata.var_params['R0_peak_day']
   PEAK_WIDE    = gdata.var_params['R0_peak_width']
   SIA_COVER    = gdata.var_params['SIA_Coverage']
+  SEED_CASES   = gdata.var_params['seed_outbreak']
 
 
   # ***** Events *****
@@ -126,6 +127,19 @@ def campaignBuilder():
                 'peak_time':      PEAK_TIME }
 
   camp_module.add(IV_BumpR0(pdict))
+
+
+  # Incorporate forced outbreaks
+  obdict = {}
+  if(SEED_CASES):
+    obdict = { ['AFRO:DRCONGO:LUALABA:DILOLO',       110*365 + 42*7] ,
+               ['AFRO:DRCONGO:SUD_KIVU:NUNDU',       110*365 + 35*7] ,
+               ['AFRO:DRCONGO:HAUT_KATANGA:SAKANIA', 110*365 + 35*7] }
+    for obreak in obdict:
+      pdict    = {'startday':       obreak[1] ,
+                  'nodes':          node_list  }
+
+      camp_module.add(IV_IMP_PRESS(pdict))
 
 
   #  ***** End file construction *****
@@ -274,6 +288,31 @@ def IV_BR_FORCE(params=dict()):
 
   camp_iv.Multiplier_By_Duration.Times      = params['x_vals']
   camp_iv.Multiplier_By_Duration.Values     = params['y_vals']
+
+  return camp_event
+
+#********************************************************************************
+
+# Forced outbreaks
+def IV_IMP_PRESS(params=dict()):
+
+  SCHEMA_PATH   =  gdata.schema_path
+
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv    = s2c.get_class_with_defaults('ImportPressure',            SCHEMA_PATH)
+
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
+
+  camp_event.Event_Coordinator_Config = camp_coord
+  camp_event.Start_Day                = params['startday']
+  camp_event.Nodeset_Config           = node_set
+
+  camp_coord.Intervention_Config      = camp_iv
+
+  camp_iv.Durations                   = [7.0]
+  camp_iv.Daily_Import_Pressures      = [1.0]
+  camp_iv.Import_Age                  = 40*365
 
   return camp_event
 
