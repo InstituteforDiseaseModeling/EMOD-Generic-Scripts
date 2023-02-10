@@ -56,12 +56,14 @@ def demographicsBuilder():
   # ***** Get variables for this simulation *****
   START_YEAR   = gdata.start_year
   BASE_YEAR    = gdata.base_year
+  END_IMPORTS  = gdata.check_abort
 
   MAX_DAILY_MORT = 0.01
   POP_DAT_STR    = 'COD'
 
   PROC_DISPER  = gdata.var_params['proc_overdispersion']
   USE_10K      = gdata.var_params['use_10k_res']
+  SEED_CASES   = gdata.var_params['seed_outbreak']
 
   IND_RISK_VAR = gdata.var_params['ind_variance_risk']
 
@@ -105,6 +107,9 @@ def demographicsBuilder():
 
       imp_rate = imp_case*dict_pop[loc_name][0]/1.0e5
       node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate}
+
+      if(SEED_CASES):
+        node_obj.node_attributes.extra_attributes.update({'InfectivityReservoirEndTime': END_IMPORTS})
 
       node_list.append(node_obj)
 
