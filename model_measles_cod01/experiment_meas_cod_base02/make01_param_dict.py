@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'MEAS-COD-Bulk02'
-param_dict['NUM_SIMS']     =    25
+param_dict['NUM_SIMS']     =   750
 
 
 param_dict['EXP_VARIABLE'] = dict()
@@ -89,7 +89,7 @@ param_dict['EXP_CONSTANT']['agent_rate']           =    12.0
 param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
 
 # Subdivide LGAs into 100km^2 regions
-param_dict['EXP_CONSTANT']['use_10k_res']          =   False
+param_dict['EXP_CONSTANT']['use_10k_res']          =    True
 
 # Use historic outbreak seeding
 param_dict['EXP_CONSTANT']['seed_outbreak']        =    True
