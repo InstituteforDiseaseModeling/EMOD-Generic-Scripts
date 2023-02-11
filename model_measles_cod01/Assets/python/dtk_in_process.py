@@ -62,12 +62,17 @@ def application(timestep):
   if(proc_time > gdata.check_abort and not gdata.pass_abort):
     BIN_EDGES = np.cumsum(day_bins) + gdata.start_log + 0.5
     BIN_EDGES = np.insert(BIN_EDGES, 0, gdata.start_log + 0.5)
-    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
-                                     bins    = BIN_EDGES,
-                                     weights = gdata.data_vec_mcw)
 
-    inf_cum = np.log(np.sum(inf_mo[:6]))
+    inf_cum = 0
+    if(gdata.data_vec_time.shape[0] > 0):
+      (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
+                                       bins    = BIN_EDGES,
+                                       weights = gdata.data_vec_mcw)
+      inf_cum = np.log(np.sum(inf_mo[:6]))
+
+
     if(inf_cum >= 8):
+      # Too much ongoing transmission
       return "ABORT"
     else:
       gdata.pass_abort = True
