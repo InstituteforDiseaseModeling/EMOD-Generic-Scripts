@@ -130,14 +130,24 @@ def campaignBuilder():
 
 
   # Incorporate forced outbreaks
-  obdict = {}
   if(SEED_CASES):
-    obdict = { ['AFRO:DRCONGO:LUALABA:DILOLO',       110*365 + 42*7] ,
-               ['AFRO:DRCONGO:SUD_KIVU:NUNDU',       110*365 + 35*7] ,
-               ['AFRO:DRCONGO:HAUT_KATANGA:SAKANIA', 110*365 + 35*7] }
-    for obreak in obdict:
+    oblist = [ [['AFRO:DRCONGO:LUALABA:DILOLO'],       110*365 + 42*7, 1] ,
+               [['AFRO:DRCONGO:SUD_KIVU:NUNDU'],       110*365 + 35*7, 2] ,
+               [['AFRO:DRCONGO:HAUT_KATANGA:SAKANIA'], 110*365 + 35*7, 3] ]
+
+    for obreak in oblist:
+      node_list  = list()
+      for targ_val in obreak[0]:
+        for node_name in node_opts:
+          if((node_name == targ_val) or (node_name.startswith(targ_val+':'))):
+            node_list.append(node_dict[node_name])
+
+      if(not node_list):
+        continue
+
       pdict    = {'startday':       obreak[1] ,
-                  'nodes':          node_list  }
+                  'nodes':          node_list ,
+                  'label':          obreak[2] }
 
       camp_module.add(IV_IMP_PRESS(pdict))
 
@@ -310,9 +320,10 @@ def IV_IMP_PRESS(params=dict()):
 
   camp_coord.Intervention_Config      = camp_iv
 
-  camp_iv.Durations                   = [7.0]
-  camp_iv.Daily_Import_Pressures      = [1.0]
+  camp_iv.Durations                   = [  7.0]
+  camp_iv.Daily_Import_Pressures      = [100.0/len(params['nodes'])]
   camp_iv.Import_Age                  = 40*365
+  camp_iv.Genome                      = params['label']
 
   return camp_event
 
