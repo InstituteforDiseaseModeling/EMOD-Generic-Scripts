@@ -80,6 +80,20 @@ def application(output_path):
   time_vec = np.arange(TIME_START, TIME_START + TIME_DELTA)
 
 
+  # Post-process strain reporter
+  strain_dat = np.loadtxt(os.path.join(output_path,'ReportStrainTracking01.csv'),delimiter=',',skiprows=1,ndmin=2)
+
+  parsed_dat[key_str]['genome_trace'] = list()
+  for gen_val in [0,1,2,3]:
+    rep_bool          = (strain_dat[:,3]==gen_val)
+    vec_time          = strain_dat[rep_bool,0]
+    vec_infs          = strain_dat[rep_bool,7]
+    (inf_mo, tstamps) = np.histogram(strain_dat[rep_bool,0],
+                                     bins    = BIN_EDGES,
+                                     weights = strain_dat[rep_bool,7])
+    parsed_dat[key_str]['genome_trace'].append(inf_mo.tolist())
+
+
   # Aggregate new infections to timeseries by month, by admin01
   adm1_list  = list(set([val.rsplit(':',1)[0] for val in REP_MAP_DICT.keys()]))
   adm1_dict  = {adm1:[NODEID_DICT[val] for val in NODEID_DICT.keys() if val.startswith(adm1+':')]
