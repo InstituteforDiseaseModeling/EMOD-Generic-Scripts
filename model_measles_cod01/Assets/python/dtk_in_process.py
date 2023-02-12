@@ -68,7 +68,7 @@ def application(timestep):
       (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
                                        bins    = BIN_EDGES,
                                        weights = gdata.data_vec_mcw)
-      inf_cum = np.log(np.sum(inf_mo[:6]))
+      inf_cum = np.log(np.sum(inf_mo[:6]+0.1))
 
 
     if(inf_cum >= 8):
