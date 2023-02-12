@@ -131,9 +131,9 @@ def campaignBuilder():
 
   # Incorporate forced outbreaks
   if(SEED_CASES):
-    oblist = [ [['AFRO:DRCONGO:LUALABA:DILOLO'],       110*365 + 42*7, 1] ,
-               [['AFRO:DRCONGO:SUD_KIVU:NUNDU'],       110*365 + 35*7, 2] ,
-               [['AFRO:DRCONGO:HAUT_KATANGA:SAKANIA'], 110*365 + 35*7, 3] ]
+    oblist = [ [['AFRO:DRCONGO:LUALABA:DILOLO'],       110*365 + 42*7 -63, 1] ,
+               [['AFRO:DRCONGO:SUD_KIVU:NUNDU'],       110*365 + 35*7 -63, 2] ,
+               [['AFRO:DRCONGO:HAUT_KATANGA:SAKANIA'], 110*365 + 35*7 -63, 3] ]
 
     for obreak in oblist:
       node_list  = list()
@@ -320,8 +320,8 @@ def IV_IMP_PRESS(params=dict()):
 
   camp_coord.Intervention_Config      = camp_iv
 
-  camp_iv.Durations                   = [  7.0]
-  camp_iv.Daily_Import_Pressures      = [100.0/len(params['nodes'])]
+  camp_iv.Durations                   = [180.0]
+  camp_iv.Daily_Import_Pressures      = [1.0/len(params['nodes'])]
   camp_iv.Import_Age                  = 40*365
   camp_iv.Genome                      = params['label']
 
