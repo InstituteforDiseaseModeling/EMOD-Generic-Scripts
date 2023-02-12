@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'MEAS-COD-Bulk02'
-param_dict['NUM_SIMS']     =   750
+param_dict['NUM_SIMS']     =  1500
 
 
 param_dict['EXP_VARIABLE'] = dict()
