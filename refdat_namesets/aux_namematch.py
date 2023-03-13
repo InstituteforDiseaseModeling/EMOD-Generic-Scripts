@@ -52,7 +52,8 @@ tlc_dict = \
   'GHA':'GHANA',
   'IND':'INDIA',
   'NGA':'NIGERIA',
-  'PAK':'PAKISTAN'
+  'PAK':'PAKISTAN',
+  'SOM':'SOMALIA'
 }
 
 #*******************************************************************************
