@@ -2,9 +2,9 @@
 model_covariance01
 ==================
 
-This example demonstrates the impact of heterogenity on epidemic attack rate.
+This example demonstrates the impact of heterogeneity on epidemic attack rate.
 These simulations sweep over R0 with fixed levels for variance in an
-individual's acquisition risk, transmission rate, and covaraince between
+individual's acquisition risk, transmission rate, and covariance between
 acquisition risk and transmission rate.
 
 Each simulation uses a single node of fully susceptible individuals and an
