@@ -11,7 +11,7 @@ From: almalinux:9.1
     dnf clean all
 
     pip install pip              --upgrade
-    pip install emod-api==1.27.4 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+    pip install emod-api==1.28.5 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
 
 %runscript
 
