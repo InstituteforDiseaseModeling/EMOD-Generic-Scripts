@@ -62,7 +62,7 @@ for k1 in range(2006,2013):
 axs01.tick_params(axis='x', labelsize=14)
 axs01.tick_params(axis='y', labelsize=14)
 
-fidx = (pyr_mat[:,0,0]>=0)
+fidx = (pyr_mat[:,-1,0]>0)
 pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
 pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
 

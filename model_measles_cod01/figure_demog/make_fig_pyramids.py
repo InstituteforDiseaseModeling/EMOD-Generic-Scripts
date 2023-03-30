@@ -40,7 +40,7 @@ for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
   pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyramid'])
 
-fidx = (pyr_mat[:,0,0]>=0)
+fidx = (pyr_mat[:,-1,0]>0)
 x_dat_list = [cod_2010_frac]
 
 fig01 = plt.figure(figsize=(14,6))
