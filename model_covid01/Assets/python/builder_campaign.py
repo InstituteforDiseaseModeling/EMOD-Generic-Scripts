@@ -205,7 +205,7 @@ def IV_Quarantine(params=dict()):
   camp_event    = s2c.get_class_with_defaults('CampaignEvent',                          SCHEMA_PATH)
   camp_coord    = s2c.get_class_with_defaults('CommunityHealthWorkerEventCoordinator',  SCHEMA_PATH)
   camp_iv       = s2c.get_class_with_defaults('Vaccine',                                SCHEMA_PATH)
-  camp_wane_trn = s2c.get_class_with_defaults('WaningEffectMapPiecewise',               SCHEMA_PATH)
+  camp_wane_trn = s2c.get_class_with_defaults('WaningEffect',                           SCHEMA_PATH)
 
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
@@ -227,7 +227,6 @@ def IV_Quarantine(params=dict()):
   camp_iv.Transmit_Config                        = camp_wane_trn
 
   camp_wane_trn.Initial_Effect                   = 1.0
-  camp_wane_trn.Reference_Timer                  = 0.0
   camp_wane_trn.Durability_Map.Times             = [ 0.0, 1.0+params['delay']   ]
   camp_wane_trn.Durability_Map.Values            = [ 0.0,     params['quality'] ]
 
@@ -245,8 +244,8 @@ def IV_MultiEffect(params=dict()):
   camp_event    = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
   camp_coord    = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
   camp_iv       = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
-  camp_wane_acq = s2c.get_class_with_defaults('WaningEffectConstant',      SCHEMA_PATH)
-  camp_wane_trn = s2c.get_class_with_defaults('WaningEffectConstant',      SCHEMA_PATH)
+  camp_wane_acq = s2c.get_class_with_defaults('WaningEffect',              SCHEMA_PATH)
+  camp_wane_trn = s2c.get_class_with_defaults('WaningEffect',              SCHEMA_PATH)
 
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
