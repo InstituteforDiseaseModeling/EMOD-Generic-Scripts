@@ -104,7 +104,7 @@ fig01.patch.set_alpha(0.0)
 axs01.patch.set_alpha(0.0)
 
 # Save figure
-plt.savefig('fig_calib_interrupt01.svg')
+plt.savefig('fig_waterfall01.png')
 plt.close()
 
 #*******************************************************************************
