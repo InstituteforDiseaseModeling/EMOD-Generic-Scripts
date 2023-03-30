@@ -14,7 +14,7 @@ Important features include:
 - Health care workers (HCW) and non-HWC moving between locations.
 - Personal protective equipment (PPE) for HWC.
 - Age-dependent susceptibility.
-- Self-quarantine behavior.
+- Self-isolation behavior.
 - Age-structured contact matricies.
 - Overdispersion of the infection rate.
 
