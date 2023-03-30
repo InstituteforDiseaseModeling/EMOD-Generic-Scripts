@@ -105,6 +105,8 @@ param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
 # Subdivide LGAs into 100km^2 regions
 param_dict['EXP_CONSTANT']['use_10k_res']          =   True
 
+# Use historic outbreak seeding
+param_dict['EXP_CONSTANT']['seed_outbreak']        =   False
 
 
 # ***** Write parameter dictionary *****
