@@ -10,11 +10,10 @@ _data_*.json
 param_*.json
 _param_*.json
 
-*_ID
+*_ID.id
 *.log
 *.png
 *.svg
-*.id
 
 __pycache__/
 *output/
