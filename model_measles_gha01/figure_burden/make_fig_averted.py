@@ -67,9 +67,7 @@ axs01.set_ylabel('Case Threshold for Response', fontsize=14)
 axs01.set_xscale('log')
 
 axs01.set_xlim(  1e-3, 1e-1)
-axs01.set_ylim(  0, 1000)
-
-virmap   = cm.get_cmap('viridis')
+axs01.set_ylim(  0,    1000)
 
 xval = log10_rep
 yval = num_cases
@@ -91,7 +89,7 @@ for k1 in range(nbins):
 
 plt.contour(np.power(10.0,xvec[:-1,:-1]+dxval/2),
                           yvec[:-1,:-1]+dyval/2,
-                          zmat, levels=[80e3,125e3,170e3,197e3],linewidths=3, vmin=0, vmax=230e3)
+                          zmat, levels=[80e3,120e3,160e3,190e3],linewidths=3, vmin=0, vmax=220e3)
 
 axs01.scatter(np.power(10.0,xval[gdx2]), yval[gdx2], c=cval[gdx2], s=2, vmin=0, vmax=250e3, alpha=0.7)
 
@@ -100,6 +98,7 @@ ticlab = ['0.1%','1.0%','10%']
 axs01.set_xticks(ticks=ticloc)
 axs01.set_xticklabels(ticlab)
 
+virmap      = plt.get_cmap('viridis')
 cbar_handle = plt.colorbar(cm.ScalarMappable(cmap=virmap), ax=axs01, shrink=0.75)
 
 axs01.plot([0.04, 0.04],[0,1000],'k:')
