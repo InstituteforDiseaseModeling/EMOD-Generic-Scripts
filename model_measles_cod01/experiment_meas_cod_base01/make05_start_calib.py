@@ -5,57 +5,41 @@
 import os
 
 from idmtools.core.platform_factory                           import  Platform
-from idmtools.assets                                          import  AssetCollection
-from idmtools_models.python.python_task                       import  PythonTask
-from idmtools_platform_comps.ssmt_work_items.comps_workitems  import  SSMTWorkItem
+#from idmtools_platform_comps.ssmt_work_items.comps_workitems  import  SSMTWorkItem
 from idmtools.core.id_file                                    import  write_id_file
+
+# Ought to go in emodpy
+import sys
+LOCAL_PATH = os.path.abspath(os.path.join('..','..','local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from emod_exp import calib_from_def_file
 
 # ******************************************************************************
 
 
 # Paths
+PATH_EXP_DEF  = os.path.abspath('param_dict.json')
 PATH_PYTHON   = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA     = os.path.abspath(os.path.join('..', 'Assets', 'data'))
 PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Alma9', 'EMOD_ENV.id'))
 PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Alma9', 'EMOD_EXE.id'))
-PATH_LOCAL    = os.path.abspath(os.path.join('..', '..', 'local_python'))
-
-DOCK_PACK     = r'docker-production.packages.idmod.org/idmtools/comps_ssmt_worker:1.6.4.8'
 
 
-# Start a work item on COMPS
+# Start a calibration on COMPS
 def run_the_calibration():
 
-  # Connect to COMPS; needs to be the same environment used to run the sims
+  # Prepare the platform
   plat_obj = Platform(block        = 'COMPS',
                       endpoint     = 'https://comps.idmod.org',
                       environment  = 'Calculon')
 
-  # Create python task for SSMT work item
-  task_obj = PythonTask(python_path = 'python3',
-                        script_path = os.path.join(PATH_LOCAL,'emod_calib.py'))
+  # Create calibration object
+  wi_obj = calib_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_ENV, PATH_EXE, PATH_DATA, LOCAL_PATH)
 
-  # Add everything needed to run an experiment and ID from the initial sweep
-  task_obj.common_assets.add_directory(PATH_PYTHON, relative_path='python')
-  task_obj.common_assets.add_directory(PATH_DATA,   relative_path='data')
-  task_obj.common_assets.add_directory(PATH_LOCAL)
-  task_obj.common_assets.add_asset(PATH_ENV)
-  task_obj.common_assets.add_asset(PATH_EXE)
-  task_obj.common_assets.add_asset('param_dict.json')
-
-  # Add working directory assets
-  ac_obj = AssetCollection()
-  ac_obj.add_asset('idmtools.ini')
-
-
-  # Es liebten alle Frauen
-  wi_obj = SSMTWorkItem(name             = 'Calibd_EMOD_Measles-COD01',
-                        task             = task_obj,
-                        transient_assets = ac_obj,
-                        docker_image     = DOCK_PACK)
+  # Send work item to COMPS; start processing
   wi_obj.run(wait_on_done=False)
 
-  # Save calibration id to file
+  # Save work item id to file
   write_id_file('COMPS_ID.id', wi_obj)
   print()
   print(wi_obj.uid.hex)

@@ -26,6 +26,8 @@ FILENAME_ID =  'COMPS_ID.id'
 COMPS_URL   =  'https://comps.idmod.org'
 
 
+#*******************************************************************************
+
 def getter_worker(sim):
 
   Client.login(COMPS_URL)
