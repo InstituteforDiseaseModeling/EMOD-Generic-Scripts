@@ -115,6 +115,7 @@ def update_config_obj(config):
   # ***** Reporting *****
   config.parameters.Enable_Default_Reporting                       =    1
   config.parameters.Enable_Demographics_Reporting                  =    1
+  config.parameters.Enable_Binned_Report                           =    1
 
   config.parameters.Custom_Reports_Filename                        = gdata.reports_file
 
