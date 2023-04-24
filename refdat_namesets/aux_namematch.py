@@ -51,6 +51,7 @@ tlc_dict = \
   'GBR':'UNITED_KINGDOM',
   'GHA':'GHANA',
   'IND':'INDIA',
+  'MYS':'MALAYSIA',
   'NGA':'NIGERIA',
   'PAK':'PAKISTAN',
   'SOM':'SOMALIA'
