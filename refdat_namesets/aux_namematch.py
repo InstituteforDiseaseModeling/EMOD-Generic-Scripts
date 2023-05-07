@@ -54,7 +54,8 @@ tlc_dict = \
   'MYS':'MALAYSIA',
   'NGA':'NIGERIA',
   'PAK':'PAKISTAN',
-  'SOM':'SOMALIA'
+  'SOM':'SOMALIA',
+  'SSA':'SUB_SAHARAN_AFRICA'
 }
 
 #*******************************************************************************
