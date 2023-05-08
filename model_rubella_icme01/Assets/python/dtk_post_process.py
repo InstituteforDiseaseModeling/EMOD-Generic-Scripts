@@ -65,6 +65,23 @@ def application(output_path):
   parsed_dat[key_str]['inf_data'] = inf_dat.tolist()
 
 
+  # Retain annualized count of births; store in a json dict
+  with open(os.path.join(output_path,'InsetChart.json')) as fid01:
+    inset_chart = json.load(fid01)
+
+  tot_births = np.array(inset_chart['Channels']['Births']['Data'])
+  births_dat = np.zeros((int(RUN_YEARS)))
+  for k1 in range(births_dat.shape[0]):
+    dex1 = int(365*(k1))
+    dex2 = int(365*(k1+1))
+    if(dex2<tot_births.shape[0]):
+      births_dat[k1] = tot_births[dex2]-tot_births[dex1]
+    elif(dex1<tot_births.shape[0]):
+      births_dat[k1] = tot_births[-1]  -tot_births[dex1]
+
+  parsed_dat[key_str]['cbr_vec'] = births_dat.tolist()
+
+
   # Calculate calibration score
   err_score = 0
 
