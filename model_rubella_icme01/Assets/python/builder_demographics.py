@@ -34,13 +34,14 @@ pop_age_days = [     0,    1825,    3650,    5475,    7300,    9125,
                  21900,   23725,   25550,   27375,   29200,   31025,
                  32850,   34675,   36500]
 
+MAX_DAILY_MORT   = 0.01
+
 #********************************************************************************
 
 def demographicsBuilder():
 
   BASE_YEAR        = gdata.base_year
   START_YEAR       = gdata.start_year
-  MAX_DAILY_MORT   = 0.01
 
   DEMOG_FILENAME   = 'demographics.json'
   PATH_OVERLAY     = 'demog_overlay'
@@ -76,8 +77,7 @@ def demographicsBuilder():
   gdata.init_pop  = 10000000
   node_id         = 1
   node_name       = SETTING+':A{:05d}'.format(node_id)
-  #imp_rate        = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
-  imp_rate        = 0
+  imp_rate        = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
 
   node_obj = Node(lat         = 0.0,
                   lon         = 0.0,
