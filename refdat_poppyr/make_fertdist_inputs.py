@@ -54,6 +54,6 @@ for row_val in flines_fwd:
 
 
 # Write data files
-np.savetxt('fert_dat_{:s}.csv'.format(COUNTRY), pop_dat.T, fmt='%f', delimiter=',')
+np.savetxt('fert_dat_{:s}.csv'.format(COUNTRY), pop_dat.T, fmt='%.1f', delimiter=',')
 
 #*******************************************************************************
