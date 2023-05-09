@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'Rubella-SSA-Working02'
-param_dict['NUM_SIMS']     =   500
+param_dict['NUM_SIMS']     =  2000
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -58,7 +58,7 @@ param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, 
 param_dict['EXP_CONSTANT']['steady_state_demog']    =  True
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            =  20000
+param_dict['EXP_CONSTANT']['num_agents']            =  50000
 
 
 
