@@ -43,16 +43,13 @@ param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 # Infectivity
 param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
 
-# RI rate for MR
-#param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
-
 
 
 # ***** Constants for this experiment *****
 
-# RI rate multiplier for MR
-#param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
-#param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year; RI starts in 2020; linear interpolation
+# Routine immunization rate; starts in 2020; linear interpolation
+param_dict['EXP_CONSTANT']['RI_rate_fracs']    =  [   0.6,    0.6]   # Fractional coverage
+param_dict['EXP_CONSTANT']['RI_rate_years']    =  [2020.0, 2050.0]   # Year
 
 # Use constant vital dynamics
 param_dict['EXP_CONSTANT']['steady_state_demog']    =  True
