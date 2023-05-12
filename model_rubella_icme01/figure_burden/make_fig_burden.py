@@ -132,7 +132,7 @@ for dirname in DIRNAMES:
 
 
   plt.tight_layout()
-  plt.savefig('fig_pyr_{:s}.png'.format(dirname))
+  plt.savefig('fig_cases_{:s}.png'.format(dirname))
   plt.close()
 
 
