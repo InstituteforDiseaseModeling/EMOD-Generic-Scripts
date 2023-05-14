@@ -5,7 +5,7 @@ additional information about how to use these scripts.
 
 To build the documentation locally, do the following:
 
-1. Create and activate a venv.
+1. Create and activate a venv.  *** Does not support Python 3.11: Use 3.10 ***
 2. Navigate to the root directory of the repo and enter the following
 
     ```
