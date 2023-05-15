@@ -1,7 +1,7 @@
 FROM almalinux:9.1
 #
 RUN dnf -y upgrade
-RUN dnf -y install python-dev
+RUN dnf -y install python-devel
 RUN dnf -y install python-pip
 RUN dnf clean all
 #
