@@ -19,7 +19,7 @@ from COMPS.Data.Simulation      import SimulationState
 #*******************************************************************************
 
 
-DOCK_PACK   = r'testteam-docker-stage.packages.idmod.org/mobyjenkins/mobyjenkins-emodpy/comps_ssmt_worker:c174786'
+DOCK_PACK   = r'testteam-docker-stage.packages.idmod.org/mobyjenkins/mobyjenkins-emodpy/comps_ssmt_worker:4a11c87'
 DATA_BRICK  =  'data_brick.json'
 FILENAME_PY =  'emod_reduce.py'
 FILENAME_ID =  'COMPS_ID.id'
