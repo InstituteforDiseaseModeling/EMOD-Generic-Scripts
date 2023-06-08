@@ -1,0 +1,26 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+    apt-get update
+    apt-get install software-properties-common -y
+    apt-get update
+    add-apt-repository universe
+    apt-get upgrade -y
+
+    apt-get clean
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container. Creates an Asset on COMPS; avoids repeated pull from docker.

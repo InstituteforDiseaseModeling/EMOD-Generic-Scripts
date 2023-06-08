@@ -8,6 +8,7 @@ from idmtools.core.platform_factory      import Platform
 from idmtools.core.id_file               import write_id_file
 from idmtools.entities.command_task      import CommandTask
 from idmtools.entities.experiment        import Experiment
+from idmtools.assets                     import AssetCollection
 from idmtools_platform_comps.utils.singularity_build \
                                          import SingularityBuildWorkItem
 from idmtools_platform_comps.utils.assetize_output.assetize_output \
@@ -29,16 +30,20 @@ def make_work():
                       num_retries      = '0',
                       exclusive        = 'False')
 
+  # Add image for base OS
+  os_image = AssetCollection.from_id_file('EMOD_OS.id')
+
   # Creates a work item to create the build image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Ubuntu22',
-                                      definition_file  = 'EMOD_EXE_Ubuntu22.def',
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Debian11',
+                                      definition_file  = 'EMOD_EXE_Debian11.def',
                                       force            = True)
+  sbwi_obj.assets.add_assets(os_image)
 
   # Wait until the build image is finished
   ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
 
   # Magic words
-  cmd_line = 'singularity exec Assets/EMOD_EXE_Ubuntu22.sif cp -r /outputs/. .'
+  cmd_line = 'singularity exec Assets/EMOD_EXE_Debian11.sif cp -r /outputs/. .'
 
   # Create CommandTask
   task_obj = CommandTask(command=cmd_line)

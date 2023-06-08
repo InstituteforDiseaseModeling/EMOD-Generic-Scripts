@@ -10,16 +10,6 @@ Follow the instructions below to
 
         pip install -r requirements.txt --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
 
-#.  Build the environment::
-
-        cd EMOD-Generic/env_Alma9
-        python make00_ENV_EMOD.py
-
-#.  Build the executable::
-
-        cd EMOD-Generic/env_Alma9
-        python make00_EXE_EMOD.py
-
 #.  Run an experiment::
 
         cd EMOD_Generic/model_covariance01/experiment_covariance01

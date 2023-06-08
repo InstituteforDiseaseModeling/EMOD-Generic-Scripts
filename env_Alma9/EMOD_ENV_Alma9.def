@@ -1,14 +1,12 @@
-Bootstrap: docker
-From: almalinux:9.1
+Bootstrap: localimage
+From: Assets/EMOD_OS_Alma9.sif
 
 %post
-    dnf upgrade -y
+    microdnf -y install python
+    microdnf -y install python-pip
+    microdnf -y install mpich
 
-    dnf -y install python
-    dnf -y install python-pip
-    dnf -y install mpich
-
-    dnf clean all
+    microdnf clean all
 
     pip install pip              --upgrade
     pip install emod-api==1.28.5 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple

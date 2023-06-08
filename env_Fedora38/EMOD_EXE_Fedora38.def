@@ -1,21 +1,21 @@
-Bootstrap: docker
-From: fedora:37
+Bootstrap: localimage
+From: Assets/EMOD_OS_Fedora38.sif
 
 %post
-    dnf upgrade -y
-
-    dnf group install "Development Tools" -y
-    dnf install gcc-c++ -y
-
-    dnf install python3-devel -y
+    dnf install python-devel -y
     dnf install mpich-devel -y
     dnf install sqlite-devel -y
     dnf install boost-devel -y
-
     dnf install git -y
-    dnf install scons -y
+    dnf install glibc-devel -y
+    dnf install gcc-c++ -y
 
     dnf clean all
+
+    python3 -m pip install pip --upgrade
+    python3 -m pip install scons
+
+    export USER=CalculonUser-EMOD
 
     git clone https://github.com/kfrey-idm/EMOD
 
@@ -24,8 +24,8 @@ From: fedora:37
     git fetch
     git checkout Generic-Ongoing
 
-    export USER=CalculonUser-EMOD
     export PATH=$PATH:/usr/lib64/mpich/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
 
     scons --Release --jobs=4 --Disease=Generic
 

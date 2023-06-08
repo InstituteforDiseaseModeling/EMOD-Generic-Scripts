@@ -1,0 +1,22 @@
+Bootstrap: docker
+From: almalinux:9.1-minimal
+
+%post
+    microdnf upgrade -y
+
+    microdnf clean all
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container. Creates an Asset on COMPS; avoids repeated pull from docker.

@@ -1,16 +1,16 @@
-Bootstrap: docker
-From: almalinux:9.1
+Bootstrap: localimage
+From: Assets/EMOD_OS_Alma9.sif
 
 %post
-    dnf install python-devel -y
-    dnf install mpich-devel -y
-    dnf install sqlite-devel -y
-    dnf install boost-devel -y
-    dnf install git -y
+    microdnf install python-devel -y
+    microdnf install mpich-devel -y
+    microdnf install sqlite-devel -y
+    microdnf install boost-devel -y
+    microdnf install git -y
+    microdnf install glibc-devel -y
+    microdnf install gcc-c++ -y
 
-    dnf group install "Development Tools" -y
-
-    dnf clean all
+    microdnf clean all
 
     python3 -m pip install pip --upgrade
     python3 -m pip install scons

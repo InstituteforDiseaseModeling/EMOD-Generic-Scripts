@@ -19,16 +19,16 @@ def make_work():
                       endpoint     = 'https://comps.idmod.org',
                       environment  = 'Calculon')
 
-  # Creates a single work item to create the image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_ENV_Fedora37',
-                                      definition_file  = 'EMOD_ENV_Fedora37.def',
+  # Creates a work item to build image
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_OS_Fedora38',
+                                      definition_file  = 'EMOD_OS_Fedora38.def',
                                       force            = True)
 
   # Wait until the image is built
   ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
 
   # Save asset id for sif to file
-  write_id_file('EMOD_ENV.id', ac_obj)
+  write_id_file('EMOD_OS.id', ac_obj)
   print()
   print(ac_obj.uid.hex)
 

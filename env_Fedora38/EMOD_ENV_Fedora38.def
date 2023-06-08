@@ -1,9 +1,7 @@
-Bootstrap: docker
-From: fedora:37
+Bootstrap: localimage
+From: Assets/EMOD_OS_Fedora38.sif
 
 %post
-    dnf upgrade -y
-
     dnf install python3 -y
     dnf install python3-pip -y
     dnf install mpich -y

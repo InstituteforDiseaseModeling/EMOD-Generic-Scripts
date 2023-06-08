@@ -1,23 +1,15 @@
-Bootstrap: docker
-From: ubuntu:22.04
+Bootstrap: localimage
+From: Assets/EMOD_OS_Ubuntu22.sif
 
 %post
-    apt-get update
-
-    apt-get install software-properties-common -y
-    apt-get update
-    add-apt-repository universe
-
-    apt-get upgrade -y
-
-    apt-get install build-essential -y
-
     apt-get install python3-dev -y
     apt-get install libmpich-dev -y
     apt-get install libsqlite3-dev -y
     apt-get install libboost-dev -y
-
     apt-get install git -y
+    apt-get install libc-dev -y
+    apt-get install g++ -y
+
     apt-get install scons -y
 
     apt-get clean

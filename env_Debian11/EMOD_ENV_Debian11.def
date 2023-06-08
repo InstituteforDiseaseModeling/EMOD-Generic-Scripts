@@ -1,13 +1,12 @@
-Bootstrap: docker
-From: debian:11.5
+Bootstrap: localimage
+From: Assets/EMOD_OS_Debian11.sif
 
 %post
-    apt-get update
-    apt-get upgrade -y
-
     apt-get install python3 -y
     apt-get install python3-pip -y
     apt-get install mpich -y
+
+    apt-get clean
 
     pip3 install pip              --upgrade
     pip3 install emod-api==1.28.5 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple

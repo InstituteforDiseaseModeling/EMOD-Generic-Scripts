@@ -1,0 +1,23 @@
+Bootstrap: docker
+From: debian:11.7
+
+%post
+    apt-get update
+    apt-get upgrade -y
+
+    apt-get clean
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container. Creates an Asset on COMPS; avoids repeated pull from docker.
