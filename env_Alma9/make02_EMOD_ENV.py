@@ -12,7 +12,7 @@ from idmtools_platform_comps.utils.singularity_build \
 
 # ******************************************************************************
 
-# Start and experiment on COMPS
+# Run work items on COMPS
 def make_work():
 
   # Prepare the platform
