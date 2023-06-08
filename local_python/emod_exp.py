@@ -10,8 +10,7 @@ from idmtools.entities.experiment                             import  Experiment
 from idmtools_models.python.python_task                       import  PythonTask
 from idmtools_platform_comps.ssmt_work_items.comps_workitems  import  SSMTWorkItem
 
-#from emodpy.emod_task                 import EMODTask
-from emod_task                        import EMODTask
+from emodpy.emod_task                 import EMODTask
 
 from emod_reduce                      import DOCK_PACK
 
