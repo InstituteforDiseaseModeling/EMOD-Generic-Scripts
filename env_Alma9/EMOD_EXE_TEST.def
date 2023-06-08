@@ -1,0 +1,54 @@
+Bootstrap: localimage
+From: Assets/EMOD_OS_Alma9.sif
+
+%post
+    microdnf install python-devel -y
+    microdnf install mpich-devel -y
+    microdnf install sqlite-devel -y
+    microdnf install boost-devel -y
+    microdnf install git -y
+    microdnf install glibc-devel -y
+    microdnf install gcc-c++ -y
+
+    microdnf clean all
+
+    python3 -m pip install pip --upgrade
+    python3 -m pip install scons
+
+    export USER=CalculonUser-EMOD
+
+    export PATH=$PATH:/usr/lib64/mpich/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
+
+    git clone https://github.com/kfrey-idm/EMOD
+
+    cd EMOD
+
+    git fetch
+    git checkout kfrey_testing01
+
+    scons --Release --jobs=4 --Disease=Generic --TestSugar
+
+    build/x64/Release/Eradication/Eradication --get-schema --schema-path schema.json -P Scripts
+
+    build/x64/Release/Eradication/Eradication -C config.json > StdOut.txt 2> StdErr.txt
+
+    head StdOut.txt
+    cat StdErr.txt
+
+    cause_an_error
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Container for building working branch of EMOD.
