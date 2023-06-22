@@ -1,14 +1,10 @@
-FROM ubuntu:20.04
+FROM almalinux:9.2-minimal
 #
-RUN apt-get update
+RUN microdnf upgrade -y
 #
-RUN apt-get -y install software-properties-common 
-RUN apt-get update
-RUN add-apt-repository universe
+RUN microdnf -y install python
+RUN microdnf -y install python-pip
+RUN microdnf clean all
 #
-RUN apt-get -y upgrade
-RUN apt-get -y install python3
-RUN apt-get -y install python3-pip
-#
-RUN pip3 install pip          --upgrade
-RUN pip3 install emodpy==1.21 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+RUN pip install pip          --upgrade
+RUN pip install emodpy==1.21 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
