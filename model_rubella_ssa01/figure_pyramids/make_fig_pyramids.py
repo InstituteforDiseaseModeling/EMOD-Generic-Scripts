@@ -14,8 +14,8 @@ from global_data          import run_years     as NUM_YRS
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_working01',
-            'experiment_working02']
+DIRNAMES = ['experiment_sweepRI_noSIAs_popEQL',
+            'experiment_sweepRI_noSIAs_popMED']
 
 
 CM      = np.array([ 70,130,180])/255

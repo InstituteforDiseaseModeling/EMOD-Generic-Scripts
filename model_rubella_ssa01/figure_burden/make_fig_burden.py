@@ -30,8 +30,8 @@ fert_set = fert_set/1000.0 # births/woman/year
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_working01',
-            'experiment_working02']
+DIRNAMES = ['experiment_sweepRI_noSIAs_popEQL',
+            'experiment_sweepRI_noSIAs_popMED']
 
 
 for dirname in DIRNAMES:

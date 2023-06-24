@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-SSA-Working02'
+param_dict['EXP_NAME']     = 'Rubella-SSA-popMED'
 param_dict['NUM_SIMS']     =  2000
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
@@ -48,11 +48,11 @@ param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, 
 # ***** Constants for this experiment *****
 
 # Routine immunization rate; starts in 2020; linear interpolation
-param_dict['EXP_CONSTANT']['RI_rate_fracs']    =  [   0.6,    0.6]   # Fractional coverage
+param_dict['EXP_CONSTANT']['RI_rate_fracs']    =  [   0.0,    0.0]   # Fractional coverage
 param_dict['EXP_CONSTANT']['RI_rate_years']    =  [2020.0, 2050.0]   # Year
 
 # Use constant vital dynamics
-param_dict['EXP_CONSTANT']['steady_state_demog']    =  True
+param_dict['EXP_CONSTANT']['steady_state_demog']    =  False
 
 # Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']            =  50000
