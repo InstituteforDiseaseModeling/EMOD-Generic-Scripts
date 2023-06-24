@@ -14,7 +14,7 @@ import numpy as np
 
 def dllcBuilder():
 
-  REPORTS_FILENAME = 'custom_dlls.json'
+  REPORTS_FILENAME = gdata.reports_file
 
 
   # ***** Get variables for this simulation *****
@@ -30,15 +30,13 @@ def dllcBuilder():
 
 
   # ***** Additional reporters *****
+
   # None
 
 
   #  ***** End file construction *****
-  with open(REPORTS_FILENAME, 'w') as fid01:
-    json.dump(json_set,fid01,sort_keys=True)
-
-  # Save filename to global data for use in other functions
-  gdata.reports_file = REPORTS_FILENAME
+  with open(REPORTS_FILENAME,'w') as fid01:
+    json.dump(json_set, fid01, sort_keys=True, indent=4)
 
 
   return None

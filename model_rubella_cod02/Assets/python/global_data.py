@@ -12,7 +12,7 @@ schema_path     = 'Assets/schema.json'
 # Filename params
 demog_files     = list()
 camp_file       = None
-reports_file    = None
+reports_file    = 'custom_dlls.json'
 
 demog_object    = None
 

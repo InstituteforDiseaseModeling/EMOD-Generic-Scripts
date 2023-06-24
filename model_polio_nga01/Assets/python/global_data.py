@@ -12,7 +12,7 @@ schema_path     = 'Assets/schema.json'
 # Filename params
 demog_files     = list()
 camp_file       = None
-reports_file    = None
+reports_file    = 'custom_dlls.json'
 
 start_off       = 365.0*(2016-1900)+120.0
 demog_dict      = dict()

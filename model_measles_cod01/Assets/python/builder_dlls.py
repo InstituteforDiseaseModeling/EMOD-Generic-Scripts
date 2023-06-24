@@ -14,42 +14,37 @@ import numpy as np
 
 def dllcBuilder():
 
-  REPORTS_FILENAME = 'custom_dlls.json'
+  REPORTS_FILENAME = gdata.reports_file
+  START_LOG        = gdata.start_log
 
 
   # ***** Get variables for this simulation *****
-  START_LOG = gdata.start_log
+  # N/A
 
 
   # Dictionary to be written
-  json_set = {}
+  json_set = dict()
 
 
   # ***** Custom reporters *****
-  json_set['Custom_Reports'] = \
-    {
-     'Use_Explicit_Dlls': 1,
-     'ReportStrainTracking':
-       {
-        'Enabled':  1,
-        'Reports': []
-       }
-    }
+  json_set['Custom_Reports'] = dict()
 
+
+  # ***** Additional reporters *****
 
   # Strain reporting
-  repDic = { 'Report_Name':    'ReportStrainTracking01.csv',
-             'Time_Start':      START_LOG                  }
+  json_set['Custom_Reports']['ReportStrainTracking'] = { 'Enabled': 1      ,
+                                                         'Reports': list() }
+
+  repDic = { 'Report_Name':  'ReportStrainTracking01.csv' ,
+             'Time_Start':    START_LOG                   }
 
   json_set['Custom_Reports']['ReportStrainTracking']['Reports'].append(repDic)
 
 
   #  ***** End file construction *****
-  with open('custom_dlls.json','w') as fid01:
-    json.dump(json_set,fid01,sort_keys=True)
-
-  # Save filename to global data for use in other functions
-  gdata.reports_file = REPORTS_FILENAME
+  with open(REPORTS_FILENAME,'w') as fid01:
+    json.dump(json_set, fid01, sort_keys=True, indent=4)
 
 
   return None

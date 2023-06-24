@@ -18,7 +18,7 @@ max_clock       =  180.0
 # Filename params
 demog_files     = list()
 camp_file       = None
-reports_file    = None
+reports_file    = 'custom_dlls.json'
 
 demog_object    = None
 demog_min_pop   =    1

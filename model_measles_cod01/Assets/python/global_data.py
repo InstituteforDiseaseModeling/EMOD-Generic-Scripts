@@ -20,7 +20,7 @@ max_clock       =  240.0
 # Filename params
 demog_files     = list()
 camp_file       = None
-reports_file    = None
+reports_file    = 'custom_dlls.json'
 
 demog_dict      = dict()
 demog_node      = dict()
