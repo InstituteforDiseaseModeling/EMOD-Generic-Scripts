@@ -43,6 +43,9 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   # Set singularity image for environment
   task_obj.set_sif(path_env_sif)
 
+  # Add python virtual environment to path in embedded interpreter
+  task_obj.add_py_path('/python_venv/lib/python3.11/site-packages')
+
   # Get parameters from json file
   with open(path_param_dict) as fid01:
     param_dict = json.load(fid01)
