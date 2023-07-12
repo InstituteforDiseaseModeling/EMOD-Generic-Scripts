@@ -148,13 +148,11 @@ for dirname in DIRNAMES:
 
   for ri_val in ri_lev:
     gidx        = (ri_vec==ri_val) & fidx
-    if (ri_val != 0.6):
-      continue
     inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
     ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
     xdat        = np.arange(INIT_YR, INIT_YR+int(ntstp/365)) + 0.5
 
-    axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)),c='C3')
+    axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 
   axs01.legend(fontsize=14)
 
