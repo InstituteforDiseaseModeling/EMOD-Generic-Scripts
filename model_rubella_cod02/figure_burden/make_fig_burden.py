@@ -136,21 +136,27 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_xlabel('Year', fontsize=14)
-  axs01.set_ylabel('Total Infections per 100k', fontsize=14)
+  #axs01.set_xlabel('Year', fontsize=14)
+  axs01.set_ylabel('Annual Rubella Infections per 100k', fontsize=16)
 
   axs01.set_xlim(2020, 2050)
   axs01.set_ylim(   0, 6000)
 
+  axs01.set_yticks(ticks=np.arange(0,6001,1000))
+  axs01.set_yticklabels(['0','1k','2k','3k','4k','5k','6k'],fontsize=16)
+  axs01.tick_params(axis='x', labelsize=16)
+
   for ri_val in ri_lev:
     gidx        = (ri_vec==ri_val) & fidx
+    if (ri_val != 0.6):
+      continue
     inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
     ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
     xdat        = np.arange(INIT_YR, INIT_YR+int(ntstp/365)) + 0.5
 
-    axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
+    axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)),c='C3')
 
-  axs01.legend()
+  axs01.legend(fontsize=14)
 
 
   # Figures - Sims - CRS
@@ -161,11 +167,15 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_xlabel('Year', fontsize=14)
-  axs01.set_ylabel('CRS Burden per 1k Births', fontsize=14)
+  #axs01.set_xlabel('Year', fontsize=14)
+  axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
 
   axs01.set_xlim(2020, 2050)
   axs01.set_ylim( 0.0,  4.0)
+
+  axs01.set_yticks(ticks=np.arange(0,4.1,0.5))
+  axs01.set_yticklabels(['0','','1','','2','','3','','4'],fontsize=16)
+  axs01.tick_params(axis='x', labelsize=16)
 
   for ri_val in ri_lev:
     gidx        = (ri_vec==ri_val) & fidx
@@ -176,7 +186,7 @@ for dirname in DIRNAMES:
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 
-  axs01.legend()
+  axs01.legend(fontsize=14)
 
   plt.tight_layout()
   plt.savefig('fig_inf_{:s}_01.png'.format(pop_dat_str))

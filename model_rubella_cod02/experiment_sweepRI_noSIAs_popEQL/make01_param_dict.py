@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'Rubella-COD-DemogSteadyState02'
-param_dict['NUM_SIMS']     =  4500
+param_dict['NUM_SIMS']     =  4500*5
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
