@@ -21,11 +21,11 @@ def update_config_obj(config):
   INIT_POP       = gdata.init_pop
   BASE_YEAR      = gdata.base_year
   START_YEAR     = gdata.start_year
+  RUN_YEARS      = gdata.run_years
 
 
   # ***** Get variables for this simulation *****
   RUN_NUM        = gdata.var_params['run_number']
-  TIME_DELTA     = gdata.var_params['num_tsteps']
   R0             = gdata.var_params['R0']
   INIT_AGENT     = gdata.var_params['num_agents']
 
@@ -36,7 +36,7 @@ def update_config_obj(config):
 
   # ***** Time *****
   config.parameters.Start_Time                                     = 365.0*(START_YEAR-BASE_YEAR)
-  config.parameters.Simulation_Duration                            = TIME_DELTA
+  config.parameters.Simulation_Duration                            = 365.0*RUN_YEARS
 
   config.parameters.Enable_Termination_On_Total_Wall_Time          =   1
   config.parameters.Wall_Time_Maximum_In_Minutes                   = MAX_CLOCK

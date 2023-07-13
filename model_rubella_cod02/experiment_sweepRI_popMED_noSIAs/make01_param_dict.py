@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-COD-DemogSteadyState02'
+param_dict['EXP_NAME']     = 'Rubella-COD-DemogMedian02'
 param_dict['NUM_SIMS']     =  4500*5
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
@@ -58,13 +58,10 @@ param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
 
 # Name of data file for population pyramid
-param_dict['EXP_CONSTANT']['pop_dat_file']          =  'steadystate'
+param_dict['EXP_CONSTANT']['pop_dat_file']          =  'median'
 
 # Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']            = 100000
-
-# Number of days for simulation
-param_dict['EXP_CONSTANT']['num_tsteps']            =    365.0*50.0
 
 
 

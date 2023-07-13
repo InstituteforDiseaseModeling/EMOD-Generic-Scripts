@@ -27,6 +27,7 @@ brate_mult_y    = None
 base_year       = 1900.0
 start_year      = 2000.0
 ri_offset       =   20.0
+run_years       =   50.0
 
 max_clock       =  180.0
 
