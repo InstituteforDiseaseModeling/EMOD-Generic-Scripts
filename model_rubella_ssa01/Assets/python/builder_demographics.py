@@ -59,7 +59,6 @@ def demographicsBuilder():
   LOG10_IMP    = 0
   SS_DEMOG     = gdata.var_params['steady_state_demog']
 
-
   # ***** Load reference data *****
   fname_pop = os.path.join('Assets','data','pop_dat_SSA.csv')
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')

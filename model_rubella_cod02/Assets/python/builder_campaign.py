@@ -27,12 +27,14 @@ def campaignBuilder():
   ALL_NODES     = gdata.demog_object.node_ids
   BASE_YEAR     = gdata.base_year
   START_YEAR    = gdata.start_year
+  RUN_YEARS     = gdata.run_years
   BR_MULT_X     = gdata.brate_mult_x
   BR_MULT_Y     = gdata.brate_mult_y
   RI_OFFSET     = gdata.ri_offset
 
 
   # ***** Get variables for this simulation *****
+  ADD_SIA       = gdata.var_params['add_campaigns']
   RI_RATE       = gdata.var_params['RI_rate']
   RI_YVEC       = gdata.var_params['RI_rate_mult_yvals']
   RI_XVEC       = gdata.var_params['RI_rate_mult_xvals']
@@ -52,6 +54,33 @@ def campaignBuilder():
                'y_vals':         ri_yvals  }
 
   camp_module.add(IV_MCV1(pdict))
+
+
+  # Add MCV RI
+  if(ADD_SIA):
+    sia_day = start_ri
+
+    # Catch-up
+    pdict     = {'startday':         sia_day ,
+                 'nodes':          ALL_NODES ,
+                 'agemin':               270 ,
+                 'agemax':              5475 ,
+                 'coverage':            0.50 }
+
+    camp_module.add(IV_SIA(pdict))
+
+    # Follow-ups
+    sia_offset = 0
+    while(sia_offset < RUN_YEARS):
+      sia_offset = sia_offset + 4.0
+      sia_day = start_ri + sia_offset*365.0
+      pdict   = {'startday':         sia_day ,
+                 'nodes':          ALL_NODES ,
+                 'agemin':               270 ,
+                 'agemax':              1825 ,
+                 'coverage':            0.50 }
+
+      camp_module.add(IV_SIA(pdict))
 
 
   # Add time varying birth rate
@@ -111,6 +140,36 @@ def IV_MCV1(params=dict()):
   camp_iv03.Acquire_Config                              = camp_wane
 
   camp_wane.Initial_Effect                              =    1.0
+
+  return camp_event
+
+#********************************************************************************
+
+# SIAs for MCV
+def IV_SIA(params=dict()):
+
+  SCHEMA_PATH   =  gdata.schema_path
+
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv01  = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
+  camp_wane  = s2c.get_class_with_defaults('WaningEffect',              SCHEMA_PATH)
+
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
+
+  camp_event.Event_Coordinator_Config       = camp_coord
+  camp_event.Start_Day                      = params['startday']
+  camp_event.Nodeset_Config                 = node_set
+
+  camp_coord.Intervention_Config            = camp_iv01
+  camp_coord.Target_Demographic             = 'ExplicitAgeRanges'
+  camp_coord.Demographic_Coverage           = params['coverage']
+  camp_coord.Target_Age_Min                 = params['agemin']/365.0
+  camp_coord.Target_Age_Max                 = params['agemax']/365.0
+
+  camp_iv01.Acquire_Config                  = camp_wane
+
+  camp_wane.Initial_Effect                  = 1.0
 
   return camp_event
 

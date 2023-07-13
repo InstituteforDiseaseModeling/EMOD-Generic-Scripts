@@ -57,8 +57,11 @@ param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
 
-# Name of data file for population pyramid
-param_dict['EXP_CONSTANT']['pop_dat_file']          =  'steadystate'
+# Use constant vital dynamics
+param_dict['EXP_CONSTANT']['steady_state_demog']    =  True
+
+# Use SIAs
+param_dict['EXP_CONSTANT']['add_campaigns']         =  False
 
 # Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']            = 100000

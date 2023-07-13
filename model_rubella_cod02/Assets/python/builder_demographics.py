@@ -11,6 +11,8 @@ import global_data as gdata
 import numpy                    as    np
 import scipy.optimize           as    opt
 
+from aux_demo_calc                                 import demoCalc_AgeDist
+
 from emod_api.demographics.Demographics            import Demographics, \
                                                           DemographicsOverlay
 from emod_api.demographics.Node                    import Node
@@ -32,13 +34,14 @@ pop_age_days = [     0,    1825,    3650,    5475,    7300,    9125,
                  21900,   23725,   25550,   27375,   29200,   31025,
                  32850,   34675,   36500]
 
+MAX_DAILY_MORT   = 0.01
+
 #********************************************************************************
 
 def demographicsBuilder():
 
   BASE_YEAR        = gdata.base_year
   START_YEAR       = gdata.start_year
-  MAX_DAILY_MORT   = 0.01
 
   DEMOG_FILENAME   = 'demographics.json'
   PATH_OVERLAY     = 'demog_overlay'
@@ -53,11 +56,11 @@ def demographicsBuilder():
   # ***** Get variables for this simulation *****
   R0           = gdata.var_params['R0']
   LOG10_IMP    = gdata.var_params['log10_import_mult']
-  POP_DAT_STR  = gdata.var_params['pop_dat_file']
+  SS_DEMOG     = gdata.var_params['steady_state_demog']
 
 
   # ***** Load reference data *****
-  fname_pop = os.path.join('Assets','data','pop_dat_{:s}.csv'.format(POP_DAT_STR))
+  fname_pop = os.path.join('Assets','data','pop_dat_COD.csv')
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec  = pop_input[0,:]  - BASE_YEAR
@@ -129,8 +132,11 @@ def demographicsBuilder():
   brmultx_02[1::2] = brmultx_01[1:]-0.5
   brmulty_02[1::2] = brmulty_01[0:-1]
 
+  if(SS_DEMOG):
+    brmulty_02 = 1.0 + 0.0*brmulty_02
+
   gdata.brate_mult_x = brmultx_02.tolist()
-  gdata.brate_mult_y = brmulty_02.tolist() 
+  gdata.brate_mult_y = brmulty_02.tolist()
 
   age_y        = pop_age_days
   age_init_cdf = np.cumsum(pop_init[:-1])/np.sum(pop_init)
@@ -156,6 +162,13 @@ def demographicsBuilder():
   mort_mat[0:-2:2,1::2] = mortvecs[:,:-1]
   mort_mat[1:-2:2,1::2] = mortvecs[:,:-1]
   mort_mat[-2:   , :]   = MAX_DAILY_MORT
+
+  if(SS_DEMOG):
+    mort_year = [mort_year[0]]
+    mort_mat  = mort_mat[:,0]
+    mort_mat  = mort_mat[...,np.newaxis]
+    (grow_rate, age_x, age_y) = demoCalc_AgeDist(birth_rate, mort_vec_X, mort_mat[:,0].tolist())
+
 
   # Vital dynamics overlays
   vd_over_dict['Defaults']  =  { 'IndividualAttributes':         dict() ,

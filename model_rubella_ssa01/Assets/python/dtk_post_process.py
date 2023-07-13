@@ -19,7 +19,6 @@ def application(output_path):
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
-  calval_dat = {key_str: dict()}
 
 
   # Sample population pyramid every year
@@ -85,17 +84,12 @@ def application(output_path):
   # Calculate calibration score
   err_score = 0
 
-  calval_dat[key_str] = float(err_score)
+  parsed_dat[key_str]['cal_val'] = float(err_score)
 
 
   # Write output dictionary
   with open('parsed_out.json','w') as fid01:
     json.dump(parsed_dat, fid01)
-
-
-  # Write calibration score
-  with open('calval_out.json','w') as fid01:
-    json.dump(calval_dat, fid01)
 
 
   return None

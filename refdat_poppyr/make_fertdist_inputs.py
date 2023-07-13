@@ -11,7 +11,7 @@ from  aux_namematch  import  reprule, tlc_dict
 
 
 # Set three letter country code
-COUNTRY = 'SSA'
+COUNTRY = ''
 
 
 # Parse CSVs

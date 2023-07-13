@@ -10,22 +10,15 @@ import numpy as np
 
 #********************************************************************************
 
-tpop_2020    = 89561000
-
-#********************************************************************************
-
 def application(output_path):
 
   SIM_IDX       = gdata.sim_index
-
-  # ***** Get variables for this simulation *****
-  TIME_DELTA     = gdata.var_params['num_tsteps']
+  RUN_YEARS     = gdata.run_years
 
 
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
-  calval_dat = {key_str: dict()}
 
 
   # Sample population pyramid every year
@@ -36,7 +29,7 @@ def application(output_path):
                   '30-34', '35-39', '40-44', '45-49', '50-54', '55-59',
                   '60-64', '65-69', '70-74', '75-79', '80-84', '85-89',
                   '90-94', '95-99']
-  pyr_dat      = np.zeros((int(np.floor(TIME_DELTA/365.0))+1,len(age_key_list)))
+  pyr_dat      = np.zeros((int(RUN_YEARS)+1,len(age_key_list)))
 
   for k1 in range(len(age_key_list)):
     age_key_str = 'Population Age {:s}'.format(age_key_list[k1])
@@ -55,7 +48,7 @@ def application(output_path):
                   '30-34', '35-39', '40-44', '45-49', '50-54', '55-59',
                   '60-64', '65-69', '70-74', '75-79', '80-84', '85-89',
                   '90-94', '95-99']
-  inf_dat      = np.zeros((int(np.ceil(TIME_DELTA/365.0)),len(age_key_list)))
+  inf_dat      = np.zeros((int(RUN_YEARS),len(age_key_list)))
   inf_mat_dat  = np.array(binned_output['Channels']['New Infections']['Data'])
 
   for k1 in range(inf_dat.shape[1]):
@@ -71,20 +64,32 @@ def application(output_path):
   parsed_dat[key_str]['inf_data'] = inf_dat.tolist()
 
 
+  # Retain annualized count of births; store in a json dict
+  with open(os.path.join(output_path,'InsetChart.json')) as fid01:
+    inset_chart = json.load(fid01)
+
+  tot_births = np.array(inset_chart['Channels']['Births']['Data'])
+  births_dat = np.zeros((int(RUN_YEARS)))
+  for k1 in range(births_dat.shape[0]):
+    dex1 = int(365*(k1))
+    dex2 = int(365*(k1+1))
+    if(dex2<tot_births.shape[0]):
+      births_dat[k1] = tot_births[dex2]-tot_births[dex1]
+    elif(dex1<tot_births.shape[0]):
+      births_dat[k1] = tot_births[-1]  -tot_births[dex1]
+
+  parsed_dat[key_str]['cbr_vec'] = births_dat.tolist()
+
+
   # Calculate calibration score
   err_score = 0
 
-  calval_dat[key_str] = float(err_score)
+  parsed_dat[key_str]['cal_val'] = float(err_score)
 
 
   # Write output dictionary
   with open('parsed_out.json','w') as fid01:
     json.dump(parsed_dat, fid01)
-
-
-  # Write calibration score
-  with open('calval_out.json','w') as fid01:
-    json.dump(calval_dat, fid01)
 
 
   return None
