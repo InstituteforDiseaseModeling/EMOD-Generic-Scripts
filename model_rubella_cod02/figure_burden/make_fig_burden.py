@@ -7,7 +7,6 @@ sys.path.append(os.path.join('..','Assets','python'))
 import numpy               as np
 import matplotlib.pyplot   as plt
 
-from builder_demographics import MAX_DAILY_MORT
 from global_data          import start_year, run_years
 
 #*******************************************************************************
