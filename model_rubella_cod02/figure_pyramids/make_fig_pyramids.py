@@ -13,8 +13,9 @@ from global_data          import start_year, run_years
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_SIAs']#,
-            #'experiment_sweepRI_popMED_noSIAs']
+DIRNAMES = ['experiment_sweepRI_popEQL_SIAs'   ,
+            #'experiment_sweepRI_popMED_noSIAs' ,
+            'experiment_sweepRI_popEQL_noSIAs' ]
 
 
 CM      = np.array([ 70,130,180])/255

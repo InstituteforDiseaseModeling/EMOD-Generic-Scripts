@@ -29,8 +29,11 @@ fert_set = fert_set/1000.0 # births/woman/year
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_SIAs']#,
-            #'experiment_sweepRI_popMED_noSIAs']
+DIRNAMES = ['experiment_sweepRI_popEQL_SIAs'   ,
+            'experiment_sweepRI_popEQL_noSIAs_02',
+            'experiment_sweepRI_popEQL_noSIAs_03',
+            'experiment_sweepRI_popMED_noSIAs' ,
+            'experiment_sweepRI_popEQL_noSIAs' ]
 
 
 for dirname in DIRNAMES:
@@ -135,10 +138,10 @@ for dirname in DIRNAMES:
   axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
 
   axs01.set_xlim(2020, 2050)
-  axs01.set_ylim( 0.0,  4.0)
+  axs01.set_ylim( 0.0,  5.0)
 
-  axs01.set_yticks(ticks=np.arange(0,4.1,0.5))
-  axs01.set_yticklabels(['0','','1','','2','','3','','4'],fontsize=16)
+  axs01.set_yticks(ticks=np.arange(0,5.1,0.5))
+  axs01.set_yticklabels(['0','','1','','2','','3','','4','','5'],fontsize=16)
   axs01.tick_params(axis='x', labelsize=16)
 
   for ri_val in ri_lev:
@@ -150,7 +153,8 @@ for dirname in DIRNAMES:
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 
-  axs01.legend(fontsize=14)
+  if('_02' in dirname):
+    axs01.legend(fontsize=14)
 
   plt.tight_layout()
   plt.savefig('fig_inf_{:s}_01.png'.format(dirname))
