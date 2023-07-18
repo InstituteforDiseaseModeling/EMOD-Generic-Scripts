@@ -14,7 +14,7 @@ from global_data          import start_year, run_years
 
 
 DIRNAMES = ['experiment_sweepRI_popEQL_SIAs'   ,
-            #'experiment_sweepRI_popMED_noSIAs' ,
+            'experiment_sweepRI_popMED_noSIAs' ,
             'experiment_sweepRI_popEQL_noSIAs' ]
 
 
