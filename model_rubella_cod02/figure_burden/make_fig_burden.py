@@ -30,8 +30,6 @@ fert_set = fert_set/1000.0 # births/woman/year
 
 
 DIRNAMES = ['experiment_sweepRI_popEQL_SIAs'   ,
-            'experiment_sweepRI_popEQL_noSIAs_02',
-            'experiment_sweepRI_popEQL_noSIAs_03',
             'experiment_sweepRI_popMED_noSIAs' ,
             'experiment_sweepRI_popEQL_noSIAs' ]
 
@@ -153,8 +151,6 @@ for dirname in DIRNAMES:
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 
-  if('_02' in dirname):
-    axs01.legend(fontsize=14)
 
   plt.tight_layout()
   plt.savefig('fig_inf_{:s}_01.png'.format(dirname))
