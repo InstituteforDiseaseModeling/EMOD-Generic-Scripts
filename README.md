@@ -25,8 +25,7 @@ To build the documentation locally, do the following:
 | model_measles_nga01      | Documentation. |
 | model_network01          | Demonstration of the network infectivity feature. |
 | model_polio_nga01        | Example outbreak simulations for cVDPV2 in Nigeria. Collab with JG and HL. |
-| model_rubella_drc01      | Example of rubella vaccine introduction for the Democratic Republic of the Congo assuming rollout through routine immunization services only. |
-| model_rubella_drc02      | Extension of the DRC01 workflow examining time-varying demographics and correcting DHS fertility rate values. |
+| model_rubella01          | Projections of rubella infections and CRS burden following RCV introduction.  |
 | model_transtree01        | Demonstration of the infector labeling feature and generation of explicit transmission networks. |
 | refdat_mcv1              | IHME MCV1 coverage estimates used to construct input files for EMOD simulations. |
 | refdat_namesets          | Namesets used for region identification. |

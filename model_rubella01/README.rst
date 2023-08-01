@@ -1,21 +1,20 @@
-===================
-model_rubella_cod02
-===================
+===============
+model_rubella01
+===============
 
-Extension of model_rubella_cod01 to examine the impact of non-steady-state
-demographics; vital dynamics from WPP data as in model_demographics02 for
-median estimates.
+Simulations that produce Figure 5 in the manuscript "Examination of scenarios
+introducing rubella vaccine in the Democratic Republic of the Congo." These
+simulations are used to demonstrate the potential for increased congenital
+rubella syndrome (CRS) after vaccine introduction.
 
-Adjusts fertility assumptions from model_rubella_cod01 where post-process
-birthrates were not necessarily consistent with simulated birthrates. Corrects
-error in model_rubella_cod01 where DHS fertility rates were incorrectly
-interpreted as per-3-years instead of per-year (3 year average). Outcomes are
-equivalent to previous results multiplied by a scale factor.
+See https://doi.org/10.1016/j.jvacx.2021.100127
 
-Applies agent weights during simulation so that outputs are corectly scaled to
-total population (contrast model_rubella_cod01 where required required based
-on the number of agents used during the simulation).
+Extensions the cited work to examine the impact of non-steady-state
+demographics; vital dynamics and fertility from WPP data. Applies agent weights
+during simulation so that outputs are corectly scaled to total population.
 
-Implements additional features:
-- Adjustable importation rates.
-- Time varying routine immunization rates.
+Important features include:
+- Maternally derived immunity.
+- Optional steady-state population pyramid.
+- Very low rates of exogeneous importation.
+- Posterior distribution of R0 values used as input.
