@@ -45,7 +45,6 @@ def demographicsBuilder():
 
   DEMOG_FILENAME   = 'demographics.json'
   PATH_OVERLAY     = 'demog_overlay'
-  SETTING          = 'AFRO:DRCONGO'
 
   gdata.demog_files.append(DEMOG_FILENAME)
 
@@ -57,10 +56,11 @@ def demographicsBuilder():
   R0           = gdata.var_params['R0']
   LOG10_IMP    = gdata.var_params['log10_import_mult']
   SS_DEMOG     = gdata.var_params['steady_state_demog']
+  DEMOG_SET    = gdata.var_params['demog_set']  
 
 
   # ***** Load reference data *****
-  fname_pop = os.path.join('Assets','data','pop_dat_COD.csv')
+  fname_pop = os.path.join('Assets','data','pop_dat_{:s}.csv'.format(DEMOG_SET))
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec  = pop_input[0,:]  - BASE_YEAR
@@ -75,7 +75,7 @@ def demographicsBuilder():
 
   gdata.init_pop  = int(np.sum(pop_init))
   node_id         = 1
-  node_name       = SETTING+':A{:05d}'.format(node_id)
+  node_name       = '{:s}:A{:05d}'.format(DEMOG_SET,node_id)
   imp_rate        = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
 
   node_obj = Node(lat         = 0.0,
@@ -89,7 +89,7 @@ def demographicsBuilder():
 
 
   # ***** Create primary file *****
-  REF_NAME   = 'DRC_Demographics_Datafile'
+  REF_NAME   = '{:s}_Demographics_Datafile'.format(DEMOG_SET)
   demog_obj  = Demographics(nodes=node_list, idref=REF_NAME)
 
 

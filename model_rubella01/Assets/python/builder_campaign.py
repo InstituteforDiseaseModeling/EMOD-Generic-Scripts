@@ -42,30 +42,29 @@ def campaignBuilder():
 
   # ***** Events *****
 
-  # Add MCV RI
+  # Add RI
   start_ri  = 365.0*(START_YEAR-BASE_YEAR+RI_OFFSET)
   ri_yvals  = np.minimum(np.array(RI_YVEC)*RI_RATE,1.0).tolist()
   ri_xvals  = ((np.array(RI_XVEC)-(START_YEAR+RI_OFFSET))*365.0).tolist()
 
-  pdict     = {'startday':       start_ri   ,
-               'nodes':          ALL_NODES  ,
-               'coverage':       RI_RATE    ,
-               'x_vals':         ri_xvals   ,
-               'y_vals':         ri_yvals  }
+  pdict     = {'startday':        start_ri ,
+               'nodes':          ALL_NODES ,
+               'x_vals':          ri_xvals ,
+               'y_vals':          ri_yvals }
 
   camp_module.add(IV_MCV1(pdict))
 
 
-  # Add MCV RI
+  # Add SIAs
   if(ADD_SIA):
     sia_day = start_ri
 
     # Catch-up
-    pdict     = {'startday':         sia_day ,
-                 'nodes':          ALL_NODES ,
-                 'agemin':               270 ,
-                 'agemax':              5475 ,
-                 'coverage':            0.50 }
+    pdict     = {'startday':       sia_day ,
+                 'nodes':        ALL_NODES ,
+                 'agemin':             270 ,
+                 'agemax':            5475 ,
+                 'coverage':          0.50 }
 
     camp_module.add(IV_SIA(pdict))
 
@@ -74,11 +73,11 @@ def campaignBuilder():
     while(sia_offset < RUN_YEARS):
       sia_offset = sia_offset + 4.0
       sia_day = start_ri + sia_offset*365.0
-      pdict   = {'startday':         sia_day ,
-                 'nodes':          ALL_NODES ,
-                 'agemin':               270 ,
-                 'agemax':              1825 ,
-                 'coverage':            0.50 }
+      pdict   = {'startday':       sia_day ,
+                 'nodes':        ALL_NODES ,
+                 'agemin':             270 ,
+                 'agemax':            1825 ,
+                 'coverage':          0.50 }
 
       camp_module.add(IV_SIA(pdict))
 
@@ -125,7 +124,7 @@ def IV_MCV1(params=dict()):
   camp_coord.Intervention_Config                        = camp_iv01
 
   camp_iv01.Actual_IndividualIntervention_Config        = camp_iv02
-  camp_iv01.Demographic_Coverage                        = params['coverage']  # Required, not used
+  camp_iv01.Demographic_Coverage                        =    1.0              # Required, not used
   camp_iv01.Trigger_Condition_List                      = ['Births']
   camp_iv01.Demographic_Coverage_Time_Profile           = 'InterpolationMap'
   camp_iv01.Coverage_vs_Time_Interpolation_Map.Times    = params['x_vals'] + [365.0*100.0]

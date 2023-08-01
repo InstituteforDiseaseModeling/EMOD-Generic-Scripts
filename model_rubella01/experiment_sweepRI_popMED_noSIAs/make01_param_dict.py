@@ -23,8 +23,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella-COD-DemogMedian02'
-param_dict['NUM_SIMS']     =  4500*5
+param_dict['EXP_NAME']     = 'Rubella01-DemogMedian'
+param_dict['NUM_SIMS']     =  4500
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -49,6 +49,9 @@ param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.2, 0.4, 0.
 
 
 # ***** Constants for this experiment *****
+
+# Context
+param_dict['EXP_CONSTANT']['demog_set']             =  'COD'
 
 # RI rate multiplier for MR
 param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
