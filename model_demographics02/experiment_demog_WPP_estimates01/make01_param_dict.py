@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'DemogExample-WPP-estimates01'
-param_dict['NUM_SIMS']     =  100
+param_dict['NUM_SIMS']     =  250
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -52,7 +52,7 @@ param_dict['EXP_CONSTANT']['start_year']           =  1950
 param_dict['EXP_CONSTANT']['num_years']            =    70
 
 # Country code
-param_dict['EXP_CONSTANT']['pop_dat_file']         =  'ETH'
+param_dict['EXP_CONSTANT']['pop_dat_file']         =  'PAK'
 
 
 
