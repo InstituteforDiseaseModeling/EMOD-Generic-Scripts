@@ -10,7 +10,6 @@ _data_*.json
 param_*.json
 _param_*.json
 
-*_ID.id
 *.log
 *.png
 *.svg
