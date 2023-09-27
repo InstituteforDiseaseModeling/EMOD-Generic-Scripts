@@ -43,7 +43,8 @@ extensions = [
     'sphinxcontrib.programoutput',
     'sphinx_copybutton',
     'sphinx.ext.intersphinx',
-    'sphinxext.remoteliteralinclude'
+    'sphinxext.remoteliteralinclude',
+    'sphinx_search.extension', # search across multiple docsets in domain
 ]
 
 plantuml = 'plantweb'
@@ -255,6 +256,22 @@ html_show_sphinx = False
 # base URL from which the finished HTML is served.
 #
 html_use_opensearch = 'www.idmod.org/docs/'
+
+# -- RTD Sphinx search for searching across the entire domain, default parent -------------
+
+if os.environ.get('READTHEDOCS') == 'True':
+
+    search_project_parent = "institute-for-disease-modeling-idm"
+    search_project = os.environ["READTHEDOCS_PROJECT"]
+    search_version = os.environ["READTHEDOCS_VERSION"]
+
+    rtd_sphinx_search_default_filter = f"subprojects:{search_project_parent}/{search_version}"
+
+    rtd_sphinx_search_filters = {
+        "Search this project": f"project:{search_project}/{search_version}",
+        "Search all IDM docs": f"subprojects:{search_project_parent}/{search_version}",
+    }
+
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None
