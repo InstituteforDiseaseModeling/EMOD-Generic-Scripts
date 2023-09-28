@@ -136,13 +136,9 @@ def update_config_obj(config):
   config.parameters.Enable_Initial_Susceptibility_Distribution      = 1
   config.parameters.Susceptibility_Initialization_Distribution_Type = 'DISTRIBUTION_COMPLEX'
 
-  config.parameters.Enable_Maternal_Protection    =            1
-  config.parameters.Susceptibility_Type           =  'FRACTIONAL'
-  config.parameters.Maternal_Protection_Type      =     'SIGMOID'
-  # BASE *= 1/(1+EXP((HALFMAXAGE-AGE_IN_DAYS)/STEEPFAC))
-  config.parameters.Maternal_Sigmoid_SteepFac     =   45.0
-  config.parameters.Maternal_Sigmoid_HalfMaxAge   =   90.0
-  config.parameters.Maternal_Sigmoid_SusInit      =    0.2
+  config.parameters.Maternal_Acquire_Config.Initial_Effect          =   1.0
+  config.parameters.Maternal_Acquire_Config.Durability_Map.Times    =  [   0,   50,  100,  150,  200,  250]
+  config.parameters.Maternal_Acquire_Config.Durability_Map.Values   =  [0.70, 0.57, 0.36, 0.17, 0.06, 0.00]
 
 
   # ***** Interventions *****
