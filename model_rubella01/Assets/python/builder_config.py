@@ -67,12 +67,11 @@ def update_config_obj(config):
   config.parameters.Post_Infection_Mortality_Multiplier            =    0.0
   config.parameters.Post_Infection_Transmission_Multiplier         =    0.0
 
-  config.parameters.Enable_Maternal_Protection                     =    1
-  config.parameters.Susceptibility_Type                            = 'BINARY'
-  config.parameters.Maternal_Protection_Type                       = 'SIGMOID'
-  config.parameters.Maternal_Sigmoid_HalfMaxAge                    =   90.0
-  config.parameters.Maternal_Sigmoid_SteepFac                      =   30.0
-  config.parameters.Maternal_Sigmoid_SusInit                       =    0.0
+  config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   1.0
+  config.parameters.Maternal_Acquire_Config.Enable_Box_Duration_Distribution  =   1
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Distribution         = 'GAUSSIAN_DISTRIBUTION'
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        =  90.0
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev     =  48.0
 
   config.parameters.Enable_Initial_Susceptibility_Distribution     =    1
   config.parameters.Susceptibility_Initialization_Distribution_Type= 'DISTRIBUTION_COMPLEX'
