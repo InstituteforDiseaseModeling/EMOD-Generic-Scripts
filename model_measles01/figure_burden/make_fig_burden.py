@@ -17,7 +17,7 @@ from global_data           import run_years
 DIRNAMES = ['experiment_popL1',
             'experiment_popL2',
             'experiment_popL3' ]
-YMAX     = 1500
+YMAX     = 800
 
 for dirname in DIRNAMES:
 
@@ -60,11 +60,11 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  infBlock = infBlock[fidx,:]
 
   xval = np.arange(0,run_years,1/12) + 1/24
   pops = np.interp(xval, tpop_xval, tpop_avg)
-  yval = np.mean(infBlock,axis=0)/pops*1e5
+  infBlock = infBlock[fidx,:]/pops*1e5
+  yval = np.mean(infBlock,axis=0)
 
   infDatSetSort = np.sort(infBlock,axis=0)
   infDatSetSort = infDatSetSort
