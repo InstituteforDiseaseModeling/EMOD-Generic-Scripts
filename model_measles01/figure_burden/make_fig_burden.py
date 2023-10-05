@@ -14,7 +14,9 @@ from global_data           import run_years
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_popL1' ]
+DIRNAMES = ['experiment_popL1',
+            'experiment_popL2',
+            'experiment_popL3' ]
 YMAX     = 1500
 
 for dirname in DIRNAMES:
