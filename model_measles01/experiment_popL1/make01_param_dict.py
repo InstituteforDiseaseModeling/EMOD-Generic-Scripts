@@ -41,13 +41,11 @@ NSIMS = param_dict['NUM_SIMS']
 param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 
 # Infectivity
-param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['R0']           = (8.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
 
-# RI rate for MR
-param_dict['EXP_VARIABLE']['MCV1']         = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
-
-# RI rate for MR
-param_dict['EXP_VARIABLE']['MCV2']         = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
+# RI rates
+param_dict['EXP_VARIABLE']['MCV1']         = np.random.choice([0.2, 0.4, 0.6, 0.8], p=[0.25, 0.25, 0.25, 0.25], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['MCV2']         = np.random.choice([0.0, 0.2, 0.4, 0.6], p=[0.25, 0.25, 0.25, 0.25], size=NSIMS).tolist()
 
 
 
@@ -57,7 +55,7 @@ param_dict['EXP_VARIABLE']['MCV2']         = np.random.choice([0.0, 0.2, 0.4, 0.
 param_dict['EXP_CONSTANT']['start_year']            =   2060
 
 # Log10 of multiplier on exogeneous case importation
-param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
+param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 
 # Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']            = 250000

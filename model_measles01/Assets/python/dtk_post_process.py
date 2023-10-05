@@ -48,6 +48,9 @@ def application(output_path):
                                    bins    = BIN_EDGES,
                                    weights = data_vec_mcw)
 
+  # Monthly timeseries
+  parsed_dat[key_str]['timeseries']   = inf_mo.tolist()
+
 
   # Sample population pyramid every year
   with open(os.path.join(output_path,'DemographicsSummary.json')) as fid01:

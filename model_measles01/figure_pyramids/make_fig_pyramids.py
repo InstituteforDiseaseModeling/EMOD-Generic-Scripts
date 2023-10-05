@@ -40,6 +40,9 @@ for dirname in DIRNAMES:
   fig01 = plt.figure(figsize=(16,6))
 
   for sim_idx_str in data_brick:
+    if(not sim_idx_str.isdigit()):
+      continue
+
     sim_idx = int(sim_idx_str)
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
 

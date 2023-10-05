@@ -6,33 +6,16 @@ sys.path.append(os.path.join('..','Assets','python'))
 
 import numpy               as np
 import matplotlib.pyplot   as plt
+import matplotlib.patches  as patch
+import matplotlib          as mpl
 
-from global_data          import start_year, run_years
-
-#*******************************************************************************
-
-# Years simulated
-XDAT     = np.arange(start_year, start_year+int(run_years)) + 0.5
-
-# Load UN WPP fertility distribution data
-fname    = os.path.join('..','Assets','data','fert_dat_COD.csv')
-fert_dat = np.loadtxt(fname,delimiter=',')
-fert_yr  = fert_dat[0, :]
-fert_mat = fert_dat[1:,:]
-
-# Fertility distributions interpolated for years simulated
-fert_set = np.zeros((fert_mat.shape[0],XDAT.shape[0]))
-for k1 in range(fert_set.shape[0]):
-  fert_set[k1,:] = np.interp(XDAT, fert_yr, fert_mat[k1,:])
-fert_set = fert_set/1000.0 # births/woman/year
+from global_data           import run_years
 
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_SIAs'   ,
-            'experiment_sweepRI_popMED_noSIAs' ,
-            'experiment_sweepRI_popEQL_noSIAs' ]
-
+DIRNAMES = ['experiment_popL1' ]
+YMAX     = 1500
 
 for dirname in DIRNAMES:
 
@@ -46,114 +29,64 @@ for dirname in DIRNAMES:
     param_dict = json.load(fid01)
 
   nsims        = int(param_dict['NUM_SIMS'])
-  ss_demog     =     param_dict['EXP_CONSTANT']['steady_state_demog']
-
-  try: 
-    ri_vec = np.array(param_dict['EXP_VARIABLE']['RI_rate'])
-  except:
-    ri_vec = np.ones(nsims) * param_dict['EXP_CONSTANT']['RI_rate']
-
-  ri_lev       = sorted(list(set(ri_vec.tolist())))
-  pyr_mat      = np.zeros((nsims,int(run_years)+1,20))-1
-  inf_mat      = np.zeros((nsims,int(run_years),20))
-  birth_mat    = np.zeros((nsims,int(run_years)   ))
+  infBlock     = np.zeros((nsims,12*int(run_years)))
+  pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
   for sim_idx_str in data_brick:
+    if(not sim_idx_str.isdigit()):
+      continue
+
     sim_idx = int(sim_idx_str)
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
-    inf_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['inf_data'])
-    birth_mat[sim_idx,:] = np.array(data_brick[sim_idx_str]['cbr_vec'])
+    infBlock[sim_idx,:]  = np.array(data_brick[sim_idx_str]['timeseries'])
 
-  # Index for simulations with output
   fidx = (pyr_mat[:,0,0]>=0)
 
-  # Annual crude births simulated in model
   pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
-  pop_tot     = np.sum(pyr_mat_avg,axis=1)
-  pop_tot     = np.diff(pop_tot)/2.0 + pop_tot[:-1]
-  birth_vec   = np.mean(birth_mat[fidx,:], axis=0)
-
-  # Annual births implied by fertility distribution
-  tot_fem = np.transpose((np.diff(pyr_mat_avg,axis=0)/2.0 + pyr_mat_avg[:-1,:])/2.0)
-  fertopt = fert_set
-  if(ss_demog):
-    fertopt = fert_set[:,0]
-    fertopt = fertopt[:,np.newaxis]
-  fert_births = np.sum(fertopt*tot_fem,axis=0)
-
-  # Normalize timeseries required for CRS calculation
-  norm_crs_timevec = birth_vec/fert_births
-
-  # Calculate CRS probabilities
-  crs_prob_vec  = np.ones(fertopt.shape)     # P = 1
-  crs_prob_vec  = crs_prob_vec * 0.5         # P(female)
-  crs_prob_vec  = crs_prob_vec * fertopt     # P(gave birth during year)
-  crs_prob_vec  = crs_prob_vec * 9.0/12.0    # P(pregnant during year)
-  crs_prob_vec  = crs_prob_vec * (0.85*13/39 + 0.50*13/39 + 0.50*4/39)
-                                             # P(infection leads to CRS)
+  tpop_avg    = np.sum(pyr_mat_avg, axis=1)
+  tpop_xval   = np.arange(len(tpop_avg))
 
 
   # Figures
-  fig01 = plt.figure(figsize=(16,6))
-
+  fig01 = plt.figure(figsize=(8,6))
 
   # Figures - Sims - Infections
-  axs01 = fig01.add_subplot(1, 2, 1)
+  axs01 = fig01.add_subplot(1, 1, 1)
   plt.sca(axs01)
 
   axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_ylabel('Annual Rubella Infections per 100k', fontsize=16)
+  infBlock = infBlock[fidx,:]
 
-  axs01.set_xlim(2020, 2050)
-  axs01.set_ylim(   0, 6000)
+  xval = np.arange(0,run_years,1/12) + 1/24
+  pops = np.interp(xval, tpop_xval, tpop_avg)
+  yval = np.mean(infBlock,axis=0)/pops*1e5
 
-  axs01.set_yticks(ticks=np.arange(0,6001,1000))
-  axs01.set_yticklabels(['0','1k','2k','3k','4k','5k','6k'],fontsize=16)
-  axs01.tick_params(axis='x', labelsize=16)
+  infDatSetSort = np.sort(infBlock,axis=0)
+  infDatSetSort = infDatSetSort
 
-  for ri_val in ri_lev:
-    gidx        = (ri_vec==ri_val) & fidx
-    inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
-    ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
-    xdat        = np.arange(start_year, start_year+run_years) + 0.5
+  #axs01.set_yticks(ticks=np.arange(0,6001,1000))
+  #axs01.set_yticklabels(['0','1k','2k','3k','4k','5k','6k'],fontsize=16)
+  #axs01.tick_params(axis='x', labelsize=16)
 
-    axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
+  for patwid in [0.45,0.375,0.25]:
+    xydat = np.zeros((2*infDatSetSort.shape[1],2))
+    xydat[:,0] = np.hstack((xval,xval[::-1]))
+    tidx = int((0.5-patwid)*infDatSetSort.shape[0])
+    xydat[:,1] = np.hstack((infDatSetSort[tidx,:],infDatSetSort[-tidx,::-1]))
 
-  axs01.legend(fontsize=14)
+    polyShp = patch.Polygon(xydat, facecolor='C0', alpha=0.7-patwid, edgecolor=None)
+    axs01.add_patch(polyShp)
 
-
-  # Figures - Sims - CRS
-  axs01 = fig01.add_subplot(1, 2, 2)
-  plt.sca(axs01)
-
-  axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
-  axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
-  axs01.set_axisbelow(True)
-
-  axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
-
-  axs01.set_xlim(2020, 2050)
-  axs01.set_ylim( 0.0,  5.0)
-
-  axs01.set_yticks(ticks=np.arange(0,5.1,0.5))
-  axs01.set_yticklabels(['0','','1','','2','','3','','4','','5'],fontsize=16)
-  axs01.tick_params(axis='x', labelsize=16)
-
-  for ri_val in ri_lev:
-    gidx        = (ri_vec==ri_val) & fidx
-    inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
-    crs_mat     = inf_mat_avg*np.transpose(crs_prob_vec)
-    ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
-    xdat        = np.arange(start_year, start_year+run_years) + 0.5
-
-    axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
-
+  axs01.plot(xval,yval,color='C0',linewidth=2)
+  axs01.set_ylabel('Monthly Infections per 100k',fontsize=16)
+  axs01.set_xlabel('Year',fontsize=16)
+  axs01.set_ylim(   0, YMAX)
 
   plt.tight_layout()
-  plt.savefig('fig_inf_{:s}_01.png'.format(dirname))
+  plt.savefig('fig_clouds_{:s}_01.png'.format(dirname))
   plt.close()
 
 
