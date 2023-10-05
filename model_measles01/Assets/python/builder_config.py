@@ -35,7 +35,7 @@ def update_config_obj(config):
 
   # ***** Time *****
   config.parameters.Start_Time                                     = 365.0*(START_YEAR-BASE_YEAR)
-  config.parameters.Simulation_Duration                            = 365.0*RUN_YEARS
+  config.parameters.Simulation_Duration                            = 365.0*RUN_YEARS + 1.0
 
   config.parameters.Enable_Termination_On_Total_Wall_Time          =   1
   config.parameters.Wall_Time_Maximum_In_Minutes                   = MAX_CLOCK

@@ -23,8 +23,8 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Measles01-DemogMed'
-param_dict['NUM_SIMS']     =    10
+param_dict['EXP_NAME']     = 'Measles01-DemogL2'
+param_dict['NUM_SIMS']     =   500
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -44,7 +44,10 @@ param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
 
 # RI rate for MR
-param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['MCV1']         = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
+
+# RI rate for MR
+param_dict['EXP_VARIABLE']['MCV2']         = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], p=[0.167, 0.167, 0.166, 0.167, 0.167, 0.166], size=NSIMS).tolist()
 
 
 
@@ -57,7 +60,7 @@ param_dict['EXP_CONSTANT']['start_year']            =   2040
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            = 100000
+param_dict['EXP_CONSTANT']['num_agents']            = 250000
 
 
 

@@ -31,20 +31,31 @@ def campaignBuilder():
 
 
   # ***** Get variables for this simulation *****
-  RI_RATE       = gdata.var_params['RI_rate']
+  MCV1_RATE     = gdata.var_params['MCV1']
+  MCV2_RATE     = gdata.var_params['MCV2']
   START_YEAR    = gdata.var_params['start_year']
 
 
   # ***** Events *****
 
-  # Add RI
-  start_ri  = 365.0*(START_YEAR-BASE_YEAR)
+  # Add MCV1
+  start_day = 365.0*(START_YEAR-BASE_YEAR)
+  pdict     = {'startday':        start_day ,
+               'nodes':           ALL_NODES ,
+               'ri_rate':         MCV1_RATE ,
+               'age_targ':            300.0 }
 
-  pdict     = {'startday':        start_ri ,
-               'nodes':          ALL_NODES ,
-               'y_val':            RI_RATE }
+  camp_module.add(IV_MCV(pdict))
 
-  camp_module.add(IV_MCV1(pdict))
+
+  # Add MCV2
+  start_day = 365.0*(START_YEAR-BASE_YEAR)
+  pdict     = {'startday':        start_day ,
+               'nodes':           ALL_NODES ,
+               'ri_rate':         MCV2_RATE ,
+               'age_targ':            460.0 }
+
+  camp_module.add(IV_MCV(pdict))
 
 
   # Add time varying birth rate
@@ -68,8 +79,8 @@ def campaignBuilder():
 
 #********************************************************************************
 
-# Routine immunization for MCV1
-def IV_MCV1(params=dict()):
+# Routine immunization for MCV
+def IV_MCV(params=dict()):
 
   SCHEMA_PATH   =  gdata.schema_path
 
@@ -92,13 +103,13 @@ def IV_MCV1(params=dict()):
   camp_iv01.Demographic_Coverage                        =    1.0              # Required, not used
   camp_iv01.Trigger_Condition_List                      = ['Births']
   camp_iv01.Demographic_Coverage_Time_Profile           = 'InterpolationMap'
-  camp_iv01.Coverage_vs_Time_Interpolation_Map.Times    = [365.0*0.0]       + [365.0*100.0]
-  camp_iv01.Coverage_vs_Time_Interpolation_Map.Values   = [params['y_val']] + [params['y_val']]
+  camp_iv01.Coverage_vs_Time_Interpolation_Map.Times    = [        365.0*0.0,        365.0*100.0]
+  camp_iv01.Coverage_vs_Time_Interpolation_Map.Values   = [params['ri_rate'],  params['ri_rate']]
   camp_iv01.Not_Covered_IndividualIntervention_Configs  = []                  # Breaks if not present
 
   camp_iv02.Actual_IndividualIntervention_Configs       = [camp_iv03]
   camp_iv02.Delay_Period_Distribution                   = "GAUSSIAN_DISTRIBUTION"
-  camp_iv02.Delay_Period_Gaussian_Mean                  =  300.0
+  camp_iv02.Delay_Period_Gaussian_Mean                  =  params['age_targ']
   camp_iv02.Delay_Period_Gaussian_Std_Dev               =   90.0
 
   camp_iv03.Acquire_Config                              = camp_wane
