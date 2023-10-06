@@ -22,16 +22,12 @@ RUN apt-get clean
 #
 RUN git clone https://github.com/kfrey-idm/EMOD
 #
-RUN cd EMOD
-#
-RUN git fetch
-RUN git checkout Generic-Ongoing
+RUN git --git-dir=/EMOD/.git fetch
+RUN git --git-dir=/EMOD/.git checkout Generic-Ongoing
 #
 RUN export USER=CalculonUser-EMOD
 #
-RUN scons --Release --jobs=4 --Disease=Generic
-#
-RUN cd ..
+RUN scons --Release --jobs=4 --Disease=Generic /EMOD
 #
 RUN mkdir outputs
 RUN cp EMOD/build/x64/Release/Eradication/Eradication outputs/Eradication
