@@ -1,2 +1,2 @@
 #!/bin/bash
-head -n 6 outputs/schema.json
+head -n 6 /outputs/schema.json
