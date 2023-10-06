@@ -25,7 +25,7 @@ RUN git clone https://github.com/kfrey-idm/EMOD
 RUN git --git-dir=/EMOD/.git fetch
 RUN git --git-dir=/EMOD/.git checkout Generic-Ongoing
 #
-RUN export USER=CalculonUser-EMOD
+ARG USER=CalculonUser-EMOD
 #
 RUN scons --Release --jobs=4 --Disease=Generic --directory=/EMOD/
 #
