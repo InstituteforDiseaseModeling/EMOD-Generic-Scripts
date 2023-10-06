@@ -27,7 +27,7 @@ RUN git --git-dir=/EMOD/.git checkout Generic-Ongoing
 #
 RUN export USER=CalculonUser-EMOD
 #
-RUN scons --Release --jobs=4 --Disease=Generic /EMOD
+RUN scons --Release --jobs=4 --Disease=Generic --directory=/EMOD/
 #
 RUN mkdir outputs
 RUN cp EMOD/build/x64/Release/Eradication/Eradication outputs/Eradication
