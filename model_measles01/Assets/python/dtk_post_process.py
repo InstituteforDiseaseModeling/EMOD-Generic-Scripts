@@ -8,6 +8,9 @@ import global_data as gdata
 
 import numpy as np
 
+AGE_HIST_BINS = [0.00, 0.25, 0.50, 0.75, 1.00, 1.50, 2.00, 2.50,
+                 3.00, 4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 10.0]
+
 #********************************************************************************
 
 def application(output_path):
@@ -31,6 +34,7 @@ def application(output_path):
   data_vec_time = np.array([val[0] for val in row_list], dtype = float)  # Time
   data_vec_node = np.array([val[2] for val in row_list], dtype = int  )  # Node
   data_vec_mcw  = np.array([val[4] for val in row_list], dtype = float)  # MCW
+  data_vec_age  = np.array([val[5] for val in row_list], dtype = float)  # Age
 
 
   # Prep output dictionary
@@ -42,7 +46,7 @@ def application(output_path):
   DAY_BINS    = [31,28,31,30,31,30,31,31,30,31,30,31]
   START_TIME  = 365.0*(START_YEAR-BASE_YEAR)
   BIN_EDGES   = np.cumsum(int(RUN_YEARS)*DAY_BINS) + START_TIME + 0.5
-  BIN_EDGES = np.insert(BIN_EDGES, 0, START_TIME + 0.5)
+  BIN_EDGES   = np.insert(BIN_EDGES, 0, START_TIME + 0.5)
 
   (inf_mo, tstamps) = np.histogram(data_vec_time,
                                    bins    = BIN_EDGES,
@@ -69,6 +73,23 @@ def application(output_path):
     pyr_dat[1:, k1] = age_vec_dat[364::365]
 
   parsed_dat[key_str]['pyr_data'] = pyr_dat.tolist()
+
+
+  # Age at infection histograms by year
+  YR_BINS     = [365]
+  START_TIME  = 365.0*(START_YEAR-BASE_YEAR)
+  BIN_EDGES   = np.cumsum(int(RUN_YEARS)*YR_BINS) + START_TIME + 0.5
+  BIN_EDGES   = np.insert(BIN_EDGES, 0, START_TIME + 0.5)
+
+  parsed_dat[key_str]['age_data'] = list()
+  for k1 in range(len(BIN_EDGES)-1):
+    idx     = (data_vec_time >= BIN_EDGES[k1]) & (data_vec_time < BIN_EDGES[k1+1])
+    age_dat = data_vec_age[idx]
+    mcw_dat = data_vec_mcw[idx]
+    (age_hist, _) = np.histogram(age_dat,
+                                 bins    = np.array(AGE_HIST_BINS)*365.0,
+                                 weights = mcw_dat)
+    parsed_dat[key_str]['age_data'].append(age_hist.tolist())
 
 
   # Calculate calibration score

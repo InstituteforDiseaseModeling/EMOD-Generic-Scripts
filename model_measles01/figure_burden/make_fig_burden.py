@@ -31,7 +31,7 @@ for dirname in DIRNAMES:
     param_dict = json.load(fid01)
 
   nsims        = int(param_dict['NUM_SIMS'])
-  infBlock     = np.zeros((nsims,12*int(run_years)))
+  inf_dat      = np.zeros((nsims,12*int(run_years)))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
   for sim_idx_str in data_brick:
@@ -40,7 +40,7 @@ for dirname in DIRNAMES:
 
     sim_idx = int(sim_idx_str)
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
-    infBlock[sim_idx,:]  = np.array(data_brick[sim_idx_str]['timeseries'])
+    inf_dat[sim_idx,:]   = np.array(data_brick[sim_idx_str]['timeseries'])
 
   fidx = (pyr_mat[:,0,0]>=0)
 
@@ -63,10 +63,10 @@ for dirname in DIRNAMES:
 
   xval = np.arange(0,run_years,1/12) + 1/24
   pops = np.interp(xval, tpop_xval, tpop_avg)
-  infBlock = infBlock[fidx,:]/pops*1e5
-  yval = np.mean(infBlock,axis=0)
+  inf_dat = inf_dat[fidx,:]/pops*1e5
+  yval = np.mean(inf_dat,axis=0)
 
-  infDatSetSort = np.sort(infBlock,axis=0)
+  infDatSetSort = np.sort(inf_dat,axis=0)
   infDatSetSort = infDatSetSort
 
   #axs01.set_yticks(ticks=np.arange(0,6001,1000))
