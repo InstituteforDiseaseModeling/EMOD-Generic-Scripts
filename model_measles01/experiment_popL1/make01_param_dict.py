@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'Measles01-DemogL1'
-param_dict['NUM_SIMS']     =  1000
+param_dict['NUM_SIMS']     =  2400
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -65,6 +65,7 @@ param_dict['EXP_CONSTANT']['num_agents']            = 250000
 # RI rates
 param_dict['EXP_CONSTANT']['MCV2']                  =      0.0
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
+
 
 
 # ***** Write parameter dictionary *****

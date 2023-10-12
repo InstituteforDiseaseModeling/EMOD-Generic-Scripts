@@ -15,7 +15,9 @@ from dtk_post_process      import AGE_HIST_BINS
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_popL1']
+DIRNAMES = ['experiment_popL1',
+            'experiment_popL2',
+            'experiment_popL3']
 
 
 for dirname in DIRNAMES:
@@ -34,6 +36,18 @@ for dirname in DIRNAMES:
   age_dat      = np.zeros((nsims,   int(run_years)  ,15))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
+  if('MCV1' in param_dict['EXP_VARIABLE']):
+    mcv1_vec   = np.array(param_dict['EXP_VARIABLE']['MCV1'])
+  else:
+    mcv1_vec   = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1']
+  mcv1_lvl = np.unique(mcv1_vec)
+
+  if('MCV1_age' in param_dict['EXP_VARIABLE']):
+    mcv1_age_vec = np.array(param_dict['EXP_VARIABLE']['MCV1_age'])
+  else:
+    mcv1_age_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1_age']
+  mcv1_age_lvl = np.unique(mcv1_age_vec)
+
   for sim_idx_str in data_brick:
     if(not sim_idx_str.isdigit()):
       continue
@@ -49,20 +63,38 @@ for dirname in DIRNAMES:
   tpop_avg    = np.sum(pyr_mat_avg, axis=1)
   tpop_xval   = np.arange(len(tpop_avg))
 
-  inf_yrs = np.zeros((nsims,int(run_years)))
+  xval        = np.arange(0,run_years,1/12) + 1/24
+  pops        = np.interp(xval, tpop_xval, tpop_avg)
+  inf_dat_nrm = inf_dat[fidx,:]/pops*1e5
+  yval = np.mean(inf_dat,axis=0)
+
+  inf_yrs     = np.zeros((nsims,int(run_years)))
+  inf_yrs_nrm = np.zeros((nsims,int(run_years)))
   for k1 in range(int(run_years)):
-    inf_yrs[:,k1] = np.sum(inf_dat[:,(k1*12):((k1+1)*12)],axis=1)
+    inf_yrs[:,k1]     = np.sum(inf_dat[:,(k1*12):((k1+1)*12)],axis=1)
+    inf_yrs_nrm[:,k1] = np.mean(inf_dat_nrm[:,(k1*12):((k1+1)*12)],axis=1)
 
-  # Figures
-  fig01 = plt.figure(figsize=(16,6))
-
-  # Figures - Sims - Infections
   bin_wid       = np.diff(AGE_HIST_BINS)
   bin_loc       = AGE_HIST_BINS[:-1] + bin_wid/2
   age_frac      = age_dat/(inf_yrs[:,:,np.newaxis]+np.finfo(float).eps)
   age_frac_mean = np.mean(age_frac, axis=0)
   age_frac_std  = np.std(age_frac, axis=0)
 
+  print(dirname)
+  for mcv1_val in mcv1_lvl:
+    idx01 = (mcv1_vec == mcv1_val)
+    for mcv1_age_val in mcv1_age_lvl:
+      idx02 = (mcv1_age_vec == mcv1_age_val)
+
+      tidx = (fidx & idx01 & idx02)
+      bval = np.mean(np.mean(inf_yrs_nrm[tidx,-10:],axis=0))
+      print(np.round(mcv1_val,2),np.round(mcv1_age_val,1), np.round(bval,1))
+
+
+  # Figures
+  fig01 = plt.figure(figsize=(16,6))
+
+  # Figures - Sims - Infections
   axs01 = fig01.add_subplot(1, 2, 1)
   plt.sca(axs01)
 
