@@ -44,10 +44,9 @@ param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 param_dict['EXP_VARIABLE']['R0']           = (8.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
 
 # RI rates
-param_dict['EXP_VARIABLE']['MCV1']         = np.random.choice([0.20, 0.40, 0.60, 0.80],
-                                                               p=[1/4, 1/4, 1/4, 1/4], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=0.8, size=NSIMS).tolist()
 param_dict['EXP_VARIABLE']['MCV1_age']     = np.random.choice([0.50*365, 0.75*365, 1.00*365],
-                                                               p=[1/3, 1/3, 1/3],      size=NSIMS).tolist()
+                                                               p=[1/3, 1/3, 1/3], size=NSIMS).tolist()
 
 
 
