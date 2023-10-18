@@ -15,9 +15,9 @@ from dtk_post_process      import AGE_HIST_BINS
 #*******************************************************************************
 
 
-DIRNAMES = {'experiment_popL1': 'Late'}
-            'experiment_popL2': 'Mid',
-            'experiment_popL3': 'Early'}
+DIRNAMES = {'experiment_popL1': 'Late'}#,
+            #'experiment_popL2': 'Mid',
+            #'experiment_popL3': 'Early'}
 
 
 for dirname in DIRNAMES:
@@ -98,9 +98,9 @@ for dirname in DIRNAMES:
       idx02 = (mcv1_age_vec == mcv1_age_val)
       tidx  = (fidx & idx01 & idx02)
       xval  = mcv1_vec[tidx]
-      xval2 = np.arange(0.2,0.801,0.01)
+      xval2 = np.arange(0.2,1.001,0.01)
       yval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
-      pcoef = np.polyfit(xval,yval,3)
+      pcoef = np.polyfit(xval,yval,4)
       yval2 = np.polyval(pcoef,xval2)
       if(mat_fac_val == 1):
         lfmt = '-'
@@ -111,21 +111,21 @@ for dirname in DIRNAMES:
       axs01.plot(xval2, yval2, lfmt, alpha=1.0, color='C{:d}'.format(k1))
 
     txt_age = int(np.round(mcv1_age_val/365*12))
-    axs01.text( 0.23, 80-20*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
+    axs01.text( 0.23, 57-20*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
                                 color='C{:d}'.format(k1))
     k1 = k1 + 1
 
 
 
   axs01.set_ylabel('Monthly Incidence per-100k',fontsize=16)
-  axs01.set_xlabel('MCV1 Coverage',fontsize=16)
+  axs01.set_xlabel('MCV Coverage',fontsize=16)
   axs01.set_ylim(  0, 300)
-  axs01.set_xlim(0.2, 0.8)
-  axs01.text( 0.62, 270, 'Demog: {:s}'.format(DIRNAMES[dirname]), fontsize=18)
-  axs01.text( 0.66, 226, '100% Maternal', fontsize=14)
-  axs01.plot([0.61, 0.65], [230,230], 'k-')
-  axs01.text( 0.66, 206, '50%  Maternal', fontsize=14)
-  axs01.plot([0.61, 0.65], [210,210], 'k--')
+  axs01.set_xlim(0.2, 1.0)
+  axs01.text( 0.71, 270, 'Demog: {:s}'.format(DIRNAMES[dirname]), fontsize=18)
+  axs01.text( 0.76, 253, '100% Maternal', fontsize=14)
+  axs01.plot([0.71, 0.75], [257,257], 'k-')
+  axs01.text( 0.76, 238, '50%  Maternal', fontsize=14)
+  axs01.plot([0.71, 0.75], [242,242], 'k--')
 
   plt.tight_layout()
   plt.savefig('fig_trends_{:s}_01.png'.format(dirname))

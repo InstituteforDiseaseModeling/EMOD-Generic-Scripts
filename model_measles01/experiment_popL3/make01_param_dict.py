@@ -43,8 +43,8 @@ param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 # Infectivity
 param_dict['EXP_VARIABLE']['R0']           = (8.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
 
-# RI rates
-param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=0.8, size=NSIMS).tolist()
+# RI params
+param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=1.0, size=NSIMS).tolist()
 param_dict['EXP_VARIABLE']['MCV1_age']     = np.random.choice([0.50*365, 0.75*365, 1.00*365],
                                                                p=[1/3, 1/3, 1/3], size=NSIMS).tolist()
 
@@ -65,7 +65,7 @@ param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 # Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']            = 250000
 
-# RI rates
+# RI params
 param_dict['EXP_CONSTANT']['MCV2']                  =      0.0
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
 
