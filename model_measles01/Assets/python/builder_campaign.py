@@ -36,6 +36,7 @@ def campaignBuilder():
   MCV2_RATE     = gdata.var_params['MCV2']
   MCV2_AGE      = gdata.var_params['MCV2_age']
   START_YEAR    = gdata.var_params['start_year']
+  MAT_FACTOR    = gdata.var_params['mat_factor']
 
 
   # ***** Events *****
@@ -45,7 +46,8 @@ def campaignBuilder():
   pdict     = {'startday':        start_day ,
                'nodes':           ALL_NODES ,
                'ri_rate':         MCV1_RATE ,
-               'age_targ':         MCV1_AGE }
+               'age_targ':         MCV1_AGE ,
+               'take_fac':       MAT_FACTOR }
 
   camp_module.add(IV_MCV(pdict))
 
@@ -55,7 +57,8 @@ def campaignBuilder():
   pdict     = {'startday':        start_day ,
                'nodes':           ALL_NODES ,
                'ri_rate':         MCV2_RATE ,
-               'age_targ':         MCV2_AGE }
+               'age_targ':         MCV2_AGE ,
+               'take_fac':       MAT_FACTOR }
 
   camp_module.add(IV_MCV(pdict))
 
@@ -115,7 +118,7 @@ def IV_MCV(params=dict()):
   camp_iv02.Delay_Period_Gaussian_Std_Dev               =   90.0
 
   camp_iv03.Acquire_Config                              = camp_wane
-  camp_iv03.Take_Reduced_By_Acquire_Immunity            =    1.0
+  camp_iv03.Take_Reduced_By_Acquire_Immunity            = params['take_fac']
   camp_iv03.Take_By_Age_Multiplier.Times                = [0/12*365, 3/12*365, 5/12*365, 7/12*365, 9/12*365]
   camp_iv03.Take_By_Age_Multiplier.Values               = [     0.0,      0.0,     0.65,     0.92,      1.0]
 

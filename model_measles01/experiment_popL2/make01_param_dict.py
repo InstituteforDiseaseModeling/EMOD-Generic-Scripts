@@ -48,6 +48,10 @@ param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=0.8
 param_dict['EXP_VARIABLE']['MCV1_age']     = np.random.choice([0.50*365, 0.75*365, 1.00*365],
                                                                p=[1/3, 1/3, 1/3], size=NSIMS).tolist()
 
+# Maternal protection effectiveness
+param_dict['EXP_VARIABLE']['mat_factor']   = np.random.choice([0.5, 1.0],
+                                                              p=[0.5, 0.5],       size=NSIMS).tolist()
+
 
 
 # ***** Constants for this experiment *****

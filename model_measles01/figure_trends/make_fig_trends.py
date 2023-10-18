@@ -15,9 +15,9 @@ from dtk_post_process      import AGE_HIST_BINS
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_popL1',
-            'experiment_popL2',
-            'experiment_popL3']
+DIRNAMES = {'experiment_popL1': 'Late'}
+            'experiment_popL2': 'Mid',
+            'experiment_popL3': 'Early'}
 
 
 for dirname in DIRNAMES:
@@ -48,6 +48,12 @@ for dirname in DIRNAMES:
     mcv1_age_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1_age']
   mcv1_age_lvl = np.unique(mcv1_age_vec)
 
+  if('mat_factor' in param_dict['EXP_VARIABLE']):
+    mat_fac_vec = np.array(param_dict['EXP_VARIABLE']['mat_factor'])
+  else:
+    mat_fac_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['mat_factor']
+  mat_fac_lvl = np.unique(mat_fac_vec)
+
   for sim_idx_str in data_brick:
     if(not sim_idx_str.isdigit()):
       continue
@@ -66,7 +72,6 @@ for dirname in DIRNAMES:
   xval        = np.arange(0,run_years,1/12) + 1/24
   pops        = np.interp(xval, tpop_xval, tpop_avg)
   inf_dat_nrm = inf_dat[fidx,:]/pops*1e5
-  yval = np.mean(inf_dat,axis=0)
 
   inf_yrs     = np.zeros((nsims,int(run_years)))
   inf_yrs_nrm = np.zeros((nsims,int(run_years)))
@@ -86,19 +91,41 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
+  k1 = 0
   for mcv1_age_val in mcv1_age_lvl:
-    idx02 = (mcv1_age_vec == mcv1_age_val)
-    tidx  = (fidx & idx02)
-    bval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
-    axs01.plot(mcv1_vec[tidx], bval, '.')
+    for mat_fac_val in mat_fac_lvl:
+      idx01 = (mat_fac_vec  == mat_fac_val)
+      idx02 = (mcv1_age_vec == mcv1_age_val)
+      tidx  = (fidx & idx01 & idx02)
+      xval  = mcv1_vec[tidx]
+      xval2 = np.arange(0.2,0.801,0.01)
+      yval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
+      pcoef = np.polyfit(xval,yval,3)
+      yval2 = np.polyval(pcoef,xval2)
+      if(mat_fac_val == 1):
+        lfmt = '-'
+      else:
+        lfmt = '--'
+      axs01.plot(xval,  yval,  '.',  alpha=0.1, color='C{:d}'.format(k1),
+                                     markeredgecolor=None)
+      axs01.plot(xval2, yval2, lfmt, alpha=1.0, color='C{:d}'.format(k1))
+
+    txt_age = int(np.round(mcv1_age_val/365*12))
+    axs01.text( 0.23, 80-20*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
+                                color='C{:d}'.format(k1))
+    k1 = k1 + 1
+
 
 
   axs01.set_ylabel('Monthly Incidence per-100k',fontsize=16)
   axs01.set_xlabel('MCV1 Coverage',fontsize=16)
   axs01.set_ylim(  0, 300)
   axs01.set_xlim(0.2, 0.8)
-  #axs01.text( 8.3, 0.55, 'Year {:d}'.format(int(run_years)-10), fontsize=18)
-
+  axs01.text( 0.62, 270, 'Demog: {:s}'.format(DIRNAMES[dirname]), fontsize=18)
+  axs01.text( 0.66, 226, '100% Maternal', fontsize=14)
+  axs01.plot([0.61, 0.65], [230,230], 'k-')
+  axs01.text( 0.66, 206, '50%  Maternal', fontsize=14)
+  axs01.plot([0.61, 0.65], [210,210], 'k--')
 
   plt.tight_layout()
   plt.savefig('fig_trends_{:s}_01.png'.format(dirname))

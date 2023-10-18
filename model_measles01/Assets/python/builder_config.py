@@ -27,6 +27,7 @@ def update_config_obj(config):
   R0             = gdata.var_params['R0']
   INIT_POP       = gdata.var_params['num_agents']
   START_YEAR     = gdata.var_params['start_year']
+  MAT_FACTOR     = gdata.var_params['mat_factor']
 
 
   # ***** Random number seed *****
@@ -71,7 +72,7 @@ def update_config_obj(config):
   config.parameters.Post_Infection_Mortality_Multiplier            =    0.0
   config.parameters.Post_Infection_Transmission_Multiplier         =    0.0
 
-  config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   1.0
+  config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   MAT_FACTOR
   config.parameters.Maternal_Acquire_Config.Enable_Box_Duration_Distribution  =   1
   config.parameters.Maternal_Acquire_Config.Box_Duration_Distribution         = 'GAUSSIAN_DISTRIBUTION'
   config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        = 150.0
