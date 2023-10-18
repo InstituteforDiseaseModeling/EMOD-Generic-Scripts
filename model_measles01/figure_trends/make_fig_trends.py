@@ -36,6 +36,17 @@ for dirname in DIRNAMES:
   age_dat      = np.zeros((nsims,   int(run_years)  ,15))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
+  if('MCV1' in param_dict['EXP_VARIABLE']):
+    mcv1_vec   = np.array(param_dict['EXP_VARIABLE']['MCV1'])
+  else:
+    mcv1_vec   = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1']
+  mcv1_lvl = np.unique(mcv1_vec)
+
+  if('MCV1_age' in param_dict['EXP_VARIABLE']):
+    mcv1_age_vec = np.array(param_dict['EXP_VARIABLE']['MCV1_age'])
+  else:
+    mcv1_age_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1_age']
+  mcv1_age_lvl = np.unique(mcv1_age_vec)
 
   for sim_idx_str in data_brick:
     if(not sim_idx_str.isdigit()):
@@ -55,6 +66,7 @@ for dirname in DIRNAMES:
   xval        = np.arange(0,run_years,1/12) + 1/24
   pops        = np.interp(xval, tpop_xval, tpop_avg)
   inf_dat_nrm = inf_dat[fidx,:]/pops*1e5
+  yval = np.mean(inf_dat,axis=0)
 
   inf_yrs     = np.zeros((nsims,int(run_years)))
   inf_yrs_nrm = np.zeros((nsims,int(run_years)))
@@ -62,53 +74,34 @@ for dirname in DIRNAMES:
     inf_yrs[:,k1]     = np.sum(inf_dat[:,(k1*12):((k1+1)*12)],axis=1)
     inf_yrs_nrm[:,k1] = np.mean(inf_dat_nrm[:,(k1*12):((k1+1)*12)],axis=1)
 
-  bin_wid       = np.diff(AGE_HIST_BINS)
-  bin_loc       = AGE_HIST_BINS[:-1] + bin_wid/2
-  age_frac      = age_dat/(inf_yrs[:,:,np.newaxis]+np.finfo(float).eps)
-  age_frac_mean = np.mean(age_frac, axis=0)
-  age_frac_std  = np.std(age_frac, axis=0)
-
 
   # Figures
-  fig01 = plt.figure(figsize=(16,6))
+  fig01 = plt.figure(figsize=(8,6))
 
   # Figures - Sims - Infections
-  axs01 = fig01.add_subplot(1, 2, 1)
+  axs01 = fig01.add_subplot(1, 1, 1)
   plt.sca(axs01)
 
   axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  bin_hgt = age_frac_mean[-1-10,:]/bin_wid
-  bin_std = age_frac_std[-1-10,:]/bin_wid
-  axs01.bar(bin_loc, bin_hgt, width=bin_wid, edgecolor='k', yerr=bin_std)
+  for mcv1_age_val in mcv1_age_lvl:
+    idx02 = (mcv1_age_vec == mcv1_age_val)
+    tidx  = (fidx & idx02)
+    bval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
+    axs01.plot(mcv1_vec[tidx], bval, '.')
 
-  axs01.set_ylabel('Fraction',fontsize=16)
-  axs01.set_xlabel('Age at Infection (yrs)',fontsize=16)
-  axs01.set_ylim( 0.0, 0.65)
-  axs01.set_xlim(min(AGE_HIST_BINS), max(AGE_HIST_BINS))
-  axs01.text( 8.3, 0.55, 'Year {:d}'.format(int(run_years)-10), fontsize=18)
 
-  axs01 = fig01.add_subplot(1, 2, 2)
-  plt.sca(axs01)
-  axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
-  axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
-  axs01.set_axisbelow(True)
-
-  bin_hgt = age_frac_mean[-1,:]/bin_wid
-  bin_std = age_frac_std[-1,:]/bin_wid
-  axs01.bar(bin_loc, bin_hgt, width=bin_wid, edgecolor='k', yerr=bin_std)
-
-  axs01.set_xlabel('Age at Infection (yrs)',fontsize=16)
-  axs01.set_ylim( 0.0, 0.65)
-  axs01.set_xlim(min(AGE_HIST_BINS), max(AGE_HIST_BINS))
-  axs01.text( 8.3, 0.55, 'Year {:d}'.format(int(run_years)), fontsize=18)
-
+  axs01.set_ylabel('Monthly Incidence per-100k',fontsize=16)
+  axs01.set_xlabel('MCV1 Coverage',fontsize=16)
+  axs01.set_ylim(  0, 300)
+  axs01.set_xlim(0.2, 0.8)
+  #axs01.text( 8.3, 0.55, 'Year {:d}'.format(int(run_years)-10), fontsize=18)
 
 
   plt.tight_layout()
-  plt.savefig('fig_agehist_{:s}_01.png'.format(dirname))
+  plt.savefig('fig_trends_{:s}_01.png'.format(dirname))
   plt.close()
 
 
