@@ -10,17 +10,16 @@ import matplotlib.patches  as patch
 import matplotlib          as mpl
 
 from global_data           import run_years
-from dtk_post_process      import AGE_HIST_BINS
 
 #*******************************************************************************
 
 
-DIRNAMES = {'experiment_popL1':      'Late',
-            'experiment_popL1_MCV2': 'Late',
-            'experiment_popL2':      'Mid',
-            'experiment_popL2_MCV2': 'Mid',
-            'experiment_popL3':      'Early',
-            'experiment_popL3_MCV2': 'Early'}
+DIRNAMES = ['experiment_popL1',
+            'experiment_popL1_MCV2',
+            'experiment_popL2',
+            'experiment_popL2_MCV2',
+            'experiment_popL3',
+            'experiment_popL3_MCV2']
 
 
 for dirname in DIRNAMES:
@@ -35,33 +34,23 @@ for dirname in DIRNAMES:
     param_dict = json.load(fid01)
 
   nsims        = int(param_dict['NUM_SIMS'])
+  ref_year     = param_dict['EXP_CONSTANT']['start_year']
   inf_dat      = np.zeros((nsims,12*int(run_years)))
   age_dat      = np.zeros((nsims,   int(run_years)  ,15))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
-  if('MCV1' in param_dict['EXP_VARIABLE']):
-    mcv1_vec   = np.array(param_dict['EXP_VARIABLE']['MCV1'])
-  else:
-    mcv1_vec   = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1']
-  mcv1_lvl = np.unique(mcv1_vec)
+  mcv1_vec     = np.array(param_dict['EXP_VARIABLE']['MCV1'])
+  mcv1_lvl     = np.unique(mcv1_vec)
 
-  if('MCV1_age' in param_dict['EXP_VARIABLE']):
-    mcv1_age_vec = np.array(param_dict['EXP_VARIABLE']['MCV1_age'])
-  else:
-    mcv1_age_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1_age']
+  mcv1_age_vec = np.array(param_dict['EXP_VARIABLE']['MCV1_age'])
   mcv1_age_lvl = np.unique(mcv1_age_vec)
 
-  if('MCV2' in param_dict['EXP_VARIABLE']):
-    mcv2_vec   = np.array(param_dict['EXP_VARIABLE']['MCV2'])
-  else:
-    mcv2_vec   = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV2']
-  mcv2_lvl = np.unique(mcv2_vec)
+  mat_fac_vec  = np.array(param_dict['EXP_VARIABLE']['mat_factor'])
+  mat_fac_lvl  = np.unique(mat_fac_vec)
 
-  if('mat_factor' in param_dict['EXP_VARIABLE']):
-    mat_fac_vec = np.array(param_dict['EXP_VARIABLE']['mat_factor'])
-  else:
-    mat_fac_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['mat_factor']
-  mat_fac_lvl = np.unique(mat_fac_vec)
+  mcv2_vec     = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV2']
+  mcv2_lvl     = np.unique(mcv2_vec)
+
 
   for sim_idx_str in data_brick:
     if(not sim_idx_str.isdigit()):
@@ -129,12 +118,18 @@ for dirname in DIRNAMES:
     k1 = k1 + 1
 
 
+  if(ref_year == 2020):
+    demogname = 'Demog: Early'
+  elif(ref_year == 2040):
+    demogname = 'Demog: Mid'
+  elif(ref_year == 2060):
+    demogname = 'Demog: Late'
 
   axs01.set_ylabel('Monthly Incidence per-100k',fontsize=16)
   axs01.set_xlabel('MCV Coverage',fontsize=16)
   axs01.set_ylim(  0, 300)
   axs01.set_xlim(0.2, 1.0)
-  axs01.text( 0.71, 270, 'Demog: {:s}'.format(DIRNAMES[dirname]), fontsize=18)
+  axs01.text( 0.71, 270, demogname, fontsize=18)
   axs01.text( 0.76, 253, '100% Maternal', fontsize=14)
   axs01.plot([0.71, 0.75], [257,257], 'k-')
   axs01.text( 0.76, 238, '50%  Maternal', fontsize=14)
