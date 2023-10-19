@@ -15,9 +15,9 @@ from dtk_post_process      import AGE_HIST_BINS
 #*******************************************************************************
 
 
-DIRNAMES = {'experiment_popL1': 'Late'}#,
-            #'experiment_popL2': 'Mid',
-            #'experiment_popL3': 'Early'}
+DIRNAMES = {'experiment_popL1': 'Late',
+            'experiment_popL2': 'Mid',
+            'experiment_popL3': 'Early'}
 
 
 for dirname in DIRNAMES:
