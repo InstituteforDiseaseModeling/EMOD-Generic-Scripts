@@ -15,9 +15,12 @@ from dtk_post_process      import AGE_HIST_BINS
 #*******************************************************************************
 
 
-DIRNAMES = {'experiment_popL1': 'Late',
-            'experiment_popL2': 'Mid',
-            'experiment_popL3': 'Early'}
+DIRNAMES = {'experiment_popL1':      'Late',
+            'experiment_popL1_MCV2': 'Late',
+            'experiment_popL2':      'Mid',
+            'experiment_popL2_MCV2': 'Mid',
+            'experiment_popL3':      'Early',
+            'experiment_popL3_MCV2': 'Early'}
 
 
 for dirname in DIRNAMES:
@@ -47,6 +50,12 @@ for dirname in DIRNAMES:
   else:
     mcv1_age_vec = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV1_age']
   mcv1_age_lvl = np.unique(mcv1_age_vec)
+
+  if('MCV2' in param_dict['EXP_VARIABLE']):
+    mcv2_vec   = np.array(param_dict['EXP_VARIABLE']['MCV2'])
+  else:
+    mcv2_vec   = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV2']
+  mcv2_lvl = np.unique(mcv2_vec)
 
   if('mat_factor' in param_dict['EXP_VARIABLE']):
     mat_fac_vec = np.array(param_dict['EXP_VARIABLE']['mat_factor'])
@@ -111,8 +120,12 @@ for dirname in DIRNAMES:
       axs01.plot(xval2, yval2, lfmt, alpha=1.0, color='C{:d}'.format(k1))
 
     txt_age = int(np.round(mcv1_age_val/365*12))
-    axs01.text( 0.23, 57-20*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
+    axs01.text( 0.23, 54-15*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=14,
                                 color='C{:d}'.format(k1))
+    if(mcv2_lvl[0] > 0):
+      axs01.text( 0.37, 54-15*k1, '+ MCV2 15mo', fontsize=14,
+                                  color='C{:d}'.format(k1))
+
     k1 = k1 + 1
 
 
