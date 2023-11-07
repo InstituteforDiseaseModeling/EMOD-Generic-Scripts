@@ -43,8 +43,9 @@ def update_config_obj(config):
 
 
   # ***** Intrahost *****
+  MEAN_INF_DUR = 18.0
   config.parameters.Base_Infectivity_Distribution                  = 'GAMMA_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Scale                         = R0/8.0
+  config.parameters.Base_Infectivity_Scale                         =  R0/MEAN_INF_DUR
   config.parameters.Base_Infectivity_Shape                         =    1.0
 
   config.parameters.Incubation_Period_Distribution                 = 'GAMMA_DISTRIBUTION'
@@ -52,7 +53,7 @@ def update_config_obj(config):
   config.parameters.Incubation_Period_Shape                        =    3.5
 
   config.parameters.Infectious_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Infectious_Period_Gaussian_Mean                =   18.0
+  config.parameters.Infectious_Period_Gaussian_Mean                =   MEAN_INF_DUR
   config.parameters.Infectious_Period_Gaussian_Std_Dev             =    2.0
 
   config.parameters.Enable_Nonuniform_Shedding                     =    1.0

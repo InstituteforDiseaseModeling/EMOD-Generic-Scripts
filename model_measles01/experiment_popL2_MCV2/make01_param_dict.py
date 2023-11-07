@@ -41,7 +41,7 @@ NSIMS = param_dict['NUM_SIMS']
 param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 
 # Infectivity
-param_dict['EXP_VARIABLE']['R0']           = (8.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
+param_dict['EXP_VARIABLE']['R0']           = (10.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
 
 # RI params
 param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=1.0, size=NSIMS).tolist()
