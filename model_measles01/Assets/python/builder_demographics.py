@@ -253,9 +253,6 @@ def demographicsBuilder():
 
   demog_obj.generate_file(name=DEMOG_FILENAME)
 
-  # Save filename to global data for use in other functions
-  gdata.demog_files.append(DEMOG_FILENAME)
-
   # Save the demographics object for use in other functions
   gdata.demog_object = demog_obj
 
