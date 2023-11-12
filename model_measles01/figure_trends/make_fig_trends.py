@@ -10,6 +10,7 @@ import matplotlib.patches  as patch
 import matplotlib          as mpl
 
 from global_data           import run_years
+from dtk_post_process      import AGE_HIST_BINS
 
 #*******************************************************************************
 
@@ -36,7 +37,7 @@ for dirname in DIRNAMES:
   nsims        = int(param_dict['NUM_SIMS'])
   ref_year     = param_dict['EXP_CONSTANT']['start_year']
   inf_dat      = np.zeros((nsims,12*int(run_years)))
-  age_dat      = np.zeros((nsims,   int(run_years)  ,15))
+  age_dat      = np.zeros((nsims,   int(run_years)  ,len(AGE_HIST_BINS)-1))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
   mcv1_vec     = np.array(param_dict['EXP_VARIABLE']['MCV1'])

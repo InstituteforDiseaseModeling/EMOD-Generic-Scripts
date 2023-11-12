@@ -33,7 +33,7 @@ for dirname in DIRNAMES:
 
   nsims        = int(param_dict['NUM_SIMS'])
   inf_dat      = np.zeros((nsims,12*int(run_years)))
-  age_dat      = np.zeros((nsims,   int(run_years)  ,15))
+  age_dat      = np.zeros((nsims,   int(run_years)  ,len(AGE_HIST_BINS)-1))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
 
