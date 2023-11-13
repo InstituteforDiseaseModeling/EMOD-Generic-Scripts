@@ -14,12 +14,7 @@ from global_data           import run_years
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_popL1']#,
-            #'experiment_popL1_MCV2',
-            #'experiment_popL2',
-            #'experiment_popL2_MCV2',
-            #'experiment_popL3',
-            #'experiment_popL3_MCV2']
+DIRNAMES = ['experiment_sweepAAV']
 
 
 for dirname in DIRNAMES:

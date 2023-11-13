@@ -27,8 +27,15 @@ def update_config_obj(config):
   R0             = gdata.var_params['R0']
   INIT_POP       = gdata.var_params['num_agents']
   START_YEAR     = gdata.var_params['start_year']
-  MAT_FACTOR     = gdata.var_params['mat_factor']
+  if 'mat_factor_inf' in gdata.var_params.keys():
+    MAT_FACTOR = gdata.var_params['mat_factor_inf']
+  else:
+    MAT_FACTOR = gdata.var_params['mat_factor']
 
+  if 'mat_duration' in gdata.var_params.keys():
+    MAT_DURATION   = gdata.var_params['mat_duration']
+  else:
+    MAT_DURATION = 180.0
 
   # ***** Random number seed *****
   config.parameters.Run_Number                                     = RUN_NUM
@@ -44,7 +51,7 @@ def update_config_obj(config):
 
   # ***** Intrahost *****
   config.parameters.Base_Infectivity_Distribution                  = 'GAMMA_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Scale                         = R0/8.0
+  config.parameters.Base_Infectivity_Scale                         = R0/18.0
   config.parameters.Base_Infectivity_Shape                         =    1.0
 
   config.parameters.Incubation_Period_Distribution                 = 'GAMMA_DISTRIBUTION'
@@ -52,7 +59,7 @@ def update_config_obj(config):
   config.parameters.Incubation_Period_Shape                        =    3.5
 
   config.parameters.Infectious_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Infectious_Period_Gaussian_Mean                =   18.0
+  config.parameters.Infectious_Period_Gaussian_Mean                =    18.0
   config.parameters.Infectious_Period_Gaussian_Std_Dev             =    2.0
 
   config.parameters.Enable_Nonuniform_Shedding                     =    1.0
@@ -75,8 +82,13 @@ def update_config_obj(config):
   config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   MAT_FACTOR
   config.parameters.Maternal_Acquire_Config.Enable_Box_Duration_Distribution  =   1
   config.parameters.Maternal_Acquire_Config.Box_Duration_Distribution         = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        = 150.0
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev     =  80.0
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        = MAT_DURATION
+  if MAT_DURATION < 91.0:
+    config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev   = MAT_DURATION/2.0
+  elif MAT_DURATION < 121.0:
+    config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev   = MAT_DURATION/1.75
+  else:
+    config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev   = MAT_DURATION/2.0
 
   config.parameters.Enable_Initial_Susceptibility_Distribution     =    1
   config.parameters.Susceptibility_Initialization_Distribution_Type= 'DISTRIBUTION_COMPLEX'
@@ -100,7 +112,7 @@ def update_config_obj(config):
   config.parameters.Base_Individual_Sample_Rate                    =   1.0
   config.parameters.Relative_Sample_Rate_Immune                    =   0.01
   config.parameters.Immune_Threshold_For_Downsampling              =   1.0e-5
-  config.parameters.Immune_Downsample_Min_Age                      = 365.0
+  config.parameters.Immune_Downsample_Min_Age                      = 460.0
 
 
   # ***** Demographic parameters *****

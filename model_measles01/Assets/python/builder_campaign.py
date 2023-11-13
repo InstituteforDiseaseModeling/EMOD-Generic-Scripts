@@ -36,9 +36,10 @@ def campaignBuilder():
   MCV1_AGE      = gdata.var_params['MCV1_age']
   MCV2_AGE      = gdata.var_params['MCV2_age']
   START_YEAR    = gdata.var_params['start_year']
-  MAT_FACTOR    = gdata.var_params['mat_factor']
-
-
+  if 'mat_factor_vx' in gdata.var_params.keys():
+    MAT_FACTOR = gdata.var_params['mat_factor_vx']
+  else:
+    MAT_FACTOR = gdata.var_params['mat_factor']
   # ***** Events *****
 
   # Add MCV
@@ -114,7 +115,7 @@ def IV_MCV(params=dict()):
   camp_iv03A.Actual_IndividualIntervention_Configs      = [camp_iv04A]
   camp_iv03A.Delay_Period_Distribution                  = "GAUSSIAN_DISTRIBUTION"
   camp_iv03A.Delay_Period_Gaussian_Mean                 =  params['age_MCV1']
-  camp_iv03A.Delay_Period_Gaussian_Std_Dev              =   90.0
+  camp_iv03A.Delay_Period_Gaussian_Std_Dev              =  params['age_MCV1']/3.0
 
   camp_iv04A.Acquire_Config.Initial_Effect              = 1.0
   camp_iv04B.Vaccine_Take                               = 0.95

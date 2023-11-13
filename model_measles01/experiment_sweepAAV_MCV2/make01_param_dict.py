@@ -3,7 +3,7 @@
 #********************************************************************************
 
 import json
-
+import itertools
 import numpy as np
 
 #*******************************************************************************
@@ -23,8 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Measles01-DemogL1'
-param_dict['NUM_SIMS']     =  4
+param_dict['EXP_NAME']     = 'Measles01-SweepAAV-MCV2'
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -32,41 +31,44 @@ param_dict['EXP_CONSTANT'] = dict()
 np.random.seed(4)
 
 # Convenience naming
-NSIMS = param_dict['NUM_SIMS']
 
 
 
 # ***** Specify sim-variable parameters *****
 
+
+MCV1Covs = [i/10 for i in range(11)]
+MCV1Ages = [90.0, 121.0, 151.0, 182.0, 212.0, 242.0, 273.0, 303.0, 334.0, 365.0, 396.0, 426.0, 457.0]
+MCV2Covs = [0.5, 0.75, 1.0]
+NRuns = 5
+myparams = [i for i in itertools.product(MCV1Covs, MCV1Ages, MCV2Covs, [i for i in range(NRuns)])]
+
+param_dict['NUM_SIMS']     =  len(myparams)
+NSIMS = param_dict['NUM_SIMS']
 param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
-
-# Infectivity
-param_dict['EXP_VARIABLE']['R0']           = (8.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
-
 # RI params
-param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=1.0, size=NSIMS).tolist()
-param_dict['EXP_VARIABLE']['MCV1_age']     = np.random.choice([0.50*365, 0.75*365, 1.00*365],
-                                                               p=[1/3, 1/3, 1/3], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['MCV1']         = [x[0] for x in myparams]
+param_dict['EXP_VARIABLE']['MCV1_age']     = [x[1] for x in myparams]
 
 # Maternal protection effectiveness
-param_dict['EXP_VARIABLE']['mat_factor']   = np.random.choice([0.5, 1.0],
-                                                              p=[0.5, 0.5],       size=NSIMS).tolist()
-
-
+param_dict['EXP_VARIABLE']['MCV2']         = [x[2] for x in myparams]
 
 # ***** Constants for this experiment *****
 
 # Reference year for population: [2020, 2040, 2060]
-param_dict['EXP_CONSTANT']['start_year']            =   2060
+param_dict['EXP_CONSTANT']['R0']           = 16.0
+param_dict['EXP_CONSTANT']['start_year']            =   2040
 
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            = 250000
-
+param_dict['EXP_CONSTANT']['num_agents']            = 500000
+param_dict['EXP_CONSTANT']['start_year']            =   2040
+param_dict['EXP_CONSTANT']['mat_factor_inf']        =   1.0
+param_dict['EXP_CONSTANT']['mat_factor_vx']   = 0.4
+param_dict['EXP_CONSTANT']['mat_duration'] = 120.0
 # RI params
-param_dict['EXP_CONSTANT']['MCV2']                  =      0.0
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
 
 

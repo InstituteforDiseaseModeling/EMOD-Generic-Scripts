@@ -8,9 +8,9 @@ import global_data as gdata
 
 import numpy as np
 
-AGE_HIST_BINS = [0.00, 0.25, 0.50, 0.75, 1.00, 1.50, 2.00, 2.50,
-                 3.00, 4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 10.0]
-
+#AGE_HIST_BINS = [0.00, 0.25, 0.50, 0.75, 1.00, 1.50, 2.00, 2.50,
+#                 3.00, 4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 10.0]
+AGE_HIST_BINS = [i/12.0 for i in range(25)] + [2.25+i/4 for i in range(12)] + [6+i for i in range(24)] #Add higher age bins to prepare for waning studiesSo
 #********************************************************************************
 
 def application(output_path):
