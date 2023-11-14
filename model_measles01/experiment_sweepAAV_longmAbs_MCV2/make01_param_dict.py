@@ -70,7 +70,7 @@ param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 param_dict['EXP_CONSTANT']['num_agents']            = 500000
 
 # RI params
-param_dict['EXP_CONSTANT']['MCV2']                  =      1.0
+param_dict['EXP_VARIABLE']['MCV2']                  =      [1.0]*NSIMS
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
 
 

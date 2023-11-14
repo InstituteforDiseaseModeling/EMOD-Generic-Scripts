@@ -52,6 +52,12 @@ def campaignBuilder():
                'age_MCV2':         MCV2_AGE ,
                'take_fac':       MAT_FACTOR }
 
+  if gdata.var_params.get('timeliness_distribution') is not None:
+    pdict['timeliness'] = gdata.var_params['timeliness_distribution']
+
+  if gdata.varparams.get('Ageind_vx_model') is not None:
+    pdict['Ageind_vx_model'] = gdata.var_params['Ageind_vx_model']
+
   camp_module.add(IV_MCV(pdict))
 
 
@@ -84,6 +90,9 @@ def IV_MCV(params=dict()):
   VEC_AGE  = [0/12*365, 3/12*365, 5/12*365, 7/12*365, 9/12*365]
   VEC_TAKE = [     0.0,      0.0,     0.65,     0.92,      1.0]
 
+  if params.get('Ageind_vx_model'):
+    VEC_TAKE = [1.0]*len(VEC_AGE)
+
   camp_event = s2c.get_class_with_defaults('CampaignEvent',                            SCHEMA_PATH)
   camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',                 SCHEMA_PATH)
   camp_iv01  = s2c.get_class_with_defaults('NodeLevelHealthTriggeredIVScaleUpSwitch',  SCHEMA_PATH)
@@ -115,7 +124,11 @@ def IV_MCV(params=dict()):
   camp_iv03A.Actual_IndividualIntervention_Configs      = [camp_iv04A]
   camp_iv03A.Delay_Period_Distribution                  = "GAUSSIAN_DISTRIBUTION"
   camp_iv03A.Delay_Period_Gaussian_Mean                 =  params['age_MCV1']
-  camp_iv03A.Delay_Period_Gaussian_Std_Dev              =  params['age_MCV1']/3.0
+  if params.get('timeliness') is False:
+    camp_iv03A.Delay_Period_Gaussian_Std_Dev            = 0.25
+  else:
+    camp_iv03A.Delay_Period_Gaussian_Std_Dev            =  params['age_MCV1']/3.0
+
 
   camp_iv04A.Acquire_Config.Initial_Effect              = 1.0
   camp_iv04B.Vaccine_Take                               = 0.95
@@ -127,7 +140,10 @@ def IV_MCV(params=dict()):
   camp_iv03B.Coverage                                   = params['frac_MCV2']
   camp_iv03B.Delay_Period_Distribution                  = "GAUSSIAN_DISTRIBUTION"
   camp_iv03B.Delay_Period_Gaussian_Mean                 =  params['age_MCV2']
-  camp_iv03B.Delay_Period_Gaussian_Std_Dev              =   90.0
+  if params.get('timeliness') is False:
+    camp_iv03B.Delay_Period_Gaussian_Std_Dev = 0.25
+  else:
+    camp_iv03B.Delay_Period_Gaussian_Std_Dev = 90.0
 
   camp_iv04B.Acquire_Config.Initial_Effect              = 1.0
   camp_iv04B.Vaccine_Take                               = 0.95

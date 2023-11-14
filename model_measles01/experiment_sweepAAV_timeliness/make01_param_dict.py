@@ -23,7 +23,7 @@ import numpy as np
 # ***** Setup *****
 param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Measles01-SweepAAV-mAbinterference-MCV2'
+param_dict['EXP_NAME']     = 'Measles01-SweepAAV-timeliness'
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -37,41 +37,40 @@ np.random.seed(4)
 # ***** Specify sim-variable parameters *****
 
 
+R0s = [16.0, 24.0]
 MCV1Covs = [i/10 for i in range(11)]
 MCV1Ages = [90.0, 121.0, 151.0, 182.0, 212.0, 242.0, 273.0, 303.0, 334.0, 365.0, 396.0, 426.0, 457.0]
-mat_factor_vx = [0.4, 1.0]
-mat_factor_inf = [0.4,  1.0]
 NRuns = 5
-myparams = [i for i in itertools.product(MCV1Covs, MCV1Ages, mat_factor_vx, mat_factor_inf, [i for i in range(NRuns)])]
+myparams = [i for i in itertools.product(R0s, MCV1Covs, MCV1Ages, [i for i in range(NRuns)])]
 
 param_dict['NUM_SIMS']     =  len(myparams)
 NSIMS = param_dict['NUM_SIMS']
 param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
-
+# Infectivity
+param_dict['EXP_VARIABLE']['R0']           = [x[0] for x in myparams]
 
 # RI params
-param_dict['EXP_VARIABLE']['MCV1']         = [x[0] for x in myparams]
-param_dict['EXP_VARIABLE']['MCV1_age']     = [x[1] for x in myparams]
-
+param_dict['EXP_VARIABLE']['MCV1']         = [x[1] for x in myparams]
+param_dict['EXP_VARIABLE']['MCV1_age']     = [x[2] for x in myparams]
+param_dict['EXP_VARIABLE']['timeliness_distribution'] = [False]*NSIMS
 # Maternal protection effectiveness
-param_dict['EXP_VARIABLE']['mat_factor_vx']   = [x[2] for x in myparams]
-param_dict['EXP_VARIABLE']['mat_factor_inf']   = [x[3] for x in myparams]
 
 # ***** Constants for this experiment *****
 
 # Reference year for population: [2020, 2040, 2060]
 param_dict['EXP_CONSTANT']['start_year']            =   2040
-# Infectivity
-param_dict['EXP_CONSTANT']['R0']           = 16.0
+param_dict['EXP_CONSTANT']['mat_factor_inf']        =   1.0
+param_dict['EXP_CONSTANT']['mat_factor_vx']   = 0.4
 param_dict['EXP_CONSTANT']['mat_duration'] = 120.0
 
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 
-# Initial number of agents
+# Initial number of agents 
 param_dict['EXP_CONSTANT']['num_agents']            = 500000
+
 # RI params
-param_dict['EXP_VARIABLE']['MCV2']                  =      [1.0]*NSIMS
+param_dict['EXP_CONSTANT']['MCV2']                  =      0.0
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
 
 
