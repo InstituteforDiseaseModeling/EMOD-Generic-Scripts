@@ -76,8 +76,8 @@ def update_config_obj(config):
   config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   MAT_FACTOR
   config.parameters.Maternal_Acquire_Config.Enable_Box_Duration_Distribution  =   1
   config.parameters.Maternal_Acquire_Config.Box_Duration_Distribution         = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        = 150.0
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev     =  80.0
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        = 120.0
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev     =  67.0
 
   config.parameters.Enable_Initial_Susceptibility_Distribution     =    1
   config.parameters.Susceptibility_Initialization_Distribution_Type= 'DISTRIBUTION_COMPLEX'
