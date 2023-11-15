@@ -118,7 +118,7 @@ def IV_MCV(params=dict()):
 
   camp_iv04A.Acquire_Config.Initial_Effect              = 1.0
   camp_iv04B.Vaccine_Take                               = 0.95
-  camp_iv04A.Take_Reduced_By_Acquire_Immunity           = params['take_fac']
+  camp_iv04A.Take_Reduced_By_Acquire_Immunity           = params['take_fac']/2.0
   camp_iv04A.Take_By_Age_Multiplier.Times               = VEC_AGE
   camp_iv04A.Take_By_Age_Multiplier.Values              = VEC_TAKE
 
@@ -130,7 +130,7 @@ def IV_MCV(params=dict()):
 
   camp_iv04B.Acquire_Config.Initial_Effect              = 1.0
   camp_iv04B.Vaccine_Take                               = 0.95
-  camp_iv04B.Take_Reduced_By_Acquire_Immunity           = params['take_fac']
+  camp_iv04B.Take_Reduced_By_Acquire_Immunity           = params['take_fac']/2.0
   camp_iv04B.Take_By_Age_Multiplier.Times               = VEC_AGE
   camp_iv04B.Take_By_Age_Multiplier.Values              = VEC_TAKE
 
