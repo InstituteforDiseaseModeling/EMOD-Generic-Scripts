@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'Measles01-DemogL1_MCV2'
-param_dict['NUM_SIMS']     =  2400
+param_dict['NUM_SIMS']     =  1200
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -44,13 +44,8 @@ param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 param_dict['EXP_VARIABLE']['R0']           = (10.0 + np.random.gamma(30.0, scale=0.133, size=NSIMS)).tolist()
 
 # RI params
-param_dict['EXP_VARIABLE']['MCV1']         = np.random.uniform(low=0.2, high=1.0, size=NSIMS).tolist()
-param_dict['EXP_VARIABLE']['MCV1_age']     = np.random.choice([0.50*365, 0.75*365, 1.00*365],
-                                                               p=[1/3, 1/3, 1/3], size=NSIMS).tolist()
-
-# Maternal protection effectiveness
-param_dict['EXP_VARIABLE']['mat_factor']   = np.random.choice([0.5, 1.0],
-                                                              p=[0.5, 0.5],       size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['MCV1']         =        np.random.choice(np.arange(0.2,1.01,0.04), size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['MCV1_age']     = (365.0*np.random.choice([0.50, 0.75, 1.00],       size=NSIMS)).tolist()
 
 
 
@@ -68,6 +63,9 @@ param_dict['EXP_CONSTANT']['num_agents']            = 250000
 # RI params
 param_dict['EXP_CONSTANT']['MCV2']                  =      1.0
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
+
+# Maternal protection effectiveness
+param_dict['EXP_CONSTANT']['mat_factor']            = 1.0
 
 
 
