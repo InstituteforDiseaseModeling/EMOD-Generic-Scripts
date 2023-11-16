@@ -46,9 +46,6 @@ for dirname in DIRNAMES:
   mcv1_age_vec = np.array(param_dict['EXP_VARIABLE']['MCV1_age'])
   mcv1_age_lvl = np.unique(mcv1_age_vec)
 
-  mat_fac_vec  = np.array(param_dict['EXP_VARIABLE']['mat_factor'])
-  mat_fac_lvl  = np.unique(mat_fac_vec)
-
   mcv2_vec     = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV2']
   mcv2_lvl     = np.unique(mcv2_vec)
 
@@ -92,22 +89,16 @@ for dirname in DIRNAMES:
 
   k1 = 0
   for mcv1_age_val in mcv1_age_lvl:
-    for mat_fac_val in mat_fac_lvl:
-      idx01 = (mat_fac_vec  == mat_fac_val)
-      idx02 = (mcv1_age_vec == mcv1_age_val)
-      tidx  = (fidx & idx01 & idx02)
-      xval  = mcv1_vec[tidx]
-      xval2 = np.arange(0.2,1.001,0.01)
-      yval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
-      pcoef = np.polyfit(xval,yval,4)
-      yval2 = np.polyval(pcoef,xval2)
-      if(mat_fac_val == 1):
-        lfmt = '-'
-      else:
-        lfmt = '--'
-      axs01.plot(xval,  yval,  '.',  alpha=0.1, color='C{:d}'.format(k1),
-                                     markeredgecolor=None)
-      axs01.plot(xval2, yval2, lfmt, alpha=1.0, color='C{:d}'.format(k1))
+    idx02 = (mcv1_age_vec == mcv1_age_val)
+    tidx  = (fidx & idx02)
+    xval  = mcv1_vec[tidx]
+    xval2 = np.arange(0.2,1.001,0.01)
+    yval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
+    pcoef = np.polyfit(xval,yval,4)
+    yval2 = np.polyval(pcoef,xval2)
+    axs01.plot(xval,  yval,  '.',  alpha=0.1, color='C{:d}'.format(k1),
+                                   markeredgecolor=None)
+    axs01.plot(xval2, yval2, '-', alpha=1.0, color='C{:d}'.format(k1))
 
     txt_age = int(np.round(mcv1_age_val/365*12))
     axs01.text( 0.23, 54-15*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=14,
