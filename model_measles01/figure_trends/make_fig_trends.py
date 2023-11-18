@@ -18,6 +18,7 @@ from dtk_post_process      import AGE_HIST_BINS
 DIRNAMES = ['experiment_popL1',
             'experiment_popL1_MCV2',
             'experiment_popL2',
+            'experiment_popL2_SIA',
             'experiment_popL2_MCV2',
             'experiment_popL3',
             'experiment_popL3_MCV2']
@@ -122,10 +123,6 @@ for dirname in DIRNAMES:
   axs01.set_ylim(  0, 300)
   axs01.set_xlim(0.2, 1.0)
   axs01.text( 0.71, 270, demogname, fontsize=18)
-  axs01.text( 0.76, 253, '100% Maternal', fontsize=14)
-  axs01.plot([0.71, 0.75], [257,257], 'k-')
-  axs01.text( 0.76, 238, '50%  Maternal', fontsize=14)
-  axs01.plot([0.71, 0.75], [242,242], 'k--')
 
   plt.tight_layout()
   plt.savefig('fig_trends_{:s}_01.png'.format(dirname))
