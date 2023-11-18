@@ -123,6 +123,7 @@ for dirname in DIRNAMES:
   axs01.set_ylim(  0, 300)
   axs01.set_xlim(0.2, 1.0)
   axs01.text( 0.71, 270, demogname, fontsize=18)
+  axs01.tick_params(axis='both', which='major', labelsize=14)
 
   plt.tight_layout()
   plt.savefig('fig_trends_{:s}_01.png'.format(dirname))
