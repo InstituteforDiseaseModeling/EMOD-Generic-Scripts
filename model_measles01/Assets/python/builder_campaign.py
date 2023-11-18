@@ -17,6 +17,9 @@ import emod_api.campaign     as     camp_module
 from emod_api                 import schema_to_class as s2c
 from emod_api.interventions   import utils
 
+VEC_AGE  = [0/12*365, 3/12*365, 5/12*365, 7/12*365, 9/12*365]
+VEC_TAKE = [     0.0,      0.0,     0.65,     0.92,      1.0]
+
 #********************************************************************************
 
 def campaignBuilder():
@@ -28,6 +31,7 @@ def campaignBuilder():
   BASE_YEAR     = gdata.base_year
   BR_MULT_X     = gdata.brate_mult_x
   BR_MULT_Y     = gdata.brate_mult_y
+  RUN_YEARS     = gdata.run_years
 
 
   # ***** Get variables for this simulation *****
@@ -36,6 +40,7 @@ def campaignBuilder():
   MCV1_AGE      = gdata.var_params['MCV1_age']
   MCV2_AGE      = gdata.var_params['MCV2_age']
   START_YEAR    = gdata.var_params['start_year']
+  SIA_START     = gdata.var_params['sia_start_year']
   MAT_FACTOR    = gdata.var_params['mat_factor']
 
 
@@ -64,6 +69,23 @@ def campaignBuilder():
   camp_module.add(IV_BR_FORCE(pdict))
 
 
+  # Add SIAs
+  start_day = 365.0*(START_YEAR-BASE_YEAR)
+  sia_year  = SIA_START
+  sia_rate  = 1.0/(1.0-MCV1_RATE+0.001)
+
+  while (sia_year < RUN_YEARS):
+      sia_year = sia_year + max(2.0, np.random.poisson(sia_rate))
+      pdict     = {'startday': 365.0*sia_year+start_day ,
+                   'nodes':                   ALL_NODES ,
+                   'agemin':                       0.75 ,
+                   'agemax':                       5.00 ,
+                   'coverage':                     0.50 ,
+                   'take_fac':               MAT_FACTOR }
+
+      camp_module.add(IV_SIA(pdict))
+
+
   #  ***** End file construction *****
   camp_module.save(filename=CAMP_FILENAME)
 
@@ -79,9 +101,6 @@ def campaignBuilder():
 def IV_MCV(params=dict()):
 
   SCHEMA_PATH   =  gdata.schema_path
-
-  VEC_AGE  = [0/12*365, 3/12*365, 5/12*365, 7/12*365, 9/12*365]
-  VEC_TAKE = [     0.0,      0.0,     0.65,     0.92,      1.0]
 
   camp_event = s2c.get_class_with_defaults('CampaignEvent',                            SCHEMA_PATH)
   camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',                 SCHEMA_PATH)
@@ -157,6 +176,44 @@ def IV_BR_FORCE(params=dict()):
 
   camp_iv.Multiplier_By_Duration.Times      = params['x_vals']
   camp_iv.Multiplier_By_Duration.Values     = params['y_vals']
+
+  return camp_event
+
+#********************************************************************************
+
+# SIAs for MCV
+def IV_SIA(params=dict()):
+
+  SCHEMA_PATH   =  gdata.schema_path
+
+  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
+  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
+  camp_iv01  = s2c.get_class_with_defaults('DelayedIntervention',       SCHEMA_PATH)
+  camp_iv02  = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
+
+  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
+
+  camp_event.Event_Coordinator_Config       = camp_coord
+  camp_event.Start_Day                      = params['startday']
+  camp_event.Nodeset_Config                 = node_set
+
+  camp_coord.Intervention_Config            = camp_iv01
+  camp_coord.Target_Demographic             = 'ExplicitAgeRanges'
+  camp_coord.Demographic_Coverage           = params['coverage']
+  camp_coord.Target_Age_Min                 = params['agemin']/365.0
+  camp_coord.Target_Age_Max                 = params['agemax']/365.0
+
+  camp_iv01.Actual_IndividualIntervention_Configs      = [camp_iv02]
+  camp_iv01.Delay_Period_Distribution                  = "UNIFORM_DISTRIBUTION"
+  camp_iv01.Delay_Period_Min                           =   0.0
+  camp_iv01.Delay_Period_Max                           =  14.0
+
+  camp_iv02.Acquire_Config.Initial_Effect              = 1.0
+  camp_iv02.Vaccine_Take                               = 0.95
+  camp_iv02.Take_Reduced_By_Acquire_Immunity           = params['take_fac']/2.0
+  camp_iv02.Take_By_Age_Multiplier.Times               = VEC_AGE
+  camp_iv02.Take_By_Age_Multiplier.Values              = VEC_TAKE
+
 
   return camp_event
 

@@ -54,6 +54,9 @@ param_dict['EXP_VARIABLE']['MCV1_age']     = (365.0*np.random.choice([0.50, 0.75
 # Reference year for population: [2020, 2040, 2060]
 param_dict['EXP_CONSTANT']['start_year']            =   2060
 
+# Number of years to wait before starting SIAs
+param_dict['EXP_CONSTANT']['sia_start_year']        =   1000
+
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 
