@@ -200,8 +200,8 @@ def IV_SIA(params=dict()):
   camp_coord.Intervention_Config            = camp_iv01
   camp_coord.Target_Demographic             = 'ExplicitAgeRanges'
   camp_coord.Demographic_Coverage           = params['coverage']
-  camp_coord.Target_Age_Min                 = params['agemin']/365.0
-  camp_coord.Target_Age_Max                 = params['agemax']/365.0
+  camp_coord.Target_Age_Min                 = params['agemin']
+  camp_coord.Target_Age_Max                 = params['agemax']
 
   camp_iv01.Actual_IndividualIntervention_Configs      = [camp_iv02]
   camp_iv01.Delay_Period_Distribution                  = "UNIFORM_DISTRIBUTION"
