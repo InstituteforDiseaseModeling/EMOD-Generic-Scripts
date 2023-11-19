@@ -97,15 +97,17 @@ for dirname in DIRNAMES:
     yval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
     pcoef = np.polyfit(xval,yval,4)
     yval2 = np.polyval(pcoef,xval2)
+
+    #axs01.scatter(xval, yval, c=yval, vmin=20, vmax=180)
     axs01.plot(xval,  yval,  '.',  alpha=0.1, color='C{:d}'.format(k1),
                                    markeredgecolor=None)
     axs01.plot(xval2, yval2, '-', alpha=1.0, color='C{:d}'.format(k1))
 
     txt_age = int(np.round(mcv1_age_val/365*12))
-    axs01.text( 0.23, 54-15*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=14,
+    axs01.text( 0.23, 54-15*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
                                 color='C{:d}'.format(k1))
     if(mcv2_lvl[0] > 0):
-      axs01.text( 0.37, 54-15*k1, '+ MCV2 15mo', fontsize=14,
+      axs01.text( 0.42, 54-15*k1, '+ MCV2 15mo', fontsize=18,
                                   color='C{:d}'.format(k1))
 
     k1 = k1 + 1
