@@ -55,7 +55,7 @@ def campaignBuilder():
   if gdata.var_params.get('timeliness_distribution') is not None:
     pdict['timeliness'] = gdata.var_params['timeliness_distribution']
 
-  if gdata.varparams.get('Ageind_vx_model') is not None:
+  if gdata.var_params.get('Ageind_vx_model') is not None:
     pdict['Ageind_vx_model'] = gdata.var_params['Ageind_vx_model']
 
   camp_module.add(IV_MCV(pdict))
