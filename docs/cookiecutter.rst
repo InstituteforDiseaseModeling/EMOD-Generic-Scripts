@@ -2,7 +2,7 @@
 Template for workflow
 ================================
 
-You can easily start an EMOD-Generic type workflow by utilizing  `cookiecutter-EMOD-Generic
+You can easily start an EMOD-Generic-Scripts type workflow by utilizing  `cookiecutter-EMOD-Generic
 <https://github.com/InstituteforDiseaseModeling/cookiecutter-EMOD-Generic>`_.
 
 Follow the instructions below:

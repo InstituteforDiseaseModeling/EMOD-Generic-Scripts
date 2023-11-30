@@ -2,7 +2,7 @@
 Examples
 ========
 
-EMOD-Generic provides a set of example models. Please consider contributing your own analyses.
+EMOD-Generic-Scripts provides a set of example models. Please consider contributing your own analyses.
 
 .. toctree::
     :maxdepth: 1

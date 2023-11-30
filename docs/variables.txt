@@ -15,7 +15,7 @@
 .. subsequent use. If the term changes, you will only need to manually update the :term: links.
 
 .. |IDM_l| replace:: Institute for Disease Modeling (IDM)
-.. |EMOD_Generic| replace:: EMOD-Generic
+.. |EMOD_Generic| replace:: EMOD-Generic-Scripts
 .. |emodpy_generic| replace:: emodpy-generic
 .. |emodpy| replace:: emodpy
 .. |emod_api| replace:: emod-api
