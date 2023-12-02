@@ -41,6 +41,8 @@ def campaignBuilder():
   MCV2_AGE      = gdata.var_params['MCV2_age']
   START_YEAR    = gdata.var_params['start_year']
   SIA_START     = gdata.var_params['sia_start_year']
+  SIA_MIN_AGE   = gdata.var_params['sia_min_age']
+  SIA_COVERAGE  = gdata.var_params['sia_coverage']
   MAT_FACTOR    = gdata.var_params['mat_factor']
 
 
@@ -78,9 +80,9 @@ def campaignBuilder():
       sia_year = sia_year + max(2.0, np.random.poisson(sia_rate))
       pdict     = {'startday': 365.0*sia_year+start_day ,
                    'nodes':                   ALL_NODES ,
-                   'agemin':                       0.75 ,
+                   'agemin':                SIA_MIN_AGE ,
                    'agemax':                       5.00 ,
-                   'coverage':                     0.50 ,
+                   'coverage':             SIA_COVERAGE ,
                    'take_fac':               MAT_FACTOR }
 
       camp_module.add(IV_SIA(pdict))

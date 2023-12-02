@@ -57,6 +57,10 @@ param_dict['EXP_CONSTANT']['start_year']            =   2060
 # Number of years to wait before starting SIAs
 param_dict['EXP_CONSTANT']['sia_start_year']        =   1000
 
+# Other SIA parameters
+param_dict['EXP_CONSTANT']['sia_min_age']           =      0.75
+param_dict['EXP_CONSTANT']['sia_coverage']          =      0.80
+
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      1.0
 
@@ -68,7 +72,7 @@ param_dict['EXP_CONSTANT']['MCV2']                  =      0.0
 param_dict['EXP_CONSTANT']['MCV2_age']              =      1.25*365.0
 
 # Maternal protection effectiveness
-param_dict['EXP_CONSTANT']['mat_factor']            = 1.0
+param_dict['EXP_CONSTANT']['mat_factor']            =      1.0
 
 
 
