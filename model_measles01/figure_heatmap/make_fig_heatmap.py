@@ -12,7 +12,7 @@ import matplotlib          as mpl
 import matplotlib.cm       as cm
 
 from global_data           import run_years
-from dtk_post_process      import AGE_HIST_BINS
+from dtk_post_process      import AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 #*******************************************************************************
 
@@ -36,6 +36,7 @@ for dirname in DIRNAMES:
   ref_year     = param_dict['EXP_CONSTANT']['start_year']
   inf_dat      = np.zeros((nsims,12*int(run_years)))
   age_dat      = np.zeros((nsims,   int(run_years)  ,len(AGE_HIST_BINS)-1))
+  mort_dat     = np.zeros((nsims,   int(run_years)))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
   mcv1_vec     = np.array(param_dict['EXP_VARIABLE']['MCV1'])
@@ -44,14 +45,21 @@ for dirname in DIRNAMES:
   mcv1_age_vec = np.array(param_dict['EXP_VARIABLE']['MCV1_age'])
   mcv1_age_lvl = np.unique(mcv1_age_vec)
 
+  xval         = np.arange(0,run_years,1/12) + 1/24
+  xyrs         = np.arange(0,run_years,1)    + 1/2
+  xages        = AGE_HIST_BINS[1:] + np.diff(AGE_HIST_BINS)/2
+  mort_prob    = np.interp(xages, IHME_MORT_X, IHME_MORT_Y)
+
   for sim_idx_str in data_brick:
     if(not sim_idx_str.isdigit()):
       continue
 
     sim_idx = int(sim_idx_str)
-    inf_dat[sim_idx,:]  = np.array(data_brick[sim_idx_str]['timeseries'])
+    inf_dat[sim_idx,:]   = np.array(data_brick[sim_idx_str]['timeseries'])
     age_dat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['age_data'])
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
+    mort_dat[sim_idx,:]  = np.sum(age_dat[sim_idx,:,:]*mort_prob, axis=1)
+
 
   fidx = (pyr_mat[:,0,0]>=0)
 
@@ -59,15 +67,8 @@ for dirname in DIRNAMES:
   tpop_avg    = np.sum(pyr_mat_avg, axis=1)
   tpop_xval   = np.arange(len(tpop_avg))
 
-  xval        = np.arange(0,run_years,1/12) + 1/24
-  pops        = np.interp(xval, tpop_xval, tpop_avg)
-  inf_dat_nrm = inf_dat[fidx,:]/pops*1e5
-
-  inf_yrs     = np.zeros((nsims,int(run_years)))
-  inf_yrs_nrm = np.zeros((nsims,int(run_years)))
-  for k1 in range(int(run_years)):
-    inf_yrs[:,k1]     = np.sum(inf_dat[:,(k1*12):((k1+1)*12)],axis=1)
-    inf_yrs_nrm[:,k1] = np.mean(inf_dat_nrm[:,(k1*12):((k1+1)*12)],axis=1)
+  pops        = np.interp(xyrs, tpop_xval, tpop_avg)
+  mort_nrm    = mort_dat[fidx,:]/pops*1e5
 
 
   # Figures
@@ -83,7 +84,7 @@ for dirname in DIRNAMES:
 
 
   # Binning
-  cval = np.mean(inf_yrs_nrm[fidx,-10:],axis=1)
+  cval = np.mean(mort_nrm[fidx,-10:],axis=1)/12.0
   (xvec, yvec) = np.meshgrid(mcv1_lvl, mcv1_age_lvl)
   zmat        = np.zeros(xvec.shape)
   for k1 in range(xvec.shape[0]):
@@ -91,18 +92,18 @@ for dirname in DIRNAMES:
       gidx = (mcv1_vec == xvec[k1,k2]) & (mcv1_age_vec == yvec[k1,k2])
       zmat[k1,k2] = np.mean(cval[gidx])
 
-  plt.contour(12*yvec/365.0, xvec, zmat, levels=[20,40,60,80,100,120,140,160,180], linewidths=3, vmin=20, vmax=180)
-  axs01.scatter(12*mcv1_age_vec/365.0, mcv1_vec, c=cval, vmin=20, vmax=180)
+  plt.contour(12*yvec/365.0, xvec, zmat, levels=[0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3.0], linewidths=3, vmin=0, vmax=3)
+  axs01.scatter(12*mcv1_age_vec/365.0, mcv1_vec, c=cval, vmin=0, vmax=3)
 
   virmap      = plt.get_cmap('viridis_r')
   cbar_handle = plt.colorbar(cm.ScalarMappable(cmap=virmap), ax=axs01, shrink=0.75)
 
-  ticloc = [0.0,0.25,0.5,0.75,1.0]
-  ticlab = ['180','140','100','60','20']
+  ticloc = [0,1/6,2/6,3/6,4/6,5/6,1]
+  ticlab = ['3.0','2.5','2.0','1.5','1.0','0.5','0.0']
 
   cbar_handle.set_ticks(ticks=ticloc)
   cbar_handle.set_ticklabels(ticlab)
-  cbar_handle.set_label('Monthly Incidence per-100k',fontsize=14,labelpad=10)
+  cbar_handle.set_label('Monthly Mortality per-100k',fontsize=14,labelpad=10)
   cbar_handle.ax.tick_params(labelsize=14)
 
   axs01.set_xlabel('MCV1 Age Policy (months)',fontsize=16)
