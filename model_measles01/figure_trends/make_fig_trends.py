@@ -10,7 +10,7 @@ import matplotlib.patches  as patch
 import matplotlib          as mpl
 
 from global_data           import run_years
-from dtk_post_process      import AGE_HIST_BINS
+from dtk_post_process      import AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 #*******************************************************************************
 
@@ -18,7 +18,9 @@ from dtk_post_process      import AGE_HIST_BINS
 DIRNAMES = ['experiment_popL1',
             'experiment_popL1_MCV2',
             'experiment_popL2',
-            'experiment_popL2_SIA',
+            'experiment_popL2_SIA6MO',
+            'experiment_popL2_SIA9MO',
+            'experiment_popL2_SIA9MO80p',
             'experiment_popL2_MCV2',
             'experiment_popL3',
             'experiment_popL3_MCV2']
@@ -39,6 +41,7 @@ for dirname in DIRNAMES:
   ref_year     = param_dict['EXP_CONSTANT']['start_year']
   inf_dat      = np.zeros((nsims,12*int(run_years)))
   age_dat      = np.zeros((nsims,   int(run_years)  ,len(AGE_HIST_BINS)-1))
+  mort_dat     = np.zeros((nsims,   int(run_years)))
   pyr_mat      = np.zeros((nsims,   int(run_years)+1,20))-1
 
   mcv1_vec     = np.array(param_dict['EXP_VARIABLE']['MCV1'])
@@ -50,31 +53,29 @@ for dirname in DIRNAMES:
   mcv2_vec     = np.ones(nsims)*param_dict['EXP_CONSTANT']['MCV2']
   mcv2_lvl     = np.unique(mcv2_vec)
 
+  xval         = np.arange(0,run_years,1/12) + 1/24
+  xyrs         = np.arange(0,run_years,1)    + 1/2
+  xages        = AGE_HIST_BINS[1:] + np.diff(AGE_HIST_BINS)/2
+  mort_prob    = np.interp(xages, IHME_MORT_X, IHME_MORT_Y)
 
   for sim_idx_str in data_brick:
     if(not sim_idx_str.isdigit()):
       continue
 
     sim_idx = int(sim_idx_str)
-    inf_dat[sim_idx,:]  = np.array(data_brick[sim_idx_str]['timeseries'])
+    inf_dat[sim_idx,:]   = np.array(data_brick[sim_idx_str]['timeseries'])
     age_dat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['age_data'])
     pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
+    mort_dat[sim_idx,:]  = np.sum(age_dat[sim_idx,:,:]*mort_prob, axis=1)
+
 
   fidx = (pyr_mat[:,0,0]>=0)
 
   pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
   tpop_avg    = np.sum(pyr_mat_avg, axis=1)
   tpop_xval   = np.arange(len(tpop_avg))
-
-  xval        = np.arange(0,run_years,1/12) + 1/24
-  pops        = np.interp(xval, tpop_xval, tpop_avg)
-  inf_dat_nrm = inf_dat[fidx,:]/pops*1e5
-
-  inf_yrs     = np.zeros((nsims,int(run_years)))
-  inf_yrs_nrm = np.zeros((nsims,int(run_years)))
-  for k1 in range(int(run_years)):
-    inf_yrs[:,k1]     = np.sum(inf_dat[:,(k1*12):((k1+1)*12)],axis=1)
-    inf_yrs_nrm[:,k1] = np.mean(inf_dat_nrm[:,(k1*12):((k1+1)*12)],axis=1)
+  pops        = np.interp(xyrs, tpop_xval, tpop_avg)
+  mort_nrm    = mort_dat[fidx,:]/pops*1e5
 
 
   # Figures
@@ -90,11 +91,14 @@ for dirname in DIRNAMES:
 
   k1 = 0
   for mcv1_age_val in mcv1_age_lvl:
+    if(mcv1_age_val > 300):
+      continue
+
     idx02 = (mcv1_age_vec == mcv1_age_val)
     tidx  = (fidx & idx02)
     xval  = mcv1_vec[tidx]
     xval2 = np.arange(0.2,1.001,0.01)
-    yval  = np.mean(inf_yrs_nrm[tidx,-10:],axis=1)
+    yval  = np.mean(mort_nrm[tidx,-10:],axis=1)/12.0
     pcoef = np.polyfit(xval,yval,4)
     yval2 = np.polyval(pcoef,xval2)
 
@@ -104,10 +108,10 @@ for dirname in DIRNAMES:
     axs01.plot(xval2, yval2, '-', alpha=1.0, color='C{:d}'.format(k1))
 
     txt_age = int(np.round(mcv1_age_val/365*12))
-    axs01.text( 0.23, 54-15*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
+    axs01.text( 0.56, 3.76-0.24*k1, 'MCV1 {:>2d}mo'.format(txt_age), fontsize=18,
                                 color='C{:d}'.format(k1))
     if(mcv2_lvl[0] > 0):
-      axs01.text( 0.42, 54-15*k1, '+ MCV2 15mo', fontsize=18,
+      axs01.text( 0.74, 3.76-0.24*k1, '+ MCV2 15mo', fontsize=18,
                                   color='C{:d}'.format(k1))
 
     k1 = k1 + 1
@@ -120,11 +124,11 @@ for dirname in DIRNAMES:
   elif(ref_year == 2060):
     demogname = 'Demog: Late'
 
-  axs01.set_ylabel('Monthly Incidence per-100k',fontsize=16)
+  axs01.set_ylabel('Monthly Mortality per-100k',fontsize=16)
   axs01.set_xlabel('MCV Coverage',fontsize=16)
-  axs01.set_ylim(  0, 300)
+  axs01.set_ylim(  0, 4.0)
   axs01.set_xlim(0.2, 1.0)
-  axs01.text( 0.71, 270, demogname, fontsize=18)
+  #axs01.text( 0.71, 270, demogname, fontsize=18)
   axs01.tick_params(axis='both', which='major', labelsize=14)
 
   plt.tight_layout()
