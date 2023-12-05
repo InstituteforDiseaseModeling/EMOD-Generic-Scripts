@@ -12,7 +12,7 @@ from idmtools_platform_comps.ssmt_work_items.comps_workitems  import  SSMTWorkIt
 
 from emodpy.emod_task                 import EMODTask
 
-from emod_reduce                      import DOCK_PACK
+from emod_reduce                      import DOCK_PACK, VE_PY_PATHS
 
 #*******************************************************************************
 
@@ -43,8 +43,9 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   # Set singularity image for environment
   task_obj.set_sif(path_env_sif)
 
-  # Add python virtual environment to path in embedded interpreter
-  task_obj.add_py_path('/python_venv/lib/python3.11/site-packages')
+  # Set path to python
+  for py_path in VE_PY_PATHS:
+    task_obj.add_py_path(py_path)
 
   # Get parameters from json file
   with open(path_param_dict) as fid01:
@@ -68,7 +69,7 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   # Create simulation sweep with builder
   #   Odd syntax; sweep definition needs two args: sweep function and a list. The sweep function
   #   is called once for each item in the list. Here, the list is of a 2-tuple created by the
-  #   zip function. Can't just be an interable, needs to be a list. First value for each tuple is
+  #   zip function. Can't just be any iterable, needs to be a list. First value for each tuple is
   #   the integer index of the simulation, second value is the dict of variables. All of those
   #   second-values are actually the SAME DICTIONARY (no deep copy) so don't make any changes
   #   in the sweep function.
