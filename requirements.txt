@@ -1,1 +1,1 @@
-emodpy==1.21
+emodpy==1.22
