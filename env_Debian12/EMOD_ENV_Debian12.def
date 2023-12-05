@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: Assets/EMOD_OS_Debian11.sif
+From: Assets/EMOD_OS_Debian12.sif
 
 %post
     apt-get install python3 -y

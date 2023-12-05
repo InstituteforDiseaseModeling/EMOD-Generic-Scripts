@@ -34,8 +34,8 @@ def make_work():
   os_image = AssetCollection.from_id_file('EMOD_OS.id')
 
   # Creates a work item to create the build image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Debian11',
-                                      definition_file  = 'EMOD_EXE_Debian11.def',
+  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_EXE_Debian12',
+                                      definition_file  = 'EMOD_EXE_Debian12.def',
                                       force            = True)
   sbwi_obj.assets.add_assets(os_image)
 
@@ -43,7 +43,7 @@ def make_work():
   ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
 
   # Magic words
-  cmd_line = 'singularity exec Assets/EMOD_EXE_Debian11.sif cp -r /outputs/. .'
+  cmd_line = 'singularity exec Assets/EMOD_EXE_Debian12.sif cp -r /outputs/. .'
 
   # Create CommandTask
   task_obj = CommandTask(command=cmd_line)
