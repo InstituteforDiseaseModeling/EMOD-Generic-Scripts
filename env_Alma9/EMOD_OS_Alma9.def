@@ -1,10 +1,10 @@
 Bootstrap: docker
-From: almalinux:9.2-minimal
+From: almalinux:9.3
 
 %post
-    microdnf upgrade -y
+    dnf upgrade -y
 
-    microdnf clean all
+    dnf clean all
 
 %runscript
 
