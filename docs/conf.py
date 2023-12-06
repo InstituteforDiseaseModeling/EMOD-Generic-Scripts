@@ -96,7 +96,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'EMOD-Generic'
+project = u'EMOD-Generic-Scripts'
 copyright = f'1999 - {datetime.today().year}, Bill & Melinda Gates Foundation. All rights reserved.'
 author = u'Institute for Disease Modeling'
 
@@ -282,7 +282,7 @@ if os.environ.get('READTHEDOCS') == 'True':
     search_project = os.environ["READTHEDOCS_PROJECT"]
     search_version = os.environ["READTHEDOCS_VERSION"]
 
-    rtd_sphinx_search_default_filter = f"subprojects:{search_project_parent}/{search_version}"
+    rtd_sphinx_search_default_filter = f"subprojects:{search_project}/{search_version}"
 
     rtd_sphinx_search_filters = {
         "Search this project": f"project:{search_project}/{search_version}",
@@ -312,7 +312,7 @@ if os.environ.get('READTHEDOCS') == 'True':
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'EMOD-Generic'
+htmlhelp_basename = 'EMOD-Generic-Scripts'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -338,7 +338,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'EMOD-Generic-docs.tex', u'EMOD-Generic',
+    (master_doc, 'EMOD-Generic-Scripts-docs.tex', u'EMOD-Generic-Scripts',
      u'Institute for Disease Modeling', 'manual'),
 ]
 
@@ -380,7 +380,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'EMOD-Generic-docs', u'EMOD-Generic',
+    (master_doc, 'EMOD-Generic-Scripts-docs', u'EMOD-Generic-Scripts',
      [author], 1)
 ]
 
@@ -394,7 +394,7 @@ man_show_urls = True
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'EMOD-Generic-docs', u'EMOD-Generic',
+    (master_doc, 'EMOD-Generic-Scripts-docs', u'EMOD-Generic-Scripts',
      author, 'Institute for Disease Modeling', 'Scripts for running Generic EMOD simulations with emodpy.',
      'Miscellaneous'),
 ]
