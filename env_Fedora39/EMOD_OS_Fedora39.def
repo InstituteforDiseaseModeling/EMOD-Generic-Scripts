@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: fedora:38
+From: fedora:39
 
 %post
     dnf upgrade -y

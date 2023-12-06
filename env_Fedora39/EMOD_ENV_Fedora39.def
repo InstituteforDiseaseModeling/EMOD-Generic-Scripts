@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: Assets/EMOD_OS_Fedora38.sif
+From: Assets/EMOD_OS_Fedora39.sif
 
 %post
     dnf install python3 -y
@@ -7,6 +7,9 @@ From: Assets/EMOD_OS_Fedora38.sif
     dnf install mpich -y
 
     dnf clean all
+
+    python3 -m venv py_env
+    . py_env/bin/activate
 
     pip3 install pip              --upgrade
     pip3 install emod-api==1.30.1 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
