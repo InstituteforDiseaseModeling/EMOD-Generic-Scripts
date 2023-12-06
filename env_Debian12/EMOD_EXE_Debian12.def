@@ -33,7 +33,8 @@ From: Assets/EMOD_OS_Debian12.sif
     mkdir outputs/reporter_plugins
     cp EMOD/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
 
-    outputs/Eradication --get-schema --schema-path outputs/schema.json -P EMOD/Scripts
+    mkdir PyScripts
+    cp EMOD/Scripts/*.py PyScripts
 
     rm -r EMOD
 

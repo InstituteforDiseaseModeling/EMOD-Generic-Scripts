@@ -2,42 +2,17 @@
 #
 #*******************************************************************************
 
-import os, sys, json
+import os, sys
 
-from idmtools.core.platform_factory      import Platform
-from idmtools.core.id_file               import write_id_file
-from idmtools_platform_comps.utils.singularity_build \
-                                         import SingularityBuildWorkItem
-
-# ******************************************************************************
-
-# Start and experiment on COMPS
-def make_work():
-
-  # Prepare the platform
-  plat_obj = Platform(block        = 'COMPS',
-                      endpoint     = 'https://comps.idmod.org',
-                      environment  = 'Calculon')
-
-  # Creates a work item to build image
-  sbwi_obj = SingularityBuildWorkItem(name             = 'Build_EMOD_OS_Debian12',
-                                      definition_file  = 'EMOD_OS_Debian12.def',
-                                      force            = True)
-
-  # Wait until the image is built
-  ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
-
-  # Save asset id for sif to file
-  write_id_file('EMOD_OS.id', ac_obj)
-  print()
-  print(ac_obj.uid.hex)
-
-  return None
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..','local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from emod_build  import  make_OS_asset
 
 # ******************************************************************************
 
 if(__name__ == "__main__"):
 
-  make_work()
+  make_OS_asset()
 
 # ******************************************************************************
