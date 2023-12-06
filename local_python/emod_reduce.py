@@ -25,6 +25,11 @@ FILENAME_PY =  'emod_reduce.py'
 FILENAME_ID =  'COMPS_ID.id'
 COMPS_URL   =  'https://comps.idmod.org'
 
+ID_OS       =  'EMOD_OS.id'
+ID_EXE      =  'EMOD_EXE.id'
+ID_ENV      =  'EMOD_ENV.id'
+ID_SCHEMA   =  'EMOD_SCHEMA.id'
+
 VE_PY_PATHS = ['/py_env/lib/python3.9/site-packages/',
                '/py_env/lib/python3.10/site-packages/',
                '/py_env/lib/python3.11/site-packages/']
