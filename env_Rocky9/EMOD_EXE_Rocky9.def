@@ -1,0 +1,58 @@
+Bootstrap: localimage
+From: Assets/EMOD_OS_Rocky9.sif
+
+%post
+    dnf install python-devel -y
+    dnf install mpich-devel -y
+    dnf install sqlite-devel -y
+    dnf install boost-devel -y
+    dnf install git -y
+    dnf install glibc-devel -y
+    dnf install gcc-c++ -y
+
+    dnf clean all
+
+    python3 -m pip install pip --upgrade
+    python3 -m pip install scons
+
+    export USER=CalculonUser-EMOD
+
+    export PATH=$PATH:/usr/lib64/mpich/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
+
+    git clone https://github.com/kfrey-idm/EMOD
+
+    cd EMOD
+
+    git fetch
+    git checkout Generic-Ongoing
+
+    scons --Release --jobs=4 --Disease=Generic
+
+    cd ..
+
+    mkdir outputs
+    cp EMOD/build/x64/Release/Eradication/Eradication outputs/Eradication
+
+    mkdir outputs/reporter_plugins
+    cp EMOD/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+
+    mkdir PyScripts
+    cp EMOD/Scripts/*.py PyScripts
+
+    rm -r EMOD
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container for building EMOD.
