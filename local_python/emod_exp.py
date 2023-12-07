@@ -10,9 +10,9 @@ from idmtools.entities.experiment                             import  Experiment
 from idmtools_models.python.python_task                       import  PythonTask
 from idmtools_platform_comps.ssmt_work_items.comps_workitems  import  SSMTWorkItem
 
-from emodpy.emod_task                 import EMODTask
+from emodpy.emod_task   import EMODTask
 
-from emod_reduce                      import DOCK_PACK, VE_PY_PATHS
+from emod_reduce   import  DOCK_PACK, VE_PY_PATHS, ID_EXE, ID_ENV, ID_SCHEMA
 
 #*******************************************************************************
 
@@ -35,13 +35,13 @@ def sweep_func(simulation, arg_tuple):
 
 #*******************************************************************************
 
-def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path_data):
+def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
 
   # Create EMODTask
   task_obj = EMODTask.from_files(ep4_path = path_python)
 
   # Set singularity image for environment
-  task_obj.set_sif(path_env_sif)
+  task_obj.set_sif(os.path.join(path_exe, ID_ENV))
 
   # Set path to python
   for py_path in VE_PY_PATHS:
@@ -60,8 +60,10 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
   task_obj.common_assets.add_asset(param_asset)
 
   # Add the executable and schema
-  exe_asset = AssetCollection.from_id_file(path_exe)
+  exe_asset = AssetCollection.from_id_file(os.path.join(path_exe, ID_EXE))
   task_obj.common_assets.add_assets(exe_asset)
+  schema_asset = AssetCollection.from_id_file(os.path.join(path_exe, ID_SCHEMA))
+  task_obj.common_assets.add_assets(schema_asset)
 
   # Add everything in the data assets directory as assets;
   task_obj.common_assets.add_directory(path_data, relative_path='data')
@@ -85,7 +87,7 @@ def exp_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path
 
 #*******************************************************************************
 
-def calib_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, path_data, path_local):
+def calib_from_def_file(path_param_dict, path_python, path_exe, path_data, path_local):
 
   # Create python task for SSMT work item
   task_obj = PythonTask(python_path = 'python3', script_path = os.path.join(path_local,'emod_calib.py'))
@@ -100,8 +102,9 @@ def calib_from_def_file(path_param_dict, path_python, path_env_sif, path_exe, pa
   task_obj.common_assets.add_directory(path_python, relative_path='python')
   task_obj.common_assets.add_directory(path_data,   relative_path='data')
   task_obj.common_assets.add_directory(path_local)
-  task_obj.common_assets.add_asset(path_env_sif)
-  task_obj.common_assets.add_asset(path_exe)
+  task_obj.common_assets.add_asset(os.path.join(path_exe, ID_ENV))
+  task_obj.common_assets.add_asset(os.path.join(path_exe, ID_EXE))
+  task_obj.common_assets.add_asset(os.path.join(path_exe, ID_SCHEMA))
   task_obj.common_assets.add_asset(path_param_dict)
 
   # Add working directory assets

@@ -2,17 +2,16 @@
 #
 #*******************************************************************************
 
-import os
+import os, sys
 
 from idmtools.core.platform_factory   import Platform
 from idmtools.entities.experiment     import Experiment
-from idmtools.core.id_file            import write_id_file
 
 # Ought to go in emodpy
-import sys
 LOCAL_PATH = os.path.abspath(os.path.join('..','..','local_python'))
 sys.path.insert(0, LOCAL_PATH)
-from emod_exp import exp_from_def_file
+from emod_exp          import exp_from_def_file
+from emod_reduce       import FILENAME_ID
 
 # ******************************************************************************
 
@@ -21,8 +20,7 @@ from emod_exp import exp_from_def_file
 PATH_EXP_DEF  = os.path.abspath('param_dict.json')
 PATH_PYTHON   = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA     = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_ENV      = os.path.abspath(os.path.join('..', '..', 'env_Alma9', 'EMOD_ENV.id'))
-PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Alma9', 'EMOD_EXE.id'))
+PATH_EXE      = os.path.abspath(os.path.join('..', '..', 'env_Debian12'))
 
 
 # Start and experiment on COMPS
@@ -40,13 +38,13 @@ def run_sims():
                       exclusive       = 'False')
 
   # Create experiment object
-  exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_ENV, PATH_EXE, PATH_DATA)
+  exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_EXE, PATH_DATA)
 
   # Send experiment to COMPS; start processing
   plat_obj.run_items(exp_obj)
 
   # Save experiment id to file
-  write_id_file('COMPS_ID.id', exp_obj)
+  exp_obj.to_id_file(FILENAME_ID)
   print()
   print(exp_obj.uid.hex)
 
