@@ -3,6 +3,27 @@
 See documentation at https://docs.idmod.org/projects/emod-generic-scripts/en/latest/ for
 additional information about how to use these scripts.
 
+---------------------
+To get started:
+1. Setup a virtual environment (e.g., conda) using Python 3.10
+2. Install requirements:
+   ```
+   pip install -r requirements.txt --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
+   ```
+3. Run an experiment (requires COMPS credentials):
+   ```
+   cd EMOD-Generic-Scripts/model_covariance01/experiment_covariance01
+    python make01_param_dict.py
+    python make02_lauch_sims.py
+    python make03_pool_brick.py
+    ```
+4. Make figures:
+    ```
+    cd EMOD-Generic-Scripts/model_covariance01/figure_attackfrac01
+    python make_fig_attackrate.py
+   ```
+    
+---------------------
 To build the documentation locally, do the following:
 
 1. Create and activate a venv.  *** Does not support Python 3.11: Use 3.10 ***
@@ -11,6 +32,8 @@ To build the documentation locally, do the following:
     ```
     pip install -r docs/requirements.txt
     ```
+-------------------
+
 ## Contents:
 
 | Directory | Description |
