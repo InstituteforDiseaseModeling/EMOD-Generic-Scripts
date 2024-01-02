@@ -22,6 +22,7 @@ def update_config_obj(config):
   BASE_YEAR      = gdata.base_year
   START_YEAR     = gdata.start_year
   RUN_YEARS      = gdata.run_years
+  TIME_STEP      = gdata.t_step_days
 
 
   # ***** Get variables for this simulation *****
@@ -37,6 +38,7 @@ def update_config_obj(config):
   # ***** Time *****
   config.parameters.Start_Time                                     = 365.0*(START_YEAR-BASE_YEAR)
   config.parameters.Simulation_Duration                            = 365.0*RUN_YEARS
+  config.parameters.Simulation_Timestep                            = TIME_STEP
 
   config.parameters.Enable_Termination_On_Total_Wall_Time          =   1
   config.parameters.Wall_Time_Maximum_In_Minutes                   = MAX_CLOCK
@@ -116,7 +118,9 @@ def update_config_obj(config):
   # ***** Reporting *****
   config.parameters.Enable_Default_Reporting                       =    1
   config.parameters.Enable_Demographics_Reporting                  =    1
-  config.parameters.Enable_Binned_Report                           =    1
+
+  config.parameters.Enable_Event_DB                                =    1
+  config.parameters.SQL_Events                                     =    ["NewInfection"]
 
   config.parameters.Custom_Reports_Filename                        = gdata.reports_file
 
