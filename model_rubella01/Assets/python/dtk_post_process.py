@@ -40,9 +40,15 @@ def application(output_path):
   parsed_dat = {key_str: dict()}
 
 
-  # Sample population pyramid every year
+  # Sample population pyramid at start, then every year
   with open(os.path.join(output_path,'DemographicsSummary.json')) as fid01:
     demog_output = json.load(fid01)
+
+  ds_start = demog_output['Header']['Start_Time']
+  ds_nstep = demog_output['Header']['Timesteps']
+  ds_tsize = demog_output['Header']['Simulation_Timestep']
+  time_vec = np.arange(ds_nstep)*ds_tsize + ds_start
+  nyr_bool = (np.diff(time_vec//365.0)>0.0)
 
   age_key_list = [   '<5',   '5-9', '10-14', '15-19', '20-24', '25-29',
                   '30-34', '35-39', '40-44', '45-49', '50-54', '55-59',
@@ -54,7 +60,10 @@ def application(output_path):
     age_key_str = 'Population Age {:s}'.format(age_key_list[k1])
     age_vec_dat = np.array(demog_output['Channels'][age_key_str]['Data'])
     pyr_dat[0,  k1] = age_vec_dat[0]
-    pyr_dat[1:, k1] = age_vec_dat[364::365]
+    age_subset      = age_vec_dat[:-1][nyr_bool]
+    if(age_subset.shape[0] < int(RUN_YEARS)):
+      age_subset = np.append(age_subset, age_vec_dat[-1])
+    pyr_dat[1:, k1] = age_subset
 
   parsed_dat[key_str]['pyr_data'] = pyr_dat.tolist()
 
@@ -79,17 +88,19 @@ def application(output_path):
   with open(os.path.join(output_path,'InsetChart.json')) as fid01:
     inset_chart = json.load(fid01)
 
-  tot_births = np.array(inset_chart['Channels']['Births']['Data'])
-  births_dat = np.zeros((int(RUN_YEARS)))
-  for k1 in range(births_dat.shape[0]):
-    dex1 = int(365*(k1))
-    dex2 = int(365*(k1+1))
-    if(dex2<tot_births.shape[0]):
-      births_dat[k1] = tot_births[dex2]-tot_births[dex1]
-    elif(dex1<tot_births.shape[0]):
-      births_dat[k1] = tot_births[-1]  -tot_births[dex1]
+  ic_start = inset_chart['Header']['Start_Time']
+  ic_nstep = inset_chart['Header']['Timesteps']
+  ic_tsize = inset_chart['Header']['Simulation_Timestep']
+  cumb_vec = np.array(inset_chart['Channels']['Births']['Data'])
 
-  parsed_dat[key_str]['cbr_vec'] = births_dat.tolist()
+  time_vec = np.arange(ic_nstep)*ic_tsize + ic_start
+  nyr_bool = (np.diff(time_vec//365.0)>0.0)
+  b_vec    = cumb_vec[:-1][nyr_bool]
+  if(b_vec.shape[0] < int(RUN_YEARS)):
+    b_vec = np.append(b_vec, cumb_vec[-1])
+  b_vec[1:] = np.diff(b_vec)
+
+  parsed_dat[key_str]['cbr_vec'] = b_vec.tolist()
 
 
   # Calculate calibration score

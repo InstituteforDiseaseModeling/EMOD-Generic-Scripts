@@ -67,7 +67,7 @@ param_dict['EXP_CONSTANT']['steady_state_demog']    =  False
 param_dict['EXP_CONSTANT']['add_campaigns']         =  False
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            = 100000
+param_dict['EXP_CONSTANT']['num_agents']            =  50000
 
 
 
