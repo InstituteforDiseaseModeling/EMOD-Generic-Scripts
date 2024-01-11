@@ -17,9 +17,9 @@ From: Assets/EMOD_OS_Fedora39.sif
 
     export USER=CalculonUser-EMOD
 
-    git clone https://github.com/kfrey-idm/EMOD
+    git clone https://github.com/InstituteforDiseaseModeling/EMOD-Generic
 
-    cd EMOD
+    cd EMOD-Generic
 
     git fetch
     git checkout Generic-Ongoing
@@ -32,15 +32,15 @@ From: Assets/EMOD_OS_Fedora39.sif
     cd ..
 
     mkdir outputs
-    cp EMOD/build/x64/Release/Eradication/Eradication outputs/Eradication
+    cp EMOD-Generic/build/x64/Release/Eradication/Eradication outputs/Eradication
 
     mkdir outputs/reporter_plugins
-    cp EMOD/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+    cp EMOD-Generic/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
 
     mkdir PyScripts
-    cp EMOD/Scripts/*.py PyScripts
+    cp EMOD-Generic/Scripts/*.py PyScripts
 
-    rm -r EMOD
+    rm -r EMOD-Generic
 
 %runscript
 
