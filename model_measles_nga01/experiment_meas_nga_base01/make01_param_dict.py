@@ -56,18 +56,18 @@ param_dict['EXP_CONSTANT']['R0_peak_width']        =    45.0
 param_dict['EXP_CONSTANT']['R0_peak_magnitude']    =     1.3
 
 # Importation rate per-100k per-day
-param_dict['EXP_CONSTANT']['log10_import_rate']    =   -0.50
+param_dict['EXP_CONSTANT']['log10_import_rate']    =    -0.50
 
 # Parameters for gravity model for network connections
-param_dict['EXP_CONSTANT']['net_inf_power']        =    2.0
-param_dict['EXP_CONSTANT']['net_inf_ln_mult']      =   -2.0
+param_dict['EXP_CONSTANT']['net_inf_power']        =     2.0
+param_dict['EXP_CONSTANT']['net_inf_ln_mult']      =    -2.0
 param_dict['EXP_CONSTANT']['net_inf_maxfrac']      =     0.1
 
 # Correlation between acqusition and transmission heterogeneity
 param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 
 # Individual level risk variance (acquisition multiplier; mean = 1.0; log-normal distribution)
-param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.6
+param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.3
 
 # Abort sim if running for more than specified time in minutes
 param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
@@ -82,7 +82,7 @@ param_dict['EXP_CONSTANT']['node_variance_R0']     =     0.0
 param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
 
 # Subdivide LGAs into 100km^2 regions
-param_dict['EXP_CONSTANT']['use_10k_res']          =    True
+param_dict['EXP_CONSTANT']['use_10k_res']          =   False
 
 
 

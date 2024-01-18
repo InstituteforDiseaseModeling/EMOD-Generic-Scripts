@@ -164,9 +164,7 @@ def IV_MCV1(params=dict()):
   camp_iv02.Delay_Period_Gaussian_Mean                  =  300.0
   camp_iv02.Delay_Period_Gaussian_Std_Dev               =   90.0
 
-  camp_iv03.Acquire_Config                              = camp_wane
-
-  camp_wane.Initial_Effect                              =    1.0
+  camp_iv03.Acquire_Config.Initial_Effect               =    1.0
 
   return camp_event
 
@@ -179,8 +177,8 @@ def IV_SIA(params=dict()):
 
   camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
   camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
-  camp_iv01  = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
-  camp_wane  = s2c.get_class_with_defaults('WaningEffectConstant',      SCHEMA_PATH)
+  camp_iv01  = s2c.get_class_with_defaults('DelayedIntervention',       SCHEMA_PATH)
+  camp_iv02  = s2c.get_class_with_defaults('Vaccine',                   SCHEMA_PATH)
 
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
@@ -194,9 +192,13 @@ def IV_SIA(params=dict()):
   camp_coord.Target_Age_Min                 = params['agemin']/365.0
   camp_coord.Target_Age_Max                 = params['agemax']/365.0
 
-  camp_iv01.Acquire_Config                  = camp_wane
+  camp_iv01.Actual_IndividualIntervention_Configs      = [camp_iv02]
+  camp_iv01.Delay_Period_Distribution                  = "UNIFORM_DISTRIBUTION"
+  camp_iv01.Delay_Period_Min                           =   0.0
+  camp_iv01.Delay_Period_Max                           =  14.0
 
-  camp_wane.Initial_Effect                  = 1.0
+  camp_iv02.Acquire_Config.Initial_Effect              = 1.0
+  camp_iv02.Vaccine_Take                               = 0.95
 
   return camp_event
 

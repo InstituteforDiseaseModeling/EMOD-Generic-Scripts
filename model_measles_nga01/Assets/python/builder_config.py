@@ -66,50 +66,46 @@ def update_config_obj(config):
 
 
   # ***** Intrahost *****
-  config.parameters.Base_Infectivity_Distribution            = 'GAMMA_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Scale                   = R0/8.0
-  config.parameters.Base_Infectivity_Shape                   =    1.0
+  MEAN_INF_DUR = 18.0
+  config.parameters.Base_Infectivity_Distribution                  = 'GAMMA_DISTRIBUTION'
+  config.parameters.Base_Infectivity_Scale                         =  R0/MEAN_INF_DUR
+  config.parameters.Base_Infectivity_Shape                         =    1.0
 
-  config.parameters.Incubation_Period_Distribution           = 'GAMMA_DISTRIBUTION'
-  config.parameters.Incubation_Period_Scale                  =    1.0
-  config.parameters.Incubation_Period_Shape                  =    3.5
+  config.parameters.Incubation_Period_Distribution                 = 'GAMMA_DISTRIBUTION'
+  config.parameters.Incubation_Period_Scale                        =    1.0
+  config.parameters.Incubation_Period_Shape                        =    3.5
 
-  config.parameters.Infectious_Period_Distribution           = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Infectious_Period_Gaussian_Mean          =   18.0
-  config.parameters.Infectious_Period_Gaussian_Std_Dev       =    2.0
+  config.parameters.Infectious_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
+  config.parameters.Infectious_Period_Gaussian_Mean                =   MEAN_INF_DUR
+  config.parameters.Infectious_Period_Gaussian_Std_Dev             =    2.0
 
+  config.parameters.Enable_Nonuniform_Shedding                     =    1.0
+  config.parameters.Shedding_Distribution_Alpha                    =   10.0
+  config.parameters.Shedding_Distribution_Beta                     =   10.0
 
-  config.parameters.Enable_Nonuniform_Shedding               =    1.0
-  config.parameters.Shedding_Distribution_Alpha              =   10.0
-  config.parameters.Shedding_Distribution_Beta               =   10.0
+  config.parameters.Symptomatic_Infectious_Offset                  =   11.0
 
-  config.parameters.Enable_Infection_Rate_Overdispersion     =    1
-  config.parameters.Enable_Infectivity_Scaling               =    1
+  config.parameters.Enable_Disease_Mortality                       =    0
 
-  config.parameters.Symptomatic_Infectious_Offset            =   11.0
-
-  config.parameters.Enable_Disease_Mortality                 =    0
-
-  config.parameters.Acquisition_Transmission_Correlation     = CORR_ACQ_TRANS
+  config.parameters.Acquisition_Transmission_Correlation           = CORR_ACQ_TRANS
 
 
   # ***** Immunity *****
-  config.parameters.Enable_Immunity                                  =   1
-  config.parameters.Enable_Immune_Decay                              =   0
+  config.parameters.Enable_Immunity                                =    1
+  config.parameters.Enable_Immune_Decay                            =    0
 
-  config.parameters.Post_Infection_Acquisition_Multiplier            =   0.0
-  config.parameters.Post_Infection_Transmission_Multiplier           =   0.0
-  config.parameters.Post_Infection_Mortality_Multiplier              =   0.0
+  config.parameters.Post_Infection_Acquisition_Multiplier          =    0.0
+  config.parameters.Post_Infection_Mortality_Multiplier            =    0.0
+  config.parameters.Post_Infection_Transmission_Multiplier         =    0.0
 
-  config.parameters.Enable_Maternal_Protection                       =   1
-  config.parameters.Susceptibility_Type                              = 'BINARY'
-  config.parameters.Maternal_Protection_Type                         = 'SIGMOID'
-  config.parameters.Maternal_Sigmoid_SteepFac                        =  50.0
-  config.parameters.Maternal_Sigmoid_HalfMaxAge                      = 150.0
-  config.parameters.Maternal_Sigmoid_SusInit                         =   0.0
+  config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   1.0
+  config.parameters.Maternal_Acquire_Config.Enable_Box_Duration_Distribution  =   1
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Distribution         = 'GAUSSIAN_DISTRIBUTION'
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        = 120.0
+  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev     =  67.0
 
-  config.parameters.Enable_Initial_Susceptibility_Distribution       =   1
-  config.parameters.Susceptibility_Initialization_Distribution_Type  = 'DISTRIBUTION_COMPLEX'
+  config.parameters.Enable_Initial_Susceptibility_Distribution     =    1
+  config.parameters.Susceptibility_Initialization_Distribution_Type= 'DISTRIBUTION_COMPLEX'
 
 
   # ***** Interventions *****
@@ -129,11 +125,12 @@ def update_config_obj(config):
 
   config.parameters.Enable_Infectivity_Reservoir             =   1
 
+
   # ***** Adapted sampling *****
   config.parameters.Individual_Sampling_Type                 = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
   config.parameters.Min_Node_Population_Samples              = gdata.demog_min_pop
   config.parameters.Base_Individual_Sample_Rate              =   1.0/AGENT_RATE
-  config.parameters.Relative_Sample_Rate_Immune              =   0.02
+  config.parameters.Relative_Sample_Rate_Immune              =   0.01
   config.parameters.Immune_Threshold_For_Downsampling        =   1.0e-5
   config.parameters.Immune_Downsample_Min_Age                = 365.0
 
