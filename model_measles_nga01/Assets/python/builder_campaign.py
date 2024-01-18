@@ -141,7 +141,6 @@ def IV_MCV1(params=dict()):
   camp_iv01  = s2c.get_class_with_defaults('NodeLevelHealthTriggeredIVScaleUpSwitch',  SCHEMA_PATH)
   camp_iv02  = s2c.get_class_with_defaults('DelayedIntervention',                      SCHEMA_PATH)
   camp_iv03  = s2c.get_class_with_defaults('Vaccine',                                  SCHEMA_PATH)
-  camp_wane  = s2c.get_class_with_defaults('WaningEffectConstant',                     SCHEMA_PATH)
 
   node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
 
