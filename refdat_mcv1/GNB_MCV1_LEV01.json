@@ -1,0 +1,35 @@
+{
+    "namevec": [
+        "AFRO:GUINEA_BISSAU:BAFATA",
+        "AFRO:GUINEA_BISSAU:BIOMBO",
+        "AFRO:GUINEA_BISSAU:BISSAU",
+        "AFRO:GUINEA_BISSAU:BOLAMA_BIJAGOS",
+        "AFRO:GUINEA_BISSAU:CACHEU",
+        "AFRO:GUINEA_BISSAU:GABU",
+        "AFRO:GUINEA_BISSAU:OIO",
+        "AFRO:GUINEA_BISSAU:QUINARA",
+        "AFRO:GUINEA_BISSAU:TOMBALI"
+    ],
+    "timevec": [
+        36682.5,
+        37047.5,
+        37412.5,
+        37777.5,
+        38142.5,
+        38507.5,
+        38872.5,
+        39237.5,
+        39602.5,
+        39967.5,
+        40332.5,
+        40697.5,
+        41062.5,
+        41427.5,
+        41792.5,
+        42157.5,
+        42522.5,
+        42887.5,
+        43252.5,
+        43617.5
+    ]
+}
