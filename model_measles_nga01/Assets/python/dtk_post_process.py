@@ -79,7 +79,7 @@ def application(output_path):
 
   for adm1_name in adm1_dict:
     rep_bool          = np.isin(gdata.data_vec_node,adm1_dict[adm1_name])
-    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time,
+    (inf_mo, tstamps) = np.histogram(gdata.data_vec_time[rep_bool],
                                      bins    = BIN_EDGES,
                                      weights = gdata.data_vec_mcw[rep_bool])
 
