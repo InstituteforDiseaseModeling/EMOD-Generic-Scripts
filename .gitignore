@@ -14,10 +14,17 @@ _param_*.json
 *.png
 *.svg
 
-venv/
-env/
 __pycache__/
 *output/
 
 # Sphinx documentation
 docs/_build/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
