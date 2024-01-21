@@ -44,8 +44,9 @@ param_dict['EXP_VARIABLE']['run_number']       =     list(range(NSIMS))
 
 # ***** Constants for this experiment *****
 
-# Number of days to run simulation (start Jan 1, 2008 = 40150)
-param_dict['EXP_CONSTANT']['num_tsteps']           =   365.0#365.0*(2.0 + 10.0) + 1
+# Reference year to start sim; number of years for sim to run
+param_dict['EXP_CONSTANT']['start_year']           =   2008
+param_dict['EXP_CONSTANT']['run_years']            =      4.0
 
 # R0 value
 param_dict['EXP_CONSTANT']['R0']                   =    14.0

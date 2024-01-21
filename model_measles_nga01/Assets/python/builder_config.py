@@ -47,7 +47,8 @@ def update_config_obj(config):
 
   RUN_NUM         = gdata.var_params['run_number']
 
-  TIME_DELTA      = gdata.var_params['num_tsteps']
+  START_YEAR      = gdata.var_params['start_year']
+  RUN_YEARS       = gdata.var_params['run_years']
 
   AGENT_RATE      = gdata.var_params['agent_rate']
 
@@ -59,8 +60,8 @@ def update_config_obj(config):
 
 
   # ***** Time *****
-  config.parameters.Start_Time                               = gdata.start_time
-  config.parameters.Simulation_Duration                      = TIME_DELTA
+  config.parameters.Start_Time                               = 365.0*(START_YEAR-BASE_YEAR)
+  config.parameters.Simulation_Duration                      = 365.0*RUN_YEARS + 1.0
 
   config.parameters.Enable_Termination_On_Total_Wall_Time    =   1
   config.parameters.Wall_Time_Maximum_In_Minutes             = MAX_CLOCK
@@ -156,7 +157,7 @@ def update_config_obj(config):
   config.parameters.Enable_Default_Reporting                 =   1
   config.parameters.Enable_Demographics_Reporting            =   1
   config.parameters.Enable_Event_DB                          =   1
-  config.parameters.SQL_Start_Time                           = gdata.start_log
+  config.parameters.SQL_Start_Time                           = 365.0*(START_YEAR-BASE_YEAR+3.0)
   config.parameters.SQL_Events                               =   ["NewlySymptomatic"]
 
   config.parameters.Enable_Spatial_Output                    =   0

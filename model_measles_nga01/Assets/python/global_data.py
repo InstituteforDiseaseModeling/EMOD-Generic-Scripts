@@ -9,10 +9,6 @@ sim_index       = 0
 var_params      = dict()
 schema_path     = 'Assets/schema.json'
 
-start_time      = 365.0*(2008-1900)
-start_log       = 365.0*(2011-1900)
-base_year       = 1900
-
 # Filename params
 demog_files     = list()
 camp_file       = None
@@ -34,6 +30,7 @@ data_vec_time   = None
 data_vec_node   = None
 data_vec_mcw    = None
 
+base_year       = 1900
 
 max_clock       = 120.0
 

@@ -21,13 +21,14 @@ def campaignBuilder():
 
   # Note: campaign module itself is the file object; no Campaign class right now
   CAMP_FILENAME =  'campaign.json'
-
+  BASE_YEAR     = gdata.base_year
 
   # ***** Get variables for this simulation *****
-  TIME_START   = gdata.start_time
   PEAK_SIZE    = gdata.var_params['R0_peak_magnitude']
   PEAK_TIME    = gdata.var_params['R0_peak_day']
   PEAK_WIDE    = gdata.var_params['R0_peak_width']
+  START_YEAR    = gdata.var_params['start_year']
+
 
 
   # ***** Events *****
@@ -36,12 +37,14 @@ def campaignBuilder():
   node_opts = list(node_dict.keys())
 
 
+  start_day = 365.0*(START_YEAR-BASE_YEAR)
+
   # Add MCV1 RI
   mcv1_dat = np.loadtxt(os.path.join('Assets','data', 'NGA_MCV1.csv'), delimiter=',')
   with open(os.path.join('Assets','data', 'NGA_MCV1.json')) as fid01:
     mcv1_dict = json.load(fid01)
 
-  time_vec  = np.array(mcv1_dict['timevec']) - TIME_START
+  time_vec  = np.array(mcv1_dict['timevec']) - start_day
   for k1 in range(len(mcv1_dict['namevec'])):
     reg_name  = mcv1_dict['namevec'][k1]
     mcv1_vec  = mcv1_dat[k1,:]
@@ -62,7 +65,7 @@ def campaignBuilder():
     time_list = [0.0]       + (time_vec[time_vec>0.0]).tolist() + [365.0*100]
     mcv1_list = [init_mcv1] + (mcv1_vec[time_vec>0.0]).tolist() + [np.mean(mcv1_vec[-3:])]
 
-    pdict     = {'startday':       TIME_START ,
+    pdict     = {'startday':       start_day ,
                  'nodes':          node_list  ,
                  'x_vals':         time_list   ,
                  'y_vals':         mcv1_list   }
@@ -77,7 +80,7 @@ def campaignBuilder():
   for sia_name in dict_sia:
     sia_obj    = dict_sia[sia_name]
     start_val  = sia_obj['date']
-    if(start_val < TIME_START):
+    if(start_val < start_day):
       continue
 
     SIA_COVER  = 0.50
@@ -104,7 +107,7 @@ def campaignBuilder():
 
   # Add infectivity seasonality
   all_nodes  = [node_dict[val] for val in node_opts]
-  pdict      = {'startday':       TIME_START ,
+  pdict      = {'startday':       start_day ,
                 'nodes':          all_nodes ,
                 'peak_size':      PEAK_SIZE ,
                 'peak_wide':      PEAK_WIDE ,
