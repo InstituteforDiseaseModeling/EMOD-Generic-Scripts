@@ -24,11 +24,11 @@ def campaignBuilder():
   BASE_YEAR     = gdata.base_year
 
   # ***** Get variables for this simulation *****
-  PEAK_SIZE    = gdata.var_params['R0_peak_magnitude']
-  PEAK_TIME    = gdata.var_params['R0_peak_day']
-  PEAK_WIDE    = gdata.var_params['R0_peak_width']
   START_YEAR    = gdata.var_params['start_year']
 
+  PEAK_SIZE     = gdata.var_params['R0_peak_magnitude']
+  PEAK_TIME     = gdata.var_params['R0_peak_day']
+  PEAK_WIDE     = gdata.var_params['R0_peak_width']
 
 
   # ***** Events *****
@@ -98,9 +98,9 @@ def campaignBuilder():
 
     pdict     = {'startday':       start_val ,
                  'nodes':          node_list ,
-                 'agemin':         age_min ,
-                 'agemax':         age_max ,
-                 'coverage':       SIA_COVER*targ_frac }
+                 'agemin':           age_min ,
+                 'agemax':           age_max ,
+                 'coverage':   SIA_COVER*targ_frac }
 
     camp_module.add(IV_SIA(pdict))
 

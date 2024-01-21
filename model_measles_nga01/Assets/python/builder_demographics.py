@@ -44,12 +44,12 @@ def demographicsBuilder():
 
   # ***** Get variables for this simulation *****
   TIME_START   = gdata.start_time
-  SUB_LGA      = gdata.var_params['use_10k_res']
 
-  IND_RISK_VAR = gdata.var_params['ind_variance_risk']
+  SUB_LGA      = gdata.var_params['use_10k_res']
 
   R0           = gdata.var_params['R0']
   LOG10_IMP    = gdata.var_params['log10_import_rate']
+  IND_RISK_VAR = gdata.var_params['ind_variance_risk']
 
 
   PATH_OVERLAY = 'demog_overlay'
