@@ -69,9 +69,6 @@ param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 # Individual level risk variance (acquisition multiplier; mean = 1.0; log-normal distribution)
 param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.3
 
-# Abort sim if running for more than specified time in minutes
-param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
-
 # Base agent weight; less than 5 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
 

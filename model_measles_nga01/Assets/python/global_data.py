@@ -34,5 +34,8 @@ data_vec_time   = None
 data_vec_node   = None
 data_vec_mcw    = None
 
+
+max_clock       = 120.0
+
 #*******************************************************************************
 

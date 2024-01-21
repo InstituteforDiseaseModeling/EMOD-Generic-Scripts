@@ -34,6 +34,9 @@ def max_coeff_ref(exp_vals):
 
 def update_config_obj(config):
 
+  MAX_CLOCK      = gdata.max_clock
+  BASE_YEAR      = gdata.base_year
+
 
   # ***** Get variables for this simulation *****
   R0              = gdata.var_params['R0']
@@ -49,8 +52,6 @@ def update_config_obj(config):
   AGENT_RATE      = gdata.var_params['agent_rate']
 
   CORR_ACQ_TRANS  = gdata.var_params['corr_acq_trans']
-
-  MAX_CLOCK       = gdata.var_params['max_clock_minutes']
 
 
   # ***** Random number seed ****
