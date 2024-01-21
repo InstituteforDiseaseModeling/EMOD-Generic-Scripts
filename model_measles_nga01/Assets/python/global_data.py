@@ -5,7 +5,7 @@
 #********************************************************************************
 
 # Control params
-sim_index       = 0
+sim_index       = None
 var_params      = dict()
 schema_path     = 'Assets/schema.json'
 
