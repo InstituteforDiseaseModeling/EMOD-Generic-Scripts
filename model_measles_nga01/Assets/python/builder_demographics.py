@@ -44,10 +44,8 @@ def demographicsBuilder():
 
   # ***** Get variables for this simulation *****
   TIME_START   = gdata.start_time
-  PROC_DISPER  = gdata.var_params['proc_overdispersion']
   SUB_LGA      = gdata.var_params['use_10k_res']
 
-  NODE_R0_VAR  = gdata.var_params['node_variance_R0']
   IND_RISK_VAR = gdata.var_params['ind_variance_risk']
 
   R0           = gdata.var_params['R0']
@@ -98,11 +96,6 @@ def demographicsBuilder():
       imp_rate = imp_case*dict_pop[loc_name][0]/1.0e5
       node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate}
 
-      ln_r0_sig = np.sqrt(np.log(NODE_R0_VAR+1.0))
-      ln_r0_mu  = -0.5*ln_r0_sig*ln_r0_sig
-      R0_mult   = np.random.lognormal(mean=ln_r0_mu,sigma=ln_r0_sig)
-      node_obj.node_attributes.infectivity_multiplier = R0_mult
-
       node_list.append(node_obj)
 
 
@@ -139,7 +132,8 @@ def demographicsBuilder():
 
   demog_obj.raw['Defaults']['NodeAttributes'].clear()
   nadict = dict()
-  nadict['InfectivityOverdispersion']        = PROC_DISPER
+  nadict['InfectivityOverdispersion']        =   0.0
+  nadict['InfectivityMultiplier']            =   1.0
   demog_obj.raw['Defaults']['NodeAttributes'].update(nadict)
 
   demog_obj.raw['Defaults']['IndividualAttributes'].clear()

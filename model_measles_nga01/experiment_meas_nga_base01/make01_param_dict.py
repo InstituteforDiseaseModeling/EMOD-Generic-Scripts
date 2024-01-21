@@ -75,12 +75,6 @@ param_dict['EXP_CONSTANT']['max_clock_minutes']    =   120.0
 # Base agent weight; less than 5 may have memory issues
 param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
 
-# Nodel level R0 variance (log-normal distribution)
-param_dict['EXP_CONSTANT']['node_variance_R0']     =     0.0
-
-# Node level overdispersion; 0.0 = Poisson
-param_dict['EXP_CONSTANT']['proc_overdispersion']  =     0.0
-
 # Subdivide LGAs into 100km^2 regions
 param_dict['EXP_CONSTANT']['use_10k_res']          =   False
 
