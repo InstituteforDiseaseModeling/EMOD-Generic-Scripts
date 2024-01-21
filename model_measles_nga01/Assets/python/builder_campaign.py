@@ -116,13 +116,6 @@ def campaignBuilder():
   camp_module.add(IV_BumpR0(pdict))
 
 
-  # Add infectivity trough
-  #all_nodes  = [node_dict[val] for val in node_opts]
-  #pdict      = {'nodes':          all_nodes }
-
-  camp_module.add(IV_ReduceR0(pdict))
-
-
   #  ***** End file construction *****
   camp_module.save(filename=CAMP_FILENAME)
 
@@ -253,32 +246,6 @@ def IV_BumpR0(params=dict()):
 
   camp_iv01.Multiplier_By_Duration.Times      = [val[0] for val in xyvals]
   camp_iv01.Multiplier_By_Duration.Values     = [val[1] for val in xyvals]
-
-  return camp_event
-
-#********************************************************************************
-
-# Lower transmissibility during pandemic
-def IV_ReduceR0(params=dict()):
-
-  SCHEMA_PATH   =  gdata.schema_path
-
-  camp_event = s2c.get_class_with_defaults('CampaignEvent',             SCHEMA_PATH)
-  camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator',  SCHEMA_PATH)
-  camp_iv01  = s2c.get_class_with_defaults('NodeInfectivityMult',       SCHEMA_PATH)
-
-  node_set   = utils.do_nodes(SCHEMA_PATH, params['nodes'])
-
-  camp_event.Event_Coordinator_Config       = camp_coord
-  camp_event.Start_Day                      = 120.0*365.0
-  camp_event.Nodeset_Config                 = node_set
-
-  camp_coord.Intervention_Config            = camp_iv01
-  camp_coord.Number_Repetitions             =   1
-  camp_coord.Timesteps_Between_Repetitions  =   0.0
-
-  camp_iv01.Multiplier_By_Duration.Times      = [0.0*365.0, 2.0*365.0, 4.0*365.0]
-  camp_iv01.Multiplier_By_Duration.Values     = [0.75,      0.75,      1.0]
 
   return camp_event
 
