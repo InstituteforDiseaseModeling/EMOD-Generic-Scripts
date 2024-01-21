@@ -10,8 +10,6 @@ import global_data as gdata
 
 import numpy as np
 
-import numpy as np
-
 import emod_api.campaign     as     camp_module
 
 from emod_api                 import schema_to_class as s2c
