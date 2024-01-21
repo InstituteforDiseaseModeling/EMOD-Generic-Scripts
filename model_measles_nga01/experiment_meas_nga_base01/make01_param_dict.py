@@ -71,7 +71,7 @@ param_dict['EXP_CONSTANT']['corr_acq_trans']       =     0.9
 param_dict['EXP_CONSTANT']['ind_variance_risk']    =     0.3
 
 # Base agent weight; less than 5 may have memory issues
-param_dict['EXP_CONSTANT']['agent_rate']           =   12.0
+param_dict['EXP_CONSTANT']['agent_rate']           =  16.0
 
 # Subdivide LGAs into 100km^2 regions
 param_dict['EXP_CONSTANT']['use_10k_res']          =   False
