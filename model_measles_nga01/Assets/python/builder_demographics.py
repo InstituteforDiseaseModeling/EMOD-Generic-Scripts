@@ -43,7 +43,7 @@ def demographicsBuilder():
 
 
   # ***** Get variables for this simulation *****
-  TIME_START   = gdata.start_time
+  START_YEAR   = gdata.var_params['start_year']
 
   SUB_LGA      = gdata.var_params['use_10k_res']
 
@@ -212,9 +212,8 @@ def demographicsBuilder():
       node_name  = node_dict.name
       node_id    = node_dict.forced_id
       if(node_id in data_tup[2]):
-        start_year = TIME_START/365.0 + 1900
         ref_year   = ipop_time[loc_name]
-        mult_fac   = grow_rate**(start_year-ref_year)
+        mult_fac   = grow_rate**(START_YEAR-ref_year)
         new_pop    = int(mult_fac * node_dict.node_attributes.initial_population)
         node_dict.node_attributes.initial_population = new_pop
 
