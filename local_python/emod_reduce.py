@@ -32,7 +32,8 @@ ID_SCHEMA   =  'EMOD_SCHEMA.id'
 
 VE_PY_PATHS = ['/py_env/lib/python3.9/site-packages/',
                '/py_env/lib/python3.10/site-packages/',
-               '/py_env/lib/python3.11/site-packages/']
+               '/py_env/lib/python3.11/site-packages/',
+               '/py_env/lib/python3.12/site-packages/']
 
 
 #*******************************************************************************
