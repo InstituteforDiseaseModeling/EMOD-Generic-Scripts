@@ -66,7 +66,6 @@ def application(output_path):
   # Prep output dictionary
   key_str    = '{:05d}'.format(SIM_IDX)
   parsed_dat = {key_str: dict()}
-  calval_dat = {key_str: dict()}
 
 
   # Aggregate new infections to timeseries by month, by admin01
@@ -85,13 +84,6 @@ def application(output_path):
                                      weights = gdata.data_vec_mcw[rep_bool])
 
     parsed_dat[key_str][adm1_name] = inf_mo.tolist()
-
-
-  # Calibration score from timeseries data
-  #(obj_val, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
-
-  #calval_dat[key_str]              = float(obj_val)
-  #parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
 
 
   # Sample total population pyramid every year
@@ -113,6 +105,14 @@ def application(output_path):
   parsed_dat[key_str]['pyramid'] = pyr_dat.tolist()
 
 
+  # Calibration score from timeseries data
+  #(err_score, scal_vec) = norpois_opt([ref_dat], inf_mo[:len(ref_dat)])
+  err_score = 0
+
+  parsed_dat[key_str]['cal_val']   = float(err_score)
+  #parsed_dat[key_str]['rep_rate']  = float(scal_vec[0])
+
+
   # Common output data
   parsed_dat['tstamps'] = (np.diff(tstamps)/2.0 + tstamps[:-1]).tolist()
 
@@ -120,11 +120,6 @@ def application(output_path):
   # Write output dictionary
   with open('parsed_out.json','w') as fid01:
     json.dump(parsed_dat, fid01)
-
-
-  # Write calibration score
-  with open('calval_out.json','w') as fid01:
-    json.dump(calval_dat, fid01)
 
 
   return None
