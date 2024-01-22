@@ -32,6 +32,7 @@ def application(output_path):
 
   RUN_YEARS       = gdata.run_years
   BASE_YEAR       = gdata.base_year
+  TIME_STEP       = gdata.t_step_days
   START_LOG_TIME  = gdata.start_log_time
 
   SIM_IDX         = gdata.sim_index

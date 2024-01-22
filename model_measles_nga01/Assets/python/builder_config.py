@@ -36,6 +36,7 @@ def update_config_obj(config):
 
   MAX_CLOCK      = gdata.max_clock
   BASE_YEAR      = gdata.base_year
+  TIME_STEP      = gdata.t_step_days
 
 
   # ***** Get variables for this simulation *****
@@ -62,6 +63,7 @@ def update_config_obj(config):
   # ***** Time *****
   config.parameters.Start_Time                               = 365.0*(START_YEAR-BASE_YEAR)
   config.parameters.Simulation_Duration                      = 365.0*RUN_YEARS + 1.0
+  config.parameters.Simulation_Timestep                      = TIME_STEP
 
   config.parameters.Enable_Termination_On_Total_Wall_Time    =   1
   config.parameters.Wall_Time_Maximum_In_Minutes             = MAX_CLOCK
