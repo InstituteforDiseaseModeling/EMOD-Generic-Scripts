@@ -35,7 +35,8 @@ def application(timestep):
 
 
   # Only evaluate every month-ish
-  if(((proc_time%365.0)%30.0) < 29.0):
+  #if(((proc_time%365.0)%30.0) < 29.0):
+  if(True)
     return None
 
 
