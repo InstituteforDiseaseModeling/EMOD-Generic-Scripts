@@ -30,19 +30,19 @@ ref_dat   = []
 
 def application(output_path):
 
-  DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
-  BIN_EDGES = np.cumsum(15*DAY_BINS) + gdata.start_log + 0.5  # Hist for 15 years
-  BIN_EDGES = np.insert(BIN_EDGES, 0, gdata.start_log + 0.5)
+  RUN_YEARS       = gdata.run_years
+  BASE_YEAR       = gdata.base_year
+  START_LOG_TIME  = gdata.start_log_time
 
   SIM_IDX         = gdata.sim_index
   PREV_TIME       = gdata.prev_proc_time
   REP_MAP_DICT    = gdata.demog_node_map    # LGA Dotname:     [NodeIDs]
   NODEID_DICT     = gdata.demog_node        # Node Dotname:    ForcedID
-  TIME_START      = gdata.start_time
 
 
   # ***** Get variables for this simulation *****
-  TIME_DELTA      = gdata.var_params['num_tsteps']
+  START_YEAR      = gdata.var_params['start_year']
+  RUN_YEARS       = gdata.var_params['run_years']
 
 
   # Connect to SQL database; retreive new entries
@@ -68,11 +68,11 @@ def application(output_path):
   calval_dat = {key_str: dict()}
 
 
-  # Timestamps
-  time_vec = np.arange(TIME_START, TIME_START + TIME_DELTA)
-
-
   # Aggregate new infections to timeseries by month, by admin01
+  DAY_BINS  = [31,28,31,30,31,30,31,31,30,31,30,31]
+  BIN_EDGES = np.cumsum(15*DAY_BINS) + START_LOG_TIME + 0.5  # Hist for 15 years
+  BIN_EDGES = np.insert(BIN_EDGES, 0, START_LOG_TIME + 0.5)
+
   adm1_list  = list(set([val.rsplit(':',1)[0] for val in REP_MAP_DICT.keys()]))
   adm1_dict  = {adm1:[NODEID_DICT[val] for val in NODEID_DICT.keys() if val.startswith(adm1+':')]
                                        for adm1 in adm1_list}

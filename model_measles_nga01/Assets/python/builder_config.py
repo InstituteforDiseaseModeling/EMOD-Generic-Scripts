@@ -154,10 +154,13 @@ def update_config_obj(config):
 
 
   # ***** Reporting *****
+  START_LOG_TIME       = 365.0*(START_YEAR-BASE_YEAR+3.0)
+  gdata.start_log_time = START_LOG_TIME
+
   config.parameters.Enable_Default_Reporting                 =   1
   config.parameters.Enable_Demographics_Reporting            =   1
   config.parameters.Enable_Event_DB                          =   1
-  config.parameters.SQL_Start_Time                           = 365.0*(START_YEAR-BASE_YEAR+3.0)
+  config.parameters.SQL_Start_Time                           = START_LOG_TIME
   config.parameters.SQL_Events                               =   ["NewlySymptomatic"]
 
   config.parameters.Enable_Spatial_Output                    =   0
