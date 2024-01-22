@@ -86,21 +86,30 @@ def application(output_path):
     parsed_dat[key_str][adm1_name] = inf_mo.tolist()
 
 
-  # Sample total population pyramid every year
+  # Sample population pyramid at start, then every year
   with open(os.path.join(output_path,'DemographicsSummary.json')) as fid01:
     demog_output = json.load(fid01)
+
+  ds_start = demog_output['Header']['Start_Time']
+  ds_nstep = demog_output['Header']['Timesteps']
+  ds_tsize = demog_output['Header']['Simulation_Timestep']
+  time_vec = np.arange(ds_nstep)*ds_tsize + ds_start
+  nyr_bool = (np.diff(time_vec//365.0)>0.0)
 
   age_key_list = [   '<5',   '5-9', '10-14', '15-19', '20-24', '25-29',
                   '30-34', '35-39', '40-44', '45-49', '50-54', '55-59',
                   '60-64', '65-69', '70-74', '75-79', '80-84', '85-89',
                   '90-94', '95-99']
-  pyr_dat      = np.zeros((int(np.floor(TIME_DELTA/365.0))+1,len(age_key_list)))
+  pyr_dat      = np.zeros((int(RUN_YEARS)+1,len(age_key_list)))
 
   for k1 in range(len(age_key_list)):
     age_key_str = 'Population Age {:s}'.format(age_key_list[k1])
     age_vec_dat = np.array(demog_output['Channels'][age_key_str]['Data'])
     pyr_dat[0,  k1] = age_vec_dat[0]
-    pyr_dat[1:, k1] = age_vec_dat[364::365]
+    age_subset      = age_vec_dat[:-1][nyr_bool]
+    if(age_subset.shape[0] < int(RUN_YEARS)):
+      age_subset = np.append(age_subset, age_vec_dat[-1])
+    pyr_dat[1:, k1] = age_subset
 
   parsed_dat[key_str]['pyramid'] = pyr_dat.tolist()
 
