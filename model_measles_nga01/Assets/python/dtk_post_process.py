@@ -57,10 +57,12 @@ def application(output_path):
   data_time = np.array([val[0] for val in row_list], dtype = float)  # Time
   data_node = np.array([val[2] for val in row_list], dtype = int  )  # Node
   data_mcw  = np.array([val[4] for val in row_list], dtype = float)  # MCW
+  data_age  = np.array([val[5] for val in row_list], dtype = float)  # Age
 
   gdata.data_vec_time = np.append(gdata.data_vec_time, data_time)
   gdata.data_vec_node = np.append(gdata.data_vec_node, data_node)
   gdata.data_vec_mcw  = np.append(gdata.data_vec_mcw,  data_mcw)
+  gdata.data_vec_age  = np.append(gdata.data_vec_mcw,  data_age)
 
 
   # Prep output dictionary

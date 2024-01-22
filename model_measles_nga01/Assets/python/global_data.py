@@ -29,6 +29,7 @@ max_node_id     =    0
 data_vec_time   = None
 data_vec_node   = None
 data_vec_mcw    = None
+data_vec_age    = None
 
 base_year       = 1900.0
 t_step_days     =    1.0
