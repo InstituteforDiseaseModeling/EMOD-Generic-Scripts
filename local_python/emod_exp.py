@@ -68,6 +68,10 @@ def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
   # Add everything in the data assets directory as assets;
   task_obj.common_assets.add_directory(path_data, relative_path='data')
 
+  # Add everything in the common python scripts directory as assets;
+  PATH_COMMON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'py_assets_common')
+  task_obj.common_assets.add_directory(PATH_COMMON, relative_path='python')
+
   # Create simulation sweep with builder
   #   Odd syntax; sweep definition needs two args: sweep function and a list. The sweep function
   #   is called once for each item in the list. Here, the list is of a 2-tuple created by the
