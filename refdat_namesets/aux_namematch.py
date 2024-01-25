@@ -50,6 +50,7 @@ tlc_dict = \
   'ETH':'ETHIOPIA',
   'GBR':'UNITED_KINGDOM',
   'GHA':'GHANA',
+  'GNB':'GUINEA_BISSAU',
   'IND':'INDIA',
   'MYS':'MALAYSIA',
   'NGA':'NIGERIA',
