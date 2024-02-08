@@ -61,13 +61,13 @@ param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
 
 # Use constant vital dynamics
-param_dict['EXP_CONSTANT']['steady_state_demog']    =  True
+param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
 
 # Use SIAs
 param_dict['EXP_CONSTANT']['add_campaigns']         =  False
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            =  50000
+param_dict['EXP_CONSTANT']['num_agents']            =  75000
 
 
 
