@@ -74,18 +74,21 @@ def demographicsBuilder():
   node_list = list()
 
   gdata.init_pop  = int(np.sum(pop_init))
-  node_id         = 1
-  node_name       = '{:s}:A{:05d}'.format(DEMOG_SET,node_id)
   imp_rate        = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
+  max_node        = 25
 
-  node_obj = Node(lat         = 0.0,
-                  lon         = 0.0,
-                  pop         = gdata.init_pop,
-                  name        = node_name,
-                  forced_id   = node_id,
-                  area        = 0.0)
-  node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate}
-  node_list.append(node_obj)
+  for node_num in range(max_node):
+    node_id    = node_num + 1
+    node_name  = '{:s}:A{:05d}'.format(DEMOG_SET,node_id)
+
+    node_obj = Node(lat         = 0.0 + node_id  % 5,
+                    lon         = 0.0 + node_id // 5,
+                    pop         = int(gdata.init_pop)/max_node,
+                    name        = node_name,
+                    forced_id   = node_id,
+                    area        = 0.0)
+    node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate/max_node}
+    node_list.append(node_obj)
 
 
   # ***** Create primary file *****

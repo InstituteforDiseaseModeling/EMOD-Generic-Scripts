@@ -60,6 +60,10 @@ param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.7
 
+# Gravity model - network coefficeint
+param_dict['EXP_CONSTANT']['network_coefficient'] =     1.0e3
+param_dict['EXP_CONSTANT']['network_exponent']    =     4.0
+
 # Use constant vital dynamics
 param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
 

@@ -30,6 +30,9 @@ def update_config_obj(config):
   R0             = gdata.var_params['R0']
   INIT_AGENT     = gdata.var_params['num_agents']
 
+  NET_INF_COEF   = gdata.var_params['network_coefficient']
+  NET_INF_DPOW   = gdata.var_params['network_exponent']
+
 
   # ***** Random number seed *****
   config.parameters.Run_Number                                     = RUN_NUM
@@ -88,6 +91,18 @@ def update_config_obj(config):
   config.parameters.Enable_Acquisition_Heterogeneity               =    0
   config.parameters.Enable_Infection_Rate_Overdispersion           =    0
   config.parameters.Enable_Infectivity_Reservoir                   =    1
+
+
+  # ***** Network *****
+  config.parameters.Enable_Network_Infectivity                     =    1
+
+  config.parameters.Network_Infectivity_Max_Export_Frac            =    0.1  # Maximum export fraction (definitely less than 0.5)
+  config.parameters.Network_Infectivity_Min_Connection             =    0.0  # Threshold to truncate effect to zero
+  config.parameters.Network_Infectivity_Min_Distance               =    1.0  # Min distance in km
+
+  # Uses a gravity-type model:  connection ~= coefficient / distance ^ exponent
+  config.parameters.Network_Infectivity_Coefficient                =   [NET_INF_COEF]
+  config.parameters.Network_Infectivity_Exponent                   =   [NET_INF_DPOW]
 
 
   # ***** Adapted sampling *****
