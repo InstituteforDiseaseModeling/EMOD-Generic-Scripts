@@ -87,7 +87,9 @@ def demographicsBuilder():
                     name        = node_name,
                     forced_id   = node_id,
                     area        = 0.0)
-    node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate/max_node}
+    node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate/max_node,
+                                                 'InfectivityMultiplier':                  1.0,
+                                                 'RIRateMultiplier':                       1.0}
     node_list.append(node_obj)
 
 

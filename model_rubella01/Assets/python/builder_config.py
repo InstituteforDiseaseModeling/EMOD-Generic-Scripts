@@ -91,6 +91,7 @@ def update_config_obj(config):
   config.parameters.Enable_Acquisition_Heterogeneity               =    0
   config.parameters.Enable_Infection_Rate_Overdispersion           =    0
   config.parameters.Enable_Infectivity_Reservoir                   =    1
+  config.parameters.Enable_Infectivity_Scaling                     =    1
 
 
   # ***** Network *****

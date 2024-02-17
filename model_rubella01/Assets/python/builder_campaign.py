@@ -32,6 +32,7 @@ def campaignBuilder():
   BR_MULT_Y     = gdata.brate_mult_y
   RI_OFFSET     = gdata.ri_offset
 
+  DEMOG_OBJECT  = gdata.demog_object
 
   # ***** Get variables for this simulation *****
   ADD_SIA       = gdata.var_params['add_campaigns']
@@ -44,15 +45,17 @@ def campaignBuilder():
 
   # Add RI
   start_ri  = 365.0*(START_YEAR-BASE_YEAR+RI_OFFSET)
-  ri_yvals  = np.minimum(np.array(RI_YVEC)*RI_RATE,1.0).tolist()
-  ri_xvals  = ((np.array(RI_XVEC)-(START_YEAR+RI_OFFSET))*365.0).tolist()
+  for node_obj in DEMOG_OBJECT.nodes:
+    mod_ri_rate = RI_RATE * node_obj.node_attributes.extra_attributes['RIRateMultiplier']
+    ri_yvals    = np.minimum(np.array(RI_YVEC)*mod_ri_rate,1.0).tolist()
+    ri_xvals    = ((np.array(RI_XVEC)-(START_YEAR+RI_OFFSET))*365.0).tolist()
 
-  pdict     = {'startday':        start_ri ,
-               'nodes':          ALL_NODES ,
-               'x_vals':          ri_xvals ,
-               'y_vals':          ri_yvals }
+    pdict       = {'startday':             start_ri ,
+                   'nodes':    [node_obj.forced_id] ,
+                   'x_vals':               ri_xvals ,
+                   'y_vals':               ri_yvals }
 
-  camp_module.add(IV_MCV1(pdict))
+    camp_module.add(IV_MCV1(pdict))
 
 
   # Add SIAs
