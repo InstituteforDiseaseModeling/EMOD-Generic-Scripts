@@ -34,6 +34,11 @@ def reprule(revval):
   revval = revval.replace(')',    '')
   revval = revval.replace('\x00', '')
 
+  # Remove everything else
+  revval = revval.encode('ascii', 'replace')
+  revval = revval.decode()
+  revval = revval.replace('?',    '')
+
   while(revval.count('__')):
     revval = revval.replace('__','_')
   revval = revval.strip('_')
