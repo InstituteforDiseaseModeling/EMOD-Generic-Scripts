@@ -19,8 +19,7 @@ EX_VAL = -1.0e10
 # Paths
 PATH_PYTHON   = os.path.abspath(os.path.join('Assets','python'))
 PATH_DATA     = os.path.abspath(os.path.join('Assets','data'))
-PATH_ENV      = os.path.abspath(os.path.join('Assets','EMOD_ENV.id'))
-PATH_EXE      = os.path.abspath(os.path.join('Assets','EMOD_EXE.id'))
+PATH_EXE      = os.path.abspath(os.path.join('Assets'))
 
 
 def calibration_daemon():
@@ -86,7 +85,7 @@ def calibration_daemon():
       json.dump(param_dict_new, fid01)
 
     # Create experiment object
-    exp_obj_new = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_ENV, PATH_EXE, PATH_DATA)
+    exp_obj_new = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_EXE, PATH_DATA)
 
     # Send experiment to COMPS; start processing; wait until done
     plat_obj.run_items(exp_obj_new)
