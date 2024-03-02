@@ -84,6 +84,24 @@ def application(output_path):
   parsed_dat[key_str]['inf_data'] = inf_dat.tolist()
 
 
+  # Monthly timeseries by age and location
+  DAY_BINS    = [31,28,31,30,31,30,31,31,30,31,30,31]
+  START_TIME  = 365.0*(START_YEAR-BASE_YEAR)
+  BIN_EDGES   = np.cumsum(int(RUN_YEARS)*DAY_BINS) + START_TIME + 0.5
+  BIN_EDGES   = np.insert(BIN_EDGES, 0, START_TIME + 0.5)
+  NODE_NUMS   = [node_obj.forced_id for node_obj in gdata.demog_object.nodes]
+
+  inf_nodes   = np.zeros((len(BIN_EDGES)-1,len(pop_age_days)-1,len(NODE_NUMS)))
+  for k1 in range(inf_nodes.shape[1]):
+    for k2 in range(inf_nodes.shape[2]):
+      idx = (data_vec_age >= pop_age_days[k1]) & (data_vec_age < pop_age_days[k1+1]) & (data_vec_node == NODE_NUMS[k2])
+      (inf_mo, tstamps) = np.histogram(data_vec_time[idx],
+                                       bins    = BIN_EDGES,
+                                       weights = data_vec_mcw[idx])
+      inf_nodes[:,k1,k2] = inf_mo
+  parsed_dat[key_str]['inf_nodes'] = inf_nodes.tolist()
+
+
   # Retain annualized count of births; store in a json dict
   with open(os.path.join(output_path,'InsetChart.json')) as fid01:
     inset_chart = json.load(fid01)
