@@ -73,10 +73,10 @@ def demographicsBuilder():
   # ***** Populate nodes in primary file *****
   node_list = list()
 
-  gdata.init_pop  = int(np.sum(pop_init))
+  gdata.init_pop  = 1000000 #int(np.sum(pop_init))/2.0
   node_id         = 1
   node_name       = '{:s}:A{:05d}'.format(DEMOG_SET,node_id)
-  imp_rate        = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
+  imp_rate        = gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
 
   node_obj = Node(lat         = 0.0,
                   lon         = 0.0,

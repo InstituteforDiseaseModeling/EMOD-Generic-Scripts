@@ -30,7 +30,7 @@ fert_set = fert_set/1000.0 # births/woman/year
 
 
 DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
-            'experiment_sweepRI_popEQL_noSIAs_impHI' ]
+            'experiment_sweepRI_popEQL_noSIAs_impHI']
 
 
 for dirname in DIRNAMES:
@@ -106,7 +106,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
 
-  axs01.set_xlim(2020, 2050)
+  axs01.set_xlim(2020, 2060)
   axs01.set_ylim( 0.0,  5.0)
 
   axs01.set_yticks(ticks=np.arange(0,5.1,0.5))
@@ -134,10 +134,10 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_ylabel('Probability: 2040 to 2050', fontsize=16)
+  axs01.set_ylabel('Probability: 2050 to 2060', fontsize=16)
   axs01.set_xlabel('Annual CRS Burden per 1k Births', fontsize=16)
 
-  xmaxv = 16
+  xmaxv = 10
   xbinv =  0.1
   axs01.set_xlim(0.0, xmaxv)
   axs01.set_ylim(0.0, 10.0)

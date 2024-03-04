@@ -29,10 +29,8 @@ fert_set = fert_set/1000.0 # births/woman/year
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_SIAs'         ,
-            'experiment_sweepRI_popMED_noSIAs'       ,
-            'experiment_sweepRI_popEQL_noSIAs'       ,
-            'experiment_sweepRI_popEQL_noSIAs_impHI' ]
+DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
+            'experiment_sweepRI_popEQL_noSIAs_impHI']
 
 
 for dirname in DIRNAMES:
@@ -108,7 +106,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual Rubella Infections per 100k', fontsize=16)
 
-  axs01.set_xlim(2020, 2050)
+  axs01.set_xlim(2020, 2060)
   axs01.set_ylim(   0, 6000)
 
   axs01.set_yticks(ticks=np.arange(0,6001,1000))
@@ -136,7 +134,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
 
-  axs01.set_xlim(2020, 2050)
+  axs01.set_xlim(2020, 2060)
   axs01.set_ylim( 0.0,  5.0)
 
   axs01.set_yticks(ticks=np.arange(0,5.1,0.5))

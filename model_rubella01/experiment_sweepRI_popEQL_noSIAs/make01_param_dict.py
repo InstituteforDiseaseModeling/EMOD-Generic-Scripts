@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'Rubella01-DemogSteadyState'
-param_dict['NUM_SIMS']     =  4500
+param_dict['NUM_SIMS']     = 12500
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -40,25 +40,25 @@ NSIMS = param_dict['NUM_SIMS']
 
 param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 
-# Infectivity
-param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
-
 # RI rate for MR
-param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], size=NSIMS).tolist()
+param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.5, 0.6, 0.7, 0.8], size=NSIMS).tolist()
 
 
 
 # ***** Constants for this experiment *****
 
 # Context
-param_dict['EXP_CONSTANT']['demog_set']             =  'COD'
+param_dict['EXP_CONSTANT']['demog_set']             =  'SSA'
+
+# Infectivity
+param_dict['EXP_CONSTANT']['R0']                    =      5.0
 
 # RI rate multiplier for MR
 param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
-param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year; RI starts in 2020; linear interpolation
+param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2025.0, 2060.0]   # Year; RI starts in 2020; linear interpolation
 
 # Log10 of multiplier on exogeneous case importation
-param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
+param_dict['EXP_CONSTANT']['log10_import_mult']     =     -0.2
 
 # Use constant vital dynamics
 param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
@@ -67,7 +67,7 @@ param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
 param_dict['EXP_CONSTANT']['add_campaigns']         =  False
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            =  75000
+param_dict['EXP_CONSTANT']['num_agents']            =  50000
 
 
 
