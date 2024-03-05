@@ -164,9 +164,9 @@ def demographicsBuilder():
   mort_mat[-2:   , :]   = MAX_DAILY_MORT
 
   if(SS_DEMOG):
-    mort_year = [mort_year[0]]
-    mort_mat  = mort_mat[:,0]
-    mort_mat  = mort_mat[...,np.newaxis]
+    mort_vec  = np.array([np.interp(year_init, mort_year, mort_mat[idx,:]) for idx in range(mort_mat.shape[0])])
+    mort_year = [year_init]
+    mort_mat  = mort_vec[:,np.newaxis]
     (grow_rate, age_x, age_y) = demoCalc_AgeDist(birth_rate, mort_vec_X, mort_mat[:,0].tolist())
 
 
