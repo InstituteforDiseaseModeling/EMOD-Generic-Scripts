@@ -55,7 +55,7 @@ param_dict['EXP_CONSTANT']['R0']                    =      5.0
 
 # RI rate multiplier for MR
 param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
-param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2025.0, 2060.0]   # Year; RI starts in 2020; linear interpolation
+param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2025.0, 2070.0]   # Year; RI starts in 2020; linear interpolation
 
 # Log10 of multiplier on exogeneous case importation
 param_dict['EXP_CONSTANT']['log10_import_mult']     =     -0.1

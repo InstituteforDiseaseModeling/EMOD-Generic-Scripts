@@ -26,11 +26,22 @@ for k1 in range(fert_set.shape[0]):
   fert_set[k1,:] = np.interp(XDAT, fert_yr, fert_mat[k1,:])
 fert_set = fert_set/1000.0 # births/woman/year
 
+
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
-            'experiment_sweepRI_popEQL_noSIAs_impHI']
+def smooth(y_in, box_pts):
+    box = np.ones(box_pts)/box_pts
+    y_out = np.convolve(y_in, box, mode='same')
+
+    return y_out
+
+
+#*******************************************************************************
+
+
+DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs']#,
+            #'experiment_sweepRI_popEQL_noSIAs_impHI']
 
 
 for dirname in DIRNAMES:
@@ -106,7 +117,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual Rubella Infections per 100k', fontsize=16)
 
-  axs01.set_xlim(2020, 2060)
+  axs01.set_xlim(2000, 2070)
   axs01.set_ylim(   0, 6000)
 
   axs01.set_yticks(ticks=np.arange(0,6001,1000))
@@ -134,7 +145,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
 
-  axs01.set_xlim(2020, 2060)
+  axs01.set_xlim(2000, 2070)
   axs01.set_ylim( 0.0,  5.0)
 
   axs01.set_yticks(ticks=np.arange(0,5.1,0.5))
@@ -147,6 +158,7 @@ for dirname in DIRNAMES:
     crs_mat     = inf_mat_avg*np.transpose(crs_prob_vec)
     ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
     xdat        = np.arange(start_year, start_year+run_years) + 0.5
+    ydat        = ydat#smooth(ydat, 8)
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 
