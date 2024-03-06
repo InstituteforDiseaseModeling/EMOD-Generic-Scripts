@@ -1,10 +1,10 @@
-FROM almalinux:9.2-minimal
+FROM almalinux:9.3
 #
-RUN microdnf upgrade -y
+RUN dnf upgrade -y
 #
-RUN microdnf -y install python
-RUN microdnf -y install python-pip
-RUN microdnf clean all
+RUN dnf -y install python
+RUN dnf -y install python-pip
+RUN dnf clean all
 #
 RUN pip install pip          --upgrade
 RUN pip install emodpy==1.22 --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
