@@ -40,6 +40,9 @@ NSIMS = param_dict['NUM_SIMS']
 
 param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
 
+# Infectivity
+param_dict['EXP_VARIABLE']['R0']           = (1.0 + np.random.gamma(16.0, scale=0.25, size=NSIMS)).tolist()
+
 # RI rate for MR
 param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.5, 0.6, 0.7, 0.8], size=NSIMS).tolist()
 
@@ -50,8 +53,7 @@ param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.5, 0.6, 0.
 # Context
 param_dict['EXP_CONSTANT']['demog_set']             =  'SSA'
 
-# Infectivity
-param_dict['EXP_CONSTANT']['R0']                    =      5.0
+
 
 # RI rate multiplier for MR
 param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
@@ -67,7 +69,7 @@ param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
 param_dict['EXP_CONSTANT']['add_campaigns']         =  False
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            = 100000
+param_dict['EXP_CONSTANT']['num_agents']            =  50000
 
 
 

@@ -56,7 +56,7 @@ def demographicsBuilder():
   R0           = gdata.var_params['R0']
   LOG10_IMP    = gdata.var_params['log10_import_mult']
   SS_DEMOG     = gdata.var_params['steady_state_demog']
-  DEMOG_SET    = gdata.var_params['demog_set']  
+  DEMOG_SET    = gdata.var_params['demog_set']
 
 
   # ***** Load reference data *****
@@ -64,7 +64,7 @@ def demographicsBuilder():
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec  = pop_input[0,:]  - BASE_YEAR
-  year_init = START_YEAR      - BASE_YEAR
+  year_init = START_YEAR      - BASE_YEAR + 20.0
   pop_mat   = pop_input[1:,:] + 0.1
 
   pop_init  = [np.interp(year_init, year_vec, pop_mat[idx,:]) for idx in range(pop_mat.shape[0])]
