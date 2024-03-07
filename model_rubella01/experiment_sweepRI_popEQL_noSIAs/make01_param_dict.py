@@ -24,7 +24,7 @@ import numpy as np
 param_dict = dict()
 
 param_dict['EXP_NAME']     = 'Rubella01-DemogSteadyState'
-param_dict['NUM_SIMS']     = 12500
+param_dict['NUM_SIMS']     = 50000
 param_dict['EXP_VARIABLE'] = dict()
 param_dict['EXP_CONSTANT'] = dict()
 
@@ -69,7 +69,7 @@ param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
 param_dict['EXP_CONSTANT']['add_campaigns']         =  False
 
 # Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            =  50000
+param_dict['EXP_CONSTANT']['num_agents']            =  40000
 
 
 

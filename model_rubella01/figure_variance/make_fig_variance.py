@@ -114,7 +114,7 @@ for dirname in DIRNAMES:
   axs01.tick_params(axis='x', labelsize=16)
 
   for ri_val in ri_lev:
-    if(ri_val not in [0.0, 0.7]):
+    if(ri_val not in [0.0, 0.6]):
       continue
     gidx        = (ri_vec==ri_val) & fidx
     inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
@@ -138,7 +138,7 @@ for dirname in DIRNAMES:
   axs01.set_xlabel('Annual CRS Burden per 1k Births', fontsize=16)
 
   xmaxv = 10
-  xbinv =  0.1
+  xbinv =  0.25
   axs01.set_xlim(0.0, xmaxv)
   axs01.set_ylim(0.0, 10.0)
   axs01.set_yscale('symlog', linthresh=0.1)
@@ -147,7 +147,7 @@ for dirname in DIRNAMES:
   axs01.tick_params(axis='y', labelsize=16)
 
   for ri_val in ri_lev:
-    if(ri_val not in [0.0, 0.7]):
+    if(ri_val not in [0.0, 0.6]):
       continue
     gidx        = (ri_vec==ri_val) & fidx
     inf_mat_sub = inf_mat[gidx,:,:]
