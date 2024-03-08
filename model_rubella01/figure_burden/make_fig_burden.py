@@ -5,6 +5,7 @@ import os, json, sys
 sys.path.append(os.path.join('..','Assets','python'))
 
 import numpy               as np
+import matplotlib          as mpl
 import matplotlib.pyplot   as plt
 
 from global_data          import start_year, run_years
@@ -35,6 +36,16 @@ def smooth(y_in, box_pts):
     y_out = np.convolve(y_in, box, mode='same')
 
     return y_out
+
+
+#*******************************************************************************
+
+
+mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=['tab:blue',
+                                                    'tab:green',
+                                                    'tab:orange',
+                                                    'tab:red',
+                                                    'tab:purple'])
 
 
 #*******************************************************************************
@@ -117,7 +128,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual Rubella Infections per 100k', fontsize=16)
 
-  axs01.set_xlim(2000, 2070)
+  axs01.set_xlim(2020, 2060)
   axs01.set_ylim(   0, 6000)
 
   axs01.set_yticks(ticks=np.arange(0,6001,1000))
@@ -129,6 +140,7 @@ for dirname in DIRNAMES:
     inf_mat_avg = np.mean(inf_mat[gidx,:,:],axis=0)
     ydat        = np.sum(inf_mat_avg,axis=1)/pop_tot*1e5
     xdat        = np.arange(start_year, start_year+run_years) + 0.5
+    ydat        = smooth(ydat, 2)
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 
@@ -143,9 +155,9 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
+  axs01.set_ylabel('Annual Burden per 1k Births', fontsize=16)
 
-  axs01.set_xlim(2000, 2070)
+  axs01.set_xlim(2020, 2060)
   axs01.set_ylim( 0.0,  5.0)
 
   axs01.set_yticks(ticks=np.arange(0,5.1,0.5))
@@ -158,7 +170,7 @@ for dirname in DIRNAMES:
     crs_mat     = inf_mat_avg*np.transpose(crs_prob_vec)
     ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
     xdat        = np.arange(start_year, start_year+run_years) + 0.5
-    ydat        = ydat#smooth(ydat, 8)
+    ydat        = smooth(ydat, 2)
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)))
 

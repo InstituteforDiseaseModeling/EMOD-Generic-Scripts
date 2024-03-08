@@ -53,8 +53,6 @@ param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.5, 0.6, 0.
 # Context
 param_dict['EXP_CONSTANT']['demog_set']             =  'SSA'
 
-
-
 # RI rate multiplier for MR
 param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
 param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2025.0, 2070.0]   # Year; RI starts in 2020; linear interpolation

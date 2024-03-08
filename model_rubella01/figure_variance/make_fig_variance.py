@@ -29,8 +29,18 @@ fert_set = fert_set/1000.0 # births/woman/year
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
-            'experiment_sweepRI_popEQL_noSIAs_impHI']
+def smooth(y_in, box_pts):
+    box = np.ones(box_pts)/box_pts
+    y_out = np.convolve(y_in, box, mode='same')
+
+    return y_out
+
+
+#*******************************************************************************
+
+
+DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs']#,
+            #'experiment_sweepRI_popEQL_noSIAs_impHI']
 
 
 for dirname in DIRNAMES:
@@ -104,7 +114,7 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_ylabel('Annual CRS Burden per 1k Births', fontsize=16)
+  axs01.set_ylabel('Annual Burden per 1k Births', fontsize=16)
 
   axs01.set_xlim(2020, 2060)
   axs01.set_ylim( 0.0,  5.0)
@@ -121,6 +131,7 @@ for dirname in DIRNAMES:
     crs_mat     = inf_mat_avg*np.transpose(crs_prob_vec)
     ydat        = np.sum(crs_mat,axis=1)/birth_vec*norm_crs_timevec*1e3
     xdat        = np.arange(start_year, start_year+run_years) + 0.5
+    ydat        = smooth(ydat, 2)
 
     axs01.plot(xdat,ydat,label='RI = {:3d}%'.format(int(100*ri_val)),
                          color='C{:d}'.format(ri_lev.index(ri_val)))
@@ -134,13 +145,13 @@ for dirname in DIRNAMES:
   axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
   axs01.set_axisbelow(True)
 
-  axs01.set_ylabel('Probability: 2050 to 2060', fontsize=16)
-  axs01.set_xlabel('Annual CRS Burden per 1k Births', fontsize=16)
+  axs01.set_ylabel('Bruden Probability: 2050 to 2060', fontsize=16)
+  axs01.set_xlabel('Annual Burden per 1k Births', fontsize=16)
 
-  xmaxv = 10
-  xbinv =  0.25
+  xmaxv =  8.0
+  xbinv =  0.1
   axs01.set_xlim(0.0, xmaxv)
-  axs01.set_ylim(0.0, 10.0)
+  axs01.set_ylim(0.0, 6.0)
   axs01.set_yscale('symlog', linthresh=0.1)
 
   axs01.tick_params(axis='x', labelsize=16)
@@ -153,7 +164,7 @@ for dirname in DIRNAMES:
     inf_mat_sub = inf_mat[gidx,:,:]
     crs_mat     = inf_mat_sub*np.transpose(crs_prob_vec)
     ydat        = np.sum(crs_mat,axis=2)/birth_vec*norm_crs_timevec*1e3
-    ydat        = ydat[:,-10:].flatten()
+    ydat        = ydat[:,-20:-10].flatten()
     axs01.hist(ydat, bins=np.arange(0,xmaxv+xbinv,xbinv)-ri_val/20, density=True, alpha=0.7,
                      label='RI = {:3d}%'.format(int(100*ri_val)),
                      color='C{:d}'.format(ri_lev.index(ri_val)))
