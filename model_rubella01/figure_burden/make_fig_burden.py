@@ -51,8 +51,10 @@ mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=['tab:blue',
 #*******************************************************************************
 
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs']#,
-            #'experiment_sweepRI_popEQL_noSIAs_impHI']
+DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs_subpop']#,
+            #'experiment_sweepRI_popEQL_noSIAs_R0p',
+            #'experiment_sweepRI_popEQL_noSIAs_R0n',
+            #'experiment_sweepRI_popMED_noSIAs']
 
 
 for dirname in DIRNAMES:

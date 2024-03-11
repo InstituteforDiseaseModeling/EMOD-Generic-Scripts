@@ -34,7 +34,8 @@ pop_age_days = [     0,    1825,    3650,    5475,    7300,    9125,
                  21900,   23725,   25550,   27375,   29200,   31025,
                  32850,   34675,   36500]
 
-MAX_DAILY_MORT   = 0.01
+MAX_DAILY_MORT   =       0.01
+TOT_POP_BASIS    = 1000000
 
 #********************************************************************************
 
@@ -64,28 +65,32 @@ def demographicsBuilder():
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec  = pop_input[0,:]  - BASE_YEAR
-  year_init = START_YEAR      - BASE_YEAR# + 20.0
+  year_init = START_YEAR      - BASE_YEAR + 20.0
   pop_mat   = pop_input[1:,:] + 0.1
 
   pop_init  = [np.interp(year_init, year_vec, pop_mat[idx,:]) for idx in range(pop_mat.shape[0])]
+
+  gdata.init_pop  = TOT_POP_BASIS
 
 
   # ***** Populate nodes in primary file *****
   node_list = list()
 
-  gdata.init_pop  = 1000000 #int(np.sum(pop_init))/2.0
-  node_id         = 1
-  node_name       = '{:s}:A{:05d}'.format(DEMOG_SET,node_id)
-  imp_rate        = gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
+  max_node  = 4
+  imp_rate  = TOT_POP_BASIS * 1.615e-7 * np.power(10.0, LOG10_IMP)
 
-  node_obj = Node(lat         = 0.0,
-                  lon         = 0.0,
-                  pop         = gdata.init_pop,
-                  name        = node_name,
-                  forced_id   = node_id,
-                  area        = 0.0)
-  node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate}
-  node_list.append(node_obj)
+  for node_num in range(max_node):
+    node_id    = node_num + 1
+    node_name  = '{:s}:A{:05d}'.format(DEMOG_SET,node_id)
+
+    node_obj = Node(lat         = 0.0 + node_id  % 4,
+                    lon         = 0.0 + node_id // 4,
+                    pop         = int(TOT_POP_BASIS/max_node),
+                    name        = node_name,
+                    forced_id   = node_id,
+                    area        = 0.0)
+    node_obj.node_attributes.extra_attributes = {'InfectivityReservoirSize': imp_rate/max_node}
+    node_list.append(node_obj)
 
 
   # ***** Create primary file *****
