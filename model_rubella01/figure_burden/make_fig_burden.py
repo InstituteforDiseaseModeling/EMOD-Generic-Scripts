@@ -16,7 +16,7 @@ from global_data          import start_year, run_years
 XDAT     = np.arange(start_year, start_year+int(run_years)) + 0.5
 
 # Load UN WPP fertility distribution data
-fname    = os.path.join('..','Assets','data','fert_dat_COD.csv')
+fname    = os.path.join('..','Assets','data','fert_dat_SSA.csv')
 fert_dat = np.loadtxt(fname,delimiter=',')
 fert_yr  = fert_dat[0, :]
 fert_mat = fert_dat[1:,:]
@@ -52,6 +52,7 @@ mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=['tab:blue',
 
 
 DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs_subpop']#,
+            #'experiment_sweepRI_popEQL_noSIAs_subpop']#,
             #'experiment_sweepRI_popEQL_noSIAs_R0p',
             #'experiment_sweepRI_popEQL_noSIAs_R0n',
             #'experiment_sweepRI_popMED_noSIAs']
@@ -100,12 +101,13 @@ for dirname in DIRNAMES:
   tot_fem = np.transpose((np.diff(pyr_mat_avg,axis=0)/2.0 + pyr_mat_avg[:-1,:])/2.0)
   fertopt = fert_set
   if(ss_demog):
-    fertopt = fert_set[:,0]
-    fertopt = fertopt[:,np.newaxis]
+    year_idx = np.argwhere(np.round(XDAT)==2020)[0]
+    fertopt  = fert_set[:,year_idx]
   fert_births = np.sum(fertopt*tot_fem,axis=0)
 
   # Normalize timeseries required for CRS calculation
   norm_crs_timevec = birth_vec/fert_births
+
 
   # Calculate CRS probabilities
   crs_prob_vec  = np.ones(fertopt.shape)     # P = 1
@@ -130,7 +132,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual Rubella Infections per 100k', fontsize=16)
 
-  axs01.set_xlim(2020, 2060)
+  #axs01.set_xlim(2020, 2060)
   axs01.set_ylim(   0, 6000)
 
   axs01.set_yticks(ticks=np.arange(0,6001,1000))
@@ -159,7 +161,7 @@ for dirname in DIRNAMES:
 
   axs01.set_ylabel('Annual Burden per 1k Births', fontsize=16)
 
-  axs01.set_xlim(2020, 2060)
+  #axs01.set_xlim(2020, 2060)
   axs01.set_ylim( 0.0,  5.0)
 
   axs01.set_yticks(ticks=np.arange(0,5.1,0.5))

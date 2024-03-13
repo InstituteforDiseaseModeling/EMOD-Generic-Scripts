@@ -65,7 +65,7 @@ def demographicsBuilder():
   pop_input = np.loadtxt(fname_pop, dtype=int, delimiter=',')
 
   year_vec  = pop_input[0,:]  - BASE_YEAR
-  year_init = START_YEAR      - BASE_YEAR + 20.0
+  year_init = START_YEAR      - BASE_YEAR + 40.0
   pop_mat   = pop_input[1:,:] + 0.1
 
   pop_init  = [np.interp(year_init, year_vec, pop_mat[idx,:]) for idx in range(pop_mat.shape[0])]
