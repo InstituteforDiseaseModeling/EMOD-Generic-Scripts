@@ -1,152 +1,143 @@
-#*******************************************************************************
+# *****************************************************************************
 #
-#*******************************************************************************
-
-import os, copy
+# *****************************************************************************
 
 import numpy as np
 
-#*******************************************************************************
+# *****************************************************************************
+
 
 def next_point_alg(gen_param, sum_data, ex_val):
 
-  # Control parameters
-  radFrac  = 0.10 #0.35
-  dimReq   = 6    #3
-  frac_opt = 0.95
+    # Control parameters
+    radFrac = 0.10  # 0.35
+    dimReq = 6  # 3
+    frac_opt = 0.95
 
+    # Local copy of parameters
+    NUM_SIMS = gen_param['NUM_SIMS']
+    nSampOpt = int(frac_opt*NUM_SIMS)
+    nSampRand = NUM_SIMS - nSampOpt
 
-  # Local copy of parameters
-  NUM_SIMS   =  gen_param['NUM_SIMS']
-  nSampOpt   =  int(frac_opt*NUM_SIMS)
-  nSampRand  =  NUM_SIMS - nSampOpt
+    pNames = gen_param['VAR_NAMES']
+    pRanges = gen_param['VAR_RANGES']
+    nDim = len(pNames)
 
-  pNames     =  gen_param['VAR_NAMES']
-  pRanges    =  gen_param['VAR_RANGES']
-  nDim       =  len(pNames)
+    # Get summary values
+    LLVec = np.array(sum_data['OBJ_FUN'])
 
+    # Prep output parameter dictionary
+    paramDic = dict()
+    for pName in pNames:
+        paramDic[pName] = list()
 
-  # Get summary values
-  LLVec   = np.array(sum_data['OBJ_FUN'])
+    # Vectorize data
+    datVec = np.transpose(np.array([sum_data[pName] for pName in pNames]))
+    datMin = np.array([pRange[0] for pRange in pRanges])
+    datMax = np.array([pRange[1] for pRange in pRanges])
+    datSpan = datMax-datMin
 
+    # Exclude out of range samples
+    if (nDim > 0):
+        inVec = np.logical_and(np.all(datVec > datMin, axis=1),
+                               np.all(datVec < datMax, axis=1))
+        LLVec = LLVec[inVec]
+        datVec = datVec[inVec]
 
-  # Prep output parameter dictionary
-  paramDic = dict()
-  for pName in pNames:
-    paramDic[pName] = list()
+    # Copies of input/output
+    datVecExt = np.copy(datVec)
+    LLVecSamp = np.copy(LLVec)
 
+    # Bubble bobble
+    while (nSampOpt > 0):
 
-  # Vectorize data
-  datVec  = np.transpose(np.array([sum_data[pName] for pName in pNames]))
-  datMin  = np.array([pRange[0] for pRange in pRanges])
-  datMax  = np.array([pRange[1] for pRange in pRanges])
-  datSpan = datMax-datMin
+        # Apportion sample
+        nsOpt = min(dimReq*nDim, nSampOpt)
+        nSampOpt = nSampOpt - nsOpt
 
+        # Attribute point density
+        stillThinking = True
+        while (stillThinking):
 
-  # Exclude out of range samples
-  if(nDim>0):
-    inVec  = np.logical_and(np.all(datVec>datMin,axis=1),
-                            np.all(datVec<datMax,axis=1))
-    LLVec  = LLVec[inVec]
-    datVec = datVec[inVec]
+            # No place left to optimize
+            if (len(LLVecSamp) == 0 or np.max(LLVecSamp) == ex_val):
+                nSampRand = nSampRand + nSampOpt + nsOpt
+                nSampOpt = 0
+                nsOpt = 0
+                break
 
+            # Choose best current point
+            cPointOld = datVecExt[np.argmax(LLVecSamp), :]
 
-  # Copies of input/output 
-  datVecExt = np.copy(datVec)
-  LLVecSamp = np.copy(LLVec)
+            # Calculate sample density around best point
+            distVec = np.linalg.norm((datVecExt-cPointOld)/datSpan, axis=1)
+            localVec = datVecExt[(distVec <= radFrac), :]
 
+            # Evaluate local point density
+            if (localVec.shape[0] >= dimReq*nDim):
+                # Sufficient point density; extrapolate
+                ones_vec = np.ones((localVec.shape[0], 1))
+                A = np.hstack((localVec/datSpan, ones_vec))
+                b = LLVecSamp[(distVec <= radFrac)]
+                x = np.linalg.lstsq(A, b, rcond=None)[0][:-1]
+                xN = 2.0*x/np.linalg.norm(x)
+                cPointNew = cPointOld + xN*(radFrac*datSpan)
 
-  # Bubble bobble
-  while(nSampOpt > 0):
+                # Create exclusion zone around old center
+                LLVecSamp[(distVec <= radFrac)] = ex_val
 
-    # Apportion sample
-    nsOpt = min(dimReq*nDim,nSampOpt)
-    nSampOpt = nSampOpt - nsOpt
+                # Truncate target center
+                cPointNew = np.maximum(cPointNew, datMin)
+                cPointNew = np.minimum(cPointNew, datMax)
 
-    # Attribute point density
-    stillThinking = True
-    while(stillThinking):
+                # Calculate sample density around target center
+                distVec = np.linalg.norm((datVecExt-cPointNew)/datSpan, axis=1)
+                localVec = datVecExt[(distVec <= radFrac), :]
 
-      # No place left to optimize
-      if(len(LLVecSamp) == 0 or np.max(LLVecSamp)==ex_val):
-        nSampRand = nSampRand + nSampOpt + nsOpt
-        nSampOpt  = 0
-        nsOpt     = 0
-        break
+                # Evaluate local point density
+                if (localVec.shape[0] >= dimReq*nDim):
+                    # Already sampled; go somewhere else
+                    pass
+                else:
+                    # Good target region
+                    stillThinking = False
 
-      # Choose best current point
-      cPointOld = datVecExt[np.argmax(LLVecSamp),:]
+            else:
+                # Insufficient point density; no extrapolation
+                cPointNew = cPointOld
+                stillThinking = False
 
-      # Calculate sample density around best point
-      distVec  = np.linalg.norm((datVecExt-cPointOld)/datSpan,axis=1)
-      localVec = datVecExt[(distVec<=radFrac),:]
+        # Sample locally
+        if (nsOpt):
+            optSamp = np.random.randn(nsOpt, nDim)
+            optSamp = optSamp/np.linalg.norm(optSamp, axis=1)[:, None]
+            rnd_vec = np.random.rand(nsOpt, 1)
+            optSamp = optSamp*np.power(rnd_vec, 1.0/float(nDim))
+            optSamp = optSamp*(datSpan*radFrac)
+            optSamp = optSamp+cPointNew
 
-      # Evaluate local point density
-      if(localVec.shape[0] >= dimReq*nDim):
-        # Sufficient point density; extrapolate
-        A  = np.hstack((localVec/datSpan,np.ones((localVec.shape[0],1))))
-        b  = LLVecSamp[(distVec<=radFrac)]
-        x  = np.linalg.lstsq(A,b,rcond=None)[0][:-1]
-        xN = 2.0*x/np.linalg.norm(x)
-        cPointNew = cPointOld + xN*(radFrac*datSpan)
+            # Truncate local samples
+            optSamp = np.maximum(optSamp, datMin)
+            optSamp = np.minimum(optSamp, datMax)
 
-        # Create exclusion zone around old center
-        LLVecSamp[(distVec<=radFrac)] = ex_val
+            # Attach new samples
+            datVecExt = np.vstack((datVecExt, optSamp))
+            LLVecSamp = np.append(LLVecSamp, nsOpt*[ex_val])
 
-        # Truncate target center
-        cPointNew = np.maximum(cPointNew,datMin)
-        cPointNew = np.minimum(cPointNew,datMax)
+            # Copy to output dictionary
+            for k1 in range(nDim):
+                paramDic[pNames[k1]].extend((optSamp[:, k1]).tolist())
 
-        # Calculate sample density around target center
-        distVec  = np.linalg.norm((datVecExt-cPointNew)/datSpan,axis=1)
-        localVec = datVecExt[(distVec<=radFrac),:]
+    # Add some random global samples
+    randSamp = np.random.rand(nSampRand, nDim)
+    randSamp = randSamp*datSpan
+    randSamp = randSamp+datMin
 
-        # Evaluate local point density
-        if(localVec.shape[0] >= dimReq*nDim):
-          # Already sampled; go somewhere else
-          pass
-        else:
-          # Good target region
-          stillThinking = False
+    # Copy to output dictionary
+    for k1 in range(nDim):
+        paramDic[pNames[k1]].extend((randSamp[:, k1]).tolist())
 
-      else:
-        # Insufficient point density; no extrapolation
-        cPointNew = cPointOld
-        stillThinking = False
+    # Return next parameter set
+    return paramDic
 
-    # Sample locally
-    if(nsOpt):
-      optSamp = np.random.randn(nsOpt,nDim)
-      optSamp = optSamp/np.linalg.norm(optSamp,axis=1)[:,None]
-      optSamp = optSamp*np.power(np.random.rand(nsOpt,1),1.0/float(nDim))
-      optSamp = optSamp*(datSpan*radFrac)
-      optSamp = optSamp+cPointNew
-
-      # Truncate local samples
-      optSamp = np.maximum(optSamp,datMin)
-      optSamp = np.minimum(optSamp,datMax)
-
-      # Attach new samples
-      datVecExt = np.vstack((datVecExt,optSamp))
-      LLVecSamp = np.append(LLVecSamp, nsOpt*[ex_val])
-
-      # Copy to output dictionary
-      for k1 in range(nDim):
-        paramDic[pNames[k1]].extend((optSamp[:,k1]).tolist())
-
-
-  # Add some random global samples
-  randSamp = np.random.rand(nSampRand,nDim)
-  randSamp = randSamp*datSpan
-  randSamp = randSamp+datMin
-
-
-  # Copy to output dictionary
-  for k1 in range(nDim):
-    paramDic[pNames[k1]].extend((randSamp[:,k1]).tolist())
-
-
-  # Return next parameter set
-  return paramDic
-
-#*******************************************************************************
+# *****************************************************************************
