@@ -19,14 +19,16 @@ from emod_api import __version__ as API_CUR
 
 # *****************************************************************************
 
+API_MIN = '1.30.0'
+PFILE = 'param_dict.json'
+I_FILE = 'idx_str_file.txt'
+EXP_C = 'EXP_CONSTANT'
+EXP_V = 'EXP_VARIABLE'
+
+# *****************************************************************************
+
 
 def standard_pre_process():
-
-    API_MIN = '1.30.0'
-    PFILE = 'param_dict.json'
-    I_FILE = 'idx_str_file.txt'
-    EXP_C = 'EXP_CONSTANT'
-    EXP_V = 'EXP_VARIABLE'
 
     # Declare current version of emod-api; check min version
     print('Using emod-api {:s}'.format(API_CUR))
