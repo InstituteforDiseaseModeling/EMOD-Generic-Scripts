@@ -22,6 +22,7 @@ from COMPS.Data.Simulation import SimulationState
 
 DOCK_PACK = r'docker-production-public.packages.idmod.org/emodpy/'
 DOCK_PACK = DOCK_PACK + r'comps_ssmt_worker:latest'
+
 PARAM_DICT = 'param_dict.json'
 DATA_BRICK = 'data_brick.json'
 FILENAME_PY = 'emod_reduce.py'

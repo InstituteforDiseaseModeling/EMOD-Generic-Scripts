@@ -1,74 +1,96 @@
-#*******************************************************************************
+# *****************************************************************************
 
-import numpy               as np
-import matplotlib.pyplot   as plt
+import json
+import os
+import sys
 
-#*******************************************************************************
+import numpy as np
+import matplotlib.pyplot as plt
 
-N        = 1000
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import EXP_V, NUM_SIMS, P_FILE
 
+# *****************************************************************************
 
-# Figure
-fig01 = plt.figure(figsize=(12,9))
+N = 1000
+DIRNAME = 'experiment_covariance01'
 
-axs00 = fig01.add_subplot(111)
-axs00.spines['top'].set_color('none')
-axs00.spines['bottom'].set_color('none')
-axs00.spines['left'].set_color('none')
-axs00.spines['right'].set_color('none')
-axs00.tick_params(labelcolor='w', top=False, bottom=False, left=False, right=False)
-
-#axs00.set_title('')
-
-rep_set  = [ 221, 222, 223, 224]
-inf_set  = [ 0.5, 0.5, 0.388, 0.137]
-acq_set  = [ 0.0, 0.5, 0.5,   0.5  ]
-cor_set  = [ 0.0, 0.0, 0.4,   0.8  ]
-clr_set  = [ 0,   1,   2,     3    ]
+# *****************************************************************************
 
 
-for k1 in range(len(rep_set)):
-  axs01 = fig01.add_subplot(rep_set[k1],label=None)
-  plt.sca(axs01)
+def make_fig():
 
-  axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
-  axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
-  axs01.set_axisbelow(True)
+    # Sim outputs
+    tpath = os.path.join('..', DIRNAME)
 
-  axs01.set_xlabel('Acquision Rate Multiplier')
-  axs01.set_ylabel('Transmission Rate Multiplier')
+    with open(os.path.join(tpath, P_FILE)) as fid01:
+        p_dict = json.load(fid01)
 
-  axs01.set_xlim(0,6)
-  axs01.set_ylim(0,6)
+    N_SIMS = p_dict[NUM_SIMS]
+    R0_VAR = np.round(np.array(p_dict[EXP_V]['R0_variance']), 2)
+    ACQ_VAR = np.round(np.array(p_dict[EXP_V]['indiv_variance_acq']), 2)
+    COR_VAL = np.round(np.array(p_dict[EXP_V]['correlation_acq_trans']), 2)
+    INF_VAR = N_SIMS*[0.50]
 
-  R0_VAR   = inf_set[k1]
-  AQ_VAR   = acq_set[k1]
-  rho      = cor_set[k1]
+    p_tuple = [(COR_VAL[k1], ACQ_VAR[k1], INF_VAR[k1], R0_VAR[k1])
+               for k1 in range(N_SIMS)]
+    p_tuple = sorted(list(set(p_tuple)))
 
-  R0_LN_SIG   = np.sqrt(np.log(R0_VAR+1.0))
-  R0_LN_MU    = -0.5*R0_LN_SIG*R0_LN_SIG
+    # Figure
+    fig01 = plt.figure(figsize=(12, 9))
 
-  ACQ_LN_SIG  = np.sqrt(np.log(AQ_VAR+1.0))
-  ACQ_LN_MU   = -0.5*ACQ_LN_SIG*ACQ_LN_SIG
+    axs00 = fig01.add_subplot(1, 1, 1)
+    axs00.spines['top'].set_color('none')
+    axs00.spines['bottom'].set_color('none')
+    axs00.spines['left'].set_color('none')
+    axs00.spines['right'].set_color('none')
+    axs00.tick_params(labelcolor='w', top=False, bottom=False,
+                      left=False, right=False)
 
-  risk_vec   = np.random.lognormal(mean=ACQ_LN_MU, sigma=ACQ_LN_SIG, size=N)
-  inf_vec    = np.random.lognormal(mean=R0_LN_MU,  sigma=R0_LN_SIG,  size=N)
-  corr_vec   = inf_vec*(1 + rho*(risk_vec - 1))
+    for k1 in range(len(p_tuple)):
+        axs01 = fig01.add_subplot(2, 2, k1+1, label=None)
+        plt.sca(axs01)
 
-  #print(np.mean(risk_vec),np.var(risk_vec))
-  #print(np.mean(inf_vec), np.var(inf_vec))
-  #print(np.mean(corr_vec),np.var(corr_vec))
-  #print()
-  #print(np.cov(risk_vec,corr_vec))
-  #print()
-  #print()
+        axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+        axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
+        axs01.set_axisbelow(True)
 
-  axs01.plot(risk_vec,corr_vec,marker='.',lw=0.0,color='C{:d}'.format(clr_set[k1]))
+        axs01.set_xlabel('Acquision Rate Multiplier')
+        axs01.set_ylabel('Transmission Rate Multiplier')
+
+        axs01.set_xlim(0, 6)
+        axs01.set_ylim(0, 6)
+
+        R0_VAR = p_tuple[k1][3]
+        AQ_VAR = p_tuple[k1][1]
+        rho = p_tuple[k1][0]
+
+        R0_LN_SIG = np.sqrt(np.log(R0_VAR+1.0))
+        R0_LN_MU = -0.5*R0_LN_SIG*R0_LN_SIG
+
+        ACQ_LN_SIG = np.sqrt(np.log(AQ_VAR+1.0))
+        ACQ_LN_MU = -0.5*ACQ_LN_SIG*ACQ_LN_SIG
+
+        risk_vec = np.random.lognormal(mean=ACQ_LN_MU,
+                                       sigma=ACQ_LN_SIG, size=N)
+        inf_vec = np.random.lognormal(mean=R0_LN_MU,
+                                      sigma=R0_LN_SIG, size=N)
+        corr_vec = inf_vec*(1 + rho*(risk_vec - 1))
+
+        axs01.plot(risk_vec, corr_vec, marker='.',
+                   lw=0.0, c='C{:d}'.format(k1))
+
+    plt.tight_layout()
+    plt.savefig('fig_distributions01.png')
+    plt.close()
+
+# *****************************************************************************
 
 
-plt.tight_layout()
-plt.savefig('fig_distributions01.png')
-plt.close()
+if (__name__ == "__main__"):
 
+    make_fig()
 
-#*******************************************************************************
+# *****************************************************************************

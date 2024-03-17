@@ -8,7 +8,7 @@ import time
 
 import global_data as gdata
 
-from builder_config import configBuilder
+from builder_config import update_config_obj
 from builder_demographics import demographicsBuilder
 from builder_campaign import campaignBuilder
 from builder_dlls import dllcBuilder
@@ -17,13 +17,26 @@ import numpy as np
 
 from emod_api import __version__ as API_CUR
 
+from emod_api.config import default_from_schema_no_validation as dfs
+
+from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V
+
 # *****************************************************************************
 
-API_MIN = '1.30.0'
-PFILE = 'param_dict.json'
-I_FILE = 'idx_str_file.txt'
-EXP_C = 'EXP_CONSTANT'
-EXP_V = 'EXP_VARIABLE'
+
+def configBuilder():
+
+    SPATH = gdata.schema_path
+
+    default_conf = dfs.get_default_config_from_schema(SPATH, as_rod=True)
+
+    # Probably ought to be an emod-api call
+    config_obj = update_config_obj(default_conf)
+    config_obj.parameters.finalize()
+    with open(C_FILE, 'w') as fid01:
+        json.dump(config_obj, fid01, sort_keys=True, indent=4)
+
+    return C_FILE
 
 # *****************************************************************************
 
@@ -51,7 +64,7 @@ def standard_pre_process():
     param_paths = ['.', 'Assets']
 
     for ppath in param_paths:
-        pfileopt = os.path.join(ppath, PFILE)
+        pfileopt = os.path.join(ppath, P_FILE)
         if (os.path.exists(pfileopt)):
             with open(pfileopt) as fid01:
                 param_dict = json.load(fid01)
@@ -59,7 +72,7 @@ def standard_pre_process():
 
     # Validation checks on parameter dictionary file
     if (not param_dict):
-        raise Exception('No {:s} found'.format(PFILE))
+        raise Exception('No {:s} found'.format(P_FILE))
 
     names_variable = set(param_dict[EXP_V].keys())
     names_constant = set(param_dict[EXP_C].keys())

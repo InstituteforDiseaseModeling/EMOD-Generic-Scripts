@@ -1,76 +1,84 @@
-#********************************************************************************
+# *****************************************************************************
 #
-#********************************************************************************
+# *****************************************************************************
 
 import json
+import os
+import sys
 
 import numpy as np
 
-#*******************************************************************************
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_NAME, NUM_SIMS
+
+# *****************************************************************************
 
 # This script makes a json dictionary that is used by the pre-processing script
 # in EMOD. Variable names defined here will be available to use in creating
-# the input files. Please don't change the variable name for 'EXP_NAME' or
-# for 'NUM_SIMS' because those are also used in scripts outside of EMOD.
+# the input files.
 
 # The pre-process script will open the json dict created by this method. For
-# everything in the 'EXP_VARIABLE' key, that script will assume a list and
-# get a value from that list based on the sim index. For everything in the 
-# 'EXP_CONSTANT' key, it will assume a single value and copy that value.
+# everything with the EXP_V key, that script will assume a list and get a value
+# from that list based on the sim index. For everything with the EXP_C key, it
+# will assume a single value and copy that value.
 
 
+def write_param_dict():
 
-# ***** Setup *****
-param_dict = dict()
+    # Setup
+    param_dict = dict()
 
-param_dict['EXP_NAME']     = 'CovarainceDemo01'
-param_dict['NUM_SIMS']     =  1500
-param_dict['EXP_VARIABLE'] = dict()
-param_dict['EXP_CONSTANT'] = dict()
+    param_dict[EXP_NAME] = 'CovarainceDemo01'
+    param_dict[NUM_SIMS] = 1500
+    param_dict[EXP_V] = dict()
+    param_dict[EXP_C] = dict()
 
-# Random number consistency
-np.random.seed(4)
+    # Random number consistency
+    np.random.seed(4)
 
-# Convenience naming
-NSIMS = param_dict['NUM_SIMS']
+    # Convenience naming
+    NSIMS = param_dict[NUM_SIMS]
+    P_VAR = param_dict[EXP_V]
+    P_CON = param_dict[EXP_C]
 
+    # Coordinated levels
+    p_levels = [[0.5, 0.5, 0.388, 0.137],
+                [0.0, 0.5, 0.500, 0.500],
+                [0.0, 0.0, 0.400, 0.800]]
+    rand_lev = np.random.randint(0, len(p_levels[0]), size=NSIMS).tolist()
 
+    # Run number (EMOD random seed)
+    P_VAR['run_number'] = list(range(NSIMS))
 
-# ***** Specify sim-variable parameters *****
+    # R0 values for tranmssion
+    P_VAR['R0'] = np.random.uniform(low=0.50, high=1.75, size=NSIMS).tolist()
 
-p_levels = [[  0.5,   0.5,   0.388, 0.137],
-            [  0.0,   0.5,   0.5,   0.5  ],
-            [  0.0,   0.0,   0.4,   0.8  ]]
-rand_lev = np.random.randint(0,len(p_levels[0]),size=NSIMS).tolist()
+    # R0 variance; (log-normal distribution)
+    P_VAR['R0_variance'] = [p_levels[0][val] for val in rand_lev]
 
-param_dict['EXP_VARIABLE']['run_number']             =     list(range(NSIMS))
+    # Individual acquisition variance; (mean=1.0; log-normal distribution)
+    P_VAR['indiv_variance_acq'] = [p_levels[1][val] for val in rand_lev]
 
-# R0 values for tranmssion
-param_dict['EXP_VARIABLE']['R0']                     =     np.random.uniform(low= 0.50,high= 1.75, size=NSIMS).tolist()
+    # Acquision-transmission correlation
+    P_VAR['correlation_acq_trans'] = [p_levels[2][val] for val in rand_lev]
 
-# R0 variance; (log-normal distribution)
-param_dict['EXP_VARIABLE']['R0_variance']            =     [p_levels[0][val] for val in rand_lev]
+    # Number of days for simulation
+    P_CON['num_tsteps'] = 1000.0
 
-# Individual level acquisition variance; (mean = 1.0; log-normal distribution)
-param_dict['EXP_VARIABLE']['indiv_variance_acq']     =     [p_levels[1][val] for val in rand_lev]
+    # Write parameter dictionary
+    with open('param_dict.json', 'w') as fid01:
+        json.dump(param_dict, fid01)
 
-# Acquision-transmission correlation;
-param_dict['EXP_VARIABLE']['correlation_acq_trans']  =     [p_levels[2][val] for val in rand_lev]
-
-
-
-# ***** Constants for this experiment *****
-
-# Number of days for simulation;
-param_dict['EXP_CONSTANT']['num_tsteps']           =  1000.0
-
-
-
-# ***** Write parameter dictionary *****
-
-with open('param_dict.json','w') as fid01:
-  json.dump(param_dict,fid01)
+    return None
 
 
+# *****************************************************************************
 
-#*******************************************************************************
+
+if (__name__ == "__main__"):
+
+    write_param_dict()
+
+# *****************************************************************************
