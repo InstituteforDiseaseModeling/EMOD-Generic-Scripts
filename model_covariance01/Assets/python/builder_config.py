@@ -16,10 +16,8 @@ def update_config_obj(config):
     # Variables for this simulation
     RUN_NUM = gdata.var_params['run_number']
     TIME_DELTA = gdata.var_params['num_tsteps']
-
     R0 = gdata.var_params['R0']
     R0_VAR = gdata.var_params['R0_variance']
-
     CORR_ACQ_TRANS = gdata.var_params['correlation_acq_trans']
 
     # Config parameters object (read only dictionary)

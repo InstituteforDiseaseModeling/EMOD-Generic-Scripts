@@ -6,32 +6,31 @@
 
 import global_data as gdata
 
-
 from emod_api.demographics.Demographics import Demographics, Node
+
+# *****************************************************************************
+
+DEMOG_FILENAME = 'demographics.json'
 
 # *****************************************************************************
 
 
 def demographicsBuilder():
 
-    DEMOG_FILENAME = 'demographics.json'
-
-    # ***** Get variables for this simulation *****
+    # Variables for this simulation
     IND_RISK_VAR = gdata.var_params['indiv_variance_acq']
 
-    # ***** Populate nodes in primary file *****
-
+    # Populate nodes in primary file
     node_list = list()
-
     node_obj = Node(lat=0.0, lon=0.0, pop=100000,
                     name='CATAN:001', forced_id=1)
     node_list.append(node_obj)
 
-    # ***** Create primary file *****
+    # Create primary file
     ref_name = 'Example_Covariance_Sims'
     demog_obj = Demographics(nodes=node_list, idref=ref_name)
 
-    # ***** Update defaults in primary file ****
+    # Update defaults in primary file
     demog_obj.raw['Defaults']['IndividualAttributes'].clear()
     demog_obj.raw['Defaults']['NodeAttributes'].clear()
 
@@ -40,7 +39,7 @@ def demographicsBuilder():
 
     demog_obj.raw['Defaults']['IndividualAttributes'].update(iadict)
 
-    # ***** Write primary demographics file *****
+    # Write primary demographics file
     demog_obj.generate_file(name=DEMOG_FILENAME)
 
     # Save filename to global data for use in other functions

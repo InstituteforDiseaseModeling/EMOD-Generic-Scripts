@@ -14,9 +14,8 @@ import numpy as np
 
 def application(output_path):
 
-    SIM_IDX = gdata.sim_index
-
     # Prep output dictionary
+    SIM_IDX = gdata.sim_index
     key_str = '{:05d}'.format(SIM_IDX)
     parsed_dat = {key_str: dict()}
 

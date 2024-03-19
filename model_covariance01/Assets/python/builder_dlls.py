@@ -13,8 +13,6 @@ import global_data as gdata
 
 def dllcBuilder():
 
-    REPORTS_FILENAME = gdata.reports_file
-
     # Get variables for this simulation
     # N/A
 
@@ -28,6 +26,7 @@ def dllcBuilder():
     # N/A
 
     #  Write file
+    REPORTS_FILENAME = gdata.reports_file
     with open(REPORTS_FILENAME, 'w') as fid01:
         json.dump(json_set, fid01, sort_keys=True, indent=4)
 
