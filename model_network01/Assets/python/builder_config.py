@@ -1,118 +1,87 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Builds a config file for input to the DTK.
+# Configuration file for simulation.
 #
-#********************************************************************************
-
-import os, sys, json
+# *****************************************************************************
 
 import global_data as gdata
 
-import numpy as np
+# *****************************************************************************
 
-from emod_api.config import default_from_schema_no_validation as dfs
-
-#********************************************************************************
 
 def update_config_obj(config):
 
-  # ***** Get variables for this simulation *****
-  RUN_NUM        = gdata.var_params['run_number']
-  TIME_DELTA     = gdata.var_params['num_tsteps']
+    # Variables for this simulation
+    RUN_NUM = gdata.var_params['run_number']
+    TIME_DELTA = gdata.var_params['num_tsteps']
 
-  NET_INF_COEF   = gdata.var_params['network_coefficient']
-  NET_INF_DPOW   = gdata.var_params['network_exponent']
-  MAX_FRAC       = gdata.var_params['max_export']
-  MIN_CONNECT    = gdata.var_params['min_connect']
+    NET_INF_COEF = gdata.var_params['network_coefficient']
+    NET_INF_DPOW = gdata.var_params['network_exponent']
+    MAX_FRAC = gdata.var_params['max_export']
+    MIN_CONNECT = gdata.var_params['min_connect']
 
+    # Config parameters object (read only dictionary)
+    cp = config.parameters
 
-  # ***** Random number seed ****
-  config.parameters.Run_Number                                     = RUN_NUM
+    # Random number seed
+    cp.Run_Number = RUN_NUM
 
+    # Time
+    cp.Start_Time = 0.0
+    cp.Simulation_Duration = TIME_DELTA
 
-  # ***** Time *****
-  config.parameters.Start_Time                                     =    0.0
-  config.parameters.Simulation_Duration                            = TIME_DELTA
+    cp.Enable_Termination_On_Zero_Total_Infectivity = 1
+    cp.Minimum_End_Time = 50.0
 
-  config.parameters.Enable_Termination_On_Zero_Total_Infectivity   =    1
-  config.parameters.Minimum_End_Time                               =   50.0
+    # Intrahost
+    cp.Base_Infectivity_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Base_Infectivity_Constant = 0.5
 
+    cp.Incubation_Period_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Incubation_Period_Constant = 3.0
 
-  # ***** Intrahost *****
-  config.parameters.Base_Infectivity_Distribution                  = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Constant                      =    0.5
+    cp.Infectious_Period_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Infectious_Period_Constant = 3.0
 
-  config.parameters.Incubation_Period_Distribution                 = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Incubation_Period_Constant                     =    3.0
+    config.parameters.Enable_Disease_Mortality = 0
 
-  config.parameters.Infectious_Period_Distribution                 = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Infectious_Period_Constant                     =    3.0
+    # Interventions
+    cp.Enable_Network_Infectivity = 1
+    cp.Network_Infectivity_Max_Export_Frac = MAX_FRAC
+    cp.Network_Infectivity_Min_Connection = MIN_CONNECT
 
-  config.parameters.Enable_Disease_Mortality                       =    0
+    cp.Network_Infectivity_Coefficient = [NET_INF_COEF]
+    cp.Network_Infectivity_Exponent = [NET_INF_DPOW]
 
+    # Immunity
+    cp.Enable_Immunity = 1
+    cp.Enable_Immune_Decay = 0
 
-  # ***** Interventions *****
-  config.parameters.Enable_Network_Infectivity                     =    1
-  config.parameters.Network_Infectivity_Max_Export_Frac            = MAX_FRAC
-  config.parameters.Network_Infectivity_Min_Connection             = MIN_CONNECT
+    cp.Post_Infection_Acquisition_Multiplier = 0.0
+    cp.Post_Infection_Transmission_Multiplier = 0.0
+    cp.Post_Infection_Mortality_Multiplier = 0.0
 
-  config.parameters.Network_Infectivity_Coefficient                =   [NET_INF_COEF]
-  config.parameters.Network_Infectivity_Exponent                   =   [NET_INF_DPOW]
+    # Interventions *****
+    cp.Enable_Interventions = 1
+    cp.Campaign_Filename = gdata.camp_file
 
+    # Adapted sampling
+    cp.Individual_Sampling_Type = 'TRACK_ALL'
 
-  # ***** Immunity *****
-  config.parameters.Enable_Immunity                                =    1
-  config.parameters.Enable_Immune_Decay                            =    0
+    # Demographic parameters
+    cp.Enable_Demographics_Builtin = 1
 
-  config.parameters.Post_Infection_Acquisition_Multiplier          =    0.0
-  config.parameters.Post_Infection_Transmission_Multiplier         =    0.0
-  config.parameters.Post_Infection_Mortality_Multiplier            =    0.0
+    cp.Default_Geography_Initial_Node_Population = 1000
+    cp.Default_Geography_Torus_Size = 25
 
+    cp.Enable_Vital_Dynamics = 0
 
-  # ***** Interventions *****
-  config.parameters.Enable_Interventions                           =    1
-  config.parameters.Campaign_Filename                              = gdata.camp_file
+    # Reporting
+    cp.Enable_Default_Reporting = 1
+    cp.Enable_Spatial_Output = 1
+    cp.Spatial_Output_Channels = ["New_Infections"]
+    cp.Custom_Reports_Filename = gdata.reports_file
 
+    return config
 
-  # ***** Adapted sampling *****
-  config.parameters.Individual_Sampling_Type                       = 'TRACK_ALL'
-
-
-  # ***** Demographic parameters *****
-  config.parameters.Enable_Demographics_Builtin                    =    1
-
-  config.parameters.Default_Geography_Initial_Node_Population      = 1000
-  config.parameters.Default_Geography_Torus_Size                   =   25
-
-  config.parameters.Enable_Vital_Dynamics                          =    0
-
-
-  # ***** Reporting *****
-  config.parameters.Enable_Default_Reporting                       =    1
-  config.parameters.Enable_Spatial_Output                          =    1
-  config.parameters.Spatial_Output_Channels                        = ["New_Infections"]
-
-  config.parameters.Custom_Reports_Filename                        = gdata.reports_file
-
-
-  return config
-
-#********************************************************************************
-
-def configBuilder():
-
-  FILE_CONFIG  =  'config.json'
-  SCHEMA_PATH  =  gdata.schema_path
-
-  default_conf = dfs.get_default_config_from_schema(SCHEMA_PATH,as_rod=True)
-
-  # Probably ought to be an emod-api call
-  config_obj = update_config_obj(default_conf);
-  config_obj.parameters.finalize()
-  with open(FILE_CONFIG, 'w') as fid01:
-    json.dump(config_obj, fid01, sort_keys=True, indent=4)
-
-
-  return FILE_CONFIG
-
-#********************************************************************************
+# *****************************************************************************

@@ -1,70 +1,82 @@
-#********************************************************************************
+# *****************************************************************************
 #
-#********************************************************************************
+# *****************************************************************************
 
 import json
+import os
+import sys
 
 import numpy as np
 
-#*******************************************************************************
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_NAME, NUM_SIMS
+
+# *****************************************************************************
 
 # This script makes a json dictionary that is used by the pre-processing script
 # in EMOD. Variable names defined here will be available to use in creating
-# the input files. Please don't change the variable name for 'EXP_NAME' or
-# for 'NUM_SIMS' because those are also used in scripts outside of EMOD.
+# the input files.
 
 # The pre-process script will open the json dict created by this method. For
-# everything in the 'EXP_VARIABLE' key, that script will assume a list and
-# get a value from that list based on the sim index. For everything in the 
-# 'EXP_CONSTANT' key, it will assume a single value and copy that value.
+# everything with the EXP_V key, that script will assume a list and get a value
+# from that list based on the sim index. For everything with the EXP_C key, it
+# will assume a single value and copy that value.
 
 
+def write_param_dict():
 
-# ***** Setup *****
-param_dict = dict()
+    # Setup
+    param_dict = dict()
 
-param_dict['EXP_NAME']     = 'NetworkInfectivityDemo01'
-param_dict['NUM_SIMS']     =   100
-param_dict['EXP_VARIABLE'] = dict()
-param_dict['EXP_CONSTANT'] = dict()
+    param_dict[EXP_NAME] = 'NetworkInfectivityDemo01'
+    param_dict[NUM_SIMS] = 25
+    param_dict[EXP_V] = dict()
+    param_dict[EXP_C] = dict()
 
-# Random number consistency
-np.random.seed(4)
+    # Random number consistency
+    np.random.seed(4)
 
-# Convenience naming
-NSIMS = param_dict['NUM_SIMS']
+    # Convenience naming
+    NSIMS = param_dict[NUM_SIMS]
+    P_VAR = param_dict[EXP_V]
+    P_CON = param_dict[EXP_C]
 
+    # Run number (EMOD random seed)
+    P_VAR['run_number'] = list(range(NSIMS))
 
+    # Gravity model - network coefficeint
+    P_VAR['network_coefficient'] = np.random.choice([1.0e1,
+                                                     1.0e2,
+                                                     1.0e3,
+                                                     1.0e4],
+                                                    size=NSIMS).tolist()
 
-# ***** Specify sim-variable parameters *****
+    # Number of days for simulation
+    P_CON['num_tsteps'] = 2000.0
 
-param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
+    # Gravity model - network power
+    P_CON['network_exponent'] = 4.0
 
-# Gravity model - network coefficeint
-param_dict['EXP_VARIABLE']['network_coefficient'] =  np.random.choice([1.0e1, 1.0e2, 1.0e3, 1.0e4], p=[0.25, 0.25, 0.25, 0.25], size=NSIMS).tolist()
+    # Max node export fraction
+    P_CON['max_export'] = 0.1
 
+    # Threshold for edge truncation to zero
+    P_CON['min_connect'] = 1.0e-8
 
+    # Write parameter dictionary
+    with open('param_dict.json', 'w') as fid01:
+        json.dump(param_dict, fid01)
 
-# ***** Constants for this experiment *****
-
-# Number of days for simulation
-param_dict['EXP_CONSTANT']['num_tsteps']          =  2000.0
-
-# Gravity model - network power
-param_dict['EXP_CONSTANT']['network_exponent']    =     4.0
-
-# Max node export fraction
-param_dict['EXP_CONSTANT']['max_export']          =     0.1
-
-# Max node export fraction
-param_dict['EXP_CONSTANT']['min_connect']         =     1.0e-8
-
-
-# ***** Write parameter dictionary *****
-
-with open('param_dict.json','w') as fid01:
-  json.dump(param_dict,fid01)
-
+    return None
 
 
-#*******************************************************************************
+# *****************************************************************************
+
+
+if (__name__ == "__main__"):
+
+    write_param_dict()
+
+# *****************************************************************************
