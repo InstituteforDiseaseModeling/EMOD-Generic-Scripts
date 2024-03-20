@@ -19,7 +19,8 @@ from emod_api import __version__ as API_CUR
 
 from emod_api.config import default_from_schema_no_validation as dfs
 
-from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V
+from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
+                           AGE_KEY_LIST, YR_DAYS, POP_PYR
 
 # *****************************************************************************
 
@@ -110,5 +111,36 @@ def standard_pre_process():
     time.sleep(1)
 
     return config_filename
+
+# *****************************************************************************
+
+
+def post_proc_poppyr(output_path, parsed_out):
+
+    # Sample population pyramid every year
+    with open(os.path.join(output_path, 'DemographicsSummary.json')) as fid01:
+        demog_output = json.load(fid01)
+
+    ds_start = demog_output['Header']['Start_Time']
+    ds_nstep = demog_output['Header']['Timesteps']
+    ds_tsize = demog_output['Header']['Simulation_Timestep']
+    time_vec = np.arange(ds_nstep)*ds_tsize + ds_start
+    nyr_bool = (np.diff(time_vec//YR_DAYS) > 0.0)
+    run_yrs = ds_nstep*ds_tsize/YR_DAYS
+
+    pyr_dat = np.zeros((int(run_yrs)+1, len(AGE_KEY_LIST)))
+
+    for k1 in range(len(AGE_KEY_LIST)):
+        age_key_str = 'Population Age {:s}'.format(AGE_KEY_LIST[k1])
+        age_vec_dat = np.array(demog_output['Channels'][age_key_str]['Data'])
+        pyr_dat[0, k1] = age_vec_dat[0]
+        age_subset = age_vec_dat[:-1][nyr_bool]
+        if (age_subset.shape[0] < int(run_yrs)):
+            age_subset = np.append(age_subset, age_vec_dat[-1])
+        pyr_dat[1:, k1] = age_subset
+
+    parsed_out[POP_PYR] = pyr_dat.tolist()
+
+    return None
 
 # *****************************************************************************

@@ -38,3 +38,29 @@ def ce_import_pressure(node_list,
     return camp_event
 
 # *****************************************************************************
+
+
+def ce_br_force(node_list, times, values,
+                start_day=0.0):
+
+    SPATH = gdata.schema_path
+
+    # Birth rate multiplier
+    camp_event = s2c.get_class_with_defaults('CampaignEvent', SPATH)
+    camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator', SPATH)
+    camp_iv = s2c.get_class_with_defaults('NodeBirthRateMult', SPATH)
+
+    node_set = utils.do_nodes(SPATH, node_list)
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv
+
+    camp_iv.Multiplier_By_Duration.Times = times
+    camp_iv.Multiplier_By_Duration.Values = values
+
+    return camp_event
+
+# *****************************************************************************
