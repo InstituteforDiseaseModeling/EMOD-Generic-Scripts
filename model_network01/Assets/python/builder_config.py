@@ -78,8 +78,8 @@ def update_config_obj(config):
 
     # Reporting
     cp.Enable_Default_Reporting = 1
-    cp.Enable_Spatial_Output = 1
-    cp.Spatial_Output_Channels = ["New_Infections"]
+    cp.Enable_Event_DB = 1
+    cp.SQL_Events = ["NewInfection"]
     cp.Custom_Reports_Filename = gdata.reports_file
 
     return config

@@ -37,7 +37,7 @@ def make_fig():
     # One animation for each coefficient value
     for k1 in range(netc_vals.shape[0]):
         sim_idx = np.argwhere(net_coef == netc_vals[k1])[0][0]
-        inf_dat = data_brick['{:05d}'.format(sim_idx)]
+        inf_dat = data_brick['{:05d}'.format(sim_idx)]['inf_data']
         f_lab = '{:1.0e}'.format(netc_vals[k1])
         f_lab = f_lab.replace('+', '')
         svg_defaultgrid(inf_dat, f_lab)
