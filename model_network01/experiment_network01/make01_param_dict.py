@@ -47,17 +47,14 @@ def write_param_dict():
     P_VAR['run_number'] = list(range(NSIMS))
 
     # Gravity model - network coefficeint
-    P_VAR['network_coefficient'] = np.random.choice([1.0e1,
-                                                     1.0e2,
-                                                     1.0e3,
-                                                     1.0e4],
-                                                    size=NSIMS).tolist()
+    P_VAR['net_coef'] = np.random.choice([1.0e1, 1.0e2, 1.0e3, 1.0e4],
+                                         size=NSIMS).tolist()
 
     # Number of days for simulation
     P_CON['num_tsteps'] = 2000.0
 
     # Gravity model - network power
-    P_CON['network_exponent'] = 4.0
+    P_CON['net_exp'] = 4.0
 
     # Max node export fraction
     P_CON['max_export'] = 0.1

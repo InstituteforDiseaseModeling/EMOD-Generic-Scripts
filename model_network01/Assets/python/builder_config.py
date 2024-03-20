@@ -15,8 +15,8 @@ def update_config_obj(config):
     RUN_NUM = gdata.var_params['run_number']
     TIME_DELTA = gdata.var_params['num_tsteps']
 
-    NET_INF_COEF = gdata.var_params['network_coefficient']
-    NET_INF_DPOW = gdata.var_params['network_exponent']
+    NET_INF_COEF = gdata.var_params['net_coef']
+    NET_INF_DPOW = gdata.var_params['net_exp']
     MAX_FRAC = gdata.var_params['max_export']
     MIN_CONNECT = gdata.var_params['min_connect']
 

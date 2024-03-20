@@ -18,7 +18,7 @@ def sn(f):
 
 #********************************************************************************
 
-def svg_defaultgrid(inf_dat, sim_idx, f_lab):
+def svg_defaultgrid(inf_dat, f_lab):
 
   infDat   = np.array(inf_dat)
   ngrid03  = int(np.sqrt(infDat.shape[0]))
