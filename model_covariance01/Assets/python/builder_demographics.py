@@ -36,7 +36,6 @@ def demographicsBuilder():
 
     iadict = dict()
     iadict['AcquisitionHeterogeneityVariance'] = IND_RISK_VAR
-
     demog_obj.raw['Defaults']['IndividualAttributes'].update(iadict)
 
     # Write primary demographics file

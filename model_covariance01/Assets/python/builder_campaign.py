@@ -22,7 +22,7 @@ def campaignBuilder():
     ALL_NODES = gdata.demog_object.node_ids
     CAMP_FILE = gdata.camp_file
 
-    # Events
+    # Import pressure
     camp_event = ce_import_pressure(ALL_NODES, duration=5.0)
     camp_module.add(camp_event)
 
