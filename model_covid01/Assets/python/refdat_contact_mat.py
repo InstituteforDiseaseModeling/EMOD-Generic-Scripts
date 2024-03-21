@@ -1,44 +1,11 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Supporting data for file construction
-#
-#********************************************************************************
-
-
-#********************************************************************************
-
-def contact_mat_fun(arg_key=str()):
-
-  narg_key1 = arg_key
-  while(len(narg_key1) > 0 and narg_key1 not in mat_home):
-    narg_key1 = narg_key1.rsplit(':',1)[0]
-
-  narg_key2 = arg_key
-  while(len(narg_key2) > 0 and narg_key2 not in mat_work):
-    narg_key2 = narg_key2.rsplit(':',1)[0]
-
-  narg_key3 = arg_key
-  while(len(narg_key3) > 0 and narg_key3 not in mat_schl):
-    narg_key3 = narg_key3.rsplit(':',1)[0]
-
-  narg_key4 = arg_key
-  while(len(narg_key4) > 0 and narg_key4 not in mat_comm):
-    narg_key4 = narg_key4.rsplit(':',1)[0]
-
-  return(mat_home[narg_key1],
-         mat_work[narg_key2],
-         mat_schl[narg_key3],
-         mat_comm[narg_key4])
-
-#end-contact_mat_fun
-
-#********************************************************************************
+# *****************************************************************************
 
 mat_home = dict()
 mat_work = dict()
 mat_schl = dict()
 mat_comm = dict()
-
 
 mat_home['AFRO:ANG'] = \
    [[4.47e-01,1.07e+00,7.64e-01,3.22e-01,4.29e-01,5.52e-01,4.56e-01,4.23e-01,
@@ -1237,4 +1204,12 @@ mat_comm['WPRO:LAO'] = \
     [1.67e-02,1.90e-02,2.83e-02,1.30e-02,2.17e-02,2.43e-02,4.09e-02,3.05e-02,
      2.38e-02,2.57e-02,1.60e-02,1.33e-02,1.25e-02,1.68e-02,1.33e-02,7.34e-03]]
 
-#********************************************************************************
+# *****************************************************************************
+
+
+def contact_mat_fun(arg_key=str()):
+
+    return (mat_home[arg_key], mat_work[arg_key],
+            mat_schl[arg_key], mat_comm[arg_key])
+
+# *****************************************************************************

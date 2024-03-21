@@ -1,164 +1,105 @@
-#********************************************************************************
+# *****************************************************************************
 #
-#********************************************************************************
+# *****************************************************************************
 
 import json
+import os
+import sys
 
 import numpy as np
 
-#*******************************************************************************
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_NAME, NUM_SIMS
+
+# *****************************************************************************
 
 # This script makes a json dictionary that is used by the pre-processing script
 # in EMOD. Variable names defined here will be available to use in creating
-# the input files. Please don't change the variable name for 'EXP_NAME' or
-# for 'NUM_SIMS' because those are also used in scripts outside of EMOD.
+# the input files.
 
 # The pre-process script will open the json dict created by this method. For
-# everything in the 'EXP_VARIABLE' key, that script will assume a list and
-# get a value from that list based on the sim index. For everything in the 
-# 'EXP_CONSTANT' key, it will assume a single value and copy that value.
+# everything with the EXP_V key, that script will assume a list and get a value
+# from that list based on the sim index. For everything with the EXP_C key, it
+# will assume a single value and copy that value.
 
 
+def write_param_dict():
 
-# ***** Setup *****
-param_dict = dict()
+    # Setup
+    param_dict = dict()
 
-param_dict['EXP_NAME']     = 'SARS-CoV-2-ETH-UrbRur01'
-param_dict['NUM_SIMS']     =   700
-param_dict['EXP_VARIABLE'] = dict()
-param_dict['EXP_CONSTANT'] = dict()
+    param_dict[EXP_NAME] = 'SARS-CoV-2-ETH-UrbRur01'
+    param_dict[NUM_SIMS] = 700
+    param_dict[EXP_V] = dict()
+    param_dict[EXP_C] = dict()
 
-# Random number consistency
-np.random.seed(4)
+    # Random number consistency
+    np.random.seed(4)
 
-# Convenience naming
-NSIMS = param_dict['NUM_SIMS']
+    # Convenience naming
+    NSIMS = param_dict[NUM_SIMS]
+    P_VAR = param_dict[EXP_V]
+    P_CON = param_dict[EXP_C]
 
+    # Run number (EMOD random seed)
+    P_VAR['run_number'] = list(range(NSIMS))
 
+    # Population structure
+    node_opts = [100, 150, 200, 250]
+    P_VAR['num_nodes'] = (np.random.choice(node_opts, NSIMS)).tolist()
 
-# ***** Specify sim-variable parameters *****
+    # Simulation duration
+    P_CON['nTsteps'] = 730
 
-param_dict['EXP_VARIABLE']['run_number']                   =   list(range(NSIMS))
+    # Setting (defines age structure)
+    P_CON['ctext_val'] = 'AFRO:ETH'
 
-param_dict['EXP_VARIABLE']['num_nodes']                    =  (np.random.choice([100,150,200,250], NSIMS)).tolist()
+    # Total population
+    P_CON['totpop'] = 1e6
 
+    # Migration intensity
+    P_CON['migration_coeff'] = 1e-3
+    P_CON['pop_power'] = 1.00
 
-# ***** Constants for this experiment *****
+    # Fraction of population in rural nodes
+    P_CON['frac_rural'] = 0.78
 
-param_dict['EXP_CONSTANT']['nTsteps']                      =          730
+    # Acquire and transmit multiplier for childern
+    P_CON['age_effect_a'] = 0.70
+    P_CON['age_effect_t'] = 0.20
 
-param_dict['EXP_CONSTANT']['ctext_val']                    =        'AFRO:ETH'
+    # Self-isolation on symptoms behavior
+    P_CON['self_isolate_on_symp_frac'] = 0.1
+    P_CON['self_isolate_effectiveness'] = 0.8
 
-param_dict['EXP_CONSTANT']['totpop']                       =           1e6
-param_dict['EXP_CONSTANT']['migration_coeff']              =          1e-3
-param_dict['EXP_CONSTANT']['pop_power']                    =          1.00
+    # Infectivity
+    P_CON['R0'] = 3.60
 
-param_dict['EXP_CONSTANT']['frac_rural']                   =          0.78
+    # Start day for importations
+    P_CON['importations_start_day'] = 60
+    P_CON['importations_daily_rate'] = 1.2
+    P_CON['importations_duration'] = 365
 
-param_dict['EXP_CONSTANT']['age_effect_a']                 =          0.70
-param_dict['EXP_CONSTANT']['age_effect_t']                 =          0.20
+    # Effectiveness of PPE for health workers
+    P_CON['HCW_PPE'] = 0.95
 
+    # Contact pattern revisions
+    P_CON['trans_mat01'] = [1.00, 0.00, 0.50, 0.75]
+    P_CON['start_mat01'] = 75
 
-param_dict['EXP_CONSTANT']['R0']                           =          3.60
+    # Write parameter dictionary
+    with open('param_dict.json', 'w') as fid01:
+        json.dump(param_dict, fid01)
 
+    return None
 
-param_dict['EXP_CONSTANT']['trans_mat02']                  =  [1.00, 0.00, 0.50, 0.75]
-param_dict['EXP_CONSTANT']['trans_mat03']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat04']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat05']                  =  [1.00, 0.00, 0.50, 0.90]
-
-param_dict['EXP_CONSTANT']['trans_mat06']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat07']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat08']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat09']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat10']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat11']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat12']                  =  [1.00, 0.00, 0.50, 0.90]
-param_dict['EXP_CONSTANT']['trans_mat13']                  =  [1.00, 0.00, 0.50, 0.90]
-
-param_dict['EXP_CONSTANT']['start_day_trans_mat02']        =           75
-param_dict['EXP_CONSTANT']['start_day_trans_mat03']        =          731
-param_dict['EXP_CONSTANT']['start_day_trans_mat04']        =          731
-param_dict['EXP_CONSTANT']['start_day_trans_mat05']        =          731
-
-param_dict['EXP_CONSTANT']['start_day_trans_mat06']        =          731
-param_dict['EXP_CONSTANT']['start_day_trans_mat07']        =          731+7
-param_dict['EXP_CONSTANT']['start_day_trans_mat08']        =          731
-param_dict['EXP_CONSTANT']['start_day_trans_mat09']        =          731+7
-param_dict['EXP_CONSTANT']['start_day_trans_mat10']        =          731
-param_dict['EXP_CONSTANT']['start_day_trans_mat11']        =          731+7
-param_dict['EXP_CONSTANT']['start_day_trans_mat12']        =          731
-param_dict['EXP_CONSTANT']['start_day_trans_mat13']        =          731+7
-
-param_dict['EXP_CONSTANT']['spike_trans_mat02']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat03']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat04']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat05']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat06']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat07']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat08']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat09']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat10']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat11']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat12']            =          False
-param_dict['EXP_CONSTANT']['spike_trans_mat13']            =          False
-
-param_dict['EXP_CONSTANT']['nudge_trans_mat02']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat03']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat04']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat05']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat06']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat07']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat08']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat09']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat10']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat11']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat12']            =          False
-param_dict['EXP_CONSTANT']['nudge_trans_mat13']            =          False
-
-param_dict['EXP_CONSTANT']['household_sia02']              =          False
-param_dict['EXP_CONSTANT']['household_sia03']              =          False
-param_dict['EXP_CONSTANT']['household_sia04']              =          False
-param_dict['EXP_CONSTANT']['household_sia05']              =          False
-param_dict['EXP_CONSTANT']['household_sia06']              =          False
-param_dict['EXP_CONSTANT']['household_sia07']              =          False
-param_dict['EXP_CONSTANT']['household_sia08']              =          False
-param_dict['EXP_CONSTANT']['household_sia09']              =          False
-param_dict['EXP_CONSTANT']['household_sia10']              =          False
-param_dict['EXP_CONSTANT']['household_sia11']              =          False
-param_dict['EXP_CONSTANT']['household_sia12']              =          False
-param_dict['EXP_CONSTANT']['household_sia13']              =          False
-
-param_dict['EXP_CONSTANT']['HCW_PPE']                      =          0.95
-
-param_dict['EXP_CONSTANT']['HCW_Walk']                     =          False
-param_dict['EXP_CONSTANT']['HCW_Walk_Start']               =          160
-param_dict['EXP_CONSTANT']['HCW_Walk_End']                 =          200
-
-param_dict['EXP_CONSTANT']['Bob_Walk']                     =          False
-param_dict['EXP_CONSTANT']['Bob_Frac']                     =            0.0007
-param_dict['EXP_CONSTANT']['Bob_Walk_Start']               =          160
-param_dict['EXP_CONSTANT']['Bob_Walk_End']                 =          200
-
-param_dict['EXP_CONSTANT']['importations_start_day']       =           60
-param_dict['EXP_CONSTANT']['importations_daily_rate']      =            1.2
-param_dict['EXP_CONSTANT']['importations_duration']        =          365
-
-param_dict['EXP_CONSTANT']['self_isolate_on_symp_frac']    =            0.1
-param_dict['EXP_CONSTANT']['self_isolate_effectiveness']   =            0.8
-
-param_dict['EXP_CONSTANT']['active_finding_start_day']     =          731
-param_dict['EXP_CONSTANT']['active_finding_coverage']      =            0.0
-param_dict['EXP_CONSTANT']['active_finding_effectiveness'] =            0.9
-param_dict['EXP_CONSTANT']['active_finding_delay']         =            0.00
+# *****************************************************************************
 
 
+if (__name__ == "__main__"):
 
-# ***** Write parameter dictionary *****
+    write_param_dict()
 
-with open('param_dict.json','w') as fid01:
-  json.dump(param_dict,fid01)
-
-
-
-#*******************************************************************************
+# *****************************************************************************

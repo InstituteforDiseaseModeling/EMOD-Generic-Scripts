@@ -149,3 +149,34 @@ def ce_matrix_swap(node_list, prop_name, matrix,
     return camp_event
 
 # *****************************************************************************
+
+
+def ce_visit_nodes(node_orig, node_dest,
+                   start_day=0.0, only_group=None, fraction=0.0, duration=1.0):
+
+    # MigrateIndividuals
+    camp_event = s2c.get_class_with_defaults('CampaignEvent', SPATH)
+    camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator', SPATH)
+    camp_iv = s2c.get_class_with_defaults('MigrateIndividuals', SPATH)
+
+    node_set = utils.do_nodes(SPATH, [node_orig])
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv
+    camp_coord.Demographic_Coverage = fraction
+
+    if (only_group):
+        camp_coord.Property_Restrictions_Within_Node = only_group
+
+    camp_iv.NodeID_To_Migrate_To = node_orig
+    camp_iv.Duration_Before_Leaving_Distribution = 'CONSTANT_DISTRIBUTION'
+    camp_iv.Duration_Before_Leaving_Constant = 0
+    camp_iv.Duration_At_Node_Distribution = 'CONSTANT_DISTRIBUTION'
+    camp_iv.Duration_At_Node_Constant = duration
+
+    return camp_event
+
+# *****************************************************************************

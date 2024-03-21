@@ -29,10 +29,12 @@ def demographicsBuilder():
     POP_POW = gdata.var_params['pop_power']
 
     # Get HINT matrix
-    pdict = {'arg_dist': [1.0, 1.0, 1.0, 1.0],
-             'spike_mat': False, 'nudge_mat': False, 'hcw_h2h': False,
-             'ctext_val': CTEXT_VAL}
-    (age_pyr, age_names, mat_block) = mat_magic(pdict)
+    arg_dist = [1.0, 1.0, 1.0, 1.0]
+    spike_mat = False
+    nudge_mat = False
+    hcw_h2h = False,
+    (age_pyr, age_names, mat_block) = mat_magic(CTEXT_VAL, arg_dist,
+                                                spike_mat, nudge_mat, hcw_h2h)
 
     # Dictionary of parameters to be written
     json_set = dict()
@@ -92,7 +94,7 @@ def demographicsBuilder():
     json_set['Defaults']['IndividualProperties'].append(ipdict)
 
     # Write primary demographics file
-    with open(gdata.demog_files[0], 'w') as fid01:
+    with open(DEMOG_FILE, 'w') as fid01:
         json.dump(json_set, fid01, sort_keys=True)
 
     # Save filename to global data for use in other functions
