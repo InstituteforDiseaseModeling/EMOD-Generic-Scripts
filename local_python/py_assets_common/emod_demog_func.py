@@ -5,7 +5,7 @@
 import json
 import os
 
-from emod_constants import DEMOG_FILENAME, PATH_OVERLAY, \
+from emod_constants import DEMOG_FILE, PATH_OVERLAY, \
                            MORT_XVAL, POP_AGE_DAYS
 
 # *****************************************************************************
@@ -53,7 +53,7 @@ def demog_vd_over(ref_name, node_list, cb_rate,
     vdoddiamdf['ResultScaleFactor'] = 1
     vdoddiamdf['ResultValues'] = mort_mat.tolist()
 
-    nfname = DEMOG_FILENAME.rsplit('.', 1)[0] + '_vd.json'
+    nfname = DEMOG_FILE.rsplit('.', 1)[0] + '_vd.json'
     nfname = os.path.join(PATH_OVERLAY, nfname)
 
     with open(nfname, 'w') as fid01:

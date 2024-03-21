@@ -9,6 +9,7 @@ import global_data as gdata
 import emod_api.campaign as camp_module
 
 from emod_camp_events import ce_import_pressure
+from emod_constants import CAMP_FILE
 
 # *****************************************************************************
 
@@ -20,7 +21,6 @@ def campaignBuilder():
 
     # Note: campaign module itself is the file object; no Campaign class
     ALL_NODES = gdata.demog_object.node_ids
-    CAMP_FILE = gdata.camp_file
 
     # Import pressure
     camp_event = ce_import_pressure(ALL_NODES, duration=5.0)

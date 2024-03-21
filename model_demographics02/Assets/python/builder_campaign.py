@@ -9,6 +9,7 @@ import global_data as gdata
 import emod_api.campaign as camp_module
 
 from emod_camp_events import ce_br_force
+from emod_constants import CAMP_FILE
 
 # *****************************************************************************
 
@@ -20,9 +21,8 @@ def campaignBuilder():
 
     # Note: campaign module itself is the file object; no Campaign class
     ALL_NODES = gdata.demog_object.node_ids
-    CAMP_FILE = gdata.camp_file
 
-    # Add time varying birth rate
+    # Time varying birth rate
     BASE_YEAR = gdata.base_year
     BR_MULT_X = gdata.brate_mult_x
     BR_MULT_Y = gdata.brate_mult_y

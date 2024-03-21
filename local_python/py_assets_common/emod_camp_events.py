@@ -2,12 +2,10 @@
 #
 # *****************************************************************************
 
-import global_data as gdata
-
 from emod_api import schema_to_class as s2c
 from emod_api.interventions import utils
 
-from emod_constants import YR_DAYS
+from emod_constants import SPATH, YR_DAYS
 
 # *****************************************************************************
 
@@ -15,8 +13,6 @@ from emod_constants import YR_DAYS
 def ce_import_pressure(node_list,
                        start_day=0.0, duration=1.0,
                        magnitude=1.0, age_yrs=40.0):
-
-    SPATH = gdata.schema_path
 
     # Import pressure
     camp_event = s2c.get_class_with_defaults('CampaignEvent', SPATH)
@@ -43,8 +39,6 @@ def ce_import_pressure(node_list,
 def ce_br_force(node_list, times, values,
                 start_day=0.0):
 
-    SPATH = gdata.schema_path
-
     # Birth rate multiplier
     camp_event = s2c.get_class_with_defaults('CampaignEvent', SPATH)
     camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator', SPATH)
@@ -70,8 +64,6 @@ def ce_vax_AMT(node_list,
                start_day=0.0, only_group=None, coverage=1.0,
                acq_eff=0.0, mrt_eff=0.0, trn_eff=0.0):
 
-    SPATH = gdata.schema_path
-
     # Vaccine
     camp_event = s2c.get_class_with_defaults('CampaignEvent', SPATH)
     camp_coord = s2c.get_class_with_defaults('StandardEventCoordinator', SPATH)
@@ -85,7 +77,7 @@ def ce_vax_AMT(node_list,
 
     camp_coord.Intervention_Config = camp_iv
 
-    if(only_group):
+    if (only_group):
         camp_coord.Property_Restrictions_Within_Node = only_group
 
     camp_iv.Vaccine_Take = coverage
@@ -101,7 +93,6 @@ def ce_vax_AMT(node_list,
 def ce_quarantine(node_list, trigger,
                   start_day=0.0, coverage=1.0, delay=0.0, effect=0.0):
 
-    SPATH = gdata.schema_path
     CHWEC = 'CommunityHealthWorkerEventCoordinator'
 
     # Vaccine
@@ -138,8 +129,6 @@ def ce_quarantine(node_list, trigger,
 
 def ce_matrix_swap(node_list, prop_name, matrix,
                    start_day=0.0):
- 
-    SPATH = gdata.schema_path
 
     # ChangeIPMatrix
     camp_event = s2c.get_class_with_defaults('CampaignEvent', SPATH)

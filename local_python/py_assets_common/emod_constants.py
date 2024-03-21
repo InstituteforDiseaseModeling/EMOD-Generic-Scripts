@@ -13,7 +13,12 @@ EXP_V = 'EXP_VARIABLE'
 EXP_NAME = 'EXP_NAME'
 NUM_SIMS = 'NUM_SIMS'
 
-DEMOG_FILENAME = 'demographics.json'
+SPATH = 'Assets/schema.json'
+
+CAMP_FILE = 'campaign.json'
+REPORTS_FILE = 'custom_dlls.json'
+DEMOG_FILE = 'demographics.json'
+
 PATH_OVERLAY = 'demog_overlay'
 
 YR_DAYS = 365

@@ -20,14 +20,12 @@ from emod_api import __version__ as API_CUR
 from emod_api.config import default_from_schema_no_validation as dfs
 
 from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
-                           AGE_KEY_LIST, YR_DAYS, POP_PYR
+                           AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH
 
 # *****************************************************************************
 
 
 def configBuilder():
-
-    SPATH = gdata.schema_path
 
     default_conf = dfs.get_default_config_from_schema(SPATH, as_rod=True)
 

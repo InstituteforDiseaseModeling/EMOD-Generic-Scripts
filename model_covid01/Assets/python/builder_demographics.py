@@ -13,10 +13,7 @@ from aux_matrix_calc import mat_magic
 
 import numpy as np
 
-# *****************************************************************************
-
-DEMOG_FILENAME = 'demographics.json'
-ID_REFERENCE = 'covid-custom'
+from emod_constants import DEMOG_FILE
 
 # *****************************************************************************
 
@@ -67,6 +64,7 @@ def demographicsBuilder():
         json_set['Nodes'].append(nodeDic)
 
     # Create metadata dictionary
+    ID_REFERENCE = 'covid-custom'
     json_set['Metadata'] = {'IdReference': ID_REFERENCE}
 
     # Create defaults dictionary
@@ -98,7 +96,7 @@ def demographicsBuilder():
         json.dump(json_set, fid01, sort_keys=True)
 
     # Save filename to global data for use in other functions
-    gdata.demog_files.append(DEMOG_FILENAME)
+    gdata.demog_files.append(DEMOG_FILE)
 
     # Save the demographics object for use in other functions
     gdata.demog_object = json_set

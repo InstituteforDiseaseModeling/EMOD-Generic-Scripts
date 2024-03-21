@@ -10,7 +10,6 @@
 def demographicsBuilder():
 
     # Use built-in demographics
-
     return None
 
 # *****************************************************************************

@@ -8,9 +8,7 @@ import global_data as gdata
 
 from emod_api.demographics.Demographics import Demographics, Node
 
-# *****************************************************************************
-
-DEMOG_FILENAME = 'demographics.json'
+from emod_constants import DEMOG_FILE
 
 # *****************************************************************************
 
@@ -39,10 +37,10 @@ def demographicsBuilder():
     demog_obj.raw['Defaults']['IndividualAttributes'].update(iadict)
 
     # Write primary demographics file
-    demog_obj.generate_file(name=DEMOG_FILENAME)
+    demog_obj.generate_file(name=DEMOG_FILE)
 
     # Save filename to global data for use in other functions
-    gdata.demog_files.append(DEMOG_FILENAME)
+    gdata.demog_files.append(DEMOG_FILE)
 
     # Save the demographics object for use in other functions
     gdata.demog_object = demog_obj

@@ -17,6 +17,7 @@ from emod_api.interventions import utils
 
 from emod_camp_events import ce_import_pressure, ce_vax_AMT, ce_quarantine, \
                              ce_matrix_swap
+from emod_constants import CAMP_FILE
 
 # *****************************************************************************
 
@@ -78,7 +79,6 @@ def campaignBuilder():
 
     # Note: campaign module itself is the file object; no Campaign class
     ALL_NODES = list(range(1, NUM_NODES+1))
-    CAMP_FILE = gdata.camp_file
 
     TRANS_RANGE  = range(2,14)
 

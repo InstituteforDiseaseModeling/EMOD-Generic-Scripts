@@ -6,6 +6,8 @@
 
 import global_data as gdata
 
+from emod_constants import CAMP_FILE, REPORTS_FILE
+
 # *****************************************************************************
 
 
@@ -53,7 +55,7 @@ def update_config_obj(config):
 
     # Interventions
     cp.Enable_Interventions = 1
-    cp.Campaign_Filename = gdata.camp_file
+    cp.Campaign_Filename = CAMP_FILE
 
     # Adapted sampling
     cp.Individual_Sampling_Type = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
@@ -83,7 +85,7 @@ def update_config_obj(config):
     # Reporting
     cp.Enable_Default_Reporting = 1
     cp.Enable_Property_Output = 1
-    cp.Custom_Reports_Filename = gdata.reports_file
+    cp.Custom_Reports_Filename = REPORTS_FILE
 
     return config
 

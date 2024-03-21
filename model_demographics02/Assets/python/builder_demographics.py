@@ -13,7 +13,7 @@ from emod_api.demographics.Demographics import Demographics, Node
 import numpy as np
 
 from emod_demog_func import demog_vd_over
-from emod_constants import DEMOG_FILENAME, MORT_XVAL, MAX_DAILY_MORT
+from emod_constants import DEMOG_FILE, MORT_XVAL, MAX_DAILY_MORT
 
 # *****************************************************************************
 
@@ -103,10 +103,10 @@ def demographicsBuilder():
     gdata.demog_files.append(nfname)
 
     # Write primary demographics file
-    demog_obj.generate_file(name=DEMOG_FILENAME)
+    demog_obj.generate_file(name=DEMOG_FILE)
 
     # Save filename to global data for use in other functions
-    gdata.demog_files.append(DEMOG_FILENAME)
+    gdata.demog_files.append(DEMOG_FILE)
 
     # Save the demographics object for use in other functions
     gdata.demog_object = demog_obj
