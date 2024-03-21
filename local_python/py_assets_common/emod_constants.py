@@ -13,6 +13,9 @@ EXP_V = 'EXP_VARIABLE'
 EXP_NAME = 'EXP_NAME'
 NUM_SIMS = 'NUM_SIMS'
 
+DEMOG_FILENAME = 'demographics.json'
+PATH_OVERLAY = 'demog_overlay'
+
 YR_DAYS = 365
 
 POP_PYR = 'pyr_data'

@@ -4,25 +4,16 @@
 #
 # *****************************************************************************
 
-import json
 import os
 
 import global_data as gdata
 
-from emod_api.demographics.Demographics import Demographics, Node, \
-                                               DemographicsOverlay
-
-from emod_api.demographics.PropertiesAndAttributes import \
-                                               IndividualAttributes, \
-                                               NodeAttributes
+from emod_api.demographics.Demographics import Demographics, Node
 
 import numpy as np
 
-from emod_constants import MORT_XVAL, POP_AGE_DAYS, MAX_DAILY_MORT
-
-# *****************************************************************************
-
-DEMOG_FILENAME = 'demographics.json'
+from emod_api_func import demog_vd_over
+from emod_constants import DEMOG_FILENAME, MORT_XVAL, MAX_DAILY_MORT
 
 # *****************************************************************************
 
@@ -32,15 +23,6 @@ def demographicsBuilder():
     # Variables for this simulation
     START_YEAR = gdata.var_params['start_year']
     POP_DAT_STR = gdata.var_params['pop_dat_file']
-
-
-
-    PATH_OVERLAY = 'demog_overlay'
-
-    if (not os.path.exists(PATH_OVERLAY)):
-        os.mkdir(PATH_OVERLAY)
-
-
 
     # Load reference data
     dat_file = 'pop_dat_{:s}.csv'.format(POP_DAT_STR)
@@ -52,8 +34,6 @@ def demographicsBuilder():
     pop_init = [np.interp(year_init, year_vec, pop_mat[idx, :])
                 for idx in range(pop_mat.shape[0])]
     gdata.init_pop = int(np.sum(pop_init))
-
-
 
     # Populate nodes in primary file
     node_list = list()
@@ -68,8 +48,6 @@ def demographicsBuilder():
     # Update defaults in primary file
     demog_obj.raw['Defaults']['IndividualAttributes'].clear()
     demog_obj.raw['Defaults']['NodeAttributes'].clear()
-
-
 
     # Calculate vital dynamics
     diff_ratio = (pop_mat[:-1, :-1]-pop_mat[1:, 1:])/pop_mat[:-1, :-1]
@@ -100,22 +78,17 @@ def demographicsBuilder():
     gdata.brate_mult_x = brmultx_02.tolist()
     gdata.brate_mult_y = brmulty_02.tolist()
 
-    age_y = POP_AGE_DAYS
     age_init_cdf = np.cumsum(pop_init[:-1])/np.sum(pop_init)
     age_x = [0] + age_init_cdf.tolist()
 
-    # Write vital dynamics and susceptibility initialization overlays
-    vd_over_dict = dict()
-
     birth_rate = brate_val/365.0/1000.0
-    mort_vec_X = MORT_XVAL
     mort_year = np.zeros(2*year_vec.shape[0]-3)
 
     mort_year[0::2] = year_vec[0:-1]
     mort_year[1::2] = year_vec[1:-1]-1e-4
     mort_year = mort_year.tolist()
 
-    mort_mat = np.zeros((len(mort_vec_X), len(mort_year)))
+    mort_mat = np.zeros((len(MORT_XVAL), len(mort_year)))
 
     mort_mat[0:-2:2, 0::2] = mortvecs
     mort_mat[1:-2:2, 0::2] = mortvecs
@@ -123,48 +96,11 @@ def demographicsBuilder():
     mort_mat[1:-2:2, 1::2] = mortvecs[:, :-1]
     mort_mat[-2:, :] = MAX_DAILY_MORT
 
-    # Vital dynamics overlays
-    vd_over_dict['Metadata'] = {'IdReference': ref_name}
-    vd_over_dict['Defaults'] = {'IndividualAttributes': dict(),
-                                'NodeAttributes': dict()}
-    vd_over_dict['Nodes'] = [{'NodeID': node_obj.forced_id}
-                             for node_obj in node_list]
-
-    vdodd = vd_over_dict['Defaults']
-    vdodd['NodeAttributes'] = {'BirthRate': birth_rate}
-    vdodd['IndividualAttributes'] = {'AgeDistribution': dict(),
-                                     'MortalityDistributionMale': dict(),
-                                     'MortalityDistributionFemale': dict()}
-
-    vdoddiaad = vdodd['IndividualAttributes']['AgeDistribution']
-    vdoddiaad['DistributionValues'] = [age_x]
-    vdoddiaad['ResultScaleFactor'] = 1
-    vdoddiaad['ResultValues'] = [age_y]
-
-    vdoddiamdm = vdodd['IndividualAttributes']['MortalityDistributionMale']
-    vdoddiamdm['AxisNames'] = ['age', 'year']
-    vdoddiamdm['AxisScaleFactors'] = [1, 1]
-    vdoddiamdm['NumDistributionAxes'] = 2
-    vdoddiamdm['NumPopulationGroups'] = [len(mort_vec_X), len(mort_year)]
-    vdoddiamdm['PopulationGroups'] = [mort_vec_X, mort_year]
-    vdoddiamdm['ResultScaleFactor'] = 1
-    vdoddiamdm['ResultValues'] = mort_mat.tolist()
-
-    vdoddiamdf = vdodd['IndividualAttributes']['MortalityDistributionFemale']
-    vdoddiamdf['AxisNames'] = ['age', 'year']
-    vdoddiamdf['AxisScaleFactors'] = [1, 1]
-    vdoddiamdf['NumDistributionAxes'] = 2
-    vdoddiamdf['NumPopulationGroups'] = [len(mort_vec_X), len(mort_year)]
-    vdoddiamdf['PopulationGroups'] = [mort_vec_X, mort_year]
-    vdoddiamdf['ResultScaleFactor'] = 1
-    vdoddiamdf['ResultValues'] = mort_mat.tolist()
-
-    nfname = DEMOG_FILENAME.rsplit('.', 1)[0] + '_vd.json'
-    nfname = os.path.join(PATH_OVERLAY, nfname)
+    # Write vital dynamics overlay
+    n_list = [node_obj.forced_id for node_obj in node_list]
+    nfname = demog_vd_over(ref_name, n_list, birth_rate,
+                           mort_year, mort_mat, age_x)
     gdata.demog_files.append(nfname)
-
-    with open(nfname, 'w') as fid01:
-        json.dump(vd_over_dict, fid01, indent=3)
 
     # Write primary demographics file
     demog_obj.generate_file(name=DEMOG_FILENAME)
