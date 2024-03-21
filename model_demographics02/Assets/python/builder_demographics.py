@@ -12,7 +12,7 @@ from emod_api.demographics.Demographics import Demographics, Node
 
 import numpy as np
 
-from emod_api_func import demog_vd_over
+from emod_demog_func import demog_vd_over
 from emod_constants import DEMOG_FILENAME, MORT_XVAL, MAX_DAILY_MORT
 
 # *****************************************************************************
