@@ -7,17 +7,20 @@ sys.path.append(os.path.join('..','Assets','python'))
 import numpy               as np
 import matplotlib.pyplot   as plt
 
-from dtk_post_process import tpop_xval, tpop_yval
+from dtk_post_process import tpop_yval
 
-from dtk_post_process import pop_age_days
 from dtk_post_process import uk_1950_frac, uk_1960_frac
 from dtk_post_process import uk_1970_frac, uk_1980_frac
+
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import POP_AGE_DAYS
 
 #*******************************************************************************
 
 DIRNAME = 'experiment_demog_UK01_sweep'
 
-xvals   = np.array(tpop_xval)
 yref    = np.array(tpop_yval)/1e6
 
 CM    = np.array([ 70,130,180])/255
@@ -35,15 +38,14 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
 nsims    = int(param_dict['NUM_SIMS'])
-ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
+pyr_mat = np.zeros((nsims,30+1,20))-1
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
-  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_dat'])
+  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
 
 fidx = (pyr_mat[:,0,0]>=0)
 
@@ -88,7 +90,7 @@ for k0 in range(len(demog_lev)):
     axs01.set_xticks(ticks=ticloc)
     axs01.set_xticklabels(ticlab)
 
-    ydat        = np.array(pop_age_days)/365.0 - 2.5
+    ydat        = np.array(POP_AGE_DAYS)/365.0 - 2.5
     pop_dat     = pyr_mat_avg[k1,:]
     pop_dat_err = pyr_mat_std[k1,:]
     tpop        = np.sum(pop_dat)
@@ -131,7 +133,7 @@ for k0 in range(len(demog_lev)):
     axs01.set_xticks(ticks=ticloc)
     axs01.set_xticklabels(ticlab)
 
-    ydat        = np.array(pop_age_days)/365.0 - 2.5
+    ydat        = np.array(POP_AGE_DAYS)/365.0 - 2.5
     pop_dat     = np.array(x_dat_list[k1])
     effpop      = yref[10*k1]
 

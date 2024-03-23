@@ -1,103 +1,73 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Builds a config file for input to the DTK.
+# Configuration file for simulation.
 #
-#********************************************************************************
-
-import os, sys, json
+# *****************************************************************************
 
 import global_data as gdata
 
-import numpy as np
+from emod_constants import CAMP_FILE, REPORTS_FILE
 
-from emod_api.config import default_from_schema_no_validation as dfs
+# *****************************************************************************
 
-#********************************************************************************
 
-# Function for setting config parameters 
 def update_config_obj(config):
 
-  # ***** Get variables for this simulation *****
-  RUN_NUM        = gdata.var_params['run_number']
-  TIME_DELTA     = gdata.var_params['num_tsteps']
+    # Variables for this simulation
+    RUN_NUM = gdata.var_params['run_number']
+    INIT_AGENT = gdata.var_params['num_agents']
 
+    # Config parameters object (read only dictionary)
+    cp = config.parameters
 
-  # ***** Random number seed ****
-  config.parameters.Run_Number                                     = RUN_NUM
+    # Random number seed
+    cp.Run_Number = RUN_NUM
 
+    # Time
+    cp.Start_Time = 365.0*(gdata.start_year-gdata.base_year)
+    cp.Simulation_Duration = 365.0*gdata.run_years
+    cp.Simulation_Timestep = gdata.t_step_days
 
-  # ***** Time *****
-  config.parameters.Start_Time                                     =    0.0
-  config.parameters.Simulation_Duration                            = TIME_DELTA
+    # Intrahost
+    cp.Base_Infectivity_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Base_Infectivity_Constant = 0.0
 
+    cp.Incubation_Period_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Incubation_Period_Constant = 0.0
 
+    cp.Infectious_Period_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Infectious_Period_Constant = 0.0
 
-  # ***** Intrahost *****
-  config.parameters.Base_Infectivity_Distribution                  = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Constant                      =    0.0
+    cp.Enable_Disease_Mortality = 0
 
-  config.parameters.Incubation_Period_Distribution                 = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Incubation_Period_Constant                     =    0.0
+    # Immunity
+    cp.Enable_Immunity = 0
 
-  config.parameters.Infectious_Period_Distribution                 = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Infectious_Period_Constant                     =    0.0
+    # Interventions
+    cp.Enable_Interventions = 1
+    cp.Campaign_Filename = CAMP_FILE
 
-  config.parameters.Enable_Disease_Mortality                       =    0
+    # Adapted sampling
+    cp.Individual_Sampling_Type = 'FIXED_SAMPLING'
+    cp.Base_Individual_Sample_Rate = INIT_AGENT/gdata.init_pop
 
-  # ***** Immunity *****
-  config.parameters.Enable_Immunity                                =    0
+    # Demographic parameters
+    cp.Enable_Demographics_Builtin = 0
+    cp.Enable_Vital_Dynamics = 1
+    cp.Enable_Birth = 1
+    cp.Birth_Rate_Dependence = 'POPULATION_DEP_RATE'
+    cp.Enable_Aging = 1
+    cp.Age_Initialization_Distribution_Type = 'DISTRIBUTION_COMPLEX'
+    cp.Enable_Natural_Mortality = 1
+    cp.Death_Rate_Dependence = 'NONDISEASE_MORTALITY_BY_AGE_AND_GENDER'
 
+    cp.Demographics_Filenames = gdata.demog_files
 
-  # ***** Interventions *****
-  config.parameters.Enable_Interventions                           =    1
-  config.parameters.Campaign_Filename                              = gdata.camp_file
+    # Reporting
+    cp.Enable_Default_Reporting = 1
+    cp.Enable_Demographics_Reporting = 1
+    cp.Custom_Reports_Filename = REPORTS_FILE
 
+    return config
 
-  # ***** Adapted sampling *****
-  config.parameters.Individual_Sampling_Type                       = 'TRACK_ALL'
-
-
-  # ***** Demographic parameters *****
-  config.parameters.Enable_Demographics_Builtin                    =    0
-
-  config.parameters.Enable_Vital_Dynamics                          =    1
-
-  config.parameters.Enable_Birth                                   =    1
-  config.parameters.Birth_Rate_Dependence                          = 'POPULATION_DEP_RATE'
-  config.parameters.Enable_Aging                                   =    1
-  config.parameters.Age_Initialization_Distribution_Type           = 'DISTRIBUTION_COMPLEX'
-  config.parameters.Enable_Natural_Mortality                       =    1
-  config.parameters.Death_Rate_Dependence                          = 'NONDISEASE_MORTALITY_BY_AGE_AND_GENDER'
-
-
-  config.parameters.Demographics_Filenames                         = gdata.demog_files
-
-
-  # ***** Reporting *****
-  config.parameters.Enable_Default_Reporting                       =    1
-  config.parameters.Enable_Demographics_Reporting                  =    1
-
-  config.parameters.Custom_Reports_Filename                        = gdata.reports_file
-
-
-  return config
-
-#********************************************************************************
-
-def configBuilder():
-
-  FILE_CONFIG  =  'config.json'
-  SCHEMA_PATH  =  gdata.schema_path
-
-  default_conf = dfs.get_default_config_from_schema(SCHEMA_PATH,as_rod=True)
-
-  # Probably ought to be an emod-api call
-  config_obj = update_config_obj(default_conf);
-  config_obj.parameters.finalize()
-  with open(FILE_CONFIG, 'w') as fid01:
-    json.dump(config_obj, fid01, sort_keys=True, indent=4)
-
-
-  return FILE_CONFIG
-
-#********************************************************************************
+# *****************************************************************************

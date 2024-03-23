@@ -7,13 +7,13 @@ sys.path.append(os.path.join('..','Assets','python'))
 import numpy               as np
 import matplotlib.pyplot   as plt
 
-from dtk_post_process import tpop_xval, tpop_yval
+from dtk_post_process import tpop_yval
 
 #*******************************************************************************
 
 DIRNAME = 'experiment_demog_UK01_sweep'
 
-xvals   = np.array(tpop_xval)
+xvals   = np.arange(31)
 yref    = np.array(tpop_yval)/1e6
 
 
@@ -27,15 +27,14 @@ with open(os.path.join(tpath,'param_dict.json')) as fid01:
   param_dict = json.load(fid01)
 
 nsims    = int(param_dict['NUM_SIMS'])
-ntstp    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
 var_set  = np.array(param_dict['EXP_VARIABLE']['variable_birthrate'])
 age_set  = np.array(param_dict['EXP_VARIABLE']['modified_age_init'])
 mort_set = np.array(param_dict['EXP_VARIABLE']['log_mort_mult03'])
 
-pyr_mat = np.zeros((nsims,int(ntstp/365)+1,20))-1
+pyr_mat = np.zeros((nsims,30+1,20))-1
 for sim_idx_str in data_brick:
   sim_idx = int(sim_idx_str)
-  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_dat'])
+  pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
 
 fidx = (pyr_mat[:,0,0]>=0)
 
