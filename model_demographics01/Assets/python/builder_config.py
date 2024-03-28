@@ -59,7 +59,8 @@ def update_config_obj(config):
     cp.Enable_Aging = 1
     cp.Age_Initialization_Distribution_Type = 'DISTRIBUTION_COMPLEX'
     cp.Enable_Natural_Mortality = 1
-    cp.Death_Rate_Dependence = 'NONDISEASE_MORTALITY_BY_AGE_AND_GENDER'
+    enum_str = 'NONDISEASE_MORTALITY_BY_YEAR_AND_AGE_FOR_EACH_GENDER'
+    cp.Death_Rate_Dependence = enum_str
 
     cp.Demographics_Filenames = gdata.demog_files
 

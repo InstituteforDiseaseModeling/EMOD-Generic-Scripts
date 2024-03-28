@@ -14,10 +14,13 @@ from emod_constants import DEMOG_FILE, PATH_OVERLAY, \
 
 
 def demog_vd_over(ref_name, node_list, cb_rate,
-                  mort_year, mort_mat, age_x):
+                  mort_year, mort_mat, age_x, age_y=None):
 
     if (not os.path.exists(PATH_OVERLAY)):
         os.mkdir(PATH_OVERLAY)
+
+    if (age_y is None):
+        age_y = POP_AGE_DAYS
 
     vd_over_dict = dict()
 
@@ -35,7 +38,7 @@ def demog_vd_over(ref_name, node_list, cb_rate,
     vdoddiaad = vdodd['IndividualAttributes']['AgeDistribution']
     vdoddiaad['DistributionValues'] = [age_x]
     vdoddiaad['ResultScaleFactor'] = 1
-    vdoddiaad['ResultValues'] = [POP_AGE_DAYS]
+    vdoddiaad['ResultValues'] = [age_y]
 
     vdoddiamdm = vdodd['IndividualAttributes']['MortalityDistributionMale']
     vdoddiamdm['AxisNames'] = ['age', 'year']
