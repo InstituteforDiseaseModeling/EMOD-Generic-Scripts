@@ -1,76 +1,80 @@
-#********************************************************************************
+# *****************************************************************************
 #
-#********************************************************************************
+# *****************************************************************************
 
 import json
+import os
+import sys
 
 import numpy as np
 
-#*******************************************************************************
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_O, P_FILE, \
+                                            EXP_NAME, NUM_SIMS, NUM_ITER
+
+# *****************************************************************************
 
 # This script makes a json dictionary that is used by the pre-processing script
 # in EMOD. Variable names defined here will be available to use in creating
-# the input files. Please don't change the variable name for 'EXP_NAME' or
-# for 'NUM_SIMS' because those are also used in scripts outside of EMOD.
+# the input files.
 
 # The pre-process script will open the json dict created by this method. For
-# everything in the 'EXP_VARIABLE' key, that script will assume a list and
-# get a value from that list based on the sim index. For everything in the 
-# 'EXP_CONSTANT' key, it will assume a single value and copy that value.
+# everything with the EXP_V key, that script will assume a list and get a value
+# from that list based on the sim index. For everything with the EXP_C key, it
+# will assume a single value and copy that value.
 
 
+def write_param_dict():
 
-# ***** Setup *****
-param_dict = dict()
+    # Setup
+    param_dict = dict()
 
-param_dict['EXP_NAME']     = 'DemogExample-UK01-Calib'
-param_dict['NUM_SIMS']     =   720
-param_dict['NUM_ITER']     =     6
-param_dict['EXP_VARIABLE'] = dict()
-param_dict['EXP_CONSTANT'] = dict()
-param_dict['EXP_OPTIMIZE'] = dict()
+    param_dict[EXP_NAME] = 'DemogExample-UK01-Calib'
+    param_dict[NUM_SIMS] = 720
+    param_dict[NUM_ITER] = 6
+    param_dict[EXP_V] = dict()
+    param_dict[EXP_C] = dict()
+    param_dict[EXP_O] = dict()
 
+    # Random number consistency
+    np.random.seed(4)
 
-# Random number consistency
-np.random.seed(4)
+    # Convenience naming
+    NSIMS = param_dict[NUM_SIMS]
+    P_VAR = param_dict[EXP_V]
+    P_CON = param_dict[EXP_C]
+    P_OPT = param_dict[EXP_O]
 
-# Convenience naming
-NSIMS = param_dict['NUM_SIMS']
+    # Run number (EMOD random seed)
+    P_VAR['run_number'] = list(range(NSIMS))
 
+    # Log of age-independent multiplier for mortality rates
+    P_OPT['log_mort_mult01'] = [-4.0, 4.0]
+    P_OPT['log_mort_mult02'] = [-4.0, 4.0]
+    P_OPT['log_mort_mult03'] = [-4.0, 4.0]
 
+    # Use historical data for crude birth rate (constant value otherwise)
+    P_CON['variable_birthrate'] = True
 
-# ***** Specify sim-variable parameters *****
+    # Use historical data for age initialization (equilibrium otherwise)
+    P_CON['modified_age_init'] = True
 
-param_dict['EXP_VARIABLE']['run_number']          =  list(range(NSIMS))
+    # Number of agents for simulation
+    P_CON['num_agents'] = 50000
 
+    # Write parameter dictionary
+    with open(P_FILE, 'w') as fid01:
+        json.dump(param_dict, fid01)
 
+    return None
 
-# ***** Parameters to auto-adjust *****
-
-# Log of age-independent multiplier for mortality rates
-param_dict['EXP_OPTIMIZE']['log_mort_mult01']     =  [-4.0, 4.0]
-param_dict['EXP_OPTIMIZE']['log_mort_mult02']     =  [-4.0, 4.0]
-param_dict['EXP_OPTIMIZE']['log_mort_mult03']     =  [-4.0, 4.0]
-
-
-
-# ***** Constants for this experiment *****
-
-# Number of days for simulation
-param_dict['EXP_CONSTANT']['num_tsteps']          =  365.0*30
-
-# Use historical data for crude birth rate (constant value otherwise)
-param_dict['EXP_CONSTANT']['variable_birthrate']  =  True
-
-# Use historical data for age initialization (equilibrium otherwise)
-param_dict['EXP_CONSTANT']['modified_age_init']   =  True
-
-
-# ***** Write parameter dictionary *****
-
-with open('param_dict.json','w') as fid01:
-  json.dump(param_dict,fid01)
+# *****************************************************************************
 
 
+if (__name__ == "__main__"):
 
-#*******************************************************************************
+    write_param_dict()
+
+# *****************************************************************************

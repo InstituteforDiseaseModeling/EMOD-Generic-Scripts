@@ -10,8 +10,10 @@ C_FILE = 'config.json'
 
 EXP_C = 'EXP_CONSTANT'
 EXP_V = 'EXP_VARIABLE'
+EXP_O = 'EXP_OPTIMIZE'
 EXP_NAME = 'EXP_NAME'
 NUM_SIMS = 'NUM_SIMS'
+NUM_ITER = 'NUM_ITER'
 
 SPATH = 'Assets/schema.json'
 
