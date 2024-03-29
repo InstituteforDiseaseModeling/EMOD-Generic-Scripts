@@ -66,9 +66,10 @@ def pool_manager(exp_id=None):
 
     if (not exp_id):
         (exp_id, _, _, _) = read_id_file(os.path.join('Assets', FILENAME_ID))
-        exp_obj = Experiment.get(exp_id)
-        sims_all = exp_obj.get_simulations()
-        sims_valid = [s for s in sims_all if s.state.value >=
+
+    exp_obj = Experiment.get(exp_id)
+    sims_all = exp_obj.get_simulations()
+    sims_valid = [s for s in sims_all if s.state.value >=
                       SimulationState.Commissioned.value]
 
     with Pool() as pool_obj:
