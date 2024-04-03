@@ -25,8 +25,6 @@ TLOCS = [-8, -6, -4, -2, 0, 2, 4, 6, 8]
 
 def make_fig():
 
-    # yref    = np.array(tpop_yval)/1e6
-
     # Sim outputs
     tpath = os.path.join('..', DIRNAME)
 
@@ -39,8 +37,9 @@ def make_fig():
     N_SIMS = int(param_dict[NUM_SIMS])
     VAR_SET = np.array(param_dict[EXP_V]['variable_birthrate'])
     AGE_SET = np.array(param_dict[EXP_V]['modified_age_init'])
-    MORT_SET = np.array(param_dict[EXP_V]['log_mort_mult03'])
+    MORT_SET = -np.array(param_dict[EXP_V]['log_mort_mult03'])
 
+    sim_pop_list = list()
     pyr_mat = np.zeros((N_SIMS, 30+1, 20))-1
     for sim_idx_str in data_brick:
         sim_idx = int(sim_idx_str)
@@ -66,6 +65,7 @@ def make_fig():
                for k1 in range(N_SIMS)]
     p_tuple = sorted(list(set(p_tuple)))
 
+    # Pyramid figures
     for k0 in range(len(p_tuple)):
         fig01 = plt.figure(figsize=(24, 12))
         pt = p_tuple[k0]
@@ -75,6 +75,8 @@ def make_fig():
 
         pyr_mat_avg = np.mean(pyr_mat[gidx, :, :], axis=0)
         pyr_mat_std = np.std(pyr_mat[gidx, :, :], axis=0)
+
+        sim_pop_list.append(np.sum(pyr_mat_avg, axis=1))
 
         for k1 in range(0, pyr_mat_avg.shape[0], 10):
 
@@ -157,6 +159,45 @@ def make_fig():
         plt.tight_layout()
         plt.savefig('fig_pyr_set{:02d}_01.png'.format(k0+1))
         plt.close()
+
+    # Total pop figure
+    fig01 = plt.figure(figsize=(8, 6))
+
+    axs01 = fig01.add_subplot(1, 1, 1, label=None)
+    plt.sca(axs01)
+
+    axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+    axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
+    axs01.set_axisbelow(True)
+
+    axs01.set_xlabel('Year', fontsize=14)
+    axs01.set_ylabel('UK Population (M)', fontsize=14)
+
+    axs01.set_xlim(0, 30)
+    axs01.set_ylim(48, 58)
+
+    ticloc = [0, 5, 10, 15, 20, 25, 30]
+    ticlab = ['1950', '1955', '1960', '1965', '1970', '1975', '1980']
+    axs01.set_xticks(ticks=ticloc)
+    axs01.set_xticklabels(ticlab, fontsize=14)
+
+    ticloc = [48, 50, 52, 54, 56, 58]
+    ticlab = ['48', '50', '52', '54', '56', '58']
+    axs01.set_yticks(ticks=ticloc)
+    axs01.set_yticklabels(ticlab, fontsize=14)
+
+    lab_val = ['Equilib Demog', '+Birth Rate Data',
+               '+Initial Age Data', '+Mortality Calib']
+    for k1 in range(len(sim_pop_list)):
+        sim_pop = sim_pop_list[k1]
+        axs01.plot(sim_pop/1.0e6, label=lab_val[k1])
+    axs01.plot(np.sum(pop_mat_ref, axis=0)/1.0e6, 'k.', ms=10)
+
+    axs01.legend()
+
+    plt.tight_layout()
+    plt.savefig('fig_pop_tot_01.png')
+    plt.close()
 
     return None
 

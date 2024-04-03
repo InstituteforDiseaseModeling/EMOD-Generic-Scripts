@@ -46,7 +46,9 @@ def write_param_dict():
     # Coordinated levels
     p_levels = [[False, True, True, True],
                 [False, False, True, True],
-                [0.0, 0.0, 0.0, 0.28]]
+                [0.0, 0.0, 0.0, -1.44],
+                [0.0, 0.0, 0.0, -0.42],
+                [0.0, 0.0, 0.0, -0.52]]
     rand_lev = np.random.randint(0, len(p_levels[0]), size=NSIMS).tolist()
 
     # Run number (EMOD random seed)
@@ -59,11 +61,9 @@ def write_param_dict():
     P_VAR['modified_age_init'] = [p_levels[1][val] for val in rand_lev]
 
     # Log of age-independent multiplier for mortality rates
-    P_VAR['log_mort_mult03'] = [p_levels[2][val] for val in rand_lev]
-
-    # Log of age-dependent multiplier for mortality rates
-    P_CON['log_mort_mult01'] = 0.0
-    P_CON['log_mort_mult02'] = 0.0
+    P_VAR['log_mort_mult01'] = [p_levels[2][val] for val in rand_lev]
+    P_VAR['log_mort_mult02'] = [p_levels[3][val] for val in rand_lev]
+    P_VAR['log_mort_mult03'] = [p_levels[4][val] for val in rand_lev]
 
     # Number of agents for simulation
     P_CON['num_agents'] = 50000

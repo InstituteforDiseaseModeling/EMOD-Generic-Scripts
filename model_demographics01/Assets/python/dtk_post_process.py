@@ -33,12 +33,15 @@ def application(output_path):
     ref_pop = np.sum(gdata.pop_mat_ref, axis=0)
     sum_val = np.sum(np.power(100*(sim_pop-ref_pop)/ref_pop, 2.0))
     err_score = err_score + np.sqrt(sum_val)
+    parsed_dat[key_str]['pop_err'] = -float(err_score)
 
     # Error from pyramid shape (every decade)
     for yr_idx in range(0, int(gdata.run_years)+1, 10):
-        sim_pyr = pyr_dat[yr_idx, :]/np.sum(pyr_dat[yr_idx, :])
+        sim_pyr = pyr_dat[yr_idx, :]
+        tpopsim = np.sum(sim_pyr)
         ref_pyr = np.array(gdata.pop_mat_ref[:, yr_idx])
-        sum_val = np.sum(np.power(100*(sim_pyr-ref_pyr), 2.0))
+        tpopref = np.sum(ref_pyr)
+        sum_val = np.sum(np.power(100*(sim_pyr/tpopsim-ref_pyr/tpopref), 2.0))
         err_score = err_score + np.sqrt(sum_val)
 
     # Record calibration score

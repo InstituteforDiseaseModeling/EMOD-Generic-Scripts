@@ -74,7 +74,7 @@ def demographicsBuilder():
     gdata.brate_mult_x = br_mult_x.tolist()
     gdata.brate_mult_y = br_mult_y.tolist()
 
-    # Use mortality profile from initial year
+    # Use mortality profile from initial year; data starts in 1950
     mort_year = [mort_year[0]]
     mort_mat = mort_mat[:, 0]
     mort_mat = mort_mat[..., np.newaxis]
