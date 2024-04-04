@@ -23,6 +23,13 @@ DEMOG_FILE = 'demographics.json'
 
 PATH_OVERLAY = 'demog_overlay'
 
+SQL_TIME = 0
+SQL_NODE = 2
+SQL_AGENT = 3
+SQL_MCW = 4
+SQL_AGE = 5
+SQL_LABEL = 6
+
 YR_DAYS = 365
 
 POP_PYR = 'pyr_data'

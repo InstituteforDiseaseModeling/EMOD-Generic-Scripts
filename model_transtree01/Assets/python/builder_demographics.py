@@ -1,31 +1,18 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Builds a demographics file and overlays for input to the DTK.
+# Demographics file and overlays.
 #
-#********************************************************************************
+# *****************************************************************************
 
-import os, sys, json
+# *****************************************************************************
 
-import global_data as gdata
-
-import numpy as np
-
-#********************************************************************************
 
 def demographicsBuilder():
 
-  DEMOG_FILENAME = 'demographics.json'
+    # Variables for this simulation
 
+    # Use auto-generated file; nothing to do
 
-  # ***** Get variables for this simulation *****
-  # N/A
+    return None
 
-
-  # ***** Write primary demographics file *****
-  # Use defaults
-
-
-
-  return None
-
-#*******************************************************************************
+# *****************************************************************************
