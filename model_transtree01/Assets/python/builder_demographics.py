@@ -9,10 +9,7 @@
 
 def demographicsBuilder():
 
-    # Variables for this simulation
-
-    # Use auto-generated file; nothing to do
-
+    # Use built-in demographics
     return None
 
 # *****************************************************************************
