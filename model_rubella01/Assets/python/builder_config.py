@@ -1,148 +1,117 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Builds a config file for input to the DTK.
+# Configuration file for simulation.
 #
-#********************************************************************************
-
-import os, sys, json
+# *****************************************************************************
 
 import global_data as gdata
 
-import numpy as np
+from emod_constants import CAMP_FILE, REPORTS_FILE
 
-from emod_api.config import default_from_schema_no_validation as dfs
+# *****************************************************************************
 
-#********************************************************************************
 
-# Function for setting config parameters 
 def update_config_obj(config):
 
-  MAX_CLOCK      = gdata.max_clock
-  INIT_POP       = gdata.init_pop
-  BASE_YEAR      = gdata.base_year
-  START_YEAR     = gdata.start_year
-  RUN_YEARS      = gdata.run_years
-  TIME_STEP      = gdata.t_step_days
+    # Variables for this simulation
+    RUN_NUM = gdata.var_params['run_number']
+    R0 = gdata.var_params['R0']
+    INIT_AGENT = gdata.var_params['num_agents']
 
+    # Config parameters object (read only dictionary)
+    cp = config.parameters
 
-  # ***** Get variables for this simulation *****
-  RUN_NUM        = gdata.var_params['run_number']
-  R0             = gdata.var_params['R0']
-  INIT_AGENT     = gdata.var_params['num_agents']
+    # Random number seed
+    cp.Run_Number = RUN_NUM
 
+    # Time
+    cp.Start_Time = 365.0*(gdata.start_year-gdata.base_year)
+    cp.Simulation_Duration = 365.0*gdata.run_years
+    cp.Simulation_Timestep = gdata.t_step_days
 
-  # ***** Random number seed *****
-  config.parameters.Run_Number                                     = RUN_NUM
+    cp.Enable_Termination_On_Total_Wall_Time = 1
+    cp.Wall_Time_Maximum_In_Minutes = gdata.max_clock
 
+    # Intrahost
+    inf_prd_mean = 6.0
+    cp.Base_Infectivity_Distribution = 'CONSTANT_DISTRIBUTION'
+    cp.Base_Infectivity_Constant = R0/inf_prd_mean
 
-  # ***** Time *****
-  config.parameters.Start_Time                                     = 365.0*(START_YEAR-BASE_YEAR)
-  config.parameters.Simulation_Duration                            = 365.0*RUN_YEARS
-  config.parameters.Simulation_Timestep                            = TIME_STEP
+    cp.Incubation_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
+    cp.Incubation_Period_Gaussian_Mean = 17.0
+    cp.Incubation_Period_Gaussian_Std_Dev = 2.0
 
-  config.parameters.Enable_Termination_On_Total_Wall_Time          =   1
-  config.parameters.Wall_Time_Maximum_In_Minutes                   = MAX_CLOCK
+    cp.Infectious_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
+    cp.Infectious_Period_Gaussian_Mean = inf_prd_mean
+    cp.Infectious_Period_Gaussian_Std_Dev = 2.0
 
+    cp.Enable_Disease_Mortality = 0
 
-  # ***** Intrahost *****
-  config.parameters.Base_Infectivity_Distribution                  = 'CONSTANT_DISTRIBUTION'
-  config.parameters.Base_Infectivity_Constant                      =    R0/6.0
+    cp.Symptomatic_Infectious_Offset = 3.0
 
-  config.parameters.Incubation_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Incubation_Period_Gaussian_Mean                =   17.0
-  config.parameters.Incubation_Period_Gaussian_Std_Dev             =    2.0
+    # Immunity
+    cp.Enable_Immunity = 1
+    cp.Enable_Immune_Decay = 0
 
-  config.parameters.Infectious_Period_Distribution                 = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Infectious_Period_Gaussian_Mean                =    6.0
-  config.parameters.Infectious_Period_Gaussian_Std_Dev             =    2.0
+    cp.Post_Infection_Acquisition_Multiplier = 0.0
+    cp.Post_Infection_Mortality_Multiplier = 0.0
+    cp.Post_Infection_Transmission_Multiplier = 0.0
 
-  config.parameters.Enable_Disease_Mortality                       =    0
+    cp.Maternal_Acquire_Config.Initial_Effect = 1.0
+    cp.Maternal_Acquire_Config.Enable_Box_Duration_Distribution = 1
+    enum_str = 'GAUSSIAN_DISTRIBUTION'
+    cp.Maternal_Acquire_Config.Box_Duration_Distribution = enum_str
+    cp.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean = 90.0
+    cp.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev = 48.0
 
-  config.parameters.Symptomatic_Infectious_Offset                  =    3.0
+    cp.Enable_Initial_Susceptibility_Distribution = 1
+    cp.Susceptibility_Initialization_Distribution_Type = 'DISTRIBUTION_COMPLEX'
 
+    # Interventions
+    cp.Enable_Interventions = 1
+    cp.Campaign_Filename = CAMP_FILE
 
-  # ***** Immunity *****
-  config.parameters.Enable_Immunity                                =    1
-  config.parameters.Enable_Immune_Decay                            =    0
+    # Infectivity
+    cp.Enable_Acquisition_Heterogeneity = 0
+    cp.Enable_Infection_Rate_Overdispersion = 0
+    cp.Enable_Infectivity_Reservoir = 1
 
-  config.parameters.Post_Infection_Acquisition_Multiplier          =    0.0
-  config.parameters.Post_Infection_Mortality_Multiplier            =    0.0
-  config.parameters.Post_Infection_Transmission_Multiplier         =    0.0
+    # Network
+    cp.Enable_Network_Infectivity = 1
+    cp.Network_Infectivity_Coefficient = [0.0]
+    cp.Network_Infectivity_Exponent = [2.0]
 
-  config.parameters.Maternal_Acquire_Config.Initial_Effect                    =   1.0
-  config.parameters.Maternal_Acquire_Config.Enable_Box_Duration_Distribution  =   1
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Distribution         = 'GAUSSIAN_DISTRIBUTION'
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Mean        =  90.0
-  config.parameters.Maternal_Acquire_Config.Box_Duration_Gaussian_Std_Dev     =  48.0
+    # Adapted sampling
+    cp.Individual_Sampling_Type = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
+    cp.Min_Node_Population_Samples = 20.0
+    cp.Base_Individual_Sample_Rate = INIT_AGENT/gdata.init_pop
+    cp.Relative_Sample_Rate_Immune = 0.01
+    cp.Immune_Threshold_For_Downsampling = 1.0e-5
+    cp.Immune_Downsample_Min_Age = 365.0
 
-  config.parameters.Enable_Initial_Susceptibility_Distribution     =    1
-  config.parameters.Susceptibility_Initialization_Distribution_Type= 'DISTRIBUTION_COMPLEX'
+    # Demographics
+    cp.Enable_Demographics_Builtin = 0
 
+    cp.Enable_Vital_Dynamics = 1
 
-  # ***** Interventions *****
-  config.parameters.Enable_Interventions                           =    1
-  config.parameters.Campaign_Filename                              = gdata.camp_file
+    cp.Enable_Birth = 1
+    cp.Birth_Rate_Dependence = 'POPULATION_DEP_RATE'
+    cp.Enable_Aging = 1
+    cp.Age_Initialization_Distribution_Type = 'DISTRIBUTION_COMPLEX'
+    cp.Enable_Natural_Mortality = 1
+    enum_str = 'NONDISEASE_MORTALITY_BY_YEAR_AND_AGE_FOR_EACH_GENDER'
+    cp.Death_Rate_Dependence = enum_str
 
+    cp.Demographics_Filenames = gdata.demog_files
 
-  # ***** Infectivity *****
-  config.parameters.Enable_Acquisition_Heterogeneity               =    0
-  config.parameters.Enable_Infection_Rate_Overdispersion           =    0
-  config.parameters.Enable_Infectivity_Reservoir                   =    1
+    # Reporting
+    cp.Enable_Default_Reporting = 1
+    cp.Enable_Demographics_Reporting = 1
+    cp.Enable_Event_DB = 1
+    cp.SQL_Events = ["NewInfection"]
 
+    cp.Custom_Reports_Filename = REPORTS_FILE
 
-  # ***** Adapted sampling *****
-  config.parameters.Individual_Sampling_Type                       = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
-  config.parameters.Min_Node_Population_Samples                    =  20.0
-  config.parameters.Base_Individual_Sample_Rate                    = INIT_AGENT/INIT_POP
-  config.parameters.Relative_Sample_Rate_Immune                    =   0.01
-  config.parameters.Immune_Threshold_For_Downsampling              =   1.0e-5
-  config.parameters.Immune_Downsample_Min_Age                      = 365.0
+    return config
 
-
-  # ***** Demographic parameters *****
-  config.parameters.Enable_Demographics_Builtin                    =    0
-
-  config.parameters.Enable_Vital_Dynamics                          =    1
-
-  config.parameters.Enable_Birth                                   =    1
-  config.parameters.Birth_Rate_Dependence                          = 'POPULATION_DEP_RATE'
-  config.parameters.Enable_Aging                                   =    1
-  config.parameters.Age_Initialization_Distribution_Type           = 'DISTRIBUTION_COMPLEX'
-  config.parameters.Enable_Natural_Mortality                       =    1
-  config.parameters.Death_Rate_Dependence                          = 'NONDISEASE_MORTALITY_BY_YEAR_AND_AGE_FOR_EACH_GENDER'
-
-
-  config.parameters.Demographics_Filenames                         = gdata.demog_files
-
-
-  # ***** Reporting *****
-  config.parameters.Enable_Default_Reporting                       =    1
-  config.parameters.Enable_Demographics_Reporting                  =    1
-
-  config.parameters.Enable_Event_DB                                =    1
-  config.parameters.SQL_Events                                     =    ["NewInfection"]
-
-  config.parameters.Custom_Reports_Filename                        = gdata.reports_file
-
-
-  return config
-
-#********************************************************************************
-
-def configBuilder():
-
-  FILE_CONFIG  =  'config.json'
-  SCHEMA_PATH  =  gdata.schema_path
-
-  default_conf = dfs.get_default_config_from_schema(SCHEMA_PATH,as_rod=True)
-
-  # Probably ought to be an emod-api call
-  config_obj = update_config_obj(default_conf);
-  config_obj.parameters.finalize()
-  with open(FILE_CONFIG, 'w') as fid01:
-    json.dump(config_obj, fid01, sort_keys=True, indent=4)
-
-
-  return FILE_CONFIG
-
-#********************************************************************************
+# *****************************************************************************

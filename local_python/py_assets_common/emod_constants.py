@@ -32,6 +32,7 @@ SQL_LABEL = 6
 
 YR_DAYS = 365
 
+CBR_VEC = 'cbr_vec'
 POP_PYR = 'pyr_data'
 
 MORT_XVAL = [0.6, 1829.5, 1829.6, 3659.5, 3659.6, 5489.5,

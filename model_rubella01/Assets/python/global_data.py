@@ -1,36 +1,32 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Static data module for embedded python in the DTK.
+# Static data module for embedded python.
 #
-#********************************************************************************
+# *****************************************************************************
 
 # Control params
-sim_index       = None
-var_params      = dict()
-schema_path     = 'Assets/schema.json'
+sim_index = 0
+var_params = dict()
 
 # Filename params
-demog_files     = list()
-camp_file       = None
-reports_file    = 'custom_dlls.json'
+demog_files = list()
 
-demog_object    = None
+demog_object = None
 
 # Other stuff
 first_call_bool = True
 
-init_pop        = None
+init_pop = 1000000
 
-brate_mult_x    = None
-brate_mult_y    = None
+brate_mult_x = None
+brate_mult_y = None
 
-base_year       = 1900.0
-start_year      = 2000.0
-ri_offset       =   20.0
-run_years       =   50.0
-t_step_days     =    5.0
+base_year = 1900.0
+start_year = 2000.0
+ri_offset = 25.0
+run_years = 60.0
+t_step_days = 5.0
 
-max_clock       =  180.0
+max_clock = 180.0
 
-#*******************************************************************************
-
+# *****************************************************************************

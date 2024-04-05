@@ -1,81 +1,89 @@
-#********************************************************************************
+# *****************************************************************************
 #
-#********************************************************************************
+# *****************************************************************************
 
 import json
+import os
+import sys
 
 import numpy as np
 
-#*******************************************************************************
+# Ought to go in emodpy
+LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
+sys.path.insert(0, LOCAL_PATH)
+from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_NAME, NUM_SIMS
+
+# *****************************************************************************
 
 # This script makes a json dictionary that is used by the pre-processing script
 # in EMOD. Variable names defined here will be available to use in creating
-# the input files. Please don't change the variable name for 'EXP_NAME' or
-# for 'NUM_SIMS' because those are also used in scripts outside of EMOD.
+# the input files.
 
 # The pre-process script will open the json dict created by this method. For
-# everything in the 'EXP_VARIABLE' key, that script will assume a list and
-# get a value from that list based on the sim index. For everything in the 
-# 'EXP_CONSTANT' key, it will assume a single value and copy that value.
+# everything with the EXP_V key, that script will assume a list and get a value
+# from that list based on the sim index. For everything with the EXP_C key, it
+# will assume a single value and copy that value.
 
 
+def write_param_dict():
 
-# ***** Setup *****
-param_dict = dict()
+    # Setup
+    param_dict = dict()
 
-param_dict['EXP_NAME']     = 'Rubella01-DemogSteadyState'
-param_dict['NUM_SIMS']     =  4500
-param_dict['EXP_VARIABLE'] = dict()
-param_dict['EXP_CONSTANT'] = dict()
+    param_dict[EXP_NAME] = 'Rubella01-DemogSteadyState'
+    param_dict[NUM_SIMS] = 3000
+    param_dict[EXP_V] = dict()
+    param_dict[EXP_C] = dict()
 
-# Random number consistency
-np.random.seed(4)
+    # Random number consistency
+    np.random.seed(4)
 
-# Convenience naming
-NSIMS = param_dict['NUM_SIMS']
+    # Convenience naming
+    NSIMS = param_dict[NUM_SIMS]
+    P_VAR = param_dict[EXP_V]
+    P_CON = param_dict[EXP_C]
 
+    # Run number (EMOD random seed)
+    P_VAR['run_number'] = list(range(NSIMS))
 
+    # Infectivity
+    P_VAR['R0'] = (1.0 + np.random.gamma(16.0, scale=0.25,
+                                         size=NSIMS)).tolist()
 
-# ***** Specify sim-variable parameters *****
+    # RI rate for MR
+    P_VAR['RI_rate'] = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+                                        size=NSIMS).tolist()
 
-param_dict['EXP_VARIABLE']['run_number']   =  list(range(NSIMS))
+    # Context
+    P_CON['demog_set'] = 'SSA'
 
-# Infectivity
-param_dict['EXP_VARIABLE']['R0']           = np.random.gamma(30.0, scale=0.133, size=NSIMS).tolist()
+    # RI rate multiplier for MR
+    P_CON['RI_rate_mult_yvals'] = [1.0, 1.0]
+    P_CON['RI_rate_mult_xvals'] = [2025.0, 2060.0]
 
-# RI rate for MR
-param_dict['EXP_VARIABLE']['RI_rate']      = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0], size=NSIMS).tolist()
+    # Log10 of multiplier on exogeneous case importation
+    P_CON['log10_import_mult'] = -0.1
 
+    # Use constant vital dynamics
+    P_CON['steady_state_demog'] = True
 
+    # Use SIAs
+    P_CON['add_campaigns'] = False
 
-# ***** Constants for this experiment *****
+    # Initial number of agents
+    P_CON['num_agents'] = 50000
 
-# Context
-param_dict['EXP_CONSTANT']['demog_set']             =  'COD'
+    # Write parameter dictionary
+    with open('param_dict.json', 'w') as fid01:
+        json.dump(param_dict, fid01)
 
-# RI rate multiplier for MR
-param_dict['EXP_CONSTANT']['RI_rate_mult_yvals']    =  [   1.0,    1.0]   # Multiplier for the RI_rate above; same length as xvals below
-param_dict['EXP_CONSTANT']['RI_rate_mult_xvals']    =  [2020.0, 2050.0]   # Year; RI starts in 2020; linear interpolation
+    return None
 
-# Log10 of multiplier on exogeneous case importation
-param_dict['EXP_CONSTANT']['log10_import_mult']     =      0.0
-
-# Use constant vital dynamics
-param_dict['EXP_CONSTANT']['steady_state_demog']    =   True
-
-# Use SIAs
-param_dict['EXP_CONSTANT']['add_campaigns']         =  False
-
-# Initial number of agents 
-param_dict['EXP_CONSTANT']['num_agents']            =  75000
-
-
-
-# ***** Write parameter dictionary *****
-
-with open('param_dict.json','w') as fid01:
-  json.dump(param_dict,fid01)
-
+# *****************************************************************************
 
 
-#*******************************************************************************
+if (__name__ == "__main__"):
+
+    write_param_dict()
+
+# *****************************************************************************

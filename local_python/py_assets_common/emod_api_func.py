@@ -20,7 +20,7 @@ from emod_api import __version__ as API_CUR
 from emod_api.config import default_from_schema_no_validation as dfs
 
 from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
-                           AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH
+                           AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH, CBR_VEC
 
 # *****************************************************************************
 
@@ -138,6 +138,32 @@ def post_proc_poppyr(output_path, parsed_out):
         pyr_dat[1:, k1] = age_subset
 
     parsed_out[POP_PYR] = pyr_dat.tolist()
+
+    return None
+
+# *****************************************************************************
+
+
+def post_proc_cbr(output_path, parsed_out):
+
+    # Retain annualized count of births
+    with open(os.path.join(output_path, 'InsetChart.json')) as fid01:
+        inset_chart = json.load(fid01)
+
+    ic_start = inset_chart['Header']['Start_Time']
+    ic_nstep = inset_chart['Header']['Timesteps']
+    ic_tsize = inset_chart['Header']['Simulation_Timestep']
+    cumb_vec = np.array(inset_chart['Channels']['Births']['Data'])
+
+    time_vec = np.arange(ic_nstep)*ic_tsize + ic_start
+    nyr_bool = (np.diff(time_vec//365.0) > 0.0)
+    run_years = (ic_nstep*ic_tsize)//365.0
+    b_vec = cumb_vec[:-1][nyr_bool]
+    if (b_vec.shape[0] < run_years):
+        b_vec = np.append(b_vec, cumb_vec[-1])
+    b_vec[1:] = np.diff(b_vec)
+
+    parsed_out[CBR_VEC] = b_vec.tolist()
 
     return None
 

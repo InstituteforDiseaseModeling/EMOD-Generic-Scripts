@@ -6,6 +6,10 @@ import json
 import os
 
 import numpy as np
+import scipy.optimize as opt
+
+from emod_api.demographics.Demographics import DemographicsOverlay
+from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes
 
 from emod_constants import DEMOG_FILE, PATH_OVERLAY, \
                            MORT_XVAL, POP_AGE_DAYS, MAX_DAILY_MORT
@@ -14,7 +18,7 @@ from emod_constants import DEMOG_FILE, PATH_OVERLAY, \
 
 
 def demog_vd_over(ref_name, node_list, cb_rate,
-                  mort_year, mort_mat, age_x, age_y=None):
+                  mort_year, mort_mat, age_x, age_y=None, idx=0):
 
     if (not os.path.exists(PATH_OVERLAY)):
         os.mkdir(PATH_OVERLAY)
@@ -58,11 +62,70 @@ def demog_vd_over(ref_name, node_list, cb_rate,
     vdoddiamdf['ResultScaleFactor'] = 1
     vdoddiamdf['ResultValues'] = mort_mat.tolist()
 
-    nfname = DEMOG_FILE.rsplit('.', 1)[0] + '_vd.json'
+    nfname = DEMOG_FILE.rsplit('.', 1)[0] + '_vd{:03d}.json'.format(idx)
     nfname = os.path.join(PATH_OVERLAY, nfname)
 
     with open(nfname, 'w') as fid01:
         json.dump(vd_over_dict, fid01)
+
+    return nfname
+
+# *****************************************************************************
+
+
+def min_fun(x1, age_year, age_prob, targ_frac):
+
+    min_val = np.minimum(np.exp(x1*(age_year-0.65)), 1.0)*age_prob
+    retval = np.sum(min_val)-targ_frac
+
+    return retval
+
+# *****************************************************************************
+
+
+def demog_is_over(ref_name, node_list, R0, age_x, age_y=None, idx=0):
+
+    if (not os.path.exists(PATH_OVERLAY)):
+        os.mkdir(PATH_OVERLAY)
+
+    if (age_y is None):
+        age_y = POP_AGE_DAYS
+
+    # Calculate initial susceptibilities
+    targ_frac = 1.1*(1.0/R0)  # Tries to aim for Reff of 1.1
+
+    # Implicit solve of exponential decay mapped onto age distribution. Target
+    # area-under-the-curve is specified by targ_frac. Just aims to get close.
+    # May break for very low target frac values (e.g., < 0.01)
+    age_y_res = np.arange(1, 100*365, 30)
+    age_x_res = np.interp(age_y_res, age_y, age_x)
+    age_year = np.array(age_y_res[1:])/365.0
+    age_prob = np.diff(np.array(age_x_res))
+
+    arg_tup = (age_year, age_prob, targ_frac)
+    iSP0 = opt.brentq(min_fun, a=-80, b=0, args=arg_tup)
+    isus_x = [0] + (np.logspace(1.475, 4.540, 20, dtype=int)).tolist()
+    isus_y = [round(np.minimum(np.exp(iSP0*(val/365.0-0.65)), 1.0), 4)
+              for val in isus_x]
+
+    # Initial susceptibility overlays
+    dover_obj = DemographicsOverlay()
+    dover_obj.individual_attributes = IndividualAttributes()
+    dover_sus = IndividualAttributes.SusceptibilityDistribution()
+    dover_obj.individual_attributes.susceptibility_distribution = dover_sus
+
+    dover_obj.meta_data = {'IdReference': ref_name}
+
+    dover_obj.nodes = node_list
+
+    dover_sus = dover_obj.individual_attributes.susceptibility_distribution
+    dover_sus.distribution_values = isus_x
+    dover_sus.result_scale_factor = 1
+    dover_sus.result_values = isus_y
+
+    nfname = DEMOG_FILE.rsplit('.', 1)[0] + '_is{:03d}.json'.format(idx)
+    nfname = os.path.join(PATH_OVERLAY, nfname)
+    dover_obj.to_file(file_name=nfname)
 
     return nfname
 
