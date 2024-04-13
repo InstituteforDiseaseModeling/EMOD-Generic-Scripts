@@ -5,7 +5,7 @@ additional information about how to use these scripts.
 
 ---------------------
 To get started:
-1. Setup a virtual environment (e.g., conda) using Python 3.10
+1. Setup a virtual environment (e.g., conda)
 2. Install requirements:
    ```
    pip install -r requirements.txt --index-url=https://packages.idmod.org/api/pypi/pypi-production/simple
@@ -26,7 +26,7 @@ To get started:
 ---------------------
 To build the documentation locally, do the following:
 
-1. Create and activate a venv.  *** Does not support Python 3.11: Use 3.10 ***
+1. Create and activate a venv.
 2. Navigate to the root directory of the repo and enter the following
 
     ```
