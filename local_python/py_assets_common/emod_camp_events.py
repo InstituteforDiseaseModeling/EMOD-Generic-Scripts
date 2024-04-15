@@ -14,8 +14,12 @@ SEC = 'StandardEventCoordinator'
 CHWEC = 'CommunityHealthWorkerEventCoordinator'
 
 NLHT = 'NodeLevelHealthTriggeredIVScaleUpSwitch'
+MID = 'MultiInterventionDistributor'
 DI = 'DelayedIntervention'
 VAX = 'Vaccine'
+
+VEC_AGE = [0/12*365, 3/12*365, 5/12*365, 7/12*365, 9/12*365]
+VEC_TAKE = [0.0, 0.0, 0.65, 0.92, 1.0]
 
 # *****************************************************************************
 
@@ -71,14 +75,17 @@ def ce_br_force(node_list, times, values,
 
 
 def ce_RI(node_list, times, values,
-          start_day=0.0):
+          start_day=0.0, base_take=1.0, acq_fact=0.0, age_dep=False,
+          age_one=300.0, frac_two=None, age_two=475.0):
 
     # Vaccine
     camp_event = s2c.get_class_with_defaults(CE, SPATH)
     camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
-    camp_iv01 = s2c.get_class_with_defaults(NLHT,  SPATH)
-    camp_iv02 = s2c.get_class_with_defaults(DI, SPATH)
-    camp_iv03 = s2c.get_class_with_defaults(VAX, SPATH)
+    camp_iv01 = s2c.get_class_with_defaults(NLHT, SPATH)
+    camp_iv02 = s2c.get_class_with_defaults(MID, SPATH)
+
+    camp_iv03 = s2c.get_class_with_defaults(DI, SPATH)
+    camp_iv04 = s2c.get_class_with_defaults(VAX, SPATH)
 
     node_set = utils.do_nodes(SPATH, node_list)
 
@@ -96,19 +103,49 @@ def ce_RI(node_list, times, values,
     camp_iv01.Coverage_vs_Time_Interpolation_Map.Values = values + [values[-1]]
     camp_iv01.Not_Covered_IndividualIntervention_Configs = []  # Required
 
-    camp_iv02.Actual_IndividualIntervention_Configs = [camp_iv03]
-    camp_iv02.Delay_Period_Distribution = "GAUSSIAN_DISTRIBUTION"
-    camp_iv02.Delay_Period_Gaussian_Mean = 300.0
-    camp_iv02.Delay_Period_Gaussian_Std_Dev = 90.0
+    camp_iv02.Intervention_List = [camp_iv03]
 
-    camp_iv03.Acquire_Config.Initial_Effect = 1.0
+    camp_iv03.Actual_IndividualIntervention_Configs = [camp_iv04]
+    camp_iv03.Delay_Period_Distribution = "GAUSSIAN_DISTRIBUTION"
+    camp_iv03.Delay_Period_Gaussian_Mean = age_one
+    camp_iv03.Delay_Period_Gaussian_Std_Dev = 90.0
+
+    camp_iv04.Acquire_Config.Initial_Effect = 1.0
+    camp_iv04.Vaccine_Take = base_take
+    camp_iv04.Take_Reduced_By_Acquire_Immunity = acq_fact
+
+    if (age_dep):
+        camp_iv04.Take_By_Age_Multiplier.Times = VEC_AGE
+        camp_iv04.Take_By_Age_Multiplier.Values = VEC_TAKE
+
+    # Second RI dose
+    if (frac_two):
+        camp_iv05 = s2c.get_class_with_defaults(DI, SPATH)
+        camp_iv06 = s2c.get_class_with_defaults(VAX, SPATH)
+
+        camp_iv05.Actual_IndividualIntervention_Configs = [camp_iv06]
+        camp_iv05.Coverage = frac_two
+        camp_iv05.Delay_Period_Distribution = "GAUSSIAN_DISTRIBUTION"
+        camp_iv05.Delay_Period_Gaussian_Mean = age_two
+        camp_iv05.Delay_Period_Gaussian_Std_Dev = 90.0
+
+        camp_iv06.Acquire_Config.Initial_Effect = 1.0
+        camp_iv06.Vaccine_Take = base_take
+        camp_iv06.Take_Reduced_By_Acquire_Immunity = acq_fact
+
+        camp_iv02.Intervention_List.append(camp_iv05)
+
+        if (age_dep):
+            camp_iv06.Take_By_Age_Multiplier.Times = VEC_AGE
+            camp_iv06.Take_By_Age_Multiplier.Values = VEC_TAKE
 
     return camp_event
 
 # *****************************************************************************
 
 
-def ce_SIA(node_list, start_day=0.0, yrs_min=0.75, yrs_max=5.0, coverage=0.8):
+def ce_SIA(node_list, start_day=0.0, yrs_min=0.75, yrs_max=5.0,
+           coverage=0.8, base_take=1.0, acq_fact=0.0, age_dep=False):
 
     # Vaccine
     camp_event = s2c.get_class_with_defaults(CE, SPATH)
@@ -134,7 +171,12 @@ def ce_SIA(node_list, start_day=0.0, yrs_min=0.75, yrs_max=5.0, coverage=0.8):
     camp_iv01.Delay_Period_Max = 14.0
 
     camp_iv02.Acquire_Config.Initial_Effect = 1.0
-    camp_iv02.Vaccine_Take = 1.0
+    camp_iv02.Vaccine_Take = base_take
+    camp_iv02.Take_Reduced_By_Acquire_Immunity = acq_fact
+
+    if (age_dep):
+        camp_iv02.Take_By_Age_Multiplier.Times = VEC_AGE
+        camp_iv02.Take_By_Age_Multiplier.Values = VEC_TAKE
 
     return camp_event
 
