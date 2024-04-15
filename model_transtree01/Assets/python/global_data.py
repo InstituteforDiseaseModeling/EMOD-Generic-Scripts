@@ -15,7 +15,5 @@ demog_object = None
 
 # Other stuff
 first_call_bool = True
-prev_proc_time = -1.0
-tree_data = None
 
 # *****************************************************************************
