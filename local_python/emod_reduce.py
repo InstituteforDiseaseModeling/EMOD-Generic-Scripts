@@ -110,7 +110,7 @@ def get_sim_files(exp_id='', LOCAL_PATH=''):
     wi_obj = SSMTWorkItem(name='ReduceExpOutput',
                           task=task_obj,
                           docker_image=DOCK_PACK)
-    wi_obj.run(wait_on_done=True)
+    wi_obj.run(wait_until_done=True)
 
     # Download reduced output and delete work item
     resp_dict = plat.get_files(wi_obj, [DATA_BRICK])

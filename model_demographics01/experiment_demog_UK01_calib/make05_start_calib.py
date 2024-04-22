@@ -37,7 +37,7 @@ def run_the_calibration():
                                  PATH_EXE, PATH_DATA, LOCAL_PATH)
 
     # Send work item to COMPS; start processing
-    wi_obj.run(wait_on_done=False)
+    wi_obj.run(wait_until_done=False)
 
     # Save work item id to file
     wi_obj.to_id_file(FILENAME_ID)

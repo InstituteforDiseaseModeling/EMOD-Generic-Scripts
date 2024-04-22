@@ -36,7 +36,7 @@ def make_OS_asset():
                                         force=True)
 
     # Wait until the image is built
-    ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
+    ac_obj = sbwi_obj.run(wait_until_done=True, platform=plat_obj)
 
     # Save asset id for sif to file
     ac_obj.to_id_file(ID_OS)
@@ -76,7 +76,7 @@ def make_EXE_asset():
     sbwi_obj.assets.add_assets(os_image)
 
     # Wait until the build image is finished
-    ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
+    ac_obj = sbwi_obj.run(wait_until_done=True, platform=plat_obj)
 
     # Magic words
     s_exe = 'singularity exec Assets/EMOD_EXE_'+OS_NAME+'.sif '
@@ -92,7 +92,7 @@ def make_EXE_asset():
     # Wait until asset collection has been built; save to file
     ao_obj01 = AssetizeOutput(no_simulation_prefix=True)
     ao_obj01.from_items(Experiment.from_task(task_obj))
-    ao_obj01.run(wait_on_done=True, platform=plat_obj)
+    ao_obj01.run(wait_until_done=True, platform=plat_obj)
     ao_obj01.asset_collection.to_id_file(ID_EXE)
     print(ao_obj01.asset_collection.uid.hex)
 
@@ -106,7 +106,7 @@ def make_EXE_asset():
     # Wait until asset collection has been built
     ao_obj02 = AssetizeOutput(no_simulation_prefix=True)
     ao_obj02.from_items(Experiment.from_task(task_obj))
-    ao_obj02.run(wait_on_done=True, platform=plat_obj)
+    ao_obj02.run(wait_until_done=True, platform=plat_obj)
     ao_obj02.asset_collection.to_id_file(ID_SCHEMA)
     print(ao_obj02.asset_collection.uid.hex)
 
@@ -137,7 +137,7 @@ def make_ENV_asset():
     sbwi_obj.assets.add_assets(os_image)
 
     # Wait until the image is built
-    ac_obj = sbwi_obj.run(wait_on_done=True, platform=plat_obj)
+    ac_obj = sbwi_obj.run(wait_until_done=True, platform=plat_obj)
 
     # Save asset id for sif to file
     ac_obj.to_id_file(ID_ENV)
