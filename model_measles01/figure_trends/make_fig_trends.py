@@ -17,7 +17,7 @@ from dtk_post_process import AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_popL1']
+DIRNAMES = ['experiment_slice']
 
 # *****************************************************************************
 
@@ -85,9 +85,6 @@ def make_fig():
         axs01.set_axisbelow(True)
 
         for mcv1_age_val in mcv1_age_lvl:
-            if (mcv1_age_val > 300):
-                continue
-
             idx02 = (mcv1_age_vec == mcv1_age_val)
             tidx = (fidx & idx02)
             xval = mcv1_vec[tidx]

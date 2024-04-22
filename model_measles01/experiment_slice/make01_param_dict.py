@@ -30,7 +30,7 @@ def write_param_dict():
     # Setup
     param_dict = dict()
 
-    param_dict[EXP_NAME] = 'Measles01-DemogL1'
+    param_dict[EXP_NAME] = 'Measles01-slice'
     param_dict[NUM_SIMS] = 1200
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
@@ -53,11 +53,11 @@ def write_param_dict():
     # RI params
     P_VAR['MCV1'] = np.random.choice(np.arange(0.2, 1.01, 0.04),
                                      size=NSIMS).tolist()
-    P_VAR['MCV1_age'] = (365.0*np.random.choice([0.50, 0.75, 1.00],
+    P_VAR['MCV1_age'] = (np.random.choice([180.0, 270.0],
                          size=NSIMS)).tolist()
 
-    # Reference year for population: [2020, 2040, 2060]
-    P_CON['ref_year'] = 2060
+    # Reference year for population; uses UN WPP DRC
+    P_CON['ref_year'] = 2040
 
     # Number of years to wait before starting SIAs
     P_CON['sia_start_year'] = 1000
