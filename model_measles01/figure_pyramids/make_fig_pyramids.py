@@ -1,95 +1,79 @@
-#*******************************************************************************
+# *****************************************************************************
 
-import os, json, sys
+import json
+import os
+import sys
 
-sys.path.append(os.path.join('..','Assets','python'))
+import numpy as np
+import matplotlib.pyplot as plt
 
-import numpy               as np
-import matplotlib.pyplot   as plt
+# Ought to go in emodpy
+sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
+sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
 
-from builder_demographics import pop_age_days
-from global_data          import run_years
+from py_assets_common.emod_constants import NUM_SIMS, P_FILE, POP_PYR
+from py_assets_common.emod_local_proc import pyr_chart
+from global_data import start_year, run_years
 
-#*******************************************************************************
+# *****************************************************************************
 
+DIRNAMES = ['experiment_slice']
 
-DIRNAMES = ['experiment_popL1' ,
-            'experiment_popL2' ,
-            'experiment_popL3' ]
-
-
-CM      = np.array([ 70,130,180])/255
-CF      = np.array([238,121,137])/255
-
-
-for dirname in DIRNAMES:
-
-  # Sim outputs
-  tpath = os.path.join('..',dirname)
-
-  with open(os.path.join(tpath,'data_brick.json')) as fid01:
-    data_brick = json.load(fid01)
-
-  with open(os.path.join(tpath,'param_dict.json')) as fid01:
-    param_dict = json.load(fid01)
-
-  nsims        = int(param_dict['NUM_SIMS'])
-
-  pyr_mat      = np.zeros((nsims,int(run_years)+1,20))-1
-
-  fig01 = plt.figure(figsize=(16,6))
-
-  for sim_idx_str in data_brick:
-    if(not sim_idx_str.isdigit()):
-      continue
-
-    sim_idx = int(sim_idx_str)
-    pyr_mat[sim_idx,:,:] = np.array(data_brick[sim_idx_str]['pyr_data'])
-
-  fidx = (pyr_mat[:,0,0]>=0)
-
-  pyr_mat_avg = np.mean(pyr_mat[fidx,:,:],axis=0)
-  pyr_mat_std = np.std(pyr_mat[fidx,:,:],axis=0)
+# *****************************************************************************
 
 
-  # Figures - Sims
-  for k1 in range(2):
-    axs01 = fig01.add_subplot(1, 2, k1+1)
-    plt.sca(axs01)
+def make_fig():
 
-    axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
-    axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
-    axs01.set_axisbelow(True)
+    for dirname in DIRNAMES:
 
-    axs01.set_xlabel('Percentage', fontsize=14)
-    axs01.set_ylabel('Age (yrs)', fontsize=14)
+        # Sim outputs
+        tpath = os.path.join('..', dirname)
 
-    axs01.set_xlim( -12,  12)
-    axs01.set_ylim(   0, 100)
+        with open(os.path.join(tpath, 'data_brick.json')) as fid01:
+            data_brick = json.load(fid01)
 
-    ticloc = [-12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12]
-    ticlab = ['12', '10', '8', '6', '4', '2', '0', '2', '4', '6', '8', '10', '12']
-    axs01.set_xticks(ticks=ticloc)
-    axs01.set_xticklabels(ticlab)
+        with open(os.path.join(tpath, P_FILE)) as fid01:
+            param_dict = json.load(fid01)
 
-    ydat        = np.array(pop_age_days)/365.0 - 2.5
-    pop_dat     = pyr_mat_avg[-k1,:]
-    pop_dat_err = pyr_mat_std[-k1,:]
-    tpop        = np.sum(pop_dat)
+        NSIMS = int(param_dict[NUM_SIMS])
+        pyr_mat = np.zeros((NSIMS, int(run_years)+1, 20))-1
+        year_vec = np.arange(start_year, start_year+run_years+1, dtype=int)
+        chart_yrs = year_vec[np.mod(year_vec, 10) == 0]
+        num_charts = chart_yrs.shape[0]
 
-    pop_dat_n     = 100*pop_dat/tpop
-    pop_dat_n_err = 100*pop_dat_err/tpop
+        fig01 = plt.figure(figsize=(8*num_charts, 6))
 
-    axs01.barh(ydat[1:],  pop_dat_n/2.0, height=4.75, xerr=pop_dat_n_err, color=CF)
-    axs01.barh(ydat[1:], -pop_dat_n/2.0, height=4.75, xerr=pop_dat_n_err, color=CM)
+        for sim_idx_str in data_brick:
+            sim_idx = int(sim_idx_str)
+            pyr_mat[sim_idx, :, :] = np.array(data_brick[sim_idx_str][POP_PYR])
 
-    axs01.text( -11, 92.5, 'Year {:d}'.format(k1*int(run_years)), fontsize=18)
-    axs01.text(   5, 87.5, 'Total Pop\n{:5.2f}M'.format(tpop/1e6), fontsize=18)
+        fidx = (pyr_mat[:, 0, 0] >= 0)
+
+        pyr_mat_avg = np.mean(pyr_mat[fidx, :, :], axis=0)
+        pyr_mat_std = np.std(pyr_mat[fidx, :, :], axis=0)
+
+        # Figures - Sims
+        for k1 in range(num_charts):
+
+            axs01 = fig01.add_subplot(1, num_charts, k1+1)
+
+            gidx = np.argwhere(year_vec == chart_yrs[k1])[0][0]
+            pop_dat = pyr_mat_avg[gidx, :]
+            pop_dat_err = pyr_mat_std[gidx, :]
+
+            pyr_chart(axs01, pop_dat, pop_dat_err, year_vec[gidx])
+
+        plt.tight_layout()
+        plt.savefig('fig_pyr_{:s}_01.png'.format(dirname))
+        plt.close()
+
+    return None
+
+# *****************************************************************************
 
 
-  plt.tight_layout()
-  plt.savefig('fig_pyr_{:s}_01.png'.format(dirname))
-  plt.close()
+if (__name__ == "__main__"):
 
+    make_fig()
 
-#*******************************************************************************
+# *****************************************************************************

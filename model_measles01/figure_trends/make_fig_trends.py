@@ -8,12 +8,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.join('..', '..', 'local_python', 'py_assets_common')
-sys.path.insert(0, os.path.abspath(LOCAL_PATH))
-sys.path.append(os.path.join('..', 'Assets', 'python'))
-from emod_constants import EXP_C, EXP_V, NUM_SIMS, P_FILE, POP_PYR
-from global_data import run_years
-from dtk_post_process import AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
+sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
+sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
+from py_assets_common.emod_constants import EXP_C, EXP_V, NUM_SIMS, \
+                                            P_FILE, POP_PYR
+from global_data import run_years, AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 # *****************************************************************************
 
