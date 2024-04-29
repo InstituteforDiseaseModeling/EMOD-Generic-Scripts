@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: Assets/EMOD_OS_Fedora39.sif
+From: Assets/EMOD_OS_Fedora40.sif
 
 %post
     dnf install python3 -y

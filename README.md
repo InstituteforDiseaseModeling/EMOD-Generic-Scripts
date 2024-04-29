@@ -38,7 +38,7 @@ To build the documentation locally, do the following:
 
 | Directory | Description |
 | --- | --- |
-| env_Alma9 <br /> env_Debian12 <br /> env_Fedora39 <br /> env_Rocky9 <br /> env_Ubuntu24 |  Contains the definition scripts for singularity containers. Produces the the EMOD executable, schema, and custom reporters; creates an environment for running EMOD on COMPS and contains the python packages available to the embedded python interpreter. All files remain on COMPS and are provided to the various workflows as Asset Collection IDs. |
+| env_Alma9 <br /> env_Debian12 <br /> env_Fedora40 <br /> env_Rocky9 <br /> env_Ubuntu24 |  Contains the definition scripts for singularity containers. Produces the the EMOD executable, schema, and custom reporters; creates an environment for running EMOD on COMPS and contains the python packages available to the embedded python interpreter. All files remain on COMPS and are provided to the various workflows as Asset Collection IDs. |
 | local_python             | Contains additional python scripts that provide helper functions common to all of the workflows. |
 | model_covariance01       | Demonstration of the covariance feature. |
 | model_covid01            | Baseline simulations for SARS-CoV-2 in EMOD. Collab with MvG. |
