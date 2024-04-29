@@ -30,7 +30,7 @@ def write_param_dict():
     # Setup
     param_dict = dict()
 
-    param_dict[EXP_NAME] = 'Measles01-slice'
+    param_dict[EXP_NAME] = 'Measles01-SweepBase'
     param_dict[NUM_SIMS] = 1200
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
