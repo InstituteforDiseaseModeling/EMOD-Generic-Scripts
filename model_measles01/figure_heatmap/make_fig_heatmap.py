@@ -16,8 +16,8 @@ from global_data import run_years, AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_surface_base',
-            'experiment_surface_ideal']
+DIRNAMES = ['experiment_surf_base',
+            'experiment_surf_ideal']
 
 # *****************************************************************************
 
