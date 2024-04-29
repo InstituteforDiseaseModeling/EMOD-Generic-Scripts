@@ -21,7 +21,9 @@ def campaignBuilder():
     # Variables for this simulation
     MCV1_RATE = gdata.var_params['MCV1']
     MCV2_FRAC = gdata.var_params['MCV2']
+
     MCV1_AGE = gdata.var_params['MCV1_age']
+    AGE_DEP = gdata.var_params['Age_Take']
 
     SIA_START = gdata.var_params['sia_start_year']
     SIA_MIN_AGE = gdata.var_params['sia_min_age']
@@ -42,8 +44,8 @@ def campaignBuilder():
     start_day = 365.0*(gdata.start_year-gdata.base_year)
     acq_fact = MAT_FACTOR/2.0
     camp_event = ce_RI(ALL_NODES, [0.0], [MCV1_RATE], start_day=start_day,
-                       base_take=0.95, acq_fact=acq_fact, age_dep=True,
-                       age_one=MCV1_AGE, frac_two=MCV2_FRAC)
+                       base_take=0.95, acq_fact=acq_fact, age_dep=AGE_DEP,
+                       age_one=MCV1_AGE, frac_two=MCV2_FRAC, age_std=60.0)
     camp_module.add(camp_event)
 
     # Add SIAs
@@ -58,7 +60,7 @@ def campaignBuilder():
 
         camp_event = ce_SIA(ALL_NODES, start_day=start_sia,
                             yrs_min=SIA_MIN_AGE, coverage=SIA_COVERAGE,
-                            base_take=0.95, acq_fact=acq_fact, age_dep=True)
+                            base_take=0.95, acq_fact=acq_fact, age_dep=AGE_DEP)
         camp_module.add(camp_event)
 
     # End file construction

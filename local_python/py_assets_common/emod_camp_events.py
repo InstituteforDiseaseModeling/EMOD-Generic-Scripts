@@ -76,7 +76,7 @@ def ce_br_force(node_list, times, values,
 
 def ce_RI(node_list, times, values,
           start_day=0.0, base_take=1.0, acq_fact=0.0, age_dep=False,
-          age_one=300.0, frac_two=None, age_two=475.0):
+          age_one=300.0, frac_two=None, age_two=475.0, age_std=90.0):
 
     # Vaccine
     camp_event = s2c.get_class_with_defaults(CE, SPATH)
@@ -108,7 +108,7 @@ def ce_RI(node_list, times, values,
     camp_iv03.Actual_IndividualIntervention_Configs = [camp_iv04]
     camp_iv03.Delay_Period_Distribution = "GAUSSIAN_DISTRIBUTION"
     camp_iv03.Delay_Period_Gaussian_Mean = age_one
-    camp_iv03.Delay_Period_Gaussian_Std_Dev = 90.0
+    camp_iv03.Delay_Period_Gaussian_Std_Dev = age_std
 
     camp_iv04.Acquire_Config.Initial_Effect = 1.0
     camp_iv04.Vaccine_Take = base_take
@@ -127,7 +127,7 @@ def ce_RI(node_list, times, values,
         camp_iv05.Coverage = frac_two
         camp_iv05.Delay_Period_Distribution = "GAUSSIAN_DISTRIBUTION"
         camp_iv05.Delay_Period_Gaussian_Mean = age_two
-        camp_iv05.Delay_Period_Gaussian_Std_Dev = 90.0
+        camp_iv05.Delay_Period_Gaussian_Std_Dev = age_std
 
         camp_iv06.Acquire_Config.Initial_Effect = 1.0
         camp_iv06.Vaccine_Take = base_take
