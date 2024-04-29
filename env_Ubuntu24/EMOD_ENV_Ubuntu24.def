@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: Assets/EMOD_OS_Ubuntu22.sif
+From: Assets/EMOD_OS_Ubuntu24.sif
 
 %post
     apt-get install python3 -y
