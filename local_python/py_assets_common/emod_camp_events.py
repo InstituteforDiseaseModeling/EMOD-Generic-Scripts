@@ -74,6 +74,47 @@ def ce_br_force(node_list, times, values,
 # *****************************************************************************
 
 
+def ce_inf_force(node_list, step_init, step_width, step_size,
+                 start_day=0.0):
+
+    # Infectivity multiplier
+    camp_event = s2c.get_class_with_defaults(CE, SPATH)
+    camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
+    camp_iv = s2c.get_class_with_defaults('NodeInfectivityMult', SPATH)
+
+    node_set   = utils.do_nodes(SPATH, node_list)
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv
+    camp_coord.Number_Repetitions =  -1  # Repeat forever
+    camp_coord.Timesteps_Between_Repetitions = 365.0
+
+    x_init = step_init % 365.0
+    x_ends = (step_init+step_width) % 365.0
+    y_bound = 1.0
+
+    if(x_ends < x_init):
+        y_bound  = step_size
+
+    xyvals   = set([(0.0, y_bound),
+                    (x_init-0.1, 1.0),
+                    (x_init, step_size),
+                    (x_ends-0.1, step_size),
+                    (x_ends, 1.0),
+                    (365.0, y_bound)])
+    xyvals   = sorted(list(xyvals), key=lambda val: val[0])
+
+    camp_iv.Multiplier_By_Duration.Times = [val[0] for val in xyvals]
+    camp_iv.Multiplier_By_Duration.Values = [val[1] for val in xyvals]
+
+    return camp_event
+
+# *****************************************************************************
+
+
 def ce_RI(node_list, times, values,
           start_day=0.0, base_take=1.0, acq_fact=0.0, age_dep=False,
           age_one=300.0, frac_two=None, age_two=475.0, age_std=90.0):

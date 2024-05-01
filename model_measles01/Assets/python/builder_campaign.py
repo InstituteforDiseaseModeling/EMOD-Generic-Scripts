@@ -10,7 +10,7 @@ import numpy as np
 
 import emod_api.campaign as camp_module
 
-from emod_camp_events import ce_br_force, ce_RI, ce_SIA
+from emod_camp_events import ce_br_force, ce_inf_force, ce_RI, ce_SIA
 from emod_constants import CAMP_FILE
 
 # *****************************************************************************
@@ -38,6 +38,11 @@ def campaignBuilder():
     BR_MULT_Y = gdata.brate_mult_y
     start_day = 365.0*(gdata.start_year-gdata.base_year)
     camp_event = ce_br_force(ALL_NODES, BR_MULT_X, BR_MULT_Y, start_day)
+    camp_module.add(camp_event)
+
+    # Add seasonality
+    start_day = 365.0*(gdata.start_year-gdata.base_year)
+    camp_event = ce_inf_force(ALL_NODES, 15.0, 60.0, 1.30)
     camp_module.add(camp_event)
 
     # Add MCV
