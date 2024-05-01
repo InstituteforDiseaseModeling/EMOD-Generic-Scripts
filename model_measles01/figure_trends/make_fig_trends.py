@@ -16,7 +16,8 @@ from global_data import run_years, AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_slice']
+DIRNAMES = ['experiment_sweep_base',
+            'experiment_sweep_base_MCV2',]
 
 # *****************************************************************************
 

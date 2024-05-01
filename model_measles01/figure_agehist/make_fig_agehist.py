@@ -15,7 +15,7 @@ from global_data import run_years, AGE_HIST_BINS
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_slice']
+DIRNAMES = ['experiment_sweep_base']
 
 # *****************************************************************************
 
