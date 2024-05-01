@@ -17,7 +17,9 @@ from global_data import start_year, run_years
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_slice']
+DIRNAMES = ['experiment_sweep_base',
+            'experiment_sweep_base_MCV2',
+            'experiment_sweep_base_SIAs',]
 
 # *****************************************************************************
 
