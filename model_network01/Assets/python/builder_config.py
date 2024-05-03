@@ -82,6 +82,8 @@ def update_config_obj(config):
     cp.Enable_Default_Reporting = 1
     cp.Enable_Event_DB = 1
     cp.SQL_Events = ["NewInfection"]
+    cp.Enable_Spatial_Output = 1
+    cp.Spatial_Output_Channels = ["Population"]
     cp.Custom_Reports_Filename = REPORTS_FILE
 
     return config

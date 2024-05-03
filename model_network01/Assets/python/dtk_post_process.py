@@ -2,8 +2,10 @@
 #
 # *****************************************************************************
 
+import os
 import json
 import sqlite3
+import struct
 
 import global_data as gdata
 
@@ -18,6 +20,21 @@ def application(output_path):
     SIM_IDX = gdata.sim_index
     key_str = '{:05d}'.format(SIM_IDX)
     parsed_dat = {key_str: dict()}
+
+    # Population data from spatial report binary
+    with open(os.path.join(output_path, 'SpatialReport_Population.bin'), mode='rb') as fid01:
+        sr_data = fid01.read()
+
+    # Strut output is tuple even when single value
+    num_nodes = struct.unpack("i", sr_data[0:4])[0]
+    num_times = struct.unpack("i", sr_data[4:8])[0]
+    node_ids = struct.unpack("i"*num_nodes, sr_data[8:(8+4*num_nodes)])
+    sim_data = struct.unpack("f"*num_nodes*num_times, sr_data[(8+4*num_nodes):])
+
+    # Construct numpy data structures
+    node_id_vec = np.array([val for val in node_ids])
+    pop_mat = np.reshape(np.array([val for val in sim_data]), (num_times, -1))
+    print(node_id_vec.shape, pop_mat.shape)
 
     # Connect to SQL database; retreive new entries
     connection_obj = sqlite3.connect('simulation_events.db')
