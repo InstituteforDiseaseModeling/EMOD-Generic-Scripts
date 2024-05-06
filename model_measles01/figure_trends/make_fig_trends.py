@@ -51,6 +51,8 @@ def make_fig():
         mcv2_vec = np.ones(nsims)*param_dict[EXP_C]['MCV2']
         mcv2_lvl = np.unique(mcv2_vec)
 
+        sia_year = param_dict[EXP_C]['sia_start_year']
+
         xval = np.arange(0, run_years, 1/12) + 1/24
         xyrs = np.arange(0, run_years, 1) + 1/2
         xages = AGE_HIST_BINS[1:] + np.diff(AGE_HIST_BINS)/2
@@ -105,6 +107,10 @@ def make_fig():
                        fontsize=18, color=cval)
             if (mcv2_lvl[0] > 0):
                 axs01.text(0.74, 3.76-0.24*lidx, '+ MCV2 15mo', fontsize=18,
+                           color=cval)
+
+            if (sia_year < run_years):
+                axs01.text(0.74, 3.76-0.24*lidx, '+ SIAs', fontsize=18,
                            color=cval)
 
         axs01.set_ylabel('Monthly Mortality per-100k', fontsize=16)
