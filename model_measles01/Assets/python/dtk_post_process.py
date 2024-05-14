@@ -3,6 +3,7 @@
 # *****************************************************************************
 
 import json
+import os
 import sqlite3
 
 import global_data as gdata
@@ -66,6 +67,17 @@ def application(output_path):
                                      bins=np.array(gdata.AGE_HIST_BINS)*365.0,
                                      weights=mcw_dat)
         parsed_dat[key_str]['age_data'].append(age_hist.tolist())
+
+    # Retain infected fraction timeseries
+    with open(os.path.join(output_path, 'InsetChart.json')) as fid01:
+        inset_chart = json.load(fid01)
+
+    ic_start = inset_chart['Header']['Start_Time']
+    ic_nstep = inset_chart['Header']['Timesteps']
+    ic_tsize = inset_chart['Header']['Simulation_Timestep']
+    inf_frac_vec = np.array(inset_chart['Channels']['Infected']['Data'])
+
+    parsed_dat[key_str]['inf_frac_vec'] = inf_frac_vec.tolist()
 
     # Write output dictionary
     with open('parsed_out.json', 'w') as fid01:
