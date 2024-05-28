@@ -16,7 +16,7 @@ demog_object = None
 # Other stuff
 first_call_bool = True
 
-init_pop = 250000
+init_pop = 500000
 
 brate_mult_x = None
 brate_mult_y = None

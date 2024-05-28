@@ -36,8 +36,8 @@ def make_fig():
 
         nsims = int(param_dict[NUM_SIMS])
 
-        imp_levels_vec = np.array(param_dict[EXP_V]['log10_import_mult'])
-        imp_levels = np.unique(imp_levels_vec).tolist()
+        targ_clust_vec = np.array(param_dict[EXP_V]['target_cluster'])
+        targ_clusts = np.unique(targ_clust_vec).tolist()
 
         inf_dat = np.zeros((nsims, int(365*run_years/t_step_days)))
         pyr_mat = np.zeros((nsims, int(run_years)+1, 20))-1
@@ -63,15 +63,16 @@ def make_fig():
         axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
         axs01.set_axisbelow(True)
 
-        for imp_lev in imp_levels:
-            idx02 = (imp_levels_vec == imp_lev)
+        for targ_clust in targ_clusts:
+            idx02 = (targ_clust_vec == targ_clust)
             tidx = (fidx & idx02)
 
             sub_samp = int(365*10/t_step_days)
             inf_dat_sub = inf_dat[tidx,-sub_samp:]
             frac_zeros = np.sum(inf_dat_sub==0, axis=1)/inf_dat_sub.shape[1]
+            print("Cluster {:d} - Prob Endemic: ".format(targ_clust), np.sum(frac_zeros==0)/frac_zeros.shape[0])
 
-            hist_lab = 'Imp Mult {:3.1f}: Avg = {:4.2f}'.format(imp_lev, np.mean(frac_zeros))
+            hist_lab = 'Cluster {:d}: Avg = {:4.2f}'.format(targ_clust, np.mean(frac_zeros))
 
             axs01.hist(frac_zeros, bins=np.arange(0,1.01,0.05), density=True, edgecolor='k', alpha=0.7, label=hist_lab)
 

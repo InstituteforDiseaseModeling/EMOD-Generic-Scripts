@@ -5,10 +5,13 @@
 # *****************************************************************************
 
 import os
+import json
 
 import global_data as gdata
 
 import numpy as np
+
+from sklearn.cluster import KMeans
 
 from emod_api.demographics.Demographics import Demographics, Node
 from emod_api.demographics import DemographicsTemplates as DT
@@ -26,6 +29,9 @@ def demographicsBuilder():
     LOG10_IMP = gdata.var_params['log10_import_mult']
     REF_YEAR = gdata.var_params['ref_year']
     SS_DEMOG = True
+    RUN_NUM = gdata.var_params['run_number']
+    FNAME_CLASS = gdata.var_params['file_classifier']
+    TARG_CLUST = gdata.var_params['target_cluster']
 
     # Load reference data
     dat_file = 'pop_dat_COD.csv'
@@ -37,16 +43,66 @@ def demographicsBuilder():
     pop_init = [np.interp(year_init, year_vec, pop_mat[idx, :])
                 for idx in range(pop_mat.shape[0])]
 
+
+
+    # Random geography
+    fname = os.path.join('Assets', 'data', 'latlong_NGA.json')
+    with open(fname) as fid01:
+        dict_latlong = json.load(fid01)
+
+    fname = os.path.join('Assets', 'data', 'pop_NGA.json')
+    with open(fname) as fid01:
+        dict_pop = json.load(fid01)
+
+    fname = os.path.join('Assets', 'data', FNAME_CLASS)
+    with open(fname) as fid01:
+        dict_class = json.load(fid01)
+
+    list_name = list(dict_pop.keys())
+    vec_pop = np.array([dict_pop[val] for val in list_name])
+    vec_yx = np.array([[dict_latlong[val][0],dict_latlong[val][1]] for val in list_name])
+    vec_class = np.array([dict_class[val] for val in list_name])
+
+    class_idx = (vec_class==TARG_CLUST)
+    vec_pop = vec_pop[class_idx]
+    vec_yx = vec_yx[class_idx]
+
+    tpop = np.sum(vec_pop)
+    ktarg = int(tpop/gdata.init_pop)
+    sub_clust = KMeans(n_clusters=ktarg, random_state=RUN_NUM).fit(vec_yx, sample_weight=vec_pop)
+    sub_label = sub_clust.labels_
+
+    area_dict = dict()
+    for k1 in range(ktarg):
+        sub_yx = vec_yx[sub_label==k1]
+        dy = np.max(sub_yx[:,0]) - np.min(sub_yx[:,0])
+        dx = np.max(sub_yx[:,1]) - np.min(sub_yx[:,1])
+        a_est = dx*dy
+        area_dict[k1] = a_est
+
+    alistmed = np.median([area_dict[keyval] for keyval in area_dict])
+    targ_clu = np.random.randint(ktarg)
+    while(area_dict[targ_clu] > alistmed):
+        targ_clu = np.random.randint(ktarg)
+
+    pop_set = vec_pop[sub_label==targ_clu][:]
+    long_set = vec_yx[sub_label==targ_clu][:,0]
+    lat_set = vec_yx[sub_label==targ_clu][:,1]
+
+
+
     # Populate nodes in primary file
     node_list = list()
-    node_id = 1
-    imp_rate = R0/6.0 * gdata.init_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
-    nname = 'EXAMPLE:A{:05d}'.format(node_id)
-    node_obj = Node(lat=0.0, lon=0.0, pop=gdata.init_pop,
-                    name=nname, forced_id=node_id)
-    irs_key = 'InfectivityReservoirSize'
-    node_obj.node_attributes.extra_attributes = {irs_key: imp_rate}
-    node_list.append(node_obj)
+    for k1 in range(pop_set.shape[0]):
+        node_id = 1 + k1
+        node_pop = pop_set[k1]
+        imp_rate = R0/6.0 * node_pop * 1.615e-7 * np.power(10.0, LOG10_IMP)
+        nname = 'EXAMPLE:A{:05d}'.format(node_id)
+        node_obj = Node(lat=lat_set[k1], lon=long_set[k1], pop=node_pop,
+                        name=nname, forced_id=node_id)
+        irs_key = 'InfectivityReservoirSize'
+        node_obj.node_attributes.extra_attributes = {irs_key: imp_rate}
+        node_list.append(node_obj)
 
     # Create primary file
     ref_name = 'Demographics_Datafile'

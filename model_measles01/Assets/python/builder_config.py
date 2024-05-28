@@ -81,10 +81,17 @@ def update_config_obj(config):
     cp.Enable_Infection_Rate_Overdispersion = 0
     cp.Enable_Infectivity_Reservoir = 1
 
+    # Network
+    cp.Enable_Network_Infectivity = 1
+    cp.Network_Infectivity_Max_Export_Frac = 0.05
+
+    cp.Network_Infectivity_Coefficient = [100.0]
+    cp.Network_Infectivity_Exponent = [2.0]
+
     # Adapted sampling
     cp.Individual_Sampling_Type = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
     cp.Min_Node_Population_Samples = 20.0
-    cp.Base_Individual_Sample_Rate = 1.0
+    cp.Base_Individual_Sample_Rate = 0.5
     cp.Relative_Sample_Rate_Immune = 0.01
     cp.Immune_Threshold_For_Downsampling = 1.0e-5
     cp.Immune_Downsample_Min_Age = 365.0

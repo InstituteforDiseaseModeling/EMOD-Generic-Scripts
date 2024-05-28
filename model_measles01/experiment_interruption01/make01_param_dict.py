@@ -31,7 +31,7 @@ def write_param_dict():
     param_dict = dict()
 
     param_dict[EXP_NAME] = 'Measles01-Interruption01'
-    param_dict[NUM_SIMS] = 720
+    param_dict[NUM_SIMS] = 1000
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
 
@@ -46,13 +46,17 @@ def write_param_dict():
     # Run number (EMOD random seed)
     P_VAR['run_number'] = list(range(NSIMS))
 
-    # Log10 of multiplier on exogeneous case importation
-    P_VAR['log10_import_mult'] = (np.random.choice([-1.0, -0.5, 0.0],
-                                  size=NSIMS)).tolist()
-
     # Infectivity
     P_VAR['R0'] = (10.0 + np.random.gamma(30.0, scale=0.133,
                                           size=NSIMS)).tolist()
+
+    # Cluster class to use for demog construction
+    NUM_CLUSTER = 5
+    P_VAR['target_cluster'] = (np.random.randint(NUM_CLUSTER,
+                               size=NSIMS)).tolist()
+
+    # File name for clusters
+    P_CON['file_classifier'] = 'NGA_populationclusters_5.json'
 
     # RI params
     P_CON['MCV1'] = 0.70
@@ -68,7 +72,8 @@ def write_param_dict():
     P_CON['sia_min_age'] = 0.75
     P_CON['sia_coverage'] = 0.80
 
-
+    # Log10 of multiplier on exogeneous case importation
+    P_CON['log10_import_mult'] = 0.0
 
     # RI params
     P_CON['Age_Take'] = True
