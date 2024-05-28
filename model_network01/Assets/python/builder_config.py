@@ -47,7 +47,7 @@ def update_config_obj(config):
 
     config.parameters.Enable_Disease_Mortality = 0
 
-    # Interventions
+    # Network
     cp.Enable_Network_Infectivity = 1
     cp.Network_Infectivity_Max_Export_Frac = MAX_FRAC
     cp.Network_Infectivity_Min_Connection = MIN_CONNECT
@@ -63,7 +63,7 @@ def update_config_obj(config):
     cp.Post_Infection_Transmission_Multiplier = 0.0
     cp.Post_Infection_Mortality_Multiplier = 0.0
 
-    # Interventions *****
+    # Interventions
     cp.Enable_Interventions = 1
     cp.Campaign_Filename = CAMP_FILE
 
