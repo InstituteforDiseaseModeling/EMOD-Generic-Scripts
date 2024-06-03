@@ -62,9 +62,8 @@ def write_param_dict():
     # Number of years to wait before starting SIAs
     P_CON['sia_start_year'] = 1000
 
-    # Other SIA parameters
-    P_CON['sia_min_age'] = 0.75
-    P_CON['sia_coverage'] = 0.80
+    # Coverage of SIAs
+    P_CON['sia_coverage'] = 0.60
 
     # Log10 of multiplier on exogeneous case importation
     P_CON['log10_import_mult'] = 1.0

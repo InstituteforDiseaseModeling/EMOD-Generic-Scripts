@@ -26,7 +26,6 @@ def campaignBuilder():
     AGE_DEP = gdata.var_params['Age_Take']
 
     SIA_START = gdata.var_params['sia_start_year']
-    SIA_MIN_AGE = gdata.var_params['sia_min_age']
     SIA_COVERAGE = gdata.var_params['sia_coverage']
     MAT_FACTOR = gdata.var_params['mat_factor']
 
@@ -64,7 +63,7 @@ def campaignBuilder():
         start_sia = 365.0*sia_year+start_day
 
         camp_event = ce_SIA(ALL_NODES, start_day=start_sia,
-                            yrs_min=SIA_MIN_AGE, coverage=SIA_COVERAGE,
+                            yrs_min=MCV1_AGE/365.0, coverage=SIA_COVERAGE,
                             base_take=0.95, acq_fact=acq_fact, age_dep=AGE_DEP)
         camp_module.add(camp_event)
 
