@@ -8,18 +8,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
-sys.path.insert(0, LOCAL_PATH)
+sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
+sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
 from py_assets_common.emod_local_proc import crs_proc
 from py_assets_common.emod_constants import EXP_C, EXP_V, CBR_VEC, \
                                             NUM_SIMS, P_FILE, POP_PYR
+from global_data import run_years, start_year
 
 # *****************************************************************************
 
 DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs']
-
-START_YR = 2000
-RUN_YEARS = 60
 
 # *****************************************************************************
 
@@ -43,9 +41,9 @@ def make_fig():
         ri_vec = np.array(param_dict[EXP_V]['RI_rate'])
 
         ri_lev = sorted(list(set(ri_vec.tolist())))
-        pyr_mat = np.zeros((nsims, RUN_YEARS+1, 20))-1
-        inf_mat = np.zeros((nsims, RUN_YEARS, 20))
-        birth_mat = np.zeros((nsims, RUN_YEARS))
+        pyr_mat = np.zeros((nsims, int(run_years)+1, 20))-1
+        inf_mat = np.zeros((nsims, int(run_years), 20))
+        birth_mat = np.zeros((nsims, int(run_years)))
 
         for sim_idx_str in data_brick:
             sim_idx = int(sim_idx_str)
@@ -63,7 +61,7 @@ def make_fig():
         pop_tot = np.diff(pop_tot)/2.0 + pop_tot[:-1]
 
         # CRS calculations
-        XDAT = np.arange(START_YR, START_YR+RUN_YEARS) + 0.5
+        XDAT = np.arange(start_year, int(start_year+run_years)) + 0.5
         fname = 'fert_dat_{:s}.csv'.format(demog_set)
         fnabs = os.path.abspath(os.path.join('..', 'Assets', 'data', fname))
         (frt_brth, crs_prob_vec) = crs_proc(fnabs, XDAT, pyr_mat_avg, ss_demog)
@@ -134,6 +132,7 @@ def make_fig():
             axs01.hist(ydat, bins=np.arange(0, xmaxv+xbinv, xbinv)-ri_val/20,
                        density=True, alpha=0.7,
                        label='RI = {:3d}%'.format(int(100*ri_val)))
+            print(ri_val, np.mean(ydat), np.percentile(ydat, [5, 50, 95]))
 
         axs01.legend(fontsize=14)
 
