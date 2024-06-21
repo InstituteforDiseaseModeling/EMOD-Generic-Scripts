@@ -31,7 +31,7 @@ def run_sims():
     plat_obj = Platform(block='COMPS',
                         endpoint='https://comps.idmod.org',
                         environment='Calculon',
-                        priority='Normal',
+                        priority='AboveNormal',
                         simulation_root='$COMPS_PATH(USER)',
                         node_group='idm_abcd',
                         num_cores='1',

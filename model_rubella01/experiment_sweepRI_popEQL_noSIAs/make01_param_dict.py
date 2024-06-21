@@ -51,7 +51,7 @@ def write_param_dict():
                                          size=NSIMS)).tolist()
 
     # RI rate for MR
-    P_VAR['RI_rate'] = np.random.choice([0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+    P_VAR['RI_rate'] = np.random.choice([0.0, 0.6],
                                         size=NSIMS).tolist()
 
     # Context
@@ -71,7 +71,7 @@ def write_param_dict():
     P_CON['add_campaigns'] = False
 
     # Initial number of agents
-    P_CON['num_agents'] = 50000
+    P_CON['num_agents'] = 100000
 
     # Write parameter dictionary
     with open('param_dict.json', 'w') as fid01:
