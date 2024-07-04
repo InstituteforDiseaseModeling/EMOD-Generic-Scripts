@@ -70,7 +70,7 @@ def write_param_dict():
 
     # RI params
     P_CON['Age_Take'] = True
-    P_CON['MCV2'] = 0.5
+    P_CON['MCV2'] = 1.0
 
     # Maternal protection effectiveness
     P_CON['mat_factor'] = 1.0
