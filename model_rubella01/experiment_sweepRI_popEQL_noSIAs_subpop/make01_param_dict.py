@@ -30,7 +30,7 @@ def write_param_dict():
     # Setup
     param_dict = dict()
 
-    param_dict[EXP_NAME] = 'Rubella01-DemogSteadyState'
+    param_dict[EXP_NAME] = 'Rubella01-DemogSubpop'
     param_dict[NUM_SIMS] = 3000
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
@@ -56,7 +56,7 @@ def write_param_dict():
 
     # Context
     P_CON['demog_set'] = 'SSA'
-    P_CON['num_nodes'] = 1
+    P_CON['num_nodes'] = 4
 
     # RI rate multiplier for MR
     P_CON['RI_rate_mult_yvals'] = [1.0, 1.0]

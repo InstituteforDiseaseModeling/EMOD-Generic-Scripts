@@ -47,7 +47,7 @@ def write_param_dict():
     P_VAR['run_number'] = list(range(NSIMS))
 
     # Infectivity
-    P_VAR['R0'] = (1.0 + np.random.gamma(16.0, scale=0.25,
+    P_VAR['R0'] = (-1.0 + np.random.gamma(16.0, scale=0.25,
                                          size=NSIMS)).tolist()
 
     # RI rate for MR

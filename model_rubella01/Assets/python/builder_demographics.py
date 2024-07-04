@@ -26,6 +26,7 @@ def demographicsBuilder():
     LOG10_IMP = gdata.var_params['log10_import_mult']
     SS_DEMOG = gdata.var_params['steady_state_demog']
     POP_DAT_STR = gdata.var_params['demog_set']
+    NUM_NODES = gdata.var_params['num_nodes']
 
     # Load reference data
     dat_file = 'pop_dat_{:s}.csv'.format(POP_DAT_STR)
@@ -39,11 +40,10 @@ def demographicsBuilder():
 
     # Populate nodes in primary file
     node_list = list()
-    num_nodes = 1
-    pop_nodes = int(gdata.init_pop/num_nodes)
+    pop_nodes = int(gdata.init_pop/NUM_NODES)
     imp_rate = pop_nodes * 1.615e-7 * np.power(10.0, LOG10_IMP)
     irs_key = 'InfectivityReservoirSize'
-    for nid in range(num_nodes):
+    for nid in range(NUM_NODES):
         nname = POP_DAT_STR + '_{:04d}'.format(nid+1)
         node_obj = Node(lat=0.0, lon=0.0, pop=pop_nodes,
                         name=nname, forced_id=(nid+1))
