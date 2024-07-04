@@ -111,13 +111,11 @@ def make_fig():
         axs01.set_axisbelow(True)
 
         axs01.set_ylabel('Probability', fontsize=16)
-        axs01.set_xlabel('Annual Rubella Burden per 1k Births', fontsize=16)
+        axs01.set_xlabel('Annual Rubella Burden per 1k Births: 2050 to 2060', fontsize=16)
 
-        xmaxv = 10
-        xbinv = 0.2
+        xmaxv = 5
+        xbinv = 0.1
         axs01.set_xlim(0.0, xmaxv)
-        axs01.set_ylim(0.0, 10.0)
-        axs01.set_yscale('symlog', linthresh=0.1)
 
         axs01.tick_params(axis='x', labelsize=16)
         axs01.tick_params(axis='y', labelsize=16)
@@ -130,7 +128,7 @@ def make_fig():
             crs_mat = inf_mat_sub*np.transpose(crs_prob_vec)
             ydat = np.sum(crs_mat, axis=2)/brth_vec*norm_crs_timevec*1e3
             ydat = ydat[:, -10:].flatten()
-            axs01.hist(ydat, bins=np.arange(0, xmaxv+xbinv, xbinv)-ri_val/20,
+            axs01.hist(ydat, bins=np.arange(0, xmaxv+xbinv, xbinv),
                        density=True, alpha=0.7,
                        label='RI = {:3d}%'.format(int(100*ri_val)))
             print(ri_val, np.mean(ydat), np.percentile(ydat, [5, 50, 95]))
