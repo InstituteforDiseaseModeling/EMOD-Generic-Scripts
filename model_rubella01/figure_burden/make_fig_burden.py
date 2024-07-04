@@ -87,7 +87,7 @@ def make_fig():
 
         axs01.set_ylabel('Annual Rubella Infections per 100k Population', fontsize=16)
 
-        axs01.set_xlim(2020, 2050)
+        axs01.set_xlim(2020, 2060)
         axs01.set_ylim(0, 6000)
 
         axs01.set_yticks(ticks=np.arange(0, 6001, 1000))
@@ -114,7 +114,7 @@ def make_fig():
 
         axs01.set_ylabel('Annual Rubella Burden per 1k Births', fontsize=16)
 
-        axs01.set_xlim(2020, 2050)
+        axs01.set_xlim(2020, 2060)
         axs01.set_ylim(0.0, 5.0)
 
         axs01.set_yticks(ticks=np.arange(0, 5.1, 0.5))
