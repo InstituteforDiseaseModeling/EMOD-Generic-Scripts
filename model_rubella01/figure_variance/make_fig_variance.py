@@ -17,7 +17,8 @@ from global_data import run_years, start_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs']
+DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
+            'experiment_sweepRI_popMED_noSIAs']
 
 # *****************************************************************************
 
@@ -61,7 +62,7 @@ def make_fig():
         pop_tot = np.diff(pop_tot)/2.0 + pop_tot[:-1]
 
         # CRS calculations
-        XDAT = np.arange(start_year, int(start_year+run_years)) + 0.5
+        XDAT = np.arange(start_year, start_year+run_years) + 0.5
         fname = 'fert_dat_{:s}.csv'.format(demog_set)
         fnabs = os.path.abspath(os.path.join('..', 'Assets', 'data', fname))
         (frt_brth, crs_prob_vec) = crs_proc(fnabs, XDAT, pyr_mat_avg, ss_demog)
@@ -109,8 +110,8 @@ def make_fig():
         axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
         axs01.set_axisbelow(True)
 
-        axs01.set_ylabel('Probability: 2050 to 2060', fontsize=16)
-        axs01.set_xlabel('Annual CRS Burden per 1k Births', fontsize=16)
+        axs01.set_ylabel('Probability', fontsize=16)
+        axs01.set_xlabel('Annual Rubella Burden per 1k Births', fontsize=16)
 
         xmaxv = 10
         xbinv = 0.2
