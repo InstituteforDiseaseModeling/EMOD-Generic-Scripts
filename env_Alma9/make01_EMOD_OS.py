@@ -6,8 +6,7 @@ import os
 import sys
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.abspath(os.path.join('..', 'local_python'))
-sys.path.insert(0, LOCAL_PATH)
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'local_python')))
 from emod_build import make_OS_asset
 
 # *****************************************************************************
