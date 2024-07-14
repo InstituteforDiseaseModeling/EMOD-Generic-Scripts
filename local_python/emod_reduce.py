@@ -18,26 +18,8 @@ from COMPS import Client
 from COMPS.Data import Experiment
 from COMPS.Data.Simulation import SimulationState
 
-# *****************************************************************************
-
-DOCK_PACK = r'docker-production-public.packages.idmod.org/emodpy/'
-DOCK_PACK = DOCK_PACK + r'comps_ssmt_worker:latest'
-
-PARAM_DICT = 'param_dict.json'
-DATA_BRICK = 'data_brick.json'
-FILENAME_PY = 'emod_reduce.py'
-FILENAME_ID = 'COMPS_ID.id'
-COMPS_URL = 'https://comps.idmod.org'
-
-ID_OS = 'EMOD_OS.id'
-ID_EXE = 'EMOD_EXE.id'
-ID_ENV = 'EMOD_ENV.id'
-ID_SCHEMA = 'EMOD_SCHEMA.id'
-
-VE_PY_PATHS = ['/py_env/lib/python3.9/site-packages/',
-               '/py_env/lib/python3.10/site-packages/',
-               '/py_env/lib/python3.11/site-packages/',
-               '/py_env/lib/python3.12/site-packages/']
+from py_assets_common.emod_constants import DOCK_PACK, COMPS_URL, D_FILE, \
+                                            COMPS_ID_FILE
 
 # *****************************************************************************
 
@@ -65,7 +47,7 @@ def pool_manager(exp_id=None):
     Client.login(COMPS_URL)
 
     if (not exp_id):
-        (exp_id, _, _, _) = read_id_file(os.path.join('Assets', FILENAME_ID))
+        (exp_id, _, _, _) = read_id_file(os.path.join('Assets', COMPS_ID_FILE))
 
     exp_obj = Experiment.get(exp_id)
     sims_all = exp_obj.get_simulations()
@@ -80,7 +62,7 @@ def pool_manager(exp_id=None):
         if (resp):
             merged_dict.update(json.loads(resp))
 
-    with open(DATA_BRICK, 'w') as fid01:
+    with open(D_FILE, 'w') as fid01:
         json.dump(merged_dict, fid01)
 
     return None
@@ -96,16 +78,22 @@ def get_sim_files(exp_id=''):
 
     # Add everything in the common python scripts directory as assets;
     f_path = os.path.abspath(__file__)
+    f_dir = os.path.dirname(f_path)
     f_name = os.path.basename(f_path)
 
     # Create python task for SSMT work item
     task_obj = PythonTask(python_path='python3', script_path=f_name)
 
     # Add script for python task and exp id file to assets
-    asset01 = Asset(filename=FILENAME_ID, content=exp_id)
+    asset01 = Asset(filename=COMPS_ID_FILE, content=exp_id)
     asset02 = Asset(filename=f_path)
     task_obj.common_assets.add_asset(asset01)
     task_obj.common_assets.add_asset(asset02)
+
+    # Add everything in the common python scripts directory as assets
+    PATH_COMMON = os.path.join(f_dir, 'py_assets_common')
+    task_obj.common_assets.add_directory(PATH_COMMON,
+                                         relative_path='py_assets_common')
 
     # Reduce experiment output to single file
     wi_obj = SSMTWorkItem(name='ReduceExpOutput', task=task_obj,
@@ -113,8 +101,8 @@ def get_sim_files(exp_id=''):
     wi_obj.run(wait_until_done=True)
 
     # Download reduced output and delete work item
-    resp_dict = plat.get_files(wi_obj, [DATA_BRICK])
-    ret_val = json.loads(resp_dict[DATA_BRICK].decode())
+    resp_dict = plat.get_files(wi_obj, [D_FILE])
+    ret_val = json.loads(resp_dict[D_FILE].decode())
     plat_obj = wi_obj.get_platform_object()
     plat_obj.delete()
 

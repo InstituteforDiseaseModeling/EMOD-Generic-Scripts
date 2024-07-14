@@ -13,7 +13,7 @@ from idmtools_platform_comps.utils.singularity_build \
 from idmtools_platform_comps.utils.assetize_output.assetize_output \
                                          import AssetizeOutput
 
-from emod_reduce import ID_OS, ID_EXE, ID_SCHEMA, ID_ENV
+from py_assets_common.emod_constants import ID_OS, ID_EXE, ID_ENV, ID_SCHEMA
 
 # ****************************************************************************
 

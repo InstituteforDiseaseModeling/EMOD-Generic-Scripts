@@ -7,6 +7,19 @@ API_MIN = '2.0.0'
 COMPS_ID_FILE = 'COMPS_ID.id'
 COMPS_URL = 'https://comps.idmod.org'
 
+DOCK_PACK = r'docker-production-public.packages.idmod.org/emodpy/' + \
+            r'comps_ssmt_worker:latest'
+
+VE_PY_PATHS = ['/py_env/lib/python3.9/site-packages/',
+               '/py_env/lib/python3.10/site-packages/',
+               '/py_env/lib/python3.11/site-packages/',
+               '/py_env/lib/python3.12/site-packages/']
+
+ID_OS = 'EMOD_OS.id'
+ID_EXE = 'EMOD_EXE.id'
+ID_ENV = 'EMOD_ENV.id'
+ID_SCHEMA = 'EMOD_SCHEMA.id'
+
 P_FILE = 'param_dict.json'
 D_FILE = 'data_brick.json'
 I_FILE = 'idx_str_file.txt'
