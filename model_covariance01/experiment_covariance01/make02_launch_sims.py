@@ -18,7 +18,7 @@ from py_assets_common.emod_constants import COMPS_ID_FILE, P_FILE
 PATH_EXP_DEF = os.path.abspath(P_FILE)
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_EXE = os.path.abspath(os.path.join('..', '..', 'env_Alma9'))
+PATH_EXE = os.path.abspath(os.path.join('..', '..', 'env_Debian12'))
 
 # *****************************************************************************
 
