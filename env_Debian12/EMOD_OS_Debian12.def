@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: debian:12.5
+From: debian:12.6
 
 %post
     apt-get update
