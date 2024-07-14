@@ -8,13 +8,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
-sys.path.insert(0, LOCAL_PATH)
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'local_python')))
 from py_assets_common.emod_constants import EXP_V, NUM_SIMS, P_FILE
 
 # *****************************************************************************
 
-N = 1000
 DIRNAME = 'experiment_covariance01'
 
 # *****************************************************************************
@@ -72,6 +70,8 @@ def make_fig():
 
         ACQ_LN_SIG = np.sqrt(np.log(AQ_VAR+1.0))
         ACQ_LN_MU = -0.5*ACQ_LN_SIG*ACQ_LN_SIG
+
+        N = 1000
 
         risk_vec = np.random.lognormal(mean=ACQ_LN_MU,
                                        sigma=ACQ_LN_SIG, size=N)

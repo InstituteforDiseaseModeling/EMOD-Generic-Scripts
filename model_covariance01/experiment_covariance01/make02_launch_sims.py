@@ -8,18 +8,17 @@ import sys
 from idmtools.core.platform_factory import Platform
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
-sys.path.insert(0, LOCAL_PATH)
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'local_python')))
 from emod_exp import exp_from_def_file
-from emod_reduce import FILENAME_ID
+from py_assets_common.emod_constants import COMPS_ID_FILE, P_FILE
 
 # *****************************************************************************
 
 # Paths
-PATH_EXP_DEF = os.path.abspath('param_dict.json')
+PATH_EXP_DEF = os.path.abspath(P_FILE)
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_EXE = os.path.abspath(os.path.join('..', '..', 'env_Debian12'))
+PATH_EXE = os.path.abspath(os.path.join('..', '..', 'env_Alma9'))
 
 # *****************************************************************************
 
@@ -45,7 +44,7 @@ def run_sims():
     plat_obj.run_items(exp_obj)
 
     # Save experiment id to file
-    exp_obj.to_id_file(FILENAME_ID)
+    exp_obj.to_id_file(COMPS_ID_FILE)
     print()
     print(exp_obj.uid.hex)
 
