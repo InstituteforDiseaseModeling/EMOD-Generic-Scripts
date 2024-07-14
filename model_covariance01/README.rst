@@ -8,4 +8,4 @@ Each simulation uses a single node of fully susceptible individuals and an outbr
 
 Example distributions for the four sets of heterogeneity examined in these simulations are shown below.
 
-image:: figure_attackfrac01/ref_attackrate.png
+.. image:: figure_attackfrac01/ref_attackrate.png
