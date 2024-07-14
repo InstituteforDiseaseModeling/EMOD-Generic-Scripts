@@ -2,9 +2,13 @@
 #
 # *****************************************************************************
 
-API_MIN = '1.30.0'
+API_MIN = '2.0.0'
+
+COMPS_ID_FILE = 'COMPS_ID.id'
+COMPS_URL = 'https://comps.idmod.org'
 
 P_FILE = 'param_dict.json'
+D_FILE = 'data_brick.json'
 I_FILE = 'idx_str_file.txt'
 C_FILE = 'config.json'
 

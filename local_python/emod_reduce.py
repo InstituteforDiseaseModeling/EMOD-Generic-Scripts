@@ -70,7 +70,7 @@ def pool_manager(exp_id=None):
     exp_obj = Experiment.get(exp_id)
     sims_all = exp_obj.get_simulations()
     sims_valid = [s for s in sims_all if s.state.value >=
-                      SimulationState.Commissioned.value]
+                  SimulationState.Commissioned.value]
 
     with Pool() as pool_obj:
         resp_list = pool_obj.map(getter_worker, sims_valid)
@@ -89,26 +89,26 @@ def pool_manager(exp_id=None):
 
 
 # Runs locally
-def get_sim_files(exp_id='', LOCAL_PATH=''):
+def get_sim_files(exp_id=''):
 
     # Connect to COMPS
-    plat = Platform(block='COMPS',
-                    endpoint=COMPS_URL,
-                    environment='Calculon')
+    plat = Platform(block='COMPS', endpoint=COMPS_URL, environment='Calculon')
+
+    # Add everything in the common python scripts directory as assets;
+    f_path = os.path.abspath(__file__)
+    f_name = os.path.basename(f_path)
 
     # Create python task for SSMT work item
-    task_obj = PythonTask(python_path='python3',
-                          script_path=FILENAME_PY)
+    task_obj = PythonTask(python_path='python3', script_path=f_name)
 
     # Add script for python task and exp id file to assets
     asset01 = Asset(filename=FILENAME_ID, content=exp_id)
-    asset02 = Asset(filename=os.path.join(LOCAL_PATH, FILENAME_PY))
+    asset02 = Asset(filename=f_path)
     task_obj.common_assets.add_asset(asset01)
     task_obj.common_assets.add_asset(asset02)
 
     # Reduce experiment output to single file
-    wi_obj = SSMTWorkItem(name='ReduceExpOutput',
-                          task=task_obj,
+    wi_obj = SSMTWorkItem(name='ReduceExpOutput', task=task_obj,
                           docker_image=DOCK_PACK)
     wi_obj.run(wait_until_done=True)
 

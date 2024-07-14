@@ -40,8 +40,6 @@ def make_OS_asset():
 
     # Save asset id for sif to file
     ac_obj.to_id_file(ID_OS)
-    print()
-    print(ac_obj.uid.hex)
 
     return None
 
@@ -141,8 +139,6 @@ def make_ENV_asset():
 
     # Save asset id for sif to file
     ac_obj.to_id_file(ID_ENV)
-    print()
-    print(ac_obj.uid.hex)
 
     return None
 
