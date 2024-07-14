@@ -14,7 +14,7 @@ from idmtools_platform_comps.ssmt_work_items.comps_workitems \
 
 from emodpy.emod_task import EMODTask
 
-from py_assets_common.emod_constants import ID_OS, ID_EXE, ID_ENV, ID_SCHEMA, \
+from py_assets_common.emod_constants import ID_EXE, ID_ENV, ID_SCHEMA, \
                                             DOCK_PACK, VE_PY_PATHS
 
 # *****************************************************************************
