@@ -11,8 +11,9 @@ param_*.json
 _param_*.json
 
 *.log
-*.png
 *.svg
+*.png
+!ref_*.png
 
 __pycache__/
 *output/
