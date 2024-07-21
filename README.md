@@ -22,8 +22,8 @@ additional information about how to use these scripts.
 | model_measles01          | Documentation. |
 | model_network01          | Demonstration of the network infectivity feature. |
 | model_polio_nga01        | Example outbreak simulations for cVDPV2 in Nigeria. Collab with JG and HL. |
-| model_rubella01          | Projections of rubella infections and CRS burden following RCV introduction.  |
-| model_transtree01        | Demonstration of the infector labeling feature and generation of explicit transmission networks. |
+| model_rubella01          | Projections of rubella infections and estimates of CRS burden following RCV introduction.  |
+| model_transtree01        | [Demonstration of the infector labeling feature and generation of explicit transmission networks.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_transtree01.html) |
 | refdat_mcv1              | IHME MCV1 coverage estimates used to construct input files for EMOD simulations. |
 | refdat_namesets          | Namesets used for region identification. |
 | refdat_poppyr            | UN WPP age structured population estimates used to construct input files for EMOD simulations. |
