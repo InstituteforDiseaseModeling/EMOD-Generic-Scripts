@@ -40,7 +40,7 @@ To build the documentation locally, do the following:
 | --- | --- |
 | env_Alma9 <br /> env_Debian12 <br /> env_Fedora40 <br /> env_Rocky9 <br /> env_Ubuntu24 |  Contains the definition scripts for singularity containers. Produces the the EMOD executable, schema, and custom reporters; creates an environment for running EMOD on COMPS and contains the python packages available to the embedded python interpreter. All files remain on COMPS and are provided to the various workflows as Asset Collection IDs. |
 | local_python             | Contains additional python scripts with helper functions common to all of the workflows. |
-| model_covariance01       | Demonstration simulations for heterogeneity in individual behavior. |
+| model_covariance01       | [Demonstration simulations for heterogeneity in individual behavior.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_covariance01.html) |
 | model_covid01            | Baseline simulations for SARS-CoV-2 in EMOD. Collab with MvG. |
 | model_demographics01     | Example demographics for UK measles simulations. |
 | model_demographics02     | Example demographics using UN WPP data as inputs. |
