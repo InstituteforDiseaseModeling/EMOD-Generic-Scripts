@@ -9,10 +9,9 @@ import sys
 import numpy as np
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
-sys.path.insert(0, LOCAL_PATH)
-from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_NAME, \
-                                            NUM_SIMS, P_FILE
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'local_python')))
+from py_assets_common.emod_constants import EXP_C, EXP_V, EXP_NAME, NUM_SIMS, \
+                                            P_FILE
 
 # *****************************************************************************
 

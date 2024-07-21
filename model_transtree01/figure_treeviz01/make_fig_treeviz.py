@@ -8,9 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Ought to go in emodpy
-LOCAL_PATH = os.path.abspath(os.path.join('..', '..', 'local_python'))
-sys.path.insert(0, LOCAL_PATH)
-from py_assets_common.emod_constants import EXP_V, NUM_SIMS, P_FILE
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'local_python')))
+from py_assets_common.emod_constants import EXP_V, NUM_SIMS, P_FILE, D_FILE
 
 # *****************************************************************************
 
@@ -60,7 +59,7 @@ def make_fig():
     # Sim outputs
     tpath = os.path.join('..', DIRNAME)
 
-    with open(os.path.join(tpath, 'data_brick.json')) as fid01:
+    with open(os.path.join(tpath, D_FILE)) as fid01:
         data_brick = json.load(fid01)
 
     with open(os.path.join(tpath, P_FILE)) as fid01:
