@@ -72,7 +72,7 @@ def write_param_dict():
     P_CON['add_campaigns'] = False
 
     # Initial number of agents
-    P_CON['num_agents'] = 50000
+    P_CON['num_agents'] = 100000
 
     # Write parameter dictionary
     with open(P_FILE, 'w') as fid01:
