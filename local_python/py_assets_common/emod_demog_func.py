@@ -31,7 +31,7 @@ def demog_vd_over(ref_name, node_list, cb_rate,
     vd_over_dict['Metadata'] = {'IdReference': ref_name}
     vd_over_dict['Defaults'] = {'IndividualAttributes': dict(),
                                 'NodeAttributes': dict()}
-    vd_over_dict['Nodes'] = [{'NodeID': nid} for nid in node_list]
+    vd_over_dict['Nodes'] = [{'NodeID': nid.forced_id} for nid in node_list]
 
     vdodd = vd_over_dict['Defaults']
     vdodd['NodeAttributes'] = {'BirthRate': cb_rate}
@@ -109,19 +109,16 @@ def demog_is_over(ref_name, node_list, R0, age_x, age_y=None, idx=0):
               for val in isus_x]
 
     # Initial susceptibility overlays
-    dover_obj = DemographicsOverlay()
-    dover_obj.individual_attributes = IndividualAttributes()
-    dover_sus = IndividualAttributes.SusceptibilityDistribution()
-    dover_obj.individual_attributes.susceptibility_distribution = dover_sus
+    ind_sus = IndividualAttributes.SusceptibilityDistribution()
+    ind_sus.distribution_values = isus_x
+    ind_sus.result_scale_factor = 1
+    ind_sus.result_values = isus_y
 
-    dover_obj.meta_data = {'IdReference': ref_name}
+    ind_att = IndividualAttributes()
+    ind_att.susceptibility_distribution = ind_sus
 
-    dover_obj.nodes = node_list
-
-    dover_sus = dover_obj.individual_attributes.susceptibility_distribution
-    dover_sus.distribution_values = isus_x
-    dover_sus.result_scale_factor = 1
-    dover_sus.result_values = isus_y
+    dover_obj = DemographicsOverlay(idref=ref_name, nodes=node_list,
+                                    individual_attributes=ind_att)
 
     nfname = DEMOG_FILE.rsplit('.', 1)[0] + '_is{:03d}.json'.format(idx)
     nfname = os.path.join(PATH_OVERLAY, nfname)

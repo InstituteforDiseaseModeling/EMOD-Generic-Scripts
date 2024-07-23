@@ -86,14 +86,12 @@ def demographicsBuilder():
     gdata.brate_mult_y = br_mult_y.tolist()
 
     # Write vital dynamics overlay
-    n_list = [node_obj.forced_id for node_obj in node_list]
-    nfname = demog_vd_over(ref_name, n_list, birth_rate,
+    nfname = demog_vd_over(ref_name, node_list, birth_rate,
                            mort_year, mort_mat, age_x, age_y)
     gdata.demog_files.append(nfname)
 
     # Write initial susceptibility overlay
-    n_list = [node_obj.forced_id for node_obj in node_list]
-    nfname = demog_is_over(ref_name, n_list, R0, age_x, age_y)
+    nfname = demog_is_over(ref_name, node_list, R0, age_x, age_y)
     gdata.demog_files.append(nfname)
 
     # Write primary demographics file
