@@ -13,3 +13,12 @@ Infectivity (assumed R0 value) has a very stong effect on the pattern of resurge
 .. image:: figures/ref_rcv_infectivity.png
 
 At lower levels of infectivity, the rate of uncontrolled burden is elevated and the risk of resurgence is absent. Higher infectivity is associated with much lower levels of burden; even if resurgence does occur, the levels of burden remain below those rates estimated at lower levels of infectivity.
+
+The examples above assume equilibrium demography: constant growth rate and invariant population pyramid shape. This assumption leads to rates of infection and burden that are constant in the long term.
+
+.. image:: figures/ref_rcv_demog_ss.png
+
+Actual demography for sub-Saharan Africa, based on medium projections from the UN WPP, is expected to undergo demographic transition. Both fertility and mortality are expected to decline:
+
+.. image:: figures/ref_rcv_demog_med.png
+
