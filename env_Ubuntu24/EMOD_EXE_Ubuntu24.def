@@ -5,7 +5,6 @@ From: Assets/EMOD_OS_Ubuntu24.sif
     apt-get install python3-dev -y
     apt-get install libmpich-dev -y
     apt-get install libsqlite3-dev -y
-    apt-get install libboost-dev -y
     apt-get install git -y
     apt-get install libc-dev -y
     apt-get install g++ -y

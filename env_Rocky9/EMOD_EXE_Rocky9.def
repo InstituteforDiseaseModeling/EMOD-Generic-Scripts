@@ -5,7 +5,6 @@ From: Assets/EMOD_OS_Rocky9.sif
     dnf install python-devel -y
     dnf install mpich-devel -y
     dnf install sqlite-devel -y
-    dnf install boost-devel -y
     dnf install git -y
     dnf install glibc-devel -y
     dnf install gcc-c++ -y
