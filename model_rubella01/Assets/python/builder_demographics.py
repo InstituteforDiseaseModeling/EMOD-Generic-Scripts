@@ -27,6 +27,7 @@ def demographicsBuilder():
     SS_DEMOG = gdata.var_params['steady_state_demog']
     POP_DAT_STR = gdata.var_params['demog_set']
     NUM_NODES = gdata.var_params['num_nodes']
+    CBR_VAL = gdata.var_params['CBR_val']
 
     # Load reference data
     dat_file = 'pop_dat_{:s}.csv'.format(POP_DAT_STR)
@@ -65,7 +66,7 @@ def demographicsBuilder():
     mort_mat = vd_tup[1]
     age_x = vd_tup[2]
     age_y = None
-    birth_rate = vd_tup[3]
+    birth_rate = CBR_VAL/365.0/1000.0 #vd_tup[3]
     br_mult_x = vd_tup[4]
     br_mult_y = vd_tup[5]
 

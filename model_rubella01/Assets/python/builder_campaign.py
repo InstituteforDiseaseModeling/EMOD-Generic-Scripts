@@ -20,6 +20,9 @@ def campaignBuilder():
 
     # Variables for this simulation
     ADD_SIA = gdata.var_params['add_campaigns']
+    SIA_FUs = gdata.var_params['SIA_followups']
+    SIA_rate = gdata.var_params['SIA_coverage']
+
     RI_RATE = gdata.var_params['RI_rate']
     RI_XVEC = np.array(gdata.var_params['RI_rate_mult_xvals'])
     RI_YVEC = np.array(gdata.var_params['RI_rate_mult_yvals'])
@@ -46,8 +49,20 @@ def campaignBuilder():
         # Catch-up
         start_day = 365.0*(gdata.start_year-gdata.base_year+gdata.ri_offset)
         camp_event = ce_SIA(ALL_NODES, start_day=start_day,
-                            yrs_min=0.75, yrs_max=15.0, coverage=0.8)
+                            yrs_min=0.75, yrs_max=15.0, coverage=SIA_rate)
         camp_module.add(camp_event)
+
+    if (ADD_SIA and SIA_FUs):
+        # Follow-ups
+        SIA_int = 4
+        start_year = gdata.start_year-gdata.base_year+gdata.ri_offset
+        end_year = gdata.start_year-gdata.base_year+gdata.run_years
+        while (start_year <= end_year):
+            start_year = start_year + SIA_int
+            start_day = 365.0*start_year
+            camp_event = ce_SIA(ALL_NODES, start_day=start_day,
+                                yrs_min=0.75, yrs_max=5.0, coverage=SIA_rate)
+            camp_module.add(camp_event)
 
     # End file construction
     camp_module.save(filename=CAMP_FILE)
