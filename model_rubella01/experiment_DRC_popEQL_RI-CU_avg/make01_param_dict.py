@@ -32,7 +32,7 @@ def write_param_dict():
     # Setup
     param_dict = dict()
 
-    param_dict[EXP_NAME] = 'Rubella01-DRC-Demog:EQL-Avg-RI-CU'
+    param_dict[EXP_NAME] = 'Rubella01-DRC-Demog:EQL-Avg-RI-CU60'
     param_dict[NUM_SIMS] = 500
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
