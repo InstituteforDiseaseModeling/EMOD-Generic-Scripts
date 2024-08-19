@@ -29,10 +29,8 @@ def make_dat():
     nsims = int(param_dict[NUM_SIMS])
     ss_demog = param_dict[EXP_C]['steady_state_demog']
     demog_set = param_dict[EXP_C]['demog_set']
-    #ri_vec = np.array(param_dict[EXP_V]['RI_rate'])
     adm01 = [param_dict[EXP_C]['adm01']]
 
-    #ri_lev = sorted(list(set(ri_vec.tolist())))
     prov_list = sorted(list(set(adm01)))
 
     pyr_mat = np.zeros((nsims, int(run_years)+1, 20))-1
@@ -51,7 +49,6 @@ def make_dat():
 
     for prov in prov_list:
         gidx = (np.array(adm01) == prov) & fidx
-        print(prov)
 
         # Average population
         pyr_mat_avg = np.mean(pyr_mat[gidx, :, :], axis=0)
@@ -67,24 +64,24 @@ def make_dat():
         # Normalize timeseries required for CRS calculation
         brth_vec = np.mean(birth_mat[gidx, :], axis=0)
         norm_crs_timevec = brth_vec/frt_brth
+        print(prov, np.mean(norm_crs_timevec))
 
+        # Population scaling
         pop_scale = np.sum([pop_2019[val] for val in pop_2019])/pop_tot[19]
 
-        inf_mat_avg = np.mean(inf_mat[gidx, :, :], axis=0)
+        # Calculation CRS from infections and probabilities
         crs_mat = np.sum(inf_mat[gidx, :, :]*crs_prob_vec[:,0], axis=2)
+        crs_out = crs_mat*pop_scale
 
-        crs_out = crs_mat*norm_crs_timevec*pop_scale
+        # CRS range
         crs_out = np.cumsum(crs_out[:, -35:-5], axis=1)
         crs_sort = np.sort(crs_out, axis=1)
         tidx = int(crs_sort.shape[0]/20)
-        #print(prov, ',', int(np.mean(crs_sort[:,-1])))
-        print(int(np.mean(crs_sort[:,-1])))
+        print(prov, int(np.mean(crs_sort[:,-1])))
 
-        crs_rat = inf_mat_avg*np.transpose(crs_prob_vec)
-        #ydat = np.sum(crs_rat, axis=1)/brth_vec*norm_crs_timevec*1e3
-        yydat = np.sum(crs_rat, axis=1)*norm_crs_timevec*pop_scale
-        yydat = yydat[-35:-5]
-        yydat = np.cumsum(yydat)
+        # CRS rates
+        ydat = np.mean(crs_mat, axis=0)/brth_vec*1e5
+        print(prov, np.round(np.mean(ydat[-15:-5])))
 
     return None
 
