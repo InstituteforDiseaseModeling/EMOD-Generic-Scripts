@@ -2,7 +2,7 @@
 model_transtree01
 =================
 
-This example demonstrates the implementation of superspreading behavior and its visualization using transmission trees. These simulations use a constant R\ :sub:`0`\ value of 1.5 and one of two variance levels for the secondary transmission rate: constant or exponential. A constant rate has all infected individuals tranmsit with a Poisson rate equal to the R\ :sub:`0`\ value; an exponential rate has each infected individual transmit with a Poisson rate that is drawn from an exponential distribution with mean equal to the R\ :sub:`0`\ value.
+This example demonstrates the implementation of superspreading behavior and its visualization using transmission trees. These simulations use a constant R\ :sub:`0`\  value of 1.5 and one of two variance levels for the secondary transmission rate: constant or exponential. A constant rate has all infected individuals tranmsit with a Poisson rate equal to the R\ :sub:`0`\  value; an exponential rate has each infected individual transmit with a Poisson rate that is drawn from an exponential distribution with mean equal to the R\ :sub:`0`\  value.
 
 One tree diagram for each simulation is shown in the figure below:
 
