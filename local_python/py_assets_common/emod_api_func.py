@@ -5,6 +5,7 @@
 import json
 import os
 import time
+import struct
 
 import global_data as gdata
 
@@ -20,7 +21,8 @@ from emod_api import __version__ as API_CUR
 from emod_api.config import default_from_schema_no_validation as dfs
 
 from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
-                           AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH, CBR_VEC
+                           AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH, CBR_VEC, \
+                           NODE_IDS_STR, NODE_POP_STR
 
 # *****************************************************************************
 
@@ -164,6 +166,33 @@ def post_proc_cbr(output_path, parsed_out):
     b_vec[1:] = np.diff(b_vec)
 
     parsed_out[CBR_VEC] = b_vec.tolist()
+
+    return None
+
+# *****************************************************************************
+
+
+def post_proc_nodepop(output_path, parsed_out):
+
+    # Population data from Spatial_Output_Channels = ["Population"]
+    fname = 'SpatialReport_Population.bin'
+    with open(os.path.join(output_path, fname), mode='rb') as fid01:
+        sr_data = fid01.read()
+
+    # Struct output is tuple even when single value
+    num_nodes = struct.unpack("i", sr_data[0:4])[0]
+    num_times = struct.unpack("i", sr_data[4:8])[0]
+    node_ids = struct.unpack("i"*num_nodes,
+                             sr_data[8:(8+4*num_nodes)])
+    sim_data = struct.unpack("f"*num_nodes*num_times,
+                             sr_data[(8+4*num_nodes):])
+
+    # Construct numpy data structures
+    node_id_vec = np.array([val for val in node_ids])
+    pop_mat = np.reshape(np.array([val for val in sim_data]), (num_times, -1))
+
+    parsed_out[NODE_IDS_STR] = node_id_vec.tolist()
+    parsed_out[NODE_POP_STR] = pop_mat.tolist()
 
     return None
 

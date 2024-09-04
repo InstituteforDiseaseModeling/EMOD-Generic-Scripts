@@ -51,6 +51,8 @@ YR_DAYS = 365
 
 CBR_VEC = 'cbr_vec'
 POP_PYR = 'pyr_data'
+NODE_POP_STR = 'node_pop'
+NODE_IDS_STR = 'node_ids'
 
 MORT_XVAL = [0.6, 1829.5, 1829.6, 3659.5, 3659.6, 5489.5,
              5489.6, 7289.5, 7289.6, 9119.5, 9119.6, 10949.5,
