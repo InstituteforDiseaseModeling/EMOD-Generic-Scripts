@@ -9,7 +9,7 @@ import global_data as gdata
 
 import numpy as np
 
-from emod_api_func import post_proc_poppyr
+from emod_api_func import post_proc_poppyr, post_proc_prev
 from emod_constants import SQL_TIME, SQL_MCW, SQL_AGE
 
 # *****************************************************************************
@@ -24,6 +24,9 @@ def application(output_path):
 
     # Sample population pyramid every year
     post_proc_poppyr(output_path, parsed_dat[key_str])
+
+    # Timeseries of prevalence
+    post_proc_prev(output_path, parsed_dat[key_str])
 
     # Connect to SQL database; retreive new entries
     connection_obj = sqlite3.connect('simulation_events.db')
@@ -47,7 +50,6 @@ def application(output_path):
                                      bins=BIN_EDGES,
                                      weights=data_vec_mcw)
 
-    # Monthly timeseries
     parsed_dat[key_str]['timeseries'] = inf_mo.tolist()
 
     # Age at infection histograms by year

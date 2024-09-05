@@ -51,6 +51,7 @@ YR_DAYS = 365
 
 CBR_VEC = 'cbr_vec'
 POP_PYR = 'pyr_data'
+INF_FRAC = 'inf_frac'
 NODE_POP_STR = 'node_pop'
 NODE_IDS_STR = 'node_ids'
 

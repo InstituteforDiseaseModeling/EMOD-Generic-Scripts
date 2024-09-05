@@ -22,7 +22,7 @@ from emod_api.config import default_from_schema_no_validation as dfs
 
 from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
                            AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH, CBR_VEC, \
-                           NODE_IDS_STR, NODE_POP_STR
+                           NODE_IDS_STR, NODE_POP_STR, INF_FRAC
 
 # *****************************************************************************
 
@@ -193,6 +193,21 @@ def post_proc_nodepop(output_path, parsed_out):
 
     parsed_out[NODE_IDS_STR] = node_id_vec.tolist()
     parsed_out[NODE_POP_STR] = pop_mat.tolist()
+
+    return None
+
+# *****************************************************************************
+
+
+def post_proc_prev(output_path, parsed_out):
+
+    # Retain timeseries of infected fraction
+    with open(os.path.join(output_path, 'InsetChart.json')) as fid01:
+        inset_chart = json.load(fid01)
+
+    inf_frac_vec = np.array(inset_chart['Channels']['Infected']['Data'])
+
+    parsed_out[INF_FRAC] = inf_frac_vec.tolist()
 
     return None
 
