@@ -36,4 +36,4 @@ Every experiment directory containas an ``Assets`` folder with ``python`` and ``
     Contains user-defined python files used by EMOD. Some filenames must remain unchanged: ``dtk_pre_process.py``, ``dtk_in_process.py``, and ``dtk_post_process.py`` are assumed to be present and contain a function named ``application``. Everything else can be user-defined.
 
 * ``data``
-    Contains csv files, json files, etc. for use by the python scripts python while running EMOD.
+    Contains csv files, json files, etc. for use by the python scripts while running EMOD.
