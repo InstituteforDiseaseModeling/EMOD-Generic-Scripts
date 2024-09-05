@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
 sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
 from py_assets_common.emod_constants import EXP_C, EXP_V, NUM_SIMS, \
-                                            P_FILE, POP_PYR
+                                            P_FILE, POP_PYR, D_FILE
 from global_data import run_years, AGE_HIST_BINS, IHME_MORT_X, IHME_MORT_Y
 
 # *****************************************************************************
@@ -30,7 +30,7 @@ def make_fig():
         # Sim outputs
         tpath = os.path.join('..', dirname)
 
-        with open(os.path.join(tpath, 'data_brick.json')) as fid01:
+        with open(os.path.join(tpath, D_FILE)) as fid01:
             data_brick = json.load(fid01)
 
         with open(os.path.join(tpath, P_FILE)) as fid01:
@@ -48,10 +48,10 @@ def make_fig():
         mcv1_age_vec = np.array(param_dict[EXP_V]['MCV1_age'])
         mcv1_age_lvl = np.unique(mcv1_age_vec).tolist()
 
-        mcv2_vec = np.ones(nsims)*param_dict[EXP_C]['MCV2']
-        mcv2_lvl = np.unique(mcv2_vec)
+        mcv2_lvl = param_dict[EXP_C]['MCV2']
 
         sia_year = param_dict[EXP_C]['sia_start_year']
+        sia_min_age_yr = param_dict[EXP_C]['sia_min_age_yr']
 
         xval = np.arange(0, run_years, 1/12) + 1/24
         xyrs = np.arange(0, run_years, 1) + 1/2
@@ -95,23 +95,26 @@ def make_fig():
             yval = np.mean(mort_nrm[tidx, -10:], axis=1)/12.0
             pcoef = np.polyfit(xval, yval, 4)
             yval2 = np.polyval(pcoef, xval2)
+
             lidx = mcv1_age_lvl.index(mcv1_age_val)
             cval = 'C{:d}'.format(lidx)
+            xpos = 3.76-0.24*lidx
 
             axs01.plot(xval, yval, '.', alpha=0.1, color=cval,
                        markeredgecolor=None)
             axs01.plot(xval2, yval2, '-', alpha=1.0, color=cval)
 
-            txt_age = int(np.round(mcv1_age_val/365*12))
-            axs01.text(0.56, 3.76-0.24*lidx, 'MCV1 {:>2d}mo'.format(txt_age),
-                       fontsize=18, color=cval)
-            if (mcv2_lvl[0] > 0):
-                axs01.text(0.74, 3.76-0.24*lidx, '+ MCV2 15mo', fontsize=18,
-                           color=cval)
+            mcv1_mo = int(np.round(mcv1_age_val/365*12))
+            mcv1_str = 'MCV1 {:>2d}mo'.format(mcv1_mo)
+            axs01.text(0.56, xpos, mcv1_str, fontsize=18, color=cval)
+
+            if (mcv2_lvl > 0):
+                mcv2_str = '+ MCV2 15mo'
+                axs01.text(0.74, xpos, mcv2_str, fontsize=18, color=cval)
 
             if (sia_year < run_years):
-                axs01.text(0.74, 3.76-0.24*lidx, '+ SIAs', fontsize=18,
-                           color=cval)
+                sia_str = '+ SIAs {:>2d}mo+'.format(sia_min_age_yr)
+                axs01.text(0.74, xpos, sia_str, fontsize=18, color=cval)
 
         axs01.set_ylabel('Monthly Mortality per-100k', fontsize=16)
         axs01.set_xlabel('MCV Coverage', fontsize=16)
