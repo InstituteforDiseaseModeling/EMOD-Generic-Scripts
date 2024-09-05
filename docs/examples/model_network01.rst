@@ -9,7 +9,5 @@ An outbreak is initialized by a constant importation pressure of infected indivi
 
 Infected individuals are introduced in one node only (lower-left on the grid). The network infectivity feature implements a gravity-type expression for transmission between nodes. All nodes have equal populations and follow susceptible-infected-recovered dynamics. The value of the exponent in the gravity expression is fixed at 2.0 and the level of network infectivity is varied by setting the coefficient in the gravity expression to 1 of 4 values.
 
-Example below
-
 .. raw:: html
     :file: figures/ref_netinfect_med.svg

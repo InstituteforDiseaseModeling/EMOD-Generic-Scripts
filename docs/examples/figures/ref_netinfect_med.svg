@@ -35,6 +35,8 @@
       {
         SVGDoc = document.getElementById("SVGDoc");
         rePaint();
+        togPlay();
+        togRep();
       };
 
       function ctrlOn(event)
