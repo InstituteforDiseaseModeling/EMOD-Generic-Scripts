@@ -2,6 +2,7 @@ Bootstrap: localimage
 From: Assets/EMOD_OS_Debian12.sif
 
 %post
+    apt-get update
     apt-get install python3 -y
     apt-get install python3-pip -y
     apt-get install python3-venv -y
