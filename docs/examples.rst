@@ -15,6 +15,7 @@ EMOD-Generic-Scripts provides a set of example models. Please consider contribut
     examples/model_measles_gha01
     examples/model_measles_nga01
     examples/model_measles_nga02
+    examples/model_measles01
     examples/model_network01
     examples/model_polio_nga01
     examples/model_rubella01
