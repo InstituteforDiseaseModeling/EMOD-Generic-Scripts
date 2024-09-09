@@ -113,7 +113,7 @@ def make_fig():
                 axs01.text(0.74, xpos, mcv2_str, fontsize=18, color=cval)
 
             if (sia_year < run_years):
-                sia_str = '+ SIAs {:>2d}mo+'.format(sia_min_age_yr)
+                sia_str = '+ SIAs >{:d}mo'.format(int(sia_min_age_yr*12))
                 axs01.text(0.74, xpos, sia_str, fontsize=18, color=cval)
 
         axs01.set_ylabel('Monthly Mortality per-100k', fontsize=16)

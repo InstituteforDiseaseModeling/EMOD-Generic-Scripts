@@ -78,7 +78,7 @@ def pyr_chart(axs01, pop_dat, pop_dat_err, yr_lab):
                xerr=pop_dat_n_err, color=CLR_M)
 
     tpop_str = 'Total Pop\n{:5.1f}M'.format(tpop/1e6)
-    axs01.text(-11, 92.5, '{:04d}'.format(yr_lab), fontsize=18)
+    axs01.text(-11, 92.5, '{:<4d}'.format(yr_lab), fontsize=18)
     axs01.text(5, 87.5, tpop_str, fontsize=18)
 
     return None

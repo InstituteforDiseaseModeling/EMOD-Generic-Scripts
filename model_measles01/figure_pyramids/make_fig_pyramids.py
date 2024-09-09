@@ -63,7 +63,8 @@ def make_fig():
             pop_dat = pyr_mat_avg[gidx, :]
             pop_dat_err = pyr_mat_std[gidx, :]
 
-            pyr_chart(axs01, pop_dat, pop_dat_err, year_vec[gidx])
+            yr_vec_alt = year_vec[gidx]-int(start_year)
+            pyr_chart(axs01, pop_dat, pop_dat_err, yr_vec_alt)
 
         plt.tight_layout()
         plt.savefig('fig_pyr_{:s}_01.png'.format(dirname))
