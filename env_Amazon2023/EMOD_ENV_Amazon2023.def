@@ -1,0 +1,30 @@
+Bootstrap: localimage
+From: Assets/EMOD_OS_Amazon2023.sif
+
+%post
+    dnf -y install python
+    dnf -y install python-pip
+    dnf -y install mpich
+
+    dnf clean all
+
+    python3 -m venv py_env
+    . py_env/bin/activate
+
+    pip install pip              --upgrade
+    pip install emod-api==2.0.1  --extra-index-url https://packages.idmod.org/api/pypi/pypi-production/simple
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container for running EMOD using emod-api for file support.

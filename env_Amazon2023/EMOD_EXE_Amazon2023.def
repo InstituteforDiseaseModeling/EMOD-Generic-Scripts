@@ -1,0 +1,61 @@
+Bootstrap: localimage
+From: Assets/EMOD_OS_Amazon2023.sif
+
+%post
+    dnf install python-devel -y
+    dnf install mpich-devel -y
+    dnf install sqlite-devel -y
+    dnf install git -y
+    dnf install glibc-devel -y
+    dnf install gcc-c++ -y
+
+    dnf clean all
+
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
+    rm get-pip.py
+
+    python3 -m pip install pip --upgrade
+    python3 -m pip install scons
+
+    export USER=CalculonUser-EMOD
+
+    export PATH=$PATH:/usr/lib64/mpich/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/mpich/lib
+
+    git clone https://github.com/InstituteforDiseaseModeling/EMOD-Generic
+
+    cd EMOD-Generic
+
+    git fetch
+    git checkout Generic-Ongoing
+
+    scons --Release --jobs=4 --Disease=Generic
+
+    cd ..
+
+    mkdir outputs
+    cp EMOD-Generic/build/x64/Release/Eradication/Eradication outputs/Eradication
+
+    mkdir outputs/reporter_plugins
+    cp EMOD-Generic/build/x64/Release/reporter_plugins/*.so outputs/reporter_plugins
+
+    mkdir PyScripts
+    cp EMOD-Generic/Scripts/*.py PyScripts
+
+    rm -r EMOD-Generic
+
+%runscript
+
+
+%environment
+
+
+%test
+
+
+%labels
+    Author kfrey@idmod.org
+
+%help
+    Minimal container for building EMOD.
