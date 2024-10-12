@@ -20,10 +20,17 @@ def dllcBuilder():
     json_set = dict()
 
     # Custom reports object
-    json_set['Custom_Reports'] = dict()
+    cr_str = 'Custom_Reports'
+    json_set[cr_str] = dict()
 
-    # Configurations
-    # N/A
+    # Strain reporting
+    rst_str = 'ReportStrainTracking'
+    json_set[cr_str][rst_str] = {'Enabled': 1,
+                                 'Reports': list()}
+
+    repDic = {'Report_Name': 'ReportStrainTracking.csv'}
+
+    json_set[cr_str][rst_str]['Reports'].append(repDic)
 
     #  Write file
     with open(REPORTS_FILE, 'w') as fid01:
