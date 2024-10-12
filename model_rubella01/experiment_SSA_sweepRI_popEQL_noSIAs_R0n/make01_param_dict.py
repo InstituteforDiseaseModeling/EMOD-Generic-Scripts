@@ -30,7 +30,7 @@ def write_param_dict():
     # Setup
     param_dict = dict()
 
-    param_dict[EXP_NAME] = 'Rubella01-SSA-Demog:EQL-R0:Lo'
+    param_dict[EXP_NAME] = 'Rubella01-SSA-Demog_EQL-R0_Lo'
     param_dict[NUM_SIMS] = 3000
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
