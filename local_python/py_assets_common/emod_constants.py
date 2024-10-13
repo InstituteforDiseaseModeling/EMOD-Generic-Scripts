@@ -37,6 +37,7 @@ SPATH = 'Assets/schema.json'
 CAMP_FILE = 'campaign.json'
 REPORTS_FILE = 'custom_dlls.json'
 DEMOG_FILE = 'demographics.json'
+RST_FILE = 'ReportStrainTracking.csv'
 
 PATH_OVERLAY = 'demog_overlay'
 
@@ -47,9 +48,15 @@ SQL_MCW = 4
 SQL_AGE = 5
 SQL_LABEL = 6
 
+RST_TIME = 0
+RST_NODE = 1
+RST_CONT_INF = 5
+RST_CONT_TOT = 6
+
 YR_DAYS = 365
 
 CBR_VEC = 'cbr_vec'
+R0_VEC = 'r0_vec'
 POP_PYR = 'pyr_data'
 INF_FRAC = 'inf_frac'
 NODE_POP_STR = 'node_pop'

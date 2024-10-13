@@ -9,7 +9,7 @@ import global_data as gdata
 
 import numpy as np
 
-from emod_api_func import post_proc_poppyr, post_proc_cbr
+from emod_api_func import post_proc_poppyr, post_proc_cbr, post_proc_R0
 from emod_constants import SQL_TIME, SQL_MCW, SQL_AGE, POP_AGE_DAYS
 
 # *****************************************************************************
@@ -27,6 +27,9 @@ def application(output_path):
 
     # Retain annualized count of births
     post_proc_cbr(output_path, parsed_dat[key_str])
+
+    # Estimate R0 from output
+    post_proc_R0(output_path, parsed_dat[key_str])
 
     # Connect to SQL database; retreive new entries
     connection_obj = sqlite3.connect('simulation_events.db')

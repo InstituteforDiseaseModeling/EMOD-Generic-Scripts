@@ -22,7 +22,8 @@ from emod_api.config import default_from_schema_no_validation as dfs
 
 from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
                            AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH, CBR_VEC, \
-                           NODE_IDS_STR, NODE_POP_STR, INF_FRAC
+                           NODE_IDS_STR, NODE_POP_STR, INF_FRAC, RST_FILE, \
+                           RST_TIME, RST_CONT_INF, RST_CONT_TOT, R0_VEC
 
 # *****************************************************************************
 
@@ -208,6 +209,29 @@ def post_proc_prev(output_path, parsed_out):
     inf_frac_vec = np.array(inset_chart['Channels']['Infected']['Data'])
 
     parsed_out[INF_FRAC] = inf_frac_vec.tolist()
+
+    return None
+
+# *****************************************************************************
+
+
+def post_proc_R0(output_path, parsed_out):
+
+    # Retain timeseries of infected fraction
+    with open(os.path.join(output_path, RST_FILE)) as fid01:
+        rst_dat = np.loadtxt(fid01, delimiter=',', skiprows=1)
+
+    rst_time_vec = rst_dat[:, RST_TIME]
+    rst_cont_vec = rst_dat[:, RST_CONT_TOT]
+    rst_infs_vec = rst_dat[:, RST_CONT_INF]
+    np_eps = np.finfo(float).eps
+
+    tot_contagion = rst_cont_vec
+    tot_infection = rst_infs_vec
+
+    est_r0_vec = tot_contagion/(tot_infection+np_eps)
+
+    parsed_out[R0_VEC] = est_r0_vec.tolist()
 
     return None
 

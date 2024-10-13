@@ -6,7 +6,7 @@
 
 import json
 
-from emod_constants import REPORTS_FILE
+from emod_constants import REPORTS_FILE, RST_FILE
 
 # *****************************************************************************
 
@@ -24,11 +24,11 @@ def dllcBuilder():
     json_set[cr_str] = dict()
 
     # Strain reporting
-    rst_str = 'ReportStrainTracking'
+    rst_str = RST_FILE.split('.')[0]
     json_set[cr_str][rst_str] = {'Enabled': 1,
                                  'Reports': list()}
 
-    repDic = {'Report_Name': 'ReportStrainTracking.csv'}
+    repDic = {'Report_Name': RST_FILE}
 
     json_set[cr_str][rst_str]['Reports'].append(repDic)
 
