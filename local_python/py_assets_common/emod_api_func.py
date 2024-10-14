@@ -23,7 +23,8 @@ from emod_api.config import default_from_schema_no_validation as dfs
 from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
                            AGE_KEY_LIST, YR_DAYS, POP_PYR, SPATH, CBR_VEC, \
                            NODE_IDS_STR, NODE_POP_STR, INF_FRAC, RST_FILE, \
-                           RST_TIME, RST_CONT_INF, RST_CONT_TOT, R0_VEC
+                           RST_TIME, RST_CONT_INF, RST_CONT_TOT, R0_VEC, \
+                           R0_TIME
 
 # *****************************************************************************
 
@@ -231,6 +232,7 @@ def post_proc_R0(output_path, parsed_out):
 
     est_r0_vec = tot_contagion/(tot_infection+np_eps)
 
+    parsed_out[R0_TIME] = rst_time_vec.tolist()
     parsed_out[R0_VEC] = est_r0_vec.tolist()
 
     return None

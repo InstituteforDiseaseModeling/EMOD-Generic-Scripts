@@ -33,16 +33,15 @@ def update_config_obj(config):
     cp.Wall_Time_Maximum_In_Minutes = gdata.max_clock
 
     # Intrahost
-    inf_prd_mean = 6.0
     cp.Base_Infectivity_Distribution = 'CONSTANT_DISTRIBUTION'
-    cp.Base_Infectivity_Constant = R0/inf_prd_mean
+    cp.Base_Infectivity_Constant = R0/gdata.inf_prd_mean
 
     cp.Incubation_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
     cp.Incubation_Period_Gaussian_Mean = 17.0
     cp.Incubation_Period_Gaussian_Std_Dev = 2.0
 
     cp.Infectious_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
-    cp.Infectious_Period_Gaussian_Mean = inf_prd_mean
+    cp.Infectious_Period_Gaussian_Mean = gdata.inf_prd_mean
     cp.Infectious_Period_Gaussian_Std_Dev = 2.0
 
     cp.Enable_Disease_Mortality = 0
