@@ -171,7 +171,6 @@ def make_fig():
         plt.tight_layout()
         plt.savefig('fig_aai_{:s}_01.png'.format(dirname))
         plt.close()
-        1/0
 
     return None
 
