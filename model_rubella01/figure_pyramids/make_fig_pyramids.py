@@ -16,8 +16,8 @@ from global_data import start_year, run_years
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
-            'experiment_sweepRI_popMED_noSIAs']
+DIRNAMES = ['experiment_SSA_sweepRI_popEQL_noSIAs',
+            'experiment_SSA_sweepRI_popMED_noSIAs']
 
 # *****************************************************************************
 

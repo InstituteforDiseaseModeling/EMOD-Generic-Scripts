@@ -17,11 +17,11 @@ from global_data import run_years, start_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
-            'experiment_sweepRI_popMED_noSIAs',
-            'experiment_sweepRI_popEQL_noSIAs_R0p',
-            'experiment_sweepRI_popEQL_noSIAs_R0n',
-            'experiment_sweepRI_popEQL_noSIAs_subpop']
+DIRNAMES = ['experiment_SSA_sweepRI_popEQL_noSIAs',
+            'experiment_SSA_sweepRI_popMED_noSIAs',
+            'experiment_SSA_sweepRI_popEQL_noSIAs_R0p',
+            'experiment_SSA_sweepRI_popEQL_noSIAs_R0n',
+            'experiment_SSA_sweepRI_popEQL_noSIAs_subpop']
 
 # *****************************************************************************
 
@@ -85,7 +85,8 @@ def make_fig():
         axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
         axs01.set_axisbelow(True)
 
-        axs01.set_ylabel('Annual Rubella Infections per 100k Population', fontsize=16)
+        ylab_str = 'Annual Rubella Infections per 100k Population'
+        axs01.set_ylabel(ylab_str, fontsize=16)
 
         axs01.set_xlim(2020, 2050)
         axs01.set_ylim(0, 6000)

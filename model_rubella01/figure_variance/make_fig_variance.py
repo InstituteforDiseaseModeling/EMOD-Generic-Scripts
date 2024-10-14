@@ -17,8 +17,8 @@ from global_data import run_years, start_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_sweepRI_popEQL_noSIAs',
-            'experiment_sweepRI_popMED_noSIAs']
+DIRNAMES = ['experiment_SSA_sweepRI_popEQL_noSIAs',
+            'experiment_SSA_sweepRI_popMED_noSIAs']
 
 # *****************************************************************************
 
@@ -110,8 +110,9 @@ def make_fig():
         axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
         axs01.set_axisbelow(True)
 
+        xlab_str = 'Annual Rubella Burden per 1k Births: 2050 to 2060'
+        axs01.set_xlabel(xlab_str, fontsize=16)
         axs01.set_ylabel('Probability', fontsize=16)
-        axs01.set_xlabel('Annual Rubella Burden per 1k Births: 2050 to 2060', fontsize=16)
 
         xmaxv = 5
         xbinv = 0.1
