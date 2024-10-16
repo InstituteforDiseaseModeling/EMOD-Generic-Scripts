@@ -22,6 +22,7 @@ def reprule(revval):
     revval = revval.replace('Ñ', 'NY')
     revval = revval.replace('Ô', 'O')
     revval = revval.replace('Ó', 'O')
+    revval = revval.replace('Ü', 'U')
     revval = revval.replace('Û', 'U')
     revval = revval.replace('Ú', 'U')
 
@@ -43,7 +44,7 @@ def reprule(revval):
     # Remove non-ASCII characters
     revval = revval.encode('ascii', 'replace')
     revval = revval.decode()
-    revval = revval.replace('?',    '')
+    revval = revval.replace('?', '')
 
     # Condence and strip underscore characters
     while (revval.count('__')):
@@ -55,7 +56,7 @@ def reprule(revval):
 # *****************************************************************************
 
 
-# Dictionary of three letter country codes;
+# Dictionary of UN WPP names
 tlc_dict = {
     'COD': 'DEMOCRATIC_REPUBLIC_OF_THE_CONGO',
     'ETH': 'ETHIOPIA',

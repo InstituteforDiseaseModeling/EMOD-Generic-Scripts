@@ -5,7 +5,8 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.join('..', 'refdat_namesets'))
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'refdat_namesets')))
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'local_python')))
 from aux_namematch import reprule, tlc_dict
 
 # *****************************************************************************
@@ -49,11 +50,13 @@ def make_pop_dat(TLC=''):
     ofile_name = 'pop_dat_{:s}.csv'.format(TLC)
     np.savetxt(ofile_name, pop_dat.T, fmt='%d', delimiter=',')
 
+    return None
+
 # *****************************************************************************
 
 
 if (__name__ == "__main__"):
 
-    make_pop_dat('COD')
+    make_pop_dat('')
 
 # *****************************************************************************
