@@ -965,164 +965,164 @@ Index,Variant,"Region, subregion, country or area *",Notes,Location code,ISO3 Al
 948,Medium,Least developed countries,f,941,,,199,Development Group,902,2098,0.33,23.20,74.70,116.24,105.55,59.28,18.87,2.64,0.11
 949,Medium,Least developed countries,f,941,,,199,Development Group,902,2099,0.31,22.71,73.86,115.96,105.79,59.34,18.75,2.58,0.11
 950,Medium,Least developed countries,f,941,,,199,Development Group,902,2100,0.30,22.22,73.03,115.71,106.08,59.42,18.64,2.53,0.10
-951,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2022,0.99,32.71,110.85,124.87,87.84,46.17,15.35,3.09,0.29
-952,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2023,0.96,32.15,109.69,124.88,88.62,46.33,15.23,3.08,0.28
-953,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2024,0.94,31.59,108.46,124.84,89.46,46.44,15.12,3.07,0.28
-954,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2025,0.92,31.04,107.23,124.77,90.47,46.59,15.04,3.04,0.28
-955,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2026,0.90,30.54,105.80,124.54,91.32,46.81,14.96,2.99,0.27
-956,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2027,0.87,30.03,104.40,124.54,92.06,47.19,14.93,2.93,0.27
-957,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2028,0.85,29.50,102.86,124.37,92.67,47.57,14.86,2.86,0.27
-958,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2029,0.84,29.04,101.39,124.16,93.33,48.03,14.76,2.80,0.27
-959,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2030,0.82,28.58,100.00,123.87,93.97,48.57,14.68,2.74,0.27
-960,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2031,0.81,28.12,98.67,123.40,94.54,49.04,14.60,2.68,0.26
-961,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2032,0.80,27.63,97.41,123.00,95.20,49.41,14.57,2.63,0.25
-962,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2033,0.78,27.18,96.07,122.37,95.67,49.67,14.55,2.57,0.25
-963,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2034,0.77,26.81,94.87,121.74,96.07,49.89,14.57,2.51,0.24
-964,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2035,0.74,26.50,93.71,121.17,96.53,50.17,14.67,2.46,0.24
-965,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2036,0.72,26.29,92.56,120.60,96.96,50.43,14.75,2.42,0.23
-966,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2037,0.70,26.12,91.45,120.10,97.52,50.72,14.77,2.40,0.23
-967,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2038,0.68,25.90,90.65,119.69,98.13,50.97,14.79,2.39,0.22
-968,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2039,0.66,25.54,89.92,118.98,98.47,51.08,14.77,2.38,0.21
-969,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2040,0.65,25.15,89.55,118.43,98.89,51.27,14.78,2.39,0.21
-970,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2041,0.63,24.72,89.47,117.92,99.32,51.51,14.80,2.39,0.20
-971,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2042,0.61,24.37,89.63,117.59,99.45,51.64,14.77,2.38,0.20
-972,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2043,0.60,24.06,89.53,117.33,99.46,51.71,14.71,2.37,0.20
-973,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2044,0.58,23.75,89.17,117.42,99.59,51.85,14.67,2.36,0.20
-974,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2045,0.56,23.42,88.59,117.59,99.59,51.88,14.64,2.35,0.20
-975,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2046,0.55,23.13,87.92,117.98,99.67,51.91,14.63,2.33,0.20
-976,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2047,0.53,22.84,87.18,118.27,99.78,51.96,14.62,2.32,0.20
-977,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2048,0.52,22.54,86.47,118.42,99.93,52.00,14.60,2.30,0.20
-978,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2049,0.50,22.23,85.67,118.20,99.90,51.96,14.55,2.28,0.20
-979,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2050,0.49,21.96,85.04,118.08,100.00,51.95,14.51,2.25,0.20
-980,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2051,0.47,21.64,84.25,117.67,99.95,51.86,14.43,2.23,0.19
-981,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2052,0.46,21.36,83.61,117.46,100.22,51.95,14.40,2.20,0.19
-982,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2053,0.45,21.03,82.79,116.96,100.30,51.91,14.34,2.16,0.19
-983,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2054,0.43,20.74,82.14,116.70,100.54,51.82,14.28,2.13,0.18
-984,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2055,0.42,20.44,81.46,116.37,100.68,51.66,14.20,2.10,0.18
-985,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2056,0.41,20.18,80.86,116.14,100.83,51.56,14.12,2.07,0.18
-986,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2057,0.40,19.90,80.18,115.82,100.89,51.61,14.07,2.04,0.17
-987,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2058,0.39,19.62,79.49,115.56,101.01,51.77,14.02,2.01,0.17
-988,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2059,0.38,19.33,78.68,115.05,100.89,51.83,13.90,1.97,0.16
-989,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2060,0.37,19.07,78.03,114.80,101.02,51.98,13.81,1.94,0.16
-990,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2061,0.36,18.85,77.39,114.56,101.18,52.07,13.76,1.91,0.15
-991,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2062,0.35,18.65,76.85,114.44,101.42,52.15,13.79,1.88,0.15
-992,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2063,0.34,18.40,76.15,114.08,101.47,52.14,13.82,1.86,0.15
-993,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2064,0.33,18.19,75.53,113.77,101.57,52.17,13.87,1.83,0.14
-994,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2065,0.32,17.95,74.78,113.27,101.50,52.11,13.86,1.81,0.14
-995,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2066,0.31,17.74,74.13,112.88,101.51,52.09,13.83,1.80,0.13
-996,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2067,0.31,17.56,73.65,112.68,101.70,52.18,13.80,1.80,0.13
-997,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2068,0.30,17.36,73.06,112.30,101.70,52.16,13.74,1.79,0.13
-998,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2069,0.29,17.16,72.55,112.10,101.89,52.24,13.71,1.79,0.12
-999,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2070,0.28,16.96,72.03,111.77,101.94,52.26,13.67,1.78,0.12
-1000,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2071,0.27,16.77,71.56,111.49,102.02,52.30,13.63,1.76,0.12
-1001,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2072,0.27,16.59,71.21,111.38,102.23,52.40,13.61,1.74,0.12
-1002,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2073,0.26,16.38,70.79,111.25,102.43,52.50,13.58,1.72,0.12
-1003,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2074,0.25,16.18,70.35,111.07,102.58,52.58,13.56,1.70,0.11
-1004,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2075,0.24,15.96,69.85,110.81,102.63,52.61,13.51,1.68,0.11
-1005,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2076,0.23,15.76,69.41,110.66,102.75,52.67,13.48,1.66,0.11
-1006,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2077,0.23,15.53,68.91,110.47,102.86,52.74,13.46,1.64,0.11
-1007,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2078,0.22,15.31,68.42,110.27,102.94,52.78,13.43,1.61,0.10
-1008,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2079,0.21,15.10,68.02,110.25,103.21,52.92,13.42,1.59,0.10
-1009,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2080,0.21,14.88,67.50,110.04,103.28,52.96,13.38,1.57,0.10
-1010,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2081,0.20,14.68,67.02,109.93,103.47,53.07,13.36,1.55,0.09
-1011,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2082,0.19,14.48,66.60,109.99,103.84,53.24,13.36,1.53,0.09
-1012,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2083,0.19,14.27,66.11,109.94,104.10,53.37,13.35,1.51,0.09
-1013,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2084,0.18,14.08,65.62,109.86,104.35,53.50,13.34,1.49,0.09
-1014,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2085,0.17,13.85,65.03,109.61,104.47,53.56,13.31,1.47,0.08
-1015,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2086,0.17,13.64,64.45,109.37,104.61,53.62,13.28,1.45,0.08
-1016,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2087,0.16,13.46,63.98,109.27,104.86,53.74,13.27,1.43,0.08
-1017,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2088,0.16,13.28,63.54,109.23,105.21,53.91,13.27,1.41,0.08
-1018,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2089,0.15,13.08,62.99,109.03,105.43,54.03,13.26,1.39,0.07
-1019,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2090,0.15,12.90,62.44,108.79,105.57,54.13,13.25,1.37,0.07
-1020,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2091,0.14,12.72,61.87,108.50,105.69,54.22,13.23,1.36,0.07
-1021,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2092,0.14,12.55,61.38,108.34,105.95,54.40,13.24,1.34,0.07
-1022,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2093,0.14,12.37,60.80,108.01,106.05,54.49,13.23,1.32,0.06
-1023,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2094,0.13,12.21,60.37,107.95,106.41,54.70,13.25,1.31,0.06
-1024,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2095,0.13,12.04,59.84,107.72,106.61,54.85,13.25,1.29,0.06
-1025,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2096,0.12,11.88,59.36,107.49,106.78,55.00,13.27,1.28,0.06
-1026,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2097,0.12,11.71,58.85,107.28,107.00,55.17,13.28,1.26,0.06
-1027,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2098,0.12,11.55,58.37,107.06,107.20,55.35,13.30,1.25,0.05
-1028,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2099,0.11,11.40,57.94,106.98,107.55,55.58,13.32,1.24,0.05
-1029,Medium,"Less developed regions, excluding least developed countries",g,934,,,,Development Group,902,2100,0.11,11.23,57.41,106.68,107.69,55.70,13.32,1.23,0.05
-1030,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2022,1.97,51.37,138.83,147.68,108.88,61.95,23.75,5.78,0.48
-1031,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2023,1.93,50.70,137.52,147.06,108.61,61.55,23.40,5.68,0.47
-1032,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2024,1.88,50.01,136.13,146.37,108.31,61.15,23.05,5.57,0.46
-1033,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2025,1.84,49.34,134.85,145.85,108.15,60.82,22.74,5.46,0.46
-1034,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2026,1.80,48.69,133.47,145.22,107.97,60.50,22.44,5.34,0.45
-1035,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2027,1.76,48.05,132.16,144.76,107.89,60.23,22.17,5.23,0.44
-1036,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2028,1.72,47.41,130.73,144.25,107.76,59.97,21.91,5.11,0.43
-1037,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2029,1.68,46.83,129.35,143.71,107.67,59.74,21.67,5.00,0.43
-1038,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2030,1.64,46.23,127.97,143.15,107.61,59.52,21.43,4.90,0.42
-1039,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2031,1.61,45.66,126.55,142.46,107.48,59.30,21.20,4.80,0.41
-1040,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2032,1.57,45.13,125.29,141.97,107.51,59.17,21.00,4.72,0.40
-1041,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2033,1.53,44.58,123.90,141.25,107.40,58.95,20.80,4.63,0.39
-1042,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2034,1.50,44.06,122.68,140.68,107.37,58.81,20.62,4.56,0.39
-1043,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2035,1.46,43.51,121.36,140.00,107.27,58.66,20.44,4.48,0.38
-1044,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2036,1.42,42.99,120.02,139.27,107.18,58.51,20.28,4.41,0.37
-1045,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2037,1.38,42.52,118.80,138.63,107.22,58.42,20.14,4.34,0.37
-1046,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2038,1.35,42.01,117.64,138.02,107.27,58.33,20.00,4.28,0.36
-1047,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2039,1.31,41.44,116.37,137.20,107.16,58.19,19.85,4.22,0.35
-1048,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2040,1.28,40.87,115.30,136.52,107.15,58.13,19.74,4.17,0.35
-1049,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2041,1.25,40.29,114.26,135.83,107.08,58.11,19.64,4.12,0.34
-1050,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2042,1.21,39.72,113.26,135.22,106.94,58.07,19.52,4.07,0.33
-1051,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2043,1.18,39.21,112.29,134.68,106.82,58.05,19.40,4.02,0.33
-1052,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2044,1.15,38.66,111.17,134.08,106.59,57.98,19.28,3.97,0.32
-1053,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2045,1.12,38.14,110.10,133.65,106.46,57.94,19.19,3.93,0.32
-1054,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2046,1.09,37.64,109.00,133.18,106.31,57.85,19.12,3.89,0.31
-1055,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2047,1.06,37.14,107.94,132.65,106.16,57.75,19.05,3.85,0.31
-1056,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2048,1.04,36.63,106.86,132.11,106.04,57.63,18.98,3.80,0.30
-1057,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2049,1.01,36.11,105.73,131.42,105.80,57.45,18.88,3.76,0.30
-1058,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2050,0.98,35.61,104.70,130.83,105.64,57.32,18.78,3.71,0.29
-1059,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2051,0.95,35.09,103.58,130.10,105.40,57.14,18.66,3.66,0.29
-1060,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2052,0.93,34.64,102.67,129.63,105.36,57.09,18.58,3.62,0.29
-1061,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2053,0.90,34.14,101.55,128.86,105.09,56.93,18.46,3.57,0.28
-1062,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2054,0.88,33.65,100.58,128.29,104.98,56.82,18.34,3.52,0.27
-1063,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2055,0.85,33.18,99.62,127.73,104.84,56.70,18.24,3.47,0.27
-1064,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2056,0.83,32.72,98.71,127.21,104.73,56.63,18.14,3.42,0.26
-1065,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2057,0.81,32.26,97.78,126.67,104.60,56.55,18.05,3.37,0.26
-1066,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2058,0.78,31.77,96.79,126.10,104.43,56.44,17.95,3.32,0.25
-1067,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2059,0.76,31.30,95.76,125.40,104.16,56.28,17.85,3.26,0.24
-1068,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2060,0.74,30.86,94.90,124.94,104.09,56.21,17.77,3.22,0.24
-1069,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2061,0.72,30.44,94.02,124.44,103.99,56.11,17.70,3.17,0.23
-1070,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2062,0.70,30.03,93.23,124.10,104.03,56.07,17.64,3.13,0.23
-1071,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2063,0.68,29.58,92.28,123.53,103.88,55.92,17.56,3.09,0.22
-1072,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2064,0.66,29.19,91.48,123.13,103.86,55.87,17.49,3.05,0.21
-1073,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2065,0.64,28.74,90.50,122.49,103.66,55.72,17.38,3.01,0.21
-1074,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2066,0.62,28.34,89.66,122.01,103.56,55.63,17.29,2.98,0.20
-1075,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2067,0.61,27.95,88.91,121.69,103.62,55.63,17.22,2.94,0.20
-1076,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2068,0.59,27.54,88.05,121.20,103.53,55.54,17.12,2.91,0.19
-1077,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2069,0.57,27.13,87.23,120.78,103.52,55.50,17.04,2.87,0.19
-1078,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2070,0.55,26.71,86.37,120.28,103.42,55.41,16.94,2.83,0.18
-1079,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2071,0.53,26.31,85.58,119.84,103.38,55.36,16.86,2.79,0.18
-1080,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2072,0.52,25.93,84.88,119.53,103.44,55.37,16.79,2.75,0.18
-1081,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2073,0.50,25.53,84.12,119.21,103.52,55.37,16.72,2.71,0.17
-1082,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2074,0.49,25.11,83.31,118.77,103.48,55.32,16.64,2.67,0.17
-1083,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2075,0.47,24.72,82.54,118.39,103.48,55.30,16.56,2.62,0.16
-1084,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2076,0.45,24.31,81.74,117.99,103.48,55.27,16.48,2.58,0.16
-1085,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2077,0.44,23.90,80.91,117.54,103.44,55.23,16.40,2.54,0.15
-1086,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2078,0.43,23.53,80.20,117.23,103.51,55.26,16.34,2.50,0.15
-1087,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2079,0.41,23.16,79.53,117.01,103.66,55.32,16.29,2.46,0.15
-1088,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2080,0.40,22.80,78.82,116.70,103.74,55.35,16.23,2.43,0.14
-1089,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2081,0.39,22.43,78.10,116.40,103.82,55.38,16.17,2.39,0.14
-1090,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2082,0.37,22.07,77.46,116.27,104.08,55.48,16.13,2.35,0.13
-1091,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2083,0.36,21.72,76.77,116.05,104.26,55.57,16.09,2.31,0.13
-1092,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2084,0.35,21.36,76.08,115.80,104.41,55.63,16.04,2.28,0.13
-1093,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2085,0.34,21.00,75.34,115.46,104.49,55.66,15.98,2.24,0.12
-1094,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2086,0.32,20.63,74.58,115.10,104.55,55.67,15.92,2.20,0.12
-1095,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2087,0.31,20.30,73.94,114.90,104.76,55.74,15.87,2.17,0.11
-1096,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2088,0.30,19.97,73.33,114.78,105.04,55.87,15.84,2.13,0.11
-1097,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2089,0.29,19.60,72.58,114.44,105.14,55.91,15.78,2.10,0.11
-1098,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2090,0.28,19.27,71.91,114.18,105.30,55.99,15.74,2.06,0.10
-1099,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2091,0.27,18.93,71.18,113.83,105.39,56.03,15.68,2.03,0.10
-1100,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2092,0.26,18.61,70.55,113.64,105.63,56.15,15.65,1.99,0.10
-1101,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2093,0.25,18.28,69.84,113.32,105.77,56.22,15.61,1.96,0.09
-1102,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2094,0.24,17.97,69.25,113.22,106.11,56.39,15.59,1.93,0.09
-1103,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2095,0.23,17.63,68.53,112.90,106.27,56.46,15.54,1.90,0.09
-1104,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2096,0.23,17.32,67.88,112.63,106.44,56.57,15.51,1.86,0.08
-1105,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2097,0.22,16.99,67.18,112.34,106.63,56.67,15.47,1.83,0.08
-1106,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2098,0.21,16.69,66.55,112.13,106.89,56.82,15.44,1.80,0.08
-1107,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2099,0.20,16.39,65.93,111.96,107.20,57.00,15.41,1.78,0.08
-1108,Medium,"Less developed regions, excluding China",,948,,,,Development Group,1803,2100,0.19,16.09,65.25,111.71,107.43,57.13,15.38,1.75,0.07
+951,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2022,0.99,32.71,110.85,124.87,87.84,46.17,15.35,3.09,0.29
+952,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2023,0.96,32.15,109.69,124.88,88.62,46.33,15.23,3.08,0.28
+953,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2024,0.94,31.59,108.46,124.84,89.46,46.44,15.12,3.07,0.28
+954,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2025,0.92,31.04,107.23,124.77,90.47,46.59,15.04,3.04,0.28
+955,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2026,0.90,30.54,105.80,124.54,91.32,46.81,14.96,2.99,0.27
+956,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2027,0.87,30.03,104.40,124.54,92.06,47.19,14.93,2.93,0.27
+957,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2028,0.85,29.50,102.86,124.37,92.67,47.57,14.86,2.86,0.27
+958,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2029,0.84,29.04,101.39,124.16,93.33,48.03,14.76,2.80,0.27
+959,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2030,0.82,28.58,100.00,123.87,93.97,48.57,14.68,2.74,0.27
+960,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2031,0.81,28.12,98.67,123.40,94.54,49.04,14.60,2.68,0.26
+961,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2032,0.80,27.63,97.41,123.00,95.20,49.41,14.57,2.63,0.25
+962,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2033,0.78,27.18,96.07,122.37,95.67,49.67,14.55,2.57,0.25
+963,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2034,0.77,26.81,94.87,121.74,96.07,49.89,14.57,2.51,0.24
+964,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2035,0.74,26.50,93.71,121.17,96.53,50.17,14.67,2.46,0.24
+965,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2036,0.72,26.29,92.56,120.60,96.96,50.43,14.75,2.42,0.23
+966,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2037,0.70,26.12,91.45,120.10,97.52,50.72,14.77,2.40,0.23
+967,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2038,0.68,25.90,90.65,119.69,98.13,50.97,14.79,2.39,0.22
+968,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2039,0.66,25.54,89.92,118.98,98.47,51.08,14.77,2.38,0.21
+969,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2040,0.65,25.15,89.55,118.43,98.89,51.27,14.78,2.39,0.21
+970,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2041,0.63,24.72,89.47,117.92,99.32,51.51,14.80,2.39,0.20
+971,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2042,0.61,24.37,89.63,117.59,99.45,51.64,14.77,2.38,0.20
+972,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2043,0.60,24.06,89.53,117.33,99.46,51.71,14.71,2.37,0.20
+973,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2044,0.58,23.75,89.17,117.42,99.59,51.85,14.67,2.36,0.20
+974,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2045,0.56,23.42,88.59,117.59,99.59,51.88,14.64,2.35,0.20
+975,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2046,0.55,23.13,87.92,117.98,99.67,51.91,14.63,2.33,0.20
+976,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2047,0.53,22.84,87.18,118.27,99.78,51.96,14.62,2.32,0.20
+977,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2048,0.52,22.54,86.47,118.42,99.93,52.00,14.60,2.30,0.20
+978,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2049,0.50,22.23,85.67,118.20,99.90,51.96,14.55,2.28,0.20
+979,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2050,0.49,21.96,85.04,118.08,100.00,51.95,14.51,2.25,0.20
+980,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2051,0.47,21.64,84.25,117.67,99.95,51.86,14.43,2.23,0.19
+981,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2052,0.46,21.36,83.61,117.46,100.22,51.95,14.40,2.20,0.19
+982,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2053,0.45,21.03,82.79,116.96,100.30,51.91,14.34,2.16,0.19
+983,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2054,0.43,20.74,82.14,116.70,100.54,51.82,14.28,2.13,0.18
+984,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2055,0.42,20.44,81.46,116.37,100.68,51.66,14.20,2.10,0.18
+985,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2056,0.41,20.18,80.86,116.14,100.83,51.56,14.12,2.07,0.18
+986,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2057,0.40,19.90,80.18,115.82,100.89,51.61,14.07,2.04,0.17
+987,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2058,0.39,19.62,79.49,115.56,101.01,51.77,14.02,2.01,0.17
+988,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2059,0.38,19.33,78.68,115.05,100.89,51.83,13.90,1.97,0.16
+989,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2060,0.37,19.07,78.03,114.80,101.02,51.98,13.81,1.94,0.16
+990,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2061,0.36,18.85,77.39,114.56,101.18,52.07,13.76,1.91,0.15
+991,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2062,0.35,18.65,76.85,114.44,101.42,52.15,13.79,1.88,0.15
+992,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2063,0.34,18.40,76.15,114.08,101.47,52.14,13.82,1.86,0.15
+993,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2064,0.33,18.19,75.53,113.77,101.57,52.17,13.87,1.83,0.14
+994,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2065,0.32,17.95,74.78,113.27,101.50,52.11,13.86,1.81,0.14
+995,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2066,0.31,17.74,74.13,112.88,101.51,52.09,13.83,1.80,0.13
+996,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2067,0.31,17.56,73.65,112.68,101.70,52.18,13.80,1.80,0.13
+997,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2068,0.30,17.36,73.06,112.30,101.70,52.16,13.74,1.79,0.13
+998,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2069,0.29,17.16,72.55,112.10,101.89,52.24,13.71,1.79,0.12
+999,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2070,0.28,16.96,72.03,111.77,101.94,52.26,13.67,1.78,0.12
+1000,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2071,0.27,16.77,71.56,111.49,102.02,52.30,13.63,1.76,0.12
+1001,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2072,0.27,16.59,71.21,111.38,102.23,52.40,13.61,1.74,0.12
+1002,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2073,0.26,16.38,70.79,111.25,102.43,52.50,13.58,1.72,0.12
+1003,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2074,0.25,16.18,70.35,111.07,102.58,52.58,13.56,1.70,0.11
+1004,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2075,0.24,15.96,69.85,110.81,102.63,52.61,13.51,1.68,0.11
+1005,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2076,0.23,15.76,69.41,110.66,102.75,52.67,13.48,1.66,0.11
+1006,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2077,0.23,15.53,68.91,110.47,102.86,52.74,13.46,1.64,0.11
+1007,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2078,0.22,15.31,68.42,110.27,102.94,52.78,13.43,1.61,0.10
+1008,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2079,0.21,15.10,68.02,110.25,103.21,52.92,13.42,1.59,0.10
+1009,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2080,0.21,14.88,67.50,110.04,103.28,52.96,13.38,1.57,0.10
+1010,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2081,0.20,14.68,67.02,109.93,103.47,53.07,13.36,1.55,0.09
+1011,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2082,0.19,14.48,66.60,109.99,103.84,53.24,13.36,1.53,0.09
+1012,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2083,0.19,14.27,66.11,109.94,104.10,53.37,13.35,1.51,0.09
+1013,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2084,0.18,14.08,65.62,109.86,104.35,53.50,13.34,1.49,0.09
+1014,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2085,0.17,13.85,65.03,109.61,104.47,53.56,13.31,1.47,0.08
+1015,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2086,0.17,13.64,64.45,109.37,104.61,53.62,13.28,1.45,0.08
+1016,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2087,0.16,13.46,63.98,109.27,104.86,53.74,13.27,1.43,0.08
+1017,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2088,0.16,13.28,63.54,109.23,105.21,53.91,13.27,1.41,0.08
+1018,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2089,0.15,13.08,62.99,109.03,105.43,54.03,13.26,1.39,0.07
+1019,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2090,0.15,12.90,62.44,108.79,105.57,54.13,13.25,1.37,0.07
+1020,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2091,0.14,12.72,61.87,108.50,105.69,54.22,13.23,1.36,0.07
+1021,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2092,0.14,12.55,61.38,108.34,105.95,54.40,13.24,1.34,0.07
+1022,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2093,0.14,12.37,60.80,108.01,106.05,54.49,13.23,1.32,0.06
+1023,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2094,0.13,12.21,60.37,107.95,106.41,54.70,13.25,1.31,0.06
+1024,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2095,0.13,12.04,59.84,107.72,106.61,54.85,13.25,1.29,0.06
+1025,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2096,0.12,11.88,59.36,107.49,106.78,55.00,13.27,1.28,0.06
+1026,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2097,0.12,11.71,58.85,107.28,107.00,55.17,13.28,1.26,0.06
+1027,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2098,0.12,11.55,58.37,107.06,107.20,55.35,13.30,1.25,0.05
+1028,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2099,0.11,11.40,57.94,106.98,107.55,55.58,13.32,1.24,0.05
+1029,Medium,Less developed regions excluding least developed countries,g,934,,,,Development Group,902,2100,0.11,11.23,57.41,106.68,107.69,55.70,13.32,1.23,0.05
+1030,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2022,1.97,51.37,138.83,147.68,108.88,61.95,23.75,5.78,0.48
+1031,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2023,1.93,50.70,137.52,147.06,108.61,61.55,23.40,5.68,0.47
+1032,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2024,1.88,50.01,136.13,146.37,108.31,61.15,23.05,5.57,0.46
+1033,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2025,1.84,49.34,134.85,145.85,108.15,60.82,22.74,5.46,0.46
+1034,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2026,1.80,48.69,133.47,145.22,107.97,60.50,22.44,5.34,0.45
+1035,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2027,1.76,48.05,132.16,144.76,107.89,60.23,22.17,5.23,0.44
+1036,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2028,1.72,47.41,130.73,144.25,107.76,59.97,21.91,5.11,0.43
+1037,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2029,1.68,46.83,129.35,143.71,107.67,59.74,21.67,5.00,0.43
+1038,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2030,1.64,46.23,127.97,143.15,107.61,59.52,21.43,4.90,0.42
+1039,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2031,1.61,45.66,126.55,142.46,107.48,59.30,21.20,4.80,0.41
+1040,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2032,1.57,45.13,125.29,141.97,107.51,59.17,21.00,4.72,0.40
+1041,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2033,1.53,44.58,123.90,141.25,107.40,58.95,20.80,4.63,0.39
+1042,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2034,1.50,44.06,122.68,140.68,107.37,58.81,20.62,4.56,0.39
+1043,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2035,1.46,43.51,121.36,140.00,107.27,58.66,20.44,4.48,0.38
+1044,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2036,1.42,42.99,120.02,139.27,107.18,58.51,20.28,4.41,0.37
+1045,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2037,1.38,42.52,118.80,138.63,107.22,58.42,20.14,4.34,0.37
+1046,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2038,1.35,42.01,117.64,138.02,107.27,58.33,20.00,4.28,0.36
+1047,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2039,1.31,41.44,116.37,137.20,107.16,58.19,19.85,4.22,0.35
+1048,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2040,1.28,40.87,115.30,136.52,107.15,58.13,19.74,4.17,0.35
+1049,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2041,1.25,40.29,114.26,135.83,107.08,58.11,19.64,4.12,0.34
+1050,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2042,1.21,39.72,113.26,135.22,106.94,58.07,19.52,4.07,0.33
+1051,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2043,1.18,39.21,112.29,134.68,106.82,58.05,19.40,4.02,0.33
+1052,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2044,1.15,38.66,111.17,134.08,106.59,57.98,19.28,3.97,0.32
+1053,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2045,1.12,38.14,110.10,133.65,106.46,57.94,19.19,3.93,0.32
+1054,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2046,1.09,37.64,109.00,133.18,106.31,57.85,19.12,3.89,0.31
+1055,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2047,1.06,37.14,107.94,132.65,106.16,57.75,19.05,3.85,0.31
+1056,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2048,1.04,36.63,106.86,132.11,106.04,57.63,18.98,3.80,0.30
+1057,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2049,1.01,36.11,105.73,131.42,105.80,57.45,18.88,3.76,0.30
+1058,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2050,0.98,35.61,104.70,130.83,105.64,57.32,18.78,3.71,0.29
+1059,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2051,0.95,35.09,103.58,130.10,105.40,57.14,18.66,3.66,0.29
+1060,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2052,0.93,34.64,102.67,129.63,105.36,57.09,18.58,3.62,0.29
+1061,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2053,0.90,34.14,101.55,128.86,105.09,56.93,18.46,3.57,0.28
+1062,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2054,0.88,33.65,100.58,128.29,104.98,56.82,18.34,3.52,0.27
+1063,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2055,0.85,33.18,99.62,127.73,104.84,56.70,18.24,3.47,0.27
+1064,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2056,0.83,32.72,98.71,127.21,104.73,56.63,18.14,3.42,0.26
+1065,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2057,0.81,32.26,97.78,126.67,104.60,56.55,18.05,3.37,0.26
+1066,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2058,0.78,31.77,96.79,126.10,104.43,56.44,17.95,3.32,0.25
+1067,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2059,0.76,31.30,95.76,125.40,104.16,56.28,17.85,3.26,0.24
+1068,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2060,0.74,30.86,94.90,124.94,104.09,56.21,17.77,3.22,0.24
+1069,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2061,0.72,30.44,94.02,124.44,103.99,56.11,17.70,3.17,0.23
+1070,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2062,0.70,30.03,93.23,124.10,104.03,56.07,17.64,3.13,0.23
+1071,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2063,0.68,29.58,92.28,123.53,103.88,55.92,17.56,3.09,0.22
+1072,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2064,0.66,29.19,91.48,123.13,103.86,55.87,17.49,3.05,0.21
+1073,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2065,0.64,28.74,90.50,122.49,103.66,55.72,17.38,3.01,0.21
+1074,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2066,0.62,28.34,89.66,122.01,103.56,55.63,17.29,2.98,0.20
+1075,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2067,0.61,27.95,88.91,121.69,103.62,55.63,17.22,2.94,0.20
+1076,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2068,0.59,27.54,88.05,121.20,103.53,55.54,17.12,2.91,0.19
+1077,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2069,0.57,27.13,87.23,120.78,103.52,55.50,17.04,2.87,0.19
+1078,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2070,0.55,26.71,86.37,120.28,103.42,55.41,16.94,2.83,0.18
+1079,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2071,0.53,26.31,85.58,119.84,103.38,55.36,16.86,2.79,0.18
+1080,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2072,0.52,25.93,84.88,119.53,103.44,55.37,16.79,2.75,0.18
+1081,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2073,0.50,25.53,84.12,119.21,103.52,55.37,16.72,2.71,0.17
+1082,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2074,0.49,25.11,83.31,118.77,103.48,55.32,16.64,2.67,0.17
+1083,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2075,0.47,24.72,82.54,118.39,103.48,55.30,16.56,2.62,0.16
+1084,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2076,0.45,24.31,81.74,117.99,103.48,55.27,16.48,2.58,0.16
+1085,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2077,0.44,23.90,80.91,117.54,103.44,55.23,16.40,2.54,0.15
+1086,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2078,0.43,23.53,80.20,117.23,103.51,55.26,16.34,2.50,0.15
+1087,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2079,0.41,23.16,79.53,117.01,103.66,55.32,16.29,2.46,0.15
+1088,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2080,0.40,22.80,78.82,116.70,103.74,55.35,16.23,2.43,0.14
+1089,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2081,0.39,22.43,78.10,116.40,103.82,55.38,16.17,2.39,0.14
+1090,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2082,0.37,22.07,77.46,116.27,104.08,55.48,16.13,2.35,0.13
+1091,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2083,0.36,21.72,76.77,116.05,104.26,55.57,16.09,2.31,0.13
+1092,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2084,0.35,21.36,76.08,115.80,104.41,55.63,16.04,2.28,0.13
+1093,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2085,0.34,21.00,75.34,115.46,104.49,55.66,15.98,2.24,0.12
+1094,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2086,0.32,20.63,74.58,115.10,104.55,55.67,15.92,2.20,0.12
+1095,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2087,0.31,20.30,73.94,114.90,104.76,55.74,15.87,2.17,0.11
+1096,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2088,0.30,19.97,73.33,114.78,105.04,55.87,15.84,2.13,0.11
+1097,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2089,0.29,19.60,72.58,114.44,105.14,55.91,15.78,2.10,0.11
+1098,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2090,0.28,19.27,71.91,114.18,105.30,55.99,15.74,2.06,0.10
+1099,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2091,0.27,18.93,71.18,113.83,105.39,56.03,15.68,2.03,0.10
+1100,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2092,0.26,18.61,70.55,113.64,105.63,56.15,15.65,1.99,0.10
+1101,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2093,0.25,18.28,69.84,113.32,105.77,56.22,15.61,1.96,0.09
+1102,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2094,0.24,17.97,69.25,113.22,106.11,56.39,15.59,1.93,0.09
+1103,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2095,0.23,17.63,68.53,112.90,106.27,56.46,15.54,1.90,0.09
+1104,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2096,0.23,17.32,67.88,112.63,106.44,56.57,15.51,1.86,0.08
+1105,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2097,0.22,16.99,67.18,112.34,106.63,56.67,15.47,1.83,0.08
+1106,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2098,0.21,16.69,66.55,112.13,106.89,56.82,15.44,1.80,0.08
+1107,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2099,0.20,16.39,65.93,111.96,107.20,57.00,15.41,1.78,0.08
+1108,Medium,Less developed regions excluding China,,948,,,,Development Group,1803,2100,0.19,16.09,65.25,111.71,107.43,57.13,15.38,1.75,0.07
 1109,Medium,Land-locked Developing Countries (LLDC),h,1636,,,432,Special other,1803,2022,3.22,83.80,193.77,192.45,149.26,98.28,44.10,13.92,1.08
 1110,Medium,Land-locked Developing Countries (LLDC),h,1636,,,432,Special other,1803,2023,3.10,82.22,191.03,190.04,147.08,96.18,42.82,13.55,1.05
 1111,Medium,Land-locked Developing Countries (LLDC),h,1636,,,432,Special other,1803,2024,2.98,80.60,188.26,187.62,144.84,94.11,41.55,13.17,1.02
@@ -7524,243 +7524,243 @@ Index,Variant,"Region, subregion, country or area *",Notes,Location code,ISO3 Al
 7507,Medium,China,5,156,CHN,CN,156,Country/Area,906,2098,0.03,5.99,34.81,86.58,102.03,54.87,12.17,0.76,0.02
 7508,Medium,China,5,156,CHN,CN,156,Country/Area,906,2099,0.03,6.01,34.92,86.79,102.23,55.06,12.24,0.76,0.02
 7509,Medium,China,5,156,CHN,CN,156,Country/Area,906,2100,0.03,5.99,34.77,86.39,101.72,54.82,12.22,0.76,0.02
-7510,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2022,0.00,1.57,9.46,29.47,60.87,40.54,9.32,0.25,0.01
-7511,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2023,0.00,1.57,9.64,30.40,62.06,41.28,9.44,0.26,0.01
-7512,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2024,0.00,1.57,9.78,31.28,62.95,41.97,9.50,0.27,0.01
-7513,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2025,0.00,1.58,9.93,31.97,63.90,42.69,9.56,0.28,0.01
-7514,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2026,0.00,1.61,10.09,32.36,65.04,43.40,9.62,0.29,0.01
-7515,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2027,0.00,1.64,10.26,32.54,66.20,44.00,9.64,0.29,0.01
-7516,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2028,0.00,1.71,10.43,32.75,67.36,44.68,9.76,0.29,0.01
-7517,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2029,0.00,1.81,10.60,33.15,68.53,45.58,9.99,0.29,0.01
-7518,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2030,0.00,1.90,10.79,33.58,69.72,46.62,10.22,0.29,0.01
-7519,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2031,0.00,1.83,10.81,33.39,69.83,46.82,10.19,0.29,0.01
-7520,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2032,0.00,1.70,10.96,33.62,70.73,47.30,10.23,0.28,0.01
-7521,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2033,0.00,1.66,11.10,33.75,71.49,47.52,10.35,0.29,0.01
-7522,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2034,0.00,1.76,11.26,34.08,72.46,47.82,10.59,0.30,0.01
-7523,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2035,0.00,2.01,11.47,34.65,73.79,48.57,10.90,0.30,0.01
-7524,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2036,0.00,2.21,11.48,34.71,74.07,48.95,10.99,0.30,0.01
-7525,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2037,0.00,2.31,11.63,35.36,75.17,50.01,11.07,0.30,0.01
-7526,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2038,0.00,2.35,11.76,36.06,75.76,50.70,10.96,0.31,0.01
-7527,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2039,0.00,2.28,11.91,36.99,76.66,51.43,10.88,0.31,0.01
-7528,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2040,0.00,2.15,12.08,37.66,77.55,52.17,10.97,0.32,0.01
-7529,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2041,0.00,2.09,12.13,36.92,77.62,52.45,11.12,0.32,0.01
-7530,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2042,0.00,2.12,12.26,36.27,78.50,53.20,11.41,0.32,0.01
-7531,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2043,0.00,2.15,12.42,36.70,79.67,54.10,11.71,0.31,0.01
-7532,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2044,0.00,2.18,12.56,37.91,80.72,54.90,11.94,0.31,0.01
-7533,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2045,0.00,2.19,12.60,39.50,81.00,55.19,12.08,0.31,0.01
-7534,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2046,0.00,2.22,12.73,41.14,81.73,55.89,12.35,0.33,0.01
-7535,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2047,0.00,2.24,12.81,41.74,82.11,56.09,12.52,0.33,0.01
-7536,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2048,0.00,2.27,12.97,42.15,83.33,56.43,12.79,0.34,0.01
-7537,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2049,0.00,2.29,13.06,41.72,84.09,56.43,12.93,0.35,0.01
-7538,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2050,0.00,2.31,13.22,41.38,85.25,56.99,13.12,0.36,0.01
-7539,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2051,0.00,2.30,13.30,41.29,85.78,57.98,13.23,0.37,0.01
-7540,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2052,0.00,2.30,13.36,41.51,86.14,59.08,13.20,0.37,0.01
-7541,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2053,0.00,2.30,13.44,41.80,86.57,59.42,13.04,0.38,0.01
-7542,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2054,0.00,2.31,13.57,42.20,87.27,59.33,12.95,0.38,0.01
-7543,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2055,0.00,2.30,13.62,42.39,87.64,58.45,12.96,0.39,0.01
-7544,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2056,0.00,2.29,13.63,42.45,87.71,57.56,13.43,0.39,0.01
-7545,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2057,0.00,2.31,13.79,43.00,88.77,58.01,14.07,0.39,0.01
-7546,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2058,0.00,2.31,13.82,43.14,89.01,58.33,13.97,0.37,0.01
-7547,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2059,0.00,2.32,13.88,43.32,89.41,59.18,13.60,0.37,0.01
-7548,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2060,0.00,2.31,13.90,43.31,89.54,59.93,13.01,0.37,0.01
-7549,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2061,0.00,2.32,14.01,43.56,90.28,60.64,12.62,0.41,0.01
-7550,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2062,0.00,2.34,14.13,43.83,91.02,61.12,12.61,0.43,0.01
-7551,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2063,0.00,2.35,14.12,43.72,90.98,61.08,12.77,0.40,0.01
-7552,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2064,0.00,2.39,14.31,44.24,92.22,61.91,13.30,0.39,0.01
-7553,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2065,0.00,2.41,14.34,44.25,92.42,62.04,13.66,0.37,0.01
-7554,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2066,0.00,2.44,14.46,44.54,93.15,62.52,13.88,0.35,0.01
-7555,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2067,0.00,2.46,14.44,44.47,93.04,62.43,13.85,0.35,0.02
-7556,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2068,0.00,2.48,14.47,44.52,93.22,62.54,13.87,0.36,0.02
-7557,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2069,0.00,2.53,14.61,44.88,94.09,63.15,14.00,0.38,0.01
-7558,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2070,0.00,2.55,14.65,44.92,94.30,63.36,14.03,0.39,0.01
-7559,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2071,0.00,2.56,14.65,44.91,94.33,63.45,14.02,0.39,0.01
-7560,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2072,0.00,2.57,14.71,45.08,94.65,63.74,14.05,0.40,0.01
-7561,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2073,0.00,2.60,14.85,45.53,95.51,64.39,14.18,0.40,0.01
-7562,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2074,0.00,2.60,14.84,45.55,95.43,64.40,14.18,0.40,0.01
-7563,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2075,0.00,2.62,14.94,45.94,96.08,64.91,14.32,0.40,0.01
-7564,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2076,0.00,2.62,15.00,46.19,96.41,65.18,14.41,0.40,0.01
-7565,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2077,0.00,2.62,15.00,46.33,96.44,65.21,14.45,0.40,0.01
-7566,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2078,0.00,2.62,15.06,46.64,96.83,65.50,14.54,0.40,0.01
-7567,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2079,0.00,2.62,15.12,46.95,97.23,65.81,14.64,0.41,0.01
-7568,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2080,0.00,2.61,15.17,47.16,97.51,66.03,14.72,0.41,0.01
-7569,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2081,0.00,2.62,15.23,47.42,97.94,66.32,14.80,0.41,0.01
-7570,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2082,0.00,2.63,15.37,47.90,98.85,66.92,14.95,0.42,0.02
-7571,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2083,0.00,2.64,15.43,48.11,99.27,67.16,15.02,0.42,0.02
-7572,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2084,0.00,2.66,15.53,48.45,99.97,67.59,15.15,0.43,0.02
-7573,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2085,0.00,2.65,15.50,48.32,99.75,67.38,15.14,0.43,0.02
-7574,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2086,0.00,2.65,15.55,48.49,100.13,67.56,15.20,0.43,0.02
-7575,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2087,0.00,2.66,15.64,48.71,100.67,67.83,15.27,0.43,0.02
-7576,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2088,0.00,2.67,15.75,48.99,101.38,68.21,15.36,0.44,0.02
-7577,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2089,0.00,2.68,15.80,49.10,101.74,68.37,15.39,0.44,0.02
-7578,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2090,0.00,2.68,15.86,49.23,102.12,68.57,15.42,0.44,0.02
-7579,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2091,0.00,2.67,15.86,49.17,102.10,68.52,15.37,0.44,0.02
-7580,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2092,0.00,2.68,15.90,49.29,102.40,68.70,15.36,0.44,0.02
-7581,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2093,0.00,2.69,15.95,49.41,102.67,68.88,15.35,0.44,0.02
-7582,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2094,0.00,2.69,15.98,49.51,102.89,69.03,15.34,0.44,0.02
-7583,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2095,0.00,2.70,16.02,49.60,103.16,69.23,15.35,0.44,0.02
-7584,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2096,0.00,2.71,16.07,49.71,103.48,69.46,15.38,0.44,0.02
-7585,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2097,0.00,2.73,16.17,50.00,104.14,69.95,15.46,0.44,0.02
-7586,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2098,0.00,2.74,16.22,50.12,104.44,70.20,15.51,0.44,0.02
-7587,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2099,0.00,2.75,16.31,50.35,105.00,70.63,15.59,0.44,0.02
-7588,Medium,"China, Hong Kong SAR",6,344,HKG,HK,344,Country/Area,906,2100,0.00,2.76,16.30,50.27,104.92,70.62,15.59,0.44,0.02
-7589,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2022,0.01,2.66,25.88,75.89,73.51,36.01,9.60,1.11,0.03
-7590,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2023,0.01,2.65,26.83,77.19,74.65,36.62,9.82,1.13,0.03
-7591,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2024,0.01,2.66,27.63,78.85,76.12,37.22,10.06,1.16,0.03
-7592,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2025,0.01,2.68,27.89,80.15,77.22,37.47,10.23,1.18,0.03
-7593,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2026,0.01,2.71,27.84,81.79,78.65,37.78,10.44,1.21,0.03
-7594,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2027,0.01,2.75,27.51,83.30,79.96,38.02,10.60,1.23,0.04
-7595,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2028,0.01,2.79,27.23,84.85,81.32,38.39,10.74,1.25,0.04
-7596,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2029,0.01,2.81,27.05,85.89,82.23,38.75,10.78,1.27,0.04
-7597,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2030,0.01,2.85,27.22,87.06,83.35,39.41,10.82,1.30,0.04
-7598,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2031,0.01,2.88,27.46,87.78,84.14,40.08,10.81,1.32,0.04
-7599,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2032,0.01,2.91,27.67,88.17,84.65,40.67,10.78,1.34,0.04
-7600,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2033,0.01,2.95,27.90,88.73,85.32,41.23,10.80,1.35,0.04
-7601,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2034,0.01,2.99,28.03,89.11,85.84,41.50,10.85,1.34,0.04
-7602,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2035,0.01,3.06,28.22,89.86,86.80,41.73,10.99,1.33,0.04
-7603,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2036,0.01,3.14,28.30,90.34,87.64,41.69,11.13,1.32,0.04
-7604,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2037,0.01,3.20,28.38,90.70,88.44,41.56,11.27,1.30,0.04
-7605,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2038,0.01,3.23,28.74,91.63,89.77,41.76,11.44,1.30,0.04
-7606,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2039,0.01,3.23,29.13,92.12,90.55,41.95,11.49,1.31,0.04
-7607,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2040,0.01,3.22,29.70,92.67,91.27,42.38,11.48,1.32,0.04
-7608,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2041,0.01,3.22,30.46,93.19,91.89,43.00,11.43,1.34,0.04
-7609,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2042,0.01,3.25,31.20,93.78,92.52,43.71,11.36,1.36,0.04
-7610,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2043,0.01,3.29,31.63,94.65,93.35,44.47,11.36,1.38,0.04
-7611,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2044,0.01,3.32,31.66,95.51,94.07,45.04,11.42,1.39,0.04
-7612,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2045,0.01,3.34,31.38,96.21,94.54,45.36,11.55,1.38,0.04
-7613,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2046,0.01,3.37,31.34,97.11,95.07,45.64,11.77,1.37,0.04
-7614,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2047,0.01,3.39,31.62,98.01,95.66,45.94,12.03,1.36,0.04
-7615,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2048,0.01,3.39,31.73,98.05,95.67,45.99,12.20,1.34,0.04
-7616,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2049,0.01,3.38,31.74,97.65,95.33,45.92,12.28,1.34,0.04
-7617,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2050,0.01,3.40,32.02,98.05,95.72,46.26,12.41,1.36,0.04
-7618,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2051,0.01,3.42,32.28,98.62,96.02,46.61,12.50,1.39,0.04
-7619,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2052,0.01,3.43,32.47,99.13,96.16,46.84,12.57,1.43,0.04
-7620,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2053,0.01,3.43,32.60,99.55,96.42,46.96,12.63,1.46,0.04
-7621,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2054,0.01,3.42,32.64,99.70,96.64,46.86,12.66,1.48,0.04
-7622,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2055,0.01,3.42,32.77,100.19,97.32,46.83,12.74,1.49,0.04
-7623,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2056,0.01,3.42,32.80,100.49,97.69,46.60,12.79,1.50,0.04
-7624,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2057,0.01,3.43,32.88,100.98,98.09,46.52,12.86,1.51,0.04
-7625,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2058,0.01,3.43,32.90,101.36,98.40,46.66,12.88,1.51,0.04
-7626,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2059,0.01,3.43,32.77,101.29,98.30,46.78,12.80,1.51,0.04
-7627,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2060,0.01,3.42,32.66,101.32,98.30,47.02,12.70,1.52,0.04
-7628,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2061,0.01,3.44,32.69,101.74,98.72,47.33,12.60,1.53,0.04
-7629,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2062,0.01,3.45,32.68,101.97,98.98,47.40,12.51,1.53,0.04
-7630,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2063,0.01,3.47,32.71,102.27,99.31,47.52,12.54,1.53,0.05
-7631,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2064,0.01,3.49,32.79,102.69,99.80,47.70,12.68,1.53,0.05
-7632,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2065,0.01,3.49,32.64,102.27,99.49,47.51,12.73,1.51,0.05
-7633,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2066,0.01,3.50,32.67,102.34,99.65,47.55,12.78,1.48,0.05
-7634,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2067,0.01,3.51,32.77,102.53,99.93,47.65,12.79,1.47,0.05
-7635,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2068,0.01,3.52,32.86,102.63,100.13,47.71,12.78,1.47,0.05
-7636,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2069,0.01,3.53,33.02,102.89,100.49,47.86,12.80,1.49,0.04
-7637,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2070,0.01,3.55,33.21,103.24,100.92,48.05,12.83,1.51,0.04
-7638,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2071,0.01,3.54,33.17,102.97,100.71,47.96,12.79,1.51,0.04
-7639,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2072,0.01,3.57,33.44,103.74,101.51,48.36,12.88,1.52,0.04
-7640,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2073,0.01,3.57,33.41,103.64,101.42,48.35,12.86,1.51,0.04
-7641,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2074,0.01,3.57,33.47,103.74,101.51,48.44,12.87,1.51,0.04
-7642,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2075,0.01,3.59,33.64,104.11,101.85,48.66,12.92,1.51,0.04
-7643,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2076,0.01,3.59,33.71,104.22,101.94,48.76,12.95,1.51,0.04
-7644,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2077,0.01,3.59,33.69,104.06,101.76,48.73,12.94,1.51,0.04
-7645,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2078,0.01,3.59,33.77,104.30,101.95,48.88,12.99,1.51,0.04
-7646,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2079,0.01,3.60,33.88,104.61,102.18,49.04,13.06,1.51,0.04
-7647,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2080,0.01,3.60,33.97,104.80,102.30,49.13,13.10,1.52,0.04
-7648,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2081,0.01,3.60,33.99,104.82,102.26,49.13,13.13,1.52,0.04
-7649,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2082,0.01,3.61,34.10,105.15,102.55,49.26,13.19,1.53,0.04
-7650,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2083,0.01,3.60,34.04,105.01,102.40,49.16,13.19,1.53,0.04
-7651,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2084,0.01,3.59,33.93,104.80,102.16,49.01,13.18,1.53,0.04
-7652,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2085,0.01,3.59,33.97,104.97,102.26,49.04,13.20,1.54,0.04
-7653,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2086,0.01,3.60,34.08,105.34,102.59,49.18,13.24,1.55,0.04
-7654,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2087,0.01,3.61,34.17,105.66,102.88,49.32,13.28,1.55,0.04
-7655,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2088,0.01,3.61,34.20,105.81,103.03,49.38,13.28,1.56,0.04
-7656,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2089,0.01,3.62,34.28,106.18,103.40,49.53,13.31,1.57,0.04
-7657,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2090,0.01,3.61,34.12,105.87,103.09,49.36,13.26,1.56,0.04
-7658,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2091,0.01,3.62,34.16,106.11,103.30,49.44,13.28,1.57,0.05
-7659,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2092,0.01,3.63,34.22,106.37,103.57,49.56,13.31,1.57,0.05
-7660,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2093,0.01,3.62,34.13,106.19,103.42,49.47,13.28,1.56,0.05
-7661,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2094,0.01,3.62,34.10,106.14,103.42,49.45,13.26,1.56,0.05
-7662,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2095,0.01,3.62,34.09,106.13,103.45,49.44,13.25,1.56,0.05
-7663,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2096,0.01,3.63,34.10,106.17,103.51,49.46,13.25,1.56,0.05
-7664,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2097,0.01,3.63,34.11,106.19,103.56,49.48,13.25,1.56,0.05
-7665,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2098,0.01,3.64,34.23,106.53,103.93,49.66,13.29,1.56,0.05
-7666,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2099,0.01,3.65,34.29,106.71,104.13,49.76,13.31,1.56,0.05
-7667,Medium,"China, Macao SAR",7,446,MAC,MO,446,Country/Area,906,2100,0.01,3.66,34.28,106.66,104.13,49.75,13.29,1.56,0.05
-7668,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2022,0.07,4.39,21.36,56.61,84.76,47.87,10.45,0.74,0.09
-7669,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2023,0.07,4.29,20.78,56.10,86.11,50.38,11.38,0.82,0.09
-7670,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2024,0.07,4.19,20.13,55.47,87.13,52.90,12.34,0.88,0.09
-7671,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2025,0.07,4.09,19.52,54.97,88.21,55.64,13.37,0.95,0.09
-7672,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2026,0.07,3.97,18.78,54.15,88.62,58.04,14.37,1.01,0.09
-7673,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2027,0.07,3.83,18.18,53.63,89.47,60.73,15.50,1.08,0.09
-7674,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2028,0.07,3.68,17.51,52.78,89.82,63.01,16.66,1.15,0.09
-7675,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2029,0.07,3.59,16.91,51.92,90.26,65.24,17.96,1.22,0.09
-7676,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2030,0.07,3.57,16.34,50.95,90.63,67.33,19.38,1.29,0.09
-7677,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2031,0.07,3.59,15.74,49.80,90.73,69.17,20.83,1.37,0.09
-7678,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2032,0.07,3.60,15.22,48.93,91.28,71.34,22.42,1.45,0.09
-7679,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2033,0.07,3.58,14.65,47.75,91.17,72.96,23.81,1.53,0.08
-7680,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2034,0.06,3.58,14.22,46.83,91.41,74.85,25.24,1.64,0.08
-7681,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2035,0.06,3.54,13.81,45.80,91.26,76.39,26.51,1.76,0.08
-7682,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2036,0.06,3.46,13.43,44.60,90.82,77.65,27.66,1.88,0.08
-7683,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2037,0.06,3.40,13.17,43.58,91.07,79.50,29.02,2.02,0.08
-7684,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2038,0.06,3.32,12.83,42.40,90.77,80.87,30.18,2.13,0.08
-7685,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2039,0.06,3.28,12.55,41.68,90.66,82.43,31.37,2.23,0.07
-7686,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2040,0.06,3.25,12.27,41.33,90.59,84.03,32.53,2.32,0.07
-7687,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2041,0.06,3.21,11.93,41.06,90.08,85.23,33.50,2.40,0.07
-7688,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2042,0.06,3.18,11.62,40.77,89.57,86.46,34.49,2.47,0.07
-7689,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2043,0.06,3.17,11.37,40.61,89.44,87.92,35.63,2.54,0.07
-7690,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2044,0.06,3.17,11.17,40.53,89.57,89.38,36.87,2.60,0.07
-7691,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2045,0.05,3.16,11.00,40.25,89.75,90.70,38.14,2.66,0.07
-7692,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2046,0.05,3.14,10.79,39.61,89.58,91.52,39.25,2.69,0.06
-7693,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2047,0.05,3.15,10.69,39.22,90.09,93.04,40.62,2.75,0.06
-7694,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2048,0.05,3.12,10.47,38.44,89.48,93.28,41.42,2.78,0.06
-7695,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2049,0.05,3.12,10.35,38.10,89.58,94.08,42.45,2.85,0.06
-7696,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2050,0.05,3.12,10.26,37.87,89.59,94.71,43.40,2.93,0.06
-7697,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2051,0.05,3.13,10.20,37.82,89.75,95.41,44.47,3.04,0.06
-7698,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2052,0.05,3.13,10.13,37.70,89.58,95.74,45.53,3.12,0.05
-7699,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2053,0.05,3.15,10.14,37.85,90.02,96.63,46.66,3.23,0.05
-7700,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2054,0.05,3.15,10.10,37.84,90.02,96.87,47.10,3.31,0.05
-7701,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2055,0.05,3.16,10.10,37.93,90.25,97.29,47.31,3.38,0.05
-7702,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2056,0.05,3.17,10.11,38.03,90.40,97.55,47.13,3.48,0.05
-7703,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2057,0.04,3.17,10.11,38.10,90.45,97.61,46.85,3.62,0.05
-7704,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2058,0.05,3.17,10.13,38.22,90.67,97.90,46.70,3.70,0.05
-7705,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2059,0.05,3.18,10.15,38.32,90.82,98.07,46.53,3.68,0.05
-7706,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2060,0.05,3.18,10.17,38.46,91.06,98.33,46.62,3.63,0.05
-7707,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2061,0.05,3.18,10.20,38.64,91.38,98.65,46.94,3.56,0.05
-7708,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2062,0.05,3.18,10.20,38.68,91.41,98.65,47.18,3.49,0.05
-7709,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2063,0.05,3.18,10.22,38.78,91.62,98.85,47.48,3.43,0.05
-7710,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2064,0.05,3.20,10.26,38.98,92.10,99.33,47.82,3.41,0.05
-7711,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2065,0.05,3.20,10.24,38.93,92.06,99.25,47.82,3.42,0.05
-7712,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2066,0.05,3.20,10.24,38.92,92.10,99.25,47.82,3.46,0.05
-7713,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2067,0.05,3.20,10.25,38.96,92.26,99.38,47.86,3.52,0.05
-7714,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2068,0.05,3.20,10.25,38.95,92.34,99.45,47.88,3.56,0.05
-7715,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2069,0.05,3.20,10.24,38.84,92.23,99.31,47.78,3.57,0.05
-7716,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2070,0.05,3.22,10.32,39.06,92.91,100.04,48.11,3.60,0.05
-7717,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2071,0.05,3.23,10.35,39.11,93.20,100.35,48.22,3.61,0.05
-7718,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2072,0.05,3.24,10.34,39.07,93.19,100.34,48.18,3.61,0.05
-7719,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2073,0.05,3.24,10.35,39.08,93.24,100.42,48.18,3.60,0.05
-7720,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2074,0.05,3.24,10.32,38.98,92.95,100.14,48.00,3.58,0.05
-7721,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2075,0.05,3.23,10.32,38.93,92.82,100.05,47.92,3.57,0.05
-7722,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2076,0.05,3.25,10.39,39.17,93.39,100.71,48.18,3.59,0.05
-7723,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2077,0.05,3.26,10.41,39.22,93.53,100.89,48.22,3.59,0.05
-7724,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2078,0.05,3.26,10.44,39.28,93.71,101.11,48.31,3.59,0.05
-7725,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2079,0.05,3.27,10.47,39.40,93.99,101.42,48.44,3.59,0.05
-7726,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2080,0.05,3.27,10.47,39.40,93.94,101.40,48.44,3.57,0.05
-7727,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2081,0.05,3.28,10.49,39.54,94.19,101.70,48.60,3.57,0.05
-7728,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2082,0.05,3.28,10.48,39.55,94.10,101.63,48.58,3.56,0.05
-7729,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2083,0.05,3.28,10.47,39.53,93.94,101.48,48.55,3.56,0.05
-7730,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2084,0.05,3.29,10.50,39.67,94.23,101.79,48.76,3.57,0.05
-7731,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2085,0.05,3.29,10.51,39.74,94.39,101.95,48.91,3.58,0.05
-7732,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2086,0.05,3.29,10.49,39.65,94.22,101.75,48.88,3.57,0.05
-7733,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2087,0.05,3.30,10.55,39.82,94.68,102.22,49.15,3.59,0.05
-7734,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2088,0.05,3.29,10.53,39.74,94.50,102.02,49.07,3.60,0.05
-7735,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2089,0.05,3.30,10.54,39.75,94.56,102.08,49.09,3.62,0.05
-7736,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2090,0.05,3.32,10.61,40.02,95.20,102.75,49.43,3.66,0.05
-7737,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2091,0.05,3.31,10.56,39.85,94.79,102.30,49.24,3.65,0.05
-7738,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2092,0.05,3.32,10.58,39.95,94.96,102.48,49.35,3.67,0.05
-7739,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2093,0.05,3.32,10.61,40.09,95.22,102.75,49.50,3.68,0.05
-7740,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2094,0.05,3.33,10.63,40.19,95.39,102.93,49.59,3.69,0.05
-7741,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2095,0.05,3.32,10.61,40.09,95.13,102.66,49.43,3.68,0.05
-7742,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2096,0.05,3.32,10.62,40.13,95.26,102.78,49.46,3.69,0.05
-7743,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2097,0.05,3.32,10.63,40.17,95.36,102.89,49.47,3.70,0.05
-7744,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2098,0.05,3.34,10.68,40.37,95.84,103.39,49.67,3.72,0.05
-7745,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2099,0.05,3.33,10.66,40.36,95.74,103.27,49.59,3.71,0.05
-7746,Medium,"China, Taiwan Province of China",8,158,TWN,TW,158,Country/Area,906,2100,0.05,3.33,10.66,40.39,95.72,103.24,49.57,3.71,0.05
+7510,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2022,0.00,1.57,9.46,29.47,60.87,40.54,9.32,0.25,0.01
+7511,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2023,0.00,1.57,9.64,30.40,62.06,41.28,9.44,0.26,0.01
+7512,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2024,0.00,1.57,9.78,31.28,62.95,41.97,9.50,0.27,0.01
+7513,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2025,0.00,1.58,9.93,31.97,63.90,42.69,9.56,0.28,0.01
+7514,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2026,0.00,1.61,10.09,32.36,65.04,43.40,9.62,0.29,0.01
+7515,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2027,0.00,1.64,10.26,32.54,66.20,44.00,9.64,0.29,0.01
+7516,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2028,0.00,1.71,10.43,32.75,67.36,44.68,9.76,0.29,0.01
+7517,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2029,0.00,1.81,10.60,33.15,68.53,45.58,9.99,0.29,0.01
+7518,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2030,0.00,1.90,10.79,33.58,69.72,46.62,10.22,0.29,0.01
+7519,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2031,0.00,1.83,10.81,33.39,69.83,46.82,10.19,0.29,0.01
+7520,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2032,0.00,1.70,10.96,33.62,70.73,47.30,10.23,0.28,0.01
+7521,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2033,0.00,1.66,11.10,33.75,71.49,47.52,10.35,0.29,0.01
+7522,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2034,0.00,1.76,11.26,34.08,72.46,47.82,10.59,0.30,0.01
+7523,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2035,0.00,2.01,11.47,34.65,73.79,48.57,10.90,0.30,0.01
+7524,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2036,0.00,2.21,11.48,34.71,74.07,48.95,10.99,0.30,0.01
+7525,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2037,0.00,2.31,11.63,35.36,75.17,50.01,11.07,0.30,0.01
+7526,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2038,0.00,2.35,11.76,36.06,75.76,50.70,10.96,0.31,0.01
+7527,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2039,0.00,2.28,11.91,36.99,76.66,51.43,10.88,0.31,0.01
+7528,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2040,0.00,2.15,12.08,37.66,77.55,52.17,10.97,0.32,0.01
+7529,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2041,0.00,2.09,12.13,36.92,77.62,52.45,11.12,0.32,0.01
+7530,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2042,0.00,2.12,12.26,36.27,78.50,53.20,11.41,0.32,0.01
+7531,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2043,0.00,2.15,12.42,36.70,79.67,54.10,11.71,0.31,0.01
+7532,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2044,0.00,2.18,12.56,37.91,80.72,54.90,11.94,0.31,0.01
+7533,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2045,0.00,2.19,12.60,39.50,81.00,55.19,12.08,0.31,0.01
+7534,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2046,0.00,2.22,12.73,41.14,81.73,55.89,12.35,0.33,0.01
+7535,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2047,0.00,2.24,12.81,41.74,82.11,56.09,12.52,0.33,0.01
+7536,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2048,0.00,2.27,12.97,42.15,83.33,56.43,12.79,0.34,0.01
+7537,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2049,0.00,2.29,13.06,41.72,84.09,56.43,12.93,0.35,0.01
+7538,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2050,0.00,2.31,13.22,41.38,85.25,56.99,13.12,0.36,0.01
+7539,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2051,0.00,2.30,13.30,41.29,85.78,57.98,13.23,0.37,0.01
+7540,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2052,0.00,2.30,13.36,41.51,86.14,59.08,13.20,0.37,0.01
+7541,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2053,0.00,2.30,13.44,41.80,86.57,59.42,13.04,0.38,0.01
+7542,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2054,0.00,2.31,13.57,42.20,87.27,59.33,12.95,0.38,0.01
+7543,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2055,0.00,2.30,13.62,42.39,87.64,58.45,12.96,0.39,0.01
+7544,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2056,0.00,2.29,13.63,42.45,87.71,57.56,13.43,0.39,0.01
+7545,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2057,0.00,2.31,13.79,43.00,88.77,58.01,14.07,0.39,0.01
+7546,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2058,0.00,2.31,13.82,43.14,89.01,58.33,13.97,0.37,0.01
+7547,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2059,0.00,2.32,13.88,43.32,89.41,59.18,13.60,0.37,0.01
+7548,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2060,0.00,2.31,13.90,43.31,89.54,59.93,13.01,0.37,0.01
+7549,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2061,0.00,2.32,14.01,43.56,90.28,60.64,12.62,0.41,0.01
+7550,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2062,0.00,2.34,14.13,43.83,91.02,61.12,12.61,0.43,0.01
+7551,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2063,0.00,2.35,14.12,43.72,90.98,61.08,12.77,0.40,0.01
+7552,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2064,0.00,2.39,14.31,44.24,92.22,61.91,13.30,0.39,0.01
+7553,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2065,0.00,2.41,14.34,44.25,92.42,62.04,13.66,0.37,0.01
+7554,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2066,0.00,2.44,14.46,44.54,93.15,62.52,13.88,0.35,0.01
+7555,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2067,0.00,2.46,14.44,44.47,93.04,62.43,13.85,0.35,0.02
+7556,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2068,0.00,2.48,14.47,44.52,93.22,62.54,13.87,0.36,0.02
+7557,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2069,0.00,2.53,14.61,44.88,94.09,63.15,14.00,0.38,0.01
+7558,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2070,0.00,2.55,14.65,44.92,94.30,63.36,14.03,0.39,0.01
+7559,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2071,0.00,2.56,14.65,44.91,94.33,63.45,14.02,0.39,0.01
+7560,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2072,0.00,2.57,14.71,45.08,94.65,63.74,14.05,0.40,0.01
+7561,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2073,0.00,2.60,14.85,45.53,95.51,64.39,14.18,0.40,0.01
+7562,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2074,0.00,2.60,14.84,45.55,95.43,64.40,14.18,0.40,0.01
+7563,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2075,0.00,2.62,14.94,45.94,96.08,64.91,14.32,0.40,0.01
+7564,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2076,0.00,2.62,15.00,46.19,96.41,65.18,14.41,0.40,0.01
+7565,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2077,0.00,2.62,15.00,46.33,96.44,65.21,14.45,0.40,0.01
+7566,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2078,0.00,2.62,15.06,46.64,96.83,65.50,14.54,0.40,0.01
+7567,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2079,0.00,2.62,15.12,46.95,97.23,65.81,14.64,0.41,0.01
+7568,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2080,0.00,2.61,15.17,47.16,97.51,66.03,14.72,0.41,0.01
+7569,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2081,0.00,2.62,15.23,47.42,97.94,66.32,14.80,0.41,0.01
+7570,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2082,0.00,2.63,15.37,47.90,98.85,66.92,14.95,0.42,0.02
+7571,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2083,0.00,2.64,15.43,48.11,99.27,67.16,15.02,0.42,0.02
+7572,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2084,0.00,2.66,15.53,48.45,99.97,67.59,15.15,0.43,0.02
+7573,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2085,0.00,2.65,15.50,48.32,99.75,67.38,15.14,0.43,0.02
+7574,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2086,0.00,2.65,15.55,48.49,100.13,67.56,15.20,0.43,0.02
+7575,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2087,0.00,2.66,15.64,48.71,100.67,67.83,15.27,0.43,0.02
+7576,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2088,0.00,2.67,15.75,48.99,101.38,68.21,15.36,0.44,0.02
+7577,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2089,0.00,2.68,15.80,49.10,101.74,68.37,15.39,0.44,0.02
+7578,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2090,0.00,2.68,15.86,49.23,102.12,68.57,15.42,0.44,0.02
+7579,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2091,0.00,2.67,15.86,49.17,102.10,68.52,15.37,0.44,0.02
+7580,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2092,0.00,2.68,15.90,49.29,102.40,68.70,15.36,0.44,0.02
+7581,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2093,0.00,2.69,15.95,49.41,102.67,68.88,15.35,0.44,0.02
+7582,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2094,0.00,2.69,15.98,49.51,102.89,69.03,15.34,0.44,0.02
+7583,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2095,0.00,2.70,16.02,49.60,103.16,69.23,15.35,0.44,0.02
+7584,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2096,0.00,2.71,16.07,49.71,103.48,69.46,15.38,0.44,0.02
+7585,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2097,0.00,2.73,16.17,50.00,104.14,69.95,15.46,0.44,0.02
+7586,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2098,0.00,2.74,16.22,50.12,104.44,70.20,15.51,0.44,0.02
+7587,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2099,0.00,2.75,16.31,50.35,105.00,70.63,15.59,0.44,0.02
+7588,Medium,China Hong Kong SAR,6,344,HKG,HK,344,Country/Area,906,2100,0.00,2.76,16.30,50.27,104.92,70.62,15.59,0.44,0.02
+7589,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2022,0.01,2.66,25.88,75.89,73.51,36.01,9.60,1.11,0.03
+7590,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2023,0.01,2.65,26.83,77.19,74.65,36.62,9.82,1.13,0.03
+7591,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2024,0.01,2.66,27.63,78.85,76.12,37.22,10.06,1.16,0.03
+7592,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2025,0.01,2.68,27.89,80.15,77.22,37.47,10.23,1.18,0.03
+7593,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2026,0.01,2.71,27.84,81.79,78.65,37.78,10.44,1.21,0.03
+7594,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2027,0.01,2.75,27.51,83.30,79.96,38.02,10.60,1.23,0.04
+7595,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2028,0.01,2.79,27.23,84.85,81.32,38.39,10.74,1.25,0.04
+7596,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2029,0.01,2.81,27.05,85.89,82.23,38.75,10.78,1.27,0.04
+7597,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2030,0.01,2.85,27.22,87.06,83.35,39.41,10.82,1.30,0.04
+7598,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2031,0.01,2.88,27.46,87.78,84.14,40.08,10.81,1.32,0.04
+7599,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2032,0.01,2.91,27.67,88.17,84.65,40.67,10.78,1.34,0.04
+7600,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2033,0.01,2.95,27.90,88.73,85.32,41.23,10.80,1.35,0.04
+7601,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2034,0.01,2.99,28.03,89.11,85.84,41.50,10.85,1.34,0.04
+7602,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2035,0.01,3.06,28.22,89.86,86.80,41.73,10.99,1.33,0.04
+7603,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2036,0.01,3.14,28.30,90.34,87.64,41.69,11.13,1.32,0.04
+7604,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2037,0.01,3.20,28.38,90.70,88.44,41.56,11.27,1.30,0.04
+7605,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2038,0.01,3.23,28.74,91.63,89.77,41.76,11.44,1.30,0.04
+7606,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2039,0.01,3.23,29.13,92.12,90.55,41.95,11.49,1.31,0.04
+7607,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2040,0.01,3.22,29.70,92.67,91.27,42.38,11.48,1.32,0.04
+7608,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2041,0.01,3.22,30.46,93.19,91.89,43.00,11.43,1.34,0.04
+7609,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2042,0.01,3.25,31.20,93.78,92.52,43.71,11.36,1.36,0.04
+7610,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2043,0.01,3.29,31.63,94.65,93.35,44.47,11.36,1.38,0.04
+7611,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2044,0.01,3.32,31.66,95.51,94.07,45.04,11.42,1.39,0.04
+7612,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2045,0.01,3.34,31.38,96.21,94.54,45.36,11.55,1.38,0.04
+7613,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2046,0.01,3.37,31.34,97.11,95.07,45.64,11.77,1.37,0.04
+7614,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2047,0.01,3.39,31.62,98.01,95.66,45.94,12.03,1.36,0.04
+7615,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2048,0.01,3.39,31.73,98.05,95.67,45.99,12.20,1.34,0.04
+7616,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2049,0.01,3.38,31.74,97.65,95.33,45.92,12.28,1.34,0.04
+7617,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2050,0.01,3.40,32.02,98.05,95.72,46.26,12.41,1.36,0.04
+7618,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2051,0.01,3.42,32.28,98.62,96.02,46.61,12.50,1.39,0.04
+7619,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2052,0.01,3.43,32.47,99.13,96.16,46.84,12.57,1.43,0.04
+7620,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2053,0.01,3.43,32.60,99.55,96.42,46.96,12.63,1.46,0.04
+7621,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2054,0.01,3.42,32.64,99.70,96.64,46.86,12.66,1.48,0.04
+7622,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2055,0.01,3.42,32.77,100.19,97.32,46.83,12.74,1.49,0.04
+7623,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2056,0.01,3.42,32.80,100.49,97.69,46.60,12.79,1.50,0.04
+7624,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2057,0.01,3.43,32.88,100.98,98.09,46.52,12.86,1.51,0.04
+7625,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2058,0.01,3.43,32.90,101.36,98.40,46.66,12.88,1.51,0.04
+7626,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2059,0.01,3.43,32.77,101.29,98.30,46.78,12.80,1.51,0.04
+7627,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2060,0.01,3.42,32.66,101.32,98.30,47.02,12.70,1.52,0.04
+7628,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2061,0.01,3.44,32.69,101.74,98.72,47.33,12.60,1.53,0.04
+7629,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2062,0.01,3.45,32.68,101.97,98.98,47.40,12.51,1.53,0.04
+7630,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2063,0.01,3.47,32.71,102.27,99.31,47.52,12.54,1.53,0.05
+7631,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2064,0.01,3.49,32.79,102.69,99.80,47.70,12.68,1.53,0.05
+7632,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2065,0.01,3.49,32.64,102.27,99.49,47.51,12.73,1.51,0.05
+7633,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2066,0.01,3.50,32.67,102.34,99.65,47.55,12.78,1.48,0.05
+7634,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2067,0.01,3.51,32.77,102.53,99.93,47.65,12.79,1.47,0.05
+7635,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2068,0.01,3.52,32.86,102.63,100.13,47.71,12.78,1.47,0.05
+7636,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2069,0.01,3.53,33.02,102.89,100.49,47.86,12.80,1.49,0.04
+7637,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2070,0.01,3.55,33.21,103.24,100.92,48.05,12.83,1.51,0.04
+7638,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2071,0.01,3.54,33.17,102.97,100.71,47.96,12.79,1.51,0.04
+7639,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2072,0.01,3.57,33.44,103.74,101.51,48.36,12.88,1.52,0.04
+7640,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2073,0.01,3.57,33.41,103.64,101.42,48.35,12.86,1.51,0.04
+7641,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2074,0.01,3.57,33.47,103.74,101.51,48.44,12.87,1.51,0.04
+7642,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2075,0.01,3.59,33.64,104.11,101.85,48.66,12.92,1.51,0.04
+7643,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2076,0.01,3.59,33.71,104.22,101.94,48.76,12.95,1.51,0.04
+7644,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2077,0.01,3.59,33.69,104.06,101.76,48.73,12.94,1.51,0.04
+7645,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2078,0.01,3.59,33.77,104.30,101.95,48.88,12.99,1.51,0.04
+7646,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2079,0.01,3.60,33.88,104.61,102.18,49.04,13.06,1.51,0.04
+7647,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2080,0.01,3.60,33.97,104.80,102.30,49.13,13.10,1.52,0.04
+7648,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2081,0.01,3.60,33.99,104.82,102.26,49.13,13.13,1.52,0.04
+7649,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2082,0.01,3.61,34.10,105.15,102.55,49.26,13.19,1.53,0.04
+7650,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2083,0.01,3.60,34.04,105.01,102.40,49.16,13.19,1.53,0.04
+7651,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2084,0.01,3.59,33.93,104.80,102.16,49.01,13.18,1.53,0.04
+7652,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2085,0.01,3.59,33.97,104.97,102.26,49.04,13.20,1.54,0.04
+7653,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2086,0.01,3.60,34.08,105.34,102.59,49.18,13.24,1.55,0.04
+7654,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2087,0.01,3.61,34.17,105.66,102.88,49.32,13.28,1.55,0.04
+7655,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2088,0.01,3.61,34.20,105.81,103.03,49.38,13.28,1.56,0.04
+7656,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2089,0.01,3.62,34.28,106.18,103.40,49.53,13.31,1.57,0.04
+7657,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2090,0.01,3.61,34.12,105.87,103.09,49.36,13.26,1.56,0.04
+7658,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2091,0.01,3.62,34.16,106.11,103.30,49.44,13.28,1.57,0.05
+7659,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2092,0.01,3.63,34.22,106.37,103.57,49.56,13.31,1.57,0.05
+7660,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2093,0.01,3.62,34.13,106.19,103.42,49.47,13.28,1.56,0.05
+7661,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2094,0.01,3.62,34.10,106.14,103.42,49.45,13.26,1.56,0.05
+7662,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2095,0.01,3.62,34.09,106.13,103.45,49.44,13.25,1.56,0.05
+7663,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2096,0.01,3.63,34.10,106.17,103.51,49.46,13.25,1.56,0.05
+7664,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2097,0.01,3.63,34.11,106.19,103.56,49.48,13.25,1.56,0.05
+7665,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2098,0.01,3.64,34.23,106.53,103.93,49.66,13.29,1.56,0.05
+7666,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2099,0.01,3.65,34.29,106.71,104.13,49.76,13.31,1.56,0.05
+7667,Medium,China, Macao SAR,7,446,MAC,MO,446,Country/Area,906,2100,0.01,3.66,34.28,106.66,104.13,49.75,13.29,1.56,0.05
+7668,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2022,0.07,4.39,21.36,56.61,84.76,47.87,10.45,0.74,0.09
+7669,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2023,0.07,4.29,20.78,56.10,86.11,50.38,11.38,0.82,0.09
+7670,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2024,0.07,4.19,20.13,55.47,87.13,52.90,12.34,0.88,0.09
+7671,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2025,0.07,4.09,19.52,54.97,88.21,55.64,13.37,0.95,0.09
+7672,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2026,0.07,3.97,18.78,54.15,88.62,58.04,14.37,1.01,0.09
+7673,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2027,0.07,3.83,18.18,53.63,89.47,60.73,15.50,1.08,0.09
+7674,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2028,0.07,3.68,17.51,52.78,89.82,63.01,16.66,1.15,0.09
+7675,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2029,0.07,3.59,16.91,51.92,90.26,65.24,17.96,1.22,0.09
+7676,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2030,0.07,3.57,16.34,50.95,90.63,67.33,19.38,1.29,0.09
+7677,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2031,0.07,3.59,15.74,49.80,90.73,69.17,20.83,1.37,0.09
+7678,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2032,0.07,3.60,15.22,48.93,91.28,71.34,22.42,1.45,0.09
+7679,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2033,0.07,3.58,14.65,47.75,91.17,72.96,23.81,1.53,0.08
+7680,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2034,0.06,3.58,14.22,46.83,91.41,74.85,25.24,1.64,0.08
+7681,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2035,0.06,3.54,13.81,45.80,91.26,76.39,26.51,1.76,0.08
+7682,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2036,0.06,3.46,13.43,44.60,90.82,77.65,27.66,1.88,0.08
+7683,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2037,0.06,3.40,13.17,43.58,91.07,79.50,29.02,2.02,0.08
+7684,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2038,0.06,3.32,12.83,42.40,90.77,80.87,30.18,2.13,0.08
+7685,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2039,0.06,3.28,12.55,41.68,90.66,82.43,31.37,2.23,0.07
+7686,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2040,0.06,3.25,12.27,41.33,90.59,84.03,32.53,2.32,0.07
+7687,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2041,0.06,3.21,11.93,41.06,90.08,85.23,33.50,2.40,0.07
+7688,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2042,0.06,3.18,11.62,40.77,89.57,86.46,34.49,2.47,0.07
+7689,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2043,0.06,3.17,11.37,40.61,89.44,87.92,35.63,2.54,0.07
+7690,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2044,0.06,3.17,11.17,40.53,89.57,89.38,36.87,2.60,0.07
+7691,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2045,0.05,3.16,11.00,40.25,89.75,90.70,38.14,2.66,0.07
+7692,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2046,0.05,3.14,10.79,39.61,89.58,91.52,39.25,2.69,0.06
+7693,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2047,0.05,3.15,10.69,39.22,90.09,93.04,40.62,2.75,0.06
+7694,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2048,0.05,3.12,10.47,38.44,89.48,93.28,41.42,2.78,0.06
+7695,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2049,0.05,3.12,10.35,38.10,89.58,94.08,42.45,2.85,0.06
+7696,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2050,0.05,3.12,10.26,37.87,89.59,94.71,43.40,2.93,0.06
+7697,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2051,0.05,3.13,10.20,37.82,89.75,95.41,44.47,3.04,0.06
+7698,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2052,0.05,3.13,10.13,37.70,89.58,95.74,45.53,3.12,0.05
+7699,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2053,0.05,3.15,10.14,37.85,90.02,96.63,46.66,3.23,0.05
+7700,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2054,0.05,3.15,10.10,37.84,90.02,96.87,47.10,3.31,0.05
+7701,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2055,0.05,3.16,10.10,37.93,90.25,97.29,47.31,3.38,0.05
+7702,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2056,0.05,3.17,10.11,38.03,90.40,97.55,47.13,3.48,0.05
+7703,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2057,0.04,3.17,10.11,38.10,90.45,97.61,46.85,3.62,0.05
+7704,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2058,0.05,3.17,10.13,38.22,90.67,97.90,46.70,3.70,0.05
+7705,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2059,0.05,3.18,10.15,38.32,90.82,98.07,46.53,3.68,0.05
+7706,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2060,0.05,3.18,10.17,38.46,91.06,98.33,46.62,3.63,0.05
+7707,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2061,0.05,3.18,10.20,38.64,91.38,98.65,46.94,3.56,0.05
+7708,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2062,0.05,3.18,10.20,38.68,91.41,98.65,47.18,3.49,0.05
+7709,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2063,0.05,3.18,10.22,38.78,91.62,98.85,47.48,3.43,0.05
+7710,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2064,0.05,3.20,10.26,38.98,92.10,99.33,47.82,3.41,0.05
+7711,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2065,0.05,3.20,10.24,38.93,92.06,99.25,47.82,3.42,0.05
+7712,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2066,0.05,3.20,10.24,38.92,92.10,99.25,47.82,3.46,0.05
+7713,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2067,0.05,3.20,10.25,38.96,92.26,99.38,47.86,3.52,0.05
+7714,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2068,0.05,3.20,10.25,38.95,92.34,99.45,47.88,3.56,0.05
+7715,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2069,0.05,3.20,10.24,38.84,92.23,99.31,47.78,3.57,0.05
+7716,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2070,0.05,3.22,10.32,39.06,92.91,100.04,48.11,3.60,0.05
+7717,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2071,0.05,3.23,10.35,39.11,93.20,100.35,48.22,3.61,0.05
+7718,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2072,0.05,3.24,10.34,39.07,93.19,100.34,48.18,3.61,0.05
+7719,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2073,0.05,3.24,10.35,39.08,93.24,100.42,48.18,3.60,0.05
+7720,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2074,0.05,3.24,10.32,38.98,92.95,100.14,48.00,3.58,0.05
+7721,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2075,0.05,3.23,10.32,38.93,92.82,100.05,47.92,3.57,0.05
+7722,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2076,0.05,3.25,10.39,39.17,93.39,100.71,48.18,3.59,0.05
+7723,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2077,0.05,3.26,10.41,39.22,93.53,100.89,48.22,3.59,0.05
+7724,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2078,0.05,3.26,10.44,39.28,93.71,101.11,48.31,3.59,0.05
+7725,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2079,0.05,3.27,10.47,39.40,93.99,101.42,48.44,3.59,0.05
+7726,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2080,0.05,3.27,10.47,39.40,93.94,101.40,48.44,3.57,0.05
+7727,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2081,0.05,3.28,10.49,39.54,94.19,101.70,48.60,3.57,0.05
+7728,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2082,0.05,3.28,10.48,39.55,94.10,101.63,48.58,3.56,0.05
+7729,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2083,0.05,3.28,10.47,39.53,93.94,101.48,48.55,3.56,0.05
+7730,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2084,0.05,3.29,10.50,39.67,94.23,101.79,48.76,3.57,0.05
+7731,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2085,0.05,3.29,10.51,39.74,94.39,101.95,48.91,3.58,0.05
+7732,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2086,0.05,3.29,10.49,39.65,94.22,101.75,48.88,3.57,0.05
+7733,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2087,0.05,3.30,10.55,39.82,94.68,102.22,49.15,3.59,0.05
+7734,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2088,0.05,3.29,10.53,39.74,94.50,102.02,49.07,3.60,0.05
+7735,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2089,0.05,3.30,10.54,39.75,94.56,102.08,49.09,3.62,0.05
+7736,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2090,0.05,3.32,10.61,40.02,95.20,102.75,49.43,3.66,0.05
+7737,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2091,0.05,3.31,10.56,39.85,94.79,102.30,49.24,3.65,0.05
+7738,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2092,0.05,3.32,10.58,39.95,94.96,102.48,49.35,3.67,0.05
+7739,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2093,0.05,3.32,10.61,40.09,95.22,102.75,49.50,3.68,0.05
+7740,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2094,0.05,3.33,10.63,40.19,95.39,102.93,49.59,3.69,0.05
+7741,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2095,0.05,3.32,10.61,40.09,95.13,102.66,49.43,3.68,0.05
+7742,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2096,0.05,3.32,10.62,40.13,95.26,102.78,49.46,3.69,0.05
+7743,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2097,0.05,3.32,10.63,40.17,95.36,102.89,49.47,3.70,0.05
+7744,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2098,0.05,3.34,10.68,40.37,95.84,103.39,49.67,3.72,0.05
+7745,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2099,0.05,3.33,10.66,40.36,95.74,103.27,49.59,3.71,0.05
+7746,Medium,China Taiwan Province of China,8,158,TWN,TW,158,Country/Area,906,2100,0.05,3.33,10.66,40.39,95.72,103.24,49.57,3.71,0.05
 7747,Medium,Dem. People's Republic of Korea,,408,PRK,KP,408,Country/Area,906,2022,0.11,2.45,52.38,178.25,106.96,17.87,1.58,0.97,0.24
 7748,Medium,Dem. People's Republic of Korea,,408,PRK,KP,408,Country/Area,906,2023,0.11,2.59,52.30,177.17,107.43,17.91,1.54,0.98,0.24
 7749,Medium,Dem. People's Republic of Korea,,408,PRK,KP,408,Country/Area,906,2024,0.10,2.72,51.88,175.12,107.02,17.86,1.50,0.99,0.23
@@ -16135,85 +16135,85 @@ Index,Variant,"Region, subregion, country or area *",Notes,Location code,ISO3 Al
 16118,Medium,Barbados,,52,BRB,BB,52,Country/Area,915,2098,0.04,6.53,38.50,95.94,112.67,60.68,13.74,0.87,0.02
 16119,Medium,Barbados,,52,BRB,BB,52,Country/Area,915,2099,0.04,6.51,38.40,95.75,112.41,60.54,13.71,0.87,0.02
 16120,Medium,Barbados,,52,BRB,BB,52,Country/Area,915,2100,0.04,6.50,38.32,95.63,112.23,60.44,13.68,0.87,0.02
-16121,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2022,0.44,21.53,72.43,95.06,81.44,44.82,12.56,0.82,0.13
-16122,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2023,0.44,21.05,71.52,95.30,82.10,45.29,12.55,0.82,0.13
-16123,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2024,0.43,20.69,70.48,95.10,82.29,45.52,12.45,0.83,0.13
-16124,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2025,0.41,20.38,69.50,95.00,82.67,45.91,12.46,0.85,0.13
-16125,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2026,0.39,20.18,68.67,95.03,83.19,46.39,12.56,0.88,0.13
-16126,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2027,0.38,20.12,67.94,95.11,83.84,46.87,12.64,0.89,0.13
-16127,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2028,0.36,19.87,67.10,94.90,84.20,47.08,12.65,0.88,0.13
-16128,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2029,0.35,19.51,66.58,95.00,84.88,47.25,12.68,0.88,0.13
-16129,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2030,0.34,19.01,65.96,94.86,85.56,47.37,12.73,0.88,0.13
-16130,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2031,0.33,18.60,65.57,94.89,86.56,47.59,12.80,0.89,0.13
-16131,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2032,0.31,18.27,65.23,94.90,87.58,47.82,12.84,0.90,0.13
-16132,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2033,0.30,17.78,64.33,94.32,87.79,47.79,12.74,0.90,0.12
-16133,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2034,0.29,17.43,63.73,94.40,88.47,48.19,12.62,0.90,0.12
-16134,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2035,0.28,17.07,62.97,94.32,89.01,48.76,12.52,0.91,0.12
-16135,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2036,0.27,16.70,62.15,94.14,89.37,49.45,12.41,0.92,0.12
-16136,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2037,0.26,16.39,61.73,94.52,90.25,50.52,12.39,0.93,0.12
-16137,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2038,0.25,15.98,60.97,94.33,90.56,51.00,12.33,0.92,0.11
-16138,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2039,0.24,15.65,60.33,94.25,90.92,51.41,12.38,0.91,0.11
-16139,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2040,0.23,15.37,59.80,94.29,91.42,51.96,12.61,0.91,0.11
-16140,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2041,0.22,15.10,59.24,94.27,91.78,52.44,12.91,0.90,0.11
-16141,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2042,0.21,14.81,58.59,94.18,92.02,52.87,13.26,0.90,0.11
-16142,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2043,0.20,14.52,58.06,94.29,92.50,53.27,13.44,0.90,0.10
-16143,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2044,0.20,14.23,57.57,94.38,93.06,53.53,13.54,0.91,0.10
-16144,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2045,0.19,13.90,56.92,94.16,93.37,53.59,13.65,0.93,0.10
-16145,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2046,0.18,13.63,56.50,94.28,93.97,53.74,13.79,0.97,0.10
-16146,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2047,0.17,13.37,56.10,94.43,94.59,53.84,13.92,1.01,0.09
-16147,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2048,0.17,13.10,55.57,94.43,95.08,53.98,13.95,1.03,0.09
-16148,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2049,0.16,12.80,54.84,94.10,95.22,54.06,13.88,1.04,0.09
-16149,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2050,0.16,12.54,54.32,94.14,95.69,54.41,13.83,1.05,0.09
-16150,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2051,0.15,12.26,53.64,93.88,95.84,54.53,13.69,1.06,0.09
-16151,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2052,0.14,12.00,53.08,93.81,96.22,54.71,13.54,1.07,0.09
-16152,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2053,0.14,11.83,52.86,94.30,97.21,55.27,13.56,1.08,0.09
-16153,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2054,0.14,11.60,52.31,94.18,97.54,55.46,13.57,1.08,0.08
-16154,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2055,0.13,11.40,51.86,94.22,98.03,55.73,13.63,1.08,0.08
-16155,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2056,0.13,11.21,51.37,94.18,98.42,55.95,13.65,1.07,0.08
-16156,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2057,0.12,11.02,50.87,94.11,98.80,56.18,13.65,1.05,0.08
-16157,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2058,0.12,10.85,50.41,94.09,99.23,56.46,13.67,1.05,0.08
-16158,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2059,0.11,10.66,49.89,93.92,99.51,56.59,13.66,1.05,0.07
-16159,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2060,0.11,10.48,49.35,93.69,99.71,56.66,13.64,1.05,0.07
-16160,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2061,0.11,10.33,48.93,93.63,100.08,56.81,13.64,1.05,0.07
-16161,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2062,0.10,10.16,48.43,93.40,100.29,56.88,13.64,1.05,0.07
-16162,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2063,0.10,10.06,48.25,93.76,101.10,57.34,13.73,1.05,0.06
-16163,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2064,0.10,9.91,47.84,93.66,101.40,57.51,13.73,1.05,0.06
-16164,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2065,0.09,9.77,47.45,93.59,101.72,57.69,13.71,1.05,0.06
-16165,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2066,0.09,9.64,47.14,93.65,102.17,57.94,13.71,1.05,0.06
-16166,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2067,0.09,9.52,46.82,93.69,102.58,58.17,13.72,1.05,0.06
-16167,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2068,0.09,9.40,46.60,93.94,103.22,58.52,13.78,1.05,0.06
-16168,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2069,0.08,9.24,46.16,93.73,103.32,58.56,13.78,1.05,0.05
-16169,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2070,0.08,9.10,45.86,93.78,103.69,58.76,13.80,1.04,0.05
-16170,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2071,0.08,8.96,45.49,93.69,103.89,58.85,13.81,1.04,0.05
-16171,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2072,0.07,8.84,45.17,93.71,104.20,59.02,13.83,1.03,0.05
-16172,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2073,0.07,8.74,44.98,94.02,104.83,59.37,13.90,1.04,0.05
-16173,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2074,0.07,8.59,44.49,93.73,104.77,59.30,13.87,1.03,0.04
-16174,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2075,0.07,8.46,44.08,93.59,104.87,59.30,13.86,1.02,0.04
-16175,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2076,0.06,8.35,43.80,93.70,105.23,59.45,13.89,1.02,0.04
-16176,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2077,0.06,8.24,43.50,93.72,105.50,59.53,13.90,1.02,0.04
-16177,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2078,0.06,8.11,43.14,93.59,105.61,59.51,13.89,1.01,0.04
-16178,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2079,0.06,7.98,42.72,93.33,105.59,59.41,13.86,1.01,0.04
-16179,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2080,0.06,7.92,42.73,93.98,106.57,59.86,13.95,1.01,0.04
-16180,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2081,0.06,7.78,42.24,93.55,106.32,59.61,13.88,1.00,0.04
-16181,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2082,0.05,7.70,42.05,93.79,106.81,59.77,13.90,1.00,0.03
-16182,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2083,0.05,7.62,41.84,93.99,107.27,59.91,13.91,1.00,0.03
-16183,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2084,0.05,7.57,41.78,94.54,108.14,60.27,13.97,1.00,0.03
-16184,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2085,0.05,7.44,41.30,94.12,107.88,59.99,13.88,0.98,0.03
-16185,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2086,0.05,7.38,41.13,94.35,108.37,60.12,13.88,0.98,0.03
-16186,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2087,0.05,7.30,40.85,94.33,108.55,60.09,13.85,0.97,0.03
-16187,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2088,0.05,7.25,40.79,94.78,109.29,60.39,13.88,0.97,0.03
-16188,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2089,0.05,7.15,40.40,94.47,109.17,60.22,13.81,0.96,0.03
-16189,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2090,0.04,7.08,40.16,94.48,109.38,60.23,13.78,0.95,0.03
-16190,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2091,0.04,7.05,40.15,95.02,110.20,60.56,13.82,0.94,0.02
-16191,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2092,0.04,6.99,39.90,94.97,110.32,60.49,13.78,0.93,0.02
-16192,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2093,0.04,6.92,39.67,94.98,110.52,60.46,13.76,0.92,0.02
-16193,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2094,0.04,6.87,39.54,95.21,110.98,60.57,13.77,0.92,0.02
-16194,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2095,0.04,6.81,39.33,95.25,111.18,60.54,13.76,0.91,0.02
-16195,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2096,0.04,6.75,39.15,95.33,111.41,60.52,13.74,0.90,0.02
-16196,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2097,0.04,6.70,39.02,95.52,111.76,60.58,13.73,0.89,0.02
-16197,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2098,0.04,6.66,38.89,95.71,112.12,60.64,13.73,0.89,0.02
-16198,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2099,0.04,6.58,38.60,95.50,112.00,60.45,13.67,0.88,0.02
-16199,Medium,"Bonaire, Sint Eustatius and Saba",27,535,BES,BQ,535,Country/Area,915,2100,0.04,6.55,38.57,95.96,112.62,60.65,13.70,0.87,0.02
+16121,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2022,0.44,21.53,72.43,95.06,81.44,44.82,12.56,0.82,0.13
+16122,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2023,0.44,21.05,71.52,95.30,82.10,45.29,12.55,0.82,0.13
+16123,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2024,0.43,20.69,70.48,95.10,82.29,45.52,12.45,0.83,0.13
+16124,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2025,0.41,20.38,69.50,95.00,82.67,45.91,12.46,0.85,0.13
+16125,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2026,0.39,20.18,68.67,95.03,83.19,46.39,12.56,0.88,0.13
+16126,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2027,0.38,20.12,67.94,95.11,83.84,46.87,12.64,0.89,0.13
+16127,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2028,0.36,19.87,67.10,94.90,84.20,47.08,12.65,0.88,0.13
+16128,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2029,0.35,19.51,66.58,95.00,84.88,47.25,12.68,0.88,0.13
+16129,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2030,0.34,19.01,65.96,94.86,85.56,47.37,12.73,0.88,0.13
+16130,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2031,0.33,18.60,65.57,94.89,86.56,47.59,12.80,0.89,0.13
+16131,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2032,0.31,18.27,65.23,94.90,87.58,47.82,12.84,0.90,0.13
+16132,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2033,0.30,17.78,64.33,94.32,87.79,47.79,12.74,0.90,0.12
+16133,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2034,0.29,17.43,63.73,94.40,88.47,48.19,12.62,0.90,0.12
+16134,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2035,0.28,17.07,62.97,94.32,89.01,48.76,12.52,0.91,0.12
+16135,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2036,0.27,16.70,62.15,94.14,89.37,49.45,12.41,0.92,0.12
+16136,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2037,0.26,16.39,61.73,94.52,90.25,50.52,12.39,0.93,0.12
+16137,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2038,0.25,15.98,60.97,94.33,90.56,51.00,12.33,0.92,0.11
+16138,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2039,0.24,15.65,60.33,94.25,90.92,51.41,12.38,0.91,0.11
+16139,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2040,0.23,15.37,59.80,94.29,91.42,51.96,12.61,0.91,0.11
+16140,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2041,0.22,15.10,59.24,94.27,91.78,52.44,12.91,0.90,0.11
+16141,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2042,0.21,14.81,58.59,94.18,92.02,52.87,13.26,0.90,0.11
+16142,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2043,0.20,14.52,58.06,94.29,92.50,53.27,13.44,0.90,0.10
+16143,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2044,0.20,14.23,57.57,94.38,93.06,53.53,13.54,0.91,0.10
+16144,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2045,0.19,13.90,56.92,94.16,93.37,53.59,13.65,0.93,0.10
+16145,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2046,0.18,13.63,56.50,94.28,93.97,53.74,13.79,0.97,0.10
+16146,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2047,0.17,13.37,56.10,94.43,94.59,53.84,13.92,1.01,0.09
+16147,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2048,0.17,13.10,55.57,94.43,95.08,53.98,13.95,1.03,0.09
+16148,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2049,0.16,12.80,54.84,94.10,95.22,54.06,13.88,1.04,0.09
+16149,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2050,0.16,12.54,54.32,94.14,95.69,54.41,13.83,1.05,0.09
+16150,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2051,0.15,12.26,53.64,93.88,95.84,54.53,13.69,1.06,0.09
+16151,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2052,0.14,12.00,53.08,93.81,96.22,54.71,13.54,1.07,0.09
+16152,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2053,0.14,11.83,52.86,94.30,97.21,55.27,13.56,1.08,0.09
+16153,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2054,0.14,11.60,52.31,94.18,97.54,55.46,13.57,1.08,0.08
+16154,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2055,0.13,11.40,51.86,94.22,98.03,55.73,13.63,1.08,0.08
+16155,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2056,0.13,11.21,51.37,94.18,98.42,55.95,13.65,1.07,0.08
+16156,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2057,0.12,11.02,50.87,94.11,98.80,56.18,13.65,1.05,0.08
+16157,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2058,0.12,10.85,50.41,94.09,99.23,56.46,13.67,1.05,0.08
+16158,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2059,0.11,10.66,49.89,93.92,99.51,56.59,13.66,1.05,0.07
+16159,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2060,0.11,10.48,49.35,93.69,99.71,56.66,13.64,1.05,0.07
+16160,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2061,0.11,10.33,48.93,93.63,100.08,56.81,13.64,1.05,0.07
+16161,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2062,0.10,10.16,48.43,93.40,100.29,56.88,13.64,1.05,0.07
+16162,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2063,0.10,10.06,48.25,93.76,101.10,57.34,13.73,1.05,0.06
+16163,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2064,0.10,9.91,47.84,93.66,101.40,57.51,13.73,1.05,0.06
+16164,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2065,0.09,9.77,47.45,93.59,101.72,57.69,13.71,1.05,0.06
+16165,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2066,0.09,9.64,47.14,93.65,102.17,57.94,13.71,1.05,0.06
+16166,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2067,0.09,9.52,46.82,93.69,102.58,58.17,13.72,1.05,0.06
+16167,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2068,0.09,9.40,46.60,93.94,103.22,58.52,13.78,1.05,0.06
+16168,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2069,0.08,9.24,46.16,93.73,103.32,58.56,13.78,1.05,0.05
+16169,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2070,0.08,9.10,45.86,93.78,103.69,58.76,13.80,1.04,0.05
+16170,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2071,0.08,8.96,45.49,93.69,103.89,58.85,13.81,1.04,0.05
+16171,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2072,0.07,8.84,45.17,93.71,104.20,59.02,13.83,1.03,0.05
+16172,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2073,0.07,8.74,44.98,94.02,104.83,59.37,13.90,1.04,0.05
+16173,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2074,0.07,8.59,44.49,93.73,104.77,59.30,13.87,1.03,0.04
+16174,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2075,0.07,8.46,44.08,93.59,104.87,59.30,13.86,1.02,0.04
+16175,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2076,0.06,8.35,43.80,93.70,105.23,59.45,13.89,1.02,0.04
+16176,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2077,0.06,8.24,43.50,93.72,105.50,59.53,13.90,1.02,0.04
+16177,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2078,0.06,8.11,43.14,93.59,105.61,59.51,13.89,1.01,0.04
+16178,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2079,0.06,7.98,42.72,93.33,105.59,59.41,13.86,1.01,0.04
+16179,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2080,0.06,7.92,42.73,93.98,106.57,59.86,13.95,1.01,0.04
+16180,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2081,0.06,7.78,42.24,93.55,106.32,59.61,13.88,1.00,0.04
+16181,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2082,0.05,7.70,42.05,93.79,106.81,59.77,13.90,1.00,0.03
+16182,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2083,0.05,7.62,41.84,93.99,107.27,59.91,13.91,1.00,0.03
+16183,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2084,0.05,7.57,41.78,94.54,108.14,60.27,13.97,1.00,0.03
+16184,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2085,0.05,7.44,41.30,94.12,107.88,59.99,13.88,0.98,0.03
+16185,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2086,0.05,7.38,41.13,94.35,108.37,60.12,13.88,0.98,0.03
+16186,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2087,0.05,7.30,40.85,94.33,108.55,60.09,13.85,0.97,0.03
+16187,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2088,0.05,7.25,40.79,94.78,109.29,60.39,13.88,0.97,0.03
+16188,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2089,0.05,7.15,40.40,94.47,109.17,60.22,13.81,0.96,0.03
+16189,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2090,0.04,7.08,40.16,94.48,109.38,60.23,13.78,0.95,0.03
+16190,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2091,0.04,7.05,40.15,95.02,110.20,60.56,13.82,0.94,0.02
+16191,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2092,0.04,6.99,39.90,94.97,110.32,60.49,13.78,0.93,0.02
+16192,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2093,0.04,6.92,39.67,94.98,110.52,60.46,13.76,0.92,0.02
+16193,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2094,0.04,6.87,39.54,95.21,110.98,60.57,13.77,0.92,0.02
+16194,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2095,0.04,6.81,39.33,95.25,111.18,60.54,13.76,0.91,0.02
+16195,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2096,0.04,6.75,39.15,95.33,111.41,60.52,13.74,0.90,0.02
+16196,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2097,0.04,6.70,39.02,95.52,111.76,60.58,13.73,0.89,0.02
+16197,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2098,0.04,6.66,38.89,95.71,112.12,60.64,13.73,0.89,0.02
+16198,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2099,0.04,6.58,38.60,95.50,112.00,60.45,13.67,0.88,0.02
+16199,Medium,Bonaire Sint Eustatius and Saba,27,535,BES,BQ,535,Country/Area,915,2100,0.04,6.55,38.57,95.96,112.62,60.65,13.70,0.87,0.02
 16200,Medium,British Virgin Islands,19,92,VGB,VG,92,Country/Area,915,2022,0.20,14.10,47.53,59.48,48.28,25.53,7.00,0.27,0.08
 16201,Medium,British Virgin Islands,19,92,VGB,VG,92,Country/Area,915,2023,0.20,13.68,47.51,60.19,49.57,26.23,7.08,0.26,0.08
 16202,Medium,British Virgin Islands,19,92,VGB,VG,92,Country/Area,915,2024,0.17,13.43,47.11,60.65,50.80,26.91,7.15,0.24,0.07
