@@ -41,7 +41,7 @@ def crs_proc(fert_file, XDAT, pyr_mat_avg, ss_demog=False):
     crs_prob_vec = crs_prob_vec * 0.5           # P(female)
     crs_prob_vec = crs_prob_vec * fertopt       # P(gave birth during year)
     crs_prob_vec = crs_prob_vec * 9.0/12.0      # P(pregnant during year)
-    crs_prob_vec = crs_prob_vec * (0.85*13/39 + 0.50*13/39 + 0.50*4/39)
+    crs_prob_vec = crs_prob_vec * (0.85*13/39 + 0.50*4/39 + 0.50*4/39)
                                                 # P(infection leads to CRS)
 
     return (fert_births, crs_prob_vec)
