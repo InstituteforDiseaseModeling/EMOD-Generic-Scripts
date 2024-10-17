@@ -1,5 +1,6 @@
 # *****************************************************************************
 
+import json
 import os
 import sys
 
@@ -7,12 +8,25 @@ import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join('..', 'refdat_namesets')))
 sys.path.insert(0, os.path.abspath(os.path.join('..', 'local_python')))
-from aux_namematch import reprule, tlc_wpp_dict
+from aux_namematch import reprule
 
 # *****************************************************************************
 
 
 def make_fert_dat(TLC=''):
+
+    # Name references
+    tlc_wpp_dict = dict()
+
+    fname = os.path.join('..', 'refdat_namesets', 'tlc_wpp_countries.json')
+    with open(fname) as fid01:
+        n_dict = json.load(fid01)
+    tlc_wpp_dict.update(n_dict)
+
+    fname = os.path.join('..', 'refdat_namesets', 'tlc_wpp_groups.json')
+    with open(fname) as fid01:
+        n_dict = json.load(fid01)
+    tlc_wpp_dict.update(n_dict)
 
     # Parse CSVs
     wppf1 = 'WPP2022_FERT_F02_FERTILITY_RATES_BY_AGE_ESTIMATES.csv'
