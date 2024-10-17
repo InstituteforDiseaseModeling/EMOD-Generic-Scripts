@@ -36,6 +36,7 @@ def reprule(revval):
     # Remove ASCII characters
     revval = revval.replace('\'',   '')
     revval = revval.replace('"',    '')
+    revval = revval.replace('’',    '')
     revval = revval.replace('.',    '')
     revval = revval.replace('(',    '')
     revval = revval.replace(')',    '')
