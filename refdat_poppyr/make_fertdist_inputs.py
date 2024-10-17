@@ -7,7 +7,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join('..', 'refdat_namesets')))
 sys.path.insert(0, os.path.abspath(os.path.join('..', 'local_python')))
-from aux_namematch import reprule, tlc_dict
+from aux_namematch import reprule, tlc_wpp_dict
 
 # *****************************************************************************
 
@@ -24,31 +24,34 @@ def make_fert_dat(TLC=''):
         flines_fwd = [val.strip().split(',') for val in fid01.readlines()]
 
     # Construct output data structure
+    rng = range(11, 20)
     pop_dat = np.zeros((0, 21), dtype=float)
 
     # Add values from retrospective estimates
-    for row_val in flines_rev:
-        if (reprule(row_val[2]) == tlc_dict[TLC]):
-            year_val = int(row_val[10])
+    for rval in flines_rev:
+        if (reprule(rval[2]) == tlc_wpp_dict[TLC]):
+            year_val = int(rval[10])
             if (year_val % 5):
                 continue
-            bin_pops = [float(row_val[idx].replace(' ', '')) for idx in range(11, 20)]
+            bpop = [float(rval[idx].replace(' ', '')) for idx in rng]
             fert_row = np.zeros(20, dtype=float)
-            fert_row[2:11] = bin_pops
-            pop_dat = np.vstack((pop_dat, np.array([year_val]+fert_row.tolist())))
+            fert_row[2:11] = bpop
+            fert_row = fert_row.tolist()
+            pop_dat = np.vstack((pop_dat, np.array([year_val]+fert_row)))
 
     # Add values from forward projections
-    for row_val in flines_fwd:
-        if (reprule(row_val[2]) == tlc_dict[TLC]):
-            year_val = int(row_val[10])
+    for rval in flines_fwd:
+        if (reprule(rval[2]) == tlc_wpp_dict[TLC]):
+            year_val = int(rval[10])
             if (year_val % 5):
                 continue
             if (year_val == pop_dat[-1, 0]):
                 continue
-            bin_pops = [float(row_val[idx].replace(' ', '')) for idx in range(11, 20)]
+            bpop = [float(rval[idx].replace(' ', '')) for idx in rng]
             fert_row = np.zeros(20, dtype=float)
-            fert_row[2:11] = bin_pops
-            pop_dat = np.vstack((pop_dat, np.array([year_val]+fert_row.tolist())))
+            fert_row[2:11] = bpop
+            fert_row = fert_row.tolist()
+            pop_dat = np.vstack((pop_dat, np.array([year_val]+fert_row)))
 
     # Write data files
     ofile_name = 'fert_dat_{:s}.csv'.format(TLC)
