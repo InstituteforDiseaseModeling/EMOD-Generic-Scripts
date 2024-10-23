@@ -71,14 +71,6 @@ def write_param_dict():
     # Base agent weight; less than 10 may have memory issues
     P_CON['agent_rate'] = 25.0
 
-    # Paramaters for HINT group fraction of infectable agents
-    # Non-zero group fraction is param_beta, with scale probability of
-    # param_alpha instead
-    P_CON['use_zero_group'] = False
-    P_CON['nonzero_group_beta_dist_param_alpha'] = 1.0
-    P_CON['nonzero_group_beta_dist_param_beta'] = 1.0
-    P_CON['nonzero_group_scale'] = 1.0
-
     # R0 values for cVDPV and Sabin; linear interpolation;
     # requires R0 > R0_OPV
     P_CON['R0'] = 16.0

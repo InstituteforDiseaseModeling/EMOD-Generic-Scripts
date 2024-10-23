@@ -18,13 +18,21 @@ from emod_constants import DEMOG_FILE, PATH_OVERLAY, \
 
 
 def demog_vd_over(ref_name, node_list, cb_rate,
-                  mort_year, mort_mat, age_x, age_y=None, idx=0):
+                  mort_year, mort_mat, age_x, age_y=None, idx=0,
+                  mort_age_in=None):
 
     if (not os.path.exists(PATH_OVERLAY)):
         os.mkdir(PATH_OVERLAY)
 
-    if (age_y is None):
-        age_y = POP_AGE_DAYS
+    if (age_y):
+        age_y_vec = age_y
+    else:
+        age_y_vec = POP_AGE_DAYS
+
+    if (mort_age_in):
+        mort_age_vec = mort_age_in
+    else:
+        mort_age_vec = MORT_XVAL
 
     vd_over_dict = dict()
 
@@ -42,14 +50,14 @@ def demog_vd_over(ref_name, node_list, cb_rate,
     vdoddiaad = vdodd['IndividualAttributes']['AgeDistribution']
     vdoddiaad['DistributionValues'] = [age_x]
     vdoddiaad['ResultScaleFactor'] = 1
-    vdoddiaad['ResultValues'] = [age_y]
+    vdoddiaad['ResultValues'] = [age_y_vec]
 
     vdoddiamdm = vdodd['IndividualAttributes']['MortalityDistributionMale']
     vdoddiamdm['AxisNames'] = ['age', 'year']
     vdoddiamdm['AxisScaleFactors'] = [1, 1]
     vdoddiamdm['NumDistributionAxes'] = 2
-    vdoddiamdm['NumPopulationGroups'] = [len(MORT_XVAL), len(mort_year)]
-    vdoddiamdm['PopulationGroups'] = [MORT_XVAL, mort_year]
+    vdoddiamdm['NumPopulationGroups'] = [len(mort_age_vec), len(mort_year)]
+    vdoddiamdm['PopulationGroups'] = [mort_age_vec, mort_year]
     vdoddiamdm['ResultScaleFactor'] = 1
     vdoddiamdm['ResultValues'] = mort_mat.tolist()
 
@@ -57,8 +65,8 @@ def demog_vd_over(ref_name, node_list, cb_rate,
     vdoddiamdf['AxisNames'] = ['age', 'year']
     vdoddiamdf['AxisScaleFactors'] = [1, 1]
     vdoddiamdf['NumDistributionAxes'] = 2
-    vdoddiamdf['NumPopulationGroups'] = [len(MORT_XVAL), len(mort_year)]
-    vdoddiamdf['PopulationGroups'] = [MORT_XVAL, mort_year]
+    vdoddiamdf['NumPopulationGroups'] = [len(mort_age_vec), len(mort_year)]
+    vdoddiamdf['PopulationGroups'] = [mort_age_vec, mort_year]
     vdoddiamdf['ResultScaleFactor'] = 1
     vdoddiamdf['ResultValues'] = mort_mat.tolist()
 
@@ -107,6 +115,32 @@ def demog_is_over(ref_name, node_list, R0, age_x, age_y=None, idx=0):
     isus_x = [0] + (np.logspace(1.475, 4.540, 20, dtype=int)).tolist()
     isus_y = [round(np.minimum(np.exp(iSP0*(val/365.0-0.65)), 1.0), 4)
               for val in isus_x]
+
+    # Initial susceptibility overlays
+    ind_sus = IndividualAttributes.SusceptibilityDistribution()
+    ind_sus.distribution_values = isus_x
+    ind_sus.result_scale_factor = 1
+    ind_sus.result_values = isus_y
+
+    ind_att = IndividualAttributes()
+    ind_att.susceptibility_distribution = ind_sus
+
+    dover_obj = DemographicsOverlay(idref=ref_name, nodes=node_list,
+                                    individual_attributes=ind_att)
+
+    nfname = DEMOG_FILE.rsplit('.', 1)[0] + '_is{:03d}.json'.format(idx)
+    nfname = os.path.join(PATH_OVERLAY, nfname)
+    dover_obj.to_file(file_name=nfname)
+
+    return nfname
+
+# *****************************************************************************
+
+
+def demog_is_over_precalc(ref_name, node_list, isus_x, isus_y, idx=0):
+
+    if (not os.path.exists(PATH_OVERLAY)):
+        os.mkdir(PATH_OVERLAY)
 
     # Initial susceptibility overlays
     ind_sus = IndividualAttributes.SusceptibilityDistribution()

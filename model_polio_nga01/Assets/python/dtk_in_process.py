@@ -1,22 +1,22 @@
-#********************************************************************************
+# *****************************************************************************
 #
-#********************************************************************************
+# *****************************************************************************
 
-import os, sys
+import global_data as gdata
 
-import global_data as gd
+# *****************************************************************************
 
-import numpy as np
-
-#*******************************************************************************
 
 def application(timestep):
 
-  if(gd.first_call_bool):
-    gd.first_call_bool = False
-    timeval = float(timestep)
-    print("Hello and goodbye from in-process at time {:.1f}".format(timeval))
+    # Example interface for in-processing;
+    if (gdata.first_call_bool):
+        gdata.first_call_bool = False
 
-  return None
+        timeval = float(timestep)
+        msg_str = 'Hello and goodbye from in-process at time {:.1f}'
+        print(msg_str.format(timeval))
 
-#*******************************************************************************
+    return None
+
+# *****************************************************************************
