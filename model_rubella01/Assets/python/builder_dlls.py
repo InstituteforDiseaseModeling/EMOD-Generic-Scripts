@@ -6,7 +6,8 @@
 
 import json
 
-from emod_constants import REPORTS_FILE, RST_FILE
+from emod_report_func import report_strain
+from emod_constants import REPORTS_FILE
 
 # *****************************************************************************
 
@@ -20,17 +21,10 @@ def dllcBuilder():
     json_set = dict()
 
     # Custom reports object
-    cr_str = 'Custom_Reports'
-    json_set[cr_str] = dict()
+    json_set['Custom_Reports'] = dict()
 
-    # Strain reporting
-    rst_str = RST_FILE.split('.')[0]
-    json_set[cr_str][rst_str] = {'Enabled': 1,
-                                 'Reports': list()}
-
-    repDic = {'Report_Name': RST_FILE}
-
-    json_set[cr_str][rst_str]['Reports'].append(repDic)
+    # Configurations
+    report_strain(json_set)
 
     #  Write file
     with open(REPORTS_FILE, 'w') as fid01:
