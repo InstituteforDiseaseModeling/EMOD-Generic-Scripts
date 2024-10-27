@@ -50,14 +50,8 @@ def write_param_dict():
     P_CON['net_inf_power'] = [2.0]
     P_CON['net_inf_ln_mult'] = [-2.424]
 
-    # Number of days to run simulation
-    P_CON['num_tsteps'] = 365.0*2.0
-
     # Days after May 1, 2016 (Sabin2 cessation) to start simulation
     P_CON['start_time'] = 365.0*0.0
-
-    # Abort sim if running for more than specified time in minutes
-    P_CON['max_clock_minutes'] = 120.0
 
     # Node level overdispersion; 0.0 = Poisson
     P_CON['proc_overdispersion'] = 0.8
@@ -93,22 +87,18 @@ def write_param_dict():
     # Immunity mapper with 50% coverage SIAs (80% coverage otherwise)
     P_CON['use_50pct_init'] = True
 
-    # Apply the historic SIA calendar; coverage for SIAs in calendar
-    # SIAs may not occur with large value of 'burnin_time'
+    # Apply the historic SIA calendar; events prior to sim start ignored
     P_CON['sia_calendar'] = False
-    P_CON['sia_calendar_nopv'] = False
     P_CON['sia_coverage'] = 0.5
 
-    # Optional timestamp cutoff for SIA calendar; absolute time
+    # Cutoff time for SIA calendar
     P_CON['sia_cutoff'] = 42825.0
 
     # Direct introduction of cVDPV2
     # day_offset -> days after sim start, NOT ABSOLUTE TIME
-    P_CON['sia_other'] = True
     P_CON['sia_sets'] = [{"targ_list": ["AFRO:NIGERIA:KANO:KANO_MUNICIPAL"],
                           "day_offset": 1.0*365.0 + 5.0,
-                          "num_cases": 100,
-                          "agent_wght": 1.0}]
+                          "num_cases": 100}]
 
     # Node level R0 variance (infectivity multiplier;
     # mean = 1.0; log-normal distribution)

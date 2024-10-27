@@ -1,20 +1,29 @@
-#*******************************************************************************
+# *****************************************************************************
 
-import os, json
+import json
+import os
+import sys
 
-import numpy              as np
-import matplotlib.pyplot  as plt
+import numpy as np
+import matplotlib.pyplot as plt
 
-#*******************************************************************************
+# Ought to go in emodpy
+sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
+sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
+
+from global_data import run_years
+
+# *****************************************************************************
 
 DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
             'experiment_cVDPV2_NGA_100km_SIAs']
 
-TITLES   = ['May 2017 Outbreak\nNo SIAs Post Cessation',
-            'May 2017 Outbreak\nEMOD SIA Calendar through Outbreak']
+TITLES = ['May 2017 Outbreak\nNo SIAs Post Cessation',
+          'May 2017 Outbreak\nEMOD SIA Calendar through Outbreak']
+
+# *****************************************************************************
 
 nfigs = len(DIRNAMES)
-
 
 # Figure setup
 fig01 = plt.figure(figsize=(8*nfigs,6))
@@ -58,7 +67,7 @@ for k1 in range(len(DIRNAMES)):
 
   node_names = data_brick.pop('node_names')
   n_sims     = param_dict['NUM_SIMS']
-  n_tstep    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
+  n_tstep    = int(365.0*run_years)
   n_nodes    = len(node_names)
 
   tot_inf = np.zeros((n_sims, n_tstep))

@@ -113,14 +113,6 @@ def demographicsBuilder():
         xyt_vec[vec_idx,0] = node_list[k1].lon
         xyt_vec[vec_idx,1] = node_list[k1].lat
 
-    # Distance matrix
-    dist_mat = np.zeros((num_nodes,num_nodes))
-    for k1 in range(dist_mat.shape[0]):
-        dist_mat[k1,:] = demoCalc_hDist(xyt_vec[k1,1],xyt_vec[k1,0],xyt_vec[:,1],xyt_vec[:,0])
-
-    gdata.demog_dist_mat = dist_mat
-
-
     # ***** Write node name bookkeeping *****
 
     nname_dict     = {node_obj.name: node_obj.forced_id for node_obj in node_list}
@@ -220,8 +212,6 @@ def demographicsBuilder():
 
     # ***** Write vital dynamics overlays *****
 
-    demog_kid_dict = dict()
-
     for k1 in range(len(vd_over_list)):
         data_tup = vd_over_list[k1]
         over_set = dict()
@@ -247,7 +237,6 @@ def demographicsBuilder():
                 mult_fac   = grow_rate**(start_year-ref_year)
                 new_pop    = int(mult_fac * node_dict.node_attributes.initial_population)
                 node_dict.node_attributes.initial_population = new_pop
-                demog_kid_dict[node_name] = int(new_pop*targ_frac)
 
         # Write vital dynamics overlay
         start_year_vec = [100.0]
@@ -255,13 +244,6 @@ def demographicsBuilder():
         nfname = demog_vd_over(ref_name, data_tup[2], brth_rate, start_year_vec,
                                mort_mat, age_x, age_y, k1, d_rate_x)
         gdata.demog_files.append(nfname)
-
-    # Save the target populations for use in other functions
-    gdata.demog_kid_dict = demog_kid_dict
-
-    with open('targ_pop_9mo_5yr.json','w')  as fid01:
-        json.dump(demog_kid_dict,fid01,sort_keys=True,indent=3)
-
 
     # ***** Populate susceptibility overlays *****
 

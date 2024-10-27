@@ -1,32 +1,36 @@
-#*******************************************************************************
+# *****************************************************************************
 
-import os, json, sys
+import json
+import os
+import sys
 
-import numpy              as np
-import matplotlib.pyplot  as plt
+import numpy as np
+import matplotlib.pyplot as plt
 
-sys.path.append(os.path.join('..','Assets','python'))
+# Ought to go in emodpy
+sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
+sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
 
+from global_data import run_years
 from refdat_location_admin02 import data_dict as ref_longlatref
+from aux_demo_calc import demoCalc_hDist
 
-from aux_demo_calc           import demoCalc_hDist
-
-#*******************************************************************************
+# *****************************************************************************
 
 DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
             'experiment_cVDPV2_NGA_100km_SIAs']
 
-TITLES   = ['May 2017 Outbreak\nNo SIAs Post Cessation',
-            'May 2017 Outbreak\nEMOD SIA Calendar through Outbreak']
+TITLES = ['May 2017 Outbreak\nNo SIAs Post Cessation',
+          'May 2017 Outbreak\nEMOD SIA Calendar through Outbreak']
 
 INIT_NAME = 'AFRO:NIGERIA:KANO:KANO_MUNICIPAL'
 
-nfigs = len(DIRNAMES)
+# *****************************************************************************
 
+nfigs = len(DIRNAMES)
 
 # Figure setup
 fig01 = plt.figure(figsize=(8*nfigs,6))
-
 
 for k1 in range(len(DIRNAMES)):
   dirval = DIRNAMES[k1]
@@ -67,7 +71,7 @@ for k1 in range(len(DIRNAMES)):
 
   node_names = data_brick.pop('node_names')
   n_sims     = param_dict['NUM_SIMS']
-  n_tstep    = int(param_dict['EXP_CONSTANT']['num_tsteps'])
+  n_tstep    = int(365.0*run_years)
   n_nodes    = len(node_names)
 
   init_xy   = ref_longlatref[INIT_NAME]

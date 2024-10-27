@@ -1,32 +1,36 @@
-#********************************************************************************
+# *****************************************************************************
 #
-# Static data module for embedded python in the DTK.
+# Static data module for embedded python.
 #
-#********************************************************************************
+# *****************************************************************************
 
 # Control params
-sim_index       = 0
-var_params      = dict()
-schema_path     = 'Assets/schema.json'
+sim_index = 0
+var_params = dict()
 
 # Filename params
-demog_files     = list()
-camp_file       = None
-reports_file    = 'custom_dlls.json'
+demog_files = list()
 
-start_off       = 365.0*(2016-1900)+120.0
-demog_dict      = dict()
-demog_node      = dict()
-demog_min_pop   = 0
-demog_node_map  = dict()      # LGA:     [NodeIDs]
-demog_rep_index = dict()      # LGA:  Output row number
-demog_object    = None
-demog_kid_dict  = dict()
-demog_dist_mat  = None
-
+demog_object = None
 
 # Other stuff
 first_call_bool = True
 
-#*******************************************************************************
 
+
+start_off = 365.0*(2016-1900)+120.0
+demog_dict = dict()
+demog_node = dict()
+demog_min_pop = 0
+demog_node_map = dict()      # LGA:     [NodeIDs]
+demog_rep_index = dict()      # LGA:  Output row number
+schema_path = 'Assets/schema.json'
+
+
+
+run_years = 2.0
+t_step_days = 1.0
+
+max_clock = 180.0
+
+# *****************************************************************************

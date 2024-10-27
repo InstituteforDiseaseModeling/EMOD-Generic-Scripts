@@ -53,13 +53,10 @@ def update_config_obj(config):
     RUN_NUM = gdata.var_params['run_number']
 
     TIME_START = gdata.var_params['start_time']
-    TIME_DELTA = gdata.var_params['num_tsteps']
 
     AGENT_RATE = gdata.var_params['agent_rate']
 
     CORR_ACQ_TRANS = gdata.var_params['corr_acq_trans']
-
-    MAX_CLOCK = gdata.var_params['max_clock_minutes']
 
     LABEL_MUTES = gdata.var_params['label_by_mutator']
 
@@ -71,10 +68,11 @@ def update_config_obj(config):
 
     # Time
     cp.Start_Time = gdata.start_off + TIME_START
-    cp.Simulation_Duration = TIME_DELTA
+    cp.Simulation_Duration = 365.0*gdata.run_years
+    cp.Simulation_Timestep = gdata.t_step_days
 
     cp.Enable_Termination_On_Total_Wall_Time = 1
-    cp.Wall_Time_Maximum_In_Minutes = MAX_CLOCK
+    cp.Wall_Time_Maximum_In_Minutes = gdata.max_clock
 
     # Intrahost
     if(BI_STD > 0.01):
@@ -133,7 +131,7 @@ def update_config_obj(config):
 
     # Interventions 
     cp.Enable_Interventions = 1
-    cp.Campaign_Filename = gdata.camp_file
+    cp.Campaign_Filename = CAMP_FILE
 
     # Adapted sampling
     cp.Individual_Sampling_Type = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
@@ -144,7 +142,6 @@ def update_config_obj(config):
     cp.Immune_Downsample_Min_Age = 365.0
 
     # Multistrain
-
     num_strains = NOPV_BOXES + OPV_BOXES + 1
     log2_num_strains = np.ceil(np.log2(num_strains))
 
@@ -153,7 +150,7 @@ def update_config_obj(config):
     cp.Enable_Genome_Mutation = 1
     cp.Enable_Label_By_Mutator = LABEL_MUTES
 
-    cp.Number_of_Clades = 3
+    cp.Number_of_Clades = 2
     cp.Log2_Number_of_Genomes_per_Clade = log2_num_strains
 
     list_multiply = np.ones(num_strains)

@@ -29,7 +29,7 @@ from emod_constants import API_MIN, P_FILE, I_FILE, C_FILE, EXP_C, EXP_V, \
 # *****************************************************************************
 
 
-def configBuilder():
+def config_builder():
 
     default_conf = dfs.get_default_config_from_schema(SPATH, as_rod=True)
 
@@ -109,7 +109,7 @@ def standard_pre_process():
     time.sleep(1)
 
     # Simulation configuration file
-    config_filename = configBuilder()
+    config_filename = config_builder()
     time.sleep(1)
 
     return config_filename
