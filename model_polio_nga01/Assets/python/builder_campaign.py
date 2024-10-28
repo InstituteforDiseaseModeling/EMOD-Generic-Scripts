@@ -33,12 +33,9 @@ def campaignBuilder():
 
     SIA_ADDLIST  = gdata.var_params['sia_sets']
 
-    OPV_BOXES    = gdata.var_params['OPV_compartments']
-    NOPV_BOXES   = gdata.var_params['nOPV_compartments']
-
     NODE_DICT    = gdata.demog_node
 
-    node_opts     = list(NODE_DICT.keys())
+    node_opts = list(NODE_DICT.keys())
     node_dict_inv = {NODE_DICT[nname_val]:nname_val for nname_val in NODE_DICT}
 
     # Use SIA calendar for OPV2 schedule
@@ -55,7 +52,7 @@ def campaignBuilder():
 
             if (sia_obj['type'] == 'sabin2'):
                 clade = 0
-                genome = NOPV_BOXES
+                genome = gdata.boxes_nopv2
             elif (sia_obj['type'] == 'nopv2'):
                 clade = 1
                 genome = 0
@@ -93,7 +90,7 @@ def campaignBuilder():
         pdict = {'startday': startday,
                  'nodes': node_list,
                  'num_cases': sia_obj['num_cases'],
-                 'genome': NOPV_BOXES+OPV_BOXES }
+                 'genome': gdata.boxes_nopv2+gdata.boxes_sabin2 }
         camp_module.add(IV_cVDPV2(pdict))
 
     # End file construction

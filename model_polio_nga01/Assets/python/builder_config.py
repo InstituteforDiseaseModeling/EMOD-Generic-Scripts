@@ -34,31 +34,15 @@ def update_config_obj(config):
     R0 = gdata.var_params['R0']
     R0_OPV = gdata.var_params['R0_OPV']
     NOPV_R0_MULT = gdata.var_params['R0_nOPV_mult']
-
     BI_STD = gdata.var_params['base_inf_stddev_mult']
-
     ID_MEAN = gdata.var_params['inf_duration_mean']
     ID_STD = gdata.var_params['inf_dur_stddev_mult']
-
     NI_LN_MULT = gdata.var_params['net_inf_ln_mult']
     NI_POWER = gdata.var_params['net_inf_power']
-    NI_MAXFRAC = gdata.var_params['net_inf_maxfrac']
-
-    OPV_REV = gdata.var_params['OPV_rev_prob']
-    OPV_BOXES = gdata.var_params['OPV_compartments']
-
-    NOPV_REV = gdata.var_params['nOPV_rev_prob']
-    NOPV_BOXES = gdata.var_params['nOPV_compartments']
-
     RUN_NUM = gdata.var_params['run_number']
-
     TIME_START = gdata.var_params['start_time']
-
     AGENT_RATE = gdata.var_params['agent_rate']
-
     CORR_ACQ_TRANS = gdata.var_params['corr_acq_trans']
-
-    LABEL_MUTES = gdata.var_params['label_by_mutator']
 
     # Config parameters object (read only dictionary)
     cp = config.parameters
@@ -110,7 +94,7 @@ def update_config_obj(config):
 
     cp.Network_Infectivity_Coefficient = ni_coeff
     cp.Network_Infectivity_Exponent = NI_POWER
-    cp.Network_Infectivity_Max_Export_Frac = NI_MAXFRAC
+    cp.Network_Infectivity_Max_Export_Frac = 0.01
     cp.Network_Infectivity_Min_Connection = 1.0e-8
     cp.Network_Infectivity_Min_Distance = 1.0
 
@@ -142,33 +126,31 @@ def update_config_obj(config):
     cp.Immune_Downsample_Min_Age = 365.0
 
     # Multistrain
-    num_strains = NOPV_BOXES + OPV_BOXES + 1
+    CMOPV2 = gdata.boxes_sabin2
+    CNOPV2 = gdata.boxes_nopv2
+    num_strains = CNOPV2 + CMOPV2 + 1
     log2_num_strains = np.ceil(np.log2(num_strains))
 
     cp.Enable_Strain_Tracking = 1
-    cp.Enable_Genome_Dependent_Infectivity = 1
-    cp.Enable_Genome_Mutation = 1
-    cp.Enable_Label_By_Mutator = LABEL_MUTES
-
     cp.Number_of_Clades = 2
     cp.Log2_Number_of_Genomes_per_Clade = log2_num_strains
 
     list_multiply = np.ones(num_strains)
-    list_multiply[:NOPV_BOXES] = NOPV_R0_MULT * R0_OPV / R0
-    list_multiply[NOPV_BOXES:] = np.linspace(R0_OPV/R0, 1.0, num = OPV_BOXES + 1)
-  
+    list_multiply[:CNOPV2] = NOPV_R0_MULT * R0_OPV/R0
+    list_multiply[CNOPV2:] = np.linspace(R0_OPV/R0, 1.0, num=CMOPV2+1)
+    cp.Enable_Genome_Dependent_Infectivity = 1
     cp.Genome_Infectivity_Multipliers = list_multiply.tolist()
 
     list_mutate = np.zeros(num_strains)
-    list_mutate[:NOPV_BOXES] = NOPV_REV
-    list_mutate[NOPV_BOXES:-1] = OPV_REV
-
+    list_mutate[:CNOPV2] = gdata.rev_nopv2
+    list_mutate[CNOPV2:-1] = gdata.rev_sabin2
+    cp.Enable_Genome_Mutation = 1
     cp.Genome_Mutation_Rates = list_mutate.tolist()
 
-    list_mlabel = np.zeros(num_strains)
-    list_mlabel[-1] = 1
-
-    config.parameters.Genome_Mutations_Labeled = list_mlabel.tolist()
+    #list_mlabel = np.zeros(num_strains)
+    #list_mlabel[-1] = 1
+    #cp.Enable_Label_By_Mutator = 1
+    #cp.Genome_Mutations_Labeled = list_mlabel.tolist()
 
     # Demographics
     cp.Enable_Demographics_Builtin = 0
@@ -185,9 +167,6 @@ def update_config_obj(config):
     cp.Enable_Acquisition_Heterogeneity = 1
 
     cp.Demographics_Filenames = gdata.demog_files
-
-    # HINT
-    cp.Enable_Heterogeneous_Intranode_Transmission = 1
 
     # Reporting
     cp.Enable_Default_Reporting = 1

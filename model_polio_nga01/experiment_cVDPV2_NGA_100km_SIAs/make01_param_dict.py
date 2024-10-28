@@ -59,9 +59,6 @@ def write_param_dict():
     # Correlation between acqusition and transmission heterogeneity
     P_CON['corr_acq_trans'] = 0.9
 
-    # Network maximum export fraction
-    P_CON['net_inf_maxfrac'] = 0.1
-
     # Base agent weight; less than 10 may have memory issues
     P_CON['agent_rate'] = 25.0
 
@@ -107,24 +104,6 @@ def write_param_dict():
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)
     P_CON['ind_variance_risk'] = 3.0
-
-    # Rate of mutation / infectivity scaling for nOPV;
-    # transition to Sabin after nOPV
-    P_CON['nOPV_rev_prob'] = 0.0
-    P_CON['nOPV_compartments'] = 2
-
-    # Rate of mutation / infectivity scaling for Sabin;
-    # transition to cVDPV after Sabin
-    P_CON['OPV_rev_prob'] = 0.0
-    P_CON['OPV_compartments'] = 7
-
-    # Uniquely labels infections (with the agent ID) on mutation;
-    # CAN SLOW DOWN SIMS
-    P_CON['label_by_mutator'] = False
-
-    # Timestamps for conducting serosurveys; absolute time;
-    # survey <10yrs, 1yr age bins
-    P_CON['serosurvey_timestamps'] = [42825.0]
 
     # Write parameter dictionary
     with open(P_FILE, 'w') as fid01:

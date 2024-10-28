@@ -58,6 +58,7 @@ RST_CONT_TOT = 6
 RST_NEW_INF = 7
 
 YR_DAYS = 365
+MO_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 CBR_VEC = 'cbr_vec'
 R0_VEC = 'r0_vec'
