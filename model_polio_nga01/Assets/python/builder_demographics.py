@@ -29,14 +29,6 @@ from refdat_alias                  import data_dict   as dict_alias
 from refdat_birthrate              import data_dict   as dict_birth
 from refdat_deathrate              import data_dict   as dict_death
 
-from aux_demo_calc                 import demoCalc_AgeDist
-from aux_demo_calc                 import demoCalc_hDist
-
-from emod_api.demographics.Demographics            import DemographicsOverlay
-from emod_api.demographics.PropertiesAndAttributes import IndividualAttributes, \
-                                                          IndividualProperty,   \
-                                                          NodeAttributes
-
 # *****************************************************************************
 
 
@@ -217,14 +209,12 @@ def demographicsBuilder():
         over_set = dict()
 
         # Age initialization magic
-        brth_rate   = data_tup[0].item()
+        brth_rate = data_tup[0].item()
         d_rate_y = data_tup[1].tolist()
         d_rate_x = dict_death['BIN_EDGES']
-        force_v  = 12*[1.0] # No seasonal forcing
-        (grow_rate, age_x, age_y) = demoCalc_AgeDist(brth_rate,d_rate_x,d_rate_y)
-
-        # Fraction of populatin between 9 mos and 5 yrs
-        targ_frac = np.interp(5.00*365.0, age_y, age_x) - np.interp(0.75*365.0, age_y, age_x)
+        force_v = 12*[1.0]  # No seasonal forcing
+        (grow_rate, age_x, age_y) = DT._computeAgeDist(brth_rate, d_rate_x,
+                                                       d_rate_y, force_v, max_yr=100)
 
         # Update initial node populations; calculate target populations
         ref_nodes = [node_obj_dict.forced_id for node_obj_dict in data_tup[2]]
