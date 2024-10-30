@@ -81,14 +81,8 @@ def write_param_dict():
     # Subdivide LGAs into 100km^2 regions
     P_CON['use_10k_res'] = True
 
-    # Immunity mapper with 50% coverage SIAs (80% coverage otherwise)
-    P_CON['use_50pct_init'] = True
-
     # Apply the historic SIA calendar; events prior to sim start ignored
     P_CON['sia_calendar'] = True
-    P_CON['sia_coverage'] = 0.5
-
-    # Cutoff time for SIA calendar
     P_CON['sia_cutoff'] = 42825.0
 
     # Direct introduction of cVDPV2

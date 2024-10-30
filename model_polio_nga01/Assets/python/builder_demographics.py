@@ -39,8 +39,6 @@ def demographicsBuilder():
 
     SUB_LGA = gdata.var_params['use_10k_res']
 
-    LOWER_INIT = gdata.var_params['use_50pct_init']
-
     TIME_START   = gdata.var_params['start_time']
     PROC_DISPER  = gdata.var_params['proc_overdispersion']
 
@@ -235,27 +233,16 @@ def demographicsBuilder():
                                mort_mat, age_x, age_y, k1, d_rate_x)
         gdata.demog_files.append(nfname)
 
-    # ***** Populate susceptibility overlays *****
-
     # Load immunity mapper data
-    imm_map_dat = dict()
-    if(LOWER_INIT):
-        init_sus_val = 50
-    else:
-        init_sus_val = 80
+    init_sus_val = int(100*gdata.sia_coverage)
+    fname = 'sus_init_NGA_{:02d}.json'.format(init_sus_val)
+    with open(os.path.join('Assets', 'data', fname)) as fid01:
+        isus_dat = json.load(fid01)
 
-    fname = 'NGA_SUSINIT_{:02d}pct.json'.format(init_sus_val)
-    with open(os.path.join('Assets','data', fname)) as fid01:
-        isus_dict = json.load(fid01)
-
-    isus_name = np.array(isus_dict['namevec'])
-    isus_time = np.array(isus_dict['timevec'])
-    isus_ages = np.array(isus_dict['agesvec'])
-
-    for k1 in range(isus_ages.shape[0]):
-        aval  = isus_ages[k1]
-        fname = 'NGA_SUSINIT_{:02d}pct_{:02d}.csv'.format(init_sus_val,isus_ages[k1])
-        imm_map_dat[aval] = np.loadtxt(os.path.join('Assets','data',fname),delimiter=',')
+    isus_time = np.array(isus_dat['time'])
+    isus_name = np.array(isus_dat['name'])
+    isus_ages = np.array(isus_dat['ages'])
+    isus_data = np.array(isus_dat['data'])
 
     # Create list of initial susceptibility overlays
     is_over_list = list()
@@ -269,9 +256,10 @@ def demographicsBuilder():
                 if(node_initsus is None):
                     node_initsus = list()
                     for k2 in range(isus_ages.shape[0]):
-                        aval          = isus_ages[k2]
-                        node_isus_dat = imm_map_dat[aval][k1,:]
-                        node_initsus.append(np.interp(gdata.start_off+TIME_START,isus_time,node_isus_dat))
+                        aval = isus_ages[k2]
+                        nis_dat = isus_data[k1,k2,:]
+                        ipdat = np.interp(gdata.start_off+TIME_START, isus_time, nis_dat)
+                        node_initsus.append(ipdat)
                     node_initsus = np.array(node_initsus)
                 else:
                     raise Exception("Duplicate susceptibility data")
@@ -288,10 +276,11 @@ def demographicsBuilder():
 
     # Write susceptibility overlays
     for k1 in range(len(is_over_list)):
+        data_tup = is_over_list[k1]
         isus_x = [0.0] + (365.0*(isus_ages+3.0)/12.0).tolist() + [365.0*10.0]
-        isus_y = [1.0] + is_over_list[k1][0].tolist()          + [0.0]
+        isus_y = [1.0] + data_tup[0].tolist() + [0.0]
 
-        nfname = demog_is_over_precalc(ref_name, node_list, isus_x, isus_y, k1)
+        nfname = demog_is_over_precalc(ref_name, data_tup[1], isus_x, isus_y, k1)
         gdata.demog_files.append(nfname)
 
     # Write primary demographics file

@@ -32,6 +32,7 @@ boxes_nopv2 = 2
 boxes_sabin2 = 7
 rev_nopv2 = 0.0
 rev_sabin2 = 0.0
+sia_coverage = 0.80
 
 run_years = 2.0
 t_step_days = 1.0

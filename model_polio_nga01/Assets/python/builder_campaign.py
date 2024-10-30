@@ -28,7 +28,6 @@ def campaignBuilder():
     TIME_START   = gdata.var_params['start_time']
 
     SIA_CALENDAR = gdata.var_params['sia_calendar']
-    SIA_COVERAGE = gdata.var_params['sia_coverage']
     SIA_STOP = gdata.var_params['sia_cutoff']
 
     SIA_ADDLIST  = gdata.var_params['sia_sets']
@@ -65,7 +64,7 @@ def campaignBuilder():
 
             pdict = {'startday': startday,
                      'nodes': node_list,
-                     'coverage': SIA_COVERAGE,
+                     'coverage': gdata.sia_coverage,
                      'clade': clade,
                      'genome': genome}
 
@@ -117,7 +116,7 @@ def IV_OPV2(params):
     camp_event.Nodeset_Config = node_set
 
     camp_coord.Intervention_Config = camp_iv
-    camp_coord.Demographic_Coverage = params['coverage']
+    camp_coord.Demographic_Coverage = params['coverage']*0.70
     camp_coord.Target_Demographic = 'ExplicitAgeRanges'
     camp_coord.Target_Age_Min = 0.75
     camp_coord.Target_Age_Max = 5.00
@@ -147,7 +146,7 @@ def IV_cVDPV2(params):
     camp_event.Start_Day = params['startday']
     camp_event.Nodeset_Config = node_set
 
-    camp_coord.Intervention_Config            = camp_iv
+    camp_coord.Intervention_Config = camp_iv
 
     camp_iv.Genome = params['genome']
     camp_iv.Number_Cases_Per_Node = params['num_cases']

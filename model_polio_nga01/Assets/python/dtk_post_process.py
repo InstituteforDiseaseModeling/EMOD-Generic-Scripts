@@ -2,11 +2,8 @@
 #
 # *****************************************************************************
 
-
 import json
 import os
-import shutil
-import sys
 
 import global_data as gdata
 
@@ -31,9 +28,7 @@ def application(output_path):
     # Variables for this simulation
     TIME_START = gdata.var_params['start_time']
     TIME_DELTA = 365.0*gdata.run_years
-    OPV_BOXES = gdata.var_params['OPV_compartments']
-    NOPV_BOXES = gdata.var_params['nOPV_compartments']
-    cVDPV_genome = OPV_BOXES + NOPV_BOXES
+    cVDPV_genome = gdata.boxes_sabin2 + gdata.boxes_nopv2
 
     # Timesteps
     time_init = gdata.start_off + TIME_START
