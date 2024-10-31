@@ -12,9 +12,10 @@ from emod_constants import CAMP_FILE, REPORTS_FILE
 
 # *****************************************************************************
 
+
 def max_coeff_ref(exp_vals):
 
-    if (np.min(exp_vals)<0.0 or np.max(exp_vals)>8.0):
+    if (np.min(exp_vals) < 0.0 or np.max(exp_vals) > 8.0):
         raise Exception('Network exponent out of range.')
 
     x_ref = np.array([0, 0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8])
@@ -34,9 +35,6 @@ def update_config_obj(config):
     R0 = gdata.var_params['R0']
     R0_OPV = gdata.var_params['R0_OPV']
     NOPV_R0_MULT = gdata.var_params['R0_nOPV_mult']
-    BI_STD = gdata.var_params['base_inf_stddev_mult']
-    ID_MEAN = gdata.var_params['inf_duration_mean']
-    ID_STD = gdata.var_params['inf_dur_stddev_mult']
     NI_LN_MULT = gdata.var_params['net_inf_ln_mult']
     NI_POWER = gdata.var_params['net_inf_power']
     RUN_NUM = gdata.var_params['run_number']
@@ -59,25 +57,20 @@ def update_config_obj(config):
     cp.Wall_Time_Maximum_In_Minutes = gdata.max_clock
 
     # Intrahost
-    if(BI_STD > 0.01):
-        cp.Base_Infectivity_Distribution = 'GAMMA_DISTRIBUTION'
-        cp.Base_Infectivity_Scale = R0/ID_MEAN*BI_STD*BI_STD
-        cp.Base_Infectivity_Shape = 1.0/BI_STD/BI_STD
-    else:
-        cp.Base_Infectivity_Distribution = 'CONSTANT_DISTRIBUTION'
-        cp.Base_Infectivity_Constant = R0/ID_MEAN
+    ID_MEAN = gdata.inf_dur_mean
+    ID_STD = gdata.inf_dur_std
+
+    cp.Base_Infectivity_Distribution = 'GAMMA_DISTRIBUTION'
+    cp.Base_Infectivity_Shape = 1.0
+    cp.Base_Infectivity_Scale = R0/ID_MEAN
 
     cp.Incubation_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
     cp.Incubation_Period_Gaussian_Mean = 3.0
     cp.Incubation_Period_Gaussian_Std_Dev = 1.0
 
-    if(ID_STD > 0.01):
-        cp.Infectious_Period_Distribution = 'GAMMA_DISTRIBUTION'
-        cp.Infectious_Period_Scale = ID_MEAN*ID_STD*ID_STD
-        cp.Infectious_Period_Shape = 1.0/ID_STD/ID_STD
-    else:
-        cp.Infectious_Period_Distribution = 'CONSTANT_DISTRIBUTION'
-        cp.Infectious_Period_Constant = ID_MEAN
+    cp.Infectious_Period_Distribution = 'GAMMA_DISTRIBUTION'
+    cp.Infectious_Period_Shape = ID_MEAN*ID_MEAN/ID_STD/ID_STD
+    cp.Infectious_Period_Scale = ID_STD*ID_STD/ID_MEAN
 
     cp.Enable_Infection_Rate_Overdispersion = 1
     cp.Enable_Infectivity_Scaling = 1
@@ -88,7 +81,7 @@ def update_config_obj(config):
 
     # Network
     max_k = max_coeff_ref(NI_POWER)
-    ni_coeff  = [np.exp(max_k[k1]+NI_LN_MULT[k1]) for k1 in range(len(max_k))]
+    ni_coeff = [np.exp(max_k[k1]+NI_LN_MULT[k1]) for k1 in range(len(max_k))]
 
     cp.Enable_Network_Infectivity = 1
 
@@ -109,17 +102,19 @@ def update_config_obj(config):
     cp.Enable_Initial_Susceptibility_Distribution = 1
     cp.Susceptibility_Initialization_Distribution_Type = 'DISTRIBUTION_COMPLEX'
 
+    mac_x = [0, 50, 100, 150, 200, 250]
+    mac_y = [0.70, 0.57, 0.36, 0.17, 0.06, 0.00]
     cp.Maternal_Acquire_Config.Initial_Effect = 1.0
-    cp.Maternal_Acquire_Config.Durability_Map.Times = [0, 50, 100, 150, 200, 250]
-    cp.Maternal_Acquire_Config.Durability_Map.Values = [0.70, 0.57, 0.36, 0.17, 0.06, 0.00]
+    cp.Maternal_Acquire_Config.Durability_Map.Times = mac_x
+    cp.Maternal_Acquire_Config.Durability_Map.Values = mac_y
 
-    # Interventions 
+    # Interventions
     cp.Enable_Interventions = 1
     cp.Campaign_Filename = CAMP_FILE
 
     # Adapted sampling
     cp.Individual_Sampling_Type = 'ADAPTED_SAMPLING_BY_IMMUNE_STATE'
-    cp.Min_Node_Population_Samples =  100.0
+    cp.Min_Node_Population_Samples = 100.0
     cp.Base_Individual_Sample_Rate = 1/AGENT_RATE
     cp.Relative_Sample_Rate_Immune = 0.05
     cp.Immune_Threshold_For_Downsampling = 1.0e-5
@@ -147,10 +142,10 @@ def update_config_obj(config):
     cp.Enable_Genome_Mutation = 1
     cp.Genome_Mutation_Rates = list_mutate.tolist()
 
-    #list_mlabel = np.zeros(num_strains)
-    #list_mlabel[-1] = 1
-    #cp.Enable_Label_By_Mutator = 1
-    #cp.Genome_Mutations_Labeled = list_mlabel.tolist()
+    # list_mlabel = np.zeros(num_strains)
+    # list_mlabel[-1] = 1
+    # cp.Enable_Label_By_Mutator = 1
+    # cp.Genome_Mutations_Labeled = list_mlabel.tolist()
 
     # Demographics
     cp.Enable_Demographics_Builtin = 0

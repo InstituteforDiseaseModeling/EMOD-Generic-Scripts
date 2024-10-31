@@ -70,14 +70,6 @@ def write_param_dict():
     # Transmissibility of nOPV with respect to Sabin
     P_CON['R0_nOPV_mult'] = 0.5
 
-    # Mean duration of infectious period
-    P_CON['inf_duration_mean'] = 24.0
-
-    # Dispersion for base infectivity and infectious duration
-    # (multiplier; 1.0 = exponential)
-    P_CON['base_inf_stddev_mult'] = 1.0
-    P_CON['inf_dur_stddev_mult'] = 0.4708333
-
     # Subdivide LGAs into 100km^2 regions
     P_CON['use_10k_res'] = True
 
@@ -90,10 +82,6 @@ def write_param_dict():
     P_CON['sia_sets'] = [{"targ_list": ["AFRO:NIGERIA:KANO:KANO_MUNICIPAL"],
                           "day_offset": 1.0*365.0 + 5.0,
                           "num_cases": 100}]
-
-    # Node level R0 variance (infectivity multiplier;
-    # mean = 1.0; log-normal distribution)
-    P_CON['node_variance_R0'] = 0.0
 
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)

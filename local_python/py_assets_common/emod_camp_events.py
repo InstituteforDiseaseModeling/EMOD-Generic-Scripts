@@ -50,6 +50,33 @@ def ce_import_pressure(node_list,
 # *****************************************************************************
 
 
+def ce_outbreak(node_list,
+                start_day=0.0, num_cases=1, genome=0, age_yrs=40.0):
+
+    # Outbreak
+    camp_event = s2c.get_class_with_defaults(CE, SPATH)
+    camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
+    camp_iv = s2c.get_class_with_defaults('Outbreak', SPATH)
+
+    node_set = utils.do_nodes(SPATH, node_list)
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv
+
+    camp_iv.Genome = genome
+    camp_iv.Number_Cases_Per_Node = num_cases
+    camp_iv.Import_Age = age_yrs*YR_DAYS
+    camp_iv.Import_Female_Prob = 0.0
+    camp_iv.Import_Agent_MC_Weight = 1.0
+
+    return camp_event
+
+# *****************************************************************************
+
+
 def ce_br_force(node_list, times, values,
                 start_day=0.0):
 
@@ -248,6 +275,36 @@ def ce_vax_AMT(node_list,
     camp_iv.Acquire_Config.Initial_Effect = acq_eff
     camp_iv.Mortality_Config.Initial_Effect = mrt_eff
     camp_iv.Transmit_Config.Initial_Effect = trn_eff
+
+    return camp_event
+
+# *****************************************************************************
+
+
+def ce_OPV_SIA(node_list,
+               start_day=0.0, coverage=1.0, take=0.70, clade=0, genome=0):
+
+    # OutbreakIndividual
+    camp_event = s2c.get_class_with_defaults(CE, SPATH)
+    camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
+    camp_iv = s2c.get_class_with_defaults('OutbreakIndividual', SPATH)
+
+    node_set = utils.do_nodes(SPATH, node_list)
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv
+    camp_coord.Demographic_Coverage = coverage*take
+    camp_coord.Target_Demographic = 'ExplicitAgeRanges'
+    camp_coord.Target_Age_Min = 0.75
+    camp_coord.Target_Age_Max = 5.00
+
+    camp_iv.Clade = clade
+    camp_iv.Genome = genome
+    camp_iv.Ignore_Immunity = 0
+    camp_iv.Cost_To_Consumer = 1.0
 
     return camp_event
 
