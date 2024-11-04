@@ -21,7 +21,7 @@ additional information about how to use these scripts.
 | model_measles_nga02      | Documentation. |
 | model_measles01          | [Estimates of measles burden under various policies for age of MCV1.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_measles01.html) |
 | model_network01          | [Demonstration simulations for transmission of infectivity on a network.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_network01.html) |
-| model_polio_nga01        | Example outbreak simulations for cVDPV2 in Nigeria. Collab with JG and HL. |
+| model_polio_nga01        | [Example outbreak simulations for cVDPV2 in Nigeria.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_polio_nga01.html) |
 | model_rubella01          | [Projections of rubella infections and estimates of CRS burden following RCV introduction.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_rubella01.html) |
 | model_transtree01        | [Demonstration of the infector labeling feature and generation of explicit transmission networks.](https://docs.idmod.org/projects/emod-generic-scripts/en/latest/examples/model_transtree01.html) |
 | refdat_mcv1              | IHME MCV1 coverage estimates used to construct input files for EMOD simulations. |
