@@ -1,7 +1,7 @@
 sphinx~=6.2
-sphinx-rtd-theme~=1.2.2
+sphinx-rtd-theme~=1.2
 sphinxcontrib-napoleon~=0.7
-plantweb~=1.2.1
+plantweb~=1.2
 sphinxcontrib-programoutput~=0.17
 nbsphinx~=0.9
 jupyterlab~=4.0
