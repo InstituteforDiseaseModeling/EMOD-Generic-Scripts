@@ -38,7 +38,7 @@ def demographicsBuilder():
     GEOG_LIST = ['AFRO:NIGERIA']
 
     SUB_LGA = gdata.var_params['use_10k_res']
-    TIME_START = gdata.var_params['start_time']
+    START_YEAR = gdata.var_params['start_year']
     PROC_DISPER = gdata.var_params['proc_overdispersion']
     IND_RISK_VAR = gdata.var_params['ind_variance_risk']
 
@@ -107,15 +107,12 @@ def demographicsBuilder():
 
     gdata.demog_node_map = rep_groups
 
-    node_rep_dict = {val[0]: val[1]+1 for val in
+    node_rep_dict = {val[0]: val[1] for val in
                      zip(node_rep_list, range(len(node_rep_list)))}
-    with open('node_names.json', 'w') as fid01:
-        json.dump(node_rep_dict, fid01, sort_keys=True)
 
     gdata.demog_rep_index = node_rep_dict
 
     # Prune small nodes
-    gdata.demog_min_pop = 50
     rev_node_list = [node_obj for node_obj in node_list
                      if node_obj.node_attributes.initial_population >= gdata.demog_min_pop]
     node_list = rev_node_list
@@ -210,9 +207,8 @@ def demographicsBuilder():
             node_name = node_dict.name
             node_id = node_dict.forced_id
             if (node_id in ref_nodes):
-                start_year = (gdata.start_off+TIME_START)/365.0 + 1900
                 ref_year = ipop_time[loc_name]
-                mult_fac = grate**(start_year-ref_year)
+                mult_fac = grate**(START_YEAR-ref_year)
                 new_pop = int(mult_fac * node_dict.node_attributes.initial_population)
                 node_dict.node_attributes.initial_population = new_pop
 
@@ -236,6 +232,7 @@ def demographicsBuilder():
 
     # Create list of initial susceptibility overlays
     is_over_list = list()
+    start_time = 365.0*(START_YEAR-gdata.base_year)
     for node_dict in demog_obj.nodes:
         node_name = node_dict.name
         node_initsus = None
@@ -247,8 +244,7 @@ def demographicsBuilder():
                     node_initsus = list()
                     for k2 in range(isus_ages.shape[0]):
                         nis_dat = isus_data[k1, k2, :]
-                        ipdat = np.interp(gdata.start_off+TIME_START,
-                                          isus_time, nis_dat)
+                        ipdat = np.interp(start_time, isus_time, nis_dat)
                         node_initsus.append(ipdat)
                     node_initsus = np.array(node_initsus)
                 else:

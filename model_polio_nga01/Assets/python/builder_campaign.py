@@ -22,10 +22,9 @@ from emod_constants import CAMP_FILE
 def campaignBuilder():
 
     # Variables for this simulation
-    TIME_START = gdata.var_params['start_time']
+    START_YEAR = gdata.var_params['start_year']
     SIA_CALENDAR = gdata.var_params['sia_calendar']
     SIA_STOP = gdata.var_params['sia_cutoff']
-    SIA_ADDLIST = gdata.var_params['sia_sets']
     NODE_DICT = gdata.demog_node
 
     node_opts = list(NODE_DICT.keys())
@@ -51,35 +50,30 @@ def campaignBuilder():
 
             node_list = list()
             for targ_val in sia_obj['nodes']:
-                for node_name in node_opts:
-                    if ((node_name == targ_val) or
-                       (node_name.startswith(targ_val+':'))):
-                        node_list.append(NODE_DICT[node_name])
+                for nname in node_opts:
+                    if ((nname == targ_val) or
+                       (nname.startswith(targ_val+':'))):
+                        node_list.append(NODE_DICT[nname])
 
             camp_event = ce_OPV_SIA(node_list, start_day=startday,
                                     coverage=gdata.sia_coverage,
                                     clade=clade, genome=genome)
             camp_module.add(camp_event)
 
-    # Use custom spec for intervention schedule
-    for sia_obj in SIA_ADDLIST:
-        node_list = list()
-        node_name_list = list()
-        for targ_val in sia_obj['targ_list']:
-            for node_name in node_opts:
-                if ((node_name == targ_val) or
-                   (node_name.startswith(targ_val+':'))):
-                    node_list.append(NODE_DICT[node_name])
-                    node_name_list.append(node_name)
+    # Seed infections
+    node_list = list()
+    tval = gdata.seed_inf_loc
+    for nname in node_opts:
+        if ((nname == tval) or (nname.startswith(tval+':'))):
+            node_list.append(NODE_DICT[nname])
 
-        # Preserve size of outbreak; select random single node for location
-        node_list = [node_list[np.random.randint(low=0, high=len(node_list))]]
-        startday = gdata.start_off + TIME_START + sia_obj['day_offset']
-
-        camp_event = ce_outbreak(node_list, start_day=startday,
-                                 num_cases=sia_obj['num_cases'],
-                                 genome=gdata.boxes_nopv2+gdata.boxes_sabin2)
-        camp_module.add(camp_event)
+    # Preserve size of outbreak; select random single node for init loc
+    node_list = [node_list[np.random.randint(low=0, high=len(node_list))]]
+    startday = 365.0*(START_YEAR-gdata.base_year) + gdata.seed_inf_t_off
+    camp_event = ce_outbreak(node_list, start_day=startday,
+                             num_cases=gdata.seed_inf_num,
+                             genome=gdata.boxes_nopv2+gdata.boxes_sabin2)
+    camp_module.add(camp_event)
 
     # End file construction
     camp_module.save(filename=CAMP_FILE)

@@ -46,12 +46,12 @@ def write_param_dict():
     # Run number (EMOD random seed)
     P_VAR['run_number'] = list(range(NSIMS))
 
+    # Calendar year to start simulation
+    P_CON['start_year'] = 2017
+
     # Parameters for gravity model for network connections
     P_CON['net_inf_power'] = [2.0]
     P_CON['net_inf_ln_mult'] = [-2.424]
-
-    # Days after May 1, 2016 (Sabin2 cessation) to start simulation
-    P_CON['start_time'] = 365.0*0.0
 
     # Node level overdispersion; 0.0 = Poisson
     P_CON['proc_overdispersion'] = 0.8
@@ -76,12 +76,6 @@ def write_param_dict():
     # Apply the historic SIA calendar; events prior to sim start ignored
     P_CON['sia_calendar'] = False
     P_CON['sia_cutoff'] = 42825.0
-
-    # Direct introduction of cVDPV2
-    # day_offset -> days after sim start, NOT ABSOLUTE TIME
-    P_CON['sia_sets'] = [{"targ_list": ["AFRO:NIGERIA:KANO:KANO_MUNICIPAL"],
-                          "day_offset": 1.0*365.0 + 5.0,
-                          "num_cases": 100}]
 
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)

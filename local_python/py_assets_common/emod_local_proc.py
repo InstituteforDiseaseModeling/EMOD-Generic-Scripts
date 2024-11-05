@@ -14,6 +14,22 @@ PYR_TLABS = [str(abs(val)) for val in PYR_TLOCS]
 # *****************************************************************************
 
 
+def haversine_dist(lat1, long1, lat2, long2):
+
+    lat1 = np.pi*np.array(lat1)/180.0
+    lat2 = np.pi*np.array(lat2)/180.0
+    long1 = np.pi*np.array(long1)/180.0
+    long2 = np.pi*np.array(long2)/180.0
+
+    val1 = np.sin(0.5*lat2-0.5*lat1)**2
+    val2 = np.cos(lat2)*np.cos(lat1)*np.sin(0.5*long2-0.5*long1)**2
+    delt = 6371*2*np.arcsin(np.sqrt(val1+val2))
+
+    return delt
+
+# *****************************************************************************
+
+
 def crs_proc(fert_file, XDAT, pyr_mat_avg, ss_demog=False):
 
     # Load UN WPP fertility distribution data
