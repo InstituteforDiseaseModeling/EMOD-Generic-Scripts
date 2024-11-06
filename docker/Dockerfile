@@ -1,4 +1,4 @@
-FROM almalinux:9.3
+FROM almalinux:9.4
 #
 RUN dnf upgrade -y
 #
