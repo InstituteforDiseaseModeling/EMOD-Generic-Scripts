@@ -30,7 +30,7 @@ def write_param_dict():
     # Setup
     param_dict = dict()
 
-    param_dict[EXP_NAME] = 'cVDPV2-NGA-100km-noSIAs'
+    param_dict[EXP_NAME] = 'cVDPV2-NGA-100km-base'
     param_dict[NUM_SIMS] = 350
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
@@ -47,7 +47,8 @@ def write_param_dict():
     P_VAR['run_number'] = list(range(NSIMS))
 
     # Calendar year to start simulation
-    P_CON['start_year'] = 2017
+    P_CON['start_year'] = 2020
+    P_CON['run_years'] = 5.0
 
     # Parameters for gravity model for network connections
     P_CON['net_inf_power'] = [2.0]
@@ -71,8 +72,8 @@ def write_param_dict():
     P_CON['use_10k_res'] = True
 
     # Apply the historic SIA calendar; events prior to sim start ignored
-    P_CON['sia_calendar'] = False
-    P_CON['sia_cutoff'] = 2018.0*365.0
+    P_CON['sia_calendar'] = True
+    P_CON['sia_cutoff'] = 2030.0*365.0
 
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)

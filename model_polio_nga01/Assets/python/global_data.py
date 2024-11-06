@@ -36,7 +36,6 @@ rev_sabin2 = 0.0
 sia_coverage = 0.80
 
 base_year = 1900.0
-run_years = 2.0
 t_step_days = 5.0
 
 max_clock = 180.0

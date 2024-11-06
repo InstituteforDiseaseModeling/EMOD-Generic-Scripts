@@ -27,12 +27,12 @@ def application(output_path):
 
     # Variables for this simulation
     START_YEAR = gdata.var_params['start_year']
-    TIME_DELTA = 365.0*gdata.run_years
+    RUN_YEARS = gdata.var_params['run_years']
     cVDPV_genome = gdata.boxes_sabin2 + gdata.boxes_nopv2
 
     # Timesteps
     t_ini = 365.0*(START_YEAR-gdata.base_year)
-    t_end = t_ini + 365.0*gdata.run_years
+    t_end = t_ini + 365.0*RUN_YEARS
     t_vec = np.arange(t_ini, t_end+1, gdata.t_step_days)
 
     # Post-process strain reporter
@@ -62,6 +62,7 @@ def application(output_path):
 
     parsed_dat[key_str]['fatime'] = fatime.tolist()
     parsed_dat[key_str]['totinf'] = totinf.tolist()
+    parsed_dat[key_str]['infmat'] = dbrick0.tolist()
     parsed_dat['t_vec'] = t_vec.tolist()
     parsed_dat['node_names'] = REP_DEX_DICT
 

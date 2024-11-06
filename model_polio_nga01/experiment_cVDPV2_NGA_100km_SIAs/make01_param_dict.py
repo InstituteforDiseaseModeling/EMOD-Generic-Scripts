@@ -62,12 +62,9 @@ def write_param_dict():
     # Base agent weight; less than 10 may have memory issues
     P_CON['agent_rate'] = 25.0
 
-    # R0 values for cVDPV and Sabin; linear interpolation;
-    # requires R0 > R0_OPV
+    # R0 values for nOPV, cVDPV, Sabin; linear interpolation;
     P_CON['R0'] = 16.0
     P_CON['R0_OPV'] = 4.0
-
-    # Transmissibility of nOPV with respect to Sabin
     P_CON['R0_nOPV_mult'] = 0.5
 
     # Subdivide LGAs into 100km^2 regions
@@ -75,7 +72,7 @@ def write_param_dict():
 
     # Apply the historic SIA calendar; events prior to sim start ignored
     P_CON['sia_calendar'] = True
-    P_CON['sia_cutoff'] = 42825.0
+    P_CON['sia_cutoff'] = 2018.0*365.0
 
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)
