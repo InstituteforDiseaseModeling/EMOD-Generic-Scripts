@@ -19,12 +19,13 @@ first_call_bool = True
 demog_dict = dict()
 demog_node = dict()
 demog_min_pop = 50
-demog_node_map = dict()      # LGA:     [NodeIDs]
-demog_rep_index = dict()      # LGA:  Output row number
+demog_node_map = dict() # LGA: [NodeIDs]
+demog_rep_index = dict() # LGA: Output row number
 
-seed_inf_loc = 'AFRO:NIGERIA:KANO:KANO_MUNICIPAL'
-seed_inf_t_off = 370.0
-seed_inf_num = 100
+seed_inf_loc = 'AFRO:NIGERIA:JIGAWA:DUTSE'
+seed_inf_t_off = 300.0
+seed_inf_dt = 60.0
+seed_inf_num = 25.0
 
 inf_dur_mean = 24.0
 inf_dur_std = 11.3
@@ -34,6 +35,7 @@ boxes_sabin2 = 7
 rev_nopv2 = 0.0
 rev_sabin2 = 0.0
 sia_coverage = 0.80
+init_coverage = 50
 
 base_year = 1900.0
 t_step_days = 5.0

@@ -46,7 +46,7 @@ def write_param_dict():
     # Run number (EMOD random seed)
     P_VAR['run_number'] = list(range(NSIMS))
 
-    # Calendar year to start simulation
+    # Simulation start / duration
     P_CON['start_year'] = 2020
     P_CON['run_years'] = 5.0
 
@@ -55,10 +55,10 @@ def write_param_dict():
     P_CON['net_inf_ln_mult'] = [-2.424]
 
     # Node level overdispersion; 0.0 = Poisson
-    P_CON['proc_overdispersion'] = 0.8
+    P_CON['proc_overdispersion'] = 0.1
 
     # Correlation between acqusition and transmission heterogeneity
-    P_CON['corr_acq_trans'] = 0.9
+    P_CON['corr_acq_trans'] = 0.8
 
     # Base agent weight; less than 10 may have memory issues
     P_CON['agent_rate'] = 25.0

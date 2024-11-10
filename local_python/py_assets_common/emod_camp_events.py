@@ -25,8 +25,8 @@ VEC_TAKE = [0.0, 0.0, 0.65, 0.92, 1.0]
 
 
 def ce_import_pressure(node_list,
-                       start_day=0.0, duration=1.0,
-                       magnitude=1.0, age_yrs=40.0):
+                       start_day=0.0, duration=1.0, magnitude=1.0,
+                       age_yrs=40.0, clade=0, genome=0):
 
     # Import pressure
     camp_event = s2c.get_class_with_defaults(CE, SPATH)
@@ -44,33 +44,10 @@ def ce_import_pressure(node_list,
     camp_iv.Durations = [duration]
     camp_iv.Daily_Import_Pressures = [magnitude]
     camp_iv.Import_Age = age_yrs*YR_DAYS
-
-    return camp_event
-
-# *****************************************************************************
-
-
-def ce_outbreak(node_list,
-                start_day=0.0, num_cases=1, genome=0, age_yrs=40.0):
-
-    # Outbreak
-    camp_event = s2c.get_class_with_defaults(CE, SPATH)
-    camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
-    camp_iv = s2c.get_class_with_defaults('Outbreak', SPATH)
-
-    node_set = utils.do_nodes(SPATH, node_list)
-
-    camp_event.Event_Coordinator_Config = camp_coord
-    camp_event.Start_Day = start_day
-    camp_event.Nodeset_Config = node_set
-
-    camp_coord.Intervention_Config = camp_iv
-
-    camp_iv.Genome = genome
-    camp_iv.Number_Cases_Per_Node = num_cases
-    camp_iv.Import_Age = age_yrs*YR_DAYS
     camp_iv.Import_Female_Prob = 0.0
     camp_iv.Import_Agent_MC_Weight = 1.0
+    camp_iv.Clade = clade
+    camp_iv.Genome = genome
 
     return camp_event
 

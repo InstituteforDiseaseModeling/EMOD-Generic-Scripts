@@ -46,18 +46,19 @@ def write_param_dict():
     # Run number (EMOD random seed)
     P_VAR['run_number'] = list(range(NSIMS))
 
-    # Calendar year to start simulation
-    P_CON['start_year'] = 2017
+    # Simulation start / duration
+    P_CON['start_year'] = 2018
+    P_CON['run_years'] = 2.0
 
     # Parameters for gravity model for network connections
     P_CON['net_inf_power'] = [2.0]
     P_CON['net_inf_ln_mult'] = [-2.424]
 
     # Node level overdispersion; 0.0 = Poisson
-    P_CON['proc_overdispersion'] = 0.8
+    P_CON['proc_overdispersion'] = 0.1
 
     # Correlation between acqusition and transmission heterogeneity
-    P_CON['corr_acq_trans'] = 0.9
+    P_CON['corr_acq_trans'] = 0.8
 
     # Base agent weight; less than 10 may have memory issues
     P_CON['agent_rate'] = 25.0
@@ -72,7 +73,7 @@ def write_param_dict():
 
     # Apply the historic SIA calendar; events prior to sim start ignored
     P_CON['sia_calendar'] = False
-    P_CON['sia_cutoff'] = 2018.0*365.0
+    P_CON['sia_cutoff'] = 2030.0*365.0
 
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)

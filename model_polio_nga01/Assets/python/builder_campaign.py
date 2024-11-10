@@ -13,7 +13,7 @@ import numpy as np
 
 import emod_api.campaign as camp_module
 
-from emod_camp_events import ce_outbreak, ce_OPV_SIA
+from emod_camp_events import ce_import_pressure, ce_OPV_SIA
 from emod_constants import CAMP_FILE
 
 # *****************************************************************************
@@ -69,10 +69,12 @@ def campaignBuilder():
 
     # Preserve size of outbreak; select random single node for init loc
     node_list = [node_list[np.random.randint(low=0, high=len(node_list))]]
+    cvdpv_gen = gdata.boxes_nopv2+gdata.boxes_sabin2
     startday = 365.0*(START_YEAR-gdata.base_year) + gdata.seed_inf_t_off
-    camp_event = ce_outbreak(node_list, start_day=startday,
-                             num_cases=gdata.seed_inf_num,
-                             genome=gdata.boxes_nopv2+gdata.boxes_sabin2)
+    camp_event = ce_import_pressure(node_list, start_day=startday,
+                                    genome=cvdpv_gen,
+                                    duration=gdata.seed_inf_dt,
+                                    magnitude=gdata.seed_inf_num)
     camp_module.add(camp_event)
 
     # End file construction

@@ -220,8 +220,7 @@ def demographicsBuilder():
         gdata.demog_files.append(nfn)
 
     # Load immunity mapper data
-    init_sus_val = int(100*gdata.sia_coverage)
-    fname = 'sus_init_NGA_{:02d}.json'.format(init_sus_val)
+    fname = 'sus_init_NGA_{:02d}.json'.format(gdata.init_coverage)
     with open(os.path.join('Assets', 'data', fname)) as fid01:
         isus_dat = json.load(fid01)
 

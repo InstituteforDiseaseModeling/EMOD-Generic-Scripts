@@ -10,9 +10,10 @@ import matplotlib.pyplot as plt
 # Ought to go in emodpy
 sys.path.append(os.path.abspath(os.path.join('..', '..', 'local_python')))
 sys.path.append(os.path.abspath(os.path.join('..', 'Assets', 'python')))
-from py_assets_common.emod_constants import NUM_SIMS, P_FILE, D_FILE, MO_DAYS
+from py_assets_common.emod_constants import NUM_SIMS, P_FILE, D_FILE, \
+                                            MO_DAYS, EXP_C
 
-from global_data import run_years, base_year
+from global_data import base_year
 
 # *****************************************************************************
 
@@ -35,25 +36,22 @@ def make_fig():
         with open(os.path.join(tpath, P_FILE)) as fid01:
             param_dict = json.load(fid01)
 
-        t_vec = np.array(data_brick.pop('t_vec'))
-        node_names = data_brick.pop('node_names')
+        t_vec = np.array(data_brick.pop('t_vec'))/365 + base_year
+        n_dict = data_brick.pop('node_names')
         n_sims = param_dict[NUM_SIMS]
-        n_nodes = len(node_names)
+        run_years = param_dict[EXP_C]['run_years']
 
-        tot_inf = np.zeros((n_sims, t_vec.shape[0]))
-        vel_mat = np.zeros((n_sims, n_nodes))
+        inf_data = np.zeros((n_sims, len(n_dict), t_vec.shape[0]))
         for sim_idx_str in data_brick:
             sim_idx = int(sim_idx_str)
-            tinf = np.array(data_brick[sim_idx_str]['totinf'])
-            vinf = np.array(data_brick[sim_idx_str]['fatime'])
-            tot_inf[sim_idx, :] = np.cumsum(tinf)
-            vel_mat[sim_idx, :] = vinf
+            infmat = np.array(data_brick[sim_idx_str]['infmat'])
+            inf_data[sim_idx, :, :] = infmat
 
-        mean_vel = np.zeros((n_sims, t_vec.shape[0]))
-        for k2 in range(t_vec.shape[0]):
-            mean_vel[:, k2] = np.sum((vel_mat < k2) & (vel_mat > 0), axis=1)
+        totinf = np.sum(inf_data, axis=1)
+        cuminf = np.cumsum(totinf, axis=1)
+        totlga = np.sum(inf_data>0, axis=1)
 
-        gdix = (tot_inf[:, -1] > 5000)
+        gdix = (cuminf[:, -1] > 5000)
 
         # Figure setup
         fig01 = plt.figure(figsize=(8, 6))
@@ -64,31 +62,27 @@ def make_fig():
         axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
         axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
         axs01.set_axisbelow(True)
+        axs01.tick_params(axis='x', which='major', labelsize=18)
+        axs01.tick_params(axis='y', which='major', labelsize=14)
 
-        #dvals = [0]+MO_DAYS*int(run_years)
-        #ticloc = np.cumsum(dvals)
-        #ticlab = ['']*25
-        #axs01.plot([245, 245], [0, 1000], 'k:')
-        #axs01.plot([610, 610], [0, 1000], 'k:')
-        #axs01.text(31.5, -6, '2016', fontsize=14)
-        #axs01.text(31.5+365, -6, '2017', fontsize=14)
+        dvals = [0]+MO_DAYS*int(run_years)
+        ticloc = np.cumsum(dvals) + t_vec[0]
+        axs01.set_xticks(ticks=ticloc, minor=True)
 
-        #axs01.set_xticks(ticks=ticloc)
-        axs01.set_xticklabels(ticlab)
+        ticloc = np.arange(0, int(run_years)+1) + t_vec[0]
+        axs01.set_xticks(ticks=ticloc)
 
         obp_lab = 'Outbreak Probability: {:4.2f}'.format(np.sum(gdix)/n_sims)
-        axs01.text(2017.3, 97.5, obp_lab, fontsize=14)
+        axs01.text(0.1, 0.9, obp_lab, fontsize=14, transform = axs01.transAxes)
 
-        xval = t_vec/365 + base_year
-        yval1 = np.mean(mean_vel[gdix, :], axis=0)
-        yval2 = mean_vel[gdix, :]
-        axs01.plot(xval, yval1, c='C0')
+        yval2 = totlga[gdix, :]
+        yval1 = np.mean(yval2, axis=0)
+        axs01.plot(t_vec, yval1, c='C0', lw=3)
         for k3 in range(np.sum(gdix)):
-            axs01.plot(xval[::2], yval2[k3, ::2], '.', c='C0')
+            axs01.plot(t_vec, yval2[k3, ], '-', c='C0', alpha=0.1)
 
         axs01.set_ylabel('LGAs with Transmission', fontsize=14)
-        axs01.set_xlim(xval[0], xval[-1])
-        axs01.set_ylim(0, 120)
+        axs01.set_xlim(t_vec[0], t_vec[-1])
 
         plt.tight_layout()
         plt.savefig('fig_extent_tot_{:s}_01.png'.format(dirname))
