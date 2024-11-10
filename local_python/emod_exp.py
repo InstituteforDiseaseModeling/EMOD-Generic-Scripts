@@ -15,7 +15,8 @@ from idmtools_platform_comps.ssmt_work_items.comps_workitems \
 from emodpy.emod_task import EMODTask
 
 from py_assets_common.emod_constants import ID_EXE, ID_ENV, ID_SCHEMA, \
-                                            DOCK_PACK, VE_PY_PATHS
+                                            DOCK_PACK, VE_PY_PATHS, \
+                                            EXP_V, EXP_NAME, NUM_SIMS
 
 # *****************************************************************************
 
@@ -57,9 +58,9 @@ def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
     with open(path_param_dict) as fid01:
         param_dict = json.load(fid01)
 
-    EXP_NAME = param_dict['EXP_NAME']
-    NUM_SIMS = param_dict['NUM_SIMS']
-    VAR_DICT = param_dict['EXP_VARIABLE']
+    exp_name_str = param_dict[EXP_NAME]
+    nsims = param_dict[NUM_SIMS]
+    dict_var = param_dict[EXP_V]
 
     # Add the parameters dictionary to assets
     param_asset = Asset(absolute_path=path_param_dict)
@@ -90,13 +91,13 @@ def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
     #   those second-values are actually the SAME DICTIONARY (no deep copy) so
     #   don't make any changes in the sweep function.
     build_obj = SimulationBuilder()
-    sim_id_list = list(range(NUM_SIMS))
-    dict_list = NUM_SIMS*[VAR_DICT]
+    sim_id_list = list(range(nsims))
+    dict_list = nsims*[dict_var]
     arg_two = list(zip(sim_id_list, dict_list))
     build_obj.add_sweep_definition(sweep_func, arg_two)
 
     # Create an experiment from builder
-    exp_obj = Experiment.from_builder(build_obj, task_obj, name=EXP_NAME)
+    exp_obj = Experiment.from_builder(build_obj, task_obj, name=exp_name_str)
 
     return exp_obj
 
@@ -114,7 +115,7 @@ def calib_from_def_file(pth_pdict, pth_python, pth_exe, pth_data, pth_local):
     with open(pth_pdict) as fid01:
         param_dict = json.load(fid01)
 
-    EXP_NAME = param_dict['EXP_NAME']
+    exp_name_str = param_dict[EXP_NAME]
 
     # Add everything needed to run an experiment and ID from the initial sweep
     task_obj.common_assets.add_directory(pth_python, relative_path='python')
@@ -130,7 +131,7 @@ def calib_from_def_file(pth_pdict, pth_python, pth_exe, pth_data, pth_local):
     ac_obj.add_asset('idmtools.ini')
 
     # Es liebten alle Frauen
-    wi_obj = SSMTWorkItem(name='Calibd_'+EXP_NAME,
+    wi_obj = SSMTWorkItem(name='Calibd_'+exp_name_str,
                           task=task_obj,
                           transient_assets=ac_obj,
                           docker_image=DOCK_PACK)
