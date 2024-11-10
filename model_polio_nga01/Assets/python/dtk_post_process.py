@@ -32,8 +32,8 @@ def application(output_path):
 
     # Timesteps
     t_ini = 365.0*(START_YEAR-gdata.base_year)
-    t_end = t_ini + 365.0*RUN_YEARS + 0.5
-    t_vec = np.arange(t_ini, t_end+1, gdata.t_step_days)
+    t_end = t_ini + 365.0*RUN_YEARS
+    t_vec = np.arange(t_ini, t_end+0.5, gdata.t_step_days)
 
     # Post-process strain reporter
     infdat = np.loadtxt(os.path.join(output_path, RST_FILE),

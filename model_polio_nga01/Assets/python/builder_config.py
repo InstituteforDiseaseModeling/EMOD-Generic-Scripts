@@ -51,7 +51,7 @@ def update_config_obj(config):
 
     # Time
     cp.Start_Time = 365.0*(START_YEAR-gdata.base_year)
-    cp.Simulation_Duration = 365.0*RUN_YEARS + 0.5
+    cp.Simulation_Duration = 365.0*RUN_YEARS + gdata.t_step_days
     cp.Simulation_Timestep = gdata.t_step_days
 
     cp.Enable_Termination_On_Total_Wall_Time = 1
