@@ -28,14 +28,7 @@ def run_sims():
 
     # Prepare the platform
     plat_obj = Platform(block='COMPS',
-                        endpoint='https://comps.idmod.org',
-                        environment='Calculon',
-                        priority='Normal',
-                        simulation_root='$COMPS_PATH(USER)',
-                        node_group='idm_abcd',
-                        num_cores='1',
-                        num_retries='0',
-                        exclusive='False')
+                        job_directory='docker_test01')
 
     # Create experiment object
     exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_EXE, PATH_DATA)

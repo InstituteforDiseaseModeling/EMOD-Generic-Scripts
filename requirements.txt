@@ -1,1 +1,2 @@
 emodpy==1.22
+idmtools-platform-container~=1.7

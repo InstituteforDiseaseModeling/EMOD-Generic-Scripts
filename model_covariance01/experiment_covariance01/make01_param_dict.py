@@ -31,7 +31,7 @@ def write_param_dict():
     param_dict = dict()
 
     param_dict[EXP_NAME] = 'CovarainceDemo01'
-    param_dict[NUM_SIMS] = 1500
+    param_dict[NUM_SIMS] = 10
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
 
