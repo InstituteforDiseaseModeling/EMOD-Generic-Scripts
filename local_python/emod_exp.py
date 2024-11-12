@@ -48,7 +48,7 @@ def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
     task_obj = EMODTask.from_files(ep4_path=path_python)
 
     # Set singularity image for environment
-    task_obj.set_sif(os.path.join(path_exe, ID_ENV))
+    #task_obj.set_sif(os.path.join(path_exe, ID_ENV))
 
     # Set path to python
     for py_path in VE_PY_PATHS:
@@ -67,12 +67,12 @@ def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
     task_obj.common_assets.add_asset(param_asset)
 
     # Add the executable and schema
-    f_targ = os.path.join(path_exe, ID_EXE)
-    exe_asset = AssetCollection.from_id_file(f_targ)
-    task_obj.common_assets.add_assets(exe_asset)
-    f_targ = os.path.join(path_exe, ID_SCHEMA)
-    schema_asset = AssetCollection.from_id_file(f_targ)
-    task_obj.common_assets.add_assets(schema_asset)
+    #f_targ = os.path.join(path_exe, ID_EXE)
+    #exe_asset = AssetCollection.from_id_file(f_targ)
+    #task_obj.common_assets.add_assets(exe_asset)
+    #f_targ = os.path.join(path_exe, ID_SCHEMA)
+    #schema_asset = AssetCollection.from_id_file(f_targ)
+    #task_obj.common_assets.add_assets(schema_asset)
 
     # Add everything in the data assets directory as assets;
     task_obj.common_assets.add_directory(path_data, relative_path='data')
@@ -81,6 +81,11 @@ def exp_from_def_file(path_param_dict, path_python, path_exe, path_data):
     f_dir = os.path.dirname(os.path.abspath(__file__))
     PATH_COMMON = os.path.join(f_dir, 'py_assets_common')
     task_obj.common_assets.add_directory(PATH_COMMON, relative_path='python')
+
+    # Add everything in the container assets directory as assets;
+    f_dir = os.path.dirname(os.path.abspath(__file__))
+    PATH_COMMON = os.path.join(f_dir, 'container_assets')
+    task_obj.common_assets.add_directory(PATH_COMMON)
 
     # Create simulation sweep with builder
     #   Odd syntax; sweep definition needs two args: sweep function and a list.

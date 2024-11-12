@@ -10,7 +10,7 @@ from idmtools.core.platform_factory import Platform
 # Ought to go in emodpy
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'local_python')))
 from emod_exp import exp_from_def_file
-from py_assets_common.emod_constants import COMPS_ID_FILE, P_FILE
+from py_assets_common.emod_constants import P_FILE
 
 # *****************************************************************************
 
@@ -18,28 +18,23 @@ from py_assets_common.emod_constants import COMPS_ID_FILE, P_FILE
 PATH_EXP_DEF = os.path.abspath(P_FILE)
 PATH_PYTHON = os.path.abspath(os.path.join('..', 'Assets', 'python'))
 PATH_DATA = os.path.abspath(os.path.join('..', 'Assets', 'data'))
-PATH_EXE = os.path.abspath(os.path.join('..', '..', 'env_Debian12'))
 
 # *****************************************************************************
 
 
-# Start and experiment on COMPS
+# Start an experiment locally using Docker
 def run_sims():
 
     # Prepare the platform
-    plat_obj = Platform(block='COMPS',
-                        job_directory='docker_test01')
+    plat_obj = Platform(block='Container',
+                        job_directory='docker_test01',
+                        docker_image='emod_env:latest')
 
     # Create experiment object
-    exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, PATH_EXE, PATH_DATA)
+    exp_obj = exp_from_def_file(PATH_EXP_DEF, PATH_PYTHON, None, PATH_DATA)
 
-    # Send experiment to COMPS; start processing
+    # Start processing simulations
     plat_obj.run_items(exp_obj)
-
-    # Save experiment id to file
-    exp_obj.to_id_file(COMPS_ID_FILE)
-    print()
-    print(exp_obj.uid.hex)
 
     return None
 
