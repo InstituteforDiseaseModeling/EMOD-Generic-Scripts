@@ -54,6 +54,28 @@ def ce_import_pressure(node_list,
 # *****************************************************************************
 
 
+def ce_random_numbers(node_list, start_day=0.0, numbers=0):
+
+    # Import pressure
+    camp_event = s2c.get_class_with_defaults(CE, SPATH)
+    camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
+    camp_iv = s2c.get_class_with_defaults('NodeRandomNumber', SPATH)
+
+    node_set = utils.do_nodes(SPATH, node_list)
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv
+
+    camp_iv.Total_Numbers = numbers
+
+    return camp_event
+
+# *****************************************************************************
+
+
 def ce_br_force(node_list, times, values,
                 start_day=0.0):
 
