@@ -67,8 +67,8 @@ def campaignBuilder():
         if ((nname == tval) or (nname.startswith(tval+':'))):
             node_list.append(NODE_DICT[nname])
 
-    # Preserve size of outbreak; select random single node for init loc
-    node_list = [node_list[np.random.randint(low=0, high=len(node_list))]]
+    # Preserve size of outbreak; select single node for initial location
+    node_list = [node_list[-1]]
     cvdpv_gen = gdata.boxes_nopv2+gdata.boxes_sabin2
     startday = 365.0*(START_YEAR-gdata.base_year) + gdata.seed_inf_t_off
     camp_event = ce_import_pressure(node_list, start_day=startday,
