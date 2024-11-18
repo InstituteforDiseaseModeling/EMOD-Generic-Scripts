@@ -19,8 +19,8 @@ from refdat_location_admin02 import data_dict as ref_longlatref
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
-            'experiment_cVDPV2_NGA_100km_SIAs']
+DIRNAMES = [#'experiment_cVDPV2_NGA_100km_noSIAs',
+            'experiment_cVDPV2_NGA_100km_SIAs_v3']
 
 # *****************************************************************************
 

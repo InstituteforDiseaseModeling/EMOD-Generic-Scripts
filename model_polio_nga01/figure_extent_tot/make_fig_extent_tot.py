@@ -17,8 +17,8 @@ from global_data import base_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
-            'experiment_cVDPV2_NGA_100km_SIAs']
+DIRNAMES = [#'experiment_cVDPV2_NGA_100km_noSIAs',
+            'experiment_cVDPV2_NGA_100km_SIAs_v2']
 
 # *****************************************************************************
 

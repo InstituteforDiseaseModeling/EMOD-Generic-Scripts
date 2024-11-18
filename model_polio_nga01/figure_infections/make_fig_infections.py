@@ -17,8 +17,8 @@ from global_data import base_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
-            'experiment_cVDPV2_NGA_100km_SIAs']
+DIRNAMES = [#'experiment_cVDPV2_NGA_100km_noSIAs',
+            'experiment_cVDPV2_NGA_100km_SIAs_v3']
 
 # *****************************************************************************
 
@@ -74,13 +74,13 @@ def make_fig():
         obp_lab = 'Outbreak Probability: {:4.2f}'.format(np.sum(gidx)/n_sims)
         axs01.text(0.1, 0.9, obp_lab, fontsize=14, transform = axs01.transAxes)
 
-        yval2 = cuminf[gidx, :]/1000
+        yval2 = totinf[gidx, :]/1000
         yval1 = np.mean(yval2, axis=0)
         axs01.plot(t_vec, yval1, c='C0', lw=3)
         for k3 in range(np.sum(gidx)):
             axs01.plot(t_vec, yval2[k3, :], '-', c='C0', alpha=0.1)
 
-        axs01.set_ylabel('Cumulative Infections (thousands)', fontsize=18)
+        axs01.set_ylabel('Incidence (thousands)', fontsize=18)
         axs01.set_xlim(t_vec[0], t_vec[-1])
 
         plt.tight_layout()
