@@ -13,7 +13,7 @@ import numpy as np
 
 import emod_api.campaign as camp_module
 
-from emod_camp_events import ce_import_pressure, ce_OPV_SIA
+from emod_camp_events import ce_import_pressure, ce_OPV_SIA, ce_random_numbers
 from emod_constants import CAMP_FILE
 
 # *****************************************************************************
@@ -28,6 +28,9 @@ def campaignBuilder():
     NODE_DICT = gdata.demog_node
 
     node_opts = list(NODE_DICT.keys())
+
+    # Note: campaign module itself is the file object; no Campaign class
+    ALL_NODES = gdata.demog_object.node_ids
 
     # Use SIA calendar for OPV2 schedule
     if (SIA_CALENDAR):
@@ -75,6 +78,12 @@ def campaignBuilder():
                                     genome=cvdpv_gen,
                                     duration=gdata.seed_inf_dt,
                                     magnitude=gdata.seed_inf_num)
+    camp_module.add(camp_event)
+
+    # Random number stream offset
+    startday = 365.0*(START_YEAR-gdata.base_year) + 365.0
+    camp_event = ce_random_numbers(ALL_NODES, start_day=startday,
+                                   numbers=gdata.sim_index)
     camp_module.add(camp_event)
 
     # End file construction
