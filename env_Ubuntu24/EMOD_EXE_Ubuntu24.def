@@ -2,6 +2,12 @@ Bootstrap: localimage
 From: Assets/EMOD_OS_Ubuntu24.sif
 
 %post
+    apt-get update
+    apt-get install software-properties-common -y
+    apt-get update
+    add-apt-repository universe
+    apt-get upgrade -y
+
     apt-get install python3-dev -y
     apt-get install libmpich-dev -y
     apt-get install libsqlite3-dev -y

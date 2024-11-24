@@ -2,12 +2,6 @@ Bootstrap: docker
 From: ubuntu:24.04
 
 %post
-    apt-get update
-    apt-get install software-properties-common -y
-    apt-get update
-    add-apt-repository universe
-    apt-get upgrade -y
-
     apt-get clean
 
 %runscript

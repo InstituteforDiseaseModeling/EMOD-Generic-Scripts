@@ -1,9 +1,7 @@
 Bootstrap: docker
-From: fedora:40
+From: fedora:41
 
 %post
-    dnf upgrade -y
-
     dnf clean all
 
 %runscript

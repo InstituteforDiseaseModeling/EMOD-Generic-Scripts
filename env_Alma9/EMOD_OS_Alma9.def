@@ -1,9 +1,7 @@
 Bootstrap: docker
-From: almalinux:9.4
+From: almalinux:9.5
 
 %post
-    dnf upgrade -y
-
     dnf clean all
 
 %runscript

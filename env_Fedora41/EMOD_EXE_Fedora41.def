@@ -1,7 +1,9 @@
 Bootstrap: localimage
-From: Assets/EMOD_OS_Fedora40.sif
+From: Assets/EMOD_OS_Fedora41.sif
 
 %post
+    dnf upgrade -y
+
     dnf install python-devel -y
     dnf install mpich-devel -y
     dnf install sqlite-devel -y

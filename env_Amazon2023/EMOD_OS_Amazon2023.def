@@ -2,8 +2,6 @@ Bootstrap: docker
 From: amazonlinux:2023
 
 %post
-    dnf upgrade -y
-
     dnf clean all
 
 %runscript

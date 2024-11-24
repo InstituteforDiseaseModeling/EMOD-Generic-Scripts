@@ -2,6 +2,12 @@ Bootstrap: localimage
 From: Assets/EMOD_OS_Ubuntu24.sif
 
 %post
+    apt-get update
+    apt-get install software-properties-common -y
+    apt-get update
+    add-apt-repository universe
+    apt-get upgrade -y
+
     apt-get install python3 -y
     apt-get install python3-pip -y
     apt-get install python3-venv -y

@@ -2,6 +2,8 @@ Bootstrap: localimage
 From: Assets/EMOD_OS_Alma9.sif
 
 %post
+    dnf upgrade -y
+
     dnf -y install python
     dnf -y install python-pip
     dnf -y install mpich
