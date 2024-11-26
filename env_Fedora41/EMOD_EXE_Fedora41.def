@@ -18,7 +18,7 @@ From: Assets/EMOD_OS_Fedora41.sif
 
     export USER=CalculonUser-EMOD
 
-    git clone https://github.com/InstituteforDiseaseModeling/EMOD-Generic
+    git clone https://github.com/EMOD-Hub/EMOD-Generic
 
     cd EMOD-Generic
 
