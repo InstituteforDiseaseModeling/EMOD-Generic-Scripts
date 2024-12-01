@@ -106,7 +106,7 @@ def make_fig():
 
     print_branch(axs01, rec_tree(tree_dat, 0), 0)
 
-    axs01 = fig01.add_subplot(122, label=None)
+    axs01 = fig01.add_subplot(1, 2, 2, label=None)
     plt.sca(axs01)
     axs01.tick_params(labelcolor='w',
                       top=False, bottom=False,
