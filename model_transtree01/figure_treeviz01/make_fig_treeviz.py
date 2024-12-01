@@ -90,35 +90,49 @@ def make_fig():
     gdex1 = np.argwhere(obr_bool & (BI_VAR == 1.0))[0, 0]
 
     # Figure setup
-    fig01 = plt.figure(figsize=(48, 36))
+    fig01 = plt.figure(figsize=(16, 6))
 
     axs01 = fig01.add_subplot(1, 2, 1, label=None)
     plt.sca(axs01)
-    axs01.tick_params(labelcolor='w',
-                      top=False, bottom=False,
-                      left=False, right=False)
 
     tree_dat = tree_list[gdex0]
-    x_max = np.max(tree_dat[:, 0])
-    axs01.set_xlabel('Time', fontsize=14)
-    axs01.set_title('Constant Rate\nSecondary Infection', fontsize=16)
-    axs01.set_xlim(-10, x_max + 10)
+    tdelt = list()
+    for k1 in range(tree_dat.shape[0]):
+        for k2 in range(tree_dat.shape[0]):
+            if (tree_dat[k2, 3] == tree_dat[k1, 2]):
+                dt = tree_dat[k2, 0] - tree_dat[k1, 0]
+                tdelt.append((dt, max(tree_dat[k2, 0], tree_dat[k1, 0])))
 
-    print_branch(axs01, rec_tree(tree_dat, 0), 0)
+    td2 = sorted(tdelt, key=lambda ttup: ttup[1])
+    td3 = [val[0] for val in td2]
+    td4 = td3[:int(len(td3)/2)]
+
+    ltxt = 'Mean = {:4.1f}'.format(np.mean(td4))
+    # axs01.hist(td4, density=True, bins=np.arange(-0.5, 15), edgecolor='k')
+    # axs01.text(0.1, 0.8, ltxt, transform=axs01.transAxes)
+    # axs01.set_xlabel('Interval (days)')
+    # axs01.set_title('Poisson')
 
     axs01 = fig01.add_subplot(1, 2, 2, label=None)
     plt.sca(axs01)
-    axs01.tick_params(labelcolor='w',
-                      top=False, bottom=False,
-                      left=False, right=False)
 
     tree_dat = tree_list[gdex1]
-    x_max = np.max(tree_dat[:, 0])
-    axs01.set_xlabel('Time', fontsize=14)
-    axs01.set_title('Exponential Rate\nSecondary Infection', fontsize=16)
-    axs01.set_xlim(-10, x_max + 10)
+    tdelt = list()
+    for k1 in range(tree_dat.shape[0]):
+        for k2 in range(tree_dat.shape[0]):
+            if (tree_dat[k2, 3] == tree_dat[k1, 2]):
+                dt = tree_dat[k2, 0] - tree_dat[k1, 0]
+                tdelt.append((dt, max(tree_dat[k2, 0], tree_dat[k1, 0])))
 
-    print_branch(axs01, rec_tree(tree_dat, 0), 0)
+    td2 = sorted(tdelt, key=lambda ttup: ttup[1])
+    td3 = [val[0] for val in td2]
+    td4 = td3[(int(len(td3)/2)):]
+
+    ltxt = 'Mean = {:4.1f}'.format(np.mean(td4))
+    axs01.hist(td4, density=True, bins=np.arange(-0.5, 30), edgecolor='k')
+    axs01.text(0.1, 0.8, ltxt, transform=axs01.transAxes)
+    axs01.set_xlabel('Interval (days)')
+    axs01.set_title('Negative Binomial')
 
     # Generate figures
     plt.tight_layout()

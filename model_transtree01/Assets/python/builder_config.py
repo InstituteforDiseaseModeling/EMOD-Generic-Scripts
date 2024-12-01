@@ -30,22 +30,22 @@ def update_config_obj(config):
     cp.Enable_Termination_On_Zero_Total_Infectivity = 1
     cp.Minimum_End_Time = 50.0
 
+    R0 = 3.0
+    ID_MEAN = 24.0
+    ID_STD = 11.3
+
     # Intrahost
-    if (BI_STD > 0.01):
-        cp.Base_Infectivity_Distribution = 'GAMMA_DISTRIBUTION'
-        cp.Base_Infectivity_Scale = 0.5*BI_STD*BI_STD
-        cp.Base_Infectivity_Shape = 1.0/BI_STD/BI_STD
-    else:
-        cp.Base_Infectivity_Distribution = 'CONSTANT_DISTRIBUTION'
-        cp.Base_Infectivity_Constant = 0.5
+    cp.Base_Infectivity_Distribution = 'GAMMA_DISTRIBUTION'
+    cp.Base_Infectivity_Shape = 1.0
+    cp.Base_Infectivity_Scale = R0/ID_MEAN
 
     cp.Incubation_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
     cp.Incubation_Period_Gaussian_Mean = 3.0
     cp.Incubation_Period_Gaussian_Std_Dev = 1.0
 
-    cp.Infectious_Period_Distribution = 'GAUSSIAN_DISTRIBUTION'
-    cp.Infectious_Period_Gaussian_Mean = 3.0
-    cp.Infectious_Period_Gaussian_Std_Dev = 1.0
+    cp.Infectious_Period_Distribution = 'GAMMA_DISTRIBUTION'
+    cp.Infectious_Period_Shape = ID_MEAN*ID_MEAN/ID_STD/ID_STD # 4.51
+    cp.Infectious_Period_Scale = ID_STD*ID_STD/ID_MEAN # 5.32
 
     cp.Enable_Disease_Mortality = 0
 
@@ -76,7 +76,7 @@ def update_config_obj(config):
     # Demographic parameters
     cp.Enable_Demographics_Builtin = 1
 
-    cp.Default_Geography_Initial_Node_Population = 312
+    cp.Default_Geography_Initial_Node_Population = 1000
     cp.Default_Geography_Torus_Size = 4
 
     cp.Enable_Vital_Dynamics = 0
