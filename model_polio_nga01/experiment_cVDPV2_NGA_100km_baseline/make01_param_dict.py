@@ -31,7 +31,7 @@ def write_param_dict():
     param_dict = dict()
 
     param_dict[EXP_NAME] = 'cVDPV2-NGA-100km-base'
-    param_dict[NUM_SIMS] = 350
+    param_dict[NUM_SIMS] = 600
     param_dict[EXP_V] = dict()
     param_dict[EXP_C] = dict()
 
@@ -44,17 +44,22 @@ def write_param_dict():
     P_CON = param_dict[EXP_C]
 
     # Run number (EMOD random seed)
+
     P_VAR['run_number'] = list(range(NSIMS))
-    P_CON['rng_list_offset_yr'] = []
-    P_CON['rng_list_val'] = []
+    P_CON['rng_list_offset_yr'] = [1.0]
+    P_CON['rng_list_val'] = [-1]
+
+    #P_CON['run_number'] = 49
+    #P_CON['rng_list_offset_yr'] = [2.0, 6.75]
+    #P_CON['rng_list_val'] = [449, -1]
 
     # Simulation start / duration
-    P_CON['start_year'] = 2020
-    P_CON['run_years'] = 3.0
+    P_CON['start_year'] = 2018
+    P_CON['run_years'] = 8.0
 
     # Outbreak seeding
     P_CON['seed_location'] = 'AFRO:NIGERIA:JIGAWA:DUTSE'
-    P_CON['seed_offset_yr'] = 0.5
+    P_CON['seed_offset_yr'] = 300.0/365.0
 
     # Parameters for gravity model for network connections
     P_CON['net_inf_power'] = [2.0]

@@ -51,6 +51,9 @@ def make_fig():
 
         #gidx = (cuminf[:, -1] > 5000)
         gidx = (totinf[:, -1] > 0)
+        print(np.sum(totinf[:, -1] > 0))
+        print(np.argwhere(totinf[:, -1] > 0))
+        #print(totinf[449, -1])
 
         # Figure setup
         fig01 = plt.figure(figsize=(8, 6))
@@ -71,18 +74,18 @@ def make_fig():
         ticloc = np.arange(0, int(run_years)+1) + t_vec[0]
         axs01.set_xticks(ticks=ticloc)
 
-        obp_lab = 'Outbreak Probability: {:4.2f}'.format(np.sum(gidx)/n_sims)
-        axs01.text(0.1, 0.9, obp_lab, fontsize=14, transform = axs01.transAxes)
+        obp_lab = 'Ongoing Fraction: {:4.2f}'.format(np.sum(gidx)/n_sims)
+        axs01.text(0.05, 0.9, obp_lab, fontsize=14, transform = axs01.transAxes)
 
-        yval2 = cuminf[gidx, :]/1000
+        yval2 = totinf[gidx, :]/1000
         yval1 = np.mean(yval2, axis=0)
         for k3 in range(np.sum(gidx)):
             axs01.plot(t_vec, yval2[k3, :], '.', c='C0', alpha=0.1)
         axs01.plot(t_vec, yval1, c='k', lw=3)
 
-        axs01.set_ylabel('Cumulative Incidence (thousands)', fontsize=18)
+        axs01.set_ylabel('Incidence (thousands)', fontsize=18)
         axs01.set_xlim(t_vec[0], t_vec[-1])
-        axs01.set_ylim(0, 4000)
+        #axs01.set_ylim(0, 4000)
 
         plt.tight_layout()
         plt.savefig('fig_cuminf_{:s}_01.png'.format(dirname))
