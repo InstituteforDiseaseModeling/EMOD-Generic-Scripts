@@ -50,10 +50,10 @@ def write_param_dict():
 
     # Simulation start / duration
     P_CON['start_year'] = 2020
-    P_CON['run_years'] = 5.0
+    P_CON['run_years'] = 3.0
 
     # Outbreak seeding
-    P_CON['seed_location'] = 'AFRO:NIGERIA:ZAMFARA:GUSAU'
+    P_CON['seed_location'] = 'AFRO:NIGERIA:JIGAWA:DUTSE'
     P_CON['seed_offset_yr'] = 0.5
 
     # Parameters for gravity model for network connections

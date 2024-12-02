@@ -48,7 +48,6 @@ def write_param_dict():
     P_CON['rng_list_offset_yr'] = []
     P_CON['rng_list_val'] = []
 
-
     # Simulation start / duration
     P_CON['start_year'] = 2018
     P_CON['run_years'] = 2.0
