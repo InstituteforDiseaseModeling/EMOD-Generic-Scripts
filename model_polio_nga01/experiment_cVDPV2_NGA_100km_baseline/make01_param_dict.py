@@ -45,7 +45,9 @@ def write_param_dict():
 
     # Run number (EMOD random seed)
 
-    P_VAR['run_number'] = list(range(NSIMS))
+    #P_VAR['run_number'] = list(range(NSIMS))
+
+    P_CON['run_number'] = 49
     P_CON['rng_list_offset_yr'] = [1.0]
     P_CON['rng_list_val'] = [-1]
 
