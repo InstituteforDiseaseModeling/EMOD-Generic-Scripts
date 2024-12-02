@@ -14,13 +14,13 @@ from py_assets_common.emod_constants import NUM_SIMS, P_FILE, D_FILE, \
                                             MO_DAYS, EXP_C
 from py_assets_common.emod_local_proc import haversine_dist
 
-from global_data import base_year, seed_inf_loc
+from global_data import base_year
 from refdat_location_admin02 import data_dict as ref_longlatref
 
 # *****************************************************************************
 
-DIRNAMES = [#'experiment_cVDPV2_NGA_100km_noSIAs',
-            'experiment_cVDPV2_NGA_100km_SIAs_v3']
+DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
+            'experiment_cVDPV2_NGA_100km_SIAs']
 
 # *****************************************************************************
 
@@ -42,6 +42,7 @@ def make_fig():
         n_dict = data_brick.pop('node_names')
         n_sims = param_dict[NUM_SIMS]
         run_years = param_dict[EXP_C]['run_years']
+        seed_inf_loc = param_dict[EXP_C]['seed_location']
 
         i_xy = ref_longlatref[seed_inf_loc]
         c_long = [ref_longlatref[nname][0] for nname in n_dict]
@@ -86,9 +87,9 @@ def make_fig():
 
         yval2 = max_dist[gidx, :]
         yval1 = np.mean(yval2, axis=0)
-        axs01.plot(t_vec, yval1, c='C0')
         for k3 in range(np.sum(gidx)):
-            axs01.plot(t_vec, yval2[k3, :], '-', c='C0', alpha=0.1)
+            axs01.plot(t_vec, yval2[k3, :], '.', c='C0', alpha=0.1)
+        axs01.plot(t_vec, yval1, c='k', lw=3)
 
         axs01.set_ylabel('Distance from Emergence (km)', fontsize=14)
         axs01.set_xlim(t_vec[0], t_vec[-1])

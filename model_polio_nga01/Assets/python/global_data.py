@@ -22,8 +22,6 @@ demog_min_pop = 50
 demog_node_map = dict() # LGA: [NodeIDs]
 demog_rep_index = dict() # LGA: Output row number
 
-seed_inf_loc = 'AFRO:NIGERIA:JIGAWA:DUTSE'
-seed_inf_t_off = 300.0
 seed_inf_dt = 60.0
 seed_inf_num = 25.0
 

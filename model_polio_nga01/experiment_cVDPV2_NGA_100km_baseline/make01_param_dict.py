@@ -45,10 +45,16 @@ def write_param_dict():
 
     # Run number (EMOD random seed)
     P_VAR['run_number'] = list(range(NSIMS))
+    P_CON['rng_list_offset_yr'] = []
+    P_CON['rng_list_val'] = []
 
     # Simulation start / duration
     P_CON['start_year'] = 2020
     P_CON['run_years'] = 5.0
+
+    # Outbreak seeding
+    P_CON['seed_location'] = 'AFRO:NIGERIA:ZAMFARA:GUSAU'
+    P_CON['seed_offset_yr'] = 0.5
 
     # Parameters for gravity model for network connections
     P_CON['net_inf_power'] = [2.0]

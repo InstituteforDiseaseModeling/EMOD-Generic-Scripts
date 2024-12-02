@@ -17,8 +17,8 @@ from global_data import base_year
 
 # *****************************************************************************
 
-DIRNAMES = [#'experiment_cVDPV2_NGA_100km_noSIAs',
-            'experiment_cVDPV2_NGA_100km_SIAs_v2']
+DIRNAMES = ['experiment_cVDPV2_NGA_100km_noSIAs',
+            'experiment_cVDPV2_NGA_100km_SIAs']
 
 # *****************************************************************************
 
@@ -77,12 +77,13 @@ def make_fig():
 
         yval2 = totlga[gidx, :]
         yval1 = np.mean(yval2, axis=0)
-        axs01.plot(t_vec, yval1, c='C0', lw=3)
         for k3 in range(np.sum(gidx)):
-            axs01.plot(t_vec, yval2[k3, ], '-', c='C0', alpha=0.1)
+            axs01.plot(t_vec, yval2[k3, ], '.', c='C0', alpha=0.1)
+        axs01.plot(t_vec, yval1, c='k', lw=3)
 
         axs01.set_ylabel('LGAs with Transmission', fontsize=14)
         axs01.set_xlim(t_vec[0], t_vec[-1])
+        axs01.set_ylim(0, 250)
 
         plt.tight_layout()
         plt.savefig('fig_extent_tot_{:s}_01.png'.format(dirname))

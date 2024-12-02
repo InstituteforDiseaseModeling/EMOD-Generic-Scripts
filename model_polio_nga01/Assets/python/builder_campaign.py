@@ -25,6 +25,10 @@ def campaignBuilder():
     START_YEAR = gdata.var_params['start_year']
     SIA_CALENDAR = gdata.var_params['sia_calendar']
     SIA_STOP = gdata.var_params['sia_cutoff']
+    SEED_LOCATION = gdata.var_params['seed_location']
+    SEED_OFFSET = gdata.var_params['seed_offset_yr']
+    RNG_LIST = gdata.var_params['rng_list_offset_yr']
+    RNG_VAL = gdata.var_params['rng_list_val']
     NODE_DICT = gdata.demog_node
 
     node_opts = list(NODE_DICT.keys())
@@ -65,15 +69,14 @@ def campaignBuilder():
 
     # Seed infections
     node_list = list()
-    tval = gdata.seed_inf_loc
     for nname in node_opts:
-        if ((nname == tval) or (nname.startswith(tval+':'))):
+        if ((nname == SEED_LOCATION) or (nname.startswith(SEED_LOCATION+':'))):
             node_list.append(NODE_DICT[nname])
 
     # Preserve size of outbreak; select single node for initial location
     node_list = [node_list[-1]]
     cvdpv_gen = gdata.boxes_nopv2+gdata.boxes_sabin2
-    startday = 365.0*(START_YEAR-gdata.base_year) + gdata.seed_inf_t_off
+    startday = 365.0*(START_YEAR-gdata.base_year+SEED_OFFSET)
     camp_event = ce_import_pressure(node_list, start_day=startday,
                                     genome=cvdpv_gen,
                                     duration=gdata.seed_inf_dt,
@@ -81,10 +84,13 @@ def campaignBuilder():
     camp_module.add(camp_event)
 
     # Random number stream offset
-    startday = 365.0*(START_YEAR-gdata.base_year) + 365.0
-    camp_event = ce_random_numbers(ALL_NODES, start_day=startday,
-                                   numbers=gdata.sim_index)
-    camp_module.add(camp_event)
+    for (yr_off, nval) in zip(RNG_LIST, RNG_VAL):
+        startday = 365.0*(START_YEAR-gdata.base_year+yr_off)
+        if (nval < 0):
+            nval = gdata.sim_index
+        camp_event = ce_random_numbers(ALL_NODES, start_day=startday,
+                                       numbers=nval)
+        camp_module.add(camp_event)
 
     # End file construction
     camp_module.save(filename=CAMP_FILE)
