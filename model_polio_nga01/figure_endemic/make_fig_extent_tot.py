@@ -50,8 +50,12 @@ def make_fig():
         cuminf = np.cumsum(totinf, axis=1)
         totlga = np.sum(inf_data>0, axis=1)
 
-        gidx = (cuminf[:, -1] > 5000)
+        #gidx = (cuminf[:, -1] > 5000)
+        #gidx = (totinf[:, -1] > 0) & (totlga[:, -240] > 15) & (totlga[:, -145] > 10)
         gidx = (totinf[:, -1] > 0)
+        #print(np.sum(gidx))
+        #print(np.argwhere(gidx))
+        #gidx = (cuminf[:, -1] > 1e6) & (cuminf[:, -1] < 2.5e6)
 
         # Figure setup
         fig01 = plt.figure(figsize=(8, 6))
@@ -79,6 +83,7 @@ def make_fig():
         yval1 = np.mean(yval2, axis=0)
         for k3 in range(np.sum(gidx)):
             axs01.plot(t_vec, yval2[k3, ], '.', c='C0', alpha=0.1)
+            #axs01.plot(t_vec, yval2[k3, ])
         axs01.plot(t_vec, yval1, c='k', lw=3)
 
         axs01.set_ylabel('LGAs with Transmission', fontsize=14)

@@ -62,6 +62,7 @@ def make_fig():
 
         gidx = (cuminf[:, -1] > 5000)
         gidx = (totinf[:, -1] > 0)
+        gidx = (cuminf[:, -1] > 1e6) & (cuminf[:, -1] < 2.5e6)
 
         # Figure setup
         fig01 = plt.figure(figsize=(8, 6))
@@ -88,8 +89,9 @@ def make_fig():
         yval2 = max_dist[gidx, :]
         yval1 = np.mean(yval2, axis=0)
         for k3 in range(np.sum(gidx)):
-            axs01.plot(t_vec, yval2[k3, :], '.', c='C0', alpha=0.1)
-        axs01.plot(t_vec, yval1, c='k', lw=3)
+            #axs01.plot(t_vec, yval2[k3, :], '.', c='C0', alpha=0.1)
+            axs01.plot(t_vec, yval2[k3, :])
+        #axs01.plot(t_vec, yval1, c='k', lw=3)
 
         axs01.set_ylabel('Distance from Emergence (km)', fontsize=14)
         axs01.set_xlim(t_vec[0], t_vec[-1])

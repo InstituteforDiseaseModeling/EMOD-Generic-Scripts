@@ -17,7 +17,7 @@ from global_data import base_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_cVDPV2_NGA_100km_baseline']
+DIRNAMES = ['experiment_cVDPV2_NGA_100km_baseline_RI']
 
 # *****************************************************************************
 
@@ -49,14 +49,15 @@ def make_fig():
         totinf = np.sum(inf_data, axis=1)
         cuminf = np.cumsum(totinf, axis=1)
 
-        #gidx = (cuminf[:, -1] > 5000)
+        #gidx = (cuminf[:, -220] > 1.5e6) & (cuminf[:, -220] < 3.0e6) & (totinf[:, -1] > 0)
+        #gidx = (cuminf[:, -1] > 1e6)
         gidx = (totinf[:, -1] > 0)
-        print(np.sum(totinf[:, -1] > 0))
-        print(np.argwhere(totinf[:, -1] > 0))
+        #print(np.sum(gidx))
+        #print(np.argwhere(gidx))
         #print(totinf[449, -1])
 
         # Figure setup
-        fig01 = plt.figure(figsize=(8, 6))
+        fig01 = plt.figure(figsize=(12, 6))
 
         axs01 = fig01.add_subplot(1, 1, 1)
         plt.sca(axs01)
@@ -77,15 +78,17 @@ def make_fig():
         obp_lab = 'Ongoing Fraction: {:4.2f}'.format(np.sum(gidx)/n_sims)
         axs01.text(0.05, 0.9, obp_lab, fontsize=14, transform = axs01.transAxes)
 
+        #yval2 = cuminf[gidx, :]/1000
         yval2 = totinf[gidx, :]/1000
         yval1 = np.mean(yval2, axis=0)
         for k3 in range(np.sum(gidx)):
-            axs01.plot(t_vec, yval2[k3, :], '.', c='C0', alpha=0.1)
+            axs01.plot(t_vec, yval2[k3, :], '.', c='C2', alpha=0.1)
+            #axs01.plot(t_vec, yval2[k3, :])
         axs01.plot(t_vec, yval1, c='k', lw=3)
 
         axs01.set_ylabel('Incidence (thousands)', fontsize=18)
         axs01.set_xlim(t_vec[0], t_vec[-1])
-        #axs01.set_ylim(0, 4000)
+        axs01.set_ylim(0, 100)
 
         plt.tight_layout()
         plt.savefig('fig_cuminf_{:s}_01.png'.format(dirname))

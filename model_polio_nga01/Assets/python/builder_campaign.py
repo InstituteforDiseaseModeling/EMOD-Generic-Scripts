@@ -13,7 +13,8 @@ import numpy as np
 
 import emod_api.campaign as camp_module
 
-from emod_camp_events import ce_import_pressure, ce_OPV_SIA, ce_random_numbers
+from emod_camp_events import ce_import_pressure, ce_OPV_SIA, \
+                             ce_random_numbers, ce_RI
 from emod_constants import CAMP_FILE
 
 # *****************************************************************************
@@ -25,10 +26,12 @@ def campaignBuilder():
     START_YEAR = gdata.var_params['start_year']
     SIA_CALENDAR = gdata.var_params['sia_calendar']
     SIA_STOP = gdata.var_params['sia_cutoff']
+    SIA_COVER = gdata.var_params['sia_coverage']
     SEED_LOCATION = gdata.var_params['seed_location']
     SEED_OFFSET = gdata.var_params['seed_offset_yr']
     RNG_LIST = gdata.var_params['rng_list_offset_yr']
     RNG_VAL = gdata.var_params['rng_list_val']
+    RI_START_YR = gdata.var_params['ri_start_yr']
     NODE_DICT = gdata.demog_node
 
     node_opts = list(NODE_DICT.keys())
@@ -63,7 +66,7 @@ def campaignBuilder():
                         node_list.append(NODE_DICT[nname])
 
             camp_event = ce_OPV_SIA(node_list, start_day=startday,
-                                    coverage=gdata.sia_coverage,
+                                    coverage=SIA_COVER,
                                     clade=clade, genome=genome)
             camp_module.add(camp_event)
 
@@ -82,6 +85,20 @@ def campaignBuilder():
                                     duration=gdata.seed_inf_dt,
                                     magnitude=gdata.seed_inf_num)
     camp_module.add(camp_event)
+
+    # Add SIAs
+    #for syear in [7.5, 8.5]:
+    #    start_day = 365.0*(START_YEAR-gdata.base_year+syear)
+    #    camp_event = ce_OPV_SIA(ALL_NODES, start_day=start_day,
+    #                            coverage=SIA_COVER, clade=1, genome=0)
+    #    camp_module.add(camp_event)
+
+    ## Add RI
+    start_day = 365.0*(START_YEAR-gdata.base_year+6.5)
+    camp_event = ce_RI(ALL_NODES, [0.0], [0.5], start_day=start_day,
+                       base_take=0.7, age_one=180.0, age_std=5.0)
+    camp_module.add(camp_event)
+
 
     # Random number stream offset
     for (yr_off, nval) in zip(RNG_LIST, RNG_VAL):
