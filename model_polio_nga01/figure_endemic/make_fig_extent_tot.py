@@ -17,12 +17,29 @@ from global_data import base_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_cVDPV2_NGA_100km_baseline']
+DIRNAMES = ['experiment_cVDPV2_NGA_100km_baseline',
+            'experiment_cVDPV2_NGA_100km_baseline_SIAs',
+            'experiment_cVDPV2_NGA_100km_baseline_RI']
 
 # *****************************************************************************
 
 
 def make_fig():
+
+    # Figure setup
+    fig01 = plt.figure(figsize=(12, 6))
+
+    axs01 = fig01.add_subplot(1, 1, 1)
+    plt.sca(axs01)
+
+    axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
+    axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
+    axs01.set_axisbelow(True)
+    axs01.tick_params(axis='x', which='major', labelsize=18)
+    axs01.tick_params(axis='y', which='major', labelsize=14)
+
+    refx = None
+    refy = None
 
     for dirname in DIRNAMES:
 
@@ -57,18 +74,6 @@ def make_fig():
         #print(np.argwhere(gidx))
         #gidx = (cuminf[:, -1] > 1e6) & (cuminf[:, -1] < 2.5e6)
 
-        # Figure setup
-        fig01 = plt.figure(figsize=(8, 6))
-
-        axs01 = fig01.add_subplot(1, 1, 1)
-        plt.sca(axs01)
-
-        axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
-        axs01.grid(visible=True, which='minor', ls=':', lw=0.1)
-        axs01.set_axisbelow(True)
-        axs01.tick_params(axis='x', which='major', labelsize=18)
-        axs01.tick_params(axis='y', which='major', labelsize=14)
-
         dvals = [0]+MO_DAYS*int(run_years)
         ticloc = np.cumsum(dvals) + t_vec[0]
         axs01.set_xticks(ticks=ticloc, minor=True)
@@ -76,23 +81,25 @@ def make_fig():
         ticloc = np.arange(0, int(run_years)+1) + t_vec[0]
         axs01.set_xticks(ticks=ticloc)
 
-        obp_lab = 'Outbreak Probability: {:4.2f}'.format(np.sum(gidx)/n_sims)
-        axs01.text(0.1, 0.9, obp_lab, fontsize=14, transform = axs01.transAxes)
-
         yval2 = totlga[gidx, :]
         yval1 = np.mean(yval2, axis=0)
-        for k3 in range(np.sum(gidx)):
-            axs01.plot(t_vec, yval2[k3, ], '.', c='C0', alpha=0.1)
+        #for k3 in range(np.sum(gidx)):
+            #axs01.plot(t_vec, yval2[k3, ], '.', c='C0', alpha=0.1)
             #axs01.plot(t_vec, yval2[k3, ])
-        axs01.plot(t_vec, yval1, c='k', lw=3)
+        axs01.plot(t_vec, yval1, lw=3)
 
         axs01.set_ylabel('LGAs with Transmission', fontsize=14)
         axs01.set_xlim(t_vec[0], t_vec[-1])
-        axs01.set_ylim(0, 250)
+        axs01.set_ylim(0, 200)
 
-        plt.tight_layout()
-        plt.savefig('fig_extent_tot_{:s}_01.png'.format(dirname))
-        plt.close()
+        if (refx is None):
+            refx = t_vec[:-165]
+            refy = yval1[:-165]
+
+    axs01.plot(refx, refy, lw=3, c='k')
+    plt.tight_layout()
+    plt.savefig('fig_extent_tot_{:s}_01.png'.format(dirname))
+    plt.close()
 
     return None
 
