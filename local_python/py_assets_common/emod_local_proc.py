@@ -4,6 +4,9 @@
 
 import numpy as np
 
+import matplotlib.patches as patch
+import matplotlib.lines as line
+
 from py_assets_common.emod_constants import POP_AGE_DAYS, CLR_M, CLR_F
 
 # *****************************************************************************
@@ -96,6 +99,56 @@ def pyr_chart(axs01, pop_dat, pop_dat_err, yr_lab):
     tpop_str = 'Total Pop\n{:5.1f}M'.format(tpop/1e6)
     axs01.text(-11, 92.5, '{:<4d}'.format(yr_lab), fontsize=18)
     axs01.text(5, 87.5, tpop_str, fontsize=18)
+
+    return None
+
+# *****************************************************************************
+
+
+def shape_patch(axs01, shp_pts, shp_brk, clr=[0.0, 0.5, 0.0], alph=1.0):
+
+    skipnext = 0
+    if (shp_brk[-1] != len(shp_pts)):
+        shp_brk.append(len(shp_pts))
+
+    for k1 in range(1, len(shp_brk)):
+        if (skipnext > 0):
+            skipnext = skipnext - 1
+            continue
+
+        subdat = np.array(shp_pts[shp_brk[k1-1]:shp_brk[k1]])
+        cpos = k1
+
+        while (cpos < len(shp_brk)-1):
+            subdatadd = np.array(shp_pts[shp_brk[cpos]:shp_brk[cpos+1]])
+            pn = np.sum((subdatadd[1:, 0]-subdatadd[:-1, 0]) *
+                        (subdatadd[1:, 1]+subdatadd[:-1, 1]))
+            if (pn < 0):
+                subdat = np.vstack((subdat, subdatadd, subdat[-1, :]))
+                skipnext = skipnext + 1
+                cpos = cpos + 1
+            else:
+                break
+
+        poly_shp = patch.Polygon(subdat, fc=clr, ec=clr,
+                                 lw=1.0, ls='-', alpha=alph)
+        axs01.add_patch(poly_shp)
+
+    return None
+
+# *****************************************************************************
+
+
+def shape_line(axs01, shp_pts, shp_brk, clr=[0.0, 0.0, 0.0], wid=0.5):
+
+    if (shp_brk[-1] != len(shp_pts)):
+        shp_brk.append(len(shp_pts))
+
+    for k1 in range(1, len(shp_brk)):
+        subdat = np.array(shp_pts[shp_brk[k1-1]:shp_brk[k1]])
+        line_shp = line.Line2D(subdat[:, 0], subdat[:, 1],
+                               linewidth=wid, color=clr)
+        axs01.add_line(line_shp)
 
     return None
 
