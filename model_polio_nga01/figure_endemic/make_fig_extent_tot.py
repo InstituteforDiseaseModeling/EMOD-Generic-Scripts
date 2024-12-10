@@ -71,7 +71,7 @@ def make_fig():
         # Figure setup
         ax_pat = [run_years*[0], run_years*[0], run_years*[0],
                   list(range(1, run_years+1))]
-        (fig01, axlist) = plt.subplot_mosaic(ax_pat, figsize=(16, 8))
+        (fig01, axlist) = plt.subplot_mosaic(ax_pat, figsize=(2.5+1.5*run_years, 8))
         axs01 = axlist[0]
 
         axs01.grid(visible=True, which='major', ls='-', lw=0.5, label='')
