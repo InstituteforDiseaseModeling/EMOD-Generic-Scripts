@@ -59,7 +59,7 @@ def write_param_dict():
 
     # Simulation start / duration
     P_CON['start_year'] = 2018
-    P_CON['run_years'] = 9.0
+    P_CON['run_years'] = 12.0
 
     # Outbreak seeding
     P_CON['seed_location'] = 'AFRO:NIGERIA:JIGAWA:DUTSE'

@@ -87,17 +87,17 @@ def campaignBuilder():
     camp_module.add(camp_event)
 
     # Add SIAs
-    #for syear in [7.5, 8.5]:
+    #for syear in [7.5, 8.5, 9.5, 10.5, 11.5]:
     #    start_day = 365.0*(START_YEAR-gdata.base_year+syear)
     #    camp_event = ce_OPV_SIA(ALL_NODES, start_day=start_day,
     #                            coverage=SIA_COVER, clade=1, genome=0)
     #    camp_module.add(camp_event)
 
-    ## Add RI
-    start_day = 365.0*(START_YEAR-gdata.base_year+6.5)
-    camp_event = ce_RI(ALL_NODES, [0.0], [0.5], start_day=start_day,
-                       base_take=0.7, age_one=180.0, age_std=5.0)
-    camp_module.add(camp_event)
+    # Add RI
+    #start_day = 365.0*(START_YEAR-gdata.base_year+6.5)
+    #camp_event = ce_RI(ALL_NODES, [0.0], [0.5], start_day=start_day,
+    #                   base_take=0.7, age_one=180.0, age_std=5.0)
+    #camp_module.add(camp_event)
 
 
     # Random number stream offset
