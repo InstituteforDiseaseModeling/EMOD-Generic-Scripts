@@ -89,7 +89,7 @@ def update_config_obj(config):
     cp.Network_Infectivity_Coefficient = ni_coeff
     cp.Network_Infectivity_Exponent = NI_POWER
     cp.Network_Infectivity_Max_Export_Frac = 0.01
-    cp.Network_Infectivity_Min_Connection = 1.0e-8
+    cp.Network_Infectivity_Min_Connection = 1.0e-7
     cp.Network_Infectivity_Min_Distance = 1.0
 
     # Immunity
