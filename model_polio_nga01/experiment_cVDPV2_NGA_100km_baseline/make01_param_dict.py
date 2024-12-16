@@ -55,7 +55,7 @@ def write_param_dict():
 
     # Simulation start / duration
     P_CON['start_year'] = 2018
-    P_CON['run_years'] = 4.0
+    P_CON['run_years'] = 6.0
 
     # Outbreak seeding
     P_CON['seed_location'] = 'AFRO:NIGERIA:JIGAWA:DUTSE'
@@ -80,7 +80,7 @@ def write_param_dict():
     P_CON['R0_nOPV_mult'] = 0.125
 
     # Subdivide LGAs into 100km^2 regions
-    P_CON['use_10k_res'] = False
+    P_CON['use_10k_res'] = True
 
     # RI params
     P_CON['ri_start_yr'] = 2030.0
