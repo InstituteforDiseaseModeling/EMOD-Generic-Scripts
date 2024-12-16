@@ -165,6 +165,9 @@ def update_config_obj(config):
 
     cp.Custom_Reports_Filename = REPORTS_FILE
 
+    # Logging
+    cp.logLevel_StandardEventCoordinator = 'WARN'
+
     return config
 
 # *****************************************************************************
