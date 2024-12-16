@@ -17,7 +17,7 @@ from global_data import base_year
 
 # *****************************************************************************
 
-DIRNAMES = ['experiment_cVDPV2_NGA_100km_baseline_RI']
+DIRNAMES = ['experiment_cVDPV2_NGA_100km_baseline']
 
 # *****************************************************************************
 
@@ -82,7 +82,7 @@ def make_fig():
         yval2 = totinf[gidx, :]/1000
         yval1 = np.mean(yval2, axis=0)
         for k3 in range(np.sum(gidx)):
-            axs01.plot(t_vec, yval2[k3, :], '.', c='C2', alpha=0.1)
+            axs01.plot(t_vec, yval2[k3, :], '.', c='C0', alpha=0.1)
             #axs01.plot(t_vec, yval2[k3, :])
         axs01.plot(t_vec, yval1, c='k', lw=3)
 
