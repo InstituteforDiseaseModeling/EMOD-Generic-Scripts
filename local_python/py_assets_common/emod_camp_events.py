@@ -17,6 +17,7 @@ NLHT = 'NodeLevelHealthTriggeredIVScaleUpSwitch'
 MID = 'MultiInterventionDistributor'
 DI = 'DelayedIntervention'
 VAX = 'Vaccine'
+OI = 'OutbreakIndividual'
 
 VEC_AGE = [0/12*365, 3/12*365, 5/12*365, 7/12*365, 9/12*365]
 VEC_TAKE = [0.0, 0.0, 0.65, 0.92, 1.0]
@@ -211,6 +212,52 @@ def ce_RI(node_list, times, values,
 # *****************************************************************************
 
 
+def ce_RI_OPV(node_list,
+              start_day=0.0, coverage=1.0, base_take=0.7,
+              age_one=180.0, age_std=15.0, clade=0, genome=0):
+
+    # Vaccine
+    camp_event = s2c.get_class_with_defaults(CE, SPATH)
+    camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
+    camp_iv01 = s2c.get_class_with_defaults(NLHT, SPATH)
+    camp_iv02 = s2c.get_class_with_defaults(MID, SPATH)
+
+    camp_iv03 = s2c.get_class_with_defaults(DI, SPATH)
+    camp_iv04 = s2c.get_class_with_defaults(OI, SPATH)
+
+    node_set = utils.do_nodes(SPATH, node_list)
+
+    camp_event.Event_Coordinator_Config = camp_coord
+    camp_event.Start_Day = start_day
+    camp_event.Nodeset_Config = node_set
+
+    camp_coord.Intervention_Config = camp_iv01
+
+    camp_iv01.Actual_IndividualIntervention_Config = camp_iv02
+    camp_iv01.Demographic_Coverage = 1.0  # Required, not used
+    camp_iv01.Trigger_Condition_List = ['Births']
+    camp_iv01.Demographic_Coverage_Time_Profile = 'InterpolationMap'
+    camp_iv01.Coverage_vs_Time_Interpolation_Map.Times = [0.0]
+    camp_iv01.Coverage_vs_Time_Interpolation_Map.Values = [coverage*base_take]
+    camp_iv01.Not_Covered_IndividualIntervention_Configs = []  # Required
+
+    camp_iv02.Intervention_List = [camp_iv03]
+
+    camp_iv03.Actual_IndividualIntervention_Configs = [camp_iv04]
+    camp_iv03.Delay_Period_Distribution = "GAUSSIAN_DISTRIBUTION"
+    camp_iv03.Delay_Period_Gaussian_Mean = age_one
+    camp_iv03.Delay_Period_Gaussian_Std_Dev = age_std
+
+    camp_iv04.Clade = clade
+    camp_iv04.Genome = genome
+    camp_iv04.Ignore_Immunity = 0
+    camp_iv04.Cost_To_Consumer = 1.0
+
+    return camp_event
+
+# *****************************************************************************
+
+
 def ce_SIA(node_list, start_day=0.0, yrs_min=0.75, yrs_max=5.0,
            coverage=0.8, base_take=1.0, acq_fact=0.0, age_dep=False):
 
@@ -286,7 +333,7 @@ def ce_OPV_SIA(node_list,
     # OutbreakIndividual
     camp_event = s2c.get_class_with_defaults(CE, SPATH)
     camp_coord = s2c.get_class_with_defaults(SEC, SPATH)
-    camp_iv = s2c.get_class_with_defaults('OutbreakIndividual', SPATH)
+    camp_iv = s2c.get_class_with_defaults(OI, SPATH)
 
     node_set = utils.do_nodes(SPATH, node_list)
 
@@ -297,7 +344,7 @@ def ce_OPV_SIA(node_list,
     camp_coord.Intervention_Config = camp_iv
     camp_coord.Demographic_Coverage = coverage*take
     camp_coord.Target_Demographic = 'ExplicitAgeRanges'
-    camp_coord.Target_Age_Min = 0.75
+    camp_coord.Target_Age_Min = 0.50
     camp_coord.Target_Age_Max = 5.00
 
     camp_iv.Clade = clade

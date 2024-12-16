@@ -32,7 +32,6 @@ boxes_nopv2 = 2
 boxes_sabin2 = 7
 rev_nopv2 = 0.0
 rev_sabin2 = 0.0
-#sia_coverage = 0.50
 init_coverage = 50
 
 base_year = 1900.0

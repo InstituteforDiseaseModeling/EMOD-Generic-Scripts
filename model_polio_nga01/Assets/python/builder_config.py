@@ -33,7 +33,7 @@ def update_config_obj(config):
 
     # Variables for this simulation
     R0 = gdata.var_params['R0']
-    R0_OPV = gdata.var_params['R0_OPV']
+    R0_OPV_MULT = gdata.var_params['R0_OPV_mult']
     NOPV_R0_MULT = gdata.var_params['R0_nOPV_mult']
     NI_LN_MULT = gdata.var_params['net_inf_ln_mult']
     NI_POWER = gdata.var_params['net_inf_power']
@@ -132,8 +132,8 @@ def update_config_obj(config):
     cp.Log2_Number_of_Genomes_per_Clade = log2_num_strains
 
     list_multiply = np.ones(num_strains)
-    list_multiply[:CNOPV2] = NOPV_R0_MULT * R0_OPV/R0
-    list_multiply[CNOPV2:] = np.linspace(R0_OPV/R0, 1.0, num=CMOPV2+1)
+    list_multiply[:CNOPV2] = NOPV_R0_MULT
+    list_multiply[CNOPV2:] = np.linspace(R0_OPV_MULT, 1.0, num=CMOPV2+1)
     cp.Enable_Genome_Dependent_Infectivity = 1
     cp.Genome_Infectivity_Multipliers = list_multiply.tolist()
 
@@ -142,11 +142,6 @@ def update_config_obj(config):
     list_mutate[CNOPV2:-1] = gdata.rev_sabin2
     cp.Enable_Genome_Mutation = 1
     cp.Genome_Mutation_Rates = list_mutate.tolist()
-
-    # list_mlabel = np.zeros(num_strains)
-    # list_mlabel[-1] = 1
-    # cp.Enable_Label_By_Mutator = 1
-    # cp.Genome_Mutations_Labeled = list_mlabel.tolist()
 
     # Demographics
     cp.Enable_Demographics_Builtin = 0

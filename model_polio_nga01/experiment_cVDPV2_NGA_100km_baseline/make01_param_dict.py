@@ -53,13 +53,9 @@ def write_param_dict():
     P_CON['rng_list_offset_yr'] = [3.0, 6.75]
     P_CON['rng_list_val'] = [171, -1]
 
-    #P_CON['run_number'] = 49
-    #P_CON['rng_list_offset_yr'] = [2.0, 6.75]
-    #P_CON['rng_list_val'] = [449, -1]
-
     # Simulation start / duration
     P_CON['start_year'] = 2018
-    P_CON['run_years'] = 12.0
+    P_CON['run_years'] = 4.0
 
     # Outbreak seeding
     P_CON['seed_location'] = 'AFRO:NIGERIA:JIGAWA:DUTSE'
@@ -76,23 +72,26 @@ def write_param_dict():
     P_CON['corr_acq_trans'] = 0.8
 
     # Base agent weight; less than 10 may have memory issues
-    P_CON['agent_rate'] = 25.0
+    P_CON['agent_rate'] = 100.0
 
-    # R0 values for nOPV, cVDPV, Sabin; linear interpolation;
+    # R0 values for cVDPV, Sabin, nOPV; linear interpolation;
     P_CON['R0'] = 16.0
-    P_CON['R0_OPV'] = 4.0
-    P_CON['R0_nOPV_mult'] = 0.5
+    P_CON['R0_OPV_mult'] = 0.250
+    P_CON['R0_nOPV_mult'] = 0.125
 
     # Subdivide LGAs into 100km^2 regions
-    P_CON['use_10k_res'] = True
+    P_CON['use_10k_res'] = False
 
     # RI params
     P_CON['ri_start_yr'] = 2030.0
 
     # Apply the historic SIA calendar; events prior to sim start ignored
     P_CON['sia_calendar'] = True
-    P_CON['sia_cutoff'] = 2030.0*365.0
+    P_CON['sia_cutoff'] = 2030.0
     P_CON['sia_coverage'] = 0.5
+
+    # Additional nOPV2 SIAs
+    P_CON['nopv2_sia_national'] = []
 
     # Individual level risk variance (risk of acquisition multiplier;
     # mean = 1.0; log-normal distribution)

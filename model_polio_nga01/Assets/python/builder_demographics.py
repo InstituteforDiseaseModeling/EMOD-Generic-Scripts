@@ -17,14 +17,6 @@ from emod_api.demographics import DemographicsTemplates as DT
 from emod_demog_func import demog_vd_calc, demog_vd_over, demog_is_over_precalc
 from emod_constants import DEMOG_FILE, MORT_XVAL
 
-from refdat_population_admin02 import data_dict as dict_pop_admin02
-from refdat_area_admin02 import data_dict as dict_area_admin02
-from refdat_location_admin02 import data_dict as dict_longlat_admin02
-
-from refdat_population_100km import data_dict as dict_pop_100km
-from refdat_area_100km import data_dict as dict_area_100km
-from refdat_location_100km import data_dict as dict_longlat_100km
-
 from refdat_alias import data_dict as dict_alias
 from refdat_birthrate import data_dict as dict_birth
 from refdat_deathrate import data_dict as dict_death
@@ -46,59 +38,51 @@ def demographicsBuilder():
     if (not os.path.exists(PATH_OVERLAY)):
         os.mkdir(PATH_OVERLAY)
 
-    # ***** Populate nodes in primary file *****
+    # Populate nodes in primary file
+    fname = 'demog_NGA.json'
+    with open(os.path.join('Assets', 'data', fname)) as fid01:
+        demog_dat = json.load(fid01)
 
-    node_list = list()
-
-    if (SUB_LGA):
-        dict_pop = dict_pop_100km
-        dict_area = dict_area_100km
-        dict_longlat = dict_longlat_100km
-    else:
-        dict_pop = dict_pop_admin02
-        dict_area = dict_area_admin02
-        dict_longlat = dict_longlat_admin02
-
-    # Remove location aliases from geography list
-    for rname in GEOG_LIST:
-        if (rname in dict_alias):
-            for rname_val in dict_alias[rname]:
-                GEOG_LIST.append(rname_val)
+    # Aggregate population, area, lat, long, year
+    if (not SUB_LGA):
+        ndemog_dat = dict()
+        for val in demog_dat:
+            nval = val.rsplit(':',1)[0]
+            if (nval not in ndemog_dat):
+                ndemog_dat[nval] = [0, 0, 0, 0, demog_dat[val][4]]
+            ndemog_dat[nval][0] += demog_dat[val][0]
+            ndemog_dat[nval][1] += demog_dat[val][1]
+            ndemog_dat[nval][2] += demog_dat[val][2]*demog_dat[val][1]
+            ndemog_dat[nval][3] += demog_dat[val][3]*demog_dat[val][1]
+        demog_dat = ndemog_dat
+        for val in demog_dat:
+            demog_dat[val][2] /= demog_dat[val][1]
+            demog_dat[val][3] /= demog_dat[val][1]
 
     # Add nodes
     node_id = 0
+    node_list = list()
     ipop_time = dict()
 
-    for loc_name in dict_pop:
+    for loc_name in demog_dat:
         if (any([loc_name.startswith(val+':') or
                  val == loc_name for val in GEOG_LIST])):
-            ipop_time[loc_name] = dict_pop[loc_name][1] + 0.5
+            ipop_time[loc_name] = demog_dat[loc_name][4] + 0.5
             node_id = node_id + 1
 
-            node_obj = Node(lat=dict_longlat[loc_name][1],
-                            lon=dict_longlat[loc_name][0],
-                            pop=dict_pop[loc_name][0],
+            node_obj = Node(lat=demog_dat[loc_name][3],
+                            lon=demog_dat[loc_name][2],
+                            pop=demog_dat[loc_name][0],
                             name=loc_name,
                             forced_id=node_id,
-                            area=dict_area[loc_name])
-
+                            area=demog_dat[loc_name][1])
             node_obj.node_attributes.infectivity_multiplier = 1.0
 
             node_list.append(node_obj)
 
-    # Build distance matrix
-    num_nodes = len(node_list)
-
-    # Lat/long vectors
-    xyt_vec = np.zeros((num_nodes, 2))
-    for k1 in range(xyt_vec.shape[0]):
-        vec_idx = node_list[k1].forced_id-1
-        xyt_vec[vec_idx, 0] = node_list[k1].lon
-        xyt_vec[vec_idx, 1] = node_list[k1].lat
-
     # Write node name bookkeeping
     nname_dict = {node_obj.name: node_obj.forced_id for node_obj in node_list}
-    node_rep_list = sorted([nname for nname in dict_pop_admin02.keys() if
+    node_rep_list = sorted([nname for nname in demog_dat.keys() if
                             any([nname.startswith(val+':') or
                                  val == nname for val in GEOG_LIST])])
     rep_groups = {nrep: [nname_dict[val] for val in nname_dict.keys()
