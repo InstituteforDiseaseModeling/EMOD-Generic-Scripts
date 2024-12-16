@@ -9,7 +9,7 @@ import global_data as gdata
 
 import numpy as np
 
-from emod_api_func import post_proc_poppyr, post_proc_cbr, post_proc_R0
+from emod_postproc_func import post_proc_poppyr, post_proc_cbr, post_proc_R0
 from emod_constants import SQL_TIME, SQL_MCW, SQL_AGE, POP_AGE_DAYS
 
 # *****************************************************************************

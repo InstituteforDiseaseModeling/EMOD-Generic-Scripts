@@ -6,7 +6,7 @@ import json
 
 import global_data as gdata
 
-from emod_api_func import post_proc_poppyr
+from emod_postproc_func import post_proc_poppyr
 
 # *****************************************************************************
 

@@ -8,7 +8,7 @@ import global_data as gdata
 
 import numpy as np
 
-from emod_api_func import post_proc_poppyr
+from emod_postproc_func import post_proc_poppyr
 from emod_constants import POP_PYR
 
 # *****************************************************************************

@@ -9,6 +9,7 @@ import global_data as gdata
 
 import numpy as np
 
+from emod_postproc_func import post_proc_poppyr
 from emod_constants import RST_FILE, RST_TIME, RST_NODE, RST_CLADE, \
                            RST_GENOME, RST_NEW_INF
 

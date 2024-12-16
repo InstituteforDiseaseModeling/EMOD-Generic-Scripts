@@ -2,7 +2,7 @@
 #
 # *****************************************************************************
 
-from emod_api_func import standard_pre_process
+from emod_preproc_func import standard_pre_process
 
 # *****************************************************************************
 
