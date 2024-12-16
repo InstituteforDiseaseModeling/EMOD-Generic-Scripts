@@ -18,18 +18,21 @@ from emod_constants import RST_FILE, RST_TIME, RST_NODE, RST_CLADE, \
 
 def application(output_path):
 
+    # Variables for this simulation
+    START_YEAR = gdata.var_params['start_year']
+    RUN_YEARS = gdata.var_params['run_years']
+    cVDPV_genome = gdata.boxes_sabin2 + gdata.boxes_nopv2
+
+    REP_MAP_DICT = gdata.demog_node_map    # LGA Dotname: [NodeIDs]
+    REP_DEX_DICT = gdata.demog_rep_index   # LGA Dotname: Output row number
+
     # Prep output dictionary
     SIM_IDX = gdata.sim_index
     key_str = '{:05d}'.format(SIM_IDX)
     parsed_dat = {key_str: dict()}
 
-    REP_MAP_DICT = gdata.demog_node_map    # LGA Dotname: [NodeIDs]
-    REP_DEX_DICT = gdata.demog_rep_index   # LGA Dotname: Output row number
-
-    # Variables for this simulation
-    START_YEAR = gdata.var_params['start_year']
-    RUN_YEARS = gdata.var_params['run_years']
-    cVDPV_genome = gdata.boxes_sabin2 + gdata.boxes_nopv2
+    # Sample population pyramid every year
+    post_proc_poppyr(output_path, parsed_dat[key_str])
 
     # Timesteps
     t_ini = 365.0*(START_YEAR-gdata.base_year)
@@ -56,11 +59,6 @@ def application(output_path):
                 dbrick0[odex, tdex] += subdat[k1, RST_NEW_INF]
 
     # Log data for local machine
-    fatime = np.argmax(dbrick0, axis=1)
-    totinf = np.sum(dbrick0, axis=0)
-
-    parsed_dat[key_str]['fatime'] = fatime.tolist()
-    parsed_dat[key_str]['totinf'] = totinf.tolist()
     parsed_dat[key_str]['infmat'] = dbrick0.tolist()
     parsed_dat['t_vec'] = t_vec.tolist()
     parsed_dat['node_names'] = REP_DEX_DICT
